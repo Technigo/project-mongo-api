@@ -13,7 +13,6 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-
 // Model for guest
 const Guest = mongoose.model('Guest', {
   first_name: String,
@@ -44,9 +43,16 @@ if (process.env.RESET_DB) {
 const port = process.env.PORT || 8000
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
+// Middlewares
 app.use(cors())
 app.use(bodyParser.json())
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailabale' })
+  }
+})
 
 // Start defining your routes here
 app.get('/', (req, res) => {
@@ -90,10 +96,10 @@ app.get('/guests/:id', async (req, res) => {
 //   return res.send('Received a POST HTTP method')
 // })
 // app.put('/guests/:id', (req, res) => {
-//   return res.send('Received a PUT HTTP method')
+//   return res.send(`PUT HTTP method on guest/${req.params.id} resource`)
 // })
 // app.delete('/guests/:id', (req, res) => {
-//   return res.send('Received a DELETE HTTP method')
+//   return res.send(`DELETE HTTP method on guest/${req.params.id} resource`)
 // })
 
 // Start the server
