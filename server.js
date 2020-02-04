@@ -55,7 +55,25 @@ app.get('/', (req, res) => {
 
 app.get('/guests', async (req, res) => {
   const guests = await Guest.find()
-  res.json(guests)
+  const page = req.query.page
+  const searchName = req.query.search
+  const PER_PAGE = 10
+  let guestList = guests
+
+  if (searchName) {
+    guestList = guestList.filter((item) => {
+      const guestName = item.first_name.toLowerCase() || item.last_name.toLowerCase()
+      return guestName.includes(searchName.toLowerCase())
+    })
+  }
+  if (page) {
+    const startIndex = PER_PAGE * page
+    guestList = guestList.slice(startIndex, startIndex + PER_PAGE)
+  }
+  res.json({
+    totalPages: Math.floor(guestList.length / PER_PAGE),
+    guestList
+  })
 })
 
 app.get('/guests/:id', async (req, res) => {
@@ -66,6 +84,17 @@ app.get('/guests/:id', async (req, res) => {
     res.status(404).json({ error: 'Guest not found' })
   }
 })
+
+// Preparing for nest step to use in form to add/update/delet guests
+// app.post('/guests', (req, res) => {
+//   return res.send('Received a POST HTTP method')
+// })
+// app.put('/guests/:id', (req, res) => {
+//   return res.send('Received a PUT HTTP method')
+// })
+// app.delete('/guests/:id', (req, res) => {
+//   return res.send('Received a DELETE HTTP method')
+// })
 
 // Start the server
 app.listen(port, () => {

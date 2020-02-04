@@ -42,5 +42,16 @@
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
     "status_attending": false
+  },
+  {
+    "first_name": "Anette",
+    "last_name": "Nyblad",
+    "email": "nyblad@helsingenet.se",
+    "phone": 46706930402,
+    "allergies": "None",
+    "other": "",
+    "added": "February 04, 2020",
+    "updated": "February 04, 2020",
+    "status_attending": true
   }
 ]
