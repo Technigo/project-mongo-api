@@ -1,0 +1,46 @@
+[
+  {
+    "first_name": "Sofie",
+    "last_name": "Nyblad",
+    "email": "nyblad@hotmail.com",
+    "phone": 46705264820,
+    "allergies": "Seashell food",
+    "other": "Bride",
+    "date_added": "February 04, 2020",
+    "date_updated": "February 04, 2020",
+    "status_attending": true
+  },
+  {
+    "first_name": "Magnus",
+    "last_name": "Sjöö",
+    "email": "lake_7908@hotmail.com",
+    "phone": 46725165188,
+    "allergies": "Salmon",
+    "other": "Groom",
+    "date_added": "February 04, 2020",
+    "date_updated": "February 04, 2020",
+    "status_attending": true
+  },
+  {
+    "first_name": "Matte",
+    "last_name": "Wannqvist",
+    "email": "matte@wancap.se",
+    "phone": 46701234567,
+    "allergies": "None",
+    "other": "",
+    "date_added": "February 04, 2020",
+    "date_updated": "February 04, 2020",
+    "status_attending": true
+  },
+  {
+    "first_name": "Sofie",
+    "last_name": "Einars",
+    "email": "name@mail.com",
+    "phone": 46707654321,
+    "allergies": "None",
+    "other": "",
+    "date_added": "February 04, 2020",
+    "date_updated": "February 04, 2020",
+    "status_attending": false
+  }
+]
