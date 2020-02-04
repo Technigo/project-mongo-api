@@ -6,8 +6,8 @@
     "phone": 46705264820,
     "allergies": "Seashell food",
     "other": "Bride",
-    "date_added": "February 04, 2020",
-    "date_updated": "February 04, 2020",
+    "added": "February 04, 2020",
+    "updated": "February 04, 2020",
     "status_attending": true
   },
   {
@@ -17,8 +17,8 @@
     "phone": 46725165188,
     "allergies": "Salmon",
     "other": "Groom",
-    "date_added": "February 04, 2020",
-    "date_updated": "February 04, 2020",
+    "added": "February 04, 2020",
+    "updated": "February 04, 2020",
     "status_attending": true
   },
   {
@@ -28,8 +28,8 @@
     "phone": 46701234567,
     "allergies": "None",
     "other": "",
-    "date_added": "February 04, 2020",
-    "date_updated": "February 04, 2020",
+    "added": "February 04, 2020",
+    "updated": "February 04, 2020",
     "status_attending": true
   },
   {
@@ -39,8 +39,8 @@
     "phone": 46707654321,
     "allergies": "None",
     "other": "",
-    "date_added": "February 04, 2020",
-    "date_updated": "February 04, 2020",
+    "added": "February 04, 2020",
+    "updated": "February 04, 2020",
     "status_attending": false
   }
 ]

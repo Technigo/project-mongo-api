@@ -22,8 +22,8 @@ const Guest = mongoose.model('Guest', {
   phone: Number,
   allergies: String,
   other: String,
-  date_added: Date,
-  date_updated: Date,
+  added: { type: Date, default: Date.now },
+  updated: { type: Date, default: Date.now },
   status_attending: Boolean,
 })
 
