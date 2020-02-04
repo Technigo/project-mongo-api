@@ -1,0 +1,1752 @@
+[
+  {
+    "name": "Aubergine",
+    "adress": "Linnégatan 38, 114 47 Stockholm",
+    "phone": "08-6600204",
+    "openHours": "mån-tis 11.30–23.00, ons-tor 11.30–00.00, fre 11.30–01.00, lör 17.00–01.00, sön Stängt",
+    "note": "Inget riktigt skötbord, men bra yta för blöjbyte.",
+    "webpage": "http://aubergine.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Ciao Ciao Grande",
+    "adress": "Storgatan 11, 114 44 Stockholm",
+    "phone": "08-6676420",
+    "openHours": "mån-tor 11.00-22.00, fre 11.00-22.30,\nlör 12.00-22.30, sön 12.00-22.00",
+    "note": "",
+    "webpage": "http://www.ciaociaogrande.com/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Etnografiska Museet",
+    "adress": "Djurgårdsbrunnsvägen 34, 115 27 Stockholm",
+    "phone": "010-4561200",
+    "openHours": "mån stängt, tis-sön 11-17, ons 11-20",
+    "note": "",
+    "webpage": "http://www.varldskulturmuseerna.se/etnografiskamuseet/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Fältöversten",
+    "adress": "Karlaplan 13, 115 20 Stockholm",
+    "phone": "08-6963031",
+    "openHours": "mån-fre 10-19, lör 10-17, sön 11-17",
+    "note": "",
+    "webpage": "http://faltoversten.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Grand Escalier",
+    "adress": "Sturegatan 1, 114 35 Stockholm",
+    "phone": "08-51942272",
+    "openHours": "mån 11-00, tis-fre 11-01, lör 12-01, sön 12-17",
+    "note": "",
+    "webpage": "http://grandescalier.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Grodan",
+    "adress": "Grevturegatan 16, 114 46 Stockholm",
+    "phone": "08-6796100",
+    "openHours": "mån-tor 07.30-00.00, fre 07.30-01.00, lör 12.00-01.00, sön 12.00-22.00",
+    "note": "",
+    "webpage": "http://www.grodan.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Jamie's Italian",
+    "adress": "Humlegårdsgatan 23, 114 46 Stockholm",
+    "phone": "08-51734020",
+    "openHours": "mån-fre 11.30–22.00, lör-sön\n12–22.00",
+    "note": "",
+    "webpage": "https://www.jamieoliver.com/italian/sweden/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Karla café",
+    "adress": "Karlavägen 71, 114 49 Stockholm",
+    "phone": "08-6607473",
+    "openHours": "mån-fre 7.30-20.00, lör-sön 10.00-19.00",
+    "note": "",
+    "webpage": "http://karlacafe.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Ling Long",
+    "adress": "Riddargatan 6, 114 35 Stockholm",
+    "phone": "08-54503953",
+    "openHours": "mån-tis 07-00, ons-fre 07-01, lör 16-01, sön 16-00",
+    "note": "",
+    "webpage": "http://www.ling-long.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "McDonalds",
+    "adress": "Nybrogatan 18, 114 39 Stockholm",
+    "phone": "08-6616710",
+    "openHours": "mån-sön 00-24",
+    "note": "",
+    "webpage": "",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Mornington",
+    "adress": "Nybrogatan 53, 114 40 Stockholm",
+    "phone": "08-50733033",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://www.mornington.se/Mornington---Stockholm---SE/Uppt%C3%A4ck-hotellet/Restaurangen.aspx",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Sturehof",
+    "adress": "Sturegallerian 42, 114 46 Stockholm",
+    "phone": "08-4405730",
+    "openHours": "mån-fre 11-02, lör 11-02,\nsön och helgdag 11-02",
+    "note": "",
+    "webpage": "http://www.sturehof.com/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Taverna Brillo",
+    "adress": "Sturegatan 6, 114 35 Stockholm",
+    "phone": "08-51977800",
+    "openHours": "mån-tis 07–00, ons-lör 07–02, sön 09–00",
+    "note": "",
+    "webpage": "http://www.tavernabrillo.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "TGI fres Stureplan",
+    "adress": "Birgerjarlsgatan 16, 114 34 Stockholm",
+    "phone": "08-6113131",
+    "openHours": "mån-tor 11.30-00.00, fre 11.30-02.00, lör 12.00-02.00, sön 12.00-00.00",
+    "note": "",
+    "webpage": "https://fres.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Aquaria",
+    "adress": "Falkenbergsgatan 2, 115 21 Stockholm",
+    "phone": "010-7087200",
+    "openHours": "tis-sön 10-16.30",
+    "note": "",
+    "webpage": "http://www.aquaria.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Blå porten",
+    "adress": "Djurgårdsvägen 64, 115 21 Stockholm",
+    "phone": "08-663 87 59",
+    "openHours": "mån-sön 11-20",
+    "note": "",
+    "webpage": "http://www.blaporten.com/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Helin & Voltaire",
+    "adress": "Rosendalsvägen 14, 115 21 Stockholm",
+    "phone": "08-6645108",
+    "openHours": "mån-lör 9-17 sön 10-17",
+    "note": "",
+    "webpage": "http://www.helinvoltaire.com/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Junibacken",
+    "adress": "Galärvarvsvägen 8, 115 21 Stockholm",
+    "phone": "08-587 230 00",
+    "openHours": "mån stängt, tis-sön 10-17",
+    "note": "",
+    "webpage": "http://www.junibacken.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Källhagen",
+    "adress": "Djurgårdsbrunnsvägen 10, 115 27 Stockholm",
+    "phone": "08-6650300",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://kallhagen.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Rosendal",
+    "adress": "Rosendalsvägen 38, 115 21 Stockholm",
+    "phone": "08-545 812 70",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://www.rosendalstradgard.se/kafe/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Skansen Terassen",
+    "adress": "Djurgårdsslätten 49, 115 21 Stockholm",
+    "phone": "08-56637000",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://www.skansen.se/sv/plats/skansen-terrassen",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Spritmuseum",
+    "adress": "Djurgårdsvägen 38, 115 21 Stockholm",
+    "phone": "08-121 313 00",
+    "openHours": "mån 10–17, tis till lör 10–19, sön 12–17",
+    "note": "",
+    "webpage": "",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Tekniska Museet",
+    "adress": "Museivägen 7, 115 27 Stockholm",
+    "phone": "08-4505600",
+    "openHours": "mån-tis 10-17, ons 10-20, tor-sön 10-17",
+    "note": "",
+    "webpage": "https://www.tekniskamuseet.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Vasamuseet",
+    "adress": "Galärvarvsvägen 14, 115 21 Stockholm",
+    "phone": "08-519 548 00",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "https://www.vasamuseet.se/lattlast/oppettider-priser",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Villa Godthem",
+    "adress": "Rosendalsvägen 9, 115 21 Stockholm",
+    "phone": "08-68423440",
+    "openHours": "mån 11.30-22.00, tis-fre 11.30-23.00, lör 12.00-23.00, sön 12.00-22.00",
+    "note": "",
+    "webpage": "http://villagodthem.se/",
+    "location": "Östermalm",
+    "": ""
+  },
+  {
+    "name": "Agaton",
+    "adress": "Västerlånggatan 72, 111 29 Stockholm",
+    "phone": "08-207299",
+    "openHours": "mån-sön 11-23",
+    "note": "",
+    "webpage": "http://www.restaurangagaton.se/",
+    "location": "GAMLA STAN",
+    "": ""
+  },
+  {
+    "name": "Medeltidsmuseet",
+    "adress": "Strömparrterren 3, 111 30 Stockholm",
+    "phone": "08-50831790",
+    "openHours": "tis, tor–sön, 12.00–17.00, ons 12.00–20.00,\nmån stängt",
+    "note": "",
+    "webpage": "http://medeltidsmuseet.stockholm.se/",
+    "location": "GAMLA STAN",
+    "": ""
+  },
+  {
+    "name": "Mr French",
+    "adress": "Skeppsbron 16, 111 30 Stockholm",
+    "phone": "08-202095",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://www.mrfrench.se/",
+    "location": "GAMLA STAN",
+    "": ""
+  },
+  {
+    "name": "Myntkrogen",
+    "adress": "Slottsbacken 6, 111 30 Stockholm",
+    "phone": "08-104590",
+    "openHours": "mån-sön 11-17",
+    "note": "Sveriges ekonomiska museum har skötbord.",
+    "webpage": "http://www.myntkrogen.se/",
+    "location": "GAMLA STAN",
+    "": ""
+  },
+  {
+    "name": "Treskillingen",
+    "adress": "Lilla Nygatan 6, 118 28 Stockholm",
+    "phone": "08-200204",
+    "openHours": "mån stängt, tis-sön serveras lunch 11-15",
+    "note": "Postmuseum har skötbord.",
+    "webpage": "http://www.postmuseum.se/besok-oss/mat-dryck/",
+    "location": "GAMLA STAN",
+    "": ""
+  },
+  {
+    "name": "Zum Franziskaner",
+    "adress": "Skeppsbron 44, 111 30 Stockholm",
+    "phone": "08-4118330",
+    "openHours": "tis-ons 11.00-23.00, tor 11.00-23.30, fre 11.00-00.00, lör 12.00-00.00, mån och sön stängt",
+    "note": "Inget skötbord, men ett vanligt bord på handikapptoaletten att byta på.",
+    "webpage": "https://zumfranziskaner.se/",
+    "location": "GAMLA STAN",
+    "": ""
+  },
+  {
+    "name": "Andalucien",
+    "adress": "Döbelnsgatan 7, 113 52 Stockholm",
+    "phone": "08-156660",
+    "openHours": "mån-sön 16-01",
+    "note": "Inget skötbord, men det finns soffor och källare som man kan använda.",
+    "webpage": "http://www.andalucia.se/tapas.aspx",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Angelas Deli",
+    "adress": "Rörstrandsgatan 16, 113 40 Stockholm",
+    "phone": "08-6513040",
+    "openHours": "mån-sön 10-19",
+    "note": "Inget skötbord, men en stor toalett där det finns yta att byta på.",
+    "webpage": "http://www.angelasdeli.se/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Brasseri Norrtull",
+    "adress": "Sankt Eriksgatan 119, 113 43 Stockholm",
+    "phone": "08-300205",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://www.brasserinorrtull.se/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Browallshof Hotell och Matsal",
+    "adress": "Surbrunnsgatan 20, 113 48 Stockholm",
+    "phone": "08-165130",
+    "openHours": "mån-fre 11.30-23.00, lör 17.00-23.00",
+    "note": "Inget skötbord men det finns bänkar och barnstolar.",
+    "webpage": "http://www.browallshof.se/index.php/kvarterskrog",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Brunkebergs Bageri",
+    "adress": "Dalagatan 9 J, 113 61 Stockholm",
+    "phone": "08-12206120",
+    "openHours": "mån-fre 07.00-18.00, lör-sön 08.00-17.00",
+    "note": "",
+    "webpage": "http://www.brunkebergsbageri.se/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Café Ceasar",
+    "adress": "Ynglingagatan 24, 113 47 Stockholm",
+    "phone": "08-32 51 50",
+    "openHours": "Mån-Fre 07-17, Lör-sön 11-17",
+    "note": "",
+    "webpage": "http://cafecaesar.com/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Clean Food",
+    "adress": "Norrtullsgatan 9, 113 29 Stockholm",
+    "phone": "08-304462",
+    "openHours": "mån-lör 11-19",
+    "note": "",
+    "webpage": "http://clean-food.com/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Espresso House",
+    "adress": "Dalagatan 9 G, 113 61 Stockholm",
+    "phone": "010-510 11 87",
+    "openHours": "mån-sön 08-19",
+    "note": "",
+    "webpage": "https://espressohouse.com/coffee-shops/dalagatan/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Espresso House",
+    "adress": "Sveavägen 96, 113 50 Stockholm",
+    "phone": "010-510 12 25",
+    "openHours": "mån-sön 08-19",
+    "note": "",
+    "webpage": "https://espressohouse.com/coffee-shops/sveavgen-sto/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Ethio-Star Etiopien Restaurang och Bar",
+    "adress": "Saltmätargatan 19, 113 59 Stockholm",
+    "phone": "08-305044",
+    "openHours": "mån stängt, tis-tor 16-23, fre 16-01, lör 15-01, sön 15-22",
+    "note": "",
+    "webpage": "http://www.ethiostar.se/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Grappa Matsal & Bar",
+    "adress": "Sankt Eriksgatan 86, 113 62 Stockholm",
+    "phone": "08-30 80 05",
+    "openHours": "mån-lör 15-01",
+    "note": "",
+    "webpage": "http://www.grappabar.nu/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Grill",
+    "adress": "Drottninggatan 89, 113 60 Stockholm",
+    "phone": "08-31 45 30",
+    "openHours": "mån-fre 11-01, lör 16-01, sön 15-21",
+    "note": "",
+    "webpage": "http://grill.se/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Greasy Spoon",
+    "adress": "Hagagatan 4, 113 48 Stockholm",
+    "phone": "",
+    "openHours": "mån-fre 08.00-16.00, lör-sön 09.00-17.00",
+    "note": "",
+    "webpage": "http://www.greasyspoon.se/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Haga Restaurang & Delikatesser",
+    "adress": "Hagagatan 18, 113 48 Stockholm",
+    "phone": "08-31 96 95",
+    "openHours": "mån-ons 11.30-22.00, tor-fre 11.30-24.00, lör 17.00-24.00, sön 17.00-22.00",
+    "note": "Inget skötbord, men finns källare där man kan byta.",
+    "webpage": "http://www.hagadeli.com/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Hard Rock Cafe",
+    "adress": "Sveavägen 75, 113 50 Stockholm",
+    "phone": "08-545 494 00",
+    "openHours": "mån-sön 11.30-00.00",
+    "note": "",
+    "webpage": "http://www.hardrock.com/cafes/stockholm/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Hemma Vasastan",
+    "adress": "Dalagatan 28, 113 24 Stockholm",
+    "phone": "08-652 60 88",
+    "openHours": "mån-sön 11-23",
+    "note": "",
+    "webpage": "https://www.hemmavasastan.se/matsal",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Jensen's Bøfhus",
+    "adress": "Sveavägen 51, 113 59 Stockholm",
+    "phone": "08-30 09 50",
+    "openHours": "mån-sön 10-00",
+    "note": "",
+    "webpage": "http://www.jensens.com/sv/restauranger/sveavagen/",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Melanders Butik & Brasserie",
+    "adress": "Dalagatan 9R, 113 61 Stockholm",
+    "phone": "08-30 03 00",
+    "openHours": "mån-sön 11-23",
+    "note": "",
+    "webpage": "http://melanders.se/restauranger/brasseriet-dalagatan",
+    "location": "VASASTAN",
+    "": ""
+  },
+  {
+    "name": "Bamboo Garden",
+    "adress": "Åsögatan 120, 116 24 Stockholm",
+    "phone": "08-640 00 52",
+    "openHours": "mån-sön 10-22",
+    "note": "",
+    "webpage": "https://bamboogarden.gastrogate.com/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Barranco Hornhuset",
+    "adress": "Långholmsgatan 15B, 117 33 Stockholm",
+    "phone": "08-52520260",
+    "openHours": "mån – tor 11:00 – 00:00, fre 11:00 – 03:00, lör 12:00 – 03:00, sön 12:00 – 18:00",
+    "note": "",
+    "webpage": "http://www.hornhuset.se/barranco/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Bistro Malmen",
+    "adress": "Götgatan 49-51, 116 21 Stockholm",
+    "phone": "08-517 347 00",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "https://www.scandichotels.se/hotell/sverige/stockholm/scandic-malmen/restaurang-bar/bistro-malmen",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Café String",
+    "adress": "Nytorgsgatan 38, 116 40 Stockholm",
+    "phone": "08-714 85 14",
+    "openHours": "mån-tor 09-22, fre-sön 09-19",
+    "note": "Det finns en nedervåning som är tom där man kan byta blöja.",
+    "webpage": "http://cafestring.se/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Eken",
+    "adress": "Guldgränd 8, 118 20 Stockholm",
+    "phone": "08-517 353 36",
+    "openHours": "sön-tor 11.00-00.00, fre-lör 11.00-01.00",
+    "note": "",
+    "webpage": "http://ekenbar.se/index/?lang=sv",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Enzos Hornhuset",
+    "adress": "Långholmsgatan 15B, 117 33 Stockholm",
+    "phone": "08-52520266",
+    "openHours": "mån–tor 17.00–23.00, fre 17.00–01.00, lör 12.00–01.00, sön 12.00–23.00",
+    "note": "",
+    "webpage": "http://www.hornhuset.se/enzos/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Espresso House",
+    "adress": "Götgatan 98, 118 62 Stockholm",
+    "phone": "010 - 510 12 33",
+    "openHours": "Mån-Fre 10:00-19:00, Lör 10:00-18:00, Sön 11:00-17:00",
+    "note": "I anslutning till Ringen centrum",
+    "webpage": "",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Fotografiska",
+    "adress": "Stadsgårdshamnen 22, 116 45 Stockholm",
+    "phone": "08-509 005 00",
+    "openHours": "mån-ons 09–23,\ntor-lör 09–01,\nsön 09–23",
+    "note": "",
+    "webpage": "http://fotografiska.eu/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Gondolen",
+    "adress": "Stadsgården 6, 116 45 Stockholm",
+    "phone": "08-641 70 90",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://www.eriks.se/gondolen/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Grekiska Kolgrillsbaren - Ringvägen",
+    "adress": "Ringvägen 57, 118 61 Stockholm",
+    "phone": "08-668 99 99",
+    "openHours": "mån-tor: 10-22, fre: 10-23, lör: 13-23, sön: 13-21",
+    "note": "",
+    "webpage": "http://www.restaurangagapi.se/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Hornstullsgallerian",
+    "adress": "Långholmsgatan/Hornsbruksgatan",
+    "phone": "",
+    "openHours": "Mån – Fre 10–20, Lör 10–18, Sön 11–18",
+    "note": "Restauranger: Akki Sushi, Beijing8, Espresso House, Gateau, Juiceverket, Klang Market, Noodle mama. Amningsrum och parnvagnsparkering.",
+    "webpage": "http://hornstull.se/mat-dryck/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Hotel Hilton Stockholm Slussen",
+    "adress": "Guldgränd 8 118 20 Stockholm",
+    "phone": "08-517 353 00",
+    "openHours": "se hemsida",
+    "note": "Restauranger Eken Matsal och Panorama restaurang",
+    "webpage": "http://www3.hilton.com/en/hotels/sweden/hilton-stockholm-slussen-STOSLHI/dining/index.html",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Hotel Rival (Bar, bistro & café)",
+    "adress": "Mariatorget 3, 118 91 Stockholm",
+    "phone": "08-545 789 00",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://www.rival.se/se/bar-bistro-cafe/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Hälsocafét",
+    "adress": "Hornsgatan 61, 118 49 Stockholm",
+    "phone": "08-420 565 44",
+    "openHours": "Vardagar 09:00 - 19:00, Helger 10:00 - 19:00",
+    "note": "",
+    "webpage": "http://www.halsocafet.se/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Jimmys Steakhouse Södermalm",
+    "adress": "Tjärhovsgatan 33, 116 28 Stockholm",
+    "phone": "08-644 06 66",
+    "openHours": "mån-sön kl 17-24",
+    "note": "",
+    "webpage": "http://jimmys.se/sodermalm/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Koh Phangan",
+    "adress": "Skånegatan 57, 116 37 Stockholm",
+    "phone": "08-642 50 40",
+    "openHours": "Vardagar: 16-00, Helg: 13-00",
+    "note": "",
+    "webpage": "http://www.kohphangan.se/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "KÄK Hornstull",
+    "adress": "Hornsbruksgatan 24, 117 34 Stockholm",
+    "phone": "08-669 13 12",
+    "openHours": "Vardag: 11.30-21, helg: 12-21",
+    "note": "I anslutning till Hornstull galleria",
+    "webpage": "http://www.käk.com/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Linje Tio",
+    "adress": "Hornsbruksgatan 24, 117 34 Stockholm",
+    "phone": "08-220021",
+    "openHours": "Mån-Tor 17-01, Fre 16-02, Lör 12-02, Sön 12-01",
+    "note": "I anslutning till Hornstull galleria",
+    "webpage": "http://linjetio.com/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Matapoteket Mainly Raw",
+    "adress": "Bondegatan 6,116 23 Stockholm",
+    "phone": "070-999 01 70",
+    "openHours": "mån-tor 11–19, fre 11–15, lör 12–1, sön Stängt",
+    "note": "",
+    "webpage": "https://matapoteket.nu/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "McDonald's",
+    "adress": "Folkungagatan 50, 116 22 Stockholm",
+    "phone": "08-640 17 00",
+    "openHours": "mån-tor 07-04, fre 07-00, lör dygnet runt, sön 06-04",
+    "note": "",
+    "webpage": "",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "McDonald's",
+    "adress": "Hornsgatan 88, 118 21 Stockholm",
+    "phone": "08-84 12 18",
+    "openHours": "mån-tor 09-00, fre-lör 09-04, sön 09-00",
+    "note": "",
+    "webpage": "",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Nytorget Urban Deli",
+    "adress": "Nytorget 4, 116 40 Stockholm",
+    "phone": "08-425 500 30",
+    "openHours": "mån-tis 8-23, ons-tor 8-00, fre-lör 8-01, sön 8-22",
+    "note": "",
+    "webpage": "http://www.urbandeli.org/nytorget/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Paradiset (Restaurang Koloni)",
+    "adress": "Brännkyrkagatan 62, 118 23 Stockholm",
+    "phone": "0705 105 417",
+    "openHours": "mån-sön 11-20",
+    "note": "",
+    "webpage": "http://www.koloni.se/koloni-paradiset",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Restaurang Kvarnen",
+    "adress": "Medborgarplatsen 3, 118 26 Stockholm",
+    "phone": "08-643 03 80",
+    "openHours": "mån-tis 11-01, ons-fre 11-03, lör 12-03, sön 12-01",
+    "note": "Inget skötbord, men stor bänk vid handfat.",
+    "webpage": "",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Ringen centrum",
+    "adress": "Ringvägen 115, 118 60 Stockholm",
+    "phone": "",
+    "openHours": "se hemsida",
+    "note": "Här finns bl.a. Teaterns food court, Espresso house och Medo sushi",
+    "webpage": "http://www.ringencentrum.se/oppettider/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "Söderhallarna",
+    "adress": "Söderhallarna 110, 118 72 Stockholm",
+    "phone": "",
+    "openHours": "Varierar, för respektive restaurang se hemsida.",
+    "note": "Här finns bl.a. Melanders, Sushi Yama, Pig & Whistle, Pasta Gudfadern och mycket mer.",
+    "webpage": "http://www.soderhallarna.se/",
+    "location": "SÖDERMALM",
+    "": ""
+  },
+  {
+    "name": "American Table",
+    "adress": "Östra Järnvägsgatan 35, 111 20 Stockholm",
+    "phone": "08-6769800",
+    "openHours": "mån-fre 11.15-14 och 17-22, helger 18-21",
+    "note": "",
+    "webpage": "http://americantablebrasserie.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Hötorgshallen",
+    "adress": "Hötorgshallen 111, 57 Stockholm",
+    "phone": "",
+    "openHours": "mån-tor 10.00-18.00, fre 10.00-19.00, lör: 10.00-16.00",
+    "note": "Sveriges största saluhall med 40 handlare på två plan.",
+    "webpage": "http://www.hotorgshallen.se/hallen",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Bar Central",
+    "adress": "Birger Jarlsgatan 41, 111 45 Stockholm",
+    "phone": "08-20 10 08",
+    "openHours": "mån 11.30-22, tis-tor 11.30-23, fre 11.30-24, lör 17-24",
+    "note": "",
+    "webpage": "http://barcentral.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "BarbeQue Steakhouse Stockholm",
+    "adress": "Kungsgatan 54, 111 35 Stockholm",
+    "phone": "08-10 00 26",
+    "openHours": "mån-tor 11.00–00.00, fre-lör 11.00–01.00, sön 11.00–00.00",
+    "note": "",
+    "webpage": "http://kungsgatan.bbqsteakhouse.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "BarCelona Tapas Restaurang",
+    "adress": "Drottninggatan 34, 111 51 Stockholm",
+    "phone": "08-22 37 00",
+    "openHours": "mån 15:00-23:00, tis-fre 15:00-01:00, lör 12:00-01:00, sön 13:00-23:30",
+    "note": "",
+    "webpage": "http://barcelonatapas.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Berns Asiatiska",
+    "adress": "Berzelii Park 111, 47 Stockholm",
+    "phone": "08-56632222",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://www.berns.se/restaurant/berns-asiatiska/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Boqueria",
+    "adress": "Jakobsbergsgatan 17, 111 44 Stockholm",
+    "phone": "08-30 74 00",
+    "openHours": "mån - ons 11.00-22.00,\ntor 11.00-01.00, fre - lör 11.00-02.00,\nsön 11.00-18.00",
+    "note": "",
+    "webpage": "http://www.boqueria.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Burger King",
+    "adress": "Sergels Torg 1, 111 57 Stockholm",
+    "phone": "08-21 98 94",
+    "openHours": "mån-tor 09–22, fre-lör 09–00, sön 10–22",
+    "note": "",
+    "webpage": "https://burgerking.se/restauranger/909205",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Centralstationen",
+    "adress": "Centralplan 15, 111 20 Stockholm",
+    "phone": "08-410 626 00",
+    "openHours": "mån-sön 05.00 – 24.00",
+    "note": "För restauranger se hemsida",
+    "webpage": "http://www.dinstation.se/stockholms-centralstation/mat-butiker/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Caina",
+    "adress": "Norrmalmstorg 2-4, 111 46 Stockholm",
+    "phone": "08-614 10 00",
+    "openHours": "mån-tor 17-22, fre-lör 17-22, sön stängt",
+    "note": "Tillhör Nobis hotell där det finns skötbord",
+    "webpage": "http://www.nobishotel.se/en/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Åhlens",
+    "adress": "Klarabergsgatan 50, 111 21 Stockholm",
+    "phone": "08-676 60 00",
+    "openHours": "Mån-fre 10:00 - 21:00, lör 10:00 - 19:00, sön 11:00 - 19:00",
+    "note": "På plan 4 finns amningsrum och skötbord. Här kan man även värma mat, leka och se på film eller läsa en bok med barnen. Se hemsida för restauranger.",
+    "webpage": "http://www.ahlens.se/cms/20160108_170957",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "K25",
+    "adress": "Kungsgatan 25, 111 56 Stockholm",
+    "phone": "08-212929",
+    "openHours": "mån-fre 10-22, lör 11-22.",
+    "note": "",
+    "webpage": "http://k25.nu",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Scandic Continental",
+    "adress": "Vasagatan 22, 111 20 Stockholm",
+    "phone": "08-51734200",
+    "openHours": "se hemsida",
+    "note": "Till hotellet hör restaurangen The Market och Café Caldo.",
+    "webpage": "https://www.scandichotels.se/hotell/sverige/stockholm/scandic-continental/restaurang-bar",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Drottninghof",
+    "adress": "Drottninggatan 67, 111 36 Stockholm",
+    "phone": "08-22 75 22",
+    "openHours": "mån-fre 11 - 24, lör-sön 12-24",
+    "note": "",
+    "webpage": "http://www.drottninghof.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Due Piani",
+    "adress": "Hötorget 4, 111 57 Stockholm",
+    "phone": "08-22 78 88",
+    "openHours": "Mån-sön 10:00-21:00",
+    "note": "",
+    "webpage": "http://duepiani.kvartersmenyn.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Mood gallerian",
+    "adress": "Norrlandsgatan 13, 111 43 Stockholm",
+    "phone": "08-6963100",
+    "openHours": "mån-fre 10-20, lör 10-18, sön 11-17",
+    "note": "Skötbord finns på de större toaletterna och det finns en amnings/toalett lounge på våning 3.För restauranger se hemsida.",
+    "webpage": "http://moodstockholm.se/cafe-restaurang/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Gallerian",
+    "adress": "Hamngatan 37, 111 53 Stockholm",
+    "phone": "073 531 94 96",
+    "openHours": "Vardagar 10-20, lör 10-18, sön 11-18",
+    "note": "Toaletter och skötbord hittar du i södra delen av Gallerian. Besöket kostar 10 kronor och du kan växla på plats. För restauranger se hemsida.",
+    "webpage": "http://gallerian.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Giro Pizzeria",
+    "adress": "Sveavägen 46, 111 34 Stockholm",
+    "phone": "08-4406767",
+    "openHours": "mån-tor 11.30-22.00, fre 11:30-23:00, lör 12:00-23:00, sön kl. 14:00-22:00",
+    "note": "Tillhör hotell Miss Clara som har skötbord",
+    "webpage": "http://giropizzeria.com",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Kulturhuset",
+    "adress": "Sergels Torg 3, 111 57 Stockholm",
+    "phone": "08-506 20 200",
+    "openHours": "mån–fre 9–19\nlör–sön 11–17",
+    "note": "Skötrum finns på våning 2. För restauranger se hemsida.",
+    "webpage": "http://kulturhusetstadsteatern.se/Besok-oss/Kontakta-oss/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Grand hotell",
+    "adress": "Södra Blasieholmshamnen 8, 111 48 Stockholm",
+    "phone": "08 - 679 35 00",
+    "openHours": "se hemsida",
+    "note": "Till hotellet hör restaurangerna Mathias Dahlgren/Matbaren och Cadierbaren",
+    "webpage": "https://www.grandhotel.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Kungshallen",
+    "adress": "Kungsgatan 44, 111 35 Stockholm",
+    "phone": "",
+    "openHours": "Foodcourt (Nedre plan)\nVardagar 11-22, lör 11-22, sön 12-22",
+    "note": "Skötbord finns på handikapptoaletten som öppnas från restaurang Taco Bar. För restauranger se hemsida.",
+    "webpage": "http://www.kungshallen.eu",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Hearts Sthlm",
+    "adress": "Vasaplan 4, 111 20 Stockholm",
+    "phone": "08-50 56 35 08",
+    "openHours": "se hemsida",
+    "note": "Tillhör Nordic C Hotel som har skötbord",
+    "webpage": "http://www.heartssthlm.com",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Kung Carls Bakficka",
+    "adress": "Norrlandsgatan 28, 111 43 Stockholm",
+    "phone": "08-463 50 80",
+    "openHours": "mån - tor 11:30 - 24:00, fre 11:30 - 01:00, lör 12:00 - 01:00, sön 12:00 - 16:00",
+    "note": "Tillhör Hotell Kung Carl som har skötbord",
+    "webpage": "http://www.kungcarlsbakficka.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "La Bodega Tapas Bar",
+    "adress": "Döbelnsgatan 8, 111 40 Stockholm",
+    "phone": "08-22 77 01",
+    "openHours": "Mån-Tor 17:00-23:00\nFre -Lör 17:00-24:00",
+    "note": "",
+    "webpage": "http://info.aos.se/E/V/STOSE/0004/26/55/1.html",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "The Dining room",
+    "adress": "Södra Blasieholmshamnen 2, 111 48 Stockholm",
+    "phone": "08-223160",
+    "openHours": "Mån-Sön 07:00-01:00",
+    "note": "Tillhör Lydmar Hotell som har skötbord",
+    "webpage": "http://lydmar.com",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Hotell Haymarket by Scandic",
+    "adress": "Hötorget 13-15, 111 57 Stockholm",
+    "phone": "08 517 26 700",
+    "openHours": "Se hemsida",
+    "note": "Till hotellet hör restaurangen Greta och Paul's",
+    "webpage": "https://www.scandichotels.se/hotell/sverige/stockholm/haymarket-by-scandic/restaurang-bar",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "The Crooked Leg",
+    "adress": "Vasaplan 7, 111 20 Stockholm",
+    "phone": "08-50 56 32 00",
+    "openHours": "Bar: mån-tis 11:00-00:00, ons-tor 11:00-01:00, fre 11:00-02:00, lör 13:00-02:00, sön 15:00-00:00",
+    "note": "Tillhör Nordic Light Hotel som har skötbord",
+    "webpage": "https://nordiclighthotel.se/hitta-hit/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Mangal Grill & Bar",
+    "adress": "Vasagatan 6, 111 20 Stockholm",
+    "phone": "08-411 90 00",
+    "openHours": "mån-tor 11:00 - 22:00\nfre-lör 11:00 - 01:00\nsön 11:00 - 21:00\nLunch\nVardagar 11:00 - 14:00",
+    "note": "",
+    "webpage": "https://mangal-stockholm.gastrogate.com",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "MAX Hamburgerrestauranger",
+    "adress": "Kungsträdgårdsgatan 20, 111 47 Stockholm",
+    "phone": "08-611 38 10",
+    "openHours": "mån-tis 10.00–01.00, ons-tor 10.00–05.00, fre-lör 10.00–06.00, sön 10.00–01.00",
+    "note": "",
+    "webpage": "http://www.max.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "McDonald's",
+    "adress": "Hamngatan 8, 111 46 Stockholm",
+    "phone": "08-678 67 29",
+    "openHours": "mån-tis 07–01, ons-tor 07–05, fre 07–06, lör 08–06, sön 08–01",
+    "note": "",
+    "webpage": "http://www.mcdonalds.se/se.html",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "McDonald's",
+    "adress": "Kungsgatan 4A, 111 43 Stockholm",
+    "phone": "08-20 51 18",
+    "openHours": "Dygnet runt alla dagar",
+    "note": "",
+    "webpage": "http://www.mcdonalds.se/se.html",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "McDonald's",
+    "adress": "Regeringsgatan 20, 111 53 Stockholm",
+    "phone": "08-24 31 03",
+    "openHours": "mån-fre 7:00-21:00\nlör-sön 8:00-20:00",
+    "note": "",
+    "webpage": "http://www.mcdonalds.se/se.html",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Miss Clara by Nobis",
+    "adress": "Sveavägen 48, 111 34 Stockholm",
+    "phone": "08-440 67 00",
+    "openHours": "Frukost\nmån - fre 06.30-10.00 \nlör - sön 08.00-11.00\nMatsal\nmån - fre 11.30-22.00\nlör 12.00-22.00\nsön 14.00-21.00",
+    "note": "Tillhör Hotell Miss Clara där det finns skötbord",
+    "webpage": "http://www.missclarahotel.com/restaurang",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Mother",
+    "adress": "Mäster Samuelsgatan 19, 111 44 Stockholm",
+    "phone": "08-505 244 39",
+    "openHours": "Lunch mån-fre från 11:30\nBrunch sön från kl 11:30\nMiddag från kl 17 (ej sön)",
+    "note": "",
+    "webpage": "https://www.motherstockholm.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Niklas",
+    "adress": "Regeringsgatan 66, 111 39 Stockholm",
+    "phone": "08-20 60 10",
+    "openHours": "mån-tis: 11-23, ons-tor: 11-02, fre: 11-02, lör: 17-02, sön: stängt",
+    "note": "",
+    "webpage": "http://niklas.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Pizza Hut",
+    "adress": "Klarabergsgatan 56, 111 21 Stockholm",
+    "phone": "08-24 54 44",
+    "openHours": "mån-fre 10-23 \nlör-sön 10-24",
+    "note": "",
+    "webpage": "http://www.pizzahut.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Pizza Hut",
+    "adress": "Slöjdgatan 10, 111 57 Stockholm",
+    "phone": "08-411 45 20",
+    "openHours": "mån-fre 10-22 \nlör-sön 12-22",
+    "note": "",
+    "webpage": "http://www.pizzahut.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Pong Asian Restaurang",
+    "adress": "Klara Tvärgränd 3, 111 52 Stockholm",
+    "phone": "08-440 02 08",
+    "openHours": "Mån–tis 10.30 – 22.00, ons–fre10.30 – 23.00, lör 12.00 – 23.00, sön12.00 – 22.00",
+    "note": "",
+    "webpage": "http://pongasian.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Pong Buffé",
+    "adress": "Drottninggatan 71C, 111 36 Stockholm",
+    "phone": "08-20 45 63",
+    "openHours": "Mån–tis 10.30–22.00, ons –fre 10.30–23.00, lör 12.00–23.00, sön 12.00–22.00",
+    "note": "",
+    "webpage": "http://pongbuffe.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Pontus Pocket city",
+    "adress": "Norrlandsgatan 31, 111 43 Stockholm",
+    "phone": "08 545 273 00",
+    "openHours": "Lunch\nmån – fre: 11.30 – 14.00\nMiddag\ntis – lör: 17.00 – sent\nsön: Stängt",
+    "note": "",
+    "webpage": "http://pontusfrithiof.com",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Público",
+    "adress": "Rödbodtorget 2, 111 52 Stockholm",
+    "phone": "08-505 244 16",
+    "openHours": "tis 17.00 – 00.00, ons-tor 17.00 – 01.00, fre-lör 17.00 – 01.00, sön-mån stängt",
+    "note": "",
+    "webpage": "http://publico.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Restaurang Paladar de Cuba",
+    "adress": "Tegnérgatan 19, 111 40 Stockholm",
+    "phone": "08-35 25 20",
+    "openHours": "mån-fre 11-20 lör-sön: 12-20",
+    "note": "",
+    "webpage": "http://www.paladar.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Moderna Museet",
+    "adress": "Slupskjulsvägen 7, 111 49 Stockholm, Sweden",
+    "phone": "08-520 235 00",
+    "openHours": "mån Stängt\ntis 10–20\nons 10–18\ntor 10–18\nfre 10–20\nlör 11–17\nsön 11–17",
+    "note": "Restaurang finns i museet",
+    "webpage": "http://www.modernamuseet.se/stockholm/sv/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Restaurang Scandic Norra Bantorget",
+    "adress": "Wallingatan 15, 111 24 Stockholm",
+    "phone": "08-517 670 00",
+    "openHours": "Frukost: mån-fre 06:30-09:30, lör-sön 07:00-10:30\nLunch: mån-fre 11:30-13:30, lör-sön Stängt\nMiddag: mån-lör 17:00-22:00, sön Stängt",
+    "note": "Tillhör Scandic Hotell som har skötbord",
+    "webpage": "",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Shahrzad",
+    "adress": "Regeringsgatan 111, 111 39 Stockholm",
+    "phone": "08-660 60 60",
+    "openHours": "mån: 11.30-21\ntis: 11.30-22\nons-tor: 11.30-23\nfre: 11.30-24\nlör: 12-24\nsön: 12-21",
+    "note": "",
+    "webpage": "http://shahrzad.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Threesixty restaurant",
+    "adress": "Tegelbacken 6, 111 52 Stockholm",
+    "phone": "08-4123472",
+    "openHours": "mån - fre:\nFrukost: 06:30 - 10:30 \nLunch: 11:30 - 14:00 \nMiddag: 17:30 - 23:00 \nlör - sön\nFrukost: 07:00 - 11:00\nMiddag: 17:30 - 23:00",
+    "note": "Tillhör Hotell Sheraton som har skötbord",
+    "webpage": "http://www.threesixtyrestaurant.com/se/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Skeppsholmens Krogkonst",
+    "adress": "Flaggmansvägen 6, 111 49 Stockholm",
+    "phone": "08-611 99 89",
+    "openHours": "Vardagar 11.30-13.30",
+    "note": "",
+    "webpage": "http://www.krogkonst.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Stockholm Fisk",
+    "adress": "Vasagatan 1, 111 20 Stockholm",
+    "phone": "08-580 017 30",
+    "openHours": "mån-fre 11-2230 lör 13-2230 sön 13-2130",
+    "note": "",
+    "webpage": "http://www.stockholmfisk.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Teaterbrasseriet",
+    "adress": "Kungsgatan 70, 111 22 Stockholm",
+    "phone": "08 512 520 32",
+    "openHours": "Frukost: mån-fre 06:30-10:00, lör-sön 07:00-11:00\nMiddag: mån-lör 17:00-23:00, sön Stängt",
+    "note": "Tillhör Hotell Scandic Grand Central som har skötbord",
+    "webpage": "https://www.scandichotels.se/hotell/sverige/stockholm/grand-central-by-scandic/restaurang-bar/teaterbrasseriet",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "TGI fres",
+    "adress": "Hamngatan 19, 111 47 Stockholm",
+    "phone": "08-10 06 26",
+    "openHours": "mån -tor11.30–00.00 fre 11.30–01.00 Idag 11.30–01.00 sön 12.00–00.00",
+    "note": "",
+    "webpage": "https://www.fres.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Vapiano",
+    "adress": "Kungsbron 15, 111 22 Stockholm",
+    "phone": "08-24 29 40",
+    "openHours": "mån-tor 11.00–00.00, fre 11.00–01.00, lör 11.00–01.00, sön 11.00–00.00",
+    "note": "",
+    "webpage": "http://se.vapiano.com/sv/home/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Wagamama",
+    "adress": "Klarabergsviadukten 65, 111 64 Stockholm",
+    "phone": "08-519 422 73",
+    "openHours": "mån-fre 11.00–22.00, lör 12.00–22.00, sön 12.00–21.00",
+    "note": "",
+    "webpage": "https://www.wagamama.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Zócalo - Fresh Happy Mex",
+    "adress": "Klarabergsgatan 29, 111 21 Stockholm",
+    "phone": "08-409 115 07",
+    "openHours": "mån-fre 11-21 lör:12-21 sön: 12-20",
+    "note": "",
+    "webpage": "https://zocalo.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Zócalo - Fresh Happy Mex",
+    "adress": "Regeringsgatan 20, 111 53 Stockholm",
+    "phone": "08-409 115 08",
+    "openHours": "mån-fre 11-21 lör: 12-21 sön: 12-19",
+    "note": "",
+    "webpage": "https://zocalo.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Stockholm Stadsbibliotek",
+    "adress": "Sveavägen 73,\n113 80 Stockholm",
+    "phone": "08-508 31105",
+    "openHours": "mån-tor 10:00 – 21:00 \nfre 10:00 – 19:00 \nlör-sön 11:00 – 17:00",
+    "note": "Café på entréplan och biblioteket anordnar många barnaktivteter",
+    "webpage": "https://biblioteket.stockholm.se/bibliotek/stadsbiblioteket",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Musik- och teaterbiblioteket",
+    "adress": "Torsgatan 19, 113 21 Stockholm",
+    "phone": "08-519 554 00",
+    "openHours": "tis kl 12–17\nons kl 12–16\ntor kl 12–19\nfre kl 12–16",
+    "note": "",
+    "webpage": "http://musikverket.se/musikochteaterbiblioteket//",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Östasiatiska museet",
+    "adress": "Tyghusplan, 111 49 Stockholm",
+    "phone": "010-456 12 97",
+    "openHours": "mån Stängt\ntis 11–20\nons-sön 11–17",
+    "note": "Finns även ett Café",
+    "webpage": "http://www.varldskulturmuseerna.se/ostasiatiskamuseet/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Dansmuseet",
+    "adress": "Drottninggatan 17, 111 51 Stockholm",
+    "phone": "08-441 76 51",
+    "openHours": "mån Stängt\ntis 11–17\nons 11–17\ntor 11–17\nfre 11–17\nlör 12–16\nsön 12–16",
+    "note": "Finns även en restaurang",
+    "webpage": "http://www.dansmuseet.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Sven-Harrys Konstmuseum",
+    "adress": "Eastmansvägen 10, 113 61 Stockholm",
+    "phone": "08-511 600 60",
+    "openHours": "mån Stängt\ntis Stängtons 11–19\ntor 11–19\nfre 11–19\nlör 11–17\nsön 11–17",
+    "note": "",
+    "webpage": "http://www.sven-harrys.se/sv/",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Bonniers Konsthall",
+    "adress": "Torsgatan 19, 113 21",
+    "phone": "08-736 42 48",
+    "openHours": "mån Stängt\ntis Stängt\nons 12–20\ntor 12–17\nfre 12–17\nlör 12–17\nsön 12–17",
+    "note": "Finns även café",
+    "webpage": "http://www.bonnierskonsthall.se",
+    "location": "NORRMALM",
+    "": ""
+  },
+  {
+    "name": "Björk Bar & Grill",
+    "adress": "Rålambshovsleden 50, 112 19 Stockholm",
+    "phone": "08-441 31 54",
+    "openHours": "För öppetider se hemsida",
+    "note": "Tillhör hotell Courtyard Stockholm som har skötbord",
+    "webpage": "http://bjorkbarochgrill.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Café Blåbär",
+    "adress": "Fleminggatan 53, 112 32 Stockholm",
+    "phone": "08-653 83 58",
+    "openHours": "mån-fre 07.00–19.00 lör 10.00–17.00 sön stängt",
+    "note": "",
+    "webpage": "http://www.cafeblabar.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Gnarly Burger",
+    "adress": "Fridhemsgatan 13, 112 40 Stockholm",
+    "phone": "08-519 423 00",
+    "openHours": "mån 11-21\ntis 11-22\nons 11-22\ntor 11–22\nfre 11– sent\nlör 11– sent\nsön 12–21",
+    "note": "",
+    "webpage": "http://www.gnarlyburger.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Grekiska kolgrillsbaren S:t Göran",
+    "adress": "Sankt Göransgatan 121, 112 45 Stockholm",
+    "phone": "08-619 04 00",
+    "openHours": "mån-tor 10.00–22.00 fre 10.00–23.00 lör-sön 12.00–23.00",
+    "note": "",
+    "webpage": "http://www.grekiskakolgrillsbaren.se/restauranger/sankt-goran/",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Kitchen & Table Kungsholmen",
+    "adress": "Kungsholmsgatan 31, 112 27 Stockholm",
+    "phone": "08-692 52 00",
+    "openHours": "Alla dagar: 11-23",
+    "note": "Tillhör Clarion hotell som har skötbord",
+    "webpage": "http://www.kitchenandtable.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Panini",
+    "adress": "Lindhagensgatan 104C, 112 18 Stockholm",
+    "phone": "08-619 06 20",
+    "openHours": "mån-fre 7-18.30 lör 11-16 sön stängt",
+    "note": "",
+    "webpage": "http://panini.nu",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Piren Restaurang & Bar",
+    "adress": "Kristinebergs Strand 2, 112 52 Stockholm",
+    "phone": "08-618 30 30",
+    "openHours": "mån–tis 11.00 – 21.00\nons–tor 11.00 – 22.00\nfre 11.00 – 22.00/ 22.30\nlör 12.00 – 22.00/22.30\nsön 12.00 – 21.00",
+    "note": "",
+    "webpage": "http://www.piren-bar.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Restaurang Fleming",
+    "adress": "Fleminggatan 2-4, 112 26 Stockholm",
+    "phone": "08-508 267 09",
+    "openHours": "Vardagar 10:30 - 14:00\nlör 12.00 – 22.00/22.30",
+    "note": "",
+    "webpage": "https://flemingsrestauranger.gastrogate.com",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Trattorian",
+    "adress": "Norr Mälarstrand 29, 112 20 Stockholm",
+    "phone": "08-684 238 70",
+    "openHours": "För öppetider se hemsida",
+    "note": "",
+    "webpage": "http://www.trattorian.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Restaurant Lokal",
+    "adress": "Scheelegatan 8, 112 23 Stockholm",
+    "phone": "08-650 98 09",
+    "openHours": "mån & tis 17-01. ons 17-02. tor 17-02. fre 16-03. lör 17-03",
+    "note": "",
+    "webpage": "http://lokalizakaya.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Stadshuskällaren",
+    "adress": "Hantverkargatan 1, 112 21 Stockholm",
+    "phone": "08-586 218 30",
+    "openHours": "mån 11.30–14.30 tis 11.30–14.30 ons 11.30–14.30, 17.00–23.00 tor 11.30–14.30, 17.00–23.00 fre 11.30–14.30, 17.00–23.00 lör 17.00–23.00 sön Stängt",
+    "note": "",
+    "webpage": "http://www.stadshuskallarensthlm.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Västermalmsgallerian",
+    "adress": "Sankt Eriksgatan 45, 112 34 Stockholm",
+    "phone": "08 – 696 30 31",
+    "openHours": "Mån–fre 10.00–19.00\nlör 10.00–17.00\nsön 11.00–17.00",
+    "note": "",
+    "webpage": "http://www.vastermalmsgallerian.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "39Wäst",
+    "adress": "Fleminggatan 39, 112 32 Stockholm",
+    "phone": "08-650 22 20",
+    "openHours": "mån-tor 17.00–00.00, fre 16.00–01.00, lör 17.00–01.00, sön Stängt",
+    "note": "",
+    "webpage": "http://39wast.se",
+    "location": "KUNGSHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Solna centrum",
+    "adress": "Solna Torg 13, 171 45 Solna",
+    "phone": "08-400 005 00",
+    "openHours": "mån-fre 10-20, lör-sön 10-18",
+    "note": "",
+    "webpage": "http://solnacentrum.se/",
+    "location": "SOLNA",
+    "": ""
+  },
+  {
+    "name": "Mall of Scandinavia",
+    "adress": "Stjärntorget 2, 169 79 Solna",
+    "phone": "08-400 080 00",
+    "openHours": "mån-sön 10-21",
+    "note": "Här finns både amningsrum och skötbord.",
+    "webpage": "http://mallofscandinavia.se/",
+    "location": "SOLNA",
+    "": ""
+  },
+  {
+    "name": "Bromma Blocks",
+    "adress": "Ulvsundavägen 185-193, 168 67 Bromma",
+    "phone": "",
+    "openHours": "Vardagar 10-20\nlör-sön 10-18",
+    "note": "Här finns både amningsrum och skötbord.",
+    "webpage": "http://brommablocks.se/",
+    "location": "BROMMA",
+    "": ""
+  },
+  {
+    "name": "Winterviken",
+    "adress": "Vinterviksvägen 60, 117 65 Stockholm",
+    "phone": "08-400 264 80",
+    "openHours": "11.00-16.00 alla dagar – dagens lunch vardagar fram till 14.00",
+    "note": "Sago- och lekhörna med barnpassning på lördagar.",
+    "webpage": "http://www.winterviken.se/cafe-stockholm",
+    "location": "ASPUDDEN",
+    "": ""
+  },
+  {
+    "name": "Phil's burger",
+    "adress": "Sundbybergs torg 1, 172 67 Sundbyberg",
+    "phone": "08-408 840 90",
+    "openHours": "mån-tis 06:30–22, ons-tor 06:30–00, fre 06:30–01, lör 08–01, sön 08–22.",
+    "note": "",
+    "webpage": "http://www.philsburger.se/sundbyberg/",
+    "location": "SUNDBYBERG",
+    "": ""
+  },
+  {
+    "name": "Gamla orangeriet",
+    "adress": "Veit Wittrocks väg 7, 104 05 Stockholm",
+    "phone": "08-612 09 59",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://gamlaorangeriet.se/",
+    "location": "NORRA DJURGÅRDEN",
+    "": ""
+  },
+  {
+    "name": "Liljeholmstorgets galleria",
+    "adress": "Nybohovsbacken 38, 117 61 Stockholm",
+    "phone": "08-52280310",
+    "openHours": "mån-fre 10-20, lör-sön 10-18",
+    "note": "",
+    "webpage": "",
+    "location": "LILJEHOLMEN",
+    "": ""
+  },
+  {
+    "name": "Sickla köpkvarter",
+    "adress": "Simbagatan, 131 34 Nacka",
+    "phone": "08-644 21 28",
+    "openHours": "Mån-fre 10-20, lör 10-18, sön 11-17",
+    "note": "",
+    "webpage": "http://kopkvarter.sickla.se/",
+    "location": "SICKLA",
+    "": ""
+  },
+  {
+    "name": "Dalaröbageriet",
+    "adress": "Odinsvägen 15, 137 70 Dalarö",
+    "phone": "08-501 511 66",
+    "openHours": "se hemsida.",
+    "note": "Inget skötbord, men gott om yta på en bänk.",
+    "webpage": "http://www.dalarobageri.se/",
+    "location": "DALARÖ",
+    "": ""
+  },
+  {
+    "name": "Nacka Forum",
+    "adress": "Forumvägen 14 \n131 53 Nacka",
+    "phone": "08-40 000 300",
+    "openHours": "mån-fre 10:00-20:00, lör 10:00 -18:00, sön 11:00-18:00",
+    "note": "",
+    "webpage": "http://nackaforum.se/kvalitetsmarkt",
+    "location": "NACKA",
+    "": ""
+  },
+  {
+    "name": "Artipelag",
+    "adress": "Artipelagstigen 1, 134 40 Gustavsberg",
+    "phone": "08-57013000",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://artipelag.se/besok-artipelag/hitta-hit/",
+    "location": "VÄRMDÖ",
+    "": ""
+  },
+  {
+    "name": "Drottningholms slottscafé, Karamellan",
+    "adress": "Drottningholms Slott 10, 178 93 Drottningholm",
+    "phone": "08-759 00 35",
+    "openHours": "se hemsida",
+    "note": "",
+    "webpage": "http://www.drottningholmsslottscafe.se/",
+    "location": "DROTTNINGHOLM",
+    "": ""
+  },
+  {
+    "name": "Kalaskransens konditori",
+    "adress": "Svandammsvägen 17b, 126 35 Stockholm",
+    "phone": "070-5611237",
+    "openHours": "tis-fre 07:00-18:00,\nlör-sön 09:00-16:00",
+    "note": "",
+    "webpage": "http://www.kalaskransen.se/",
+    "location": "MIDSOMMARKRANSEN",
+    "": ""
+  },
+  {
+    "name": "Espresso House i Hansakompaniet",
+    "adress": "Stora Nygatan, 211 38 Malmö",
+    "phone": "040-770 00",
+    "openHours": "mån-fre: 10-19, lör: 10-17, sön: 12-17",
+    "note": "",
+    "webpage": "http://hansamalmo.se/oppettider/",
+    "location": "MALMÖ",
+    "": ""
+  },
+  {
+    "name": "Café Noir",
+    "adress": "Engelbrektsgatan 6, 211 33 Malmö",
+    "phone": "040-30 44 60",
+    "openHours": "Mån-fre 08-18, lör 10-17, sön 11-16",
+    "note": "",
+    "webpage": "https://www.facebook.com/Noir-Kaffekultur-136811053534/",
+    "location": "MALMÖ",
+    "": ""
+  },
+  {
+    "name": "Stadsmuseet",
+    "adress": "Norra Hamngatan 12, 411 14 Göteborg",
+    "phone": "031-368 36 00",
+    "openHours": "tis-sön 10-17. Kvällsöppet ons 10-20. Stängt mån.",
+    "note": "",
+    "webpage": "http://goteborgsstadsmuseum.se/",
+    "location": "GÖTEBORG",
+    "": ""
+  },
+  {
+    "name": "Antikhallarna",
+    "adress": "Västra Hamngatan 6, 411 17 Göteborg",
+    "phone": "031-131 222",
+    "openHours": "mån-fre 7.30-18.15, lör 8.30-17.00, sön stängt",
+    "note": "",
+    "webpage": "http://www.antikhallarna.se/",
+    "location": "GÖTEBORG",
+    "": ""
+  },
+  {
+    "name": "Da Matteo",
+    "adress": "Vallgatan 5, 411 16 Göteborg",
+    "phone": "031 13 06 09",
+    "openHours": "mån-fre 8-19, lör 10-18, sön 10-17",
+    "note": "",
+    "webpage": "http://www.damatteo.se/vallgatan.html",
+    "location": "GÖTEBORG",
+    "": ""
+  },
+  {
+    "name": "NK Göteborg",
+    "adress": "Östra Hamngatan 42, 411 09 Göteborg",
+    "phone": "031-710 10 00",
+    "openHours": "mån-fre 10.00-19.00, lör 10.00-17.00, sön 12.00-16.00",
+    "note": "",
+    "webpage": "https://www.nk.se/goteborg/",
+    "location": "GÖTEBORG",
+    "": ""
+  },
+  {
+    "name": "",
+    "adress": "",
+    "phone": "",
+    "openHours": "",
+    "note": "",
+    "webpage": "",
+    "location": "",
+    "": ""
+  },
+  {
+    "name": "Victoria and Albert Museum",
+    "adress": "Cromwell Road, London, SW7 2RL",
+    "phone": "0044 (0)20 7942 2000",
+    "openHours": "Daily: 10.00 - 17.45 \nfre: 10.00 - 22.00",
+    "note": "",
+    "webpage": "https://www.vam.ac.uk/",
+    "location": "LONDON",
+    "": ""
+  },
+  {
+    "name": "",
+    "adress": "",
+    "phone": "",
+    "openHours": "",
+    "note": "",
+    "webpage": "",
+    "location": "",
+    "": ""
+  },
+  {
+    "name": "Café Noir",
+    "adress": "Engelbrektsgatan 6, 211 33 Malmö",
+    "phone": "040-30 44 60",
+    "openHours": "Mån-fre 08-18, lör 10-17, sön 11-16",
+    "note": "",
+    "webpage": "https://www.facebook.com/Noir-Kaffekultur-136811053534/",
+    "location": "LONDON",
+    "": ""
+  },
+  {
+    "name": "Stadsmuseet",
+    "adress": "Norra Hamngatan 12, 411 14 Göteborg",
+    "phone": "031-368 36 00",
+    "openHours": "Tisdag-söndag 10-17. Kvällsöppet onsdag 10-20. Stängt måndagar.",
+    "note": "",
+    "webpage": "http://goteborgsstadsmuseum.se/",
+    "location": "GÖTEBORG",
+    "": ""
+  },
+  {
+    "name": "Antikhallarna",
+    "adress": "Västra Hamngatan 6, 411 17 Göteborg",
+    "phone": "031-131 222",
+    "openHours": "Måndag-fredag 7.30-18.15, lördag 8.30-17.00, söndag stängt",
+    "note": "",
+    "webpage": "http://www.antikhallarna.se/",
+    "location": "GÖTEBORG",
+    "": ""
+  },
+  {
+    "name": "NK Göteborg",
+    "adress": "Östra Hamngatan 42, 411 09 Göteborg",
+    "phone": "031-710 10 00",
+    "openHours": "Måndag-fredag 10.00-19.00, lördag 10.00-17.00, söndag 12.00-16.00",
+    "note": "",
+    "webpage": "https://www.nk.se/goteborg/",
+    "location": "GÖTEBORG",
+    "": ""
+  },
+  {
+    "name": "Victoria and Albert Museum",
+    "adress": "Cromwell Road, London, SW7 2RL",
+    "phone": "0044 (0)20 7942 2000",
+    "openHours": "Daily: 10.00 - 17.45 \nFriday: 10.00 - 22.00",
+    "note": "",
+    "webpage": "https://www.vam.ac.uk/",
+    "location": "LONDON",
+    "": ""
+  }
+]
