@@ -1,17 +1,18 @@
 import mongoose from 'mongoose';
 
 const showSchema = new mongoose.Schema({
-  title: String,
-  director: String,
-  cast: String,
-  country: String,
-  date: String,
+  show_id: { type: Number, unique: true },
+  title: { type: String, trim: true },
+  director: { type: String, trim: true },
+  cast: { type: String, trim: true },
+  country: { type: String, trim: true },
+  date: { type: String, trim: true },
   release_year: Number,
-  rating: String,
-  duration: String,
-  listed_in: String,
-  description: String,
-  type: String
+  rating: { type: String, trim: true },
+  duration: { type: String, trim: true },
+  listed_in: { type: String, trim: true },
+  description: { type: String, trim: true },
+  type: { type: String, trim: true }
 });
 
 module.exports = new mongoose.model('Show', showSchema);
