@@ -5,18 +5,18 @@ import mongoose from 'mongoose'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
-// 
+//
 // import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
+import booksData from './data/books.json'
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/books'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
+// Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
@@ -29,7 +29,7 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(booksData)
 })
 
 // Start the server
