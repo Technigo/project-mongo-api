@@ -33,13 +33,13 @@ if (process.env.RESET_DATABASE) {
   console.log('Resetting database!')
 
   const seedDatabase = async () => {
-    await Athlete.deleteMany({})
     await Box.deleteMany({})
+    await Athlete.deleteMany({})
 
-    athletesData.forEach((athleteData) => {
-			new Athlete(athleteData).save()
-			new Box(athleteData).save()
-		})
+    athletesData.forEach(async (athleteData) => {
+      const athlete = await new Athlete(athleteData).save()
+      new Box({ ...athleteData, athlete }).save()
+    })
   }
 
   seedDatabase()
@@ -78,44 +78,46 @@ app.get('/athletes', async (req, res) => {
 //   }
 // })
 
-app.get('/box', async (req, res) => {
-  const box = await Box.find()
-  console.log(box)
-  res.json(box)
+app.get('/boxes', async (req, res) => {
+  const boxes = await Box.find().populate('athlete')
+  console.log(boxes)
+  res.json(boxes)
 } )
 
-// app.get('/athletes/:id/box', async (req, res) => {
-//   const athlete = await Athlete.findById(req.params.id)
-//   if (athlete) {
-//     const box = await Box.find({ athlete: mongoose.Types.ObjectId(athlete.competitorid) })
-//     res.json(box)
-//   } else {
-//     res.status(404).json({ error: 'Box not found' })
-//   }
-// })
 
-// app.get('/athletes', (req, res) => {
-//   // Query parameter
-//   const searchString = req.query.search
 
-//   let filteredAthletes = athletesData
+app.get('/boxes/:id/athletes', async (req, res) => {
+  const box = await Box.findById(req.params.id)
+  if (box) {
+    const athletes = await Athlete.find({ box: mongoose.Types.ObjectId(box.id) })
+    res.json(athletes)
+  } else {
+    res.status(404).json({ error: 'Box not found' })
+  }
+})
 
-//   // console.log(searchString)
+app.get('/athletes', (req, res) => {
+  // Query parameter
+  const searchString = req.query.search
 
-//   if (searchString) {
-//     // Filter once
-//     // http://localhost:8080/athletes?search=Ulwahn
-//     filteredAthletes = filteredAthletes.filter(item => {
-//       const athleteName = item.competitorname.toString()
-//       const athleteCountry = item.countryoforiginname.toString()
-//       const athleteAffiliate = item.affiliatename.toString()
-//       return athleteName.includes(searchString) ||
-//         athleteCountry.includes(searchString) ||
-//         athleteAffiliate.includes(searchString)
-//     })
-//   }
-//   res.json(filteredAthletes)
-// })
+  let filteredAthletes = athletesData
+
+  console.log(searchString)
+
+  if (searchString) {
+    // Filter once
+    // http://localhost:8080/athletes?search=Ulwahn
+    filteredAthletes = filteredAthletes.filter(item => {
+      const athleteName = item.competitorname.toString()
+      const athleteCountry = item.countryoforiginname.toString()
+      const athleteAffiliate = item.affiliatename.toString()
+      return athleteName.includes(searchString) ||
+        athleteCountry.includes(searchString) ||
+        athleteAffiliate.includes(searchString)
+    })
+  }
+  res.json(filteredAthletes)
+})
 
 // Start the server
 app.listen(port, () => {
