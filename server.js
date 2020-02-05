@@ -4,12 +4,8 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import guests from './data/guests.json'
 
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-
 // Boiler plate for setting up mongoose
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/guest-list'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -38,8 +34,7 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// Defines the port the app will run on. Defaults to 8000, but can be 
-// overridden when starting the server. For example: PORT=9000 npm start
+// Defines the port the app will run on. Defaults to 8000, can be overridden e.g PORT=9000 npm run dev
 const port = process.env.PORT || 8000
 const app = express()
 
@@ -91,7 +86,7 @@ app.get('/guests/:id', async (req, res) => {
   }
 })
 
-// Preparing for nest step to use in form to add/update/delet guests
+// Preparing for next step to use in form to add/update/delete guests
 // app.post('/guests', (req, res) => {
 //   return res.send('Received a POST HTTP method')
 // })

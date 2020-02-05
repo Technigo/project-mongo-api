@@ -53,5 +53,38 @@
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
     "status_attending": true
+  },
+  {
+    "first_name": "Tobbe",
+    "last_name": "Nyblad",
+    "email": "nyblad@helsingenet.se",
+    "phone": 46703811158,
+    "allergies": "None",
+    "other": "",
+    "added": "February 04, 2020",
+    "updated": "February 04, 2020",
+    "status_attending": true
+  },
+  {
+    "first_name": "Henrik",
+    "last_name": "Nyblad",
+    "email": "henrik.nyblad@ljusnan.se",
+    "phone": 46735315625,
+    "allergies": "Fur",
+    "other": "",
+    "added": "February 04, 2020",
+    "updated": "February 04, 2020",
+    "status_attending": true
+  },
+  {
+    "first_name": "Maria",
+    "last_name": "Dahlgren",
+    "email": "henrik.nyblad@ljusnan.se",
+    "phone": 4663360019,
+    "allergies": "Tomatoes",
+    "other": "",
+    "added": "February 04, 2020",
+    "updated": "February 04, 2020",
+    "status_attending": true
   }
 ]
