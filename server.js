@@ -9,7 +9,6 @@ import Show from './models/show';
 import netflixData from './data/netflix-titles.json';
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/netflix';
-// mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 try {
   mongoose.connect(mongoUrl, {
@@ -40,14 +39,6 @@ if (process.env.RESET_DATABASE) {
 
 const port = process.env.PORT || 8080;
 const app = express();
-
-// Delete content and prepare MongoDB with new data
-// Show.deleteMany().then(() => {
-//   netflixData.forEach(show => {
-//     delete show.show_id;
-//     new Show(show).save();
-//   });
-// });
 
 // Middleware
 app.use(compression());
