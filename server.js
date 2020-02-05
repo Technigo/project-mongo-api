@@ -1,12 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import logger from 'morgan';
 import compression from 'compression';
 import Routes from './routes/index';
 import Show from './models/show';
 import netflixData from './data/netflix-titles.json';
+
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/netflix';
 
@@ -47,6 +50,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+// Middleware that will check if service is available
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next();
