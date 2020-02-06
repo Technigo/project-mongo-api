@@ -17,26 +17,51 @@ mongoose.Promise = Promise
 //setup of shows title
 const Show = mongoose.model('Show', {
   // Properties defined here match the keys from the netflix-title.json file
-  show_id: Number,
-  title: String,
-  // director: String,
-  // cast: String,
-  // country: String,
-  // date_added: toString,
-  // release_year: Number,
-  // rating: String,
-  // duration: toString,
-  // listed_in: String,
-  // description: String,
-  // type: String
+  show_id: {
+    type: Number
+  },
+  title: {
+    type: String
+  },
+  director: {
+    type: String
+  },
+  cast: {
+    type: String
+  },
+  country: {
+    type: String
+  },
+  date_added: {
+    type: String
+  },
+  release_year: {
+    type: Number
+
+  },
+  rating: {
+    type: String
+  },
+  duration: {
+    type: String
+  },
+  listed_in: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  type: {
+    type: String
+  }
 })
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Show.deleteMany({})
 
-    data.forEach((showData) => {
-      new Show(showData).save()
+    data.forEach((show) => {
+      new Show(show).save()
     })
   }
 
@@ -59,10 +84,24 @@ app.get('/', (req, res) => {
 })
 
 //setup of GET route, client can fetch all the shows
+//display all the shows which are included "Comedies" word, and the 'i' = uppercase/lowercase
 app.get("/shows", async (req, res) => {
-  const shows = await Show.find()
-  res.json(shows)
+  Show.find({ 'listed_in': /Comedies/i })
+    .then((results) => {
+      // Succesfull
+      console.log('Found : ' + results)
+      res.json(results)
+    }).catch((err) => {
+      // Error - Failure
+      // console.log('Error ' + err)
+      res.json({ message: 'Cannot find this show', err: err })
+    })
 })
+
+
+
+
+
 
 
 
