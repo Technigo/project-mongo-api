@@ -83,8 +83,23 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-//setup of GET route, client can fetch all the shows
-//display all the shows which are included "Comedies" word, and the 'i' = uppercase/lowercase
+//setup of GET route, client can fetch all the movies
+app.get("/shows/movies", async (req, res) => {
+  Show.find({ 'type': /Movie/i })
+    .then((results) => {
+      // Succesfull
+      console.log('Found : ' + results)
+      res.json(results)
+    }).catch((err) => {
+      // Error - Failure
+      // console.log('Error ' + err)
+      res.json({ message: 'Cannot find the movie', err: err })
+    })
+})
+
+
+
+//Regular expression => display all the shows which are included "Comedies" word, and the 'i' = uppercase/lowercase
 app.get("/shows", async (req, res) => {
   Show.find({ 'listed_in': /Comedies/i })
     .then((results) => {
@@ -98,7 +113,22 @@ app.get("/shows", async (req, res) => {
     })
 })
 
-
+//query-params to be able to search shows title
+app.get("/shows/:title", async (req, res) => {
+  const title = req.query.title
+  //use string variable to regex javascript//
+  const queryRegex = new RegExp(title, 'i')
+  Show.find({ 'title': queryRegex })
+    .then((results) => {
+      // Succesfull
+      console.log('Found : ' + results)
+      res.json(results)
+    }).catch((err) => {
+      // Error - Failure
+      // console.log('Error ' + err)
+      res.json({ message: 'Cannot find this show', err: err })
+    })
+})
 
 
 
