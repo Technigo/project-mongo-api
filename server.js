@@ -86,6 +86,7 @@ app.get('/guests', async (req, res) => {
     guestList = guestList.slice(startIndex, startIndex + PER_PAGE)
   }
   res.json({
+    totalGuests: guestList.length
     totalPages: Math.floor(guestList.length / PER_PAGE),
     guestList
   })
