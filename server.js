@@ -4,18 +4,12 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import booksData from './data/books.json'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project_mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
+// Defines the port the app will run on. Can be 
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
@@ -51,19 +45,33 @@ if(process.env.RESET_DB) {
   seedDatabase()
 }
 
-// Start defining your routes here
+// Start defining the routes
 app.get('/', (req, res) => {
   res.send('Books API')
 })
 
-
-
-// Return the array with all the book objects, using query for title
-// For example, http://localhost:9001/books?title=Harry will return all the books with 'Harry' in the title
-// Also, the books are sorted by average rating from the highest to lowest
+// Return the array with all the book objects
 app.get('/books', (req, res) => {
+  const { language } = req.query
   const queryString = req.query.title 
   const queryRegex = new RegExp(queryString, "i")
+ 
+// Using query for language code
+// For example, http://localhost:9001/?language=eng will return books with English language code
+  if(language) {
+   Book.find({'language_code': language})
+     .then((results) => {
+       console.log('Found')
+       res.json(results)
+      }) .catch((err) => {
+        console.log('Error ' + err)
+        res.json({message: 'Cannot find book', err: err}) 
+    })
+  }
+
+// Using query for title
+// For example, http://localhost:9001/books?title=Harry will return books with 'Harry' in the title
+// Also, the books are sorted by average rating from the highest to lowest
   Book.find({'title': queryRegex})
     .sort({'average_rating': -1})
     .then((results) => {
@@ -96,6 +104,7 @@ app.get('/books/_id/:_id', (req, res) => {
       res.json({message: 'Cannot find this book', err: err})
     })
 })
+
 
 // Start the server
 app.listen(port, () => {
