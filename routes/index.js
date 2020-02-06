@@ -1,10 +1,8 @@
 import express from 'express';
 import path from 'path';
 import { celebrate, Segments } from 'celebrate';
-import { stringSearch } from '../helpers/stringSearch';
-import Show from '../models/show';
-import { showObjectSchema } from '../validation/showObjectSchema';
-import { showQuerySchema } from '../validation/showQuerySchema';
+import validation from '../validation/validation';
+import showHandler from '../handlers/showHandlers';
 
 const router = express.Router();
 
@@ -15,150 +13,17 @@ router.get('/', (req, res) => {
 
 router.get(
   '/shows',
-  celebrate({ [Segments.QUERY]: showQuerySchema }),
-  (req, res) => {
-    const {
-      page,
-      director,
-      title,
-      actor,
-      country,
-      year,
-      rating,
-      duration,
-      categories,
-      description,
-      type
-    } = req.query;
-    const query = {};
-
-    if (title) {
-      query.title = stringSearch(title);
-    }
-
-    if (director) {
-      query.director = stringSearch(director);
-    }
-
-    if (actor) {
-      query.cast = stringSearch(actor);
-    }
-
-    if (country) {
-      query.country = stringSearch(country);
-    }
-
-    if (year) {
-      query.release_year = +year;
-    }
-
-    if (rating) {
-      query.rating = stringSearch(rating);
-    }
-
-    if (duration) {
-      query.duration = stringSearch(duration);
-    }
-
-    if (categories) {
-      query.listed_in = stringSearch(categories);
-    }
-
-    if (description) {
-      query.description = stringSearch(description);
-    }
-
-    if (type) {
-      query.type = stringSearch(type);
-    }
-
-    if (page) {
-      let ITEMS_PER_PAGE = 20;
-      let startIndex = page * ITEMS_PER_PAGE - ITEMS_PER_PAGE; // Page 1 starts at index 0
-      let totalPages;
-      let remainingPages;
-
-      // Query to get total number of objects for this particular query
-      Show.where(query).countDocuments((err, count) => {
-        totalPages = Math.ceil(count / ITEMS_PER_PAGE);
-        remainingPages = totalPages - page;
-
-        Show.find(query)
-          .skip(startIndex)
-          .limit(ITEMS_PER_PAGE)
-          .then(shows => {
-            if (shows.length > 0) {
-              const moviePhrase = shows.length > 1 ? `Movies` : `Movie`;
-
-              res.json({
-                statusCode: 200,
-                message: `${moviePhrase} fetched successfully`,
-                totalPages: totalPages,
-                remainingPages: remainingPages,
-                query: req.query,
-                data: shows
-              });
-            } else {
-              res.status(404).send({
-                statusCode: 404,
-                error: 'No movies found',
-                query: req.query
-              });
-            }
-          });
-      });
-    } else {
-      Show.find(query).then(shows => {
-        if (shows.length > 0) {
-          const moviePhrase = shows.length > 1 ? `Movies` : `Movie`;
-
-          res.json({
-            statusCode: 200,
-            message: `${moviePhrase} fetched successfully`,
-            query: req.query,
-            data: shows
-          });
-        } else {
-          res.status(404).send({
-            statusCode: 404,
-            error: 'No movies found',
-            query: req.query
-          });
-        }
-      });
-    }
-  }
+  celebrate({ [Segments.QUERY]: validation.showQuerySchema }),
+  showHandler.getAllShows
 );
 
-router.get('/shows/:id', (req, res) => {
-  const { id } = req.params;
-
-  Show.find({ show_id: +id }).then(show => {
-    if (show.length > 0) {
-      res.json({
-        statusCode: 200,
-        message: 'Movie fetched successfully',
-        data: show
-      });
-    } else {
-      res.status(404).json({
-        statusCode: 404,
-        error: `No movie found with id ${id}`,
-        params: req.params
-      });
-    }
-  });
-});
+router.get('/shows/:id', showHandler.getShowById);
 
 // POST routes
 router.post(
   '/shows',
-  celebrate({ [Segments.BODY]: showObjectSchema }),
-  (req, res) => {
-    const newShow = new Show(req.body);
-    newShow.save();
-    return res.json(newShow);
-  }
+  celebrate({ [Segments.BODY]: validation.showObjectSchema }),
+  showHandler.postShow
 );
 
 module.exports = router;
