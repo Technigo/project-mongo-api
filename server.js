@@ -11,15 +11,15 @@ mongoose.Promise = Promise
 
 // MODEL FOR GUEST
 const Guest = mongoose.model('Guest', {
-  first_name: String,
-  last_name: String,
-  email: String,
-  phone: Number,
-  allergies: String,
-  other: String,
+  first_name: { type: String },
+  last_name: { type: String },
+  email: { type: String },
+  phone: { type: Number },
+  allergies: { type: String },
+  other: { type: String },
   added: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now },
-  status_attending: Boolean,
+  status_attending: { type: Boolean },
 })
 
 // RESET DATABASE ON START
