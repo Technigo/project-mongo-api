@@ -8,7 +8,7 @@ import mongoose from 'mongoose'
 // 
 // import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
-import booksData from './data/books.json'
+// import booksData from './data/books.json'
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
@@ -32,7 +32,7 @@ const Book = mongoose.model('Book', {
   title: {
     type: String
   },
-  author: {
+  authors: {
     type: String
   },
   average_rating: {
@@ -56,11 +56,11 @@ const Book = mongoose.model('Book', {
   }
 })
 
-const addBooksToDataBase = () => {
-  booksData.forEach((book) => {
-    new Book(book).save()
-  })
-}
+// const addBooksToDataBase = () => {
+//   booksData.forEach((book) => {
+//     new Book(book).save()
+//   })
+// }
 
 // addBooksToDataBase()
 
@@ -70,9 +70,25 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/books', (req, res) => {
-  const queryString = req.query.q
-  const queryRegex = new RegExp(queryString, "i")
-  Book.find({ 'title': queryRegex })
+  const { title, author, sort_by } = req.query
+
+  const sort = {}
+
+  // Check if sort by is a descending sortable
+  if (sort_by && ['average_rating'].includes(sort_by)) {
+    sort[sort_by] = -1
+  }
+
+  // Check if sort by is a ascending sortable
+  if (sort_by && ['authors'].includes(sort_by)) {
+    sort[sort_by] = 1
+  }
+
+  Book.find({
+    title: new RegExp(title, "i"),
+    authors: new RegExp(author, 'i')
+  })
+    .sort(sort)
     .then((results) => {
       res.json(results)
     }).catch((err) => {
@@ -80,6 +96,7 @@ app.get('/books', (req, res) => {
       res.json({ message: 'Cannot find this book', err: err })
     })
 })
+
 
 app.get('/books/:isbn', (req, res) => {
   const isbn = req.params.isbn;
@@ -91,28 +108,6 @@ app.get('/books/:isbn', (req, res) => {
     });
 });
 
-app.get('/books/author/:author', (req, res) => {
-  const queryString = req.query.q
-  const queryRegex = new RegExp(queryString, "i")
-  Book.find({ 'author': queryRegex })
-    .then((results) => {
-      res.json(results)
-    }).catch((err) => {
-      console.log('Error ' + err)
-      res.json({ message: 'Cannot find this author', err: err })
-    })
-})
-
-app.get('/books/average_rating', async (req, res) => {
-  const rating = await Book.sort({ 'average_rating': -1 })
-  res.json(rating)
-
-})
-
-// app.get('books/author', async (req, res) => {
-//   const authors = await Book.author.find()
-//   res.json(authors)
-// })
 
 // Start the server
 app.listen(port, () => {
