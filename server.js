@@ -91,11 +91,11 @@ app.get('/', (req, res) => {
 })
 
 // http://localhost:8080/athletes
-app.get('/athletes', async (req, res) => {
-  const athletes = await Athlete.find()
-  console.log(athletes)
-  res.json(athletes)
-} )
+// app.get('/athletes', async (req, res) => {
+//   const athletes = await Athlete.find()
+//   console.log(athletes)
+//   res.json(athletes)
+// } )
 
 // Searching without mongoose, put a + infront of the id as its a string in the json
 // app.get('/athletes/:id', async (req, res) => {
@@ -114,6 +114,7 @@ app.get('/athletes', async (req, res) => {
 app.get('/athletes', (req, res) => {
   const queryString = req.query.q;
   const queryRegex = new RegExp(queryString, "i");
+  console.log(queryString)
   Athlete.find({'competitorname': queryRegex})
     .sort({'num_pages': -1})
     .then((results) => {
@@ -127,7 +128,7 @@ app.get('/athletes', (req, res) => {
     });
 });
 
-// http://localhost:8080/athletes?q=1071438
+// http://localhost:8080/athletes/1071438
 app.get('/athletes/:competitorid', (req, res) => {
   const competitorid = req.params.competitorid;
   Athlete.findOne({'competitorid': competitorid})
@@ -145,7 +146,7 @@ app.get('/boxes', async (req, res) => {
   res.json(boxes)
 } )
 
-// http://localhost:8080/boxes/5885/athletes this endpoint whould show all athletes from one box
+// http://localhost:8080/boxes/5e3bd6190d6a00044ab2f989/athletes this endpoint whould show all athletes from one box
 app.get('/boxes/:id/athletes', async (req, res) => {
   const box = await Box.findById(req.params.id)
   if (box) {
