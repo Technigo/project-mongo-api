@@ -3,9 +3,6 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
 // import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
 // import booksData from './data/books.json'
@@ -37,11 +34,8 @@ const addMovie = () => {
   });
 };
 
-// addMovie();
-
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
-//
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
@@ -57,9 +51,21 @@ app.use(bodyParser.json());
 app.get("/netflix", (req, res) => {
   const titleString = req.query.title;
   const castString = req.query.cast;
+  const countryString = req.query.country;
+  const genreString = req.query.genre;
+  const typeString = req.query.type;
   const titleRegex = new RegExp(titleString, "i");
   const castRegex = new RegExp(castString, "i");
-  Netflix.find({ title: titleRegex, cast: castRegex })
+  const countryRegex = new RegExp(countryString, "i");
+  const genreRegex = new RegExp(genreString, "i");
+  const typeRegex = new RegExp(typeString, "i");
+  Netflix.find({
+    title: titleRegex,
+    cast: castRegex,
+    country: countryRegex,
+    listed_in: genreRegex,
+    type: typeRegex
+  })
     .sort({ release_year: -1 })
     .then(results => {
       // Succesfull
@@ -68,7 +74,7 @@ app.get("/netflix", (req, res) => {
     .catch(err => {
       // Error/Failure
       console.log("Error " + err);
-      res.json({ message: "Cannot find this book", err: err });
+      res.json({ message: "Cannot find this search", err: err });
     });
 });
 
@@ -80,6 +86,18 @@ app.get("/netflix/_id/:_id", (req, res) => {
     })
     .catch(err => {
       res.json({ message: "Cannot find this movie", err: err });
+    });
+});
+
+app.get("/netflix/type/:type", (req, res) => {
+  const type = req.params.type;
+  const typeRegex = new RegExp(type, "i");
+  Netflix.find({ type: typeRegex })
+    .then(results => {
+      res.json(results);
+    })
+    .catch(err => {
+      res.json({ message: "Cannot find any suitable search", err: err });
     });
 });
 
