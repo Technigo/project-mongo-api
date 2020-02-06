@@ -16,15 +16,51 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+//const Nominee = mongoose.model('Nominee', {
+  //year_film: Number,
+  //year_award: Number,
+  //ceremony: Number,
+  //category: String,
+  //nominee: String,
+  //film: String,
+  //win: Boolean
+//})
+
 const Nominee = mongoose.model('Nominee', {
-  year_film: Number,
-  year_award: Number,
-  ceremony: Number,
-  category: String,
-  nominee: String,
-  film: String,
-  win: Boolean
-})
+  year_film: {
+    type: Number
+  },
+  year_award: {
+   type: Number
+  },
+  ceremony: {
+    type: Number
+  },
+  category: {
+   type: String
+  },
+  nominee: {
+   type: String
+  },
+  
+  film: {
+    type: String
+  },
+  win: {
+    type: Boolean
+  }
+});
+
+//vans codealong
+//const addNomineesToDatabase = () => {
+  //goldenGlobesData.forEach((nominee) =>{
+    //new Nominee(nominee).save();
+  //});
+//};
+
+//addNomineesToDatabase();
+
+
 
 const Year = mongoose.model('Year', {
   year_film: Number,
@@ -34,8 +70,25 @@ const Year = mongoose.model('Year', {
   }
 })
 
-if (process.env.RESET_DATABASE) {
-  console.log('resetting database')
+
+//RESET_DATABASE=true npm start dev
+
+//if (process.env.RESET_DATABASE) {
+  //console.log('resetting database')
+
+  //const seedDatabase = async () => {
+    //await Nominee.deleteMany()
+  
+    //data.forEach((nomineeData) => {
+			//new Nominee(nomineeData).save()
+		//})
+  //}
+  
+  //seedDatabase()
+//}
+
+//if (process.env.RESET_DATABASE) {
+  //console.log('resetting database')
 
   const seedDatabase = async () => {
     await Nominee.deleteMany()
@@ -51,7 +104,7 @@ if (process.env.RESET_DATABASE) {
   }
   
   seedDatabase()
-}
+//}
 
 
 
@@ -91,6 +144,8 @@ app.use(bodyParser.json())
     //}
   //})
 //})
+
+
 app.get('/', (req, res) => {
   res.send('hello world')
 })
@@ -98,6 +153,11 @@ app.get('/', (req, res) => {
 
 app.get('/nominees', async (req, res) => {
   const nominees = await Nominee.find()
+    res.json(nominees)
+  })
+
+  app.get('/years', async (req, res) => {
+    const years = await Year.find().populate('nominee')
     res.json(nominees)
   })
 
