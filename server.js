@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import mongoose from 'mongoose'
+import mongoose, { PromiseProvider } from 'mongoose'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -12,7 +12,8 @@ import booksData from './data/books.json'
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
+//The name of the database - mongodb://localhost/books
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-project-books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -68,9 +69,19 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+//A function that recives a request, the response and the argument "next". 
+//It will execute before the routes below, if it's not evoked next() it will block the code coming next. The conenction.readyState checks that the connection is good.
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
+})
+
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello !Mongo')
+  res.send('Hello Mongo!')
 })
 
 app.get('/authors', async (req, res) => {
@@ -79,11 +90,15 @@ app.get('/authors', async (req, res) => {
 })
 
 app.get('/authors/:id', async (req, res) => {
-  const author = await Author.findById(req.params.id)
-  if (author) {
-    res.json(author)
-  } else {
-    res.status(404).json({ error: 'Author not found' })
+  try {
+    const author = await Author.findById(req.params.id)
+    if (author) {
+      res.json(author)
+    } else {
+      res.status(404).json({ error: 'Author not found' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid book id' })
   }
 })
 
