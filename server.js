@@ -82,16 +82,19 @@ app.get('/', (req, res) => {
 
 //setup of GET route, client can fetch all shows with type =  movie //
 //http://localhost:8080/shows/movies//
-app.get("/shows/movies", async (req, res) => {
-  Show.find({ 'type': /Movie/i })
-    .then((results) => {
-      // Succesfull//
-      res.json(results)
-    }).catch((err) => {
-      //Error - Failure//
-      res.json({ message: 'Cannot find the movie', err: err })
-    })
-})
+// app.get("/shows/movies", async (req, res) => {
+//   const {page} = req.query
+//   const startIndex = 30 * +page
+//   console.log("startIndex", startIndex)
+//   Show.find({ 'type': /Movie/i })
+//     .then((results) => {
+//       // Succesfull//
+//       res.json(results.slice(startIndex, startIndex + 30))
+//     }).catch((err) => {
+//       //Error - Failure//
+//       res.json({ message: 'Cannot find the movie', err: err })
+//     })
+// })
 
 
 
@@ -99,38 +102,29 @@ app.get("/shows/movies", async (req, res) => {
 // http://localhost:8080/shows?year=2018&title=people&listed_in=international
 app.get("/shows", async (req, res) => {
   let queryObj = {}
-
+  let startIndex
+  if (req.query.page) { 
+    startIndex = 30 * (+req.query.page-1)
+  }
   if (req.query.listed_in) { queryObj['listed_in'] = new RegExp(req.query.listed_in, 'i') }
   if (req.query.year) { queryObj['release_year'] = req.query.year }
-  if (req.query.year) { queryObj['title'] = new RegExp(req.query.title,'i') }
+  if (req.query.title) { queryObj['title'] = new RegExp(req.query.title,'i') }
 
-  console.log(queryObj)
-  Show.find(queryObj)
+  Show.find(queryObj).sort('title')
     .then((results) => {
-      // Succesfull//
+      // Succesfull
+      if (req.query.page) {
+        res.json(results.slice(startIndex, startIndex + 30))
+      } else {
       res.json(results)
+      }
+      
     }).catch((err) => {
-      //Error - Failure//
+      //Error - Failure
       res.json({ message: 'Cannot find this show', err: err })
     })
 })
 
-
-/*
-  path-params to be able to find a specefic show
-  http://localhost:8080/shows/81082007/
-*/
-app.get("/shows/:show_id", async (req, res) => {
-  const id = req.params.show_id
-  Show.findOne({ 'show_id': id })
-    .then((results) => {
-      // Succesfull//
-      res.json(results)
-    }).catch((err) => {
-      // Error - Failure//
-      res.json({ message: 'Cannot find this show', err: err })
-    })
-})
 
 // path-params to be able to find a specefic show //
 // http://localhost:8080/shows/id/81082007/
