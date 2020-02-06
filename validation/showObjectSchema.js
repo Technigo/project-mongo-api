@@ -2,6 +2,9 @@ import { Joi } from 'celebrate';
 
 export const showObjectSchema = Joi.object()
   .keys({
+    show_id: Joi.number()
+      .integer()
+      .required(),
     title: Joi.string()
       .trim()
       .regex(/^[a-zA-Z, ]*$/, 'Letters, space and comma characters')
