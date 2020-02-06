@@ -72,6 +72,7 @@ const Year = mongoose.model('Year', {
 
 
 //RESET_DATABASE=true npm start dev
+//PMAK-5e3c53897371d60031f47163-12e3caaadf13341996d81dc084250d29d3 api-key for postman
 
 //if (process.env.RESET_DATABASE) {
   //console.log('resetting database')
@@ -87,7 +88,7 @@ const Year = mongoose.model('Year', {
   //seedDatabase()
 //}
 
-//if (process.env.RESET_DATABASE) {
+if (process.env.RESET_DATABASE) {
   //console.log('resetting database')
 
   const seedDatabase = async () => {
@@ -101,10 +102,18 @@ const Year = mongoose.model('Year', {
   
     const rebeccaFerguson = new Nominee({ year_film: 2013, year_award: 2014, ceremony: 71, category: "Best Performance by an Actress in a Limited Series or a Motion Picture Made for Television",  nominee:"Rebecca Ferguson", film: "The White Queen", win: false })
     await rebeccaFerguson.save()
+    
+    goldenGlobesData.forEach((nomineeData) => {
+      new Nominee(nomineeData).save()
+    })
   }
   
   seedDatabase()
-//}
+
+ 
+
+
+}
 
 
 
@@ -135,28 +144,32 @@ app.use(bodyParser.json())
   //})
 //})
 
-//app.get('/:nominee', (req, res) => {
-  //Nominee.findOne({nominee: req.params.nominee}).then(nominee => {
-    //if (nominee){
-      //res.json(nominee)
-    //}else{
-      //res.status(404).json({error: 'not found'})
-    //}
-  //})
-//})
+
 
 
 app.get('/', (req, res) => {
   res.send('hello world')
 })
 
-
+//this is working, showing all nominees
 app.get('/nominees', async (req, res) => {
   const nominees = await Nominee.find()
     res.json(nominees)
   })
 
-  app.get('/years', async (req, res) => {
+  //this is working, showing one selected nominee
+app.get('/:nominee', (req, res) => {
+  Nominee.findOne({nominee: req.params.nominee}).then(nominee => {
+    if (nominee){
+      res.json(nominee)
+    }else{
+      res.status(404).json({error: 'not found'})
+    }
+  })
+})
+
+  app.get('/year/:year', async (req, res) => {
+    console.log('hej')
     const years = await Year.find().populate('nominee')
     res.json(nominees)
   })
