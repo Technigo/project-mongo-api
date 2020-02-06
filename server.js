@@ -6,7 +6,23 @@ import topMusicData from './data/top-music.json'
 
 // REMEMBER : RESET_DATABASE=true npm run dev
 // import booksData from './data/books.json'
+//Json list 
+// "id": 3,
+//     "trackName": "boyfriend (with Social House)",
+//     "artistName": "Ariana Grande",
+//     "genre": "dance pop",
 
+//     "bpm": 190,
+//     "energy": 80,
+//     "danceability": 40,
+//     "loudness": -4,
+//     "liveness": 16,
+//     "valence": 70,
+//     "length": 186,
+//     "acousticness": 12,
+//     "speechiness": 46,
+//     "popularity": 85
+//
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -23,8 +39,14 @@ const Track = mongoose.model('Track', {
   bpm: Number,
   energy: Number,
   danceability: Number,
+  loudness: Number,
   liveness: Number,
-  loudness: Number
+  length: Number,
+  acousticness: Number
+})
+
+const Genre = mongoose.model('Genre', {
+  genre: String
 })
 
 // artist: {
@@ -38,10 +60,12 @@ if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
     await Artist.deleteMany({})
     await Track.deleteMany({})
+    await Genre.deleteMany({})
 
     topMusicData.forEach((topMusicData) => {
       new Artist(topMusicData).save()
       new Track(topMusicData).save()
+      new Genre(topMusicData).save()
     })
 
   }
@@ -90,16 +114,15 @@ app.get('/tracks', async (req, res) => {
 })
 // this works: http://localhost:8080/tracks
 
-app.get('/tracks', (req, res) => {
-  const queryNumber = req.query.q;
-  const queryRegex = new RegExp(queryNumber, "i");
-  Track.find({ 'bpm': queryRegex })
-    .sort({ 'num_bpm': -1 })
-    .then((results) => {
-    })
+app.get('/genres', async (req, res) => {
+  const genres = await Genre.find()
+  console.log(genres)
+  res.json(genres)
+})
+//Works with: http://localhost:8080/genres
 
-  // Start the server
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`)
-  })
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`)
 })
