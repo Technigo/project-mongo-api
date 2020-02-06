@@ -28,7 +28,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Artist = mongoose.model('Artist', {
+const TopMusic = mongoose.model('TopMusic', {
   id: Number,
   trackName: String,
   artistName: String,
@@ -45,10 +45,18 @@ const Artist = mongoose.model('Artist', {
   popularity: Number
 })
 
+const Artist = mongoose.model('Artist', {
+  artistName: String,
+  trackName: {
+    type: mongoose.Schema.Types.String,
+    ref: 'Record'
+  }
+})
+
 const Record = mongoose.model('Record', {
   trackName: String,
   artistName: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.String,
     ref: 'Artist'
   }
 })
@@ -57,10 +65,12 @@ if (process.env.RESET_DATABASE) {
   console.log('Resetting the database')
 
   const seedDatabase = async () => {
+    await TopMusic.deleteMany({})
     await Artist.deleteMany({})
     await Record.deleteMany({})
 
     topMusicData.forEach((artistData) => {
+      new TopMusic(artistData).save()
       new Artist(artistData).save()
       new Record(artistData).save()
     })
@@ -84,18 +94,63 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-// Artist.find finds all the infomation that I've made an model for.
-app.get('/artists', async (req, res) => {
-  const artists = await Artist.find()
+// TopMusic.find finds all the infomation that I've made an model for.
+app.get('/lists', async (req, res) => {
+  const list = await TopMusic.find()
 
-  res.json(artists)
-  console.log(artists)
+  res.json(list)
+  console.log(list)
+})
+
+app.get('/artists', async (req, res) => {
+  const artist = await Artist.find().populate('record')
+  res.json(artist)
+})
+
+//not working
+app.get('/artists/:id', async (req, res) => {
+  const artist = await TopMusic.findById(req.params.id)
+  if (artist) {
+    res.json(artist)
+  } else {
+    res.status(404).json({ errror: 'Artist not found' })
+  }
 })
 
 app.get('/records', async (req, res) => {
-  const records = await Record.find().populate('artist')
-  res.json(records)
+  const record = await Record.find().populate('artist')
+  res.json(record)
 })
+
+//this returns an empty array
+app.get('/artists/:id/records', async (req, res) => {
+  const artist = await TopMusic.findById(req.params.id)
+  if (artist) {
+    const record = await Record.find({ artist: mongoose.Types.ObjectId(artist.id) })
+    res.json(record)
+  } else {
+    res.status(404).json({ errror: 'Artist not found' })
+  }
+
+})
+
+app.get('/genre', (req, res) => {
+  const queryString = req.query.genre
+  console.log(queryString)
+  // /pop/ is a regex and i makes it search not being case sensitive
+  TopMusic.find({ 'genre': /pop/i })
+    .then((results) => {
+      //if .find is succesful
+      console.log('Found : ' + results)
+      res.jsonp(results)
+    }).catch((err) => {
+      //Error/Failure
+      console.log('Error ' + err)
+      res.json({ message: 'Cannot find this genre', err: err })
+    })
+})
+
+
 
 // Start the server
 app.listen(port, () => {
