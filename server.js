@@ -12,9 +12,14 @@ import mongoose from 'mongoose'
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
+// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
+
+const Author = mongoose.model('Author', {
+  name: String
+})
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -30,6 +35,11 @@ app.use(bodyParser.json())
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.get('/authors', async (req, res) => {
+  const authors = await Author.find()
+  res.json(authors)
 })
 
 // Start the server
