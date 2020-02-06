@@ -2,14 +2,9 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-// import topMusicData from './data/topMusicData.json'
 import topMusicData from './data/top-music.json'
 
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
+// REMEMBER : RESET_DATABASE=true npm run dev
 // import booksData from './data/books.json'
 
 
@@ -22,7 +17,6 @@ const Artist = mongoose.model('Artist', {
   genre: String,
   popularity: Number
 })
-// this aertist search works : http://localhost:8080/artists
 
 const Track = mongoose.model('Track', {
   trackName: String,
@@ -31,7 +25,6 @@ const Track = mongoose.model('Track', {
   danceability: Number,
   liveness: Number,
   loudness: Number
-  // this track search works: http://localhost:8080/tracks 
 })
 
 // artist: {
@@ -76,6 +69,7 @@ app.get('/artists', async (req, res) => {
   console.log(artists)
   res.json(artists)
 })
+// this artist search works : http://localhost:8080/artists
 
 app.get('/artist/:id', async (req, res) => {
   const artist = await Artist.findById(req.params.id)
@@ -86,22 +80,26 @@ app.get('/artist/:id', async (req, res) => {
   }
 })
 
+// this works - one single artist search:  
+// http://localhost:8080/artist/5e3acecd61ec7e3a4b84455f
+
 app.get('/tracks', async (req, res) => {
   const tracks = await Track.find()
   console.log(tracks)
   res.json(tracks)
 })
+// this works: http://localhost:8080/tracks
 
-// app.get('artistName/:id', async (req, res) => {
-//   const artistName = await ArtistName.findById(req.params.id)
-//   if (artistName) {
-//     res.json(artistName)
-//   } else {
-//     res.status(404).json({ error: 'Artist not found' })
-//   }
-// })
+app.get('/tracks', (req, res) => {
+  const queryNumber = req.query.q;
+  const queryRegex = new RegExp(queryNumber, "i");
+  Track.find({ 'bpm': queryRegex })
+    .sort({ 'num_bpm': -1 })
+    .then((results) => {
+    })
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
+  // Start the server
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`)
+  })
 })
