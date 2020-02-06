@@ -81,6 +81,7 @@ app.get('/', (req, res) => {
 })
 
 //setup of GET route, client can fetch all shows with type =  movie //
+//http://localhost:8080/shows/movies//
 app.get("/shows/movies", async (req, res) => {
   Show.find({ 'type': /Movie/i })
     .then((results) => {
@@ -94,9 +95,17 @@ app.get("/shows/movies", async (req, res) => {
 
 
 
-//Regular expression => display all the shows which are included "Comedies" word, and the 'i' = uppercase/lowercase
+// Regular expression => display all the shows which are included "Comedies" word, and the 'i' = uppercase/lowercase
+// http://localhost:8080/shows?year=2018&title=people&listed_in=international
 app.get("/shows", async (req, res) => {
-  Show.find({ 'listed_in': /Comedies/i })
+  let queryObj = {}
+
+  if (req.query.listed_in) { queryObj['listed_in'] = new RegExp(req.query.listed_in, 'i') }
+  if (req.query.year) { queryObj['release_year'] = req.query.year }
+  if (req.query.year) { queryObj['title'] = new RegExp(req.query.title,'i') }
+
+  console.log(queryObj)
+  Show.find(queryObj)
     .then((results) => {
       // Succesfull//
       res.json(results)
@@ -106,22 +115,11 @@ app.get("/shows", async (req, res) => {
     })
 })
 
-//query-params request => to be able to search by shows title
-app.get("/shows", async (req, res) => {
-  const queryString = req.query.showTitle
-  //use string variable to regex javascript//
-  const queryRegex = new RegExp(queryString, 'i')
-  Show.find({ 'title': queryRegex })
-    .then((results) => {
-      // Succesfull
-      res.json(results)
-    }).catch((err) => {
-      //Error - Failure
-      res.json({ message: 'Cannot find this show', err: err })
-    })
-})
 
-//path-params to be able to find a specefic show //
+/*
+  path-params to be able to find a specefic show
+  http://localhost:8080/shows/81082007/
+*/
 app.get("/shows/:show_id", async (req, res) => {
   const id = req.params.show_id
   Show.findOne({ 'show_id': id })
@@ -134,7 +132,8 @@ app.get("/shows/:show_id", async (req, res) => {
     })
 })
 
-//path-params to be able to find a specefic show //
+// path-params to be able to find a specefic show //
+// http://localhost:8080/shows/id/81082007/
 app.get("/shows/id/:id", async (req, res) => {
   const id = req.params.id
   Show.findOne({ 'show_id': id })
