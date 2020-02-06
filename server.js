@@ -3,23 +3,46 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import netflixData from './data/netflix-titles.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/netflix-titles'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+const Director = mongoose.model('Director', {
+  name: String
+})
+
+const Title = mongoose.model('Title', {
+  title: String,
+  director: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Director'
+  }
+})
+
+const seedDatabase = async () => {
+  await Director.deleteMany()
+  await Title.deleteMany()
+
+  const ara = new Director({ name: 'Luis Ara' })
+  await ara.save()
+
+  const sharma = new Director({ name: 'Abhishek Sharma' })
+  await sharma.save()
+
+  await new Title({
+    title: 'Guatemala: Heart of the Mayan World',
+    director: ara
+  }).save()
+  await new Title({
+    title: 'The Zoya Factor',
+    director: sharma
+  }).save()
+}
+
+seedDatabase()
+
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -27,9 +50,31 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
+// Routes
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(netflixData)
+})
+
+app.get('/directors', async (req, res) => {
+  const directors = await Director.find()
+  res.json(directors)
+})
+
+app.get('/directors/:id/titles', async (req, res) => {
+  const director = await Director.findById(req.params.id)
+  if (director) {
+    const titles = await Title.find({
+      director: mongoose.Types.ObjectId(director.id)
+    })
+    res.json(titles)
+  } else {
+    res.status(404).json({ error: 'Director not found' })
+  }
+})
+
+app.get('/titles', async (req, res) => {
+  const titles = await Title.find().populate('director')
+  res.json(titles)
 })
 
 // Start the server
