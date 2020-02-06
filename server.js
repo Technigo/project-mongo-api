@@ -2,17 +2,10 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import movieData from './data/imdb-movie-data.json'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/movies"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -27,9 +20,77 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+// {
+//   "Rank": 815,
+//   "Title": "Fantastic Mr. Fox",
+//   "Genre": "Animation,Adventure,Comedy",
+//   "Description": "An urbane fox cannot resist returning to his farm raiding ways and then must help his community survive the farmers' retaliation.",
+//   "Director": "Wes Anderson",
+//   "Actors": "George Clooney, Meryl Streep, Bill Murray, Jason Schwartzman",
+//   "Year": 2009,
+//   "Runtime (Minutes)": 87,
+//   "Rating": 7.8,
+//   "Votes": 149779,
+//   "Revenue (Millions)": 21,
+//   "Metascore": 83
+// },
+
+
+const Movie = mongoose.model('Movie', {
+    Rank: {
+      type: String
+    },
+    Title: {
+      type: String
+    },
+    Genre: {
+      type: String
+    },
+    Description: {
+      type: String
+    },
+    Director: {
+      type: String
+    },
+    Actors: {
+      type: String
+    },
+    Year: {
+      type: Number
+    },
+    Runtime: {
+      type: Number
+    },
+    Rating: {
+      type: Number
+    },
+    Votes: {
+      type: Number
+    },
+    Revenue: {
+      type: Number
+    },
+    Metascore: {
+      type: Number
+    }
+}
+
+const importMovieData = () => {
+  movieData.forEach((movie) => {
+    new Movie(movie).save();
+  })
+}
+
+importMovieData()
+
+
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello movies')
+})
+
+app.get('/movies', (req, res) => {
+  
 })
 
 // Start the server
