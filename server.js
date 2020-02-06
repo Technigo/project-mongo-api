@@ -12,8 +12,6 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 
-//to prevent reloading seeddatabase when server starts, we can wrap it in an environment variable//
-
 //setup of shows title
 const Show = mongoose.model('Show', {
   // Properties defined here match the keys from the netflix-title.json file
@@ -55,7 +53,7 @@ const Show = mongoose.model('Show', {
     type: String
   }
 })
-
+//to prevent reloading seeddatabase when server starts, we can wrap it in an environment variable//
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Show.deleteMany({})
@@ -67,7 +65,6 @@ if (process.env.RESET_DB) {
 
   seedDatabase()
 }
-
 
 
 //   PORT=9000 npm start
@@ -83,16 +80,14 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-//setup of GET route, client can fetch all the movies
+//setup of GET route, client can fetch all shows with type =  movie //
 app.get("/shows/movies", async (req, res) => {
   Show.find({ 'type': /Movie/i })
     .then((results) => {
-      // Succesfull
-      console.log('Found : ' + results)
+      // Succesfull//
       res.json(results)
     }).catch((err) => {
-      // Error - Failure
-      // console.log('Error ' + err)
+      //Error - Failure//
       res.json({ message: 'Cannot find the movie', err: err })
     })
 })
@@ -103,35 +98,54 @@ app.get("/shows/movies", async (req, res) => {
 app.get("/shows", async (req, res) => {
   Show.find({ 'listed_in': /Comedies/i })
     .then((results) => {
-      // Succesfull
-      console.log('Found : ' + results)
+      // Succesfull//
       res.json(results)
     }).catch((err) => {
-      // Error - Failure
-      // console.log('Error ' + err)
+      //Error - Failure//
       res.json({ message: 'Cannot find this show', err: err })
     })
 })
 
-//query-params to be able to search shows title
-app.get("/shows/:title", async (req, res) => {
-  const title = req.query.title
+//query-params request => to be able to search by shows title
+app.get("/shows", async (req, res) => {
+  const queryString = req.query.showTitle
   //use string variable to regex javascript//
-  const queryRegex = new RegExp(title, 'i')
+  const queryRegex = new RegExp(queryString, 'i')
   Show.find({ 'title': queryRegex })
     .then((results) => {
       // Succesfull
-      console.log('Found : ' + results)
       res.json(results)
     }).catch((err) => {
-      // Error - Failure
-      // console.log('Error ' + err)
+      //Error - Failure
       res.json({ message: 'Cannot find this show', err: err })
     })
 })
 
+//path-params to be able to find a specefic show //
+app.get("/shows/:show_id", async (req, res) => {
+  const id = req.params.show_id
+  Show.findOne({ 'show_id': id })
+    .then((results) => {
+      // Succesfull//
+      res.json(results)
+    }).catch((err) => {
+      // Error - Failure//
+      res.json({ message: 'Cannot find this show', err: err })
+    })
+})
 
-
+//path-params to be able to find a specefic show //
+app.get("/shows/id/:id", async (req, res) => {
+  const id = req.params.id
+  Show.findOne({ 'show_id': id })
+    .then((results) => {
+      // Succesfull//
+      res.json(results)
+    }).catch((err) => {
+      // Error - Failure//
+      res.json({ message: 'Cannot find this show', err: err })
+    })
+})
 
 
 
