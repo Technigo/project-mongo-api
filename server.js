@@ -9,6 +9,27 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+// Example of the object from the Json
+// "affiliateid": "5885",
+//   "affiliatename": "CrossFit Unique",
+//   "age": "45",
+//   "competitorid": "1071438",
+//   "competitorname": "Theresa Ulwahn",
+//   "countryoforigincode": "SE",
+//   "countryoforiginname": "Sweden",
+//   "division": "Women (45-49)",
+//   "divisionid": "4",
+//   "firstname": "Theresa",
+//   "gender": "F",
+//   "height": "1.62",
+//   "is_scaled": "0",
+//   "lastname": "Ulwahn",
+//   "overallrank": "1015",
+//   "overallscore": "6413",
+//   "postcompstatus": "",
+//   "profilepics3key": "0bda5-P1071438_3-184.jpg",
+//   "weight": "61.0"
+
 const Athlete = mongoose.model('Athlete', {
   competitorid: String,
   competitorname: String,
@@ -44,6 +65,15 @@ if (process.env.RESET_DATABASE) {
 
   seedDatabase()
 }
+// Another way how to get the athletes to the database
+// const addAthletesToDatabase = () => {
+//   athletesData.forEach((athlete) => {
+//     new Athlete(athlete).save();
+//   });
+// };
+// // addAthletesToDatabase();
+
+
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
 //
@@ -60,13 +90,15 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+// http://localhost:8080/athletes
 app.get('/athletes', async (req, res) => {
   const athletes = await Athlete.find()
   console.log(athletes)
   res.json(athletes)
 } )
 
-// app.get('/athletes/:id', (req, res) => {
+// Searching without mongoose, put a + infront of the id as its a string in the json
+// app.get('/athletes/:id', async (req, res) => {
 //   const showId = req.params.id 
 //     console.log(showId)
 //   const show = athletesData.filter(item => +item.competitorid === +showId)
@@ -78,14 +110,42 @@ app.get('/athletes', async (req, res) => {
 //   }
 // })
 
+// http://localhost:8080/athletes?q=Theresa
+app.get('/athletes', (req, res) => {
+  const queryString = req.query.q;
+  const queryRegex = new RegExp(queryString, "i");
+  Athlete.find({'competitorname': queryRegex})
+    .sort({'num_pages': -1})
+    .then((results) => {
+      // Succesfull
+      console.log('Found : ' + results);
+      res.json(results);
+    }).catch((err) => {
+      // Error/Failure
+      console.log('Error ' + err);
+      res.json({message: 'Cannot find this athlete', err: err});
+    });
+});
+
+// http://localhost:8080/athletes?q=1071438
+app.get('/athletes/:competitorid', (req, res) => {
+  const competitorid = req.params.competitorid;
+  Athlete.findOne({'competitorid': competitorid})
+    .then((results) => {
+      res.json(results);
+    }).catch((err) => {
+      res.json({message: 'Cannot find this athlete', err: err});
+    });
+});
+
+// http://localhost:8080/boxes
 app.get('/boxes', async (req, res) => {
   const boxes = await Box.find().populate('athlete')
   console.log(boxes)
   res.json(boxes)
 } )
 
-
-
+// http://localhost:8080/boxes/5885/athletes this endpoint whould show all athletes from one box
 app.get('/boxes/:id/athletes', async (req, res) => {
   const box = await Box.findById(req.params.id)
   if (box) {
@@ -94,29 +154,6 @@ app.get('/boxes/:id/athletes', async (req, res) => {
   } else {
     res.status(404).json({ error: 'Box not found' })
   }
-})
-
-app.get('/athletes', (req, res) => {
-  // Query parameter
-  const searchString = req.query.search
-
-  let filteredAthletes = athletesData
-
-  console.log(searchString)
-
-  if (searchString) {
-    // Filter once
-    // http://localhost:8080/athletes?search=Ulwahn
-    filteredAthletes = filteredAthletes.filter(item => {
-      const athleteName = item.competitorname.toString()
-      const athleteCountry = item.countryoforiginname.toString()
-      const athleteAffiliate = item.affiliatename.toString()
-      return athleteName.includes(searchString) ||
-        athleteCountry.includes(searchString) ||
-        athleteAffiliate.includes(searchString)
-    })
-  }
-  res.json(filteredAthletes)
 })
 
 // Start the server
