@@ -61,7 +61,7 @@ app.get('/guests', async (req, res) => {
   const statusAttending = req.query.attending
   const page = req.query.page
   const searchName = req.query.name
-  const PER_PAGE = 5
+  const PER_PAGE = 10
   let guestList = guests
 
   // Attending true or false - Can I do this in a shorter way?
