@@ -34,16 +34,14 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 })
 
-if(process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Book.deleteMany({})
+    await Book.deleteMany()
 
     booksData.forEach((bookData) => {
       new Book(bookData).save()
     })
   }
   seedDatabase()
-}
 
 // Start defining the routes
 app.get('/', (req, res) => {
@@ -55,9 +53,10 @@ app.get('/books', (req, res) => {
   const { language } = req.query
   const queryString = req.query.title 
   const queryRegex = new RegExp(queryString, "i")
- 
+
+
 // Using query for language code
-// For example, http://localhost:9001/?language=eng will return books with English language code
+// For example, http://localhost:9001/books?language=eng will return books with English language code
   if(language) {
    Book.find({'language_code': language})
      .then((results) => {
@@ -68,6 +67,7 @@ app.get('/books', (req, res) => {
         res.json({message: 'Cannot find book', err: err}) 
     })
   }
+
 
 // Using query for title
 // For example, http://localhost:9001/books?title=Harry will return books with 'Harry' in the title
@@ -110,3 +110,20 @@ app.get('/books/_id/:_id', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
+
+
+
+// app.get('/books', async (req, res) => {
+// const books = await Book.find()
+// res.json(books)
+// })
+
+// app.get('/books/:id', async (req, res) => {
+// const book = await Book.findById(req.params.id)
+// if(book) {
+//   res.json(book)
+// } else {
+//   res.status(404).json({ error: 'Book not found' })
+// }
+// res.json(books)
+// })
