@@ -64,6 +64,7 @@ app.get('/books', (req, res) => {
   const queryString = req.query.q
   const queryRegex = new RegExp(queryString, "i")
   Book.find({ 'title': queryRegex })
+    .sort({ 'num_pages': -1 })
     .then((results) => {
       // succesfull
       console.log('Found : ' + results)
@@ -74,9 +75,15 @@ app.get('/books', (req, res) => {
     })
 })
 
-// app.get('/books/:isbn' (req,res) => {
-
-// })
+app.get('/books/:isbn', (req, res) => {
+  const isbn = req.params.isbn
+  Book.findOne({ 'isbn': isbn })
+    .then((results) => {
+      res.json(results)
+    }).catch((err) => {
+      res.json({ message: 'Cannot find this book' })
+    })
+})
 
 app.get('/', (req, res) => {
   res.send('Hello World')
