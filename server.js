@@ -13,7 +13,8 @@ import mongoose from 'mongoose';
 // import topMusicData from './data/top-music.json'
 import skotrum from './data/skotrum.json';
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/skotrum';
+const mongoUrl =
+  process.env.MONGO_URL || 'mongodb://localhost/skotrum-mongo-project';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
