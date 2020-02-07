@@ -47,7 +47,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/tracks', async (req, res) => {
-  const tracks = await Track.find()
+  const regexGenre = new RegExp(req.query.genre, 'i')
+  const tracks = await Track.find({ genre: regexGenre })
   res.json(tracks)
 })
 
