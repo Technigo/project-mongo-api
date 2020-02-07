@@ -3,7 +3,8 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-import data from "./data/boardgames_small.json"
+import data from "./data/boardgames.json"
+import descriptionData from "./data/gameDescriptions.json"
 
 const Boardgame = mongoose.model("Boardgame", {
   // ?
@@ -61,31 +62,72 @@ app.get('/', (req, res) => {
 
 //All boardgames
 app.get("/boardgames/", async (req, res) => {
-  //query for name
+  //Queries
   const nameQuery = req.query.name
   const yearQuery = req.query.year
-  const sortOnRank = req.query.rank
-  const sortOnAverage = req.query.average
+  const sort = req.query.sort
+  let pageQuery = parseInt(req.query.page)
 
+  //Regular expression to make it case insensitive
   const nameQueryRegex = new RegExp(nameQuery, "i")
-  const boardgames = await Boardgame.find() //Find everything in the db
+  //Find everything in the db (no queries)
+  let boardgames = await Boardgame.find()
 
-  //regex - /harry/ matches harry potter
-  ///harry/i will make it case insensitive
-
-
+  //Sort by name and year
   if (nameQuery && yearQuery) {
-    const boardgamesByNameAndYear = await Boardgame.find({ "name": nameQueryRegex, "year": yearQuery })
-    res.json(boardgamesByNameAndYear)
-  } else if (nameQuery) {
-    const boardgamesByName = await Boardgame.find({ "name": nameQueryRegex })
-    res.json(boardgamesByName)
-  } else if (yearQuery) {
-    const boardgamesByYear = await Boardgame.find({ "year": yearQuery })
-    res.json(boardgamesByYear)
-  } else {
-    res.json(boardgames)
+    boardgames = await Boardgame.find({ "name": nameQueryRegex, "year": yearQuery })
+    //Name, year and average
+    if (sort === "average") {
+      boardgames = boardgames.sort((a, b) => -(parseFloat(a.average) - parseFloat(b.average)))
+    }
+    //Name, year and rank
+    else if (sort === "rank") {
+      boardgames = boardgames.sort((a, b) => (parseFloat(a.rank) - parseFloat(b.rank)))
+    }
   }
+  //Sort by name
+  else if (nameQuery) {
+    boardgames = await Boardgame.find({ "name": nameQueryRegex })
+    //Name and average
+    if (sort === "average") {
+      boardgames = boardgames.sort((a, b) => -(parseFloat(a.average) - parseFloat(b.average)))
+    }
+    //Name and rank
+    else if (sort === "rank") {
+      boardgames = boardgames.sort((a, b) => (parseFloat(a.rank) - parseFloat(b.rank)))
+    }
+  }
+  //Sort by year
+  else if (yearQuery) {
+    boardgames = await Boardgame.find({ "year": yearQuery })
+    //Year and average
+    if (sort === "average") {
+      boardgames = boardgames.sort((a, b) => -(parseFloat(a.average) - parseFloat(b.average)))
+    }
+    //Year and rank
+    else if (sort === "rank") {
+      boardgames = boardgames.sort((a, b) => (parseFloat(a.rank) - parseFloat(b.rank)))
+    }
+  }
+  //Sort only by average or rank
+  else {
+    if (sort === "average") {
+      boardgames = boardgames.sort((a, b) => -(parseFloat(a.average) - parseFloat(b.average)))
+    } else if (sort === "rank") {
+      boardgames = boardgames.sort((a, b) => (parseFloat(a.rank) - parseFloat(b.rank)))
+    }
+  }
+
+  const pageCount = Math.ceil(boardgames.length / 10)
+  if (!pageQuery) {
+    pageQuery = 1
+  }
+  else if (pageQuery > pageCount) {
+    pageQuery = pageCount
+  }
+
+  res.json(boardgames.slice(pageQuery * 10 - 10, pageQuery * 10))
+
 })
 
 //Single boardgame
