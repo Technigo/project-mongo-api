@@ -61,6 +61,14 @@ const Record = mongoose.model('Record', {
   }
 })
 
+const DanceAbility = mongoose.model('DanceAbility', {
+  danceability: Number,
+  trackName: {
+    type: mongoose.Schema.Types.String,
+    ref: 'Record'
+  }
+})
+
 if (process.env.RESET_DATABASE) {
   console.log('Resetting the database')
 
@@ -68,11 +76,13 @@ if (process.env.RESET_DATABASE) {
     await TopMusic.deleteMany({})
     await Artist.deleteMany({})
     await Record.deleteMany({})
+    await DanceAbility.deleteMany({})
 
     topMusicData.forEach((artistData) => {
       new TopMusic(artistData).save()
       new Artist(artistData).save()
       new Record(artistData).save()
+      new DanceAbility(artistData).save()
     })
   }
   seedDatabase()
@@ -102,12 +112,28 @@ app.get('/lists', async (req, res) => {
   console.log(list)
 })
 
+app.get('/genre', (req, res) => {
+  const queryString = req.query.q
+  const queryRegex = new RegExp(queryString, 'i')
+  // /pop/ is a regex and i makes it search not being case sensitive
+  TopMusic.find({ 'genre': queryRegex })
+    .then((results) => {
+      //if .find is succesful
+      console.log('Found : ' + results)
+      res.jsonp(results)
+    }).catch((err) => {
+      //Error/Failure
+      console.log('Error ' + err)
+      res.json({ message: 'Cannot find this genre', err: err })
+    })
+})
+
 app.get('/artists', async (req, res) => {
   const artist = await Artist.find().populate('record')
   res.json(artist)
 })
 
-//not working
+//this only returns the status 404
 app.get('/artists/:id', async (req, res) => {
   const artist = await TopMusic.findById(req.params.id)
   if (artist) {
@@ -119,10 +145,14 @@ app.get('/artists/:id', async (req, res) => {
 
 app.get('/records', async (req, res) => {
   const record = await Record.find().populate('artist')
-  res.json(record)
+  if (record) {
+    res.json(record)
+  } else {
+    res.status(404).json({ errror: 'Record not found' })
+  }
 })
 
-//this returns an empty array
+//this returns the status 404 
 app.get('/artists/:id/records', async (req, res) => {
   const artist = await TopMusic.findById(req.params.id)
   if (artist) {
@@ -131,24 +161,19 @@ app.get('/artists/:id/records', async (req, res) => {
   } else {
     res.status(404).json({ errror: 'Artist not found' })
   }
-
 })
 
-app.get('/genre', (req, res) => {
-  const queryString = req.query.genre
-  console.log(queryString)
-  // /pop/ is a regex and i makes it search not being case sensitive
-  TopMusic.find({ 'genre': /pop/i })
-    .then((results) => {
-      //if .find is succesful
-      console.log('Found : ' + results)
-      res.jsonp(results)
-    }).catch((err) => {
-      //Error/Failure
-      console.log('Error ' + err)
-      res.json({ message: 'Cannot find this genre', err: err })
-    })
+//this returns the danceability in a decending order together with the name of the record
+app.get('/danceabilities', async (req, res) => {
+  const danceability = await DanceAbility.find().populate('record').sort({ 'danceability': -1 })
+  if (danceability) {
+    res.json(danceability)
+  } else {
+    res.status(404).json({ errror: 'Danceability not found' })
+  }
 })
+
+
 
 
 
