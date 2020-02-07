@@ -17,16 +17,42 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/books'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Author = mongoose.model('Author', {
-  name: String
+const Book = mongoose.model('Book', {
+  bookID: {
+    type: Number
+  },
+  title: {
+    type: String
+  },
+  authors: {
+    type: String
+  },
+  average_rating: {
+    type: Number
+  },
+  isbn: {
+    unique: true,
+    type: String
+  },
+  isbn13: {
+    type: String
+  },
+  language_code: {
+    type: String
+  },
+  num_pages: {
+    type: Number
+  },
+  ratings_count: {
+    type: Number
+  },
+  text_reviews_count: {
+    type: Number
+  }
 })
 
-const Book = mongoose.model('Book', {
-  title: String,
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Author'
-  }
+booksData.forEach((book) => {
+  new Book(book).save()
 })
 
 // const Animal = mongoose.model('Animal', {
@@ -35,41 +61,41 @@ const Book = mongoose.model('Book', {
 //   isFurry: Boolean
 // })
 
-if (process.env.RESET_DATABASE) {
-  console.log('RESETTING')
-  const seedDatabase = async () => {
-    await Author.deleteMany()
-    const tolkien = new Author({ name: 'J.R.R Tolkien' })
-    await tolkien.save()
-    const adams = new Author({ name: 'Douglas Adams' })
-    await adams.save()
-    const bryson = new Author({ name: 'Bill Bryson' })
-    await bryson.save()
+// if (process.env.RESET_DATABASE) {
+//   console.log('RESETTING')
+//   const seedDatabase = async () => {
+//     await Author.deleteMany()
+//     const tolkien = new Author({ name: 'J.R.R Tolkien' })
+//     await tolkien.save()
+//     const adams = new Author({ name: 'Douglas Adams' })
+//     await adams.save()
+//     const bryson = new Author({ name: 'Bill Bryson' })
+//     await bryson.save()
 
-    await Book.deleteMany()
+//     await Book.deleteMany()
 
-    await new Book({
-      title: 'The Fellowship of the Ring',
-      author: tolkien
-    }).save()
-    await new Book({ title: 'The two towers', author: tolkien }).save()
-    await new Book({ title: 'The return of theh king', author: tolkien }).save()
-    await new Book({
-      title: 'Hitchhikers Guide to the Galaxy',
-      author: adams
-    }).save()
-    await new Book({
-      title: 'The Long Dark Tea-Time of the Soul',
-      author: adams
-    }).save()
-    await new Book({ title: 'The Salmon of Doubt', author: adams }).save()
-    await new Book({
-      title: 'Bill Brysons African Diary',
-      author: bryson
-    }).save()
-  }
-  seedDatabase()
-}
+//     await new Book({
+//       title: 'The Fellowship of the Ring',
+//       author: tolkien
+//     }).save()
+//     await new Book({ title: 'The two towers', author: tolkien }).save()
+//     await new Book({ title: 'The return of theh king', author: tolkien }).save()
+//     await new Book({
+//       title: 'Hitchhikers Guide to the Galaxy',
+//       author: adams
+//     }).save()
+//     await new Book({
+//       title: 'The Long Dark Tea-Time of the Soul',
+//       author: adams
+//     }).save()
+//     await new Book({ title: 'The Salmon of Doubt', author: adams }).save()
+//     await new Book({
+//       title: 'Bill Brysons African Diary',
+//       author: bryson
+//     }).save()
+//   }
+//   seedDatabase()
+// }
 
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
