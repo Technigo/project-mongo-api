@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 
+import { Netflix } from "./models/Netflix";
+
 // import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
 // import booksData from './data/books.json'
@@ -13,29 +15,40 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Netflix = mongoose.model("Netflix", {
-  show_id: Number,
-  title: String,
-  director: String,
-  cast: String,
-  country: String,
-  date_added: String,
-  release_year: Number,
-  rating: String,
-  duration: String,
-  listed_in: String,
-  description: String,
-  type: String
-});
+// const Netflix = mongoose.model("Netflix", {
+//   show_id: Number,
+//   title: String,
+//   director: String,
+//   cast: String,
+//   country: String,
+//   date_added: String,
+//   release_year: Number,
+//   rating: String,
+//   duration: String,
+//   listed_in: String,
+//   description: String,
+//   type: String
+// });
 
-const addMovie = () => {
-  netflixData.forEach(movie => {
-    new Netflix(movie).save();
-  });
-};
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Netflix.deleteMany({});
 
-// Defines the port the app will run on. Defaults to 8080, but can be
-// overridden when starting the server. For example:
+    netflixData.forEach(movie => {
+      new Netflix(movie).save();
+    });
+  };
+
+  seedDatabase();
+}
+
+// const addMovie = () => {
+//   netflixData.forEach(movie => {
+//     new Netflix(movie).save();
+//   });
+// };
+
+// The port the app will run on.
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
@@ -67,6 +80,7 @@ app.get("/netflix", (req, res) => {
     type: typeRegex
   })
     .sort({ release_year: -1 })
+    .limit(20)
     .then(results => {
       // Succesfull
       res.json(results);
@@ -96,6 +110,7 @@ app.get("/netflix/type/:type", (req, res) => {
     .then(results => {
       res.json(results);
     })
+
     .catch(err => {
       res.json({ message: "Cannot find any suitable search", err: err });
     });
