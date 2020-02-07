@@ -1,16 +1,9 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import mongoose, { PromiseProvider } from 'mongoose'
+import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
 import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 //The name of the database - mongodb://localhost/books
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-project-books"
@@ -22,14 +15,21 @@ mongoose.Promise = Promise
 const Author = mongoose.model('Author', {
   name: String
 })
+
 //BOOK MODEL
 const Book = mongoose.model('Book', {
+  bookID: Number,
   title: String,
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Author'
-  }
+  authors: String,
+  average_rating: Number,
+  isbn: String,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
 })
+
 
 
 //Wrap the seed in an enviorment variable to prevent it from re-run everytime we start the server.
@@ -39,21 +39,25 @@ if (process.env.RESET_DATABASE) {
     await Author.deleteMany()
     await Book.deleteMany()
 
+    booksData.forEach((book) => {
+      new Book(book).save()
+    })
+
     const tolkien = new Author({ name: "J.R.R. Tolkien" })
     await tolkien.save()
 
     const rowling = new Author({ name: "J.K. Rowling" })
     await rowling.save()
 
-    await new Book({ title: "Harry Potter and the Philosopher's Stone", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Chamber of Secrets", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Prisoner of Azkaban", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Goblet of Fire", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Order of the Phoenix", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Half-Blood Prince", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Deathly Hallows", author: rowling }).save()
-    await new Book({ title: "The Lord of the Rings", author: tolkien }).save()
-    await new Book({ title: "The Hobbit", author: tolkien }).save()
+    //   await new Book({ title: "Harry Potter and the Philosopher's Stone", author: rowling }).save()
+    //   await new Book({ title: "Harry Potter and the Chamber of Secrets", author: rowling }).save()
+    //   await new Book({ title: "Harry Potter and the Prisoner of Azkaban", author: rowling }).save()
+    //   await new Book({ title: "Harry Potter and the Goblet of Fire", author: rowling }).save()
+    //   await new Book({ title: "Harry Potter and the Order of the Phoenix", author: rowling }).save()
+    //   await new Book({ title: "Harry Potter and the Half-Blood Prince", author: rowling }).save()
+    //   await new Book({ title: "Harry Potter and the Deathly Hallows", author: rowling }).save()
+    //   await new Book({ title: "The Lord of the Rings", author: tolkien }).save()
+    //   await new Book({ title: "The Hobbit", author: tolkien }).save()
   }
   seedDatabase()
 }
@@ -81,7 +85,7 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello Mongo!')
+  res.json(booksData)
 })
 
 app.get('/authors', async (req, res) => {
@@ -89,6 +93,7 @@ app.get('/authors', async (req, res) => {
   res.json(authors)
 })
 
+//http://localhost:9090/authors/5e3d235bba4169150e4600bf
 app.get('/authors/:id', async (req, res) => {
   try {
     const author = await Author.findById(req.params.id)
@@ -102,6 +107,21 @@ app.get('/authors/:id', async (req, res) => {
   }
 })
 
+// http://localhost:9090/books/5e3d22873cf95214f0714937
+// app.get('/books/:id', async (req, res) => {
+//   try {
+//     const book = await Book.findById(req.params.id)
+//     if (book) {
+//       res.json(book)
+//     } else {
+//       res.status(404).json({ error: 'Book not found' })
+//     }
+//   } catch (err) {
+//     res.status(400).json({ error: 'Invalid book id' })
+//   }
+// })
+
+//http://localhost:9090/authors/5e3d23f8b187b7152aecbef2/books
 app.get('/authors/:id/books', async (req, res) => {
   const author = await Author.findById(req.params.id)
   if (author) {
@@ -112,10 +132,37 @@ app.get('/authors/:id/books', async (req, res) => {
   }
 })
 
-app.get('/books', async (req, res) => {
-  const books = await Book.find().populate('author')
-  res.json(books)
+// app.get('/books', async (req, res) => {
+//   const books = await Book.find().populate('author')
+//   res.json(books)
+// })
+
+//http://localhost:9090/books?title=harry
+app.get('/books', (req, res) => {
+  const queryString = req.query.title;
+  const queryRegex = new RegExp(queryString, "i")
+  console.log(queryString)
+  Book.find({ 'title': queryRegex })
+    .then((results) => {
+      // console.log('Found : ' + results)
+      res.json(results)
+    }).catch((err) => {
+      console.log('Error ' + err)
+      res.json({ message: 'Cannot fint this book', err: err })
+    })
 })
+
+//http://localhost:9090/books/439785960
+app.get('/books/:isbn', (req, res) => {
+  const isbn = req.params.isbn;
+  Book.findOne({ 'isbn': isbn })
+    .then((results) => {
+      res.json(results)
+    }).catch((err) => {
+      res.json({ message: 'Cannot fint this book', err: err })
+    })
+})
+
 
 // Start the server
 app.listen(port, () => {
