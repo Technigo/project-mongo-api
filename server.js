@@ -107,8 +107,9 @@ app.get('/', (req, res) => {
 // TopMusic.find finds all the infomation that I've made an model for.
 app.get('/lists', async (req, res) => {
   const list = await TopMusic.find()
-
-  res.json(list)
+  const { page } = req.query
+  const startIndex = 20 * +page
+  res.json(list.slice(startIndex, startIndex + 20))
   console.log(list)
 })
 
