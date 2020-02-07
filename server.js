@@ -27,7 +27,7 @@ try {
 mongoose.Promise = Promise;
 
 // Seed database
-if (process.env.RESET_DB) {
+if (process.env.RESET_DB === 'true') {
   console.log('Resetting database!');
 
   const seedDatabase = async () => {
