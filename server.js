@@ -40,6 +40,7 @@ const Nominee = mongoose.model('Nominee', {
    type: String
   },
   nominee: {
+   unique: true,
    type: String
   },
   
@@ -102,16 +103,14 @@ if (process.env.RESET_DATABASE) {
   
     const rebeccaFerguson = new Nominee({ year_film: 2013, year_award: 2014, ceremony: 71, category: "Best Performance by an Actress in a Limited Series or a Motion Picture Made for Television",  nominee:"Rebecca Ferguson", film: "The White Queen", win: false })
     await rebeccaFerguson.save()
-    
+
     goldenGlobesData.forEach((nomineeData) => {
       new Nominee(nomineeData).save()
+
     })
   }
   
   seedDatabase()
-
- 
-
 
 }
 
@@ -157,6 +156,18 @@ app.get('/nominees', async (req, res) => {
     res.json(nominees)
   })
 
+  //this is working, showing selected nominee Avatar when searching avatar wiryyen in any way
+  app.get('/avatar', (req, res) => {
+    Nominee.find({'nominee': /Avatar/i})
+     .then((results) => {
+      console.log("hej")
+      res.json(results);
+    }).catch((err) => {
+      console.log("hej2")
+     res.json({message: 'can not find nominee', err: err});
+   });
+  })
+
   //this is working, showing one selected nominee
 app.get('/:nominee', (req, res) => {
   Nominee.findOne({nominee: req.params.nominee}).then(nominee => {
@@ -168,10 +179,12 @@ app.get('/:nominee', (req, res) => {
   })
 })
 
-  app.get('/year/:year', async (req, res) => {
+
+
+  app.get('/years', async (req, res) => {
     console.log('hej')
     const years = await Year.find().populate('nominee')
-    res.json(nominees)
+    res.json(years)
   })
 
 
