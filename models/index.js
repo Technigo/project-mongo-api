@@ -8,3 +8,4 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 module.exports.Pokemon = require('./pokemon')
+module.exports.Type = require('./type')

@@ -2,6 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import pokeRoutes from './routes/pokemons'
+import typeRoutes from './routes/types'
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/poke/', pokeRoutes)
+app.use('/types/', typeRoutes)
 
 // Start the server
 app.listen(port, () => {
