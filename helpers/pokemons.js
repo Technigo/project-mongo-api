@@ -1,7 +1,7 @@
 import db from '../models'
 
 exports.getPokemonsList = (req, res) => {
-  db.Pokemon.find({}, { pokemonNo: 1, name: 2, type: 3 })
+  db.Pokemon.find()
     .then((poke) => {
       res.json({ poke })
     })
