@@ -18,13 +18,27 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const Skotrum = mongoose.model('Skotrum', {
-  name: String,
-  adress: String,
-  phone: String,
-  openHours: String,
-  note: String,
-  webpage: String,
-  location: String
+  name: {
+    type: String
+  },
+  adress: {
+    type: String
+  },
+  phone: {
+    type: String
+  },
+  openHours: {
+    type: String
+  },
+  note: {
+    type: String
+  },
+  webpage: {
+    type: String
+  },
+  location: {
+    type: String
+  }
 });
 
 if (process.env.RESET_DB) {
@@ -55,18 +69,42 @@ app.get('/', (req, res) => {
 });
 
 app.get('/restaurants', async (req, res) => {
-  const restaurant = await Skotrum.find();
+  const restaurant = await Skotrum.find().sort('location');
   res.json(restaurant);
 });
 
 app.get('/restaurants/:id', async (req, res) => {
   const restaurant = await Skotrum.findById(req.params.id);
-  res.json(restaurant);
+  if (restaurant) {
+    res.json(restaurant);
+  } else {
+    res.status(404).json({ error: 'restaurant not found' });
+  }
+});
+
+app.get('/open', async (req, res) => {
+  const queryString = req.query.q;
+  console.log(queryString);
+  const queryRegex = new RegExp(queryString, 'i');
+  const openHours = await Skotrum.find({ openHours: queryRegex });
+  if (openHours) {
+    res.json(openHours);
+  } else {
+    res.status(404).json({ error: 'openhours not found' });
+  }
 });
 
 app.get('/:location', async (req, res) => {
-  const location = await Skotrum.find({ location: req.params.location });
-  res.json(location);
+  const paramString = req.params.location;
+  console.log(paramString);
+  const paramsRegex = new RegExp(paramString, 'i');
+  const location = await Skotrum.find({ location: paramsRegex });
+  if (location) {
+    console.log(location);
+    res.json(location);
+  } else {
+    res.status(404).json({ error: 'location not found' });
+  }
 });
 
 // Start the server
