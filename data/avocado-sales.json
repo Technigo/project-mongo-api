@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.33,
     "totalVolume": 64236.62,
@@ -11,7 +11,7 @@
     "region": "Albany"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.35,
     "totalVolume": 54876.98,
@@ -22,7 +22,7 @@
     "region": "Albany"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 0.93,
     "totalVolume": 118220.22,
@@ -33,7 +33,7 @@
     "region": "Albany"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 1.08,
     "totalVolume": 78992.15,
@@ -44,7 +44,7 @@
     "region": "Albany"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.28,
     "totalVolume": 51039.6,
@@ -55,7 +55,7 @@
     "region": "Albany"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.26,
     "totalVolume": 55979.78,
@@ -66,7 +66,7 @@
     "region": "Albany"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 0.99,
     "totalVolume": 83453.76,
@@ -77,7 +77,7 @@
     "region": "Albany"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.98,
     "totalVolume": 109428.33,
@@ -88,7 +88,7 @@
     "region": "Albany"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.02,
     "totalVolume": 99811.42,
@@ -99,7 +99,7 @@
     "region": "Albany"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.07,
     "totalVolume": 74338.76,
@@ -110,7 +110,7 @@
     "region": "Albany"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 1.12,
     "totalVolume": 84843.44,
@@ -121,7 +121,7 @@
     "region": "Albany"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.28,
     "totalVolume": 64489.17,
@@ -132,7 +132,7 @@
     "region": "Albany"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.31,
     "totalVolume": 61007.1,
@@ -143,7 +143,7 @@
     "region": "Albany"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 0.99,
     "totalVolume": 106803.39,
@@ -154,7 +154,7 @@
     "region": "Albany"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.33,
     "totalVolume": 69759.01,
@@ -165,7 +165,7 @@
     "region": "Albany"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.28,
     "totalVolume": 76111.27,
@@ -176,7 +176,7 @@
     "region": "Albany"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.11,
     "totalVolume": 99172.96,
@@ -187,7 +187,7 @@
     "region": "Albany"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.07,
     "totalVolume": 105693.84,
@@ -198,7 +198,7 @@
     "region": "Albany"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.34,
     "totalVolume": 79992.09,
@@ -209,7 +209,7 @@
     "region": "Albany"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.33,
     "totalVolume": 80043.78,
@@ -220,7 +220,7 @@
     "region": "Albany"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.12,
     "totalVolume": 111140.93,
@@ -231,7 +231,7 @@
     "region": "Albany"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.45,
     "totalVolume": 75133.1,
@@ -242,7 +242,7 @@
     "region": "Albany"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.11,
     "totalVolume": 106757.1,
@@ -253,7 +253,7 @@
     "region": "Albany"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.26,
     "totalVolume": 96617,
@@ -264,7 +264,7 @@
     "region": "Albany"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.05,
     "totalVolume": 124055.31,
@@ -275,7 +275,7 @@
     "region": "Albany"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.35,
     "totalVolume": 109252.12,
@@ -286,7 +286,7 @@
     "region": "Albany"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.37,
     "totalVolume": 89534.81,
@@ -297,7 +297,7 @@
     "region": "Albany"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.27,
     "totalVolume": 104849.39,
@@ -308,7 +308,7 @@
     "region": "Albany"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.32,
     "totalVolume": 89631.3,
@@ -319,7 +319,7 @@
     "region": "Albany"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.07,
     "totalVolume": 122743.06,
@@ -330,7 +330,7 @@
     "region": "Albany"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.23,
     "totalVolume": 95123.62,
@@ -341,7 +341,7 @@
     "region": "Albany"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.19,
     "totalVolume": 101470.91,
@@ -352,7 +352,7 @@
     "region": "Albany"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.43,
     "totalVolume": 109857.47,
@@ -363,7 +363,7 @@
     "region": "Albany"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.26,
     "totalVolume": 120427.91,
@@ -374,7 +374,7 @@
     "region": "Albany"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.2,
     "totalVolume": 59197.67,
@@ -385,7 +385,7 @@
     "region": "Albany"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.22,
     "totalVolume": 49585.46,
@@ -396,7 +396,7 @@
     "region": "Albany"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.19,
     "totalVolume": 49064.73,
@@ -407,7 +407,7 @@
     "region": "Albany"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.13,
     "totalVolume": 48364.29,
@@ -418,7 +418,7 @@
     "region": "Albany"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.16,
     "totalVolume": 47362.13,
@@ -429,7 +429,7 @@
     "region": "Albany"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.02,
     "totalVolume": 67799.08,
@@ -440,7 +440,7 @@
     "region": "Albany"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.12,
     "totalVolume": 46346.85,
@@ -451,7 +451,7 @@
     "region": "Albany"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.11,
     "totalVolume": 43045.79,
@@ -462,7 +462,7 @@
     "region": "Albany"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.07,
     "totalVolume": 40507.36,
@@ -473,7 +473,7 @@
     "region": "Albany"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 0.99,
     "totalVolume": 55595.74,
@@ -484,7 +484,7 @@
     "region": "Albany"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.07,
     "totalVolume": 45675.05,
@@ -495,7 +495,7 @@
     "region": "Albany"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.06,
     "totalVolume": 41567.62,
@@ -506,7 +506,7 @@
     "region": "Albany"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 0.99,
     "totalVolume": 51253.97,
@@ -517,7 +517,7 @@
     "region": "Albany"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.99,
     "totalVolume": 70873.6,
@@ -528,7 +528,7 @@
     "region": "Albany"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.06,
     "totalVolume": 45147.5,
@@ -539,7 +539,7 @@
     "region": "Albany"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.17,
     "totalVolume": 44511.28,
@@ -550,7 +550,7 @@
     "region": "Albany"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.24,
     "totalVolume": 41195.08,
@@ -561,7 +561,7 @@
     "region": "Albany"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.22,
     "totalVolume": 40873.28,
@@ -572,7 +572,7 @@
     "region": "Albany"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.99,
     "totalVolume": 386100.49,
@@ -583,7 +583,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.08,
     "totalVolume": 331377.53,
@@ -594,7 +594,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 0.96,
     "totalVolume": 417772.47,
@@ -605,7 +605,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 1.07,
     "totalVolume": 357636.82,
@@ -616,7 +616,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 0.99,
     "totalVolume": 333280.79,
@@ -627,7 +627,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1,
     "totalVolume": 356414.57,
@@ -638,7 +638,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.13,
     "totalVolume": 339860.68,
@@ -649,7 +649,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.12,
     "totalVolume": 334041.6,
@@ -660,7 +660,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 0.99,
     "totalVolume": 419088.74,
@@ -671,7 +671,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.09,
     "totalVolume": 358478.08,
@@ -682,7 +682,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 1.09,
     "totalVolume": 349072.48,
@@ -693,7 +693,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 0.95,
     "totalVolume": 433874.46,
@@ -704,7 +704,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 0.96,
     "totalVolume": 418682.26,
@@ -715,7 +715,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.07,
     "totalVolume": 370321.17,
@@ -726,7 +726,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 0.93,
     "totalVolume": 516432.6,
@@ -737,7 +737,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.07,
     "totalVolume": 417232.18,
@@ -748,7 +748,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 0.97,
     "totalVolume": 472136.53,
@@ -759,7 +759,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.15,
     "totalVolume": 382972.72,
@@ -770,7 +770,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.12,
     "totalVolume": 379054.29,
@@ -781,7 +781,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.09,
     "totalVolume": 465213.81,
@@ -792,7 +792,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.01,
     "totalVolume": 503791.72,
@@ -803,7 +803,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.15,
     "totalVolume": 405898.44,
@@ -814,7 +814,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.08,
     "totalVolume": 437377.75,
@@ -825,7 +825,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 0.97,
     "totalVolume": 557212.99,
@@ -836,7 +836,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.14,
     "totalVolume": 407204.88,
@@ -847,7 +847,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.01,
     "totalVolume": 562462.33,
@@ -858,7 +858,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.13,
     "totalVolume": 435210.71,
@@ -869,7 +869,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 0.99,
     "totalVolume": 554763.76,
@@ -880,7 +880,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.1,
     "totalVolume": 465804.78,
@@ -891,7 +891,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 0.99,
     "totalVolume": 551009.05,
@@ -902,7 +902,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.1,
     "totalVolume": 454702,
@@ -913,7 +913,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 0.96,
     "totalVolume": 623212.04,
@@ -924,7 +924,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.11,
     "totalVolume": 451250.7,
@@ -935,7 +935,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.1,
     "totalVolume": 480071.18,
@@ -946,7 +946,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1,
     "totalVolume": 634213.1,
@@ -957,7 +957,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.12,
     "totalVolume": 448596.76,
@@ -968,7 +968,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.12,
     "totalVolume": 430966.34,
@@ -979,7 +979,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 0.99,
     "totalVolume": 451101.89,
@@ -990,7 +990,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.04,
     "totalVolume": 383139.49,
@@ -1001,7 +1001,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.11,
     "totalVolume": 365722.14,
@@ -1012,7 +1012,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1,
     "totalVolume": 479590.62,
@@ -1023,7 +1023,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.12,
     "totalVolume": 399566.22,
@@ -1034,7 +1034,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.1,
     "totalVolume": 420826.32,
@@ -1045,7 +1045,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 0.99,
     "totalVolume": 512532.44,
@@ -1056,7 +1056,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.1,
     "totalVolume": 431308.56,
@@ -1067,7 +1067,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.06,
     "totalVolume": 427391.28,
@@ -1078,7 +1078,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.03,
     "totalVolume": 433883.91,
@@ -1089,7 +1089,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.96,
     "totalVolume": 636771.37,
@@ -1100,7 +1100,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.1,
     "totalVolume": 449332.85,
@@ -1111,7 +1111,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.11,
     "totalVolume": 431490.99,
@@ -1122,7 +1122,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.11,
     "totalVolume": 397542.72,
@@ -1133,7 +1133,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1,
     "totalVolume": 435021.49,
@@ -1144,7 +1144,7 @@
     "region": "Atlanta"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.17,
     "totalVolume": 596819.4,
@@ -1155,7 +1155,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.11,
     "totalVolume": 642682.4,
@@ -1166,7 +1166,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.15,
     "totalVolume": 619509.33,
@@ -1177,7 +1177,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 1.04,
     "totalVolume": 649141.25,
@@ -1188,7 +1188,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.16,
     "totalVolume": 545800.05,
@@ -1199,7 +1199,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.12,
     "totalVolume": 572019.8,
@@ -1210,7 +1210,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.04,
     "totalVolume": 718330.48,
@@ -1221,7 +1221,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.05,
     "totalVolume": 830967.23,
@@ -1232,7 +1232,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.12,
     "totalVolume": 742220.67,
@@ -1243,7 +1243,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.19,
     "totalVolume": 656892.03,
@@ -1254,7 +1254,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.99,
     "totalVolume": 1005603.78,
@@ -1265,7 +1265,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.24,
     "totalVolume": 653560.14,
@@ -1276,7 +1276,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.28,
     "totalVolume": 657444.04,
@@ -1287,7 +1287,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.19,
     "totalVolume": 696281.81,
@@ -1298,7 +1298,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.17,
     "totalVolume": 709268.62,
@@ -1309,7 +1309,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.09,
     "totalVolume": 924993.61,
@@ -1320,7 +1320,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.18,
     "totalVolume": 823623.36,
@@ -1331,7 +1331,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.24,
     "totalVolume": 734721.29,
@@ -1342,7 +1342,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.16,
     "totalVolume": 783935.36,
@@ -1353,7 +1353,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.14,
     "totalVolume": 882754.72,
@@ -1364,7 +1364,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.16,
     "totalVolume": 821523.45,
@@ -1375,7 +1375,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.17,
     "totalVolume": 800603.23,
@@ -1386,7 +1386,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.2,
     "totalVolume": 772926.12,
@@ -1397,7 +1397,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.18,
     "totalVolume": 800194.34,
@@ -1408,7 +1408,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.1,
     "totalVolume": 850931.58,
@@ -1419,7 +1419,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.16,
     "totalVolume": 896298.77,
@@ -1430,7 +1430,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.15,
     "totalVolume": 862261.64,
@@ -1441,7 +1441,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.16,
     "totalVolume": 862840.73,
@@ -1452,7 +1452,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.09,
     "totalVolume": 955046.82,
@@ -1463,7 +1463,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.26,
     "totalVolume": 794310.29,
@@ -1474,7 +1474,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.19,
     "totalVolume": 949177.06,
@@ -1485,7 +1485,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.18,
     "totalVolume": 908661.83,
@@ -1496,7 +1496,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.27,
     "totalVolume": 790853.86,
@@ -1507,7 +1507,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.26,
     "totalVolume": 855205.82,
@@ -1518,7 +1518,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.17,
     "totalVolume": 896972.05,
@@ -1529,7 +1529,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.29,
     "totalVolume": 747841.09,
@@ -1540,7 +1540,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.28,
     "totalVolume": 762862.62,
@@ -1551,7 +1551,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.15,
     "totalVolume": 837629.62,
@@ -1562,7 +1562,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.29,
     "totalVolume": 688065.45,
@@ -1573,7 +1573,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.25,
     "totalVolume": 663677.32,
@@ -1584,7 +1584,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.1,
     "totalVolume": 808897.21,
@@ -1595,7 +1595,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.24,
     "totalVolume": 693698.13,
@@ -1606,7 +1606,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.26,
     "totalVolume": 657745.9,
@@ -1617,7 +1617,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.16,
     "totalVolume": 770115.24,
@@ -1628,7 +1628,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.11,
     "totalVolume": 749845.79,
@@ -1639,7 +1639,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.25,
     "totalVolume": 637319.34,
@@ -1650,7 +1650,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.09,
     "totalVolume": 844931.21,
@@ -1661,7 +1661,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 1.06,
     "totalVolume": 1007418.76,
@@ -1672,7 +1672,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.2,
     "totalVolume": 692934.46,
@@ -1683,7 +1683,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.23,
     "totalVolume": 657741.34,
@@ -1694,7 +1694,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.17,
     "totalVolume": 670231.94,
@@ -1705,7 +1705,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.08,
     "totalVolume": 788025.06,
@@ -1716,7 +1716,7 @@
     "region": "BaltimoreWashington"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.97,
     "totalVolume": 62909.69,
@@ -1727,7 +1727,7 @@
     "region": "Boise"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.03,
     "totalVolume": 57504.05,
@@ -1738,7 +1738,7 @@
     "region": "Boise"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 0.99,
     "totalVolume": 58461.05,
@@ -1749,7 +1749,7 @@
     "region": "Boise"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.71,
     "totalVolume": 95295.34,
@@ -1760,7 +1760,7 @@
     "region": "Boise"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.06,
     "totalVolume": 49069.13,
@@ -1771,7 +1771,7 @@
     "region": "Boise"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.09,
     "totalVolume": 52875.58,
@@ -1782,7 +1782,7 @@
     "region": "Boise"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.01,
     "totalVolume": 68648.22,
@@ -1793,7 +1793,7 @@
     "region": "Boise"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.11,
     "totalVolume": 55847.79,
@@ -1804,7 +1804,7 @@
     "region": "Boise"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.14,
     "totalVolume": 53585.51,
@@ -1815,7 +1815,7 @@
     "region": "Boise"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.11,
     "totalVolume": 59874.45,
@@ -1826,7 +1826,7 @@
     "region": "Boise"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 1.16,
     "totalVolume": 54191.14,
@@ -1837,7 +1837,7 @@
     "region": "Boise"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 0.94,
     "totalVolume": 80904.19,
@@ -1848,7 +1848,7 @@
     "region": "Boise"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.12,
     "totalVolume": 59496.33,
@@ -1859,7 +1859,7 @@
     "region": "Boise"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 0.99,
     "totalVolume": 64187.8,
@@ -1870,7 +1870,7 @@
     "region": "Boise"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.03,
     "totalVolume": 73952.9,
@@ -1881,7 +1881,7 @@
     "region": "Boise"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.08,
     "totalVolume": 64208.84,
@@ -1892,7 +1892,7 @@
     "region": "Boise"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.16,
     "totalVolume": 64464.61,
@@ -1903,7 +1903,7 @@
     "region": "Boise"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.19,
     "totalVolume": 60099.83,
@@ -1914,7 +1914,7 @@
     "region": "Boise"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.05,
     "totalVolume": 70773.76,
@@ -1925,7 +1925,7 @@
     "region": "Boise"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.12,
     "totalVolume": 64001.61,
@@ -1936,7 +1936,7 @@
     "region": "Boise"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.1,
     "totalVolume": 61286.98,
@@ -1947,7 +1947,7 @@
     "region": "Boise"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.07,
     "totalVolume": 67763.91,
@@ -1958,7 +1958,7 @@
     "region": "Boise"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.07,
     "totalVolume": 67826.07,
@@ -1969,7 +1969,7 @@
     "region": "Boise"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.09,
     "totalVolume": 63958.04,
@@ -1980,7 +1980,7 @@
     "region": "Boise"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.05,
     "totalVolume": 74677.72,
@@ -1991,7 +1991,7 @@
     "region": "Boise"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.15,
     "totalVolume": 85044.45,
@@ -2002,7 +2002,7 @@
     "region": "Boise"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.04,
     "totalVolume": 75280.41,
@@ -2013,7 +2013,7 @@
     "region": "Boise"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.06,
     "totalVolume": 81397.07,
@@ -2024,7 +2024,7 @@
     "region": "Boise"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 0.99,
     "totalVolume": 87607.71,
@@ -2035,7 +2035,7 @@
     "region": "Boise"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.12,
     "totalVolume": 80751.29,
@@ -2046,7 +2046,7 @@
     "region": "Boise"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 0.97,
     "totalVolume": 76689.38,
@@ -2057,7 +2057,7 @@
     "region": "Boise"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.03,
     "totalVolume": 83209.77,
@@ -2068,7 +2068,7 @@
     "region": "Boise"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 0.96,
     "totalVolume": 77987.53,
@@ -2079,7 +2079,7 @@
     "region": "Boise"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.06,
     "totalVolume": 95788.53,
@@ -2090,7 +2090,7 @@
     "region": "Boise"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1,
     "totalVolume": 85466.99,
@@ -2101,7 +2101,7 @@
     "region": "Boise"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 0.96,
     "totalVolume": 88111.17,
@@ -2112,7 +2112,7 @@
     "region": "Boise"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 0.99,
     "totalVolume": 89694.96,
@@ -2123,7 +2123,7 @@
     "region": "Boise"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.19,
     "totalVolume": 66246.3,
@@ -2134,7 +2134,7 @@
     "region": "Boise"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.09,
     "totalVolume": 76704.46,
@@ -2145,7 +2145,7 @@
     "region": "Boise"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 0.98,
     "totalVolume": 74543.98,
@@ -2156,7 +2156,7 @@
     "region": "Boise"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.17,
     "totalVolume": 61419.11,
@@ -2167,7 +2167,7 @@
     "region": "Boise"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1,
     "totalVolume": 65918.28,
@@ -2178,7 +2178,7 @@
     "region": "Boise"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.14,
     "totalVolume": 65350.24,
@@ -2189,7 +2189,7 @@
     "region": "Boise"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.06,
     "totalVolume": 75046.37,
@@ -2200,7 +2200,7 @@
     "region": "Boise"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 0.99,
     "totalVolume": 76836.1,
@@ -2211,7 +2211,7 @@
     "region": "Boise"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.14,
     "totalVolume": 61221.98,
@@ -2222,7 +2222,7 @@
     "region": "Boise"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.07,
     "totalVolume": 69970.75,
@@ -2233,7 +2233,7 @@
     "region": "Boise"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.91,
     "totalVolume": 113578.24,
@@ -2244,7 +2244,7 @@
     "region": "Boise"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.03,
     "totalVolume": 66069.21,
@@ -2255,7 +2255,7 @@
     "region": "Boise"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.08,
     "totalVolume": 62870.49,
@@ -2266,7 +2266,7 @@
     "region": "Boise"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.18,
     "totalVolume": 57355.52,
@@ -2277,7 +2277,7 @@
     "region": "Boise"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.01,
     "totalVolume": 80034.32,
@@ -2288,7 +2288,7 @@
     "region": "Boise"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.13,
     "totalVolume": 450816.39,
@@ -2299,7 +2299,7 @@
     "region": "Boston"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.07,
     "totalVolume": 489802.88,
@@ -2310,7 +2310,7 @@
     "region": "Boston"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.01,
     "totalVolume": 549945.76,
@@ -2321,7 +2321,7 @@
     "region": "Boston"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 1.02,
     "totalVolume": 488679.31,
@@ -2332,7 +2332,7 @@
     "region": "Boston"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.19,
     "totalVolume": 350559.81,
@@ -2343,7 +2343,7 @@
     "region": "Boston"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.07,
     "totalVolume": 466759.99,
@@ -2354,7 +2354,7 @@
     "region": "Boston"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.05,
     "totalVolume": 513738.98,
@@ -2365,7 +2365,7 @@
     "region": "Boston"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.04,
     "totalVolume": 641759.57,
@@ -2376,7 +2376,7 @@
     "region": "Boston"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.06,
     "totalVolume": 553096.84,
@@ -2387,7 +2387,7 @@
     "region": "Boston"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.02,
     "totalVolume": 534249.47,
@@ -2398,7 +2398,7 @@
     "region": "Boston"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.94,
     "totalVolume": 725296.29,
@@ -2409,7 +2409,7 @@
     "region": "Boston"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.14,
     "totalVolume": 485706.68,
@@ -2420,7 +2420,7 @@
     "region": "Boston"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.07,
     "totalVolume": 536479.42,
@@ -2431,7 +2431,7 @@
     "region": "Boston"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.07,
     "totalVolume": 553307.04,
@@ -2442,7 +2442,7 @@
     "region": "Boston"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.15,
     "totalVolume": 498640.23,
@@ -2453,7 +2453,7 @@
     "region": "Boston"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.03,
     "totalVolume": 655682.95,
@@ -2464,7 +2464,7 @@
     "region": "Boston"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.11,
     "totalVolume": 577774.74,
@@ -2475,7 +2475,7 @@
     "region": "Boston"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.13,
     "totalVolume": 526664.87,
@@ -2486,7 +2486,7 @@
     "region": "Boston"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.07,
     "totalVolume": 589471.32,
@@ -2497,7 +2497,7 @@
     "region": "Boston"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.15,
     "totalVolume": 565795.06,
@@ -2508,7 +2508,7 @@
     "region": "Boston"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.07,
     "totalVolume": 690517.19,
@@ -2519,7 +2519,7 @@
     "region": "Boston"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.17,
     "totalVolume": 571994.5,
@@ -2530,7 +2530,7 @@
     "region": "Boston"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.28,
     "totalVolume": 500233.69,
@@ -2541,7 +2541,7 @@
     "region": "Boston"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.18,
     "totalVolume": 597168.12,
@@ -2552,7 +2552,7 @@
     "region": "Boston"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.14,
     "totalVolume": 634515.74,
@@ -2563,7 +2563,7 @@
     "region": "Boston"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.27,
     "totalVolume": 582909.73,
@@ -2574,7 +2574,7 @@
     "region": "Boston"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.25,
     "totalVolume": 560494.92,
@@ -2585,7 +2585,7 @@
     "region": "Boston"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.24,
     "totalVolume": 543504.66,
@@ -2596,7 +2596,7 @@
     "region": "Boston"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.08,
     "totalVolume": 684346.48,
@@ -2607,7 +2607,7 @@
     "region": "Boston"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.25,
     "totalVolume": 562542.86,
@@ -2618,7 +2618,7 @@
     "region": "Boston"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.26,
     "totalVolume": 565160.95,
@@ -2629,7 +2629,7 @@
     "region": "Boston"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.14,
     "totalVolume": 633521.98,
@@ -2640,7 +2640,7 @@
     "region": "Boston"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.26,
     "totalVolume": 534488.54,
@@ -2651,7 +2651,7 @@
     "region": "Boston"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.14,
     "totalVolume": 625558.14,
@@ -2662,7 +2662,7 @@
     "region": "Boston"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.17,
     "totalVolume": 552368.94,
@@ -2673,7 +2673,7 @@
     "region": "Boston"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.28,
     "totalVolume": 465911.37,
@@ -2684,7 +2684,7 @@
     "region": "Boston"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.15,
     "totalVolume": 504619.83,
@@ -2695,7 +2695,7 @@
     "region": "Boston"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.26,
     "totalVolume": 408485.16,
@@ -2706,7 +2706,7 @@
     "region": "Boston"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.27,
     "totalVolume": 449818.01,
@@ -2717,7 +2717,7 @@
     "region": "Boston"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.19,
     "totalVolume": 453631.25,
@@ -2728,7 +2728,7 @@
     "region": "Boston"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.18,
     "totalVolume": 453173.22,
@@ -2739,7 +2739,7 @@
     "region": "Boston"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.25,
     "totalVolume": 417750.36,
@@ -2750,7 +2750,7 @@
     "region": "Boston"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.17,
     "totalVolume": 408403.96,
@@ -2761,7 +2761,7 @@
     "region": "Boston"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.11,
     "totalVolume": 485736.1,
@@ -2772,7 +2772,7 @@
     "region": "Boston"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.23,
     "totalVolume": 355432.28,
@@ -2783,7 +2783,7 @@
     "region": "Boston"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.2,
     "totalVolume": 399883.99,
@@ -2794,7 +2794,7 @@
     "region": "Boston"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.04,
     "totalVolume": 609985.34,
@@ -2805,7 +2805,7 @@
     "region": "Boston"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 1.22,
     "totalVolume": 490022.14,
@@ -2816,7 +2816,7 @@
     "region": "Boston"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.17,
     "totalVolume": 409343.56,
@@ -2827,7 +2827,7 @@
     "region": "Boston"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.23,
     "totalVolume": 401331.33,
@@ -2838,7 +2838,7 @@
     "region": "Boston"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.1,
     "totalVolume": 437771.89,
@@ -2849,7 +2849,7 @@
     "region": "Boston"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.02,
     "totalVolume": 491738,
@@ -2860,7 +2860,7 @@
     "region": "Boston"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.35,
     "totalVolume": 96233.08,
@@ -2871,7 +2871,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.37,
     "totalVolume": 90867.51,
@@ -2882,7 +2882,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.35,
     "totalVolume": 98473.23,
@@ -2893,7 +2893,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 1.23,
     "totalVolume": 108457.82,
@@ -2904,7 +2904,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.39,
     "totalVolume": 79973.14,
@@ -2915,7 +2915,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.4,
     "totalVolume": 90242.31,
@@ -2926,7 +2926,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.36,
     "totalVolume": 99703.72,
@@ -2937,7 +2937,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.3,
     "totalVolume": 111038.95,
@@ -2948,7 +2948,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.23,
     "totalVolume": 118541.11,
@@ -2959,7 +2959,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.36,
     "totalVolume": 99554.55,
@@ -2970,7 +2970,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 1.29,
     "totalVolume": 106083.75,
@@ -2981,7 +2981,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.3,
     "totalVolume": 109153.84,
@@ -2992,7 +2992,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.33,
     "totalVolume": 98900.48,
@@ -3003,7 +3003,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.31,
     "totalVolume": 90745.72,
@@ -3014,7 +3014,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.54,
     "totalVolume": 60624.47,
@@ -3025,7 +3025,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.59,
     "totalVolume": 73043.2,
@@ -3036,7 +3036,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.56,
     "totalVolume": 76139.58,
@@ -3047,7 +3047,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.38,
     "totalVolume": 83731.42,
@@ -3058,7 +3058,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.49,
     "totalVolume": 68953.29,
@@ -3069,7 +3069,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.5,
     "totalVolume": 69798.09,
@@ -3080,7 +3080,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.47,
     "totalVolume": 81830.13,
@@ -3091,7 +3091,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.47,
     "totalVolume": 78162.92,
@@ -3102,7 +3102,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.39,
     "totalVolume": 91825.07,
@@ -3113,7 +3113,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.36,
     "totalVolume": 128846.15,
@@ -3124,7 +3124,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.45,
     "totalVolume": 127351.46,
@@ -3135,7 +3135,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.47,
     "totalVolume": 140413.9,
@@ -3146,7 +3146,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.36,
     "totalVolume": 137246.7,
@@ -3157,7 +3157,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.5,
     "totalVolume": 108655.36,
@@ -3168,7 +3168,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.34,
     "totalVolume": 149376.79,
@@ -3179,7 +3179,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.38,
     "totalVolume": 130908.11,
@@ -3190,7 +3190,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.4,
     "totalVolume": 130841.08,
@@ -3201,7 +3201,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.43,
     "totalVolume": 121942.61,
@@ -3212,7 +3212,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.35,
     "totalVolume": 137050.23,
@@ -3223,7 +3223,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.33,
     "totalVolume": 170547.18,
@@ -3234,7 +3234,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.42,
     "totalVolume": 136771.79,
@@ -3245,7 +3245,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.41,
     "totalVolume": 136964.3,
@@ -3256,7 +3256,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.42,
     "totalVolume": 139612.52,
@@ -3267,7 +3267,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.42,
     "totalVolume": 118172.53,
@@ -3278,7 +3278,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.44,
     "totalVolume": 124145.62,
@@ -3289,7 +3289,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.39,
     "totalVolume": 119890.65,
@@ -3300,7 +3300,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.4,
     "totalVolume": 119902.96,
@@ -3311,7 +3311,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.47,
     "totalVolume": 103413.11,
@@ -3322,7 +3322,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.35,
     "totalVolume": 125724.96,
@@ -3333,7 +3333,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.43,
     "totalVolume": 112363.86,
@@ -3344,7 +3344,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.41,
     "totalVolume": 109546.92,
@@ -3355,7 +3355,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.44,
     "totalVolume": 100207.14,
@@ -3366,7 +3366,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.36,
     "totalVolume": 132760.1,
@@ -3377,7 +3377,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 1.33,
     "totalVolume": 153920.35,
@@ -3388,7 +3388,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.5,
     "totalVolume": 114052.94,
@@ -3399,7 +3399,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.52,
     "totalVolume": 107040.29,
@@ -3410,7 +3410,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.54,
     "totalVolume": 106221.32,
@@ -3421,7 +3421,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.4,
     "totalVolume": 116253.44,
@@ -3432,7 +3432,7 @@
     "region": "BuffaloRochester"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.9,
     "totalVolume": 5040365.47,
@@ -3443,7 +3443,7 @@
     "region": "California"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 0.94,
     "totalVolume": 4695737.21,
@@ -3454,7 +3454,7 @@
     "region": "California"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 0.87,
     "totalVolume": 5259354.3,
@@ -3465,7 +3465,7 @@
     "region": "California"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.78,
     "totalVolume": 5775536.27,
@@ -3476,7 +3476,7 @@
     "region": "California"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 0.91,
     "totalVolume": 4575710.62,
@@ -3487,7 +3487,7 @@
     "region": "California"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 0.92,
     "totalVolume": 4804278.16,
@@ -3498,7 +3498,7 @@
     "region": "California"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 0.83,
     "totalVolume": 5755190.69,
@@ -3509,7 +3509,7 @@
     "region": "California"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.98,
     "totalVolume": 5148983.51,
@@ -3520,7 +3520,7 @@
     "region": "California"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 0.95,
     "totalVolume": 5830427.96,
@@ -3531,7 +3531,7 @@
     "region": "California"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.12,
     "totalVolume": 4592461.81,
@@ -3542,7 +3542,7 @@
     "region": "California"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 1.07,
     "totalVolume": 4999031.79,
@@ -3553,7 +3553,7 @@
     "region": "California"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.08,
     "totalVolume": 5063309.38,
@@ -3564,7 +3564,7 @@
     "region": "California"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.02,
     "totalVolume": 4943781.29,
@@ -3575,7 +3575,7 @@
     "region": "California"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.04,
     "totalVolume": 5216784.63,
@@ -3586,7 +3586,7 @@
     "region": "California"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.14,
     "totalVolume": 4759791.13,
@@ -3597,7 +3597,7 @@
     "region": "California"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.13,
     "totalVolume": 5106508.12,
@@ -3608,7 +3608,7 @@
     "region": "California"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.09,
     "totalVolume": 5806392.78,
@@ -3619,7 +3619,7 @@
     "region": "California"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.08,
     "totalVolume": 5647385.15,
@@ -3630,7 +3630,7 @@
     "region": "California"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.18,
     "totalVolume": 5193221,
@@ -3641,7 +3641,7 @@
     "region": "California"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.11,
     "totalVolume": 5616434.08,
@@ -3652,7 +3652,7 @@
     "region": "California"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.1,
     "totalVolume": 6232081.27,
@@ -3663,7 +3663,7 @@
     "region": "California"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.16,
     "totalVolume": 5428238.87,
@@ -3674,7 +3674,7 @@
     "region": "California"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.13,
     "totalVolume": 5557616.27,
@@ -3685,7 +3685,7 @@
     "region": "California"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.18,
     "totalVolume": 5225200.52,
@@ -3696,7 +3696,7 @@
     "region": "California"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.13,
     "totalVolume": 5451636.92,
@@ -3707,7 +3707,7 @@
     "region": "California"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.12,
     "totalVolume": 6718011.83,
@@ -3718,7 +3718,7 @@
     "region": "California"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.1,
     "totalVolume": 5641742.02,
@@ -3729,7 +3729,7 @@
     "region": "California"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.07,
     "totalVolume": 5952597.29,
@@ -3740,7 +3740,7 @@
     "region": "California"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 0.97,
     "totalVolume": 6741662.31,
@@ -3751,7 +3751,7 @@
     "region": "California"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 0.98,
     "totalVolume": 6374842.9,
@@ -3762,7 +3762,7 @@
     "region": "California"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 0.98,
     "totalVolume": 6236903.31,
@@ -3773,7 +3773,7 @@
     "region": "California"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.1,
     "totalVolume": 5621713.64,
@@ -3784,7 +3784,7 @@
     "region": "California"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.08,
     "totalVolume": 5289138.5,
@@ -3795,7 +3795,7 @@
     "region": "California"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 0.93,
     "totalVolume": 6650357.96,
@@ -3806,7 +3806,7 @@
     "region": "California"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 0.88,
     "totalVolume": 8567534.49,
@@ -3817,7 +3817,7 @@
     "region": "California"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.15,
     "totalVolume": 4923565.04,
@@ -3828,7 +3828,7 @@
     "region": "California"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.05,
     "totalVolume": 5871080.81,
@@ -3839,7 +3839,7 @@
     "region": "California"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.06,
     "totalVolume": 5636644.51,
@@ -3850,7 +3850,7 @@
     "region": "California"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.12,
     "totalVolume": 5467155.55,
@@ -3861,7 +3861,7 @@
     "region": "California"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.1,
     "totalVolume": 5341821.67,
@@ -3872,7 +3872,7 @@
     "region": "California"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.06,
     "totalVolume": 5571812.77,
@@ -3883,7 +3883,7 @@
     "region": "California"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.06,
     "totalVolume": 5557163.11,
@@ -3894,7 +3894,7 @@
     "region": "California"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 0.96,
     "totalVolume": 5990243.89,
@@ -3905,7 +3905,7 @@
     "region": "California"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 0.84,
     "totalVolume": 6700134.25,
@@ -3916,7 +3916,7 @@
     "region": "California"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 0.96,
     "totalVolume": 5951871.32,
@@ -3927,7 +3927,7 @@
     "region": "California"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 0.96,
     "totalVolume": 5699944.93,
@@ -3938,7 +3938,7 @@
     "region": "California"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 0.91,
     "totalVolume": 5871224.58,
@@ -3949,7 +3949,7 @@
     "region": "California"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.85,
     "totalVolume": 9032180.67,
@@ -3960,7 +3960,7 @@
     "region": "California"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.06,
     "totalVolume": 4929884.26,
@@ -3971,7 +3971,7 @@
     "region": "California"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.02,
     "totalVolume": 5570915.26,
@@ -3982,7 +3982,7 @@
     "region": "California"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 0.92,
     "totalVolume": 6024932.34,
@@ -3993,7 +3993,7 @@
     "region": "California"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 0.93,
     "totalVolume": 5777334.9,
@@ -4004,7 +4004,7 @@
     "region": "California"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.96,
     "totalVolume": 156698.24,
@@ -4015,7 +4015,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 0.98,
     "totalVolume": 139917.89,
@@ -4026,7 +4026,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 0.95,
     "totalVolume": 157146.19,
@@ -4037,7 +4037,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.99,
     "totalVolume": 156114.08,
@@ -4048,7 +4048,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 0.95,
     "totalVolume": 138858.86,
@@ -4059,7 +4059,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1,
     "totalVolume": 133618.33,
@@ -4070,7 +4070,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.01,
     "totalVolume": 169281.16,
@@ -4081,7 +4081,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.03,
     "totalVolume": 164322.04,
@@ -4092,7 +4092,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.11,
     "totalVolume": 171793.87,
@@ -4103,7 +4103,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.27,
     "totalVolume": 140920.61,
@@ -4114,7 +4114,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 1.26,
     "totalVolume": 156565.98,
@@ -4125,7 +4125,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.14,
     "totalVolume": 167396.56,
@@ -4136,7 +4136,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.22,
     "totalVolume": 146737.74,
@@ -4147,7 +4147,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.09,
     "totalVolume": 168780.22,
@@ -4158,7 +4158,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.2,
     "totalVolume": 161443.98,
@@ -4169,7 +4169,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.19,
     "totalVolume": 171077.53,
@@ -4180,7 +4180,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.01,
     "totalVolume": 227728.43,
@@ -4191,7 +4191,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.2,
     "totalVolume": 179026.88,
@@ -4202,7 +4202,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.15,
     "totalVolume": 203298.37,
@@ -4213,7 +4213,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.24,
     "totalVolume": 178525.52,
@@ -4224,7 +4224,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.21,
     "totalVolume": 173059.32,
@@ -4235,7 +4235,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.24,
     "totalVolume": 179321.9,
@@ -4246,7 +4246,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.23,
     "totalVolume": 173896.82,
@@ -4257,7 +4257,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.19,
     "totalVolume": 187575.03,
@@ -4268,7 +4268,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.18,
     "totalVolume": 182856.82,
@@ -4279,7 +4279,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.18,
     "totalVolume": 216118.9,
@@ -4290,7 +4290,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.17,
     "totalVolume": 193654.01,
@@ -4301,7 +4301,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.17,
     "totalVolume": 201173.1,
@@ -4312,7 +4312,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.15,
     "totalVolume": 207093.88,
@@ -4323,7 +4323,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.15,
     "totalVolume": 199980.3,
@@ -4334,7 +4334,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.19,
     "totalVolume": 194630.86,
@@ -4345,7 +4345,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.2,
     "totalVolume": 212527.72,
@@ -4356,7 +4356,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.21,
     "totalVolume": 190799.99,
@@ -4367,7 +4367,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.19,
     "totalVolume": 192767.09,
@@ -4378,7 +4378,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1,
     "totalVolume": 261492.2,
@@ -4389,7 +4389,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.2,
     "totalVolume": 182141.55,
@@ -4400,7 +4400,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.18,
     "totalVolume": 180944.22,
@@ -4411,7 +4411,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.17,
     "totalVolume": 204005.24,
@@ -4422,7 +4422,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.19,
     "totalVolume": 177919.28,
@@ -4433,7 +4433,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.23,
     "totalVolume": 178788.49,
@@ -4444,7 +4444,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.19,
     "totalVolume": 182876.15,
@@ -4455,7 +4455,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.19,
     "totalVolume": 183944.05,
@@ -4466,7 +4466,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.25,
     "totalVolume": 159386.69,
@@ -4477,7 +4477,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.18,
     "totalVolume": 176146.34,
@@ -4488,7 +4488,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.08,
     "totalVolume": 201741.43,
@@ -4499,7 +4499,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.22,
     "totalVolume": 156798.51,
@@ -4510,7 +4510,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.17,
     "totalVolume": 150139.38,
@@ -4521,7 +4521,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.98,
     "totalVolume": 254009.7,
@@ -4532,7 +4532,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.18,
     "totalVolume": 167270.13,
@@ -4543,7 +4543,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.25,
     "totalVolume": 152671.15,
@@ -4554,7 +4554,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.26,
     "totalVolume": 159942.68,
@@ -4565,7 +4565,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.19,
     "totalVolume": 166006.29,
@@ -4576,7 +4576,7 @@
     "region": "Charlotte"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.93,
     "totalVolume": 661137.13,
@@ -4587,7 +4587,7 @@
     "region": "Chicago"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 0.91,
     "totalVolume": 690669.34,
@@ -4598,7 +4598,7 @@
     "region": "Chicago"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.07,
     "totalVolume": 668601.5,
@@ -4609,7 +4609,7 @@
     "region": "Chicago"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 1.14,
     "totalVolume": 664020.49,
@@ -4620,7 +4620,7 @@
     "region": "Chicago"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.11,
     "totalVolume": 602481.22,
@@ -4631,7 +4631,7 @@
     "region": "Chicago"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 0.94,
     "totalVolume": 751897.89,
@@ -4642,7 +4642,7 @@
     "region": "Chicago"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.17,
     "totalVolume": 641881.96,
@@ -4653,7 +4653,7 @@
     "region": "Chicago"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.01,
     "totalVolume": 711146.61,
@@ -4664,7 +4664,7 @@
     "region": "Chicago"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1,
     "totalVolume": 807041.46,
@@ -4675,7 +4675,7 @@
     "region": "Chicago"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.12,
     "totalVolume": 687650.27,
@@ -4686,7 +4686,7 @@
     "region": "Chicago"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 1.15,
     "totalVolume": 690302.58,
@@ -4697,7 +4697,7 @@
     "region": "Chicago"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.08,
     "totalVolume": 708914.17,
@@ -4708,7 +4708,7 @@
     "region": "Chicago"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.18,
     "totalVolume": 675172.63,
@@ -4719,7 +4719,7 @@
     "region": "Chicago"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.15,
     "totalVolume": 720501.55,
@@ -4730,7 +4730,7 @@
     "region": "Chicago"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.19,
     "totalVolume": 729117.42,
@@ -4741,7 +4741,7 @@
     "region": "Chicago"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.19,
     "totalVolume": 775671.49,
@@ -4752,7 +4752,7 @@
     "region": "Chicago"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.11,
     "totalVolume": 808677.78,
@@ -4763,7 +4763,7 @@
     "region": "Chicago"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.12,
     "totalVolume": 773773.53,
@@ -4774,7 +4774,7 @@
     "region": "Chicago"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.2,
     "totalVolume": 751850.01,
@@ -4785,7 +4785,7 @@
     "region": "Chicago"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.16,
     "totalVolume": 817690.89,
@@ -4796,7 +4796,7 @@
     "region": "Chicago"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.25,
     "totalVolume": 731125.01,
@@ -4807,7 +4807,7 @@
     "region": "Chicago"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.27,
     "totalVolume": 761027.42,
@@ -4818,7 +4818,7 @@
     "region": "Chicago"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.12,
     "totalVolume": 791332.34,
@@ -4829,7 +4829,7 @@
     "region": "Chicago"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.24,
     "totalVolume": 797060.27,
@@ -4840,7 +4840,7 @@
     "region": "Chicago"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.26,
     "totalVolume": 772151.2,
@@ -4851,7 +4851,7 @@
     "region": "Chicago"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.24,
     "totalVolume": 937317.45,
@@ -4862,7 +4862,7 @@
     "region": "Chicago"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.21,
     "totalVolume": 786250.22,
@@ -4873,7 +4873,7 @@
     "region": "Chicago"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.24,
     "totalVolume": 804902.52,
@@ -4884,7 +4884,7 @@
     "region": "Chicago"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.21,
     "totalVolume": 868197.41,
@@ -4895,7 +4895,7 @@
     "region": "Chicago"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.24,
     "totalVolume": 824216.23,
@@ -4906,7 +4906,7 @@
     "region": "Chicago"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.26,
     "totalVolume": 803571.87,
@@ -4917,7 +4917,7 @@
     "region": "Chicago"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.23,
     "totalVolume": 887105.04,
@@ -4928,7 +4928,7 @@
     "region": "Chicago"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.23,
     "totalVolume": 817870.17,
@@ -4939,7 +4939,7 @@
     "region": "Chicago"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.23,
     "totalVolume": 835938.63,
@@ -4950,7 +4950,7 @@
     "region": "Chicago"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.04,
     "totalVolume": 978376.13,
@@ -4961,7 +4961,7 @@
     "region": "Chicago"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.24,
     "totalVolume": 779868.01,
@@ -4972,7 +4972,7 @@
     "region": "Chicago"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.24,
     "totalVolume": 832529.06,
@@ -4983,7 +4983,7 @@
     "region": "Chicago"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.24,
     "totalVolume": 710718.98,
@@ -4994,7 +4994,7 @@
     "region": "Chicago"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.27,
     "totalVolume": 751812.42,
@@ -5005,7 +5005,7 @@
     "region": "Chicago"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.22,
     "totalVolume": 757271.96,
@@ -5016,7 +5016,7 @@
     "region": "Chicago"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.21,
     "totalVolume": 799946.53,
@@ -5027,7 +5027,7 @@
     "region": "Chicago"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.09,
     "totalVolume": 827010.39,
@@ -5038,7 +5038,7 @@
     "region": "Chicago"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.18,
     "totalVolume": 772997.09,
@@ -5049,7 +5049,7 @@
     "region": "Chicago"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.09,
     "totalVolume": 863391.73,
@@ -5060,7 +5060,7 @@
     "region": "Chicago"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.18,
     "totalVolume": 773078.09,
@@ -5071,7 +5071,7 @@
     "region": "Chicago"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.17,
     "totalVolume": 726401.24,
@@ -5082,7 +5082,7 @@
     "region": "Chicago"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.13,
     "totalVolume": 729325.61,
@@ -5093,7 +5093,7 @@
     "region": "Chicago"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.91,
     "totalVolume": 1133491.66,
@@ -5104,7 +5104,7 @@
     "region": "Chicago"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.22,
     "totalVolume": 745439.17,
@@ -5115,7 +5115,7 @@
     "region": "Chicago"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.14,
     "totalVolume": 797741.43,
@@ -5126,7 +5126,7 @@
     "region": "Chicago"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.15,
     "totalVolume": 802874.94,
@@ -5137,7 +5137,7 @@
     "region": "Chicago"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.11,
     "totalVolume": 783068.03,
@@ -5148,7 +5148,7 @@
     "region": "Chicago"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.87,
     "totalVolume": 162993.77,
@@ -5159,7 +5159,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 0.85,
     "totalVolume": 175425.57,
@@ -5170,7 +5170,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 0.79,
     "totalVolume": 207386.27,
@@ -5181,7 +5181,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.83,
     "totalVolume": 207513.04,
@@ -5192,7 +5192,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 0.88,
     "totalVolume": 141356.34,
@@ -5203,7 +5203,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 0.89,
     "totalVolume": 174892.99,
@@ -5214,7 +5214,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 0.88,
     "totalVolume": 193723.22,
@@ -5225,7 +5225,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.87,
     "totalVolume": 239070.13,
@@ -5236,7 +5236,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 0.93,
     "totalVolume": 254760.33,
@@ -5247,7 +5247,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.01,
     "totalVolume": 203681.71,
@@ -5258,7 +5258,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.98,
     "totalVolume": 186044.56,
@@ -5269,7 +5269,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 0.91,
     "totalVolume": 213527.77,
@@ -5280,7 +5280,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 0.93,
     "totalVolume": 235243.88,
@@ -5291,7 +5291,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.08,
     "totalVolume": 202012.62,
@@ -5302,7 +5302,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.05,
     "totalVolume": 210445.12,
@@ -5313,7 +5313,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.05,
     "totalVolume": 216548.9,
@@ -5324,7 +5324,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.02,
     "totalVolume": 232157.91,
@@ -5335,7 +5335,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.01,
     "totalVolume": 234132.09,
@@ -5346,7 +5346,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.05,
     "totalVolume": 208608.84,
@@ -5357,7 +5357,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.01,
     "totalVolume": 234349.47,
@@ -5368,7 +5368,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.08,
     "totalVolume": 214374.41,
@@ -5379,7 +5379,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.09,
     "totalVolume": 206121.36,
@@ -5390,7 +5390,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.03,
     "totalVolume": 216611.18,
@@ -5401,7 +5401,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.06,
     "totalVolume": 223479.02,
@@ -5412,7 +5412,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.03,
     "totalVolume": 218170.8,
@@ -5423,7 +5423,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.03,
     "totalVolume": 250626.33,
@@ -5434,7 +5434,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.01,
     "totalVolume": 225165.84,
@@ -5445,7 +5445,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.02,
     "totalVolume": 243012.2,
@@ -5456,7 +5456,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.05,
     "totalVolume": 229363.51,
@@ -5467,7 +5467,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.07,
     "totalVolume": 234981.67,
@@ -5478,7 +5478,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.06,
     "totalVolume": 222382.69,
@@ -5489,7 +5489,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.1,
     "totalVolume": 222390.09,
@@ -5500,7 +5500,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.04,
     "totalVolume": 234579.34,
@@ -5511,7 +5511,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.06,
     "totalVolume": 259598.76,
@@ -5522,7 +5522,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.08,
     "totalVolume": 238140.96,
@@ -5533,7 +5533,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.06,
     "totalVolume": 214469.51,
@@ -5544,7 +5544,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.02,
     "totalVolume": 226978.72,
@@ -5555,7 +5555,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.02,
     "totalVolume": 188937.83,
@@ -5566,7 +5566,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.06,
     "totalVolume": 196168.6,
@@ -5577,7 +5577,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 0.95,
     "totalVolume": 198365.16,
@@ -5588,7 +5588,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 0.98,
     "totalVolume": 212719.94,
@@ -5599,7 +5599,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 0.94,
     "totalVolume": 196008.57,
@@ -5610,7 +5610,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 0.87,
     "totalVolume": 219110.81,
@@ -5621,7 +5621,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 0.89,
     "totalVolume": 226951.64,
@@ -5632,7 +5632,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 0.93,
     "totalVolume": 183072.02,
@@ -5643,7 +5643,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 0.94,
     "totalVolume": 169950.37,
@@ -5654,7 +5654,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 0.93,
     "totalVolume": 186617.2,
@@ -5665,7 +5665,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.86,
     "totalVolume": 300905.18,
@@ -5676,7 +5676,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 0.93,
     "totalVolume": 213554.45,
@@ -5687,7 +5687,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 0.93,
     "totalVolume": 175681.09,
@@ -5698,7 +5698,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 0.92,
     "totalVolume": 201392.27,
@@ -5709,7 +5709,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 0.88,
     "totalVolume": 228569.58,
@@ -5720,7 +5720,7 @@
     "region": "CincinnatiDayton"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.99,
     "totalVolume": 107565.04,
@@ -5731,7 +5731,7 @@
     "region": "Columbus"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.03,
     "totalVolume": 117393.22,
@@ -5742,7 +5742,7 @@
     "region": "Columbus"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.03,
     "totalVolume": 124617.07,
@@ -5753,7 +5753,7 @@
     "region": "Columbus"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.99,
     "totalVolume": 137195.59,
@@ -5764,7 +5764,7 @@
     "region": "Columbus"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.03,
     "totalVolume": 97235.6,
@@ -5775,7 +5775,7 @@
     "region": "Columbus"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.04,
     "totalVolume": 115089.62,
@@ -5786,7 +5786,7 @@
     "region": "Columbus"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 0.99,
     "totalVolume": 117462.94,
@@ -5797,7 +5797,7 @@
     "region": "Columbus"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.95,
     "totalVolume": 152084.79,
@@ -5808,7 +5808,7 @@
     "region": "Columbus"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 0.99,
     "totalVolume": 135237.01,
@@ -5819,7 +5819,7 @@
     "region": "Columbus"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.04,
     "totalVolume": 119210.27,
@@ -5830,7 +5830,7 @@
     "region": "Columbus"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.98,
     "totalVolume": 137773.84,
@@ -5841,7 +5841,7 @@
     "region": "Columbus"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 0.9,
     "totalVolume": 145305.65,
@@ -5852,7 +5852,7 @@
     "region": "Columbus"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 0.93,
     "totalVolume": 134326.53,
@@ -5863,7 +5863,7 @@
     "region": "Columbus"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.02,
     "totalVolume": 137298.77,
@@ -5874,7 +5874,7 @@
     "region": "Columbus"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1,
     "totalVolume": 165068.86,
@@ -5885,7 +5885,7 @@
     "region": "Columbus"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.02,
     "totalVolume": 169025.14,
@@ -5896,7 +5896,7 @@
     "region": "Columbus"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.04,
     "totalVolume": 144563.15,
@@ -5907,7 +5907,7 @@
     "region": "Columbus"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.03,
     "totalVolume": 147230.76,
@@ -5918,7 +5918,7 @@
     "region": "Columbus"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.08,
     "totalVolume": 130920.97,
@@ -5929,7 +5929,7 @@
     "region": "Columbus"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.03,
     "totalVolume": 155881.73,
@@ -5940,7 +5940,7 @@
     "region": "Columbus"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1,
     "totalVolume": 167387.9,
@@ -5951,7 +5951,7 @@
     "region": "Columbus"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.05,
     "totalVolume": 148597.91,
@@ -5962,7 +5962,7 @@
     "region": "Columbus"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.02,
     "totalVolume": 159846.2,
@@ -5973,7 +5973,7 @@
     "region": "Columbus"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.05,
     "totalVolume": 159137.17,
@@ -5984,7 +5984,7 @@
     "region": "Columbus"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.04,
     "totalVolume": 143992.91,
@@ -5995,7 +5995,7 @@
     "region": "Columbus"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 0.98,
     "totalVolume": 173370.68,
@@ -6006,7 +6006,7 @@
     "region": "Columbus"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 0.94,
     "totalVolume": 159970.54,
@@ -6017,7 +6017,7 @@
     "region": "Columbus"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 0.99,
     "totalVolume": 164161.25,
@@ -6028,7 +6028,7 @@
     "region": "Columbus"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.01,
     "totalVolume": 171353.59,
@@ -6039,7 +6039,7 @@
     "region": "Columbus"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.03,
     "totalVolume": 187983.88,
@@ -6050,7 +6050,7 @@
     "region": "Columbus"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.1,
     "totalVolume": 143985.96,
@@ -6061,7 +6061,7 @@
     "region": "Columbus"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.01,
     "totalVolume": 171879.57,
@@ -6072,7 +6072,7 @@
     "region": "Columbus"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1,
     "totalVolume": 180511.78,
@@ -6083,7 +6083,7 @@
     "region": "Columbus"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.1,
     "totalVolume": 162802.65,
@@ -6094,7 +6094,7 @@
     "region": "Columbus"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 0.99,
     "totalVolume": 176737.77,
@@ -6105,7 +6105,7 @@
     "region": "Columbus"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.02,
     "totalVolume": 161438.17,
@@ -6116,7 +6116,7 @@
     "region": "Columbus"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1,
     "totalVolume": 172913.44,
@@ -6127,7 +6127,7 @@
     "region": "Columbus"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.07,
     "totalVolume": 129397.39,
@@ -6138,7 +6138,7 @@
     "region": "Columbus"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.09,
     "totalVolume": 126109.82,
@@ -6149,7 +6149,7 @@
     "region": "Columbus"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 0.96,
     "totalVolume": 139065.31,
@@ -6160,7 +6160,7 @@
     "region": "Columbus"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 0.94,
     "totalVolume": 182625.49,
@@ -6171,7 +6171,7 @@
     "region": "Columbus"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.01,
     "totalVolume": 149884.1,
@@ -6182,7 +6182,7 @@
     "region": "Columbus"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 0.95,
     "totalVolume": 141281.56,
@@ -6193,7 +6193,7 @@
     "region": "Columbus"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.03,
     "totalVolume": 136795.35,
@@ -6204,7 +6204,7 @@
     "region": "Columbus"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.09,
     "totalVolume": 114280.87,
@@ -6215,7 +6215,7 @@
     "region": "Columbus"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.05,
     "totalVolume": 106663.68,
@@ -6226,7 +6226,7 @@
     "region": "Columbus"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 0.96,
     "totalVolume": 128078.27,
@@ -6237,7 +6237,7 @@
     "region": "Columbus"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.87,
     "totalVolume": 216653.06,
@@ -6248,7 +6248,7 @@
     "region": "Columbus"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.08,
     "totalVolume": 116995.68,
@@ -6259,7 +6259,7 @@
     "region": "Columbus"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.02,
     "totalVolume": 116450.21,
@@ -6270,7 +6270,7 @@
     "region": "Columbus"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 0.97,
     "totalVolume": 125742.48,
@@ -6281,7 +6281,7 @@
     "region": "Columbus"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 0.89,
     "totalVolume": 158638.04,
@@ -6292,7 +6292,7 @@
     "region": "Columbus"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.8,
     "totalVolume": 1020390.64,
@@ -6303,7 +6303,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 0.82,
     "totalVolume": 928051.16,
@@ -6314,7 +6314,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 0.79,
     "totalVolume": 980891.18,
@@ -6325,7 +6325,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.74,
     "totalVolume": 1054849.97,
@@ -6336,7 +6336,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 0.8,
     "totalVolume": 839818.87,
@@ -6347,7 +6347,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 0.78,
     "totalVolume": 885067.49,
@@ -6358,7 +6358,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 0.71,
     "totalVolume": 1040439.71,
@@ -6369,7 +6369,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.8,
     "totalVolume": 977717.36,
@@ -6380,7 +6380,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 0.78,
     "totalVolume": 1114177.66,
@@ -6391,7 +6391,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 0.86,
     "totalVolume": 1010394.81,
@@ -6402,7 +6402,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.83,
     "totalVolume": 992983.76,
@@ -6413,7 +6413,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 0.81,
     "totalVolume": 1100679.15,
@@ -6424,7 +6424,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 0.82,
     "totalVolume": 1104602.14,
@@ -6435,7 +6435,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 0.84,
     "totalVolume": 1063583.86,
@@ -6446,7 +6446,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 0.77,
     "totalVolume": 1155212.67,
@@ -6457,7 +6457,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 0.86,
     "totalVolume": 1212585.41,
@@ -6468,7 +6468,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 0.84,
     "totalVolume": 1270739.69,
@@ -6479,7 +6479,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 0.82,
     "totalVolume": 1101680.91,
@@ -6490,7 +6490,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 0.85,
     "totalVolume": 1120172.03,
@@ -6501,7 +6501,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 0.88,
     "totalVolume": 1122668.33,
@@ -6512,7 +6512,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 0.85,
     "totalVolume": 1124259.51,
@@ -6523,7 +6523,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 0.87,
     "totalVolume": 1067498.21,
@@ -6534,7 +6534,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 0.8,
     "totalVolume": 1191310.92,
@@ -6545,7 +6545,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 0.82,
     "totalVolume": 1186878.88,
@@ -6556,7 +6556,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 0.82,
     "totalVolume": 1144448.23,
@@ -6567,7 +6567,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 0.83,
     "totalVolume": 1320696.13,
@@ -6578,7 +6578,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 0.77,
     "totalVolume": 1203553.98,
@@ -6589,7 +6589,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 0.75,
     "totalVolume": 1283503.44,
@@ -6600,7 +6600,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 0.65,
     "totalVolume": 1508750.45,
@@ -6611,7 +6611,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 0.73,
     "totalVolume": 1255575.78,
@@ -6622,7 +6622,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 0.68,
     "totalVolume": 1377670.81,
@@ -6633,7 +6633,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 0.81,
     "totalVolume": 1184131.34,
@@ -6644,7 +6644,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 0.73,
     "totalVolume": 1219398.43,
@@ -6655,7 +6655,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 0.75,
     "totalVolume": 1298826.19,
@@ -6666,7 +6666,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 0.77,
     "totalVolume": 1282852.08,
@@ -6677,7 +6677,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 0.81,
     "totalVolume": 1102639.51,
@@ -6688,7 +6688,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 0.8,
     "totalVolume": 1137811.87,
@@ -6699,7 +6699,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 0.72,
     "totalVolume": 1266899.55,
@@ -6710,7 +6710,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 0.77,
     "totalVolume": 1324348.89,
@@ -6721,7 +6721,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 0.79,
     "totalVolume": 1164808.22,
@@ -6732,7 +6732,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 0.67,
     "totalVolume": 1333424.37,
@@ -6743,7 +6743,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 0.72,
     "totalVolume": 1211158.55,
@@ -6754,7 +6754,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 0.75,
     "totalVolume": 1218684.28,
@@ -6765,7 +6765,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 0.82,
     "totalVolume": 1144032.03,
@@ -6776,7 +6776,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 0.8,
     "totalVolume": 1116600.76,
@@ -6787,7 +6787,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 0.77,
     "totalVolume": 1020856.87,
@@ -6798,7 +6798,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 0.67,
     "totalVolume": 1207167.54,
@@ -6809,7 +6809,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.68,
     "totalVolume": 1391089.32,
@@ -6820,7 +6820,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 0.8,
     "totalVolume": 1008295.47,
@@ -6831,7 +6831,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 0.76,
     "totalVolume": 1091677.29,
@@ -6842,7 +6842,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 0.76,
     "totalVolume": 1128693.04,
@@ -6853,7 +6853,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 0.74,
     "totalVolume": 1086363.97,
@@ -6864,7 +6864,7 @@
     "region": "DallasFtWorth"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.98,
     "totalVolume": 625475.1,
@@ -6875,7 +6875,7 @@
     "region": "Denver"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.05,
     "totalVolume": 528944.54,
@@ -6886,7 +6886,7 @@
     "region": "Denver"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 0.83,
     "totalVolume": 741702.5,
@@ -6897,7 +6897,7 @@
     "region": "Denver"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.76,
     "totalVolume": 838225.19,
@@ -6908,7 +6908,7 @@
     "region": "Denver"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.12,
     "totalVolume": 429109.64,
@@ -6919,7 +6919,7 @@
     "region": "Denver"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 0.85,
     "totalVolume": 724865.72,
@@ -6930,7 +6930,7 @@
     "region": "Denver"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 0.82,
     "totalVolume": 925618.09,
@@ -6941,7 +6941,7 @@
     "region": "Denver"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.93,
     "totalVolume": 690633.88,
@@ -6952,7 +6952,7 @@
     "region": "Denver"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 0.82,
     "totalVolume": 831994.43,
@@ -6963,7 +6963,7 @@
     "region": "Denver"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 0.93,
     "totalVolume": 735206.51,
@@ -6974,7 +6974,7 @@
     "region": "Denver"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.87,
     "totalVolume": 805437.95,
@@ -6985,7 +6985,7 @@
     "region": "Denver"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 0.9,
     "totalVolume": 775976.51,
@@ -6996,7 +6996,7 @@
     "region": "Denver"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.02,
     "totalVolume": 678935.84,
@@ -7007,7 +7007,7 @@
     "region": "Denver"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 0.97,
     "totalVolume": 694871.74,
@@ -7018,7 +7018,7 @@
     "region": "Denver"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 0.98,
     "totalVolume": 760083.16,
@@ -7029,7 +7029,7 @@
     "region": "Denver"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.01,
     "totalVolume": 735436.91,
@@ -7040,7 +7040,7 @@
     "region": "Denver"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.09,
     "totalVolume": 729046.74,
@@ -7051,7 +7051,7 @@
     "region": "Denver"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.14,
     "totalVolume": 721703.83,
@@ -7062,7 +7062,7 @@
     "region": "Denver"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.2,
     "totalVolume": 598195.03,
@@ -7073,7 +7073,7 @@
     "region": "Denver"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.17,
     "totalVolume": 648148.15,
@@ -7084,7 +7084,7 @@
     "region": "Denver"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.09,
     "totalVolume": 669377.04,
@@ -7095,7 +7095,7 @@
     "region": "Denver"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.05,
     "totalVolume": 727916.83,
@@ -7106,7 +7106,7 @@
     "region": "Denver"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.18,
     "totalVolume": 703672.69,
@@ -7117,7 +7117,7 @@
     "region": "Denver"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.1,
     "totalVolume": 857872.86,
@@ -7128,7 +7128,7 @@
     "region": "Denver"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.18,
     "totalVolume": 738933.68,
@@ -7139,7 +7139,7 @@
     "region": "Denver"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.19,
     "totalVolume": 736913.15,
@@ -7150,7 +7150,7 @@
     "region": "Denver"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.2,
     "totalVolume": 696697.65,
@@ -7161,7 +7161,7 @@
     "region": "Denver"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.16,
     "totalVolume": 730826.79,
@@ -7172,7 +7172,7 @@
     "region": "Denver"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.16,
     "totalVolume": 743005.75,
@@ -7183,7 +7183,7 @@
     "region": "Denver"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.11,
     "totalVolume": 782886.63,
@@ -7194,7 +7194,7 @@
     "region": "Denver"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.26,
     "totalVolume": 600377.94,
@@ -7205,7 +7205,7 @@
     "region": "Denver"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.16,
     "totalVolume": 657593.22,
@@ -7216,7 +7216,7 @@
     "region": "Denver"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.21,
     "totalVolume": 592588.01,
@@ -7227,7 +7227,7 @@
     "region": "Denver"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.08,
     "totalVolume": 735145.02,
@@ -7238,7 +7238,7 @@
     "region": "Denver"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.01,
     "totalVolume": 781496.4,
@@ -7249,7 +7249,7 @@
     "region": "Denver"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.19,
     "totalVolume": 620827.49,
@@ -7260,7 +7260,7 @@
     "region": "Denver"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.08,
     "totalVolume": 797021.22,
@@ -7271,7 +7271,7 @@
     "region": "Denver"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.05,
     "totalVolume": 858680.51,
@@ -7282,7 +7282,7 @@
     "region": "Denver"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.19,
     "totalVolume": 645727.95,
@@ -7293,7 +7293,7 @@
     "region": "Denver"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.11,
     "totalVolume": 627546.3,
@@ -7304,7 +7304,7 @@
     "region": "Denver"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.15,
     "totalVolume": 603112.11,
@@ -7315,7 +7315,7 @@
     "region": "Denver"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.03,
     "totalVolume": 662131.8,
@@ -7326,7 +7326,7 @@
     "region": "Denver"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.03,
     "totalVolume": 719792.51,
@@ -7337,7 +7337,7 @@
     "region": "Denver"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.03,
     "totalVolume": 670820.5,
@@ -7348,7 +7348,7 @@
     "region": "Denver"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1,
     "totalVolume": 899302.8,
@@ -7359,7 +7359,7 @@
     "region": "Denver"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.12,
     "totalVolume": 629074.28,
@@ -7370,7 +7370,7 @@
     "region": "Denver"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 0.95,
     "totalVolume": 766576.39,
@@ -7381,7 +7381,7 @@
     "region": "Denver"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.93,
     "totalVolume": 990211.57,
@@ -7392,7 +7392,7 @@
     "region": "Denver"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.02,
     "totalVolume": 695658.81,
@@ -7403,7 +7403,7 @@
     "region": "Denver"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 0.99,
     "totalVolume": 808194.41,
@@ -7414,7 +7414,7 @@
     "region": "Denver"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.09,
     "totalVolume": 666579.35,
@@ -7425,7 +7425,7 @@
     "region": "Denver"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 0.99,
     "totalVolume": 668086,
@@ -7436,7 +7436,7 @@
     "region": "Denver"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.08,
     "totalVolume": 255499.7,
@@ -7447,7 +7447,7 @@
     "region": "Detroit"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.1,
     "totalVolume": 250436.24,
@@ -7458,7 +7458,7 @@
     "region": "Detroit"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.05,
     "totalVolume": 275587.85,
@@ -7469,7 +7469,7 @@
     "region": "Detroit"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.98,
     "totalVolume": 339797.19,
@@ -7480,7 +7480,7 @@
     "region": "Detroit"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.11,
     "totalVolume": 228427.08,
@@ -7491,7 +7491,7 @@
     "region": "Detroit"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.09,
     "totalVolume": 270529.34,
@@ -7502,7 +7502,7 @@
     "region": "Detroit"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.1,
     "totalVolume": 248933.35,
@@ -7513,7 +7513,7 @@
     "region": "Detroit"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.03,
     "totalVolume": 343645.67,
@@ -7524,7 +7524,7 @@
     "region": "Detroit"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.04,
     "totalVolume": 340746.59,
@@ -7535,7 +7535,7 @@
     "region": "Detroit"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.17,
     "totalVolume": 251336.74,
@@ -7546,7 +7546,7 @@
     "region": "Detroit"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.97,
     "totalVolume": 358143.26,
@@ -7557,7 +7557,7 @@
     "region": "Detroit"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 0.99,
     "totalVolume": 362400.65,
@@ -7568,7 +7568,7 @@
     "region": "Detroit"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.1,
     "totalVolume": 286400.89,
@@ -7579,7 +7579,7 @@
     "region": "Detroit"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.17,
     "totalVolume": 257472.31,
@@ -7590,7 +7590,7 @@
     "region": "Detroit"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1,
     "totalVolume": 373545.23,
@@ -7601,7 +7601,7 @@
     "region": "Detroit"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.03,
     "totalVolume": 401472.63,
@@ -7612,7 +7612,7 @@
     "region": "Detroit"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.09,
     "totalVolume": 336982.39,
@@ -7623,7 +7623,7 @@
     "region": "Detroit"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 0.96,
     "totalVolume": 422762.9,
@@ -7634,7 +7634,7 @@
     "region": "Detroit"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.11,
     "totalVolume": 267968.5,
@@ -7645,7 +7645,7 @@
     "region": "Detroit"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 0.97,
     "totalVolume": 400251.59,
@@ -7656,7 +7656,7 @@
     "region": "Detroit"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.07,
     "totalVolume": 341289.98,
@@ -7667,7 +7667,7 @@
     "region": "Detroit"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.04,
     "totalVolume": 364735.69,
@@ -7678,7 +7678,7 @@
     "region": "Detroit"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 0.99,
     "totalVolume": 326233.8,
@@ -7689,7 +7689,7 @@
     "region": "Detroit"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.04,
     "totalVolume": 370830.93,
@@ -7700,7 +7700,7 @@
     "region": "Detroit"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.02,
     "totalVolume": 310049.5,
@@ -7711,7 +7711,7 @@
     "region": "Detroit"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.06,
     "totalVolume": 373691.57,
@@ -7722,7 +7722,7 @@
     "region": "Detroit"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1,
     "totalVolume": 329753.61,
@@ -7733,7 +7733,7 @@
     "region": "Detroit"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 0.97,
     "totalVolume": 424580.52,
@@ -7744,7 +7744,7 @@
     "region": "Detroit"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.04,
     "totalVolume": 372413.5,
@@ -7755,7 +7755,7 @@
     "region": "Detroit"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 0.97,
     "totalVolume": 447813.52,
@@ -7766,7 +7766,7 @@
     "region": "Detroit"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.09,
     "totalVolume": 324400.67,
@@ -7777,7 +7777,7 @@
     "region": "Detroit"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.03,
     "totalVolume": 373245.43,
@@ -7788,7 +7788,7 @@
     "region": "Detroit"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 0.95,
     "totalVolume": 495155.82,
@@ -7799,7 +7799,7 @@
     "region": "Detroit"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.11,
     "totalVolume": 360917.96,
@@ -7810,7 +7810,7 @@
     "region": "Detroit"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.06,
     "totalVolume": 374659.88,
@@ -7821,7 +7821,7 @@
     "region": "Detroit"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.01,
     "totalVolume": 361243.2,
@@ -7832,7 +7832,7 @@
     "region": "Detroit"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 0.96,
     "totalVolume": 468643.05,
@@ -7843,7 +7843,7 @@
     "region": "Detroit"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.02,
     "totalVolume": 271182.01,
@@ -7854,7 +7854,7 @@
     "region": "Detroit"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.11,
     "totalVolume": 295385.41,
@@ -7865,7 +7865,7 @@
     "region": "Detroit"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 0.97,
     "totalVolume": 304048.16,
@@ -7876,7 +7876,7 @@
     "region": "Detroit"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 0.97,
     "totalVolume": 455372.43,
@@ -7887,7 +7887,7 @@
     "region": "Detroit"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.13,
     "totalVolume": 254974.87,
@@ -7898,7 +7898,7 @@
     "region": "Detroit"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.01,
     "totalVolume": 278695.29,
@@ -7909,7 +7909,7 @@
     "region": "Detroit"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 0.97,
     "totalVolume": 397899.56,
@@ -7920,7 +7920,7 @@
     "region": "Detroit"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.15,
     "totalVolume": 250888.8,
@@ -7931,7 +7931,7 @@
     "region": "Detroit"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.16,
     "totalVolume": 255597.63,
@@ -7942,7 +7942,7 @@
     "region": "Detroit"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.11,
     "totalVolume": 268195.87,
@@ -7953,7 +7953,7 @@
     "region": "Detroit"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.92,
     "totalVolume": 539750.77,
@@ -7964,7 +7964,7 @@
     "region": "Detroit"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.19,
     "totalVolume": 277325.29,
@@ -7975,7 +7975,7 @@
     "region": "Detroit"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.1,
     "totalVolume": 291788.43,
@@ -7986,7 +7986,7 @@
     "region": "Detroit"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.08,
     "totalVolume": 332165.05,
@@ -7997,7 +7997,7 @@
     "region": "Detroit"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.01,
     "totalVolume": 369694.27,
@@ -8008,7 +8008,7 @@
     "region": "Detroit"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.13,
     "totalVolume": 147713.85,
@@ -8019,7 +8019,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.13,
     "totalVolume": 126262.26,
@@ -8030,7 +8030,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.24,
     "totalVolume": 117645.69,
@@ -8041,7 +8041,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.93,
     "totalVolume": 217174.66,
@@ -8052,7 +8052,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.12,
     "totalVolume": 120552.43,
@@ -8063,7 +8063,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.11,
     "totalVolume": 140981.22,
@@ -8074,7 +8074,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.2,
     "totalVolume": 129448.75,
@@ -8085,7 +8085,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.93,
     "totalVolume": 198257.69,
@@ -8096,7 +8096,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 0.91,
     "totalVolume": 205592.1,
@@ -8107,7 +8107,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.14,
     "totalVolume": 134921.44,
@@ -8118,7 +8118,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.94,
     "totalVolume": 184806.99,
@@ -8129,7 +8129,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 0.97,
     "totalVolume": 198769.54,
@@ -8140,7 +8140,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 0.99,
     "totalVolume": 160322.48,
@@ -8151,7 +8151,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.15,
     "totalVolume": 137849.61,
@@ -8162,7 +8162,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 0.88,
     "totalVolume": 244696.01,
@@ -8173,7 +8173,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 0.95,
     "totalVolume": 219380.93,
@@ -8184,7 +8184,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.09,
     "totalVolume": 170309.3,
@@ -8195,7 +8195,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 0.91,
     "totalVolume": 226898.73,
@@ -8206,7 +8206,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.28,
     "totalVolume": 128681.94,
@@ -8217,7 +8217,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 0.89,
     "totalVolume": 268902.14,
@@ -8228,7 +8228,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.08,
     "totalVolume": 186733.16,
@@ -8239,7 +8239,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.05,
     "totalVolume": 184067.49,
@@ -8250,7 +8250,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.12,
     "totalVolume": 153868.79,
@@ -8261,7 +8261,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.05,
     "totalVolume": 215736.47,
@@ -8272,7 +8272,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.19,
     "totalVolume": 153112.84,
@@ -8283,7 +8283,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.16,
     "totalVolume": 202842.97,
@@ -8294,7 +8294,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.1,
     "totalVolume": 155972.38,
@@ -8305,7 +8305,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 0.96,
     "totalVolume": 265555.66,
@@ -8316,7 +8316,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.07,
     "totalVolume": 197387.76,
@@ -8327,7 +8327,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.14,
     "totalVolume": 212599.11,
@@ -8338,7 +8338,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.31,
     "totalVolume": 167907.51,
@@ -8349,7 +8349,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.3,
     "totalVolume": 158917.21,
@@ -8360,7 +8360,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 0.97,
     "totalVolume": 277502.12,
@@ -8371,7 +8371,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.36,
     "totalVolume": 159642.82,
@@ -8382,7 +8382,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.06,
     "totalVolume": 238550.81,
@@ -8393,7 +8393,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.09,
     "totalVolume": 189609.49,
@@ -8404,7 +8404,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 0.93,
     "totalVolume": 310672.4,
@@ -8415,7 +8415,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.13,
     "totalVolume": 147494.24,
@@ -8426,7 +8426,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.22,
     "totalVolume": 157721.54,
@@ -8437,7 +8437,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.11,
     "totalVolume": 149631.24,
@@ -8448,7 +8448,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 0.91,
     "totalVolume": 311876.75,
@@ -8459,7 +8459,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.35,
     "totalVolume": 123895.07,
@@ -8470,7 +8470,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.08,
     "totalVolume": 146835.6,
@@ -8481,7 +8481,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 0.95,
     "totalVolume": 263987.21,
@@ -8492,7 +8492,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.31,
     "totalVolume": 129295.86,
@@ -8503,7 +8503,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.21,
     "totalVolume": 136761.35,
@@ -8514,7 +8514,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.24,
     "totalVolume": 132621.01,
@@ -8525,7 +8525,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.94,
     "totalVolume": 309471.69,
@@ -8536,7 +8536,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.19,
     "totalVolume": 144301.73,
@@ -8547,7 +8547,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.07,
     "totalVolume": 150201.39,
@@ -8558,7 +8558,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.03,
     "totalVolume": 185135.41,
@@ -8569,7 +8569,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 0.95,
     "totalVolume": 258979.63,
@@ -8580,7 +8580,7 @@
     "region": "GrandRapids"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.01,
     "totalVolume": 2580602.96,
@@ -8591,7 +8591,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.01,
     "totalVolume": 2504745.45,
@@ -8602,7 +8602,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.03,
     "totalVolume": 2608448.06,
@@ -8613,7 +8613,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 1,
     "totalVolume": 2981347.2,
@@ -8624,7 +8624,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.07,
     "totalVolume": 2198408.92,
@@ -8635,7 +8635,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.03,
     "totalVolume": 2601821.63,
@@ -8646,7 +8646,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.09,
     "totalVolume": 2494044.41,
@@ -8657,7 +8657,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.98,
     "totalVolume": 3184946.53,
@@ -8668,7 +8668,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1,
     "totalVolume": 3229124.75,
@@ -8679,7 +8679,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.1,
     "totalVolume": 2671535.94,
@@ -8690,7 +8690,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 1.03,
     "totalVolume": 2981549.94,
@@ -8701,7 +8701,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.02,
     "totalVolume": 3004133.39,
@@ -8712,7 +8712,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.05,
     "totalVolume": 2814678.93,
@@ -8723,7 +8723,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.1,
     "totalVolume": 2770074.76,
@@ -8734,7 +8734,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.02,
     "totalVolume": 3336245.24,
@@ -8745,7 +8745,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.03,
     "totalVolume": 3532480.92,
@@ -8756,7 +8756,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.07,
     "totalVolume": 3272555.01,
@@ -8767,7 +8767,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.04,
     "totalVolume": 3388803.79,
@@ -8778,7 +8778,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.14,
     "totalVolume": 2849127.29,
@@ -8789,7 +8789,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.03,
     "totalVolume": 3653376.07,
@@ -8800,7 +8800,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.12,
     "totalVolume": 3230139.65,
@@ -8811,7 +8811,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.14,
     "totalVolume": 3162447.64,
@@ -8822,7 +8822,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.1,
     "totalVolume": 3135698.38,
@@ -8833,7 +8833,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.12,
     "totalVolume": 3436864.41,
@@ -8844,7 +8844,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.14,
     "totalVolume": 3077237.12,
@@ -8855,7 +8855,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.13,
     "totalVolume": 3774004.27,
@@ -8866,7 +8866,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.07,
     "totalVolume": 3336314.35,
@@ -8877,7 +8877,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.08,
     "totalVolume": 3720458.83,
@@ -8888,7 +8888,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.12,
     "totalVolume": 3511185.14,
@@ -8899,7 +8899,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.13,
     "totalVolume": 3602112.79,
@@ -8910,7 +8910,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.2,
     "totalVolume": 3151714,
@@ -8921,7 +8921,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.15,
     "totalVolume": 3574050.61,
@@ -8932,7 +8932,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.09,
     "totalVolume": 3753201.03,
@@ -8943,7 +8943,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.15,
     "totalVolume": 3501344.46,
@@ -8954,7 +8954,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.05,
     "totalVolume": 3901054.42,
@@ -8965,7 +8965,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.14,
     "totalVolume": 3234024.32,
@@ -8976,7 +8976,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.06,
     "totalVolume": 3857605.11,
@@ -8987,7 +8987,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.11,
     "totalVolume": 2895992.9,
@@ -8998,7 +8998,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.18,
     "totalVolume": 2938918.81,
@@ -9009,7 +9009,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.09,
     "totalVolume": 2971443.88,
@@ -9020,7 +9020,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.04,
     "totalVolume": 3746598.18,
@@ -9031,7 +9031,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.1,
     "totalVolume": 2948199.23,
@@ -9042,7 +9042,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.04,
     "totalVolume": 3134752.64,
@@ -9053,7 +9053,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.02,
     "totalVolume": 3566752.43,
@@ -9064,7 +9064,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.16,
     "totalVolume": 2730224.03,
@@ -9075,7 +9075,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.15,
     "totalVolume": 2610004.41,
@@ -9086,7 +9086,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.07,
     "totalVolume": 2856456.35,
@@ -9097,7 +9097,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.91,
     "totalVolume": 4874124.41,
@@ -9108,7 +9108,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.13,
     "totalVolume": 2928692.32,
@@ -9119,7 +9119,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.08,
     "totalVolume": 3006207.02,
@@ -9130,7 +9130,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.1,
     "totalVolume": 3067638.32,
@@ -9141,7 +9141,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.02,
     "totalVolume": 3382800.12,
@@ -9152,7 +9152,7 @@
     "region": "GreatLakes"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.16,
     "totalVolume": 173645.55,
@@ -9163,7 +9163,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.11,
     "totalVolume": 180186.23,
@@ -9174,7 +9174,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.14,
     "totalVolume": 187058.65,
@@ -9185,7 +9185,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 1.1,
     "totalVolume": 171195.76,
@@ -9196,7 +9196,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.17,
     "totalVolume": 146103.34,
@@ -9207,7 +9207,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.16,
     "totalVolume": 162429.43,
@@ -9218,7 +9218,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.09,
     "totalVolume": 189916.88,
@@ -9229,7 +9229,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.09,
     "totalVolume": 214993.36,
@@ -9240,7 +9240,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.13,
     "totalVolume": 219970.37,
@@ -9251,7 +9251,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.11,
     "totalVolume": 183276.68,
@@ -9262,7 +9262,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.93,
     "totalVolume": 264223.22,
@@ -9273,7 +9273,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.05,
     "totalVolume": 225079.92,
@@ -9284,7 +9284,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.16,
     "totalVolume": 188436.91,
@@ -9295,7 +9295,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.15,
     "totalVolume": 192478.26,
@@ -9306,7 +9306,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.17,
     "totalVolume": 188314.24,
@@ -9317,7 +9317,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.07,
     "totalVolume": 254744.58,
@@ -9328,7 +9328,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.19,
     "totalVolume": 225494.59,
@@ -9339,7 +9339,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.18,
     "totalVolume": 219908.82,
@@ -9350,7 +9350,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.1,
     "totalVolume": 222637.15,
@@ -9361,7 +9361,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.09,
     "totalVolume": 247813.45,
@@ -9372,7 +9372,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.07,
     "totalVolume": 247575.06,
@@ -9383,7 +9383,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.1,
     "totalVolume": 242281.36,
@@ -9394,7 +9394,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.17,
     "totalVolume": 225227.57,
@@ -9405,7 +9405,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.19,
     "totalVolume": 229650.57,
@@ -9416,7 +9416,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.17,
     "totalVolume": 233638.96,
@@ -9427,7 +9427,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.19,
     "totalVolume": 275844.88,
@@ -9438,7 +9438,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.2,
     "totalVolume": 243537.29,
@@ -9449,7 +9449,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.19,
     "totalVolume": 255431.85,
@@ -9460,7 +9460,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.13,
     "totalVolume": 277578.88,
@@ -9471,7 +9471,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.21,
     "totalVolume": 265638.42,
@@ -9482,7 +9482,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.22,
     "totalVolume": 260058.34,
@@ -9493,7 +9493,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.21,
     "totalVolume": 270097.92,
@@ -9504,7 +9504,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.19,
     "totalVolume": 252843.56,
@@ -9515,7 +9515,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.19,
     "totalVolume": 299147.73,
@@ -9526,7 +9526,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.17,
     "totalVolume": 255913.63,
@@ -9537,7 +9537,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.21,
     "totalVolume": 234322.13,
@@ -9548,7 +9548,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.17,
     "totalVolume": 237429.16,
@@ -9559,7 +9559,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.18,
     "totalVolume": 201544.53,
@@ -9570,7 +9570,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.21,
     "totalVolume": 216376.66,
@@ -9581,7 +9581,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.14,
     "totalVolume": 197282.25,
@@ -9592,7 +9592,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.08,
     "totalVolume": 219149.75,
@@ -9603,7 +9603,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.2,
     "totalVolume": 190760.3,
@@ -9614,7 +9614,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.15,
     "totalVolume": 192277.92,
@@ -9625,7 +9625,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.07,
     "totalVolume": 230913.14,
@@ -9636,7 +9636,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.2,
     "totalVolume": 191040.19,
@@ -9647,7 +9647,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.22,
     "totalVolume": 187671.77,
@@ -9658,7 +9658,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.02,
     "totalVolume": 239756.62,
@@ -9669,7 +9669,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 1.06,
     "totalVolume": 283137.88,
@@ -9680,7 +9680,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.17,
     "totalVolume": 206074.14,
@@ -9691,7 +9691,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.24,
     "totalVolume": 182604.68,
@@ -9702,7 +9702,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.26,
     "totalVolume": 178735.25,
@@ -9713,7 +9713,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.05,
     "totalVolume": 203939.14,
@@ -9724,7 +9724,7 @@
     "region": "HarrisburgScranton"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.27,
     "totalVolume": 243556.57,
@@ -9735,7 +9735,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.18,
     "totalVolume": 264155.74,
@@ -9746,7 +9746,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.24,
     "totalVolume": 238558.16,
@@ -9757,7 +9757,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 1.19,
     "totalVolume": 239945.42,
@@ -9768,7 +9768,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.32,
     "totalVolume": 213631.54,
@@ -9779,7 +9779,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.27,
     "totalVolume": 212091.14,
@@ -9790,7 +9790,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.12,
     "totalVolume": 275217.97,
@@ -9801,7 +9801,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 1.16,
     "totalVolume": 309186.06,
@@ -9812,7 +9812,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.16,
     "totalVolume": 326067.03,
@@ -9823,7 +9823,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.2,
     "totalVolume": 234361.36,
@@ -9834,7 +9834,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.93,
     "totalVolume": 407866.27,
@@ -9845,7 +9845,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 1.38,
     "totalVolume": 264227.78,
@@ -9856,7 +9856,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 1.3,
     "totalVolume": 262638.61,
@@ -9867,7 +9867,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 1.29,
     "totalVolume": 247141.63,
@@ -9878,7 +9878,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 1.25,
     "totalVolume": 241532.74,
@@ -9889,7 +9889,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 1.11,
     "totalVolume": 341176.21,
@@ -9900,7 +9900,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 1.27,
     "totalVolume": 281256.19,
@@ -9911,7 +9911,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 1.26,
     "totalVolume": 292827.27,
@@ -9922,7 +9922,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 1.14,
     "totalVolume": 298493.22,
@@ -9933,7 +9933,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 1.12,
     "totalVolume": 351074.46,
@@ -9944,7 +9944,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 1.12,
     "totalVolume": 354490.75,
@@ -9955,7 +9955,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 1.16,
     "totalVolume": 323449.77,
@@ -9966,7 +9966,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 1.3,
     "totalVolume": 266049.58,
@@ -9977,7 +9977,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 1.32,
     "totalVolume": 258239.1,
@@ -9988,7 +9988,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 1.06,
     "totalVolume": 389782.2,
@@ -9999,7 +9999,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 1.25,
     "totalVolume": 339064.22,
@@ -10010,7 +10010,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 1.27,
     "totalVolume": 304624.07,
@@ -10021,7 +10021,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 1.25,
     "totalVolume": 341628.84,
@@ -10032,7 +10032,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 1.15,
     "totalVolume": 338036.94,
@@ -10043,7 +10043,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 1.29,
     "totalVolume": 353474.52,
@@ -10054,7 +10054,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 1.33,
     "totalVolume": 319502.82,
@@ -10065,7 +10065,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 1.34,
     "totalVolume": 314930.61,
@@ -10076,7 +10076,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 1.2,
     "totalVolume": 358753.17,
@@ -10087,7 +10087,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 1.25,
     "totalVolume": 370924.13,
@@ -10098,7 +10098,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 1.25,
     "totalVolume": 329589.03,
@@ -10109,7 +10109,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 1.36,
     "totalVolume": 277178.42,
@@ -10120,7 +10120,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 1.35,
     "totalVolume": 271198.73,
@@ -10131,7 +10131,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 1.25,
     "totalVolume": 251083.39,
@@ -10142,7 +10142,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 1.33,
     "totalVolume": 246967.21,
@@ -10153,7 +10153,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 1.22,
     "totalVolume": 241495.12,
@@ -10164,7 +10164,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 1.11,
     "totalVolume": 292821.36,
@@ -10175,7 +10175,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 1.4,
     "totalVolume": 225761.68,
@@ -10186,7 +10186,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 1.43,
     "totalVolume": 210375.08,
@@ -10197,7 +10197,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 1.12,
     "totalVolume": 314917.55,
@@ -10208,7 +10208,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 1.38,
     "totalVolume": 220210.32,
@@ -10219,7 +10219,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 1.39,
     "totalVolume": 223170.31,
@@ -10230,7 +10230,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 1.09,
     "totalVolume": 364571.57,
@@ -10241,7 +10241,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 1.32,
     "totalVolume": 297969.31,
@@ -10252,7 +10252,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 1.35,
     "totalVolume": 241174.11,
@@ -10263,7 +10263,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 1.39,
     "totalVolume": 229216.05,
@@ -10274,7 +10274,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 1.38,
     "totalVolume": 232640.15,
@@ -10285,7 +10285,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 1.06,
     "totalVolume": 332208.14,
@@ -10296,7 +10296,7 @@
     "region": "HartfordSpringfield"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 0.78,
     "totalVolume": 944506.54,
@@ -10307,7 +10307,7 @@
     "region": "Houston"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 0.75,
     "totalVolume": 922355.67,
@@ -10318,7 +10318,7 @@
     "region": "Houston"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 0.73,
     "totalVolume": 998752.95,
@@ -10329,7 +10329,7 @@
     "region": "Houston"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.74,
     "totalVolume": 989676.85,
@@ -10340,7 +10340,7 @@
     "region": "Houston"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 0.79,
     "totalVolume": 783225.98,
@@ -10351,7 +10351,7 @@
     "region": "Houston"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 0.73,
     "totalVolume": 913002.96,
@@ -10362,7 +10362,7 @@
     "region": "Houston"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 0.72,
     "totalVolume": 998801.78,
@@ -10373,7 +10373,7 @@
     "region": "Houston"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.75,
     "totalVolume": 983909.85,
@@ -10384,7 +10384,7 @@
     "region": "Houston"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 0.77,
     "totalVolume": 1007805.74,
@@ -10395,7 +10395,7 @@
     "region": "Houston"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 0.88,
     "totalVolume": 933623.58,
@@ -10406,7 +10406,7 @@
     "region": "Houston"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.9,
     "totalVolume": 847813.12,
@@ -10417,7 +10417,7 @@
     "region": "Houston"
   },
   {
-    "id": 11,
+    "character_id": 11,
     "date": "2015-10-11",
     "averagePrice": 0.79,
     "totalVolume": 1036269.51,
@@ -10428,7 +10428,7 @@
     "region": "Houston"
   },
   {
-    "id": 12,
+    "character_id": 12,
     "date": "2015-10-04",
     "averagePrice": 0.82,
     "totalVolume": 1019283.99,
@@ -10439,7 +10439,7 @@
     "region": "Houston"
   },
   {
-    "id": 13,
+    "character_id": 13,
     "date": "2015-09-27",
     "averagePrice": 0.86,
     "totalVolume": 968988.09,
@@ -10450,7 +10450,7 @@
     "region": "Houston"
   },
   {
-    "id": 14,
+    "character_id": 14,
     "date": "2015-09-20",
     "averagePrice": 0.83,
     "totalVolume": 967228.05,
@@ -10461,7 +10461,7 @@
     "region": "Houston"
   },
   {
-    "id": 15,
+    "character_id": 15,
     "date": "2015-09-13",
     "averagePrice": 0.89,
     "totalVolume": 1095790.27,
@@ -10472,7 +10472,7 @@
     "region": "Houston"
   },
   {
-    "id": 16,
+    "character_id": 16,
     "date": "2015-09-06",
     "averagePrice": 0.89,
     "totalVolume": 1090493.39,
@@ -10483,7 +10483,7 @@
     "region": "Houston"
   },
   {
-    "id": 17,
+    "character_id": 17,
     "date": "2015-08-30",
     "averagePrice": 0.88,
     "totalVolume": 926124.93,
@@ -10494,7 +10494,7 @@
     "region": "Houston"
   },
   {
-    "id": 18,
+    "character_id": 18,
     "date": "2015-08-23",
     "averagePrice": 0.89,
     "totalVolume": 933166.17,
@@ -10505,7 +10505,7 @@
     "region": "Houston"
   },
   {
-    "id": 19,
+    "character_id": 19,
     "date": "2015-08-16",
     "averagePrice": 0.92,
     "totalVolume": 968899.09,
@@ -10516,7 +10516,7 @@
     "region": "Houston"
   },
   {
-    "id": 20,
+    "character_id": 20,
     "date": "2015-08-09",
     "averagePrice": 0.92,
     "totalVolume": 935149.69,
@@ -10527,7 +10527,7 @@
     "region": "Houston"
   },
   {
-    "id": 21,
+    "character_id": 21,
     "date": "2015-08-02",
     "averagePrice": 0.9,
     "totalVolume": 948126.9,
@@ -10538,7 +10538,7 @@
     "region": "Houston"
   },
   {
-    "id": 22,
+    "character_id": 22,
     "date": "2015-07-26",
     "averagePrice": 0.79,
     "totalVolume": 1086740.19,
@@ -10549,7 +10549,7 @@
     "region": "Houston"
   },
   {
-    "id": 23,
+    "character_id": 23,
     "date": "2015-07-19",
     "averagePrice": 0.78,
     "totalVolume": 1093424.59,
@@ -10560,7 +10560,7 @@
     "region": "Houston"
   },
   {
-    "id": 24,
+    "character_id": 24,
     "date": "2015-07-12",
     "averagePrice": 0.79,
     "totalVolume": 999607.51,
@@ -10571,7 +10571,7 @@
     "region": "Houston"
   },
   {
-    "id": 25,
+    "character_id": 25,
     "date": "2015-07-05",
     "averagePrice": 0.79,
     "totalVolume": 1173819.67,
@@ -10582,7 +10582,7 @@
     "region": "Houston"
   },
   {
-    "id": 26,
+    "character_id": 26,
     "date": "2015-06-28",
     "averagePrice": 0.74,
     "totalVolume": 1135915.03,
@@ -10593,7 +10593,7 @@
     "region": "Houston"
   },
   {
-    "id": 27,
+    "character_id": 27,
     "date": "2015-06-21",
     "averagePrice": 0.74,
     "totalVolume": 1196121.27,
@@ -10604,7 +10604,7 @@
     "region": "Houston"
   },
   {
-    "id": 28,
+    "character_id": 28,
     "date": "2015-06-14",
     "averagePrice": 0.62,
     "totalVolume": 1533409.28,
@@ -10615,7 +10615,7 @@
     "region": "Houston"
   },
   {
-    "id": 29,
+    "character_id": 29,
     "date": "2015-06-07",
     "averagePrice": 0.72,
     "totalVolume": 1172177.72,
@@ -10626,7 +10626,7 @@
     "region": "Houston"
   },
   {
-    "id": 30,
+    "character_id": 30,
     "date": "2015-05-31",
     "averagePrice": 0.72,
     "totalVolume": 1262932.78,
@@ -10637,7 +10637,7 @@
     "region": "Houston"
   },
   {
-    "id": 31,
+    "character_id": 31,
     "date": "2015-05-24",
     "averagePrice": 0.83,
     "totalVolume": 1089679.39,
@@ -10648,7 +10648,7 @@
     "region": "Houston"
   },
   {
-    "id": 32,
+    "character_id": 32,
     "date": "2015-05-17",
     "averagePrice": 0.82,
     "totalVolume": 1025659.59,
@@ -10659,7 +10659,7 @@
     "region": "Houston"
   },
   {
-    "id": 33,
+    "character_id": 33,
     "date": "2015-05-10",
     "averagePrice": 0.76,
     "totalVolume": 1201673.17,
@@ -10670,7 +10670,7 @@
     "region": "Houston"
   },
   {
-    "id": 34,
+    "character_id": 34,
     "date": "2015-05-03",
     "averagePrice": 0.74,
     "totalVolume": 1296308.05,
@@ -10681,7 +10681,7 @@
     "region": "Houston"
   },
   {
-    "id": 35,
+    "character_id": 35,
     "date": "2015-04-26",
     "averagePrice": 0.79,
     "totalVolume": 1082231.89,
@@ -10692,7 +10692,7 @@
     "region": "Houston"
   },
   {
-    "id": 36,
+    "character_id": 36,
     "date": "2015-04-19",
     "averagePrice": 0.82,
     "totalVolume": 933033.17,
@@ -10703,7 +10703,7 @@
     "region": "Houston"
   },
   {
-    "id": 37,
+    "character_id": 37,
     "date": "2015-04-12",
     "averagePrice": 0.79,
     "totalVolume": 1096074.97,
@@ -10714,7 +10714,7 @@
     "region": "Houston"
   },
   {
-    "id": 38,
+    "character_id": 38,
     "date": "2015-04-05",
     "averagePrice": 0.83,
     "totalVolume": 1249645.2,
@@ -10725,7 +10725,7 @@
     "region": "Houston"
   },
   {
-    "id": 39,
+    "character_id": 39,
     "date": "2015-03-29",
     "averagePrice": 0.79,
     "totalVolume": 1116225.29,
@@ -10736,7 +10736,7 @@
     "region": "Houston"
   },
   {
-    "id": 40,
+    "character_id": 40,
     "date": "2015-03-22",
     "averagePrice": 0.8,
     "totalVolume": 1036663.77,
@@ -10747,7 +10747,7 @@
     "region": "Houston"
   },
   {
-    "id": 41,
+    "character_id": 41,
     "date": "2015-03-15",
     "averagePrice": 0.77,
     "totalVolume": 1043172.77,
@@ -10758,7 +10758,7 @@
     "region": "Houston"
   },
   {
-    "id": 42,
+    "character_id": 42,
     "date": "2015-03-08",
     "averagePrice": 0.78,
     "totalVolume": 1166055.83,
@@ -10769,7 +10769,7 @@
     "region": "Houston"
   },
   {
-    "id": 43,
+    "character_id": 43,
     "date": "2015-03-01",
     "averagePrice": 0.87,
     "totalVolume": 991328.46,
@@ -10780,7 +10780,7 @@
     "region": "Houston"
   },
   {
-    "id": 44,
+    "character_id": 44,
     "date": "2015-02-22",
     "averagePrice": 0.82,
     "totalVolume": 978807.74,
@@ -10791,7 +10791,7 @@
     "region": "Houston"
   },
   {
-    "id": 45,
+    "character_id": 45,
     "date": "2015-02-15",
     "averagePrice": 0.73,
     "totalVolume": 1062387.72,
@@ -10802,7 +10802,7 @@
     "region": "Houston"
   },
   {
-    "id": 46,
+    "character_id": 46,
     "date": "2015-02-08",
     "averagePrice": 0.7,
     "totalVolume": 1180723.02,
@@ -10813,7 +10813,7 @@
     "region": "Houston"
   },
   {
-    "id": 47,
+    "character_id": 47,
     "date": "2015-02-01",
     "averagePrice": 0.72,
     "totalVolume": 1280364.01,
@@ -10824,7 +10824,7 @@
     "region": "Houston"
   },
   {
-    "id": 48,
+    "character_id": 48,
     "date": "2015-01-25",
     "averagePrice": 0.77,
     "totalVolume": 983910.94,
@@ -10835,7 +10835,7 @@
     "region": "Houston"
   },
   {
-    "id": 49,
+    "character_id": 49,
     "date": "2015-01-18",
     "averagePrice": 0.77,
     "totalVolume": 1017854.16,
@@ -10846,7 +10846,7 @@
     "region": "Houston"
   },
   {
-    "id": 50,
+    "character_id": 50,
     "date": "2015-01-11",
     "averagePrice": 0.78,
     "totalVolume": 1062071.65,
@@ -10857,7 +10857,7 @@
     "region": "Houston"
   },
   {
-    "id": 51,
+    "character_id": 51,
     "date": "2015-01-04",
     "averagePrice": 0.71,
     "totalVolume": 1062990.62,
@@ -10868,7 +10868,7 @@
     "region": "Houston"
   },
   {
-    "id": 0,
+    "character_id": 0,
     "date": "2015-12-27",
     "averagePrice": 1.04,
     "totalVolume": 123096.09,
@@ -10879,7 +10879,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 1,
+    "character_id": 1,
     "date": "2015-12-20",
     "averagePrice": 1.1,
     "totalVolume": 116353.68,
@@ -10890,7 +10890,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 2,
+    "character_id": 2,
     "date": "2015-12-13",
     "averagePrice": 1.03,
     "totalVolume": 125342.89,
@@ -10901,7 +10901,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 3,
+    "character_id": 3,
     "date": "2015-12-06",
     "averagePrice": 0.92,
     "totalVolume": 145740.44,
@@ -10912,7 +10912,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 4,
+    "character_id": 4,
     "date": "2015-11-29",
     "averagePrice": 1.08,
     "totalVolume": 108444.41,
@@ -10923,7 +10923,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 5,
+    "character_id": 5,
     "date": "2015-11-22",
     "averagePrice": 1.11,
     "totalVolume": 115384.56,
@@ -10934,7 +10934,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 6,
+    "character_id": 6,
     "date": "2015-11-15",
     "averagePrice": 1.08,
     "totalVolume": 124218.61,
@@ -10945,7 +10945,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 7,
+    "character_id": 7,
     "date": "2015-11-08",
     "averagePrice": 0.96,
     "totalVolume": 147799.55,
@@ -10956,7 +10956,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 8,
+    "character_id": 8,
     "date": "2015-11-01",
     "averagePrice": 1.01,
     "totalVolume": 147459.62,
@@ -10967,7 +10967,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 9,
+    "character_id": 9,
     "date": "2015-10-25",
     "averagePrice": 1.02,
     "totalVolume": 151558.74,
@@ -10978,7 +10978,7 @@
     "region": "Indianapolis"
   },
   {
-    "id": 10,
+    "character_id": 10,
     "date": "2015-10-18",
     "averagePrice": 0.97,
     "totalVolume": 159463.52,

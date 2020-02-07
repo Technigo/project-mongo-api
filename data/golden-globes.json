@@ -661,7 +661,7 @@
     "year_award": 2010,
     "ceremony": 67,
     "category": "Best Television Series - Drama",
-    "nominee": "House",
+    "nominee": "house",
     "film": "",
     "win": false
   },
@@ -932,7 +932,7 @@
     "ceremony": 67,
     "category": "Best Performance by an Actor In A Television Series - Drama",
     "nominee": "Hugh Laurie",
-    "film": "House",
+    "film": "house",
     "win": false
   },
   {
@@ -2084,7 +2084,7 @@
     "ceremony": 68,
     "category": "Best Performance by an Actor In A Television Series - Drama",
     "nominee": "Hugh Laurie",
-    "film": "House",
+    "film": "house",
     "win": false
   },
   {
