@@ -50,10 +50,10 @@ const Book = mongoose.model('Book', {
     type: Number
   }
 })
-
-booksData.forEach((book) => {
-  new Book(book).save()
-})
+//FETCHING THE DATA FROM JSON TO DATABASE
+// booksData.forEach((book) => {
+//   new Book(book).save()
+// })
 
 // const Animal = mongoose.model('Animal', {
 //   name: String,
@@ -121,15 +121,15 @@ app.get('/', async (req, res) => {
 })
 // Start defining your routes here
 app.get('/authors', async (req, res) => {
-  const authors = await Author.find().populate('books')
+  const authors = await Author.find()
   res.json(authors)
 })
 
-app.get('/authors/:id', async (req, res) => {
+app.get('/books/:id', async (req, res) => {
   try {
-    const author = await Author.findById(req.params.id)
-    if (author) {
-      res.json(author)
+    const bookId = await Book.findById(req.params.id)
+    if (bookId) {
+      res.json(bookId)
     } else {
       res.status(404).json({ error: 'author not found' })
     }
@@ -138,21 +138,21 @@ app.get('/authors/:id', async (req, res) => {
   }
 })
 
-app.get('/authors/:id/books', async (req, res) => {
-  try {
-    const author = await Author.findById(req.params.id)
-    if (author) {
-      const books = await Book.find({
-        author: mongoose.Types.ObjectId(author.id)
-      }).populate('author')
-      res.json(books)
-    } else {
-      res.status(404).json({ error: 'author and books not found' })
-    }
-  } catch (err) {
-    res.status(400).json({ error: 'Invalid id' })
-  }
-})
+// app.get('/authors/:id/books', async (req, res) => {
+//   try {
+//     const author = await Book.authors.findById(req.params.id)
+//     if (author) {
+//       const books = await Book.find({
+//         author: mongoose.Types.ObjectId(author.id)
+//       }).populate('author')
+//       res.json(books)
+//     } else {
+//       res.status(404).json({ error: 'author and books not found' })
+//     }
+//   } catch (err) {
+//     res.status(400).json({ error: 'Invalid id' })
+//   }
+// })
 
 app.get('/books', async (req, res) => {
   const books = await Book.find().populate('author')
