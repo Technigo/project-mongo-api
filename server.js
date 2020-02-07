@@ -58,22 +58,19 @@ const Movie = mongoose.model('Movie', {
     Year: {
       type: Number
     },
-    Runtime: {
-      type: Number
-    },
+    // Runtime: {
+    //   type: Number
+    // },
     Rating: {
       type: Number
     },
-    Votes: {
-      type: Number
-    },
-    Revenue: {
-      type: Number
-    },
+    // Revenue: {
+    //   type: Number
+    // },
     Metascore: {
       type: Number
     }
-}
+})
 
 const importMovieData = () => {
   movieData.forEach((movie) => {
@@ -83,15 +80,40 @@ const importMovieData = () => {
 
 importMovieData()
 
-
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello movies')
 })
 
-app.get('/movies', (req, res) => {
+// app.get('/movies', (req, res) => {
   
-})
+//       res.json(movieData)
+// })
+
+app.get('/movies/:title', (req, res) => {
+  const title = req.params.Title;
+  Movie.findOne({'Title': title})
+    .then((results) => {
+      res.json(results);
+    }).catch((err) => {
+      res.json({message: 'Cannot find this movie', err: err});
+    });
+});
+
+// app.get('/movies', (req, res) => {
+//   // const queryString = res.query.q;
+//   // const queryRegex = new RegExp(queryString,"i");
+//   // console.log(queryString)
+//   Movie.find({'director': /Wes/i})
+//     .then((results) => {
+//       console.log('Found ' + results);
+//       res.json(results)
+//     }).catch((err) => {
+//       console.log('Error ' + err);
+//       res.json({message: "Cannot find director", err: err})
+//     });
+// })
+
 
 // Start the server
 app.listen(port, () => {
