@@ -1,15 +1,22 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import { errors } from 'celebrate';
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-
+import logger from 'morgan';
+import compression from 'compression';
+import Routes from './routes/index';
+import Show from './models/show';
 import netflixData from './data/netflix-titles.json';
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/netflix';
-// mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+dotenv.config();
+
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/netflix';
 
 try {
   mongoose.connect(mongoUrl, {
+    useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
@@ -19,54 +26,52 @@ try {
 
 mongoose.Promise = Promise;
 
+// Seed database
+if (process.env.RESET_DB) {
+  console.log('Resetting database!');
+
+  const seedDatabase = async () => {
+    await Show.deleteMany();
+
+    netflixData.forEach(item => {
+      // delete item.show_id;
+
+      const newShow = new Show(item);
+      newShow.save();
+    });
+  };
+  seedDatabase();
+}
+
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Show schema
-const Show = mongoose.model('Show', {
-  title: String,
-  director: String,
-  cast: String,
-  country: String,
-  date: String,
-  release_year: Number,
-  rating: String,
-  duration: String,
-  listed_in: String,
-  description: String,
-  type: String
-});
-
-// Delete content and prepare MongoDB with new data
-Show.deleteMany().then(() => {
-  netflixData.forEach(show => {
-    delete show.show_id;
-    new Show({ ...show }).save();
-  });
-});
-
 // Middleware
+app.use(compression());
+app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
-// Start defining your routes here
-app.get('/shows', (req, res) => {
-  Show.find().then(shows => {
-    res.json(shows);
-  });
+// Middleware that will check if API service is available
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({
+      error: 'Service unavailable'
+    });
+  }
 });
 
-app.get('/shows/:id', (req, res) => {
-  Show.find({ _id: req.params.id }).then(show => {
-    if (show) {
-      res.json(show);
-    } else {
-      res.status(404).json({
-        error: 'Not found'
-      });
-    }
-  });
-});
+// Load API routes
+app.use('/api', Routes);
+
+app.use(errors());
+
+// app.use((req, res, next) => {
+//   res.status(404).send("Sorry can't find that!");
+// });
 
 // Start the server
 app.listen(port, () => {
