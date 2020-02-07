@@ -1,9 +1,9 @@
 import db from '../models'
 
 exports.getPokemonsList = (req, res) => {
-  db.Pokemon.find()
+  db.Pokemon.find({}, { pokemonNo: 1, name: 2, type: 3 })
     .then((poke) => {
-      res.json(poke)
+      res.json({ poke })
     })
     .catch((err) => {
       res.send(err)
@@ -11,7 +11,7 @@ exports.getPokemonsList = (req, res) => {
 }
 
 exports.getPokemonDetails = (req, res) => {
-  db.Pokemon.findById(req.params.pokeId)
+  db.Pokemon.find({ name: req.params.name })
     .then((poke) => {
       res.json(poke)
     })

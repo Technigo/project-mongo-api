@@ -6,7 +6,7 @@ import helpers from '../helpers/pokemons'
 router.route('/')
   .get(helpers.getPokemonsList)
 
-router.route('/:pokeId')
+router.route('/:name')
   .get(helpers.getPokemonDetails)
 
 export default router
