@@ -45,6 +45,7 @@ const Book = mongoose.model('Book', {
 })
 
 const addBooksToDatabase = () => {
+  await Book.deleteMany
   booksData.forEach((book) => {
     new Book(book).save()
   })
@@ -70,7 +71,7 @@ app.get('/books', (req, res) => {
     }).catch((err) => {
       //if it doesn't work
       console.log('Error ' + err)
-      res.json({ message: "Cannot find this book", err: err })
+      res.json({ message: "No books found", err: err })
     })
 })
 
@@ -81,7 +82,7 @@ app.get('/books/:isbn', (req, res) => {
     .then((results) => {
       res.json(results)
     }).catch((err) => {
-      res.json({ message: "Cannot find this book", err: err })
+      res.json({ message: "Book not found", err: err })
     })
 })
 
