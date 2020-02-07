@@ -41,7 +41,7 @@
     "other": "",
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
-    "status_attending": false
+    "status_attending": true
   },
   {
     "first_name": "Sven",
@@ -168,6 +168,17 @@
     "first_name": "Kent",
     "last_name": "Nyblad",
     "email": "kent.nyblad@bollnas.se",
+    "phone": 46701234567,
+    "allergies": "",
+    "other": "",
+    "added": "February 07, 2020",
+    "updated": "February 07, 2020",
+    "status_attending": true
+  },
+  {
+    "first_name": "Linus",
+    "last_name": "Nyblad",
+    "email": "",
     "phone": 46701234567,
     "allergies": "",
     "other": "",
