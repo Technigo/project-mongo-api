@@ -44,10 +44,10 @@ const Book = mongoose.model('Book', {
 
 const addBooksToDatabase = () => {
   booksData.forEach((book) => {
-    new Book(book).save();
-  });
-};
-addBooksToDatabase();
+    new Book(book).save()
+  })
+}
+// addBooksToDatabase()
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -59,6 +59,24 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
+
+app.get('/books', (req, res) => {
+  const queryString = req.query.q
+  const queryRegex = new RegExp(queryString, "i")
+  Book.find({ 'title': queryRegex })
+    .then((results) => {
+      // succesfull
+      console.log('Found : ' + results)
+      res.json(results)
+    }).catch((err) => {
+      console.log('Error ' + err)
+      res.json({ message: 'Cannot find this book' })
+    })
+})
+
+// app.get('/books/:isbn' (req,res) => {
+
+// })
 
 app.get('/', (req, res) => {
   res.send('Hello World')
