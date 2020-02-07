@@ -8,7 +8,7 @@
     "other": "Bride",
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Magnus",
@@ -19,7 +19,7 @@
     "other": "Groom",
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Matte",
@@ -30,7 +30,7 @@
     "other": "",
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Sofie",
@@ -41,7 +41,7 @@
     "other": "",
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Sven",
@@ -52,7 +52,7 @@
     "other": "",
     "added": "February 06, 2020",
     "updated": "February 06, 2020",
-    "status_attending": false
+    "isAttending": false
   },
   {
     "first_name": "Anette",
@@ -63,7 +63,7 @@
     "other": "",
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Tobbe",
@@ -74,7 +74,7 @@
     "other": "",
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Henrik",
@@ -85,7 +85,7 @@
     "other": "Will also be photographer during the day and evening",
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Maria",
@@ -96,7 +96,7 @@
     "other": "",
     "added": "February 04, 2020",
     "updated": "February 04, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Björn",
@@ -107,7 +107,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Malin",
@@ -118,7 +118,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Josh",
@@ -129,7 +129,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Jack",
@@ -140,7 +140,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Noomi",
@@ -151,7 +151,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Andreas",
@@ -162,7 +162,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Kent",
@@ -173,7 +173,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Linus",
@@ -184,7 +184,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Cat",
@@ -195,7 +195,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": true
+    "isAttending": true
   },
   {
     "first_name": "Dog",
@@ -206,7 +206,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": false
+    "isAttending": false
   },
   {
     "first_name": "Fish",
@@ -217,7 +217,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": false
+    "isAttending": false
   },
   {
     "first_name": "Bear",
@@ -228,7 +228,7 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": false
+    "isAttending": false
   },
   {
     "first_name": "Deer",
@@ -239,6 +239,6 @@
     "other": "",
     "added": "February 07, 2020",
     "updated": "February 07, 2020",
-    "status_attending": false
+    "isAttending": false
   }
 ]

@@ -9,5 +9,5 @@ export const Guest = mongoose.model('Guest', {
   other: { type: String },
   added: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now },
-  status_attending: { type: Boolean },
+  isAttending: { type: Boolean },
 })
