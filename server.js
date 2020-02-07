@@ -46,6 +46,16 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+app.get('/tracks', async (req, res) => {
+  const tracks = await Track.find()
+  res.json(tracks)
+})
+
+app.get('/tracks/:id', async (req, res) => {
+  const track = await Track.findById(req.params.id)
+  res.json(track)
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
