@@ -63,28 +63,19 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const PER_PAGE = 2;
-
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Skotrum');
 });
 
 app.get('/restaurants', async (req, res) => {
-  const { page } = req.query;
-  const startIndex = PER_PAGE * +page;
-  const data = skotrum.slice(startIndex, startIndex + PER_PAGE);
-
-  //const restaurant = await Skotrum.find().sort('location');
-  res.json({
-    totalPage: Math.floor(skotrum.length / PER_PAGE),
-    currentPage: +page,
-    data
-  });
+  const restaurant = await Skotrum.find();
+  res.json(restaurant);
 });
 
 app.get('/skotrum', async (req, res) => {
-  const restaurant = await Skotrum.find().sort('location');
+  const restaurant = await Skotrum.find();
+  console.log(restaurant);
   if (restaurant) {
     res.json(restaurant);
   } else {
@@ -130,3 +121,16 @@ app.get('/:location', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+/* 
+const PER_PAGE = 2;
+_____
+-----
+  const { page } = req.query;
+  const startIndex = PER_PAGE * +page;
+  const data = skotrum.slice(startIndex, startIndex + PER_PAGE);
+ res.json({
+    totalPage: Math.floor(skotrum.length / PER_PAGE),
+    currentPage: +page,
+    data
+    */
