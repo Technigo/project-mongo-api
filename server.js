@@ -37,7 +37,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //ROUTES and QUERIES
-app.get("/netflix", (req, res) => {
+app.get("/netflix", async (req, res) => {
   const titleString = req.query.title;
   const castString = req.query.cast;
   const countryString = req.query.country;
@@ -48,49 +48,78 @@ app.get("/netflix", (req, res) => {
   const countryRegex = new RegExp(countryString, "i");
   const genreRegex = new RegExp(genreString, "i");
   const typeRegex = new RegExp(typeString, "i");
-  Netflix.find({
+  const searchNetflix = await Netflix.find({
     title: titleRegex,
     cast: castRegex,
     country: countryRegex,
     listed_in: genreRegex,
     type: typeRegex
-  })
-    .sort({ release_year: -1 })
-    // .limit(20)
-    .then(results => {
-      // Succesfull
-      res.json(results);
-    })
-    .catch(err => {
-      // Error/Failure
-      res.status(400).json({ message: "Cannot find this search", err: err });
-    });
+  });
+  // .sort({ release_year: -1 })
+  // // .limit(20)
+  // .then(results => {
+  //   // Succesfull
+  //   res.json(results);
+  // })
+  // .catch(err => {
+  //   res.send(err);
+  //   res.status(400).json({ message: "Cannot find this search", err: err });
+  // });
+  // .catch(err => {
+  //   // Error/Failure
+  //   // res.status(err.res.status.400)
+  //   // res.json({message: "Cannot find this search"});
+  // });
+
+  if (searchNetflix) {
+    res.json(searchNetflix);
+  } else {
+    res.status(404).json({ error: "Cannot find this search" });
+  }
 });
 
-app.get("/netflix/_id/:_id", (req, res) => {
+app.get("/netflix/_id/:_id", async (req, res) => {
   const _id = req.params._id;
-  Netflix.findOne({ _id: _id })
-    .then(results => {
-      res.json(results);
-    })
-    .catch(err => {
-      res.status(400).json({ message: "Cannot find this movie", err: err });
-    });
+
+  const findId = await Netflix.findOne({ _id: _id });
+
+  if (findId) {
+    res.json(findId);
+  } else {
+    res.status(400).json({ error: "Cannot find this movie" });
+  }
+
+  // Netflix.findOne({ _id: _id })
+  //   .then(results => {
+  //     res.json(results);
+  //   })
+  //   .catch(err => {
+  //     res.status(400).json({ message: "Cannot find this movie", err: err });
+  //   });
 });
 
-app.get("/netflix/type/:type", (req, res) => {
+app.get("/netflix/type/:type", async (req, res) => {
   const type = req.params.type;
   const typeRegex = new RegExp(type, "i");
-  Netflix.find({ type: typeRegex })
-    .then(results => {
-      res.json(results);
-    })
 
-    .catch(err => {
-      res
-        .status(400)
-        .json({ message: "Cannot find any suitable search", err: err });
-    });
+  const findType = await Netflix.find({ type: typeRegex });
+
+  if (findType) {
+    res.json(findType);
+  } else {
+    res.status(400).json({ error: "Cannot find any suitable search" });
+  }
+
+  // Netflix.find({ type: typeRegex })
+  //   .then(results => {
+  //     res.json(results);
+  //   })
+
+  //   .catch(err => {
+  //     res
+  //       .status(400)
+  //       .json({ message: "Cannot find any suitable search", err: err });
+  //   });
 });
 
 // Start the server
