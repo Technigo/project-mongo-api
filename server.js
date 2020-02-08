@@ -3,51 +3,59 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 import skotrum from './data/skotrum.json';
 
-const mongoUrl =
-  process.env.MONGO_URL || 'mongodb://localhost/skotrum-mongo-project';
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const Skotrum = mongoose.model('Skotrum', {
-  name: {
-    type: String
-  },
+  name: String,
+  adress: String,
+  phone: String,
+  openHours: String,
+  note: String,
+  webpage: String,
+  location: String
+});
+
+const Restaurant = mongoose.model('Restaurant', {
+  name: String,
   adress: {
-    type: String
-  },
-  phone: {
-    type: String
-  },
-  openHours: {
-    type: String
-  },
-  note: {
-    type: String
-  },
-  webpage: {
-    type: String
-  },
+    type: mongoose.Schema.Types.String,
+    ref: 'Location'
+  }
+});
+
+const Location = mongoose.model('Location', {
+  name: String,
+  adress: String,
   location: {
-    type: String
+    type: mongoose.Schema.Types.String,
+    ref: 'Restaurant'
+  }
+});
+
+const OpenHours = mongoose.model('OpenHours', {
+  Name: String,
+  openHours: {
+    type: mongoose.Schema.Types.String,
+    ref: 'Location'
   }
 });
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Skotrum.deleteMany();
+    await Restaurant.deleteMany();
+    await Location.deleteMany();
+    await OpenHours.deleteMany();
 
     skotrum.forEach(restData => {
       new Skotrum(restData).save();
+      new Restaurant(restData).save();
+      new Location(restData).save();
+      new OpenHours(restData).save();
     });
   };
   seedDatabase();
@@ -69,27 +77,48 @@ app.get('/', (req, res) => {
   res.send('Skotrum');
 });
 
-app.get('/restaurants', async (req, res) => {
-  const restaurant = await Skotrum.find();
-  res.json(restaurant);
+app.get('/skotrum', async (req, res) => {
+  const skotrum = await Skotrum.find();
+  console.log(skotrum);
+
+  const { page } = req.query;
+  const startIndex = 20 * +page;
+  res.json(skotrum.slice(startIndex, startIndex + 20));
 });
 
-app.get('/skotrum', async (req, res) => {
-  const restaurant = await Skotrum.find();
-  console.log(restaurant);
-  if (restaurant) {
-    res.json(restaurant);
+app.get('/skotrum/:id', async (req, res) => {
+  const skotrum = await Skotrum.findById(req.params.id);
+  if (skotrum) {
+    res.json(skotrum);
   } else {
     res.status(404).json({ error: 'restaurant not found' });
   }
 });
 
-app.get('/restaurants/:id', async (req, res) => {
-  const restaurant = await Skotrum.findById(req.params.id);
+app.get('/restaurants', async (req, res) => {
+  const restaurant = await Restaurant.find().populate('location');
   if (restaurant) {
     res.json(restaurant);
   } else {
-    res.status(404).json({ error: 'restaurant not found' });
+    res.status(404).json({ error: 'restauarnt not found' });
+  }
+});
+
+app.get('/locations', async (req, res) => {
+  const location = await Location.find().populate('Restaurant');
+  if (location) {
+    res.json(location);
+  } else {
+    res.status(404).json({ error: 'restauarnt not found' });
+  }
+});
+
+app.get('/openHours', async (req, res) => {
+  const openHours = await OpenHours.find().populate('location');
+  if (openHours) {
+    res.json(openHours);
+  } else {
+    res.status(404).json({ error: 'restauarnt not found' });
   }
 });
 
@@ -134,4 +163,15 @@ _____
     totalPage: Math.floor(skotrum.length / PER_PAGE),
     currentPage: +page,
     data
+
+
+app.get('/skotrum/:id', async (req, res) => {
+  const restaurant = await Skotrum.find();
+  console.log(restaurant);
+  if (restaurant) {
+    res.json(restaurant);
+  } else {
+    res.status(404).json({ error: 'restaurant not found' });
+  }
+});
     */
