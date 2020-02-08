@@ -10,7 +10,9 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const Director = mongoose.model("Director", {
-  name: String
+  _id: mongoose.Schema.Types.ObjectId,
+  name: String,
+  titles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Title" }]
 });
 
 const Title = mongoose.model("Title", {
@@ -18,27 +20,49 @@ const Title = mongoose.model("Title", {
   director: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Director"
-  }
+  },
+  cast: String,
+  country: String,
+  release_year: Number,
+  type: String
 });
 
 const seedDatabase = async () => {
   await Director.deleteMany();
   await Title.deleteMany();
 
-  const ara = new Director({ name: "Luis Ara" });
-  await ara.save();
+  const distinct = (value, index, self) => {
+    return self.indexOf(value) === index;
+  };
 
-  const sharma = new Director({ name: "Abhishek Sharma" });
-  await sharma.save();
+  const uniqNetflixData = netflixData.filter(title => title.director !== "");
 
-  await new Title({
-    title: "Guatemala: Heart of the Mayan World",
-    director: ara
-  }).save();
-  await new Title({
-    title: "The Zoya Factor",
-    director: sharma
-  }).save();
+  const directors = uniqNetflixData.map(title => title.director).filter(distinct);
+
+  directors.forEach(async director => {
+    const newDirector = new Director({
+      _id: mongoose.Types.ObjectId(),
+      name: director
+    });
+
+    const directorsTitles = netflixData.filter(
+      title => title.director !== "" && title.director === director
+    );
+
+    directorsTitles.forEach(async title => {
+      const newTitle = new Title({
+        title: title.title,
+        director: newDirector._id,
+        cast: title.cast,
+        country: title.country,
+        release_year: title.release_year,
+        type: title.type
+      });
+      newDirector.titles.push(newTitle);
+      await newTitle.save();
+    });
+    await newDirector.save();
+  });
 };
 
 seedDatabase();
@@ -58,6 +82,11 @@ app.get("/", (req, res) => {
 app.get("/directors", async (req, res) => {
   const directors = await Director.find();
   res.json(directors);
+});
+
+app.get("/directors/:id", async (req, res) => {
+  const director = await Director.findById(req.params.id).populate("titles");
+  res.json(director);
 });
 
 app.get("/directors/:id/titles", async (req, res) => {
