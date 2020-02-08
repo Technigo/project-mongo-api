@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 
 // ROUTES FOR GET
 app.get('/', (req, res) => {
-  res.send('Mongo-project: Guest list')
+  res.send('GET /guests GET /guests/:id GET /guests?name= GET /guests?attending=true/false')
 })
 
 // QUERYBUILDER TO HAVE MULTIPLE QUERIES IN SAME ROUTE
