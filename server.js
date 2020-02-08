@@ -9,6 +9,68 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-plants"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+if (process.env.RESET_DB) {
+  console.log('Resetting database!')
+
+  const seedDatabase = async () => {
+    await Plant.deleteMany()
+    await Family.deleteMany()
+
+    const flowers = new Family({
+      name: 'Flowers',
+      members: 21,
+      color: 'orange',
+      location: 'Africa'
+    })
+    await flowers.save()
+
+    const fungi = new Family({
+      name: 'Fungi',
+      members: 10,
+      color: 'green',
+      location: 'Europe'
+    })
+    await fungi.save()
+
+    const algae = new Family({
+      name: 'Algae',
+      members: 33,
+      color: 'brown',
+      location: 'Pacific Ocean'
+    })
+    await algae.save()
+
+    const greenalgae = new Plant({
+      name: 'Green Algae',
+      type: 'water algae',
+      isEdible: true,
+      team: algae
+    })
+    await greenalgae.save()
+
+    const lily = new Plant({
+      name: 'Lily of the Valley',
+      type: 'Seed Plant',
+      isEdible: false,
+      team: flowers
+    })
+    await lily.save()
+
+    await new Plant({
+      name: 'Truffle',
+      type: 'Wild fungi',
+      isEdible: true,
+      team: fungi
+    }).save()
+  }
+
+}
+seedDatabase()
+}
+
+
+
+
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
 //
