@@ -9,6 +9,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-plants"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+
 if (process.env.RESET_DB) {
   console.log('Resetting database!')
 
@@ -56,20 +57,17 @@ if (process.env.RESET_DB) {
     })
     await lily.save()
 
-    await new Plant({
+    const truffle = new Plant({
       name: 'Truffle',
       type: 'Wild fungi',
       isEdible: true,
       team: fungi
-    }).save()
+    })
+    await truffle.save()
+
   }
-
+  seedDatabase()
 }
-seedDatabase()
-}
-
-
-
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -89,11 +87,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/plants', async (req, res) => {
-  const plants = await Plants.find().populate('family')
-  res.json(plant)
+  const plants = await Plant.find().populate('family')
+  res.json(plants)
 })
 
-app.get('plants/:id/', async, (req, res) => {
+app.get('/plants/:id/', async (req, res) => {
   const plant = await Plant.findById(req.params.id)
   if (plant) {
     res.json(plant)
