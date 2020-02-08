@@ -77,11 +77,19 @@ app.get('/globes', (req, res) => {
   const queryRegex = new RegExp(queryString, "i")
   Globe.find({ 'nominee': queryRegex })
     .then((results) => {
-      console.log('Found : ' + results);
       res.json(results);
     }).catch((err) => {
-      console.log('Error ' + err)
       res.json({ message: 'Cannot find this nominee', err: err })
+    });
+});
+
+app.get('/globes/_id/:_id', (req, res) => {
+  const _id = req.params._id;
+  Globe.findOne({ '_id': _id })
+    .then((results) => {
+      res.json(results);
+    }).catch((err) => {
+      res.json({ message: 'Cannot find this film', err: err })
     });
 });
 
