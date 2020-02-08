@@ -15,21 +15,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// const Netflix = mongoose.model("Netflix", {
-//   show_id: Number,
-//   title: String,
-//   director: String,
-//   cast: String,
-//   country: String,
-//   date_added: String,
-//   release_year: Number,
-//   rating: String,
-//   duration: String,
-//   listed_in: String,
-//   description: String,
-//   type: String
-// });
-
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Netflix.deleteMany({});
@@ -42,12 +27,6 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-// const addMovie = () => {
-//   netflixData.forEach(movie => {
-//     new Netflix(movie).save();
-//   });
-// };
-
 // The port the app will run on.
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080;
@@ -57,10 +36,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// .deleteMany().then(() => {
-
-// });
-
+//ROUTES and QUERIES
 app.get("/netflix", (req, res) => {
   const titleString = req.query.title;
   const castString = req.query.cast;
@@ -80,15 +56,14 @@ app.get("/netflix", (req, res) => {
     type: typeRegex
   })
     .sort({ release_year: -1 })
-    .limit(20)
+    // .limit(20)
     .then(results => {
       // Succesfull
       res.json(results);
     })
     .catch(err => {
       // Error/Failure
-      console.log("Error " + err);
-      res.json({ message: "Cannot find this search", err: err });
+      res.status(400).json({ message: "Cannot find this search", err: err });
     });
 });
 
@@ -99,7 +74,7 @@ app.get("/netflix/_id/:_id", (req, res) => {
       res.json(results);
     })
     .catch(err => {
-      res.json({ message: "Cannot find this movie", err: err });
+      res.status(400).json({ message: "Cannot find this movie", err: err });
     });
 });
 
@@ -112,7 +87,9 @@ app.get("/netflix/type/:type", (req, res) => {
     })
 
     .catch(err => {
-      res.json({ message: "Cannot find any suitable search", err: err });
+      res
+        .status(400)
+        .json({ message: "Cannot find any suitable search", err: err });
     });
 });
 
