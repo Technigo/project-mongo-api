@@ -3,24 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 
-// import netflixData from "./data/netflix-titles.json";
-
-// Example json structure
-
-// {
-//   "show_id": 81193313,
-//   "title": "Chocolate",
-//   "director": "",
-//   "cast": "Ha Ji-won, Yoon Kye-sang, Jang Seung-jo, Kang Bu-ja, Lee Jae-ryong, Min Jin-woong, Kim Won-hae, Yoo Teo",
-//   "country": "South Korea",
-//   "date_added": "November 30, 2019",
-//   "release_year": 2019,
-//   "rating": "TV-14",
-//   "duration": "1 Season",
-//   "listed_in": "International TV Shows, Korean TV Shows, Romantic TV Shows",
-//   "description": "Brought together by meaningful meals in the past and present, a doctor and a chef are reacquainted when they begin working at a hospice ward.",
-//   "type": "TV Show"
-// },
+import netflixData from "./data/netflix-titles.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflix-titles";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -30,14 +13,32 @@ const Director = mongoose.model("Director", {
   name: String
 });
 
+const Title = mongoose.model("Title", {
+  title: String,
+  director: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Director"
+  }
+});
+
 const seedDatabase = async () => {
   await Director.deleteMany();
+  await Title.deleteMany();
 
   const ara = new Director({ name: "Luis Ara" });
   await ara.save();
 
   const sharma = new Director({ name: "Abhishek Sharma" });
   await sharma.save();
+
+  await new Title({
+    title: "Guatemala: Heart of the Mayan World",
+    director: ara
+  }).save();
+  await new Title({
+    title: "The Zoya Factor",
+    director: sharma
+  }).save();
 };
 
 seedDatabase();
@@ -51,12 +52,29 @@ app.use(bodyParser.json());
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send(netflixData);
 });
 
 app.get("/directors", async (req, res) => {
   const directors = await Director.find();
   res.json(directors);
+});
+
+app.get("/directors/:id/titles", async (req, res) => {
+  const director = await Director.findById(req.params.id);
+  if (director) {
+    const titles = await Title.find({
+      director: mongoose.Types.ObjectId(director.id)
+    });
+    res.json(titles);
+  } else {
+    res.status(404).json({ error: "Director not found" });
+  }
+});
+
+app.get("/titles", async (req, res) => {
+  const titles = await Title.find().populate("director");
+  res.json(titles);
 });
 
 // Start the server
