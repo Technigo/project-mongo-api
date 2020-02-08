@@ -71,7 +71,9 @@ app.get('/guests', async (req, res) => {
 
   // If there are any matching guests, return them. Else return error.
   if (guests) {
-    res.json(guests)
+    res.json({
+      guests: guests
+    })
   } else {
     res.status(404).json({ error: 'No guests found' })
   }
