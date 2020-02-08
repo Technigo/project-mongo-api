@@ -43,6 +43,7 @@ app.get('/', (req, res) => {
   res.send('Mongo-project: Guest list')
 })
 
+// QUERYBUILDER TO HAVE MULTIPLE QUERIES IN SAME ROUTE
 const queryBuilder = (req, res) => {
   const { name, attending } = req.query // Query params
   const nameRegex = new RegExp(name, 'i') // To be able to search in the whole string and not depending on upper/lowercase
@@ -51,13 +52,14 @@ const queryBuilder = (req, res) => {
   if (name) {
     query = { $or: [{ 'first_name': nameRegex }, { 'last_name': nameRegex }] }
   }
-  // Query to search for isAttening true or false
+  // Query to search for isAttending true or false
   if (attending) {
     query = { 'isAttending': attending }
   }
   return query
 }
 
+// GET ROUTE FOR GUESTS
 app.get('/guests', async (req, res) => {
   // Gets the query from queryBuilder
   const query = queryBuilder(req, res)
@@ -75,7 +77,7 @@ app.get('/guests', async (req, res) => {
   }
 })
 
-// Specific guest id
+// GET ROUTE FOR SPECIFIC ID
 app.get('/guests/:id', async (req, res) => {
   const guest = await Guest.findById(req.params.id)
   if (guest) {
@@ -84,6 +86,8 @@ app.get('/guests/:id', async (req, res) => {
     res.status(404).json({ error: 'Guest not found' })
   }
 })
+
+
 
 // Preparing for next step to use in form to add/update/delete guests
 // ROUTES FOR POST
