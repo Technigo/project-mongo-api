@@ -43,80 +43,37 @@ app.get('/', (req, res) => {
   res.send('Mongo-project: Guest list')
 })
 
+const queryBuilder = (req, res) => {
+  const { name, attending } = req.query // Query params
+  const nameRegex = new RegExp(name, 'i') // To be able to search in the whole string and not depending on upper/lowercase
+  let query = {}
+  // Query to search for first or last name
+  if (name) {
+    query = { $or: [{ 'first_name': nameRegex }, { 'last_name': nameRegex }] }
+  }
+  // Query to search for isAttening true or false
+  if (attending) {
+    query = { 'isAttending': attending }
+  }
+  return query
+}
 
-// Mongoose way to search for name (.then)
-// app.get('/guests', (req, res) => {
-
-//   // Search for first or last name
-//   const queryString = req.query.name
-//   const queryRegex = new RegExp(queryString, 'i') // To be able to search in the whole string and not depending on upper/lowercase
-//   Guest.find({ $or: [{ 'first_name': queryRegex }, { 'last_name': queryRegex }] })
-//     .sort('last_name')
-//     .sort('first_name')
-//     // Last added guest is first
-//     // .sort({ 'added': -1 })
-//     .then((results) => {
-//       res.json(results)
-//     }).catch((err) => {
-//       res.json({ message: 'No name matching', err: err })
-//     })
-// })
-
-// Mongoose way to search for name (async/await)
 app.get('/guests', async (req, res) => {
+  // Gets the query from queryBuilder
+  const query = queryBuilder(req, res)
 
-  // Search for first or last name
-  const queryString = req.query.name
-  const queryRegex = new RegExp(queryString, 'i') // To be able to search in the whole string and not depending on upper/lowercase
+  // If query is true: filter on that query, if false: return all guests
+  const guests = query
+    ? await Guest.find(query)
+    : await Guest.find().sort('last_name').sort('first_name') // .sort({ 'added': -1 })
 
-  const guests = queryRegex
-    ? await Guest.find({ $or: [{ 'first_name': queryRegex }, { 'last_name': queryRegex }] }).sort('last_name').sort('first_name')
-    : await Guest.find().sort('last_name').sort('first_name')
-
+  // If there are any matching guests, return them. Else return error.
   if (guests) {
     res.json(guests)
   } else {
     res.status(404).json({ error: 'No guests found' })
   }
 })
-
-// All guests
-// app.get('/guests', async (req, res) => {
-//   const guests = await Guest.find()
-
-//   let guestList = guests
-
-//   // Attending true or false - Can I do this in a shorter way?
-//   const statusAttending = req.query.attending
-//   if (statusAttending === 'true') {
-//     guestList = guestList.filter((item) => item.status_attending === true)
-//   }
-//   if (statusAttending === 'false') {
-//     guestList = guestList.filter((item) => item.status_attending === false)
-//   }
-
-//   // Searching on first name or last name - how to do this the mongoose way?
-//   const searchName = req.query.name
-//   if (searchName) {
-//     guestList = guestList.filter((item) => {
-//       const firstName = item.first_name.toLowerCase()
-//       const lastName = item.last_name.toLowerCase()
-//       return (firstName.includes(searchName.toLowerCase()) || lastName.includes(searchName.toLowerCase()))
-//     })
-//   }
-
-//   // Pagination - how to do this the mongoose way? totalPages is wrong when query is applied.
-//   const page = req.query.page
-//   const PER_PAGE = 10
-//   if (page) {
-//     const startIndex = PER_PAGE * page
-//     guestList = guestList.slice(startIndex, startIndex + PER_PAGE)
-//   }
-//   res.json({
-//     totalPages: Math.floor(guests.length / PER_PAGE),
-//     guestList
-//   })
-// })
 
 // Specific guest id
 app.get('/guests/:id', async (req, res) => {
