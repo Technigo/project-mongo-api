@@ -9,6 +9,14 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-project-pot
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+//HOUSE MODEL
+const House = mongoose.model('House', {
+  name: String,
+  mascot: String,
+  head_teacher: String,
+  ghost: String,
+  founder: String
+})
 
 //POTTER CHARACTER MODEL
 const Character = mongoose.model('Character', {
@@ -31,9 +39,28 @@ const Character = mongoose.model('Character', {
 
 //Wrap the seed in an enviorment variable to prevent it from re-run everytime we start the server. RESET_DB=true npm run dev
 if (process.env.RESET_DB) {
-  console.log('Resetting database!!')
+  console.log('Resetting database!')
   const seedDatabase = async () => {
     await Character.deleteMany()
+    await House.deleteMany()
+
+    const gryffindor = new House({
+      name: "Gryffindor",
+      mascot: "Lion",
+      head_teacher: "Minverva McGonogall",
+      ghost: "Nearly Headless Nick",
+      founder: "Godric Gryffindor"
+    })
+    await gryffindor.save()
+
+    const slyterhin = new House({ name: "Slytherin", mascot: "Snake", head_teacher: "Severus Snape", ghost: "The Bloody Baron", founder: "Salazar Slytherin" })
+    await slyterhin.save()
+
+    const ravenclaw = new House({ name: "Ravenclaw", mascot: "Eagle", head_teacher: "Filius Flitwick", ghost: "The Grey Lady", founder: "Rowena Ravenclaw" })
+    await ravenclaw.save()
+
+    const hufflepuff = new House({ name: "Hufflepuff", mascot: "Badger", head_teacher: "Pomona Sprout", ghost: "the Far Friar", founder: "Helga Hufflepuff" })
+    await hufflepuff.save()
 
     potterData.forEach((character) => {
       new Character(character).save()
@@ -52,7 +79,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 //A function that recives a request, the response and the argument "next". 
-//It will execute before the routes below, if it's not evoked next() it will block the code coming next. The conenction.readyState checks that the connection is good.
+//It will execute before the routes below, if it's not evoked next() it will block the code coming next. The connection.readyState checks that the connection is good.
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
@@ -67,12 +94,42 @@ app.get('/', (req, res) => {
 })
 
 //GET ALL CHARACTERS
-app.get('/characters', async (req, res) => {
-  const characters = await Character.find()
-  res.json(characters)
+// app.get('/characters', async (req, res) => {
+//   const characters = await Character.find()
+//   res.json(characters)
+// })
+
+//GET ALL HOUSES. How do I combine the house model with the character model? 
+app.get('/houses', async (req, res) => {
+  const houses = await House.find()
+  res.json(houses)
 })
 
-//GET SPECIFIC CHARACTER http://localhost:9090/characters/2
+
+//GET ALL CHARACTERS, Filter on name, house and job. http://localhost:9090/characters?name=harry&job=student&house=gryffindor&gender=male
+app.get('/characters', (req, res) => {
+  let queryObj = {}
+
+  //Regular expression to make it case insensitive
+  if (req.query.name) { queryObj['name'] = new RegExp(req.query.name, 'i') }
+  if (req.query.house) { queryObj['house'] = new RegExp(req.query.house, 'i') }
+  if (req.query.job) { queryObj['job'] = new RegExp(req.query.job, 'i') }
+  if (req.query.gender) { queryObj['gender'] = new RegExp(req.query.gender, 'i') }
+
+  Character.find(queryObj).sort('id')
+    .then((results) => {
+      // Succesfull
+      console.log('Found : ' + results);
+      res.json(results);
+    }).catch((err) => {
+      // Error/Failure
+      console.log('Error ' + err);
+      res.json({ message: 'Cannot find this character', err: err }); //Don't understand when this error message will show?
+    });
+});
+
+
+//GET SPECIFIC CHARACTER  http://localhost:9090/characters/2
 app.get("/characters/:id", async (req, res) => {
   const id = req.params.id
   const character = await Character.findOne({ "id": id })
@@ -80,6 +137,15 @@ app.get("/characters/:id", async (req, res) => {
     res.json(character)
   } else {
     res.status(404).json({ error: "Character not found" })
+  }
+})
+//GET SPECIFIC HOUSE
+app.get("/houses/:id", async (req, res) => {
+  const house = await House.findById(req.params.id)
+  if (house) {
+    res.json(house)
+  } else {
+    res.status(404).json({ error: "House not found" })
   }
 })
 
