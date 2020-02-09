@@ -1,13 +1,16 @@
-# Mongo API Project
+# Project 18, Mongo API Project made during Technigo Bootcamp Spring 2020
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This weeks project is to start using a database to store and retrieve data from and use that data to produce a RESTful API. This includes using mongoDB, Postman, Heruko and Compass to view my project. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+For this project I used a database that was already given to us at the start of the assignment, it was a set of books containing some data about the author etc. After having the data I wanted to use I made a model of this database using Mongoose models, and used that to persist my data in the database.
+
+Once the data was stored, using addBooksToDatabase data stored, I made appropriate RESTful endpoints to return the data and made the Mongoose Queries to find and return the correct data given the route and any filter params passed.
+
+In the end I managed to retrieve the entire set of 499 objects from the bookdatabase, I managed to filter on title, number of pages and to find a specific book when using a specifik isbn number. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Link to my deployed project:
+https://angie-project-mongo-api.herokuapp.com/

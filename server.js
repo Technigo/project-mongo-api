@@ -49,10 +49,6 @@ const addBooksToDatabase = () => {
 }
 addBooksToDatabase()
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 5000
 const app = express()
 
@@ -66,11 +62,8 @@ app.get('/books', (req, res) => {
   Book.find({ 'title': queryRegex })
     .sort({ 'num_pages': -1 })
     .then((results) => {
-      // succesfull
-      console.log('Found : ' + results)
       res.json(results)
     }).catch((err) => {
-      console.log('Error ' + err)
       res.json({ message: 'Cannot find this book' })
     })
 })
@@ -93,3 +86,4 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
+s
