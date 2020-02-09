@@ -45,7 +45,7 @@ const Book = mongoose.model('Book', {
 })
 
 const addBooksToDatabase = () => {
-  await Book.deleteMany
+  // await Book.deleteMany
   booksData.forEach((book) => {
     new Book(book).save()
   })
@@ -58,6 +58,10 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
+
+app.get('/', (req, res) => {
+  res.send('Hello world')
+})
 
 app.get('/books', (req, res) => {
   const queryString = req.query.query
