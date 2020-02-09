@@ -53,12 +53,17 @@ const Globe = mongoose.model('Globe', {
   }
 });
 
-const addGlobestoDatabase = () => {
-  goldenGlobesData.forEach((globes) => {
-    new Globe(globes).save();
-  });
-};
-//addGlobestoDatabase();
+if (process.env.RESET_DB) {
+  const seedDatabase = async() => {
+    await Globe.deleteMany({})
+
+    goldenGlobesData.forEach((globes) => {
+      new Globe(globes).save()
+    });
+  }
+  seedDatabase()
+}
+
 
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
@@ -95,8 +100,10 @@ app.get('/globes/_id/:_id', (req, res) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
-})
+  Globe.find().then(globes => {
+    res.json(globes)
+  });
+});
 
 // Start the server
 app.listen(port, () => {
