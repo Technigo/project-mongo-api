@@ -33,7 +33,7 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   const tracks = await Track.find()
   res.json(tracks)
 })
