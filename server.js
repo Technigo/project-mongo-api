@@ -75,9 +75,6 @@ app.get('/topmusics', (req, res) => {
   .then((results) => {
     // console.log('Found: ' + results)
     res.json(results)
-  }).catch((err) => {
-    console.log('Error' + err)
-    res.json({message: 'Cannot find music', err: err}) //How can i test error here? Maybe I dont need it?
   })
 })
 

@@ -1,13 +1,11 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+We should create endpoints for one unic search and a search result with more hits. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started to create a endpoint were you can see all songs at Sporify, top 50. Then you can search for the unic ID of 1 to 50 to see one song at the time. You can also do a search on a artist so see if that artist is on the top 50 list or not.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://api-mongoose-project.herokuapp.com/
