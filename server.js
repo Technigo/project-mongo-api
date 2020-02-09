@@ -5,11 +5,7 @@ import mongoose from "mongoose";
 
 import { Netflix } from "./models/Netflix";
 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
 import netflixData from "./data/netflix-titles.json";
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -38,38 +34,25 @@ app.use(bodyParser.json());
 
 //ROUTES and QUERIES
 app.get("/netflix", async (req, res) => {
-  const titleString = req.query.title;
-  const castString = req.query.cast;
-  const countryString = req.query.country;
-  const genreString = req.query.genre;
-  const typeString = req.query.type;
-  const titleRegex = new RegExp(titleString, "i");
-  const castRegex = new RegExp(castString, "i");
-  const countryRegex = new RegExp(countryString, "i");
-  const genreRegex = new RegExp(genreString, "i");
-  const typeRegex = new RegExp(typeString, "i");
+  const pageOptions = {
+    page: parseInt(req.query.page, 10) || 0,
+    limit: parseInt(req.query.limit, 10) || 10
+  };
+  const titleRegex = new RegExp(req.query.title, "i");
+  const castRegex = new RegExp(req.query.cast, "i");
+  const countryRegex = new RegExp(req.query.country, "i");
+  const genreRegex = new RegExp(req.query.genre, "i");
+  const typeRegex = new RegExp(req.query.type, "i");
   const searchNetflix = await Netflix.find({
     title: titleRegex,
     cast: castRegex,
     country: countryRegex,
     listed_in: genreRegex,
     type: typeRegex
-  });
-  // .sort({ release_year: -1 })
-  // // .limit(20)
-  // .then(results => {
-  //   // Succesfull
-  //   res.json(results);
-  // })
-  // .catch(err => {
-  //   res.send(err);
-  //   res.status(400).json({ message: "Cannot find this search", err: err });
-  // });
-  // .catch(err => {
-  //   // Error/Failure
-  //   // res.status(err.res.status.400)
-  //   // res.json({message: "Cannot find this search"});
-  // });
+  })
+    .skip(pageOptions.page * pageOptions.limit)
+    .limit(pageOptions.limit)
+    .sort({ release_year: -1 });
 
   if (searchNetflix) {
     res.json(searchNetflix);
@@ -86,40 +69,27 @@ app.get("/netflix/_id/:_id", async (req, res) => {
   if (findId) {
     res.json(findId);
   } else {
-    res.status(400).json({ error: "Cannot find this movie" });
+    res.status(404).json({ error: "Cannot find this movie" });
   }
-
-  // Netflix.findOne({ _id: _id })
-  //   .then(results => {
-  //     res.json(results);
-  //   })
-  //   .catch(err => {
-  //     res.status(400).json({ message: "Cannot find this movie", err: err });
-  //   });
 });
 
 app.get("/netflix/type/:type", async (req, res) => {
-  const type = req.params.type;
-  const typeRegex = new RegExp(type, "i");
+  const pageOptions = {
+    page: parseInt(req.query.page, 10) || 0,
+    limit: parseInt(req.query.limit, 10) || 10
+  };
+  const typeRegex = new RegExp(req.params.type, "i");
 
-  const findType = await Netflix.find({ type: typeRegex });
+  const findType = await Netflix.find({ type: typeRegex })
+    .skip(pageOptions.page * pageOptions.limit)
+    .limit(pageOptions.limit)
+    .sort({ release_year: -1 });
 
   if (findType) {
     res.json(findType);
   } else {
-    res.status(400).json({ error: "Cannot find any suitable search" });
+    res.status(404).json({ error: "Cannot find any suitable search" });
   }
-
-  // Netflix.find({ type: typeRegex })
-  //   .then(results => {
-  //     res.json(results);
-  //   })
-
-  //   .catch(err => {
-  //     res
-  //       .status(400)
-  //       .json({ message: "Cannot find any suitable search", err: err });
-  //   });
 });
 
 // Start the server
