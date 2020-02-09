@@ -31,7 +31,7 @@ if (process.env.RESET_DB) {
     await Track.deleteMany({})
 
     topMusicData.forEach((trackData) => {
-      new Track(trackData).save((err, trackData) => {
+      new Track(trackData).save((err) => {
         if (err) {
           console.log(err)
         }
@@ -47,8 +47,24 @@ app.get('/', (req, res) => {
 })
 
 app.get('/tracks', async (req, res) => {
-  const regexGenre = new RegExp(req.query.genre, 'i')
-  const tracks = await Track.find({ genre: regexGenre })
+  const genreQuery = new RegExp(req.query.genre, 'i')
+  const bpmQuery = req.query.bpm
+  let tracks = await Track.find()
+
+  if (genreQuery && bpmQuery) {
+    tracks = await Track.find({
+      $and:
+        [{ genre: genreQuery },
+        { bpm: bpmQuery }]
+    })
+  } else if (genreQuery || bpm) {
+    tracks = await Track.find({
+      $or:
+        [{ genre: genreQuery },
+        { bpm: bpmQuery }]
+    })
+  }
+
   res.json(tracks)
 })
 
@@ -63,7 +79,7 @@ app.get('/artists', async (req, res) => {
 })
 
 app.get('/artists/:artist/tracks', async (req, res) => {
-  const artistName = req.params.artist
+  const artistName = new RegExp(req.params.artist, 'i')
   const artist = await Track.find({ 'artistName': artistName })
   res.json(artist)
 })
