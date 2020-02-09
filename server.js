@@ -4,12 +4,6 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import topMusicData from './data/top-music.json'
 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
@@ -83,7 +77,7 @@ app.get('/topmusics', (req, res) => {
     res.json(results)
   }).catch((err) => {
     console.log('Error' + err)
-    res.json({message: 'Cannot find music', err: err}) //How do can i test error here? Maybe I dont need it?
+    res.json({message: 'Cannot find music', err: err}) //How can i test error here? Maybe I dont need it?
   })
 })
 
@@ -92,6 +86,8 @@ app.get('/topmusics/id/:id', (req, res) => {
   TopMusic.findOne({'id': id})
   .then((results) => {
     // console.log('Found: ' + results)
+    if (results === null)
+    throw "wrong" 
     res.json(results)
   }).catch((err) => {
     console.log('Error' + err)
@@ -99,10 +95,16 @@ app.get('/topmusics/id/:id', (req, res) => {
   })
 })
 
+// http://localhost:8080/topmusics/artist?q=ariana - How to search for artists
 
-
-
-
+app.get('/topmusics/artist', (req, res) => {
+  const queryString = req.query.q;
+  const queryRegex = new RegExp(queryString, "i");
+  TopMusic.find({'artistName': queryRegex})
+  .then((results) => {
+    res.json(results)
+  })
+})
 
 // Start the server
 app.listen(port, () => {
