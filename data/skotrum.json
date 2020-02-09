@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Aubergine",
     "adress": "Linnégatan 38, 114 47 Stockholm",
     "phone": "08-6600204",
@@ -7,9 +8,10 @@
     "note": "Inget riktigt skötbord, men bra yta för blöjbyte.",
     "webpage": "http://aubergine.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": false
   },
   {
+    "id": 2,
     "name": "Ciao Ciao Grande",
     "adress": "Storgatan 11, 114 44 Stockholm",
     "phone": "08-6676420",
@@ -17,9 +19,10 @@
     "note": "",
     "webpage": "http://www.ciaociaogrande.com/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 3,
     "name": "Etnografiska Museet",
     "adress": "Djurgårdsbrunnsvägen 34, 115 27 Stockholm",
     "phone": "010-4561200",
@@ -27,9 +30,10 @@
     "note": "",
     "webpage": "http://www.varldskulturmuseerna.se/etnografiskamuseet/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 4,
     "name": "Fältöversten",
     "adress": "Karlaplan 13, 115 20 Stockholm",
     "phone": "08-6963031",
@@ -37,9 +41,10 @@
     "note": "",
     "webpage": "http://faltoversten.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 5,
     "name": "Grand Escalier",
     "adress": "Sturegatan 1, 114 35 Stockholm",
     "phone": "08-51942272",
@@ -47,9 +52,10 @@
     "note": "",
     "webpage": "http://grandescalier.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 6,
     "name": "Grodan",
     "adress": "Grevturegatan 16, 114 46 Stockholm",
     "phone": "08-6796100",
@@ -57,9 +63,10 @@
     "note": "",
     "webpage": "http://www.grodan.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 7,
     "name": "Jamie's Italian",
     "adress": "Humlegårdsgatan 23, 114 46 Stockholm",
     "phone": "08-51734020",
@@ -67,9 +74,10 @@
     "note": "",
     "webpage": "https://www.jamieoliver.com/italian/sweden/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 8,
     "name": "Karla café",
     "adress": "Karlavägen 71, 114 49 Stockholm",
     "phone": "08-6607473",
@@ -77,9 +85,10 @@
     "note": "",
     "webpage": "http://karlacafe.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 9,
     "name": "Ling Long",
     "adress": "Riddargatan 6, 114 35 Stockholm",
     "phone": "08-54503953",
@@ -87,9 +96,10 @@
     "note": "",
     "webpage": "http://www.ling-long.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 10,
     "name": "McDonalds",
     "adress": "Nybrogatan 18, 114 39 Stockholm",
     "phone": "08-6616710",
@@ -97,9 +107,10 @@
     "note": "",
     "webpage": "",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 11,
     "name": "Mornington",
     "adress": "Nybrogatan 53, 114 40 Stockholm",
     "phone": "08-50733033",
@@ -107,9 +118,10 @@
     "note": "",
     "webpage": "http://www.mornington.se/Mornington---Stockholm---SE/Uppt%C3%A4ck-hotellet/Restaurangen.aspx",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 12,
     "name": "Sturehof",
     "adress": "Sturegallerian 42, 114 46 Stockholm",
     "phone": "08-4405730",
@@ -117,9 +129,10 @@
     "note": "",
     "webpage": "http://www.sturehof.com/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 13,
     "name": "Taverna Brillo",
     "adress": "Sturegatan 6, 114 35 Stockholm",
     "phone": "08-51977800",
@@ -127,9 +140,10 @@
     "note": "",
     "webpage": "http://www.tavernabrillo.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 14,
     "name": "TGI fres Stureplan",
     "adress": "Birgerjarlsgatan 16, 114 34 Stockholm",
     "phone": "08-6113131",
@@ -137,9 +151,10 @@
     "note": "",
     "webpage": "https://fres.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 15,
     "name": "Aquaria",
     "adress": "Falkenbergsgatan 2, 115 21 Stockholm",
     "phone": "010-7087200",
@@ -147,9 +162,10 @@
     "note": "",
     "webpage": "http://www.aquaria.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 16,
     "name": "Blå porten",
     "adress": "Djurgårdsvägen 64, 115 21 Stockholm",
     "phone": "08-663 87 59",
@@ -157,9 +173,10 @@
     "note": "",
     "webpage": "http://www.blaporten.com/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 16,
     "name": "Helin & Voltaire",
     "adress": "Rosendalsvägen 14, 115 21 Stockholm",
     "phone": "08-6645108",
@@ -167,9 +184,10 @@
     "note": "",
     "webpage": "http://www.helinvoltaire.com/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 18,
     "name": "Junibacken",
     "adress": "Galärvarvsvägen 8, 115 21 Stockholm",
     "phone": "08-587 230 00",
@@ -177,9 +195,10 @@
     "note": "",
     "webpage": "http://www.junibacken.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 19,
     "name": "Källhagen",
     "adress": "Djurgårdsbrunnsvägen 10, 115 27 Stockholm",
     "phone": "08-6650300",
@@ -187,9 +206,10 @@
     "note": "",
     "webpage": "http://kallhagen.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 20,
     "name": "Rosendal",
     "adress": "Rosendalsvägen 38, 115 21 Stockholm",
     "phone": "08-545 812 70",
@@ -197,9 +217,10 @@
     "note": "",
     "webpage": "http://www.rosendalstradgard.se/kafe/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 21,
     "name": "Skansen Terassen",
     "adress": "Djurgårdsslätten 49, 115 21 Stockholm",
     "phone": "08-56637000",
@@ -207,9 +228,10 @@
     "note": "",
     "webpage": "http://www.skansen.se/sv/plats/skansen-terrassen",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 22,
     "name": "Spritmuseum",
     "adress": "Djurgårdsvägen 38, 115 21 Stockholm",
     "phone": "08-121 313 00",
@@ -217,9 +239,10 @@
     "note": "",
     "webpage": "",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 23,
     "name": "Tekniska Museet",
     "adress": "Museivägen 7, 115 27 Stockholm",
     "phone": "08-4505600",
@@ -227,9 +250,10 @@
     "note": "",
     "webpage": "https://www.tekniskamuseet.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 24,
     "name": "Vasamuseet",
     "adress": "Galärvarvsvägen 14, 115 21 Stockholm",
     "phone": "08-519 548 00",
@@ -237,9 +261,10 @@
     "note": "",
     "webpage": "https://www.vasamuseet.se/lattlast/oppettider-priser",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 25,
     "name": "Villa Godthem",
     "adress": "Rosendalsvägen 9, 115 21 Stockholm",
     "phone": "08-68423440",
@@ -247,9 +272,10 @@
     "note": "",
     "webpage": "http://villagodthem.se/",
     "location": "Östermalm",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 26,
     "name": "Agaton",
     "adress": "Västerlånggatan 72, 111 29 Stockholm",
     "phone": "08-207299",
@@ -257,9 +283,10 @@
     "note": "",
     "webpage": "http://www.restaurangagaton.se/",
     "location": "GAMLA STAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 27,
     "name": "Medeltidsmuseet",
     "adress": "Strömparrterren 3, 111 30 Stockholm",
     "phone": "08-50831790",
@@ -267,9 +294,10 @@
     "note": "",
     "webpage": "http://medeltidsmuseet.stockholm.se/",
     "location": "GAMLA STAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 28,
     "name": "Mr French",
     "adress": "Skeppsbron 16, 111 30 Stockholm",
     "phone": "08-202095",
@@ -277,9 +305,10 @@
     "note": "",
     "webpage": "http://www.mrfrench.se/",
     "location": "GAMLA STAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 29,
     "name": "Myntkrogen",
     "adress": "Slottsbacken 6, 111 30 Stockholm",
     "phone": "08-104590",
@@ -287,9 +316,10 @@
     "note": "Sveriges ekonomiska museum har skötbord.",
     "webpage": "http://www.myntkrogen.se/",
     "location": "GAMLA STAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 30,
     "name": "Treskillingen",
     "adress": "Lilla Nygatan 6, 118 28 Stockholm",
     "phone": "08-200204",
@@ -297,9 +327,10 @@
     "note": "Postmuseum har skötbord.",
     "webpage": "http://www.postmuseum.se/besok-oss/mat-dryck/",
     "location": "GAMLA STAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 31,
     "name": "Zum Franziskaner",
     "adress": "Skeppsbron 44, 111 30 Stockholm",
     "phone": "08-4118330",
@@ -307,9 +338,10 @@
     "note": "Inget skötbord, men ett vanligt bord på handikapptoaletten att byta på.",
     "webpage": "https://zumfranziskaner.se/",
     "location": "GAMLA STAN",
-    "": ""
+    "hasChangingRooms": false
   },
   {
+    "id": 32,
     "name": "Andalucien",
     "adress": "Döbelnsgatan 7, 113 52 Stockholm",
     "phone": "08-156660",
@@ -317,9 +349,10 @@
     "note": "Inget skötbord, men det finns soffor och källare som man kan använda.",
     "webpage": "http://www.andalucia.se/tapas.aspx",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": false
   },
   {
+    "id": 33,
     "name": "Angelas Deli",
     "adress": "Rörstrandsgatan 16, 113 40 Stockholm",
     "phone": "08-6513040",
@@ -327,9 +360,10 @@
     "note": "Inget skötbord, men en stor toalett där det finns yta att byta på.",
     "webpage": "http://www.angelasdeli.se/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": false
   },
   {
+    "id": 34,
     "name": "Brasseri Norrtull",
     "adress": "Sankt Eriksgatan 119, 113 43 Stockholm",
     "phone": "08-300205",
@@ -337,9 +371,10 @@
     "note": "",
     "webpage": "http://www.brasserinorrtull.se/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 35,
     "name": "Browallshof Hotell och Matsal",
     "adress": "Surbrunnsgatan 20, 113 48 Stockholm",
     "phone": "08-165130",
@@ -347,9 +382,10 @@
     "note": "Inget skötbord men det finns bänkar och barnstolar.",
     "webpage": "http://www.browallshof.se/index.php/kvarterskrog",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": false
   },
   {
+    "id": 36,
     "name": "Brunkebergs Bageri",
     "adress": "Dalagatan 9 J, 113 61 Stockholm",
     "phone": "08-12206120",
@@ -357,9 +393,10 @@
     "note": "",
     "webpage": "http://www.brunkebergsbageri.se/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 37,
     "name": "Café Ceasar",
     "adress": "Ynglingagatan 24, 113 47 Stockholm",
     "phone": "08-32 51 50",
@@ -367,9 +404,10 @@
     "note": "",
     "webpage": "http://cafecaesar.com/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 38,
     "name": "Clean Food",
     "adress": "Norrtullsgatan 9, 113 29 Stockholm",
     "phone": "08-304462",
@@ -377,9 +415,10 @@
     "note": "",
     "webpage": "http://clean-food.com/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 39,
     "name": "Espresso House",
     "adress": "Dalagatan 9 G, 113 61 Stockholm",
     "phone": "010-510 11 87",
@@ -387,9 +426,10 @@
     "note": "",
     "webpage": "https://espressohouse.com/coffee-shops/dalagatan/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 40,
     "name": "Espresso House",
     "adress": "Sveavägen 96, 113 50 Stockholm",
     "phone": "010-510 12 25",
@@ -397,9 +437,10 @@
     "note": "",
     "webpage": "https://espressohouse.com/coffee-shops/sveavgen-sto/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 41,
     "name": "Ethio-Star Etiopien Restaurang och Bar",
     "adress": "Saltmätargatan 19, 113 59 Stockholm",
     "phone": "08-305044",
@@ -407,9 +448,10 @@
     "note": "",
     "webpage": "http://www.ethiostar.se/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 42,
     "name": "Grappa Matsal & Bar",
     "adress": "Sankt Eriksgatan 86, 113 62 Stockholm",
     "phone": "08-30 80 05",
@@ -417,9 +459,10 @@
     "note": "",
     "webpage": "http://www.grappabar.nu/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 43,
     "name": "Grill",
     "adress": "Drottninggatan 89, 113 60 Stockholm",
     "phone": "08-31 45 30",
@@ -427,9 +470,10 @@
     "note": "",
     "webpage": "http://grill.se/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 44,
     "name": "Greasy Spoon",
     "adress": "Hagagatan 4, 113 48 Stockholm",
     "phone": "",
@@ -437,9 +481,10 @@
     "note": "",
     "webpage": "http://www.greasyspoon.se/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 45,
     "name": "Haga Restaurang & Delikatesser",
     "adress": "Hagagatan 18, 113 48 Stockholm",
     "phone": "08-31 96 95",
@@ -447,9 +492,10 @@
     "note": "Inget skötbord, men finns källare där man kan byta.",
     "webpage": "http://www.hagadeli.com/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": false
   },
   {
+    "id": 46,
     "name": "Hard Rock Cafe",
     "adress": "Sveavägen 75, 113 50 Stockholm",
     "phone": "08-545 494 00",
@@ -457,9 +503,10 @@
     "note": "",
     "webpage": "http://www.hardrock.com/cafes/stockholm/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 47,
     "name": "Hemma Vasastan",
     "adress": "Dalagatan 28, 113 24 Stockholm",
     "phone": "08-652 60 88",
@@ -467,9 +514,10 @@
     "note": "",
     "webpage": "https://www.hemmavasastan.se/matsal",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 48,
     "name": "Jensen's Bøfhus",
     "adress": "Sveavägen 51, 113 59 Stockholm",
     "phone": "08-30 09 50",
@@ -477,9 +525,10 @@
     "note": "",
     "webpage": "http://www.jensens.com/sv/restauranger/sveavagen/",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 49,
     "name": "Melanders Butik & Brasserie",
     "adress": "Dalagatan 9R, 113 61 Stockholm",
     "phone": "08-30 03 00",
@@ -487,9 +536,10 @@
     "note": "",
     "webpage": "http://melanders.se/restauranger/brasseriet-dalagatan",
     "location": "VASASTAN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 50,
     "name": "Bamboo Garden",
     "adress": "Åsögatan 120, 116 24 Stockholm",
     "phone": "08-640 00 52",
@@ -497,9 +547,10 @@
     "note": "",
     "webpage": "https://bamboogarden.gastrogate.com/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 51,
     "name": "Barranco Hornhuset",
     "adress": "Långholmsgatan 15B, 117 33 Stockholm",
     "phone": "08-52520260",
@@ -507,9 +558,10 @@
     "note": "",
     "webpage": "http://www.hornhuset.se/barranco/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 52,
     "name": "Bistro Malmen",
     "adress": "Götgatan 49-51, 116 21 Stockholm",
     "phone": "08-517 347 00",
@@ -517,9 +569,10 @@
     "note": "",
     "webpage": "https://www.scandichotels.se/hotell/sverige/stockholm/scandic-malmen/restaurang-bar/bistro-malmen",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 53,
     "name": "Café String",
     "adress": "Nytorgsgatan 38, 116 40 Stockholm",
     "phone": "08-714 85 14",
@@ -527,9 +580,10 @@
     "note": "Det finns en nedervåning som är tom där man kan byta blöja.",
     "webpage": "http://cafestring.se/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 54,
     "name": "Eken",
     "adress": "Guldgränd 8, 118 20 Stockholm",
     "phone": "08-517 353 36",
@@ -537,9 +591,10 @@
     "note": "",
     "webpage": "http://ekenbar.se/index/?lang=sv",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 55,
     "name": "Enzos Hornhuset",
     "adress": "Långholmsgatan 15B, 117 33 Stockholm",
     "phone": "08-52520266",
@@ -547,9 +602,10 @@
     "note": "",
     "webpage": "http://www.hornhuset.se/enzos/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 56,
     "name": "Espresso House",
     "adress": "Götgatan 98, 118 62 Stockholm",
     "phone": "010 - 510 12 33",
@@ -557,9 +613,10 @@
     "note": "I anslutning till Ringen centrum",
     "webpage": "",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 57,
     "name": "Fotografiska",
     "adress": "Stadsgårdshamnen 22, 116 45 Stockholm",
     "phone": "08-509 005 00",
@@ -567,9 +624,10 @@
     "note": "",
     "webpage": "http://fotografiska.eu/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 58,
     "name": "Gondolen",
     "adress": "Stadsgården 6, 116 45 Stockholm",
     "phone": "08-641 70 90",
@@ -577,9 +635,10 @@
     "note": "",
     "webpage": "http://www.eriks.se/gondolen/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 59,
     "name": "Grekiska Kolgrillsbaren - Ringvägen",
     "adress": "Ringvägen 57, 118 61 Stockholm",
     "phone": "08-668 99 99",
@@ -587,9 +646,10 @@
     "note": "",
     "webpage": "http://www.restaurangagapi.se/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 60,
     "name": "Hornstullsgallerian",
     "adress": "Långholmsgatan/Hornsbruksgatan",
     "phone": "",
@@ -597,9 +657,10 @@
     "note": "Restauranger: Akki Sushi, Beijing8, Espresso House, Gateau, Juiceverket, Klang Market, Noodle mama. Amningsrum och parnvagnsparkering.",
     "webpage": "http://hornstull.se/mat-dryck/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 61,
     "name": "Hotel Hilton Stockholm Slussen",
     "adress": "Guldgränd 8 118 20 Stockholm",
     "phone": "08-517 353 00",
@@ -607,9 +668,10 @@
     "note": "Restauranger Eken Matsal och Panorama restaurang",
     "webpage": "http://www3.hilton.com/en/hotels/sweden/hilton-stockholm-slussen-STOSLHI/dining/index.html",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 62,
     "name": "Hotel Rival (Bar, bistro & café)",
     "adress": "Mariatorget 3, 118 91 Stockholm",
     "phone": "08-545 789 00",
@@ -617,9 +679,10 @@
     "note": "",
     "webpage": "http://www.rival.se/se/bar-bistro-cafe/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 63,
     "name": "Hälsocafét",
     "adress": "Hornsgatan 61, 118 49 Stockholm",
     "phone": "08-420 565 44",
@@ -627,9 +690,10 @@
     "note": "",
     "webpage": "http://www.halsocafet.se/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 64,
     "name": "Jimmys Steakhouse Södermalm",
     "adress": "Tjärhovsgatan 33, 116 28 Stockholm",
     "phone": "08-644 06 66",
@@ -637,9 +701,10 @@
     "note": "",
     "webpage": "http://jimmys.se/sodermalm/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 65,
     "name": "Koh Phangan",
     "adress": "Skånegatan 57, 116 37 Stockholm",
     "phone": "08-642 50 40",
@@ -647,9 +712,10 @@
     "note": "",
     "webpage": "http://www.kohphangan.se/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 66,
     "name": "KÄK Hornstull",
     "adress": "Hornsbruksgatan 24, 117 34 Stockholm",
     "phone": "08-669 13 12",
@@ -657,9 +723,10 @@
     "note": "I anslutning till Hornstull galleria",
     "webpage": "http://www.käk.com/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 67,
     "name": "Linje Tio",
     "adress": "Hornsbruksgatan 24, 117 34 Stockholm",
     "phone": "08-220021",
@@ -667,9 +734,10 @@
     "note": "I anslutning till Hornstull galleria",
     "webpage": "http://linjetio.com/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 68,
     "name": "Matapoteket Mainly Raw",
     "adress": "Bondegatan 6,116 23 Stockholm",
     "phone": "070-999 01 70",
@@ -677,9 +745,10 @@
     "note": "",
     "webpage": "https://matapoteket.nu/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 69,
     "name": "McDonald's",
     "adress": "Folkungagatan 50, 116 22 Stockholm",
     "phone": "08-640 17 00",
@@ -687,9 +756,10 @@
     "note": "",
     "webpage": "",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 70,
     "name": "McDonald's",
     "adress": "Hornsgatan 88, 118 21 Stockholm",
     "phone": "08-84 12 18",
@@ -697,9 +767,10 @@
     "note": "",
     "webpage": "",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 71,
     "name": "Nytorget Urban Deli",
     "adress": "Nytorget 4, 116 40 Stockholm",
     "phone": "08-425 500 30",
@@ -707,9 +778,10 @@
     "note": "",
     "webpage": "http://www.urbandeli.org/nytorget/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 72,
     "name": "Paradiset (Restaurang Koloni)",
     "adress": "Brännkyrkagatan 62, 118 23 Stockholm",
     "phone": "0705 105 417",
@@ -717,9 +789,10 @@
     "note": "",
     "webpage": "http://www.koloni.se/koloni-paradiset",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 73,
     "name": "Restaurang Kvarnen",
     "adress": "Medborgarplatsen 3, 118 26 Stockholm",
     "phone": "08-643 03 80",
@@ -727,9 +800,10 @@
     "note": "Inget skötbord, men stor bänk vid handfat.",
     "webpage": "",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": false
   },
   {
+    "id": 74,
     "name": "Ringen centrum",
     "adress": "Ringvägen 115, 118 60 Stockholm",
     "phone": "",
@@ -737,9 +811,10 @@
     "note": "Här finns bl.a. Teaterns food court, Espresso house och Medo sushi",
     "webpage": "http://www.ringencentrum.se/oppettider/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 75,
     "name": "Söderhallarna",
     "adress": "Söderhallarna 110, 118 72 Stockholm",
     "phone": "",
@@ -747,9 +822,10 @@
     "note": "Här finns bl.a. Melanders, Sushi Yama, Pig & Whistle, Pasta Gudfadern och mycket mer.",
     "webpage": "http://www.soderhallarna.se/",
     "location": "SÖDERMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 76,
     "name": "American Table",
     "adress": "Östra Järnvägsgatan 35, 111 20 Stockholm",
     "phone": "08-6769800",
@@ -757,9 +833,10 @@
     "note": "",
     "webpage": "http://americantablebrasserie.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 77,
     "name": "Hötorgshallen",
     "adress": "Hötorgshallen 111, 57 Stockholm",
     "phone": "",
@@ -767,9 +844,10 @@
     "note": "Sveriges största saluhall med 40 handlare på två plan.",
     "webpage": "http://www.hotorgshallen.se/hallen",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 78,
     "name": "Bar Central",
     "adress": "Birger Jarlsgatan 41, 111 45 Stockholm",
     "phone": "08-20 10 08",
@@ -777,9 +855,10 @@
     "note": "",
     "webpage": "http://barcentral.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 79,
     "name": "BarbeQue Steakhouse Stockholm",
     "adress": "Kungsgatan 54, 111 35 Stockholm",
     "phone": "08-10 00 26",
@@ -787,9 +866,10 @@
     "note": "",
     "webpage": "http://kungsgatan.bbqsteakhouse.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 80,
     "name": "BarCelona Tapas Restaurang",
     "adress": "Drottninggatan 34, 111 51 Stockholm",
     "phone": "08-22 37 00",
@@ -797,9 +877,10 @@
     "note": "",
     "webpage": "http://barcelonatapas.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 81,
     "name": "Berns Asiatiska",
     "adress": "Berzelii Park 111, 47 Stockholm",
     "phone": "08-56632222",
@@ -807,9 +888,10 @@
     "note": "",
     "webpage": "http://www.berns.se/restaurant/berns-asiatiska/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 82,
     "name": "Boqueria",
     "adress": "Jakobsbergsgatan 17, 111 44 Stockholm",
     "phone": "08-30 74 00",
@@ -817,9 +899,10 @@
     "note": "",
     "webpage": "http://www.boqueria.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 83,
     "name": "Burger King",
     "adress": "Sergels Torg 1, 111 57 Stockholm",
     "phone": "08-21 98 94",
@@ -827,9 +910,10 @@
     "note": "",
     "webpage": "https://burgerking.se/restauranger/909205",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 84,
     "name": "Centralstationen",
     "adress": "Centralplan 15, 111 20 Stockholm",
     "phone": "08-410 626 00",
@@ -837,9 +921,10 @@
     "note": "För restauranger se hemsida",
     "webpage": "http://www.dinstation.se/stockholms-centralstation/mat-butiker/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 85,
     "name": "Caina",
     "adress": "Norrmalmstorg 2-4, 111 46 Stockholm",
     "phone": "08-614 10 00",
@@ -847,9 +932,10 @@
     "note": "Tillhör Nobis hotell där det finns skötbord",
     "webpage": "http://www.nobishotel.se/en/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 86,
     "name": "Åhlens",
     "adress": "Klarabergsgatan 50, 111 21 Stockholm",
     "phone": "08-676 60 00",
@@ -857,9 +943,10 @@
     "note": "På plan 4 finns amningsrum och skötbord. Här kan man även värma mat, leka och se på film eller läsa en bok med barnen. Se hemsida för restauranger.",
     "webpage": "http://www.ahlens.se/cms/20160108_170957",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 87,
     "name": "K25",
     "adress": "Kungsgatan 25, 111 56 Stockholm",
     "phone": "08-212929",
@@ -867,9 +954,10 @@
     "note": "",
     "webpage": "http://k25.nu",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 88,
     "name": "Scandic Continental",
     "adress": "Vasagatan 22, 111 20 Stockholm",
     "phone": "08-51734200",
@@ -877,9 +965,10 @@
     "note": "Till hotellet hör restaurangen The Market och Café Caldo.",
     "webpage": "https://www.scandichotels.se/hotell/sverige/stockholm/scandic-continental/restaurang-bar",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 89,
     "name": "Drottninghof",
     "adress": "Drottninggatan 67, 111 36 Stockholm",
     "phone": "08-22 75 22",
@@ -887,9 +976,10 @@
     "note": "",
     "webpage": "http://www.drottninghof.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 90,
     "name": "Due Piani",
     "adress": "Hötorget 4, 111 57 Stockholm",
     "phone": "08-22 78 88",
@@ -897,9 +987,10 @@
     "note": "",
     "webpage": "http://duepiani.kvartersmenyn.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 91,
     "name": "Mood gallerian",
     "adress": "Norrlandsgatan 13, 111 43 Stockholm",
     "phone": "08-6963100",
@@ -907,9 +998,10 @@
     "note": "Skötbord finns på de större toaletterna och det finns en amnings/toalett lounge på våning 3.För restauranger se hemsida.",
     "webpage": "http://moodstockholm.se/cafe-restaurang/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 92,
     "name": "Gallerian",
     "adress": "Hamngatan 37, 111 53 Stockholm",
     "phone": "073 531 94 96",
@@ -917,9 +1009,10 @@
     "note": "Toaletter och skötbord hittar du i södra delen av Gallerian. Besöket kostar 10 kronor och du kan växla på plats. För restauranger se hemsida.",
     "webpage": "http://gallerian.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 93,
     "name": "Giro Pizzeria",
     "adress": "Sveavägen 46, 111 34 Stockholm",
     "phone": "08-4406767",
@@ -927,9 +1020,10 @@
     "note": "Tillhör hotell Miss Clara som har skötbord",
     "webpage": "http://giropizzeria.com",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 94,
     "name": "Kulturhuset",
     "adress": "Sergels Torg 3, 111 57 Stockholm",
     "phone": "08-506 20 200",
@@ -937,9 +1031,10 @@
     "note": "Skötrum finns på våning 2. För restauranger se hemsida.",
     "webpage": "http://kulturhusetstadsteatern.se/Besok-oss/Kontakta-oss/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 95,
     "name": "Grand hotell",
     "adress": "Södra Blasieholmshamnen 8, 111 48 Stockholm",
     "phone": "08 - 679 35 00",
@@ -947,9 +1042,10 @@
     "note": "Till hotellet hör restaurangerna Mathias Dahlgren/Matbaren och Cadierbaren",
     "webpage": "https://www.grandhotel.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 96,
     "name": "Kungshallen",
     "adress": "Kungsgatan 44, 111 35 Stockholm",
     "phone": "",
@@ -957,9 +1053,10 @@
     "note": "Skötbord finns på handikapptoaletten som öppnas från restaurang Taco Bar. För restauranger se hemsida.",
     "webpage": "http://www.kungshallen.eu",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 97,
     "name": "Hearts Sthlm",
     "adress": "Vasaplan 4, 111 20 Stockholm",
     "phone": "08-50 56 35 08",
@@ -967,9 +1064,10 @@
     "note": "Tillhör Nordic C Hotel som har skötbord",
     "webpage": "http://www.heartssthlm.com",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 98,
     "name": "Kung Carls Bakficka",
     "adress": "Norrlandsgatan 28, 111 43 Stockholm",
     "phone": "08-463 50 80",
@@ -977,9 +1075,10 @@
     "note": "Tillhör Hotell Kung Carl som har skötbord",
     "webpage": "http://www.kungcarlsbakficka.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 99,
     "name": "La Bodega Tapas Bar",
     "adress": "Döbelnsgatan 8, 111 40 Stockholm",
     "phone": "08-22 77 01",
@@ -987,9 +1086,10 @@
     "note": "",
     "webpage": "http://info.aos.se/E/V/STOSE/0004/26/55/1.html",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 100,
     "name": "The Dining room",
     "adress": "Södra Blasieholmshamnen 2, 111 48 Stockholm",
     "phone": "08-223160",
@@ -997,9 +1097,10 @@
     "note": "Tillhör Lydmar Hotell som har skötbord",
     "webpage": "http://lydmar.com",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 101,
     "name": "Hotell Haymarket by Scandic",
     "adress": "Hötorget 13-15, 111 57 Stockholm",
     "phone": "08 517 26 700",
@@ -1007,9 +1108,10 @@
     "note": "Till hotellet hör restaurangen Greta och Paul's",
     "webpage": "https://www.scandichotels.se/hotell/sverige/stockholm/haymarket-by-scandic/restaurang-bar",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 102,
     "name": "The Crooked Leg",
     "adress": "Vasaplan 7, 111 20 Stockholm",
     "phone": "08-50 56 32 00",
@@ -1017,9 +1119,10 @@
     "note": "Tillhör Nordic Light Hotel som har skötbord",
     "webpage": "https://nordiclighthotel.se/hitta-hit/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 103,
     "name": "Mangal Grill & Bar",
     "adress": "Vasagatan 6, 111 20 Stockholm",
     "phone": "08-411 90 00",
@@ -1027,9 +1130,10 @@
     "note": "",
     "webpage": "https://mangal-stockholm.gastrogate.com",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 104,
     "name": "MAX Hamburgerrestauranger",
     "adress": "Kungsträdgårdsgatan 20, 111 47 Stockholm",
     "phone": "08-611 38 10",
@@ -1037,9 +1141,10 @@
     "note": "",
     "webpage": "http://www.max.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 105,
     "name": "McDonald's",
     "adress": "Hamngatan 8, 111 46 Stockholm",
     "phone": "08-678 67 29",
@@ -1047,9 +1152,10 @@
     "note": "",
     "webpage": "http://www.mcdonalds.se/se.html",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 106,
     "name": "McDonald's",
     "adress": "Kungsgatan 4A, 111 43 Stockholm",
     "phone": "08-20 51 18",
@@ -1057,9 +1163,10 @@
     "note": "",
     "webpage": "http://www.mcdonalds.se/se.html",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 107,
     "name": "McDonald's",
     "adress": "Regeringsgatan 20, 111 53 Stockholm",
     "phone": "08-24 31 03",
@@ -1067,9 +1174,10 @@
     "note": "",
     "webpage": "http://www.mcdonalds.se/se.html",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 108,
     "name": "Miss Clara by Nobis",
     "adress": "Sveavägen 48, 111 34 Stockholm",
     "phone": "08-440 67 00",
@@ -1077,9 +1185,10 @@
     "note": "Tillhör Hotell Miss Clara där det finns skötbord",
     "webpage": "http://www.missclarahotel.com/restaurang",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 109,
     "name": "Mother",
     "adress": "Mäster Samuelsgatan 19, 111 44 Stockholm",
     "phone": "08-505 244 39",
@@ -1087,9 +1196,10 @@
     "note": "",
     "webpage": "https://www.motherstockholm.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 110,
     "name": "Niklas",
     "adress": "Regeringsgatan 66, 111 39 Stockholm",
     "phone": "08-20 60 10",
@@ -1097,9 +1207,10 @@
     "note": "",
     "webpage": "http://niklas.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 111,
     "name": "Pizza Hut",
     "adress": "Klarabergsgatan 56, 111 21 Stockholm",
     "phone": "08-24 54 44",
@@ -1107,9 +1218,10 @@
     "note": "",
     "webpage": "http://www.pizzahut.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 112,
     "name": "Pizza Hut",
     "adress": "Slöjdgatan 10, 111 57 Stockholm",
     "phone": "08-411 45 20",
@@ -1117,9 +1229,10 @@
     "note": "",
     "webpage": "http://www.pizzahut.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 113,
     "name": "Pong Asian Restaurang",
     "adress": "Klara Tvärgränd 3, 111 52 Stockholm",
     "phone": "08-440 02 08",
@@ -1127,9 +1240,10 @@
     "note": "",
     "webpage": "http://pongasian.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 114,
     "name": "Pong Buffé",
     "adress": "Drottninggatan 71C, 111 36 Stockholm",
     "phone": "08-20 45 63",
@@ -1137,9 +1251,10 @@
     "note": "",
     "webpage": "http://pongbuffe.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 115,
     "name": "Pontus Pocket city",
     "adress": "Norrlandsgatan 31, 111 43 Stockholm",
     "phone": "08 545 273 00",
@@ -1147,9 +1262,10 @@
     "note": "",
     "webpage": "http://pontusfrithiof.com",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 116,
     "name": "Público",
     "adress": "Rödbodtorget 2, 111 52 Stockholm",
     "phone": "08-505 244 16",
@@ -1157,9 +1273,10 @@
     "note": "",
     "webpage": "http://publico.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 117,
     "name": "Restaurang Paladar de Cuba",
     "adress": "Tegnérgatan 19, 111 40 Stockholm",
     "phone": "08-35 25 20",
@@ -1167,9 +1284,10 @@
     "note": "",
     "webpage": "http://www.paladar.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 118,
     "name": "Moderna Museet",
     "adress": "Slupskjulsvägen 7, 111 49 Stockholm, Sweden",
     "phone": "08-520 235 00",
@@ -1177,9 +1295,10 @@
     "note": "Restaurang finns i museet",
     "webpage": "http://www.modernamuseet.se/stockholm/sv/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 119,
     "name": "Restaurang Scandic Norra Bantorget",
     "adress": "Wallingatan 15, 111 24 Stockholm",
     "phone": "08-517 670 00",
@@ -1187,9 +1306,10 @@
     "note": "Tillhör Scandic Hotell som har skötbord",
     "webpage": "",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 120,
     "name": "Shahrzad",
     "adress": "Regeringsgatan 111, 111 39 Stockholm",
     "phone": "08-660 60 60",
@@ -1197,9 +1317,10 @@
     "note": "",
     "webpage": "http://shahrzad.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 121,
     "name": "Threesixty restaurant",
     "adress": "Tegelbacken 6, 111 52 Stockholm",
     "phone": "08-4123472",
@@ -1207,9 +1328,10 @@
     "note": "Tillhör Hotell Sheraton som har skötbord",
     "webpage": "http://www.threesixtyrestaurant.com/se/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 122,
     "name": "Skeppsholmens Krogkonst",
     "adress": "Flaggmansvägen 6, 111 49 Stockholm",
     "phone": "08-611 99 89",
@@ -1217,9 +1339,10 @@
     "note": "",
     "webpage": "http://www.krogkonst.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 123,
     "name": "Stockholm Fisk",
     "adress": "Vasagatan 1, 111 20 Stockholm",
     "phone": "08-580 017 30",
@@ -1227,9 +1350,10 @@
     "note": "",
     "webpage": "http://www.stockholmfisk.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 124,
     "name": "Teaterbrasseriet",
     "adress": "Kungsgatan 70, 111 22 Stockholm",
     "phone": "08 512 520 32",
@@ -1237,9 +1361,10 @@
     "note": "Tillhör Hotell Scandic Grand Central som har skötbord",
     "webpage": "https://www.scandichotels.se/hotell/sverige/stockholm/grand-central-by-scandic/restaurang-bar/teaterbrasseriet",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 125,
     "name": "TGI fres",
     "adress": "Hamngatan 19, 111 47 Stockholm",
     "phone": "08-10 06 26",
@@ -1247,9 +1372,10 @@
     "note": "",
     "webpage": "https://www.fres.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 126,
     "name": "Vapiano",
     "adress": "Kungsbron 15, 111 22 Stockholm",
     "phone": "08-24 29 40",
@@ -1257,9 +1383,10 @@
     "note": "",
     "webpage": "http://se.vapiano.com/sv/home/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 127,
     "name": "Wagamama",
     "adress": "Klarabergsviadukten 65, 111 64 Stockholm",
     "phone": "08-519 422 73",
@@ -1267,9 +1394,10 @@
     "note": "",
     "webpage": "https://www.wagamama.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 128,
     "name": "Zócalo - Fresh Happy Mex",
     "adress": "Klarabergsgatan 29, 111 21 Stockholm",
     "phone": "08-409 115 07",
@@ -1277,9 +1405,10 @@
     "note": "",
     "webpage": "https://zocalo.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 129,
     "name": "Zócalo - Fresh Happy Mex",
     "adress": "Regeringsgatan 20, 111 53 Stockholm",
     "phone": "08-409 115 08",
@@ -1287,9 +1416,10 @@
     "note": "",
     "webpage": "https://zocalo.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 130,
     "name": "Stockholm Stadsbibliotek",
     "adress": "Sveavägen 73,\n113 80 Stockholm",
     "phone": "08-508 31105",
@@ -1297,9 +1427,10 @@
     "note": "Café på entréplan och biblioteket anordnar många barnaktivteter",
     "webpage": "https://biblioteket.stockholm.se/bibliotek/stadsbiblioteket",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 131,
     "name": "Musik- och teaterbiblioteket",
     "adress": "Torsgatan 19, 113 21 Stockholm",
     "phone": "08-519 554 00",
@@ -1307,9 +1438,10 @@
     "note": "",
     "webpage": "http://musikverket.se/musikochteaterbiblioteket//",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 132,
     "name": "Östasiatiska museet",
     "adress": "Tyghusplan, 111 49 Stockholm",
     "phone": "010-456 12 97",
@@ -1317,9 +1449,10 @@
     "note": "Finns även ett Café",
     "webpage": "http://www.varldskulturmuseerna.se/ostasiatiskamuseet/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 133,
     "name": "Dansmuseet",
     "adress": "Drottninggatan 17, 111 51 Stockholm",
     "phone": "08-441 76 51",
@@ -1327,9 +1460,10 @@
     "note": "Finns även en restaurang",
     "webpage": "http://www.dansmuseet.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 134,
     "name": "Sven-Harrys Konstmuseum",
     "adress": "Eastmansvägen 10, 113 61 Stockholm",
     "phone": "08-511 600 60",
@@ -1337,9 +1471,10 @@
     "note": "",
     "webpage": "http://www.sven-harrys.se/sv/",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 135,
     "name": "Bonniers Konsthall",
     "adress": "Torsgatan 19, 113 21",
     "phone": "08-736 42 48",
@@ -1347,9 +1482,10 @@
     "note": "Finns även café",
     "webpage": "http://www.bonnierskonsthall.se",
     "location": "NORRMALM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 136,
     "name": "Björk Bar & Grill",
     "adress": "Rålambshovsleden 50, 112 19 Stockholm",
     "phone": "08-441 31 54",
@@ -1357,9 +1493,10 @@
     "note": "Tillhör hotell Courtyard Stockholm som har skötbord",
     "webpage": "http://bjorkbarochgrill.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 137,
     "name": "Café Blåbär",
     "adress": "Fleminggatan 53, 112 32 Stockholm",
     "phone": "08-653 83 58",
@@ -1367,9 +1504,10 @@
     "note": "",
     "webpage": "http://www.cafeblabar.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 138,
     "name": "Gnarly Burger",
     "adress": "Fridhemsgatan 13, 112 40 Stockholm",
     "phone": "08-519 423 00",
@@ -1377,9 +1515,10 @@
     "note": "",
     "webpage": "http://www.gnarlyburger.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 139,
     "name": "Grekiska kolgrillsbaren S:t Göran",
     "adress": "Sankt Göransgatan 121, 112 45 Stockholm",
     "phone": "08-619 04 00",
@@ -1387,9 +1526,10 @@
     "note": "",
     "webpage": "http://www.grekiskakolgrillsbaren.se/restauranger/sankt-goran/",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 140,
     "name": "Kitchen & Table Kungsholmen",
     "adress": "Kungsholmsgatan 31, 112 27 Stockholm",
     "phone": "08-692 52 00",
@@ -1397,9 +1537,10 @@
     "note": "Tillhör Clarion hotell som har skötbord",
     "webpage": "http://www.kitchenandtable.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 141,
     "name": "Panini",
     "adress": "Lindhagensgatan 104C, 112 18 Stockholm",
     "phone": "08-619 06 20",
@@ -1407,9 +1548,10 @@
     "note": "",
     "webpage": "http://panini.nu",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 142,
     "name": "Piren Restaurang & Bar",
     "adress": "Kristinebergs Strand 2, 112 52 Stockholm",
     "phone": "08-618 30 30",
@@ -1417,9 +1559,10 @@
     "note": "",
     "webpage": "http://www.piren-bar.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 143,
     "name": "Restaurang Fleming",
     "adress": "Fleminggatan 2-4, 112 26 Stockholm",
     "phone": "08-508 267 09",
@@ -1427,9 +1570,10 @@
     "note": "",
     "webpage": "https://flemingsrestauranger.gastrogate.com",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 144,
     "name": "Trattorian",
     "adress": "Norr Mälarstrand 29, 112 20 Stockholm",
     "phone": "08-684 238 70",
@@ -1437,9 +1581,10 @@
     "note": "",
     "webpage": "http://www.trattorian.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 145,
     "name": "Restaurant Lokal",
     "adress": "Scheelegatan 8, 112 23 Stockholm",
     "phone": "08-650 98 09",
@@ -1447,9 +1592,10 @@
     "note": "",
     "webpage": "http://lokalizakaya.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 146,
     "name": "Stadshuskällaren",
     "adress": "Hantverkargatan 1, 112 21 Stockholm",
     "phone": "08-586 218 30",
@@ -1457,9 +1603,10 @@
     "note": "",
     "webpage": "http://www.stadshuskallarensthlm.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 147,
     "name": "Västermalmsgallerian",
     "adress": "Sankt Eriksgatan 45, 112 34 Stockholm",
     "phone": "08 – 696 30 31",
@@ -1467,9 +1614,10 @@
     "note": "",
     "webpage": "http://www.vastermalmsgallerian.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 148,
     "name": "39Wäst",
     "adress": "Fleminggatan 39, 112 32 Stockholm",
     "phone": "08-650 22 20",
@@ -1477,9 +1625,10 @@
     "note": "",
     "webpage": "http://39wast.se",
     "location": "KUNGSHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 149,
     "name": "Solna centrum",
     "adress": "Solna Torg 13, 171 45 Solna",
     "phone": "08-400 005 00",
@@ -1487,9 +1636,10 @@
     "note": "",
     "webpage": "http://solnacentrum.se/",
     "location": "SOLNA",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 150,
     "name": "Mall of Scandinavia",
     "adress": "Stjärntorget 2, 169 79 Solna",
     "phone": "08-400 080 00",
@@ -1497,9 +1647,10 @@
     "note": "Här finns både amningsrum och skötbord.",
     "webpage": "http://mallofscandinavia.se/",
     "location": "SOLNA",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 151,
     "name": "Bromma Blocks",
     "adress": "Ulvsundavägen 185-193, 168 67 Bromma",
     "phone": "",
@@ -1507,9 +1658,10 @@
     "note": "Här finns både amningsrum och skötbord.",
     "webpage": "http://brommablocks.se/",
     "location": "BROMMA",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 152,
     "name": "Winterviken",
     "adress": "Vinterviksvägen 60, 117 65 Stockholm",
     "phone": "08-400 264 80",
@@ -1517,9 +1669,10 @@
     "note": "Sago- och lekhörna med barnpassning på lördagar.",
     "webpage": "http://www.winterviken.se/cafe-stockholm",
     "location": "ASPUDDEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 153,
     "name": "Phil's burger",
     "adress": "Sundbybergs torg 1, 172 67 Sundbyberg",
     "phone": "08-408 840 90",
@@ -1527,9 +1680,10 @@
     "note": "",
     "webpage": "http://www.philsburger.se/sundbyberg/",
     "location": "SUNDBYBERG",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 154,
     "name": "Gamla orangeriet",
     "adress": "Veit Wittrocks väg 7, 104 05 Stockholm",
     "phone": "08-612 09 59",
@@ -1537,9 +1691,10 @@
     "note": "",
     "webpage": "http://gamlaorangeriet.se/",
     "location": "NORRA DJURGÅRDEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 155,
     "name": "Liljeholmstorgets galleria",
     "adress": "Nybohovsbacken 38, 117 61 Stockholm",
     "phone": "08-52280310",
@@ -1547,9 +1702,10 @@
     "note": "",
     "webpage": "",
     "location": "LILJEHOLMEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 156,
     "name": "Sickla köpkvarter",
     "adress": "Simbagatan, 131 34 Nacka",
     "phone": "08-644 21 28",
@@ -1557,9 +1713,10 @@
     "note": "",
     "webpage": "http://kopkvarter.sickla.se/",
     "location": "SICKLA",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 157,
     "name": "Dalaröbageriet",
     "adress": "Odinsvägen 15, 137 70 Dalarö",
     "phone": "08-501 511 66",
@@ -1567,9 +1724,10 @@
     "note": "Inget skötbord, men gott om yta på en bänk.",
     "webpage": "http://www.dalarobageri.se/",
     "location": "DALARÖ",
-    "": ""
+    "hasChangingRooms": false
   },
   {
+    "id": 158,
     "name": "Nacka Forum",
     "adress": "Forumvägen 14 \n131 53 Nacka",
     "phone": "08-40 000 300",
@@ -1577,9 +1735,10 @@
     "note": "",
     "webpage": "http://nackaforum.se/kvalitetsmarkt",
     "location": "NACKA",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 159,
     "name": "Artipelag",
     "adress": "Artipelagstigen 1, 134 40 Gustavsberg",
     "phone": "08-57013000",
@@ -1587,9 +1746,10 @@
     "note": "",
     "webpage": "http://artipelag.se/besok-artipelag/hitta-hit/",
     "location": "VÄRMDÖ",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 160,
     "name": "Drottningholms slottscafé, Karamellan",
     "adress": "Drottningholms Slott 10, 178 93 Drottningholm",
     "phone": "08-759 00 35",
@@ -1597,9 +1757,10 @@
     "note": "",
     "webpage": "http://www.drottningholmsslottscafe.se/",
     "location": "DROTTNINGHOLM",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 161,
     "name": "Kalaskransens konditori",
     "adress": "Svandammsvägen 17b, 126 35 Stockholm",
     "phone": "070-5611237",
@@ -1607,9 +1768,10 @@
     "note": "",
     "webpage": "http://www.kalaskransen.se/",
     "location": "MIDSOMMARKRANSEN",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 162,
     "name": "Espresso House i Hansakompaniet",
     "adress": "Stora Nygatan, 211 38 Malmö",
     "phone": "040-770 00",
@@ -1617,9 +1779,10 @@
     "note": "",
     "webpage": "http://hansamalmo.se/oppettider/",
     "location": "MALMÖ",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 163,
     "name": "Café Noir",
     "adress": "Engelbrektsgatan 6, 211 33 Malmö",
     "phone": "040-30 44 60",
@@ -1627,9 +1790,10 @@
     "note": "",
     "webpage": "https://www.facebook.com/Noir-Kaffekultur-136811053534/",
     "location": "MALMÖ",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 164,
     "name": "Stadsmuseet",
     "adress": "Norra Hamngatan 12, 411 14 Göteborg",
     "phone": "031-368 36 00",
@@ -1637,9 +1801,10 @@
     "note": "",
     "webpage": "http://goteborgsstadsmuseum.se/",
     "location": "GÖTEBORG",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 165,
     "name": "Antikhallarna",
     "adress": "Västra Hamngatan 6, 411 17 Göteborg",
     "phone": "031-131 222",
@@ -1647,9 +1812,10 @@
     "note": "",
     "webpage": "http://www.antikhallarna.se/",
     "location": "GÖTEBORG",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 166,
     "name": "Da Matteo",
     "adress": "Vallgatan 5, 411 16 Göteborg",
     "phone": "031 13 06 09",
@@ -1657,9 +1823,10 @@
     "note": "",
     "webpage": "http://www.damatteo.se/vallgatan.html",
     "location": "GÖTEBORG",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 167,
     "name": "NK Göteborg",
     "adress": "Östra Hamngatan 42, 411 09 Göteborg",
     "phone": "031-710 10 00",
@@ -1667,19 +1834,10 @@
     "note": "",
     "webpage": "https://www.nk.se/goteborg/",
     "location": "GÖTEBORG",
-    "": ""
+    "hasChangingRooms": true
   },
   {
-    "name": "",
-    "adress": "",
-    "phone": "",
-    "openHours": "",
-    "note": "",
-    "webpage": "",
-    "location": "",
-    "": ""
-  },
-  {
+    "id": 169,
     "name": "Victoria and Albert Museum",
     "adress": "Cromwell Road, London, SW7 2RL",
     "phone": "0044 (0)20 7942 2000",
@@ -1687,19 +1845,10 @@
     "note": "",
     "webpage": "https://www.vam.ac.uk/",
     "location": "LONDON",
-    "": ""
+    "hasChangingRooms": true
   },
   {
-    "name": "",
-    "adress": "",
-    "phone": "",
-    "openHours": "",
-    "note": "",
-    "webpage": "",
-    "location": "",
-    "": ""
-  },
-  {
+    "id": 171,
     "name": "Café Noir",
     "adress": "Engelbrektsgatan 6, 211 33 Malmö",
     "phone": "040-30 44 60",
@@ -1707,9 +1856,10 @@
     "note": "",
     "webpage": "https://www.facebook.com/Noir-Kaffekultur-136811053534/",
     "location": "LONDON",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 172,
     "name": "Stadsmuseet",
     "adress": "Norra Hamngatan 12, 411 14 Göteborg",
     "phone": "031-368 36 00",
@@ -1717,9 +1867,10 @@
     "note": "",
     "webpage": "http://goteborgsstadsmuseum.se/",
     "location": "GÖTEBORG",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 173,
     "name": "Antikhallarna",
     "adress": "Västra Hamngatan 6, 411 17 Göteborg",
     "phone": "031-131 222",
@@ -1727,9 +1878,10 @@
     "note": "",
     "webpage": "http://www.antikhallarna.se/",
     "location": "GÖTEBORG",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 174,
     "name": "NK Göteborg",
     "adress": "Östra Hamngatan 42, 411 09 Göteborg",
     "phone": "031-710 10 00",
@@ -1737,9 +1889,10 @@
     "note": "",
     "webpage": "https://www.nk.se/goteborg/",
     "location": "GÖTEBORG",
-    "": ""
+    "hasChangingRooms": true
   },
   {
+    "id": 175,
     "name": "Victoria and Albert Museum",
     "adress": "Cromwell Road, London, SW7 2RL",
     "phone": "0044 (0)20 7942 2000",
@@ -1747,6 +1900,6 @@
     "note": "",
     "webpage": "https://www.vam.ac.uk/",
     "location": "LONDON",
-    "": ""
+    "hasChangingRooms": true
   }
 ]

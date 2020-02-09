@@ -1,13 +1,15 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This project is build with MongoDB where I fetched data from Mongo database using mongoose models.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Solution
 
-## The problem
+To do this project I first created my own data and converted it to JSON using https://www.csvjson.com/. The data I created consist of restaurants in Stockholm that has changing rooms for babys. In order to get all my data into my database I used the database seeding process.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+When I had all my data stored I returned the data using the RESTful endpoints that I found suitable to get the information out from the data. Then I used Mongoose queries to find and return the correct data from the routes I created.
+
+If I had more time I would implement frontend and pagination so the results only would show e.g. 20 objects.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://skotrum-mongo-project.herokuapp.com/
