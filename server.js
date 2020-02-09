@@ -80,12 +80,13 @@ app.use(bodyParser.json())
 app.get('/globes', (req, res) => {
   const queryString = req.query.q;
   const queryRegex = new RegExp(queryString, "i")
-  Globe.find({ 'nominee': queryRegex })
-    .then((results) => {
-      res.json(results);
-    }).catch((err) => {
-      res.json({ message: 'Cannot find this nominee', err: err })
-    });
+  Globe.find({ 'nominee': queryRegex }).then(results => {
+    if (results.length > 0) {
+      res.json(results)
+    } else {
+      res.status(404).json({ error: 'Cannot find this nominee' })
+    }
+  });
 });
 
 app.get('/globes/_id/:_id', (req, res) => {
