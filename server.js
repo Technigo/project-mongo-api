@@ -54,7 +54,7 @@ const queryBuilder = (req, res) => {
   }
   // Query to search for isAttending true or false
   if (attending) {
-    query = { 'isAttending': attending }
+    query['isAttending'] = { $eq: attending } //Adds isAttending to query if name is also applied
   }
   return query
 }
