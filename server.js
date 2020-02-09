@@ -101,10 +101,8 @@ app.get('/globes/_id/:_id', (req, res) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  Globe.find().then(globes => {
-    res.json(globes)
-  });
-});
+  res.send('End points: /globes/_id/*** or /gloves?q=***')
+})
 
 // Start the server
 app.listen(port, () => {
