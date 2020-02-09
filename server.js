@@ -6,23 +6,6 @@ import topMusicData from './data/top-music.json'
 
 console.log(topMusicData)
 
-// {
-//   "id": 1,
-//   "trackName": "Señorita",
-//   "artistName": "Shawn Mendes",
-//   "genre": "canadian pop",
-//   "bpm": 117,
-//   "energy": 55,
-//   "danceability": 76,
-//   "loudness": -6,
-//   "liveness": 8,
-//   "valence": 75,
-//   "length": 191,
-//   "acousticness": 4,
-//   "speechiness": 3,
-//   "popularity": 79
-// },
-
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -105,28 +88,33 @@ app.get('/', (req, res) => {
 })
 
 // TopMusic.find finds all the infomation that I've made an model for.
-app.get('/lists', async (req, res) => {
-  const list = await TopMusic.find()
-  const { page } = req.query
-  const startIndex = 20 * +page
-  res.json(list.slice(startIndex, startIndex + 20))
-  console.log(list)
+app.get('/music', async (req, res) => {
+  const allMusic = await TopMusic.find()
+
+  res.json(allMusic)
 })
 
-app.get('/genre', (req, res) => {
+app.get('/lists', async (req, res) => {
+  const { page } = req.query
+  const startIndex = 20 * +page
+  const list = await TopMusic.find().skip(startIndex).limit(20).exec()
+
+  res.json(list)
+})
+
+app.get('/genre', async (req, res) => {
   const queryString = req.query.q
   const queryRegex = new RegExp(queryString, 'i')
   // /pop/ is a regex and i makes it search not being case sensitive
-  TopMusic.find({ 'genre': queryRegex })
-    .then((results) => {
-      //if .find is succesful
-      console.log('Found : ' + results)
-      res.jsonp(results)
-    }).catch((err) => {
-      //Error/Failure
-      console.log('Error ' + err)
-      res.json({ message: 'Cannot find this genre', err: err })
-    })
+  const genre = await TopMusic.find({ 'genre': queryRegex })
+  if (genre) {
+    //if .find is succesful
+    console.log('Found : ' + genre)
+    res.json(genre);
+  } else {
+    console.log('Error ' + err)
+    res.status(404).json({ message: 'Cannot find this genre', err: err })
+  }
 })
 
 app.get('/artists', async (req, res) => {
@@ -134,13 +122,13 @@ app.get('/artists', async (req, res) => {
   res.json(artist)
 })
 
-//this only returns the status 404
+//this get works with MongoDBs _id
 app.get('/artists/:id', async (req, res) => {
-  const artist = await TopMusic.findById(req.params.id)
+  const artist = await Artist.findById(req.params.id)
   if (artist) {
     res.json(artist)
   } else {
-    res.status(404).json({ errror: 'Artist not found' })
+    res.status(404).json({ error: 'Artist not found' })
   }
 })
 
@@ -150,17 +138,6 @@ app.get('/records', async (req, res) => {
     res.json(record)
   } else {
     res.status(404).json({ errror: 'Record not found' })
-  }
-})
-
-//this returns the status 404 
-app.get('/artists/:id/records', async (req, res) => {
-  const artist = await TopMusic.findById(req.params.id)
-  if (artist) {
-    const record = await Record.find({ artist: mongoose.Types.ObjectId(artist.id) })
-    res.json(record)
-  } else {
-    res.status(404).json({ errror: 'Artist not found' })
   }
 })
 
