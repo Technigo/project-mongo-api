@@ -5,32 +5,7 @@ import mongoose from 'mongoose'
 
 import netflixData from './data/netflix-titles.json'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
-
-/* {
-    "show_id": 81193313,
-        "title": "Chocolate",
-            "director": "",
-                "cast": "Ha Ji-won, Yoon Kye-sang, Jang Seung-jo, Kang Bu-ja, Lee Jae-ryong, Min Jin-woong, Kim Won-hae, Yoo Teo",
-                    "country": "South Korea",
-                        "date_added": "November 30, 2019",
-                            "release_year": 2019,
-                                "rating": "TV-14",
-                                    "duration": "1 Season",
-                                        "listed_in": "International TV Shows, Korean TV Shows, Romantic TV Shows",
-                                            "description": "Brought together by meaningful meals in the past and present, a doctor and a chef are reacquainted when they begin working at a hospice ward.",
-                                                "type": "TV Show"
-}, */
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/shows"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -47,10 +22,18 @@ const Show = mongoose.model('Show', {
     listed_in: String,
     description: String,
     type: String
-
-
-
 })
+
+
+const seedDatabase = async() => {
+    await Show.deleteMany()
+    netflixData.forEach(show => {
+
+        new Show(show).save()
+    })
+}
+
+seedDatabase()
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -66,6 +49,26 @@ app.use(bodyParser.json())
 // Start defining your routes here
 app.get('/', (req, res) => {
     res.send('Hello world')
+})
+
+
+app.get('/shows', async(req, res) => {
+    const shows = await Show.find()
+    res.json(shows)
+})
+
+//Search the title with regex
+
+app.get('/regex', (reg, res) => {
+    const queryString = reg.query.q
+    const queryRegex = new RegExp(queryString, 'i')
+    Show.find({ 'title': queryRegex })
+        .then(results => {
+            res.json(results)
+        })
+        .catch(err => {
+            res.json({ message: 'Cant find this query' })
+        })
 })
 
 // Start the server
