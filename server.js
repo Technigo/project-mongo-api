@@ -34,7 +34,8 @@ if (process.env.RESET_DB) {
 }
 
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  const tracks = await Track.find()
+  res.json(tracks)
 })
 
 app.get('/tracks', async (req, res) => {
