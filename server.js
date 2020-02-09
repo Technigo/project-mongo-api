@@ -56,19 +56,28 @@ const Book = mongoose.model('Book', {
   }
 })
 
-// const addBooksToDataBase = () => {
-//   booksData.forEach((book) => {
-//     new Book(book).save()
-//   })
-// }
+if (process.env.RESET_DB) {
+  const addBooksToDataBase = async () => {
+    await Book.deleteMany({})
 
-// addBooksToDataBase()
+    booksData.forEach((book) => {
+      new Book(book).save()
+    })
+  }
+
+  addBooksToDataBase()
+}
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
 // Start defining your routes here
+
+app.get('/', (req, res) => {
+  res.send('Endpoints: /books (search by title, author or use sort_by=average_rating to get the books sorted), /books/:isbn (search for a single book)')
+})
+
 app.get('/books', (req, res) => {
   const { title, author, sort_by } = req.query
 
@@ -90,10 +99,12 @@ app.get('/books', (req, res) => {
   })
     .sort(sort)
     .then((results) => {
+      if (results.length === 0) {
+        throw new Error('No results found')
+      }
       res.json(results)
     }).catch((err) => {
-      console.log('Error ' + err)
-      res.json({ message: 'Cannot find this book', err: err })
+      res.json({ message: err.message })
     })
 })
 
@@ -102,9 +113,12 @@ app.get('/books/:isbn', (req, res) => {
   const isbn = req.params.isbn;
   Book.findOne({ 'isbn': isbn })
     .then((results) => {
+      if (!results) {
+        throw new Error('No book found')
+      }
       res.json(results);
     }).catch((err) => {
-      res.json({ message: 'Cannot find this isbn number', err: err });
+      res.json({ message: err.message });
     });
 });
 
