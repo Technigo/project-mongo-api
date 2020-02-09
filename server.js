@@ -9,13 +9,9 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8082
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
@@ -31,17 +27,12 @@ if (process.env.RESET_DB) {
     await Track.deleteMany({})
 
     topMusicData.forEach((trackData) => {
-      new Track(trackData).save((err) => {
-        if (err) {
-          console.log(err)
-        }
-      })
+      new Track(trackData).save()
     })
   }
   seedDatabase()
 }
 
-// Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
@@ -53,24 +44,33 @@ app.get('/tracks', async (req, res) => {
 
   if (genreQuery && bpmQuery) {
     tracks = await Track.find({
-      $and:
-        [{ genre: genreQuery },
-        { bpm: bpmQuery }]
+      $and: [{ genre: genreQuery }, { bpm: bpmQuery }]
     })
   } else if (genreQuery || bpm) {
     tracks = await Track.find({
-      $or:
-        [{ genre: genreQuery },
-        { bpm: bpmQuery }]
+      $or: [{ genre: genreQuery }, { bpm: bpmQuery }]
     })
   }
 
-  res.json(tracks)
+  if (tracks.length > 0) {
+    res.json(tracks)
+  } else {
+    res.status(404).json({ message: "No tracks found" })
+  }
 })
 
 app.get('/tracks/:id', async (req, res) => {
-  const track = await Track.findById(req.params.id)
-  res.json(track)
+  let track
+
+  try {
+    track = await Track.findById(req.params.id)
+  } catch (error) {
+    return res.status(404).json({ message: "Track not found" })
+  }
+
+  if (track) {
+    res.json(track)
+  }
 })
 
 app.get('/artists', async (req, res) => {
@@ -80,11 +80,22 @@ app.get('/artists', async (req, res) => {
 
 app.get('/artists/:artist/tracks', async (req, res) => {
   const artistName = new RegExp(req.params.artist, 'i')
-  const artist = await Track.find({ 'artistName': artistName })
-  res.json(artist)
+  let artist
+  try {
+    artist = await Track.find({ 'artistName': artistName })
+  } catch (error) {
+    return null
+  }
+
+  if (artist.length > 0) {
+    res.json(artist)
+  } else {
+    res.status(404).json({
+      message: "Artist not found"
+    })
+  }
 })
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
