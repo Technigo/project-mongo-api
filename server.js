@@ -23,8 +23,8 @@ const Book = mongoose.model('Book', {
     type: Number
   },
   isbn: {
-    unique: true,
-    type: Number
+    // unique: true,
+    type: String
   },
   isbn13: {
     type: Number
@@ -47,7 +47,7 @@ if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany({})
 
-    booksData.array.forEach((book) => {
+    booksData.forEach((book) => {
       new Book(book).save()
     });
   }
