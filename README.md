@@ -1,13 +1,24 @@
-# Mongo API Project
+# Project 18 - Mongo API Project
 
-Replace this readme with your own information about your project. 
+Week 18 @ Technigo Bootcamp we we're challenged to build an API again, but this time we needed to model our database using Mongoose models, and persist our data in the database.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+API: https://nyblad-guest-list.herokuapp.com/  <br>
+Example endpoint with queries: https://nyblad-guest-list.herokuapp.com/guests?attending=true&name=sofied <br>
 
-## The problem
+Front end to try out: https://the-nyblad-wedding.netlify.com/guests <br>
+(This API will be a part of my final project so heads up that the link to frontend doesn't work in future due to changes during the project)
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## Learning objectives
 
-## View it live
+* How to model data in Mongoose <br>
+* How to fetch items from a Mongo database using Mongoose <br>
+* How to seed large amounts of data to a database <br>
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+## Technologies used
+
+* MongoDB <br>
+* Mongoose <br>
+* Express <br>
+* JavaScript ES6 <br>
+
+Sofie Nyblad 2020
