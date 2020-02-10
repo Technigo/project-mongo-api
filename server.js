@@ -83,11 +83,11 @@ app.get('/', (req, res) => {
 })
 
 
-// Regular expression => display all the shows which are included "Comedies" word, and the 'i' = uppercase/lowercase
+// Regular expression => display all the shows base on searching word, and the 'i' = uppercase/lowercase
 // http://localhost:8080/shows?year=2018&title=people&listed_in=international
 app.get("/shows", async (req, res) => {
   let queryObj = {}
-  
+
   let startIndex, perPage
   if (req.query.perPage) {
     perPage = +req.query.perPage
@@ -134,6 +134,7 @@ app.get("/shows/id/:id", async (req, res) => {
       res.json({ message: 'Cannot find this show', err: err })
     })
 })
+
 
 
 
