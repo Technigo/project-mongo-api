@@ -4,11 +4,8 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 import data from "./data/boardgames.json"
-import descriptionData from "./data/gameDescriptions.json"
 
 const Boardgame = mongoose.model("Boardgame", {
-  // ?
-  // Properties defined here match the keys from the people.json file
   id: Number,
   name: String,
   year: Number,
@@ -23,7 +20,6 @@ const Boardgame = mongoose.model("Boardgame", {
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Boardgame.deleteMany({})
-
     data.forEach((boardgameData) => {
       new Boardgame(boardgameData).save()
     })
@@ -55,79 +51,60 @@ app.use((req, res, next) => {
   }
 })
 
-// Start defining your routes here
+// Routes
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Welcome! Possible routes: /boardgames/ (with queries name, year, page and sort=rank or sort=average) and /boardgames/:id.')
 })
 
 //All boardgames
 app.get("/boardgames/", async (req, res) => {
   //Queries
-  const nameQuery = req.query.name
-  const yearQuery = req.query.year
-  const sort = req.query.sort
-  let pageQuery = parseInt(req.query.page)
+  const { name, year, sort, page } = req.query
+  // const name = req.query.name
+  // const year = req.query.year
+  // const sort = req.query.sort
+  // let page = req.query.page
 
   //Regular expression to make it case insensitive
-  const nameQueryRegex = new RegExp(nameQuery, "i")
-  //Find everything in the db (no queries)
-  let boardgames = await Boardgame.find()
+  const nameRegex = new RegExp(name, "i")
 
-  //Sort by name and year
-  if (nameQuery && yearQuery) {
-    boardgames = await Boardgame.find({ "name": nameQueryRegex, "year": yearQuery })
-    //Name, year and average
-    if (sort === "average") {
-      boardgames = boardgames.sort((a, b) => -(parseFloat(a.average) - parseFloat(b.average)))
+  //Puts name-query and year-query into an object
+  const buildNameYearQuery = (name, year) => {
+    let findNameYear = {}
+    if (name) {
+      findNameYear.name = name
     }
-    //Name, year and rank
-    else if (sort === "rank") {
-      boardgames = boardgames.sort((a, b) => (parseFloat(a.rank) - parseFloat(b.rank)))
+    if (year) {
+      findNameYear.year = year
     }
+    return findNameYear
   }
-  //Sort by name
-  else if (nameQuery) {
-    boardgames = await Boardgame.find({ "name": nameQueryRegex })
-    //Name and average
-    if (sort === "average") {
-      boardgames = boardgames.sort((a, b) => -(parseFloat(a.average) - parseFloat(b.average)))
+
+  //Checks the sortquery, and sorts according to rank or average
+  const buildSortQuery = (sort) => {
+    if (sort === "rank") {
+      return { rank: 1 }
     }
-    //Name and rank
-    else if (sort === "rank") {
-      boardgames = boardgames.sort((a, b) => (parseFloat(a.rank) - parseFloat(b.rank)))
-    }
-  }
-  //Sort by year
-  else if (yearQuery) {
-    boardgames = await Boardgame.find({ "year": yearQuery })
-    //Year and average
-    if (sort === "average") {
-      boardgames = boardgames.sort((a, b) => -(parseFloat(a.average) - parseFloat(b.average)))
-    }
-    //Year and rank
-    else if (sort === "rank") {
-      boardgames = boardgames.sort((a, b) => (parseFloat(a.rank) - parseFloat(b.rank)))
-    }
-  }
-  //Sort only by average or rank
-  else {
-    if (sort === "average") {
-      boardgames = boardgames.sort((a, b) => -(parseFloat(a.average) - parseFloat(b.average)))
-    } else if (sort === "rank") {
-      boardgames = boardgames.sort((a, b) => (parseFloat(a.rank) - parseFloat(b.rank)))
+    else if (sort === "average") {
+      return { average: -1 }
     }
   }
 
-  const pageCount = Math.ceil(boardgames.length / 10)
-  if (!pageQuery) {
-    pageQuery = 1
-  }
-  else if (pageQuery > pageCount) {
-    pageQuery = pageCount
+  //Checks how many results should be skipped
+  //e.g. if page = 1 it should skip none, if page it 2 it should skip 10
+  //because the limit it set to 10
+  const skipResults = (page) => {
+    return ((page - 1) * 10)
   }
 
-  res.json(boardgames.slice(pageQuery * 10 - 10, pageQuery * 10))
-
+  //Find games based on name and year, sort on rank/average,
+  //limit to 10 results per page, skip so that every page shows accurate results
+  let boardgames = await Boardgame.find(buildNameYearQuery(nameRegex, year))
+    .sort(buildSortQuery(sort))
+    .limit(10)
+    .skip(skipResults(page))
+  //After all filters
+  res.json(boardgames)
 })
 
 //Single boardgame
@@ -140,16 +117,6 @@ app.get("/boardgames/:id", async (req, res) => {
     res.status(404).json({ error: "Boardgame not found" })
   }
 })
-
-// app.get("/boardgames/:id", async (req, res) => {
-//   const boardgame = await Boardgame.findById(req.params.id)
-//   if (boardgame) {
-//     res.json(boardgame)
-//   } else {
-//     res.status(404).json({ error: "Boardgame not found" })
-//   }
-// })
-
 
 // Start the server
 app.listen(port, () => {
