@@ -71,7 +71,16 @@ const showQuerySchema = Joi.object()
   })
   .options({ abortEarly: false });
 
+const showParamsSchema = Joi.object()
+  .keys({
+    id: Joi.number()
+      .integer()
+      .required()
+  })
+  .optional({ abortEarly: false });
+
 module.exports = {
   showObjectSchema,
-  showQuerySchema
+  showQuerySchema,
+  showParamsSchema
 };

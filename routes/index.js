@@ -17,7 +17,11 @@ router.get(
   showHandler.getAllShows
 );
 
-router.get('/shows/:id', showHandler.getShowById);
+router.get(
+  '/shows/:id',
+  celebrate({ [Segments.PARAMS]: validation.showParamsSchema }),
+  showHandler.getShowById
+);
 
 // POST routes
 router.post(
