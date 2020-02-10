@@ -11,9 +11,9 @@ I have used Kaggle to find a dataset.
 
 ## View it live
 
-https://linda-mongo-api.herokuapp.com
-Example with queries: 
-https://linda-mongo-api.herokuapp.com/characters?name=harry&job=student&house=gryffindor&gender=male  
+ - https://linda-mongo-api.herokuapp.com
+- Example with queries: 
+https://linda-mongo-api.herokuapp.com/characters?name=harry&job=student&house=gryffindor&gender=male    
 
 ## Technologies used
 - MongoDB
