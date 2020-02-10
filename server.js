@@ -87,8 +87,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/plants', async (req, res) => {
-  const plants = await Plant.find().populate('family')
-  res.json(plants)
+  const plants = await Plants.find().populate('team')
+  res.json(plant)
 })
 
 app.get('/plants/:id/', async (req, res) => {
