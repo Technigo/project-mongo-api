@@ -12,4 +12,4 @@ I created API endpoints for returning the array of books sorted by average ratin
 using query for searching for titles and params for language code, isbn and id number.
 
 Deployed project: https://michel-project-mongo.herokuapp.com/books
-Fronend part diplaying the top 30 books: https://michel-apiexpressproject.netlify.com/
+<br>Fronend part diplaying the top 30 books: https://michel-apiexpressproject.netlify.com/</br>
