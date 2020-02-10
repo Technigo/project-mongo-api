@@ -65,7 +65,7 @@ const showQuerySchema = Joi.object()
       .optional(),
     rating: Joi.string().optional(),
     duration: Joi.string().optional(),
-    categories: Joi.string().optional(),
+    category: Joi.string().optional(),
     description: Joi.string().optional(),
     type: Joi.string().optional()
   })

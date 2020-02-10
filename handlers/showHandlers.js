@@ -4,27 +4,20 @@ import { stringSearch } from '../helpers/stringSearch';
 const getShowById = async (req, res) => {
   const { id } = req.params;
   const show = await Show.find({ show_id: +id });
-  // console.log('Shows length', typeof show);
 
   if (show.length > 0) {
-    console.log('working');
     res.json({
       statusCode: 200,
       message: 'Movie fetched successfully',
       data: show
     });
   } else {
-    console.log('not working');
     res.status(404).json({
       statusCode: 404,
       error: `No movie found with id ${id}`,
       params: req.params
     });
   }
-
-  // Show.find({ show_id: +id }).then(show => {
-
-  // });
 };
 
 const getAllShows = (req, res) => {
@@ -37,7 +30,7 @@ const getAllShows = (req, res) => {
     year,
     rating,
     duration,
-    categories,
+    category,
     description,
     type
   } = req.query;
@@ -71,8 +64,8 @@ const getAllShows = (req, res) => {
     query.duration = stringSearch(duration);
   }
 
-  if (categories) {
-    query.listed_in = stringSearch(categories);
+  if (category) {
+    query.listed_in = stringSearch(category);
   }
 
   if (description) {
@@ -80,7 +73,6 @@ const getAllShows = (req, res) => {
   }
 
   if (type) {
-    console.log(type);
     query.type = stringSearch(type);
   }
 
