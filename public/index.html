@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Documentation for Custom Netflix API</title>
+  </head>
+  <body>
+    <header><h1>Documentation for Custom Netflix API</h1></header>
+    <main class="app">
+      <section>
+        <h3 class="list-description">
+          GET endpoints
+        </h3>
+        <ul>
+          <li>
+            <p class="endpoint-description">Get all shows</p>
+            <p>e.g.<a class="endpoint-url" href="/api/shows">/api/shows</a></p>
+          </li>
+          <li>
+            <p class="endpoint-description">Get a specific show</p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows/60020826"
+                >/api/shows/60020826</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows with a specific actor
+            </p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?actor=Anna"
+                >/api/shows?actor=Anna</a
+              >
+            </p>
+            <p>
+              e.g.<a
+                class="endpoint-url"
+                href="/api/shows?actor=Anna Claire Bartlam"
+                >/api/shows?actor=Anna Claire Bartlam</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows for a specific year
+            </p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?year=2017"
+                >/api/shows?year=2017</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows with a specific duration (min)
+            </p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?duration=105"
+                >/api/shows?duration=105</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows with a specific title
+            </p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?title=Chocolate"
+                >/api/shows?title=Chocolate</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows with a specific director
+            </p>
+            <p>
+              e.g.<a
+                class="endpoint-url"
+                href="/api/shows?director=Stanley Kubrick"
+                >/api/shows?director=Stanley Kubrick</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows with a specific country
+            </p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?country=Sweden"
+                >/api/shows?country=Sweden</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows with a specific rating
+            </p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?rating=TV-14"
+                >/api/shows?rating=TV-14</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows with a specific category
+            </p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?category=Comedies"
+                >/api/shows?category=Comedies</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows with a specific description
+            </p>
+            <p>
+              e.g.<a
+                class="endpoint-url"
+                href="/api/shows?description=In this sequel to the 2016"
+                >/api/shows?description=In this sequel to the 2016</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get all shows with a specific show type
+            </p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?type=movie"
+                >/api/shows?type=movie</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">Get all movies with pagination</p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?page=1"
+                >/api/shows?page=1</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get shows with several parameters
+            </p>
+            <p>
+              e.g.<a class="endpoint-url" href="/api/shows?actor=Anna&year=2019"
+                >/api/shows?actor=Anna&year=2019</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get shows with several parameters
+            </p>
+            <p>
+              e.g.<a
+                class="endpoint-url"
+                href="/api/shows?actor=Anna&year=2019&duration=24"
+                >/api/shows?actor=Anna&year=2019&duration=24</a
+              >
+            </p>
+          </li>
+          <li>
+            <p class="endpoint-description">
+              Get shows with several parameters (error example)
+            </p>
+            <p>
+              e.g.<a
+                class="endpoint-url"
+                href="/api/shows?actor=Anna&duration=105&page=3"
+                >/api/shows?actor=Anna&duration=105&page=3</a
+              >
+            </p>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
