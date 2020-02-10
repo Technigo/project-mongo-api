@@ -30,7 +30,8 @@ app.use(bodyParser.json())
 app.get('/books', (req, res) => {
   const queryString = req.query.title
   const queryRegex = new RegExp(queryString, "i")
-  Book.find({ 'title': /harry/i })
+  Book.find({ 'title': queryRegex })
+    .sort({ 'num_pages': -1 })
     .then((results) => {
       // Successful result
       console.log('Found : ' + results);
@@ -39,6 +40,17 @@ app.get('/books', (req, res) => {
       console.log('Error ' + err);
       res.json({ message: "Book not found", err: err })
     });
+});
+
+
+app.get('/books/:isbn', (req, res) => {
+  const isbn = req.params.isbn;
+  Book.find({ 'isbn': isbn })
+    .then((results) => {
+      res.json(results);
+    }).catch((err) => {
+      res.json({ message: 'Book not found', err: err });
+    })
 });
 
 
@@ -90,10 +102,6 @@ app.get('/', (req, res) => {
   res.send('Books API')
 })
 
-// Return the array with all the book objects
-/*app.get('/books', (req, res) => {
-  const { language } = req.query
-})*/
 
 // Start the server
 app.listen(port, () => {
