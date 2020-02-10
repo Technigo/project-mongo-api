@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 import { Plant } from './models/plants'
 import { Family } from './models/family'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-plants"
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://dbUserClara:dbUserClara1@cluster0-mtwpn.mongodb.net/mongoprojectplants?retryWrites=true&w=majority"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
