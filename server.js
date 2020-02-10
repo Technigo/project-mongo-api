@@ -24,6 +24,7 @@ const Skotrum = mongoose.model('Skotrum', {
 
 const Restaurant = mongoose.model('Restaurant', {
   name: String,
+  phone: String,
   adress: {
     type: mongoose.Schema.Types.String,
     ref: 'BabyRooms'
@@ -163,7 +164,7 @@ app.get('/openings', async (req, res) => {
 
 // Route with path params to be able to show restaurants by seraching for location. E.g. only write 'va' and all restaurants in vasastan will show.
 app.get('/:locations', async (req, res) => {
-  const paramString = req.params.location;
+  const paramString = req.params.locations;
   console.log(paramString);
   const paramsRegex = new RegExp(paramString, 'i');
   const location = await Skotrum.find({ location: paramsRegex });
