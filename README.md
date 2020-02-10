@@ -8,7 +8,7 @@ To do this project I first created my own data and converted it to JSON using ht
 
 When I had all my data stored I returned the data using the RESTful endpoints that I found suitable to get the information out from the data. Then I used Mongoose queries to find and return the correct data from the routes I created. I used conditions to return the results if it's true and if false it returns a error message.
 
-If I had more time I would implement frontend and pagination so the results only would show e.g. 20 objects.
+If I had more time I would implement frontend and pagination.
 
 ## View it live
 
