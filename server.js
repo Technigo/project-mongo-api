@@ -3,8 +3,6 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-import netflixData from './data/netflix-titles.json'
-
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/netflix-titles'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
@@ -51,24 +49,37 @@ app.use(cors())
 app.use(bodyParser.json())
 
 // Routes
-app.get('/', (req, res) => {
-  res.send(netflixData)
-})
-
 app.get('/directors', async (req, res) => {
   const directors = await Director.find()
   res.json(directors)
 })
 
+app.get('/directors/:id', async (req, res) => {
+  try {
+    const director = await Director.findById(req.params.id)
+    if (director) {
+      res.json(director)
+    } else {
+      res.status(404).json({ error: 'Director not found' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid director id' })
+  }
+})
+
 app.get('/directors/:id/titles', async (req, res) => {
-  const director = await Director.findById(req.params.id)
-  if (director) {
-    const titles = await Title.find({
-      director: mongoose.Types.ObjectId(director.id)
-    })
-    res.json(titles)
-  } else {
-    res.status(404).json({ error: 'Director not found' })
+  try {
+    const director = await Director.findById(req.params.id)
+    if (director) {
+      const titles = await Title.find({
+        director: mongoose.Types.ObjectId(director.id)
+      })
+      res.json(titles)
+    } else {
+      res.status(404).json({ error: 'Director not found' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid director id' })
   }
 })
 
