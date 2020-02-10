@@ -112,10 +112,10 @@ app.get('/findbabyrooms/:id', async (req, res) => {
 });
 
 // to find restaurants with babyrooms including name and adress
-app.get('/restaurants', async (req, res) => {
-  const restaurant = await Restaurant.find().populate('Location');
-  if (restaurant) {
-    res.json(restaurant);
+app.get('/contacts', async (req, res) => {
+  const contact = await Restaurant.find().populate('Location');
+  if (contact) {
+    res.json(contact);
   } else {
     res.status(404).json({ error: 'restauarnt not found' });
   }
@@ -127,7 +127,7 @@ app.get('/locations', async (req, res) => {
   if (location) {
     res.json(location);
   } else {
-    res.status(404).json({ error: 'restauarnt not found' });
+    res.status(404).json({ error: 'restaurant not found' });
   }
 });
 
