@@ -1,24 +1,30 @@
 import Show from '../models/show';
 import { stringSearch } from '../helpers/stringSearch';
 
-const getShowById = (req, res) => {
+const getShowById = async (req, res) => {
   const { id } = req.params;
+  const show = await Show.find({ show_id: +id });
+  // console.log('Shows length', typeof show);
 
-  Show.find({ show_id: +id }).then(show => {
-    if (show.length > 0) {
-      res.json({
-        statusCode: 200,
-        message: 'Movie fetched successfully',
-        data: show
-      });
-    } else {
-      res.status(404).json({
-        statusCode: 404,
-        error: `No movie found with id ${id}`,
-        params: req.params
-      });
-    }
-  });
+  if (show.length > 0) {
+    console.log('working');
+    res.json({
+      statusCode: 200,
+      message: 'Movie fetched successfully',
+      data: show
+    });
+  } else {
+    console.log('not working');
+    res.status(404).json({
+      statusCode: 404,
+      error: `No movie found with id ${id}`,
+      params: req.params
+    });
+  }
+
+  // Show.find({ show_id: +id }).then(show => {
+
+  // });
 };
 
 const getAllShows = (req, res) => {
