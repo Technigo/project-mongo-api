@@ -1,6 +1,7 @@
 # Mongo API Project
 
 This project has been to work with MongoDB and Mongoose creating a Restful routes of an API about Top Music.
+This API about Top Music has now endpoints like serching for genres, search by id, showing the full list, danceability and endpoints with artists or records built with mongoose model.
 
 # Learing objectives
 RESTful API with GET
