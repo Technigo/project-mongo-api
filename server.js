@@ -89,18 +89,6 @@ app.get("/directors/:id", async (req, res) => {
   res.json(director);
 });
 
-app.get("/directors/:id/titles", async (req, res) => {
-  const director = await Director.findById(req.params.id);
-  if (director) {
-    const titles = await Title.find({
-      director: mongoose.Types.ObjectId(director.id)
-    });
-    res.json(titles);
-  } else {
-    res.status(404).json({ error: "Director not found" });
-  }
-});
-
 app.get("/titles", async (req, res) => {
   const titles = await Title.find().populate("director");
   res.json(titles);
