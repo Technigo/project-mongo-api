@@ -74,6 +74,7 @@ const getAllShows = (req, res) => {
   }
 
   if (type) {
+    console.log(type);
     query.type = stringSearch(type);
   }
 

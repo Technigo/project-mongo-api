@@ -26,21 +26,17 @@ try {
 
 mongoose.Promise = Promise;
 
-// Seed database
 if (process.env.RESET_DB === 'true') {
-  console.log('Resetting database!');
-
   const seedDatabase = async () => {
     await Show.deleteMany();
 
     netflixData.forEach(item => {
-      // delete item.show_id;
-
       const newShow = new Show(item);
       newShow.save();
     });
   };
   seedDatabase();
+  console.log('Database cleared and seeded with new data!');
 }
 
 const port = process.env.PORT || 8080;
@@ -67,6 +63,7 @@ app.use((req, res, next) => {
 // Load API routes
 app.use('/api', Routes);
 
+// Catch errors thrown by Celebrate
 app.use(errors());
 
 // app.use((req, res, next) => {
