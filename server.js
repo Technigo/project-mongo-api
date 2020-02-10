@@ -25,6 +25,7 @@ const Skotrum = mongoose.model('Skotrum', {
 const Restaurant = mongoose.model('Restaurant', {
   name: String,
   phone: String,
+  webpage: String,
   adress: {
     type: mongoose.Schema.Types.String,
     ref: 'BabyRooms'
