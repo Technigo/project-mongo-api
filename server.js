@@ -10,7 +10,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Show = mongoose.model('Show', {
-    show_id: Number,
+    show_id: String,
     title: String,
     director: String,
     cast: String,
@@ -23,7 +23,6 @@ const Show = mongoose.model('Show', {
     description: String,
     type: String
 })
-
 
 const seedDatabase = async() => {
     await Show.deleteMany()
@@ -51,6 +50,7 @@ app.get('/', (req, res) => {
     res.send('Hello world')
 })
 
+// All the shows from the db
 
 app.get('/shows', async(req, res) => {
     const shows = await Show.find()
@@ -69,6 +69,20 @@ app.get('/regex', (reg, res) => {
         .catch(err => {
             res.json({ message: 'Cant find this query' })
         })
+})
+
+//show_id endpoint
+
+app.get('/shows/:show_id', (reg, res) => {
+    const id = reg.params.show_id
+    Show.find({ 'show_id': id })
+        .then(results => {
+            res.json(results)
+
+        }).catch(err => {
+            res.json({ message: 'Cant find query', err: err })
+        })
+
 })
 
 // Start the server
