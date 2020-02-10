@@ -1,13 +1,24 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+In this project I have built and API using MongoDB and Mongoose models. The API has RESTful endpoints and returns arrays of data and a single character. 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+I have used Kaggle to find a dataset.
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## Learning objectives
+- Model data in Mongoose
+- Fetch items from a Mongo database using Mongoose
+- Seed large amounts of data to a database
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://linda-mongo-api.herokuapp.com
+Example with queries: 
+https://linda-mongo-api.herokuapp.com/characters?name=harry&job=student&house=gryffindor&gender=male  
+
+## Technologies used
+- MongoDB
+- Mongoose
+- Express
+- JavaScript ES6
+- Postman 
+- MongoDB Compass

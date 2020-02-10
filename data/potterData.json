@@ -243,7 +243,7 @@
     "gender": "Male",
     "job": "Professor�of�Defence Against the Dark Arts�",
     "house": "Gryffindor",
-    "wand": "10�\" Cypress unicorn hair",
+    "wand": "10\" Cypress unicorn hair",
     "patronus": "Wolf",
     "species": "Werewolf",
     "blood_status": "Half-blood",
@@ -251,8 +251,8 @@
     "eye_colour": "Green",
     "loyalty": "Order of the Phoenix",
     "skills": "Exceptionally gifted in Defence Against the Dark Arts",
-    "birth": "10 March,�1960",
-    "death": "2 May,�1998"
+    "birth": "10 March,1960",
+    "death": "2 May,1998"
   },
   {
     "id": 16,
@@ -260,7 +260,7 @@
     "gender": "Male",
     "job": "The Servant of Lord Voldemort",
     "house": "Gryffindor",
-    "wand": "9�\" Chestnut dragon heartstring",
+    "wand": "9\" Chestnut dragon heartstring",
     "patronus": "None",
     "species": "Human",
     "blood_status": "Half-blood�or�pure-blood",
@@ -319,19 +319,19 @@
     "eye_colour": "Grey",
     "loyalty": "Order of the Phoenix | Gringotts Wizarding Bank",
     "skills": "Highly skilled dragon trainer| one-time Gryffindor Seeker",
-    "birth": "12 December,�1972",
+    "birth": "12 December, 1972",
     "death": ""
   },
   {
     "id": 20,
-    "name": "Lee Jordan�",
+    "name": "Lee Jordan",
     "gender": "Male",
     "job": "Student",
     "house": "Gryffindor",
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood_status": "Pure-blood�or�half-blood",
+    "blood_status": "Pure-blood-or-half-blood",
     "hair_colour": "Black",
     "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
@@ -353,7 +353,7 @@
     "eye_colour": "",
     "loyalty": "Hogwarts School of Witchcraft and Wizardry",
     "skills": "Keeper|  Captain of the Gryffindor Quidditch team",
-    "birth": "�October�1975�-�31 August�1976",
+    "birth": "October1975-31 August1976",
     "death": ""
   },
   {

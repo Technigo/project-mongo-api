@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import mongoose from 'mongoose'
+import mongoose, { mongo } from 'mongoose'
 import potterData from './data/potterData.json'
 
 //The name of the database - mongodb://localhost/mongo-project-potter
@@ -17,6 +17,14 @@ const House = mongoose.model('House', {
   ghost: String,
   founder: String
 })
+
+// const Book = mongoose.model('Book', {
+//   title: String,
+//   house: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'House'
+//   }
+// })
 
 //POTTER CHARACTER MODEL
 const Character = mongoose.model('Character', {
@@ -43,14 +51,9 @@ if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Character.deleteMany()
     await House.deleteMany()
+    // await Book.deleteMany()
 
-    const gryffindor = new House({
-      name: "Gryffindor",
-      mascot: "Lion",
-      head_teacher: "Minverva McGonogall",
-      ghost: "Nearly Headless Nick",
-      founder: "Godric Gryffindor"
-    })
+    const gryffindor = new House({ name: "Gryffindor", mascot: "Lion", head_teacher: "Minverva McGonogall", ghost: "Nearly Headless Nick", founder: "Godric Gryffindor" })
     await gryffindor.save()
 
     const slyterhin = new House({ name: "Slytherin", mascot: "Snake", head_teacher: "Severus Snape", ghost: "The Bloody Baron", founder: "Salazar Slytherin" })
@@ -61,6 +64,9 @@ if (process.env.RESET_DB) {
 
     const hufflepuff = new House({ name: "Hufflepuff", mascot: "Badger", head_teacher: "Pomona Sprout", ghost: "the Far Friar", founder: "Helga Hufflepuff" })
     await hufflepuff.save()
+
+    // await new Book({ title: "Harry Potter and the Philosopher's Stone", house: gryffindor }).save()
+    // await new Book({ title: "Harry Potter and the Chamber of Secrets", house: slyterhin }).save()
 
     potterData.forEach((character) => {
       new Character(character).save()
@@ -93,30 +99,36 @@ app.get('/', (req, res) => {
   res.send('Mongo-project: Harry Potter characters')
 })
 
-//GET ALL CHARACTERS
-// app.get('/characters', async (req, res) => {
-//   const characters = await Character.find()
-//   res.json(characters)
-// })
-
 //GET ALL HOUSES. How do I combine the house model with the character model? 
 app.get('/houses', async (req, res) => {
   const houses = await House.find()
   res.json(houses)
 })
 
+//Trying to get the house information populated into the character model but  can't make it to work. 
+//Book is to test if it works with only "manually" created data and that worked... http://localhost:9090/books
+// app.get('/books', async (req, res) => {
+//   const books = await Book.find().populate('house')
+//   res.json(books)
+// })
 
 //GET ALL CHARACTERS, Filter on name, house and job. http://localhost:9090/characters?name=harry&job=student&house=gryffindor&gender=male
 app.get('/characters', (req, res) => {
   let queryObj = {}
-
+  const pageOptions = {
+    page: parseInt(req.query.page, 10) || 0,
+    limit: parseInt(req.query.limit, 10) || 10
+  };
   //Regular expression to make it case insensitive
   if (req.query.name) { queryObj['name'] = new RegExp(req.query.name, 'i') }
   if (req.query.house) { queryObj['house'] = new RegExp(req.query.house, 'i') }
   if (req.query.job) { queryObj['job'] = new RegExp(req.query.job, 'i') }
   if (req.query.gender) { queryObj['gender'] = new RegExp(req.query.gender, 'i') }
 
-  Character.find(queryObj).sort('id')
+  Character.find(queryObj)
+    .skip(pageOptions.page * pageOptions.limit)
+    .limit(pageOptions.limit)
+    .sort({ id: 1 })
     .then((results) => {
       // Succesfull
       console.log('Found : ' + results);
