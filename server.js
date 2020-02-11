@@ -20,40 +20,14 @@ mongoose.Promise = Promise
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 7000
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
-app.get('/books', (req, res) => {
-  const queryString = req.query.title
-  const queryRegex = new RegExp(queryString, "i")
-  Book.find({ 'title': queryRegex })
-    .sort({ 'num_pages': -1 })
-    .then((results) => {
-      // Successful result
-      console.log('Found : ' + results);
-    }).catch((err) => {
-      // Failure
-      console.log('Error ' + err);
-      res.json({ message: "Book not found", err: err })
-    });
-});
-
-
-app.get('/books/:isbn', (req, res) => {
-  const isbn = req.params.isbn;
-  Book.find({ 'isbn': isbn })
-    .then((results) => {
-      res.json(results);
-    }).catch((err) => {
-      res.json({ message: 'Book not found', err: err });
-    })
-});
-
-
+// Mongoose model
 const Book = mongoose.model('Book', {
   bookID: {
     type: Number
@@ -88,14 +62,55 @@ const Book = mongoose.model('Book', {
   }
 });
 
-const seedDatabase = async () => {
-  await Book.deleteMany()
+app.get('/books', (req, res) => {
+  const queryString = req.query.title
+  const queryRegex = new RegExp(queryString, "i")
 
-  booksData.forEach((bookData) => {
-    new Book(bookData).save()
-  })
+  // Using query for title
+  Book.find({ 'title': queryRegex })
+    .sort({ 'num_pages': -1 })
+    .then((results) => {
+      // Successful result
+      console.log('Found : ' + results);
+    }).catch((err) => {
+      // Failure
+      console.log('Error ' + err);
+      res.json({ message: "Book not found", err: err })
+    });
+});
+
+
+app.get('/books/:isbn', (req, res) => {
+  const isbn = req.params.isbn;
+  Book.find({ 'isbn': isbn })
+    .then((results) => {
+      res.json(results);
+    }).catch((err) => {
+      res.json({ message: 'Book not found', err: err });
+    })
+});
+
+app.get('/books/_id/:_id', (req, res) => {
+  const _id = req.params._id
+  Book.findOne({ '_id': _id })
+    .then((results) => {
+      res.json(results)
+    }).catch((err) => {
+      res.json({ message: 'Cannot find this book', err: err })
+    })
+})
+
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Book.deleteMany({})
+
+    booksData.forEach((bookData) => {
+      new Book(bookData).save()
+    })
+  }
+  seedDatabase()
 }
-seedDatabase()
 
 // Start defining your routes here
 app.get('/', (req, res) => {
