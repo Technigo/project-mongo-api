@@ -29,22 +29,22 @@ Type {
 
 API has 4 endpoints:
 
-* /poke -returns json with list of all pokemons stored as objects
-* /poke/:name  -returns json with single pokemon object
-* /types  -returns json with list of all types of pokemon stored as object
-* /types/:type  -returns json with single type object
+* /poke -json with list of all pokemons stored as objects
+* /poke/:name  -json with single pokemon object
+* /types  -json with list of all types of pokemon stored as object
+* /types/:type  -json with single type object
 
 ## View it live
 
 ### Endpoints 
 
-https://pokedex-cislowski.herokuapp.com/poke
-https://pokedex-cislowski.herokuapp.com/poke/Pikachu
-https://pokedex-cislowski.herokuapp.com/types
-https://pokedex-cislowski.herokuapp.com/types/Normal
+* https://pokedex-cislowski.herokuapp.com/poke
+* https://pokedex-cislowski.herokuapp.com/poke/Pikachu
+* https://pokedex-cislowski.herokuapp.com/types
+* https://pokedex-cislowski.herokuapp.com/types/Normal
 
 ### SPA
 
 Simple SPA create in React:
-https://github.com/KarolCislowski/PokedexSPA
-https://pokedex-cislowski.netlify.com/
+* https://github.com/KarolCislowski/PokedexSPA
+* https://pokedex-cislowski.netlify.com/
