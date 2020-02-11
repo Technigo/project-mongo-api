@@ -103,7 +103,7 @@ app.get('/lists', async (req, res) => {
 })
 
 app.get('/genre', async (req, res) => {
-  const queryString = req.query.q
+  const queryString = req.query.genre
   const queryRegex = new RegExp(queryString, 'i')
   // /pop/ is a regex and i makes it search not being case sensitive
   const genre = await TopMusic.find({ 'genre': queryRegex })
@@ -119,7 +119,11 @@ app.get('/genre', async (req, res) => {
 
 app.get('/artists', async (req, res) => {
   const artist = await Artist.find().populate('record')
-  res.json(artist)
+  if (artist) {
+    res.json(artist)
+  } else {
+    res.status(404).json({ errror: 'Artist not found' })
+  }
 })
 
 //this get works with MongoDBs _id
