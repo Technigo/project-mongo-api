@@ -13,7 +13,7 @@ exports.getPokemonsList = (req, res) => {
 exports.getPokemonDetails = (req, res) => {
   db.Pokemon.find({ name: req.params.name })
     .then((poke) => {
-      res.json(poke)
+      res.json(poke[0])
     })
     .catch(err => {
       res.send(err)
