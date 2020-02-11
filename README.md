@@ -1,13 +1,21 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This project has been to work with MongoDB and Mongoose creating a Restful routes of an API about Top Music.
+This API about Top Music has now endpoints like serching for genres, search by id, showing the full list, danceability and endpoints with artists or records built with mongoose model.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+# Learing objectives
+RESTful API with GET
+Working with MongoDB to store the database
+Model data in Mongo using Mongoose and how to fetch items from a Mongo database using Mongoose
+How to seed large amounts of data to a database
+Use of Async and await
+Return useful error messages
+Deploy to Heruko
 
 ## View it live
+deployed site: https://top-music-api.herokuapp.com/
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+
+
+
+
