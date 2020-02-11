@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 export const Guest = mongoose.model('Guest', {
   first_name: { type: String, requierd: true, minlength: 2 },
   last_name: { type: String, requierd: true, minlength: 2 },
-  email: { type: String },
+  email: { type: String, required: true },
   phone: { type: Number },
   allergies: { type: String },
   other: { type: String },

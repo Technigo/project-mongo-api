@@ -107,14 +107,29 @@ app.post('/guests', async (req, res) => {
     res.status(400).json({ message: 'Could not save guest', error: err.errors })
   }
 })
+
 // ROUTES FOR PUT
 // app.put('/guests/:id', (req, res) => {
-//   return res.send(`PUT HTTP method on guest/${req.params.id} resource`)
+// try {
+//   //Sucess
+//   const updatedGuest = await guest.save()
+//   res.status(201).json(updatedGuest)
+// } catch (err) {
+//   // Failed
+//   res.status(400).json({ message: 'Could not update guest', error: err.errors })
+// }
 // })
+
 //ROUTES FOR DELETE
 // app.delete('/guests/:id', (req, res) => {
-//   return res.send(`DELETE HTTP method on guest/${req.params.id} resource`)
-// })
+// try {
+//   //Sucess
+//   const deletedGuest = await guest.save()
+//   res.status(201).json(deletedGuest)
+// } catch (err) {
+//   // Failed
+//   res.status(400).json({ message: 'Could not delete guest', error: err.errors })
+// }// })
 
 // Start the server
 app.listen(port, () => {
