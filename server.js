@@ -53,17 +53,13 @@ app.use((req, res, next) => {
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Welcome! Possible routes: /boardgames/ (with queries name, year, page and sort=rank or sort=average) and /boardgames/:id.')
+  res.send('Welcome! Possible routes: /boardgames/ (with queries name, year, page and sort= rank, average, newest or oldest and /boardgames/:id.')
 })
 
 //All boardgames
 app.get("/boardgames/", async (req, res) => {
   //Queries
   const { name, year, sort, page } = req.query
-  // const name = req.query.name
-  // const year = req.query.year
-  // const sort = req.query.sort
-  // let page = req.query.page
 
   //Regular expression to make it case insensitive
   const nameRegex = new RegExp(name, "i")
@@ -80,14 +76,13 @@ app.get("/boardgames/", async (req, res) => {
     return findNameYear
   }
 
-  //Checks the sortquery, and sorts according to rank or average
+  //Checks the sortquery, and sorts according to increasing rank or decreasing average
+  //Can also sort by year
   const buildSortQuery = (sort) => {
-    if (sort === "rank") {
-      return { rank: 1 }
-    }
-    else if (sort === "average") {
-      return { average: -1 }
-    }
+    if (sort === "rank") { return { rank: 1 } }
+    else if (sort === "average") { return { average: -1 } }
+    else if (sort === "newest") { return { year: -1 } }
+    else if (sort === "oldest") { return { year: 1 } }
   }
 
   //Checks how many results should be skipped
@@ -104,7 +99,12 @@ app.get("/boardgames/", async (req, res) => {
     .limit(10)
     .skip(skipResults(page))
   //After all filters
-  res.json(boardgames)
+
+  if (boardgames.length > 0) {
+    res.json(boardgames)
+  } else {
+    res.status(404).json({ error: "Nothing found on those queries, try to search for something else" })
+  }
 })
 
 //Single boardgame
