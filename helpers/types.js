@@ -13,7 +13,7 @@ exports.getTypesList = (req, res) => {
 exports.getTypeDetails = (req, res) => {
   db.Type.find({ type: req.params.type })
     .then((type) => {
-      res.json(type)
+      res.json(type[0])
     })
     .catch(err => {
       res.send(err)
