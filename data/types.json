@@ -1,74 +1,74 @@
 [
   {
     "type": "Normal",
-    "color": "#A8A878"
+    "color": "RGBA(168,168,120,1)"
   },
   {
     "type": "Fighting",
-    "color": "#C03028"
+    "color": "RGBA(192,48,40,1)"
   },
   {
     "type": "Flying",
-    "color": "#A890F0"
+    "color": "RGBA(168,144,240,1)"
   },
   {
     "type": "Poison",
-    "color": "#B55AA5"
+    "color": "RGBA(181,90,165,1)"
   },
   {
     "type": "Ground",
-    "color": "#E0C068"
+    "color": "RGBA(224,192,104,1)"
   },
   {
     "type": "Rock",
-    "color": "#BDA55A"
+    "color": "RGBA(189,165,90,1)"
   },
   {
     "type": "Bug",
-    "color": "#A8B820"
+    "color": "RGBA(168,184,32,1)"
   },
   {
     "type": "Ghost",
-    "color": "#6363B5"
+    "color": "RGBA(99,99,181,1)"
   },
   {
     "type": "Steel",
-    "color": "#B8B8D0"
+    "color": "RGBA(184,184,208,1)"
   },
   {
     "type": "Fire",
-    "color": "#F08030"
+    "color": "RGBA(240,128,48,1)"
   },
   {
     "type": "Water",
-    "color": "#C490F0"
+    "color": "RGBA(104,144,240,1)"
   },
   {
     "type": "Grass",
-    "color": "#78C850"
+    "color": "RGBA(120,200,80,1)"
   },
   {
     "type": "Electric",
-    "color": "#F8D030"
+    "color": "RGBA(248,208,48,1)"
   },
   {
     "type": "Psychic",
-    "color": "#F85888"
+    "color": "RGBA(248,88,136,1)"
   },
   {
     "type": "Ice",
-    "color": "#98D8D8"
+    "color": "RGBA(152,216,216,1)"
   },
   {
     "type": "Dragon",
-    "color": "#7038F8"
+    "color": "RGBA(112,56,248,1)"
   },
   {
     "type": "Dark",
-    "color": "#735A4A"
+    "color": "RGBA(115,90,74,1)"
   },
   {
     "type": "Fairy",
-    "color": "#EE99AC"
+    "color": "RGBA(238,153,172,1)"
   }
 ]
