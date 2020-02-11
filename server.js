@@ -90,12 +90,23 @@ app.get('/guests/:id', async (req, res) => {
 })
 
 
-
-// Preparing for next step to use in form to add/update/delete guests
 // ROUTES FOR POST
-// app.post('/guests', (req, res) => {
-//   return res.send('Received a POST HTTP method')
-// })
+app.post('/guests', async (req, res) => {
+  // Retrieve info sent by the client to our API endpoint
+  const { first_name, last_name, email, phone, allergies, other, isAttending } = req.body
+
+  // Use my mongoose model to create the database entry
+  const guest = new Guest({ first_name, last_name, email, phone, allergies, other, isAttending })
+
+  try {
+    //Sucess
+    const savedGuest = await guest.save()
+    res.status(201).json(savedGuest)
+  } catch (err) {
+    // Failed
+    res.status(400).json({ message: 'Could not save guest', error: err.errors })
+  }
+})
 // ROUTES FOR PUT
 // app.put('/guests/:id', (req, res) => {
 //   return res.send(`PUT HTTP method on guest/${req.params.id} resource`)
