@@ -4,7 +4,7 @@ I built an API using MongoDB and Mongoose models. I used Kaggle to find the data
 
 ## The problem
 
-At first I used find() to get all the data to be able to sort it with vanilla JS-methods (like sort and slice). When I started reading the mongoDB documentation I realized all the possibilities, and replaced it with mongoDB-methods such as sort, skip, limit etc). The advantage was that every request was narrowed down before find(), instead of using find() to request everything and then sorting out what should show. If I had more time I would've written more error-catching.
+At first I used find() to get all the data to be able to sort it with vanilla JS-methods (like sort and slice). When I started reading the mongoDB documentation I realized all the possibilities, and replaced it with mongoDB-methods such as sort, skip, limit etc. The advantage was that every request was narrowed down before find(), instead of using find() to request everything and then sorting out what should show. If I had more time I would've written more error-catching.
 
 ## View it live
 
