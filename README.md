@@ -1,13 +1,18 @@
-# Mongo API Project
+# Project 18 - Mongo API Project @ Technigo Bootcamp 2019-2020
 
-Replace this readme with your own information about your project. 
+The 18th project of the Technigo bootcamp was to look at how to use Mongodb to store data, and how to query that data from an API.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Link to the project: https://mongo-api-project.herokuapp.com/
 
-## The problem
+## The requirements for the project:
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+- Modeling data in Mongoose
+- Fetching items from a Mongo database using Mongoose
+- Seeding data to a database
 
-## View it live
+## Technologies used:
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+- MongoDB
+- Mongoose
+- Express
+- JavaScript ES6
