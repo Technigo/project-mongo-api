@@ -10,6 +10,6 @@ At first I used find() to get all the data to be able to sort it with vanilla JS
 
 https://boardgames-mongo.herokuapp.com/boardgames
 
-### Examples with queries:
+#### Examples with queries:
 https://boardgames-mongo.herokuapp.com/boardgames?name=cards&sort=average
 https://boardgames-mongo.herokuapp.com/boardgames?year=2010&page=2
