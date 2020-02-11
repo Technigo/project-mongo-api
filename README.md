@@ -1,13 +1,50 @@
-# Mongo API Project
+# Mongo API Project - Pokedex
 
-Replace this readme with your own information about your project. 
+API with simple data about Pokemons stored in MongoDB
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Details
 
-## The problem
+### Models
+```
+Pokemon {
+    "pokemonNo": Number,
+    "name": String,
+    "type": Array,
+    "HP": Number,
+    "Attack": Number,
+    "Defense": Number,
+    "SpAttack": Number,
+    "SpDefense": Number,
+    "Speed": Number
+  }
+  ```
+```
+Type {
+  "type": String,
+  "color": String
+}
+```
+  
+### Endpoints
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+API has 4 endpoints:
+
+* /poke -returns json with list of all pokemons stored as objects
+* /poke/:name  -returns json with single pokemon object
+* /types  -returns json with list of all types of pokemon stored as object
+* /types/:type  -returns json with single type object
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+### Endpoints 
+
+https://pokedex-cislowski.herokuapp.com/poke
+https://pokedex-cislowski.herokuapp.com/poke/Pikachu
+https://pokedex-cislowski.herokuapp.com/types
+https://pokedex-cislowski.herokuapp.com/types/Normal
+
+### SPA
+
+Simple SPA create in React:
+https://github.com/KarolCislowski/PokedexSPA
+https://pokedex-cislowski.netlify.com/
