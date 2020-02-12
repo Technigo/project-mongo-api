@@ -20,7 +20,7 @@ mongoose.Promise = Promise
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 7000
+const port = process.env.PORT || 8001
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -71,10 +71,9 @@ app.get('/books', (req, res) => {
     .sort({ 'num_pages': -1 })
     .then((results) => {
       // Successful result
-      console.log('Found : ' + results);
+      res.json(results)
     }).catch((err) => {
       // Failure
-      console.log('Error ' + err);
       res.json({ message: "Book not found", err: err })
     });
 });
