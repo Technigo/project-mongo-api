@@ -18,84 +18,24 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Book = mongoose.model('Book', {
-  bookID: {
-    type: Number
-  },
-  title: {
-    type: String
-  },
-  authors: {
-    type: String
-  },
-  average_rating: {
-    type: Number
-  },
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
   isbn: {
     unique: true,
     type: String
   },
-  isbn13: {
-    type: String
-  },
-  language_code: {
-    type: String
-  },
-  num_pages: {
-    type: Number
-  },
-  ratings_count: {
-    type: Number
-  },
-  text_reviews_count: {
-    type: Number
-  }
+  isbn13: String,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
 })
 //FETCHING THE DATA FROM JSON TO DATABASE
 // booksData.forEach((book) => {
 //   new Book(book).save()
 // })
-
-// const Animal = mongoose.model('Animal', {
-//   name: String,
-//   age: Number,
-//   isFurry: Boolean
-// })
-
-// if (process.env.RESET_DATABASE) {
-//   console.log('RESETTING')
-//   const seedDatabase = async () => {
-//     await Author.deleteMany()
-//     const tolkien = new Author({ name: 'J.R.R Tolkien' })
-//     await tolkien.save()
-//     const adams = new Author({ name: 'Douglas Adams' })
-//     await adams.save()
-//     const bryson = new Author({ name: 'Bill Bryson' })
-//     await bryson.save()
-
-//     await Book.deleteMany()
-
-//     await new Book({
-//       title: 'The Fellowship of the Ring',
-//       author: tolkien
-//     }).save()
-//     await new Book({ title: 'The two towers', author: tolkien }).save()
-//     await new Book({ title: 'The return of theh king', author: tolkien }).save()
-//     await new Book({
-//       title: 'Hitchhikers Guide to the Galaxy',
-//       author: adams
-//     }).save()
-//     await new Book({
-//       title: 'The Long Dark Tea-Time of the Soul',
-//       author: adams
-//     }).save()
-//     await new Book({ title: 'The Salmon of Doubt', author: adams }).save()
-//     await new Book({
-//       title: 'Bill Brysons African Diary',
-//       author: bryson
-//     }).save()
-//   }
-//   seedDatabase()
-// }
 
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
@@ -117,12 +57,16 @@ app.use((req, res, next) => {
 })
 
 app.get('/', async (req, res) => {
-  res.json('Books')
+  const bookslength = Book
+  res.json(bookslength.length)
 })
+
 // Start defining your routes here
-app.get('/authors', async (req, res) => {
-  const authors = await Author.find()
-  res.json(authors)
+
+app.get('/books', async (req, res) => {
+  const books = await Book.find()
+  res.json(books)
+  console.log(Book)
 })
 
 app.get('/books/:id', async (req, res) => {
@@ -136,27 +80,6 @@ app.get('/books/:id', async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: 'Invalid id' })
   }
-})
-
-// app.get('/authors/:id/books', async (req, res) => {
-//   try {
-//     const author = await Book.authors.findById(req.params.id)
-//     if (author) {
-//       const books = await Book.find({
-//         author: mongoose.Types.ObjectId(author.id)
-//       }).populate('author')
-//       res.json(books)
-//     } else {
-//       res.status(404).json({ error: 'author and books not found' })
-//     }
-//   } catch (err) {
-//     res.status(400).json({ error: 'Invalid id' })
-//   }
-// })
-
-app.get('/books', async (req, res) => {
-  const books = await Book.find().populate('author')
-  res.json(books)
 })
 
 // Start the server
