@@ -34,9 +34,13 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 })
 //FETCHING THE DATA FROM JSON TO DATABASE
-// booksData.forEach((book) => {
-//   new Book(book).save()
-// })
+
+// const addBooksToDatabase = () => {
+//   booksData.forEach((book) => {
+//     new Book(book).save()
+//   })
+// }
+// addBooksToDatabase()
 
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
@@ -58,8 +62,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', async (req, res) => {
-  const bookslength = Book
-  res.json(bookslength.length)
+  res.json('hello')
 })
 
 // Start defining your routes here
@@ -68,19 +71,6 @@ app.get('/books', async (req, res) => {
   const books = await Book.find()
   res.json(books)
 })
-
-// app.get('/title', async (req, res) => {
-//   const qString = req.query.q
-//   const qRegEx = new RegExp(qString, 'i')
-//   console.log(qString)
-//   Book.find({ title: qRegEx })
-//     .then((results) => {
-//       res.json(results)
-//     })
-//     .catch((err) => {
-//       res.json({ message: 'nope', err: err })
-//     })
-// })
 
 app.get('/title', async (req, res) => {
   const qString = req.query.q
