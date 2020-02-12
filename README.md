@@ -1,12 +1,13 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+Backend project in Express with Mongo and Mongoose about Netflix movies.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Details
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+* /movies list of all movies in the database
+* /movies/:id data about selected movie
+* /movies/years/:year list of movies released that year
+* /movies/types/:type list of movies or tv-shows
 
 ## View it live
 
