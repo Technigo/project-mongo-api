@@ -1,8 +1,9 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import mongoose from 'mongoose'
-import { restart } from 'nodemon'
+import mongoose, { Aggregate } from 'mongoose'
+
+mongoose.set('useCreateIndex', true)
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -66,7 +67,67 @@ app.get('/', async (req, res) => {
 app.get('/books', async (req, res) => {
   const books = await Book.find()
   res.json(books)
-  console.log(Book)
+})
+
+// app.get('/title', async (req, res) => {
+//   const qString = req.query.q
+//   const qRegEx = new RegExp(qString, 'i')
+//   console.log(qString)
+//   Book.find({ title: qRegEx })
+//     .then((results) => {
+//       res.json(results)
+//     })
+//     .catch((err) => {
+//       res.json({ message: 'nope', err: err })
+//     })
+// })
+
+app.get('/title', async (req, res) => {
+  const qString = req.query.q
+  const qRegEx = new RegExp(qString, 'i')
+  console.log(qString)
+  try {
+    const results = await Book.find({ title: qRegEx })
+    if (results.length) {
+      res.json(results)
+    } else {
+      res.status(404).json({ error: 'cant find any titles' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid! code: 400' })
+  }
+})
+
+app.get('/author', async (req, res) => {
+  const qString = req.query.q
+  const qRegEx = new RegExp(qString, 'i')
+  console.log(qString)
+  try {
+    const results = await Book.find({ authors: qRegEx })
+    if (results.length) {
+      res.json(results)
+    } else {
+      res.status(404).json({ error: 'cant find any authors' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid! code: 400' })
+  }
+})
+
+app.get('/isbn', async (req, res) => {
+  const qString = req.query.q
+  const qRegEx = new RegExp(qString, 'i')
+  console.log(qString)
+  try {
+    const results = await Book.find({ isbn: qRegEx })
+    if (results.length) {
+      res.json(results)
+    } else {
+      res.status(404).json({ error: 'cant find any isbn' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid! code: 400' })
+  }
 })
 
 app.get('/books/:id', async (req, res) => {
@@ -78,7 +139,7 @@ app.get('/books/:id', async (req, res) => {
       res.status(404).json({ error: 'author not found' })
     }
   } catch (err) {
-    res.status(400).json({ error: 'Invalid id' })
+    res.status(400).json({ error: 'Invalid id 400' })
   }
 })
 
