@@ -94,10 +94,9 @@ app.get('/guests/:id', async (req, res) => {
 app.post('/guests', async (req, res) => {
   // Retrieve info sent by the client to our API endpoint
   const { first_name, last_name, email, phone, allergies, other, isAttending } = req.body
-
   // Use my mongoose model to create the database entry
   const guest = new Guest({ first_name, last_name, email, phone, allergies, other, isAttending })
-
+  // Using try/catch instead of if/else
   try {
     //Sucess
     const savedGuest = await guest.save()
