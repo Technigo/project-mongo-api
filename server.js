@@ -4,14 +4,10 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import booksData from './data/books.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
