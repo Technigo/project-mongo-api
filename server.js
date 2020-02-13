@@ -78,7 +78,8 @@ app.get('/books', (req, res) => {
   const queryString = req.query.q;
   const queryRegex = new RegExp(queryString, 'i');
   Book.find({ 'title': queryRegex }).then((results) => {
-    if (results) {
+    // console.log(results)
+    if (results.length > 0) {
       console.log('Found ' + results);
       res.json(results);
     } else {
