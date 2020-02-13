@@ -40,22 +40,26 @@ app.get('/', async (req, res) => {
 
 app.get('/tracks', async (req, res) => {
   const genreQuery = new RegExp(req.query.genre, 'i')
-  const bpmQuery = req.query.bpm
+  const bpmQuery = parseInt(req.query.bpm)
   let tracks = await Track.find()
 
-  if (genreQuery && bpmQuery) {
-    tracks = await Track.find({
-      $and: [{ genre: genreQuery }, { bpm: bpmQuery }]
-    })
-  } else if (genreQuery || bpm) {
-    tracks = await Track.find({
-      $or: [{ genre: genreQuery }, { bpm: bpmQuery }]
-    })
-  }
 
-  if (tracks.length > 0) {
+  try {
+    if (genreQuery && bpmQuery) {
+      tracks = await Track.find({
+        $and: [{ 'genre': genreQuery }, { 'bpm': bpmQuery }]
+      }
+      )
+    } else if (genreQuery) {
+      tracks = await Track.find({ 'genre': genreQuery })
+    } else if (bpmQuery) {
+      tracks = await Track.find({ 'bpm': bpmQuery })
+    }
+    if (tracks.length === 0) {
+      throw new Error("No tracks found.")
+    }
     res.json(tracks)
-  } else {
+  } catch (err) {
     res.status(404).json({ message: "No tracks found" })
   }
 })
