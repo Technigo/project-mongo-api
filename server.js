@@ -49,7 +49,7 @@ if (process.env.RESET_DB) {
 
     booksData.forEach((book) => {
       new Book(book).save()
-    });
+    })
   }
   seedDatabase()
 }
@@ -88,8 +88,6 @@ app.get('/books', (req, res) => {
     }
   })
 })
-
-
 
 // Book.find({ 'title': queryRegex })
 //   .then((results) => {
