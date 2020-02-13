@@ -10,19 +10,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflix";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// "show_id": 81213894,
-//  "title": "The Zoya Factor",
-//  "director": "Abhishek Sharma",
-//  "cast": "Sonam Kapoor, Dulquer Salmaan, Sanjay Kapoor, Sikander Kher, Angad Bedi, Koel Purie, Pooja Bhamrah, Manu Rishi Chadha",
-//   "country": "India",
-//   "date_added": "November 30, 2019",
-//    "release_year": 2019,
-//    "rating": "TV-14",
-//    "duration": "135 min",
-//     "listed_in": "Comedies, Dramas, International Movies",
-//      "description": "A goofy copywriter unwittingly convinces the Indian cricket team that she’s their lucky mascot, to the dismay of their superstition-shunning captain.",
-//      "type": "Movie"
-
 const Movie = mongoose.model("Movie", {
   show_id: {
     type: Number
@@ -76,9 +63,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
 
 app.get("/movie", (req, res) => {
   const queryString = req.query.q;
