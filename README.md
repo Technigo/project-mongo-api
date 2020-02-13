@@ -13,3 +13,6 @@ I created a Mongoose model and used a json with data of books. I then created en
 -Express
 -Mongoose
 -MongoDB
+
+### Deployed project:
+https://joacim-mongo-books.herokuapp.com/
