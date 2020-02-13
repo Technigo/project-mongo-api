@@ -1,16 +1,16 @@
-# API with Express, MongoDB and Joi (Part 2)
+# Custom Netflix API (Part 2)
 
 ### Summary
 
-A custom API created with Express, MongoDB and Joi to provide information about movies and TV shows on Netflix.
+A custom API created with Express and MongoDB to provide information about movies and TV shows on Netflix.
 
 ### Implementation details
 
-In this project I have implemented API routes in Express to handle GET, POST, PUT and DELETE requests. Instead of using a database in my backend I have used a JSON dataset with movies and TV shows from Netflix.
+In this project I have implemented relevant API routes in Express to handle Netflix show requests. In [the first version of the Custom Netflix API](https://github.com/codebyfredrik/project-express-api) a JSON dataset was used to simulate the database. In this version a MongoDB database is used to store information about movies and TV shows on Netflix.
 
-When building an API data validation is very important. To combat invalid data I have used Joi, a powerful schema description language and data validator for JavaScript, to validate data in POST and PUT requests.
+Mongoose, an Object Data Modeling (ODM) library for MongoDB and Node JS, is used in this project to manage relationships between data, provide schema validation, and translate between objects in code and the representation of those objects in MongoDB.
 
-To make sure that the logic is working properly and that the endpoints are responding with correct data and status codes I have used the Jest Testing Framework for unit testing. The current implementation works really good and saves me a lot of time when I don't constantly have to test the endpoints manually when changing the logic.
+To combat invalid data in incoming API requests I decided to implement the Joi library, a powerful schema description language and data validator for JavaScript. Together with the Express middleware library Celebrate, which is a wrapper for the Joi library, I can intercept and validate incoming requests before they even reach the route handler. That reduces unneccesary logic and makes the code cleaner in the route handlers.
 
 ### Technologies used
 
@@ -25,3 +25,4 @@ To make sure that the logic is working properly and that the endpoints are respo
 ### Where can you see it in action?
 
 URL to Custom Netflix API documentation: https://express-mongodb-netflix-api.herokuapp.com/
+URL to site using the API: https://vigorous-euler-6beb1a.netlify.com/
