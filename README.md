@@ -24,5 +24,5 @@ To combat invalid data in incoming API requests I decided to implement the Joi l
 
 ### Where can you see it in action?
 
-URL to Custom Netflix API documentation: https://express-mongodb-netflix-api.herokuapp.com/
-URL to site using the API: https://vigorous-euler-6beb1a.netlify.com/
+- URL to custom Netflix API documentation: https://express-mongodb-netflix-api.herokuapp.com/
+- URL to a site using the API: https://vigorous-euler-6beb1a.netlify.com/
