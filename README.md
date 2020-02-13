@@ -1,13 +1,15 @@
-# Mongo API Project
+# Mongo API project
 
-Replace this readme with your own information about your project. 
+### What is this?
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+A project to practice MongoDB by storing and retriving data from a database and make a RESTful API from that data.
 
-## The problem
+### What did I do?
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I created a Mongoose model and used a json with data of books. I then created endpoints and used different methods to fetch data via query and params
 
-## View it live
+### Wich technologies is used?
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+-Express
+-Mongoose
+-MongoDB
