@@ -19,7 +19,7 @@ To make sure that the logic is working properly and that the endpoints are respo
 - [Express](https://expressjs.com/) - A minimal and flexible Node JS web application framework
 - [MongoDB](https://www.mongodb.com/) - A general purpose, document-based, distributed database
 - [Mongoose](https://mongoosejs.com/) - MongoDB object modeling for Node JS
-- [Joi](https://github.com/hapijs/joi) - A powerful schema description language and data validator
+- [Joi](https://hapi.dev/family/joi/) - A powerful schema description language and data validator
 - [Celebrate](https://github.com/arb/celebrate) - A Joi validation middleware for Express JS
 
 ### Where can you see it in action?
