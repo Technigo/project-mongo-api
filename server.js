@@ -84,16 +84,12 @@ app.get('/artists/:artist/tracks', async (req, res) => {
   let artist
   try {
     artist = await Track.find({ 'artistName': artistName })
-  } catch (error) {
-    return null
-  }
-
-  if (artist.length > 0) {
+    if (artist.length === 0) {
+      throw new Error("Invalid name")
+    }
     res.json(artist)
-  } else {
-    res.status(404).json({
-      message: "Artist not found"
-    })
+  } catch (err) {
+    res.status(400).json({ error: err.message })
   }
 })
 
