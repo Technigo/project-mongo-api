@@ -40,14 +40,14 @@ if(process.env.RESET_DB) {
   seedDatabase()
 }
 
-//Return Error if connection fail
-  app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next()
-  } else {
-    res.status(503).json({ error: 'Service unavailable' })
-  }
-})
+// //Return Error if connection fail
+//   app.use((req, res, next) => {
+//   if (mongoose.connection.readyState === 1) {
+//     next()
+//   } else {
+//     res.status(503).json({ error: 'Service unavailable' })
+//   }
+// })
 
 // Start defining the routes
 app.get('/', (req, res) => {
