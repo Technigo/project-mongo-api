@@ -10,7 +10,7 @@ In this project I have implemented relevant API routes in Express to handle Netf
 
 Mongoose, an Object Data Modeling (ODM) library for MongoDB and Node JS, is used in this project to manage relationships between data, provide schema validation, and translate between objects in code and the representation of those objects in MongoDB.
 
-To combat invalid data in incoming API requests I decided to implement the Joi library, a powerful schema description language and data validator for JavaScript. Together with the middleware library Celebrate, which is an Express wrapper for the Joi library, Express can intercept and validate incoming requests before they even reach the route handler. The benefit of using a middleware is that the pure logic for validation simplifies the error handling logic in the route handlers and also makes the code a lot cleaner.
+To combat invalid data in incoming API requests I decided to implement the Joi library, a powerful schema description language and data validator for JavaScript. Together with the middleware library Celebrate, which is an Express wrapper for the Joi library, Express can intercept and validate incoming requests objects before they even reach the route handler. The benefit of using a middleware is that the pure logic for validation is centralized, thus keeping the error handling logic in the route handlers to a minimum.
 
 ### Technologies used
 
