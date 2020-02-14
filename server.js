@@ -62,37 +62,39 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Start defining your routes here
+if (process.env.RESET_DATABASE) {
+  console.log("Resetting database!"); //Use this command in terminal RESET_DATABASE=true npm run dev
 
-app.get("/movie", (req, res) => {
-  const queryString = req.query.q;
-  const queryRegex = new RegExp(queryString, "i");
-  Movie.find({ title: queryRegex })
-    .sort({ rating: -1 })
-    .then(results => {
-      // Succesfull
-      console.log("Found : " + results);
-      res.json(results);
-    })
-    .catch(err => {
-      // Error/Failure
-      console.log("Error " + err);
-      res.json({ message: "Cannot find this movie", err: err });
-    });
-});
+  app.get("/movie", (req, res) => {
+    const queryString = req.query.q;
+    const queryRegex = new RegExp(queryString, "i");
+    Movie.find({ title: queryRegex })
+      .sort({ rating: -1 })
+      .then(results => {
+        // Succesfull
+        console.log("Found : " + results);
+        res.json(results);
+      })
+      .catch(err => {
+        // Error/Failure
+        console.log("Error " + err);
+        res.json({ message: "Cannot find this movie", err: err });
+      });
+  });
 
-app.get("/movie/:director", (req, res) => {
-  console.log(`req.params.director: ${req.params.director}`);
-  const director = req.params.director;
-  Movie.findOne({ director: director })
-    .then(results => {
-      res.json(results);
-    })
-    .catch(err => {
-      res.json({ message: "Cannot find this director", err: err });
-    });
-});
+  app.get("/movie/:director", (req, res) => {
+    console.log(`req.params.director: ${req.params.director}`);
+    const director = req.params.director;
+    Movie.findOne({ director: director })
+      .then(results => {
+        res.json(results);
+      })
+      .catch(err => {
+        res.json({ message: "Cannot find this director", err: err });
+      });
+  });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
