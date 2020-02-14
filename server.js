@@ -62,6 +62,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
+
 app.get("/movie", (req, res) => {
   const queryString = req.query.q;
   const queryRegex = new RegExp(queryString, "i");
