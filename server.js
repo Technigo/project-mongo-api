@@ -119,16 +119,19 @@ app.post('/guests', async (req, res) => {
 // }
 // })
 
-//ROUTES FOR DELETE
-// app.delete('/guests/:id', (req, res) => {
-// try {
-//   //Sucess
-//   const deletedGuest = await guest.save()
-//   res.status(201).json(deletedGuest)
-// } catch (err) {
-//   // Failed
-//   res.status(400).json({ message: 'Could not delete guest', error: err.errors })
-// }// })
+//ROUTES FOR DELETE - UNDER CONSTRUCTION
+app.delete('/guests/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    // Sucess to delete the guest
+    await Guest.findOneAndDelete({ '_id': id })
+    res.status(201).json()
+  } catch (err) {
+    // Failed
+    res.status(404).json({ message: `Could not delete guest `, error: err.errors })
+  }
+})
+
 
 // Start the server
 app.listen(port, () => {
