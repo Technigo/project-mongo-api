@@ -120,6 +120,7 @@ const getAllShows = (req, res) => {
         res.json({
           statusCode: 200,
           message: `${moviePhrase} fetched successfully`,
+          totalItems: shows.length,
           query: req.query,
           data: shows
         });
