@@ -99,6 +99,7 @@ const getAllShows = (req, res) => {
               message: `${moviePhrase} fetched successfully`,
               totalPages: totalPages,
               remainingPages: remainingPages,
+              totalItems: count,
               query: req.query,
               data: shows
             });
