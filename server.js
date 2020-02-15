@@ -108,16 +108,17 @@ app.post('/guests', async (req, res) => {
 })
 
 // ROUTES FOR PUT
-// app.put('/guests/:id', (req, res) => {
-// try {
-//   //Sucess
-//   const updatedGuest = await guest.save()
-//   res.status(201).json(updatedGuest)
-// } catch (err) {
-//   // Failed
-//   res.status(400).json({ message: 'Could not update guest', error: err.errors })
-// }
-// })
+app.put('/guests/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    //Sucess
+    await Guest.findOneAndUpdate({ '_id': id }, req.body, { new: true })
+    res.status(201).json()
+  } catch (err) {
+    // Failed
+    res.status(400).json({ message: 'Could not update guest', error: err.errors })
+  }
+})
 
 //ROUTES FOR DELETE - UNDER CONSTRUCTION
 app.delete('/guests/:id', async (req, res) => {
@@ -131,7 +132,6 @@ app.delete('/guests/:id', async (req, res) => {
     res.status(404).json({ message: `Could not delete guest `, error: err.errors })
   }
 })
-
 
 // Start the server
 app.listen(port, () => {
