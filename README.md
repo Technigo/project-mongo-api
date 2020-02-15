@@ -12,8 +12,8 @@ I started by defining "the Show model" and its properties. after I noticed that 
 ## Returning JSON (click links)
 
 - API root: https://mongo-api-by-nasim.herokuapp.com/
-***I decided to send an object which shows the length of the data to make it easy for frontend part***
-* To get all the shows: https://mongo-api-by-nasim.herokuapp.com/shows
+- ***I decided to send an object which shows the length of the data to make it easy for frontend part***
+- To get all the shows: https://mongo-api-by-nasim.herokuapp.com/shows
 - To get a specific show: https://mongo-api-by-nasim.herokuapp.com/shows/id/81082007/
 - To filter shows by its title: https://mongo-api-by-nasim.herokuapp.com/shows?title=people
 - To filter shows by the release year: https://mongo-api-by-nasim.herokuapp.com/shows?year=2015
