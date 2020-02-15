@@ -12,22 +12,22 @@ I started by defining "the Show model" and its properties. after I noticed that 
 ## Returning JSON (click links)
 
 - API root: https://mongo-api-by-nasim.herokuapp.com/
-- I decided to send an object which shows the length of the data to make it easy for frontend part.
-- To get all the shows: https://mongo-api-by-nasim.herokuapp.com/shows
+***I decided to send an object which shows the length of the data to make it easy for frontend part***
+* To get all the shows: https://mongo-api-by-nasim.herokuapp.com/shows
 - To get a specific show: https://mongo-api-by-nasim.herokuapp.com/shows/id/81082007/
 - To filter shows by its title: https://mongo-api-by-nasim.herokuapp.com/shows?title=people
 - To filter shows by the release year: https://mongo-api-by-nasim.herokuapp.com/shows?year=2015
 - To filter shows by genre: https://mongo-api-by-nasim.herokuapp.com/shows?listed_in=stand-up
 - To filter shows by title, release year and genre:  https://mongoapibynasim.herokuapp.com/showstitle=strong&year=2017&linsted_in=dramas
 
-## Technologies used 💻
+## Technologies used :💻:
 - Express
 - MongoDB
 - Mongoose 
 - Node.js
 
 
-## View it live 🎯
+## View it live :🎯:
 
 - The Backend: https://mongo-api-by-nasim.herokuapp.com/
 - The Frontend: https://react-movie-search-by-nasim.netlify.com/
