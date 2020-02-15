@@ -1,18 +1,17 @@
-# Mongo API
+# API using MongoDB
 
 It was time to level-up my backend skill and start using a database to store and retrieve data from and use that data to produce a RESTful API.
 
 ## The problem and approaches
 
-This project is following up my previous project, which I created an API using Express and the data was have taken from Netflix. In this project I stored and retrieved all data to the database. 
+This project is a follow up on a previous project, where I created an API which was using Netflix movie data from a JSON file. In this project I stored the data in a MongoDB database.
 
-I started by defining "the Show model" and its properties. after I noticed that the data was seeding everytime the database  loads, I stored the <code>db.collection.deleteMany()</code> metod in an environment variable, which prevent the duplicating of existing datas.
+I started by defining the "Show model" and its properties. Since I every time the Express server restarted the data was seeded into the database, I used the environmental variable <code>RESET_DB</code> to control if database should be reset, or not before each run.
 
-### Endpoint examples
-## Returning JSON (click links)
+## Endpoints
 
 - API root: https://mongo-api-by-nasim.herokuapp.com/
-- ***I decided to send an object which shows the length of the data to make it easy for frontend part, so you will find the object at the top the JSON like this<code> {
+- *** Since I'm using pagination I decided to return the data from the <code>/shows</code> endpoint as an object with metadata to be able to display total number of movies for a search result on the frontend side. You will find it in the JSON like this<code> {
   "total_shows": 1375,
   "shows":[{data object}]
   }</code>***
@@ -29,9 +28,9 @@ I started by defining "the Show model" and its properties. after I noticed that 
 - Mongoose 
 - Node.js
 
-
 ## View it live 🎯
 
 - The Backend: https://mongo-api-by-nasim.herokuapp.com/
 - The Frontend: https://react-movie-search-by-nasim.netlify.com/
 
+React frontend repository can be found here: https://github.com/Nasimmhn/react-movie-search
