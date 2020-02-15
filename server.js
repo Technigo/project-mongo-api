@@ -55,7 +55,7 @@ const Show = mongoose.model('Show', {
 })
 
 
-//to prevent reloading seeddatabase when server starts, we can wrap it in an environment variable//
+// to prevent duplicating data in the database when server starts we wrap it in an environment variable
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Show.deleteMany({})
