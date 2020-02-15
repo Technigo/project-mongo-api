@@ -38,7 +38,7 @@ app.use((req, res, next) => {
   }
 })
 
-// ROUTES FOR GET
+// ROUTES
 app.get('/', (req, res) => {
   res.send('Endpoints: GET/guests GET/guests/:id GET/guests?name= GET/guests?attending=true/false')
 })
@@ -90,7 +90,7 @@ app.get('/guests/:id', async (req, res) => {
 })
 
 
-// ROUTES FOR POST
+// POST ROUTE
 app.post('/guests', async (req, res) => {
   // Retrieve info sent by the client to our API endpoint
   const { first_name, last_name, email, phone, allergies, other, isAttending } = req.body
@@ -107,7 +107,7 @@ app.post('/guests', async (req, res) => {
   }
 })
 
-// ROUTES FOR PUT
+// PUT ROUTE FOR SPECIFIC ID
 app.put('/guests/:id', async (req, res) => {
   const { id } = req.params
   try {
@@ -120,7 +120,7 @@ app.put('/guests/:id', async (req, res) => {
   }
 })
 
-//ROUTES FOR DELETE - UNDER CONSTRUCTION
+// DELETE ROUTE FOR SPECIFIC ID
 app.delete('/guests/:id', async (req, res) => {
   const { id } = req.params
   try {
@@ -133,7 +133,7 @@ app.delete('/guests/:id', async (req, res) => {
   }
 })
 
-// Start the server
+// START THE SERVER
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
