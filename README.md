@@ -11,10 +11,10 @@ I started by defining the "Show model" and its properties. Since I every time th
 ## Endpoints
 
 - API root: https://mongo-api-by-nasim.herokuapp.com/
-- *** Since I'm using pagination I decided to return the data from the <code>/shows</code> endpoint as an object with metadata to be able to display total number of movies for a search result on the frontend side. You will find it in the JSON like this<code> {
+- ***Since I'm using pagination I decided to return the data from the <code>/shows</code> endpoint as an object with metadata to be able to display total number of movies for a search result on the frontend side. You will find it in the JSON like this***<code> {
   "total_shows": 1375,
   "shows":[{data object}]
-  }</code>***
+  }</code>
 - To get all the shows: https://mongo-api-by-nasim.herokuapp.com/shows
 - To get a specific show: https://mongo-api-by-nasim.herokuapp.com/shows/id/81082007/
 - To filter shows by its title: https://mongo-api-by-nasim.herokuapp.com/shows?title=people
