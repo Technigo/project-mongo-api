@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import guests from './data/guests.json'
+// import guests from './data/guests.json'
 import { Guest } from './models/guest'
 
 // MONGOOSE SETUP
@@ -10,18 +10,18 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/guest-list'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// SEEDING FOR ADDING NEW DATA
-if (process.env.RESET_DB) {
-  console.log('Resetting database')
-  const seedDatabase = async () => {
-    await Guest.deleteMany({})
+// SEEDING FOR ADDING NEW DATA WHEN SETTING UP
+// if (process.env.RESET_DB) {
+//   console.log('Resetting database')
+//   const seedDatabase = async () => {
+//     await Guest.deleteMany({})
 
-    guests.forEach((guestData) => {
-      new Guest(guestData).save()
-    })
-  }
-  seedDatabase()
-}
+//     guests.forEach((guestData) => {
+//       new Guest(guestData).save()
+//     })
+//   }
+//   seedDatabase()
+// }
 
 // PORT & APP SETUP
 const port = process.env.PORT || 8000 // Default 8000, can be overridden e.g PORT=5000 npm run dev
