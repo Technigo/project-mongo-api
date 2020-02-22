@@ -2,8 +2,11 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt-nodejs'
 // import guests from './data/guests.json'
+// import users from './data/users.json'
 import { Guest } from './models/guest'
+import { User } from './models/user'
 
 // MONGOOSE SETUP
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/guest-list'
@@ -14,14 +17,33 @@ mongoose.Promise = Promise
 // if (process.env.RESET_DB) {
 //   console.log('Resetting database')
 //   const seedDatabase = async () => {
-//     await Guest.deleteMany({})
+//     await User.deleteMany({})
 
-//     guests.forEach((guestData) => {
-//       new Guest(guestData).save()
+//     users.forEach((userData) => {
+//       new User(userData).save()
 //     })
 //   }
 //   seedDatabase()
 // }
+
+// MIDDLEWARE TO CHECK ACCESSTOKEN FOR USERS (IF THE USER MATCH ANY ACCESSTOKEN IN DB)
+const authenticateUser = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ accessToken: req.header('Authorization') })
+    if (user) {
+      req.user = user;
+      next()
+    } else {
+      res
+        .status(401)
+        .json({ loggedOut: true, message: 'Please try to log in again' })
+    }
+  } catch (err) {
+    res
+      .status(403)
+      .json({ message: 'accesToken missing or wrong', errors: err.errors })
+  }
+};
 
 // PORT & APP SETUP
 const port = process.env.PORT || 8000 // Default 8000, can be overridden e.g PORT=5000 npm run dev
@@ -43,7 +65,23 @@ app.get('/', (req, res) => {
   res.send('Endpoints: GET/guests GET/guests/:id GET/guests?name= GET/guests?attending=true/false')
 })
 
-// QUERYBUILDER TO HAVE MULTIPLE QUERIES IN SAME ROUTE
+// ROUTE TO LOGIN USER
+app.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body
+    const user = await User.findOne({ email })
+    if (user && bcrypt.compareSync(password, user.password)) {
+      res.status(201).json({ name: user.name, userId: user._id, accessToken: user.accessToken })
+    } else {
+      res.json({ notFound: true })
+    }
+  } catch (err) {
+    res.status(400).json({ message: 'Could not find user', errors: err.errors })
+  }
+})
+
+// ------------------ GUEST LIST ROUTES ------------------------- //
+// QUERYBUILDER TO HAVE MULTIPLE QUERIES IN GUESTS ROUTE
 const queryBuilder = (req, res) => {
   const { name, attending } = req.query // Query params
   const nameRegex = new RegExp(name, 'i') // To be able to search in the whole string and not depending on upper/lowercase
@@ -132,6 +170,18 @@ app.delete('/guests/:id', async (req, res) => {
     res.status(404).json({ message: `Could not delete guest `, error: err.errors })
   }
 })
+
+
+// ------------------ TO DO ROUTES ------------------------- //
+
+// GET
+
+// POST
+
+// PUT
+
+// DELETE
+
 
 // START THE SERVER
 app.listen(port, () => {
