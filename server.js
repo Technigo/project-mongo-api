@@ -14,17 +14,17 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 // SEEDING FOR ADDING NEW DATA WHEN SETTING UP
-// if (process.env.RESET_DB) {
-//   console.log('Resetting database')
-//   const seedDatabase = async () => {
-//     await User.deleteMany({})
+if (process.env.RESET_DB) {
+  console.log('Resetting database')
+  const seedDatabase = async () => {
+    await User.deleteMany({})
 
-//     users.forEach((userData) => {
-//       new User(userData).save()
-//     })
-//   }
-//   seedDatabase()
-// }
+    users.forEach((userData) => {
+      new User(userData).save()
+    })
+  }
+  seedDatabase()
+}
 
 // MIDDLEWARE TO CHECK ACCESSTOKEN FOR USERS (IF THE USER MATCH ANY ACCESSTOKEN IN DB)
 const authenticateUser = async (req, res, next) => {
