@@ -51,10 +51,6 @@ const Asana = mongoose.model('Asana', {
 })
 
 const User = mongoose.model('User', {
-  name: {
-    type: String,
-    unique: true
-  },
   email: {
     type: String,
     unique: true
