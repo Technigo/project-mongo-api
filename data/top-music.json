@@ -32,22 +32,6 @@
     "popularity": 92
   },
   {
-    "id": 3,
-    "trackName": "boyfriend (with Social House)",
-    "artistName": "Ariana Grande",
-    "genre": "dance pop",
-    "bpm": 190,
-    "energy": 80,
-    "danceability": 40,
-    "loudness": -4,
-    "liveness": 16,
-    "valence": 70,
-    "length": 186,
-    "acousticness": 12,
-    "speechiness": 46,
-    "popularity": 85
-  },
-  {
     "id": 4,
     "trackName": "Beautiful People (feat. Khalid)",
     "artistName": "Ed Sheeran",

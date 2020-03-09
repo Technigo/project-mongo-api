@@ -31,11 +31,6 @@ const Genre = mongoose.model('Genre', {
   genre: String
 })
 
-// artist: {
-//   type: mongoose.Schema.Types.ObjectId,
-//   ref: 'Artist'
-// }
-
 if (process.env.RESET_DATABASE) {
   console.log('Resetting database!')
 
