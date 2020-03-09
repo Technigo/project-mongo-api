@@ -5,24 +5,6 @@ import mongoose from 'mongoose'
 import topMusicData from './data/top-music.json'
 
 // REMEMBER : RESET_DATABASE=true npm run dev
-// import booksData from './data/books.json'
-//Json list 
-// "id": 3,
-//     "trackName": "boyfriend (with Social House)",
-//     "artistName": "Ariana Grande",
-//     "genre": "dance pop",
-
-//     "bpm": 190,
-//     "energy": 80,
-//     "danceability": 40,
-//     "loudness": -4,
-//     "liveness": 16,
-//     "valence": 70,
-//     "length": 186,
-//     "acousticness": 12,
-//     "speechiness": 46,
-//     "popularity": 85
-//
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -49,10 +31,6 @@ const Genre = mongoose.model('Genre', {
   genre: String
 })
 
-// artist: {
-//   type: mongoose.Schema.Types.ObjectId,
-//   ref: 'Artist'
-// }
 
 if (process.env.RESET_DATABASE) {
   console.log('Resetting database!')
