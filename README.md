@@ -1,13 +1,10 @@
-# Mongo API Project
+THE MONGODB API.
 
-Replace this readme with your own information about your project. 
+This project is built using the MongoDB database to store and retrieve data from, and having that data to 
+produce a RESTful API. (Used Mongoose models)
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Problems:
+Not being able to see the endpoints was an issue but when I got it to work it was a lot of fun adding things.
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
-
-## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+View it live
+See the database here: https://pb-mongo-api.herokuapp.com/
