@@ -28,7 +28,7 @@ const storage = cloudinaryStorage({
 
 process.env.CLOUDINARY_API_KEY
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/asana" //API
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/yoga" //API
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUndefinedTopology: true })
 mongoose.Promise = Promise
 
@@ -52,6 +52,10 @@ const Asana = mongoose.model('Asana', {
 
 const User = mongoose.model('User', {
   name: {
+    type: String,
+    unique: true
+  },
+  email: {
     type: String,
     unique: true
   },
