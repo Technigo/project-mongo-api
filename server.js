@@ -21,14 +21,16 @@ cloudinary.config({
 
 const storage = cloudinaryStorage({
   cloudinary,
-  folder: 'pets',
+  folder: 'Images',
   allowedFormats: ['jpg', 'png'],
-  transformation: [{ width: 500, height: 500, crop: "limit" }]
+  transformation: [{ width: 1000, height: 1000, crop: "limit" }]
 }) //storage
+
+const parser = multer({ storage })
 
 process.env.CLOUDINARY_API_KEY
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/yoga" //API
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/asana" //API
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUndefinedTopology: true })
 mongoose.Promise = Promise
 
@@ -48,6 +50,12 @@ const Asana = mongoose.model('Asana', {
   type: mongoose.Schema.Types.ObjectId,
   ref: 'Chakra'
  }
+})
+
+const Image = mongoose.model('Image', {
+  name: String,
+  imageUrl: String,
+  imageId: String,
 })
 
 const User = mongoose.model('User', {
@@ -206,6 +214,16 @@ const authenticateUser = async (req, res, next) => {
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.post('/images', parser.single('image'), async (req, res) => {
+  const image = new Image ({
+    name: req.body.name,
+    imageUrl: req.file.secure_url,
+    imageId: req.file.public_id
+  })
+  await image.save()
+  res.json(image)
 })
 
 app.post('/users', async (req, res) => {
