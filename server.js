@@ -58,9 +58,9 @@ const Movie = mongoose.model('Movie', {
     Year: {
       type: Number
     },
-    // Runtime: {
-    //   type: Number
-    // },
+    Runtime: {
+      type: Number
+    },
     Rating: {
       type: Number
     },
@@ -72,7 +72,9 @@ const Movie = mongoose.model('Movie', {
     }
 })
 
-const importMovieData = () => {
+const importMovieData = async() => {
+  await Movie.deleteMany()
+
   movieData.forEach((movie) => {
     new Movie(movie).save();
   })
@@ -85,13 +87,13 @@ app.get('/', (req, res) => {
   res.send('Hello movies')
 })
 
-// app.get('/movies', (req, res) => {
+app.get('/movies', (req, res) => {
   
-//       res.json(movieData)
-// })
+      res.json(movieData)
+})
 
 app.get('/movies/:title', (req, res) => {
-  const title = req.params.Title;
+  const title = req.params.title;
   Movie.findOne({'Title': title})
     .then((results) => {
       res.json(results);
@@ -99,21 +101,6 @@ app.get('/movies/:title', (req, res) => {
       res.json({message: 'Cannot find this movie', err: err});
     });
 });
-
-// app.get('/movies', (req, res) => {
-//   // const queryString = res.query.q;
-//   // const queryRegex = new RegExp(queryString,"i");
-//   // console.log(queryString)
-//   Movie.find({'director': /Wes/i})
-//     .then((results) => {
-//       console.log('Found ' + results);
-//       res.json(results)
-//     }).catch((err) => {
-//       console.log('Error ' + err);
-//       res.json({message: "Cannot find director", err: err})
-//     });
-// })
-
 
 // Start the server
 app.listen(port, () => {
