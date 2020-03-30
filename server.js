@@ -5,6 +5,30 @@ import mongoose from 'mongoose'
 import crypto from 'crypto'
 import bcrypt from 'bcrypt-nodejs'
 
+import cloudinary from 'cloudinary'
+import multer from 'multer'
+import cloudinaryStorage from 'multer-storage-cloudinary'
+
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+cloudinary.config({
+cloud_name: 'dlhmccbpm', // this needs to be whatever you get from cloudinary
+api_key: process.env.CLOUDINARY_API_KEY,
+api_secret: process.env.CLOUDINARY_API_SECRET
+}) //Handles API keys and secrets fron cloudinary
+
+const storage = cloudinaryStorage({
+cloudinary,
+folder: 'Images',
+allowedFormats: ['jpg', 'png'],
+transformation: [{ width: 500, height: 500, crop: "limit" }]
+}) //storage
+
+const parser = multer({ storage })
+
+process.env.CLOUDINARY_API_KEY
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/asana" //API
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUndefinedTopology: true })
@@ -217,6 +241,12 @@ app.post('/sessions', async (req, res) => {
   }
 })
 
+// SECRET ROUTE (Welcome page)
+app.get('/users/:userId', authenticateUser)
+app.get('/users/:userId', (req, res) => {
+  res.json({ name: req.user.name })
+})
+
 //app.get('/chakra', authenticateUser)
 app.get('/chakra', async (req, res) => {
   try {  
@@ -233,7 +263,7 @@ app.get('/chakra', async (req, res) => {
 
 //fungerar!
 
-//app.get('/chakra/:id', authenticateUser)
+app.get('/chakra/:id', authenticateUser)
 app.get('/chakra/:id', async (req, res) => {
   try {
     const chakraId = await Chakra.findById(req.params.id)
@@ -249,7 +279,7 @@ app.get('/chakra/:id', async (req, res) => {
 
 //filters on asanas(yogaposes) by chakra
 
-//app.get('/chakra/:id/asana', authenticateUser)
+app.get('/chakra/:id/asana', authenticateUser)
 app.get('/chakra/:id/asana', async (req, res) => {
   try {
     const chakra = await Chakra.findById(req.params.id)
@@ -264,7 +294,7 @@ app.get('/chakra/:id/asana', async (req, res) => {
   }
 })
 
-//app.get('/asana', authenticateUser)
+app.get('/asana', authenticateUser)
 app.get('/asana', async (req, res) => {
   try {
   const asana = await Asana.find().populate('chakra') //.populate() adds the chakra info to the asana object
@@ -278,7 +308,7 @@ app.get('/asana', async (req, res) => {
   }
 })
 
-//app.get('/asana', authenticateUser)
+app.get('/asana', authenticateUser)
 app.get('/asana', (req, res) => {
   const queryString = req.query.q; //search query like this http://localhost:8080/asana?q=wheel
   const queryRegex = new RegExp(queryString, "i"); //queryString is how to search a string, "i" is ignoring the upper/lowercase. 
@@ -296,7 +326,7 @@ app.get('/asana', (req, res) => {
     });
 });
 
-//app.get('/asana/:id', authenticateUser)
+app.get('/asana/:id', authenticateUser)
 app.get('/asana/:id', async (req, res) => {
   try {
     const asanaId = await Asana.findById(req.params.id)
