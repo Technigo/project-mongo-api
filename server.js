@@ -5,31 +5,6 @@ import mongoose from 'mongoose'
 import crypto from 'crypto'
 import bcrypt from 'bcrypt-nodejs'
 
-import cloudinary from 'cloudinary'
-import multer from 'multer'
-import cloudinaryStorage from 'multer-storage-cloudinary'
-
-import dotenv from 'dotenv'
-
-dotenv.config()
-
-cloudinary.config({
-  cloud_name: 'dlhmccbpm', // this needs to be whatever you get from cloudinary
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-}) //Handles API keys and secrets fron cloudinary
-
-const storage = cloudinaryStorage({
-  cloudinary,
-  folder: 'Images',
-  allowedFormats: ['jpg', 'png'],
-  transformation: [{ width: 500, height: 500, crop: "limit" }]
-}) //storage
-
-const parser = multer({ storage })
-
-
-process.env.CLOUDINARY_API_KEY
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/asana" //API
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUndefinedTopology: true })
