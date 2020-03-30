@@ -247,7 +247,7 @@ app.get('/users/:userId', (req, res) => {
   res.json({ name: req.user.name })
 })
 
-//app.get('/chakra', authenticateUser)
+app.get('/chakra', authenticateUser)
 app.get('/chakra', async (req, res) => {
   try {  
     const chakra = await Chakra.find()
