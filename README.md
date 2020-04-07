@@ -1,4 +1,4 @@
-# Yoga API Project :woman-in-lotus-position:
+# Yoga API Project
 
 A yogapose database with 43 different yogaposes and the 7 chakras in our body. I yoga theory each yogapose is connected to a different chakra or energyfield in the body, that makes the different poses helpful not only for physical exersice but also for mental wellbeing. For example yogaposes that is affecting the sakral chakra helps us with creativity, the poses connected to the solar plexus chakra affect our self confidence and so on. 
 
