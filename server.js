@@ -16,6 +16,25 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+const Artist = mongoose.model('Artist', {
+  name: String
+
+})
+// RESET_DB=true
+if (process.env.RESET_DB){
+  const seedDatabase = async () => {
+    await Artist.deleteMany()
+
+    const britney = new Artist({name: "Britney Spears"})
+    await britney.save()
+
+    const michael = new Artist({name: "Michael Jackson"})
+    await michael.save()
+  }
+  seedDatabase()
+}
+
+
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
 //
@@ -30,6 +49,11 @@ app.use(bodyParser.json())
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.get('/artists', async (req, res)=>{
+  const artists = await Artist.find()
+  res.json(artists)
 })
 
 // Start the server
