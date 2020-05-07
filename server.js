@@ -2,6 +2,8 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import artistData from './data/artistsCSV.json'
+
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -17,20 +19,43 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Artist = mongoose.model('Artist', {
-  name: String
+  id: Number,
+  name: String,
+  nationality: String
 
 })
+const ArtistDetail = mongoose.model('ArtisDetail', {
+ id: Number,
+ name: String,
+ years: String,
+ genre: String,
+ nationality: String,
+ bio: String,
+ wikipedia: String,
+ paintings: Number
+})
+
 // RESET_DB=true
 if (process.env.RESET_DB){
   const seedDatabase = async () => {
     await Artist.deleteMany()
+    await ArtistDetail.deleteMany()
 
-    const britney = new Artist({name: "Britney Spears"})
-    await britney.save()
+    artistData.forEach((artist) => {
+			new ArtistDetail(artist).save()
+		})
 
-    const michael = new Artist({name: "Michael Jackson"})
-    await michael.save()
+    artistData.forEach((artist)=>{
+      new Artist( {
+        id: artist.id,
+        name: artist.name,
+        nationality: artist.nationality
+      }).save()
+    })
+
   }
+  
+
   seedDatabase()
 }
 
@@ -45,6 +70,7 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
+app.use('/images', express.static('./artistImages'))
 
 // Start defining your routes here
 app.get('/', (req, res) => {
