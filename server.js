@@ -42,6 +42,7 @@ if (process.env.RESET_DATABASE) {
       name: 'Cinnamon Buns',
       typeOf: 'The classic',
       ingredients: 10,
+      img_url: 'http://tiny.cc/ql7ooz',
       time: 240,
     })
     await buns.save()
@@ -50,6 +51,7 @@ if (process.env.RESET_DATABASE) {
       name: 'Rhubarb Pie',
       typeOf: 'Fresh and easy',
       ingredients: 6,
+      img_url: 'http://tiny.cc/sk7ooz',
       time: 30,
     })
     await rhubarb.save()
@@ -58,6 +60,7 @@ if (process.env.RESET_DATABASE) {
       name: 'Love Mums',
       typeOf: 'Chocolate in pan',
       ingredients: 12,
+      img_url: 'http://tiny.cc/4j7ooz',
       time: 30,
     })
     await mums.save()
@@ -70,6 +73,7 @@ if (process.env.RESET_DATABASE) {
       name: 'Pasta Pomodoro',
       typeOf: 'Simple Italian Classic',
       ingredients: 5,
+      img_url: 'http://tiny.cc/fg7ooz',
       time: 15,
     })
     await pomodoro.save()
@@ -78,6 +82,7 @@ if (process.env.RESET_DATABASE) {
       name: 'Mexican Tacos',
       typeOf: 'South American Favorite',
       ingredients: 12,
+      img_url: 'http://tiny.cc/lh7ooz',
       time: 40,
     })
     await tacos.save()
@@ -86,7 +91,8 @@ if (process.env.RESET_DATABASE) {
       name: 'Swedish Meatballs',
       typeOf: 'The Timeless Original',
       ingredients: 5,
-      time: 15,
+      img_url: 'http://tiny.cc/zi7ooz',
+      time: 30,
     })
     await meatballs.save()
   }
