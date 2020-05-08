@@ -39,9 +39,71 @@ if (process.env.RESET_DB) {
 }
 
 // Start defining your routes here
+
+app.get('/', (req, res) => {
+  res.send('try visiting /books')
+})
+
+
 app.get('/books', (req, res) => {
   Books.find().then(books => {
-    res.json(books)
+    let orderedBooks = books
+    const keyword = req.query.keyword
+    const order = req.query.order
+    const PAGE_SIZE = 20
+    const page = +req.query.page || 1
+    let selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+    if (keyword) {
+      if (order === 'highest') {
+        orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? -1 : 1)
+
+      } else if (order === 'lowest') {
+        orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? 1 : -1)
+
+      } else if (order === 'longest') {
+        orderedBooks = orderedBooks.sort((a, b) => (a.num_pages > b.num_pages) ? -1 : 1)
+
+      } else if (order === 'shortest') {
+        orderedBooks = orderedBooks.sort((a, b) => (a.num_pages > b.num_pages) ? 1 : -1)
+
+      } else {
+        orderedBooks = orderedBooks.sort((a, b) => (a.bookID > b.bookID) ? 1 : -1)
+      }
+      const firstResult = orderedBooks.filter((book) => book.authors.toLowerCase().replace(/ /gi, '_').includes(keyword))
+      const secondResult = orderedBooks.filter((book) => {
+
+        if (book.title.toString().toLowerCase().replace(/ /gi, '_').includes(keyword) && firstResult.indexOf(book) === -1) {
+          return true
+        } else {
+          return false
+        }
+      })
+
+      const finalResult = firstResult.concat(secondResult)
+      selectedPage = finalResult.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+      res.json(selectedPage)
+    } else if (order === 'highest') {
+      orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? -1 : 1)
+      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+      res.json(selectedPage)
+    } else if (order === 'lowest') {
+      orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? 1 : -1)
+      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+      res.json(selectedPage)
+    } else if (order === 'longest') {
+      orderedBooks = orderedBooks.sort((a, b) => (a.num_pages > b.num_pages) ? -1 : 1)
+      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+      res.json(selectedPage)
+    } else if (order === 'shortest') {
+      orderedBooks = orderedBooks.sort((a, b) => (a.num_pages > b.num_pages) ? 1 : -1)
+      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+      res.json(selectedPage)
+    } else {
+      orderedBooks = orderedBooks.sort((a, b) => (a.bookID > b.bookID) ? 1 : -1)
+      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+      res.json(selectedPage)
+    }
+
   })
 })
 
