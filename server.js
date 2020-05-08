@@ -2,9 +2,11 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import booksData from './data/books.json'
+// import booksData from './data/books.json'
 
 import { Food } from './data/food'
+import { Menu } from './data/menu'
+// import { Menu } from './data/menu'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -35,6 +37,7 @@ if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
     await Food.deleteMany()
 
+    // Save dessrts
     const buns = new Food({
       name: 'Cinnamon Buns',
       typeOf: 'The classic',
@@ -58,6 +61,34 @@ if (process.env.RESET_DATABASE) {
       time: 30,
     })
     await mums.save()
+
+
+    // Save food menu
+    await Menu.deleteMany()
+
+    const pomodoro = new Menu({
+      name: 'Pasta Pomodoro',
+      typeOf: 'Simple Italian Classic',
+      ingredients: 5,
+      time: 15,
+    })
+    await pomodoro.save()
+
+    const tacos = new Menu({
+      name: 'Mexican Tacos',
+      typeOf: 'South American Favorite',
+      ingredients: 12,
+      time: 40,
+    })
+    await tacos.save()
+
+    const meatballs = new Menu({
+      name: 'Swedish Meatballs',
+      typeOf: 'The Timeless Original',
+      ingredients: 5,
+      time: 15,
+    })
+    await meatballs.save()
   }
   seedDatabase()
 }
@@ -68,11 +99,19 @@ app.get('/', (req, res) => {
   res.send('Hello world, next backend project!')
 })
 
+// Show all desserts
 app.get('/dessert', async (req, res) => {
   const menu = await Food.find()
   res.json(menu)
 })
 
+// Show all foods
+app.get('/food', async (req, res) => {
+  const food = await Menu.find()
+  res.json(food)
+})
+
+// View specific dessert
 app.get('/dessert/:id', async (req, res) => {
   const menuItem = await Food.findById(req.params.id)
 
@@ -80,6 +119,16 @@ app.get('/dessert/:id', async (req, res) => {
     res.json(menuItem)
   } else {
     res.status(404).json({ error: 'Nope, nothing here!' })
+  }
+})
+
+app.get('/food/:id', async (req, res) => {
+  const foodItem = await Menu.findById(req.params.id)
+
+  if (foodItem) {
+    res.json(foodItem)
+  } else {
+    res.status(404).json({ error: 'Nothing to see here...'})
   }
 })
 
