@@ -22,7 +22,7 @@ const Shows = mongoose.model('Shows', {
   "country": String,
   "release_year": Number,
   "description": String,
-  "type": String
+  "type": String,
 }, true)
 
 app.get('/shows', (req, res) => {
@@ -53,6 +53,33 @@ app.get('/shows/:id', (req, res) => {
     } else {
       res.status(404).json({ error: `This show does not exist!`})
     }
+  })
+})
+
+app.get('/categories', (req, res) => {
+  
+  Shows.find().then(show => {
+    let categories = []
+
+    show.forEach((item) => {
+      if (!categories.includes(item.type)) {
+        categories.push(item.type)
+      }
+      else return
+    })
+
+    res.json(categories)
+  })
+})
+
+app.get('/categories/:category', (req, res) => {
+  const category = req.params.category
+
+  Shows.find( { type: category }).collation({ locale: 'en_US', strength: 1 }).then (category => {
+    if (category.length === 0) (
+      res.json(`There is no category named ${req.params.category}`)
+    )
+    res.json(category)
   })
 })
 
