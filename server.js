@@ -13,9 +13,8 @@ mongoose.Promise = Promise
 const Song = mongoose.model('Song', {
   trackName: String,
   artistName: String,
-  genre: String
-
-  // type: mongoose.Schema.Types.ObjectId,
+  genre: String,
+  //type: mongoose.Schema.Types.ObjectId,
   // ref: 'Artist',
 
 })
@@ -43,10 +42,14 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
-// app.get('/', (req, res) => {
-//   res.send('Hello world')
-// })
+const listEndpoints = require('express-list-endpoints')
+
+
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.send(listEndpoints(app))
+})
 
 //list all the tophits 
 app.get('/hits', async (req, res) => {
@@ -55,12 +58,27 @@ app.get('/hits', async (req, res) => {
 
 })
 
-app.get('/hits/hits:id', async (req, res) => {
-  const hitSong = await Song.findById(req.params.id)
+//Path to one hitsong after id (why is this else statment not working?)
+// app.get('/hits/hit/:id', async (req, res) => {
+//   const hitSong = await Song.findById(req.params.id)
+//   if (hitSong) {
+//     res.json(hitSong)
+//   } else {
+//     res.status(404).json({ error: 'no song with that id found' })
+//   }
+// })
+
+// Path to hitsong with id 
+app.get('/hits/hit/:id', async (req, res) => {
+  let hitSong
+  try {
+    hitSong = await Song.findById(req.params.id)
+  } catch (error) {
+    return res.status(404).json({ message: "Hit song not found" })
+  }
+
   if (hitSong) {
     res.json(hitSong)
-  } else {
-    res.status(404).json({ error: 'no song with that id found' })
   }
 })
 
