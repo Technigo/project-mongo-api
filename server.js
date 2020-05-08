@@ -55,6 +55,16 @@ app.get('/hits', async (req, res) => {
 
 })
 
+app.get('/hits/hits:id', async (req, res) => {
+  const hitSong = await Song.findById(req.params.id)
+  if (hitSong) {
+    res.json(hitSong)
+  } else {
+    res.status(404).json({ error: 'no song with that id found' })
+  }
+})
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
