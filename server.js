@@ -40,7 +40,7 @@ if (process.env.RESET_DATABASE) {
     // Save dessrts
     const buns = new Food({
       name: 'Cinnamon Buns',
-      typeOf: 'The classic',
+      typeOf: 'All-Time Favorite',
       ingredients: 10,
       img_url: 'http://tiny.cc/ql7ooz',
       time: 240,
@@ -64,6 +64,15 @@ if (process.env.RESET_DATABASE) {
       time: 30,
     })
     await mums.save()
+
+    const blueberry = new Food({
+      name: 'Blueberry Cheesecake',
+      typeOf: 'New York Classic',
+      ingredients: 8,
+      img_url: 'http://tiny.cc/0y1poz',
+      time: 60,
+    })
+    await blueberry.save()
 
 
     // Save food menu
@@ -95,6 +104,15 @@ if (process.env.RESET_DATABASE) {
       time: 30,
     })
     await meatballs.save()
+
+    const masala = new Menu({
+      name: 'Tikka Masala',
+      typeOf: 'Indian Spices',
+      ingredients: 7,
+      img_url: 'http://tiny.cc/371poz',
+      time: 20,
+    })
+    await masala.save()
   }
   seedDatabase()
 }
@@ -103,6 +121,7 @@ if (process.env.RESET_DATABASE) {
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world, next backend project!')
+
 })
 
 // Show all desserts
