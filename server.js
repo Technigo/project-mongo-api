@@ -84,7 +84,15 @@ app.get('/artists', async (req, res)=>{
 
 app.get('/artists/id/:id', async (req, res)=>{
   const id = req.params.id
-  const artistId = await ArtistDetail.findOne ({ id : id })
+  const artistId = await ArtistDetail.findOne ({ id })
+  if (artistId) {
+    res.json(artistId)
+  }
+  res.status(404).json({error:"artist not found"})
+})
+app.get('/artists/name/:name', async (req, res)=>{
+  const name = req.params.name
+  const artistId = await ArtistDetail.findOne ({ name })
   if (artistId) {
     res.json(artistId)
   }
