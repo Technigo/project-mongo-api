@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import artistData from './data/artistsCSV.json'
-
+import {Artist, ArtistDetail} from './models'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -18,22 +18,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Artist = mongoose.model('Artist', {
-  id: Number,
-  name: String,
-  nationality: String
 
-})
-const ArtistDetail = mongoose.model('ArtisDetail', {
- id: Number,
- name: String,
- years: String,
- genre: String,
- nationality: String,
- bio: String,
- wikipedia: String,
- paintings: Number
-})
 
 // RESET_DB=true
 if (process.env.RESET_DB){
