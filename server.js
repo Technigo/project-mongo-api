@@ -2,11 +2,10 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-// import booksData from './data/books.json'
 
-import { Food } from './data/food'
+
+import { Dessert } from './data/dessert'
 import { Menu } from './data/menu'
-// import { Menu } from './data/menu'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -14,6 +13,7 @@ import { Menu } from './data/menu'
 // import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
 // import netflixData from './data/netflix-titles.json'
+// import booksData from './data/books.json'
 // import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
@@ -35,10 +35,10 @@ app.use(bodyParser.json())
 if (process.env.RESET_DATABASE) {
   console.log('Resetting the database!')
   const seedDatabase = async () => {
-    await Food.deleteMany()
+    await Dessert.deleteMany()
 
     // Save dessrts
-    const buns = new Food({
+    const buns = new Dessert({
       name: 'Cinnamon Buns',
       typeOf: 'All-Time Favorite',
       ingredients: 10,
@@ -47,7 +47,7 @@ if (process.env.RESET_DATABASE) {
     })
     await buns.save()
 
-    const rhubarb = new Food({
+    const rhubarb = new Dessert({
       name: 'Rhubarb Pie',
       typeOf: 'Fresh and easy',
       ingredients: 6,
@@ -56,7 +56,7 @@ if (process.env.RESET_DATABASE) {
     })
     await rhubarb.save()
 
-    const mums = new Food({
+    const mums = new Dessert({
       name: 'Love Mums',
       typeOf: 'Chocolate in pan',
       ingredients: 12,
@@ -65,7 +65,7 @@ if (process.env.RESET_DATABASE) {
     })
     await mums.save()
 
-    const blueberry = new Food({
+    const blueberry = new Dessert({
       name: 'Blueberry Cheesecake',
       typeOf: 'New York Classic',
       ingredients: 8,
@@ -126,8 +126,8 @@ app.get('/', (req, res) => {
 
 // Show all desserts
 app.get('/dessert', async (req, res) => {
-  const menu = await Food.find()
-  res.json(menu)
+  const dessert = await Dessert.find()
+  res.json(dessert)
 })
 
 // Show all foods
@@ -138,7 +138,7 @@ app.get('/food', async (req, res) => {
 
 // View specific dessert
 app.get('/dessert/:id', async (req, res) => {
-  const menuItem = await Food.findById(req.params.id)
+  const menuItem = await Dessert.findById(req.params.id)
 
   if (menuItem) {
     res.json(menuItem)
