@@ -5,6 +5,9 @@ import mongoose from 'mongoose'
 import showData from './data/netflix-titles.json'
 import { Shows } from './models'
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
