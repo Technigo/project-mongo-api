@@ -82,6 +82,15 @@ app.get('/artists', async (req, res)=>{
   res.json(artists)
 })
 
+app.get('/artists/id/:id', async (req, res)=>{
+  const id = req.params.id
+  const artistId = await ArtistDetail.findOne ({ id : id })
+  if (artistId) {
+    res.json(artistId)
+  }
+  res.status(404).json({error:"artist not found"})
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
