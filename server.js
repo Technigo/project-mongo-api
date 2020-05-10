@@ -54,11 +54,17 @@ app.get('/', (req, res) => {
 // Route for all books
 app.get('/books', async (req, res) => {
   const { page, per_page } = req.query
+  const numBooks = await Book.estimatedDocumentCount()
   const pageNo = +page || 1
   const perPage = +per_page || 10
   const booksList = await Book.find().limit(perPage).skip(perPage * (pageNo - 1))
 
-  res.json(booksList)
+  res.json({
+    total_books: numBooks,
+    total_pages: Math.ceil(numBooks / perPage),
+    page: pageNo,
+    books: booksList
+  })
 })
 
 // Route for single book using ISBN as param
