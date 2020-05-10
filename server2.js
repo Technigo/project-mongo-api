@@ -40,8 +40,8 @@ if (process.env.RESET_DB) {
     //await Track.deleteMany({});
     //await Genre.deleteMany({});
 
-    data.forEach((artistData) => {
-      new Track(artistData).save();
+    data.forEach((trackData) => {
+      new Track(trackData).save();
       //new Track(artistdata).save();
       //new Genre(topMusicData).save();
     });

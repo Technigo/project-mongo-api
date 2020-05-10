@@ -2,40 +2,53 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+import data from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/country";
+// Defines the port the app will run on. Defaults to 8080, but can be
+// overridden when starting the server. For example:
+//
+//   PORT=9000 npm start
+
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Youtuber = mongoose.model("Youtuber", {
-  name: String,
+const Track = mongoose.model("Track", {
+  artistName: String,
+  trackName: String,
+  genre: String,
+  popularity: Number,
+  length: Number,
+  danceability: Number,
   id: Number,
 });
 
+/*const Track = mongoose.model("Track", {
+  trackName: String,
+  length: Number,
+  danceability: Number,
+});*/
+
+/*const Genre = mongoose.model("Genre", {
+  genre: String,
+});*/
+
+//if (process.env.RESET_DB) {
 const seedDatabase = async () => {
-  const lindgren = new Youtuber({ name: "Therese Lindgren", id: 1 });
-  await lindgren.save();
+  // raderar så det ej läggs till varje gång man laddar sida.
+  await Track.deleteMany({});
+  //await Track.deleteMany({});
+  //await Genre.deleteMany({});
 
-  const dietz = new Youtuber({ name: "Margaux Dietz", id: 2 });
-  await dietz.save();
-
-  const olsson = new Youtuber({ name: "Jon Olsson", id: 3 });
-  await olsson.save();
-
-  const guidetti = new Youtuber({ name: "Sanna Guidetti", id: 4 });
-  await guidetti.save();
-
-  const neistat = new Youtuber({ name: "Casey Neistat", id: 5 });
-  await neistat.save();
-
-  const delos = new Youtuber({ name: "Sv Delos", id: 6 });
-  await delos.save();
-
-  const delér = new Youtuber({ name: "Janni Delér", id: 7 });
-  await delér.save();
+  data.forEach((trackData) => {
+    new Track(trackData).save();
+    //new Track(artistdata).save();
+    //new Genre(topMusicData).save();
+  });
 };
 
 seedDatabase();
+//}
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -47,19 +60,31 @@ app.use(bodyParser.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   // Displays all movies and shows
-  //res.json(topMusicData);
-  res.send("Hello World nu kör vi igen!!!");
+  //res.json(data);
+  res.send("Hello Kajsa");
 });
 
-app.get("/:youtubers", async (req, res) => {
-  const youtubers = await Youtuber.find();
-  res.json(youtubers);
-});
+/*app.get("/tracks", async (req, res) => {
+  const tracks = await Track.find();
+  console.log(tracks);
+  res.json(tracks);
+});*/
 
-app.get("/youtubers/:id", async (req, res) => {
-  const youtubers = await Youtuber.find();
-  res.json(youtubers);
+app.get("/tracks", async (req, res) => {
+  const tracks = await Track.find();
+  //console.log(tracks);
+  res.json(tracks);
 });
+// this artist search works : http://localhost:8080/artists
+
+/*app.get("/tracks/:id", async (req, res) => {
+  const tracks = await Track.findById(req.params.id);
+  if (tracks) {
+    res.json(tracks);
+  } else {
+    res.status(404).json({ error: "Track not found" });
+  }
+});*/
 
 // Start the server
 app.listen(port, () => {

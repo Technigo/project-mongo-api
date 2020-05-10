@@ -1,6 +1,6 @@
 # Mongo API Project
 
-This project is built using the MongoDB database to store and retrieve data from, and having that data to produce a RESTful API. (Used Mongoose models)
+This project is built using the MongoDB database to store and retrieve data from, and having that data to produce a RESTful API.
 
 ## The problem
 
