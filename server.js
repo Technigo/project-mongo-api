@@ -66,7 +66,11 @@ app.get('/books/:isbn', async (req, res) => {
   const { isbn } = req.params
   const book = await Book.findOne({ isbn })
 
-  res.json(book)
+  if (book) {
+    res.json(book)
+  } else {
+    res.status(404).json({ error: `No book found with isbn ${isbn}` })
+  }
 })
 
 // Start the server
