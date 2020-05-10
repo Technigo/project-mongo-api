@@ -48,7 +48,7 @@ const Book = mongoose.model('Book', {
   }
 })
 /*
-  isbn: {
+  isbn search idea: {
     type: String,
     // unique: true
     // But give "Deprecation Warnings" in Node:
@@ -56,7 +56,7 @@ const Book = mongoose.model('Book', {
   },
 */
 
-// RESTART_DATABASE npm run dev:
+// To reset database and the populate db:
 // $ RESET_DATABASE=true npm run dev
 // Seed DATABASE using Async
 // forEach loop will put all Books from JSON into database
@@ -94,11 +94,10 @@ app.get('/', (req, res) => {
   res.send("My API endpoints: /books ,  , plus handling error if no id match")
 })
 
- // test, test:
+// test, test:
  app.get('/all', async (req, res) => {
    res.json('lala')
  })
- // find ONE Book per NAME:
 
 // a RESTful route to return all Books:
 // http://localhost:8080/books
@@ -107,11 +106,41 @@ app.get('/books', async (req, res) => {
   res.json(books)
 })
 
+// a RESTful route to return ONE Books via ISBN nr::
+// http://localhost:8080/books/439785960
+app.get('/books/:isbn', async (req, res) => {
+  const isbn = req.params.isbn
+  Book.findOne({ 'isbn': isbn })
+    .then((results) => {
+      res.json(results)
+    }).catch((err) => {
+      // res.json({ message: "Not found", err: err })
+      res.status(404).json({ error: 'Book not found' })
+    })
+})
+
+/*
 
 
 
+
+
+
+*/
+
+
+
+
+
+
+
+// find ONE Book per NAME:
 
  
+
+
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
