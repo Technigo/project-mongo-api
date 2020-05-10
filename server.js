@@ -53,7 +53,10 @@ app.get('/', (req, res) => {
 
 // Route for all books
 app.get('/books', async (req, res) => {
-  const booksList = await Book.find()
+  const { page, per_page } = req.query
+  const pageNo = +page || 1
+  const perPage = +per_page || 10
+  const booksList = await Book.find().limit(perPage).skip(perPage * (pageNo - 1))
 
   res.json(booksList)
 })
