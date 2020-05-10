@@ -2,14 +2,11 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+//import booksData from './data/books.json'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+
 
 // Database setup:
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
@@ -75,10 +72,10 @@ if (process.env.RESET_DATABASE){
   }
  seedDatabase()
 }
-
 // Dubbelkolla detta oven först innan SEED till MongoDB
 // se databas i Compass! project-mongo / books 
 // project-mongo.books
+
 
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
@@ -94,13 +91,21 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world - Mongo API here! Get som books ready LALALA!')
+  res.send("My API endpoints: /books ,  , plus handling error if no id match")
 })
 
- // find ALL Books
+ // test, test:
+ app.get('/all', async (req, res) => {
+   res.json('lala')
+ })
  // find ONE Book per NAME:
 
-
+// a RESTful route to return all Books:
+// http://localhost:8080/books
+app.get('/books', async (req, res) => {
+  const books = await Book.find()
+  res.json(books)
+})
 
 
 
