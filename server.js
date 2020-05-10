@@ -19,7 +19,7 @@ mongoose.Promise = Promise
 // Mongoose model setup:
   // Book Model
 const Book = mongoose.model('Book', {
-  bookId: {
+  bookID: {
     type: Number
   },
   title: {
@@ -32,10 +32,10 @@ const Book = mongoose.model('Book', {
     type: Number
   },
   isbn: {
-    type: String,
+    type: Number
   },
   isbn13: {
-    type: String,
+    type: Number
   },
   language_code: {
     type: String
@@ -51,7 +51,6 @@ const Book = mongoose.model('Book', {
   }
 })
 /*
-Tested for search via unique value
   isbn: {
     type: String,
     // unique: true
@@ -60,14 +59,26 @@ Tested for search via unique value
   },
 */
 
+// RESTART_DATABASE npm run dev:
+// $ RESET_DATABASE=true npm run dev
+// Seed DATABASE using Async
+// forEach loop will put all Books from JSON into database
+if (process.env.RESET_DATABASE){
+ console.log('Resetting database')
 
+  const seedDatabase = async () => {
+    await Book.deleteMany()
 
+    booksData.forEach((book) => {
+      new Book(book).save()
+    })
+  }
+ seedDatabase()
+}
 
-
-
-
-
-
+// Dubbelkolla detta oven först innan SEED till MongoDB
+// se databas i Compass! project-mongo / books 
+// project-mongo.books
 
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
@@ -83,9 +94,19 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world - Mongo API here! Get som books ready!')
+  res.send('Hello world - Mongo API here! Get som books ready LALALA!')
 })
 
+ // find ALL Books
+ // find ONE Book per NAME:
+
+
+
+
+
+
+
+ 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
