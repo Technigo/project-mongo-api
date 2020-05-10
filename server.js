@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import artistData from './data/artistsCSV.json'
-import {Artist, ArtistDetail} from './models'
+import {ArtistDetail} from './models'
 
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/artists"
