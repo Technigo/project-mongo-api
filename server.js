@@ -30,10 +30,11 @@ const Book = mongoose.model('Book', {
 })
 
 if (process.env.RESET_DATABASE) {
-console.log('reseting')
+  console.log('Resetting database!')
 
   const seedDatabase = async () => {
     await Author.deleteMany()
+    await Book.deleteMany()
 
     const coelho = new Author ({ name: 'Paulo Coelho' })
     await coelho.save()
@@ -47,6 +48,7 @@ console.log('reseting')
  
 }
 seedDatabase()
+
 }
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -69,10 +71,24 @@ app.get('/authors', async (req, res) => {
   res.json(authors)
 })
 
+app.get('/authors/:id', async (req, res) => {
+  const author = await Author.findById(req.params.id)
+  if (author) {
+    res.json(author)
+  } else {
+    res.status(404).json({ error: 'Author not found' })
+  }
+  
+})
+
 app.get('/authors/:id/books', async (req, res) => {
   const author = await Author.findById(req.params.id)
+  if (author) {
   const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) })
   res.json(books)
+  } else {
+    res.status(404).json({ error: 'Author not found' })
+  }
 })
 
 app.get('/books', async (req, res) => {
