@@ -3,8 +3,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose, { MongooseDocument } from 'mongoose'
 import { stringify } from 'querystring'
-import netflixData from './data/netflix-titles.json'
-
+// import netflixData from './data/netflix-titles.json'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -49,46 +48,8 @@ const seedDatabase = async () => {
   await new Movie({ title: "Jurassic Park", director: spielberg }).save()
 }
 seedDatabase()
-
 }
 
-// const Author = mongoose.model('Author', {
-//   name: String
-// })
-
-// const Book = mongoose.model('Book', {
-//   title: String,
-//   author: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'Author'
-//   }
-// })
-
-// if (process.env.RESET_DATABASE) {
-//   console.log('Resetting database!')
-
-//   const seedDatabase = async () => {
-//     await Author.deleteMany()
-//     await Book.deleteMany()
-
-//     const coelho = new Author ({ name: 'Paulo Coelho' })
-//     await coelho.save()
-
-//     const echart = new Author ({ name: 'Echart Tolle' })
-//     await echart.save() 
-
-
-//     await new Book({ title: "The Alchemist", author: coelho }).save()
-//     await new Book({ title: "The Power of Now", author: echart }).save()
- 
-// }
-// seedDatabase()
-
-// }
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 5000
 const app = express()
 
@@ -130,6 +91,48 @@ app.get('/movies', async (req, res) => {
   res.json(movies)
 })
 
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`)
+})
+
+// const Author = mongoose.model('Author', {
+//   name: String
+// })
+
+// const Book = mongoose.model('Book', {
+//   title: String,
+//   author: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'Author'
+//   }
+// })
+
+// if (process.env.RESET_DATABASE) {
+//   console.log('Resetting database!')
+
+//   const seedDatabase = async () => {
+//     await Author.deleteMany()
+//     await Book.deleteMany()
+
+//     const coelho = new Author ({ name: 'Paulo Coelho' })
+//     await coelho.save()
+
+//     const echart = new Author ({ name: 'Echart Tolle' })
+//     await echart.save() 
+
+
+//     await new Book({ title: "The Alchemist", author: coelho }).save()
+//     await new Book({ title: "The Power of Now", author: echart }).save()
+ 
+// }
+// seedDatabase()
+
+// }
+// Defines the port the app will run on. Defaults to 8080, but can be 
+// overridden when starting the server. For example:
+//
+//   PORT=9000 npm start
 
 
 // app.get('/authors', async (req, res) => {
@@ -162,9 +165,3 @@ app.get('/movies', async (req, res) => {
 //   res.json(books)
 // })
 
-
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
-})
