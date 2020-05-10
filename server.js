@@ -98,7 +98,7 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Endpoints= /directors & /directors/:id & /directors/:id/movies & /movies')
 })
 
 app.get('/directors', async (req, res) => {
