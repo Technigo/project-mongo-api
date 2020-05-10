@@ -51,10 +51,17 @@ app.get('/', (req, res) => {
 
 // Route for all books
 app.get('/books', async (req, res) => {
-  const { page } = req.query
   const booksList = await Book.find()
 
   res.json(booksList)
+})
+
+// Route for single book using ISBN as param
+app.get('/books/:isbn', async (req, res) => {
+  const { isbn } = req.params
+  const book = await Book.findOne({ isbn })
+
+  res.json(book)
 })
 
 // Start the server
