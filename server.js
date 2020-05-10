@@ -49,6 +49,12 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+// Route for all books
+app.get('/books', async (req, res) => {
+  const books = await Book.find()
+
+  res.json(books)
+})
 
 // Start the server
 app.listen(port, () => {
