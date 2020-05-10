@@ -17,7 +17,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Author = mongoose.model('Author',{
+const Author = mongoose.model('Author', {
   name: String
 })
 
@@ -35,14 +35,16 @@ console.log('reseting')
   const seedDatabase = async () => {
     await Author.deleteMany()
 
-    const coelho = new Author ({ name: 'Paulo Coelho'})
+    const coelho = new Author ({ name: 'Paulo Coelho' })
     await coelho.save()
 
-    const echart = new Author ({name: 'Echart Tolle'})
+    const echart = new Author ({ name: 'Echart Tolle' })
     await echart.save() 
 
-    await new Book({ title: "The Alchemist", author: Coelho}).save()
-    await new Book({ title: "The Power of Now", author: Tolle }).save()
+
+    await new Book({ title: "The Alchemist", author: coelho }).save()
+    await new Book({ title: "The Power of Now", author: echart }).save()
+ 
 }
 seedDatabase()
 }
@@ -66,6 +68,19 @@ app.get('/authors', async (req, res) => {
   const authors = await Author.find()
   res.json(authors)
 })
+
+app.get('/authors/:id/books', async (req, res) => {
+  const author = await Author.findById(req.params.id)
+  const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) })
+  res.json(books)
+})
+
+app.get('/books', async (req, res) => {
+  const books = await Book.find().populate('author')
+  res.json(books)
+})
+
+
 
 // Start the server
 app.listen(port, () => {
