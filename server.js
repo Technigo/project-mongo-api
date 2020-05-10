@@ -52,13 +52,9 @@ app.get('/', (req, res) => {
 // Route for all books
 app.get('/books', async (req, res) => {
   const { page } = req.query
-  let booksList = await Book.find()
+  const booksList = await Book.find()
 
-  const startIndex = 10 * (+page - 1) || 0
-  const endIndex = startIndex + 10
-  const booksListPaginated = booksList.slice(startIndex, endIndex)
-
-  res.json({ books: booksListPaginated })
+  res.json(booksList)
 })
 
 // Start the server
