@@ -5,10 +5,9 @@ import mongoose from 'mongoose'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
-// 
 // import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
+import booksData from './data/books.json'
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
@@ -16,40 +15,38 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Author = mongoose.model('Author', {
-  name: String
-})
+// const Nomination = mongoose.model('Nomination', {
+//   year_film: Number,
+//   year_award: Number,
+//   ceremony: Number,
+//   category: String,
+//   nominee: String,
+//   film: String,
+//   win: Boolean
+// })
 
 const Book = mongoose.model('Book', {
+  bookID: Number,
   title: String,
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Author'
-  }
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
 })
 
-if (process.env.RESET_DATABASE) {
-  console.log('Resetting database!')
 
+if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Author.deleteMany()
-    await Book.deleteMany()
+    await Book.deleteMany({})
+    await Author.deleteMany({})
 
-    const tolkien = new Author({ name: 'J.R.R Tolkien' })
-    await tolkien.save()
-
-    const rowling = new Author({ name: 'J.K. Rowling' })
-    await rowling.save()
-
-    await new Book({ title: "Harry Potter and the Philosopher's Stone", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Chamber of Secrets", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Prisoner of Azkaban", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Goblet of Fire", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Order of the Phoenix", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Half-Blood Prince", author: rowling }).save()
-    await new Book({ title: "Harry Potter and the Deathly Hallows", author: rowling }).save()
-    await new Book({ title: "The Lord of the Rings", author: tolkien }).save()
-    await new Book({ title: "The Hobbit", author: tolkien }).save()
+    booksData.forEach((bookData) => {
+      new Book(bookData).save()
+    })
   }
   seedDatabase()
 }
@@ -70,33 +67,18 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-app.get('/authors', async (req, res) => {
-  const authors = await Author.find()
-  res.json(authors)
-})
-
-app.get('/authors/:id', async (req, res) => {
-  const author = await Author.findById(req.params.id)
-  if (author) {
-    res.json(author)
-  } else {
-    res.status(404).json({ error: 'Author not found' })
-  }
-})
-
-app.get('/authors/:id/books', async (req, res) => {
-  const author = await Author.findById(req.params.id)
-  if (author) {
-    const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) })
-    res.json(books)
-  } else {
-    res.status(404).json({ error: 'Author not found' })
-  }
-})
-
 app.get('/books', async (req, res) => {
-  const books = await Book.find().populate('author')
+  const books = await Book.find()
   res.json(books)
+})
+
+app.get('/books/:id', async (req, res) => {
+  const book = await Book.findById(req.params.id)
+  if (book) {
+    res.json(book)
+  } else {
+    res.status(404).json({ error: 'Book not found' })
+  }
 })
 
 
