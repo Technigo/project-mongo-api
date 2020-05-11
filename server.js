@@ -1,52 +1,76 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
-//import booksData from './data/books.json'
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import mongoose from "mongoose";
+import booksData from "./data/books.json";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 
-
 // Database setup:
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.Promise = Promise
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
 
-// Mongoose model setup:
-  // Book Model
-const Book = mongoose.model('Book', {
-  bookID: {
-    type: Number
-  },
-  title: {
-    type: String
-  },
-  authors: {
-    type: String
-  },
-  average_rating: {
-    type: Number
-  },
+// TODO:
+/*
+  change type on:
+
   isbn: {
-    type: Number
+    type: String
   },
   isbn13: {
-    type: Number
-  },
-  language_code: {
     type: String
   },
+
+Skriva om + await ??:
+
+    booksData.forEach((book) => {
+      new Book(book).save()
+    })
+ så här:   
+await booksData.forEach((book) => new Book(book).save())
+
+
+Skriva om min :isbn med await:
+
+
+*/
+
+// Mongoose model setup:
+// Book Model
+const Book = mongoose.model("Book", {
+  bookID: {
+    type: Number,
+  },
+  title: {
+    type: String,
+  },
+  authors: {
+    type: String,
+  },
+  average_rating: {
+    type: Number,
+  },
+  isbn: {
+    type: String,
+  },
+  isbn13: {
+    type: String,
+  },
+  language_code: {
+    type: String,
+  },
   num_pages: {
-    type: Number
+    type: Number,
   },
   ratings_count: {
-    type: Number
+    type: Number,
   },
   text_reviews_count: {
-    type: Number
-  }
-})
+    type: Number,
+  },
+});
 /*
   isbn search idea: {
     type: String,
@@ -60,66 +84,74 @@ const Book = mongoose.model('Book', {
 // $ RESET_DATABASE=true npm run dev
 // Seed DATABASE using Async
 // forEach loop will put all Books from JSON into database
-if (process.env.RESET_DATABASE){
- console.log('Resetting database')
+if (process.env.RESET_DATABASE) {
+  console.log("Resetting database");
 
   const seedDatabase = async () => {
-    await Book.deleteMany()
+    await Book.deleteMany();
 
     booksData.forEach((book) => {
-      new Book(book).save()
-    })
-  }
- seedDatabase()
+      new Book(book).save();
+    });
+  };
+  seedDatabase();
 }
 // Dubbelkolla detta oven först innan SEED till MongoDB
-// se databas i Compass! project-mongo / books 
+// se databas i Compass! project-mongo / books
 // project-mongo.books
 
-
-
-// Defines the port the app will run on. Defaults to 8080, but can be 
+// Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8080
-const app = express()
+const port = process.env.PORT || 8080;
+const app = express();
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(bodyParser.json())
+app.use(cors());
+app.use(bodyParser.json());
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  res.send("My API endpoints: /books ,  , plus handling error if no id match")
-})
+app.get("/", (req, res) => {
+  res.send("My API endpoints: /books ,  , plus handling error if no id match");
+});
 
 // test, test:
- app.get('/all', async (req, res) => {
-   res.json('lala')
- })
+app.get("/all", async (req, res) => {
+  res.json("lala");
+});
 
 // a RESTful route to return all Books:
 // http://localhost:8080/books
-app.get('/books', async (req, res) => {
-  const books = await Book.find()
-  res.json(books)
-})
+app.get("/books", async (req, res) => {
+  const books = await Book.find();
+  console.log(`Found ${books.lenght} books`);
+  res.json(books);
+});
 
-// a RESTful route to return ONE Books via ISBN nr::
+// a RESTful route to return ONE Book via ISBN nr:: AWAIT?????
 // http://localhost:8080/books/439785960
-app.get('/books/:isbn', async (req, res) => {
-  const isbn = req.params.isbn
-  Book.findOne({ 'isbn': isbn })
+app.get("/books/:isbn", async (req, res) => {
+  const isbn = req.params.isbn;
+  Book.findOne({ isbn: isbn })
     .then((results) => {
-      res.json(results)
-    }).catch((err) => {
-      // res.json({ message: "Not found", err: err })
-      res.status(404).json({ error: 'Book not found' })
+      res.json(results);
     })
-})
+    .catch((err) => {
+      // res.json({ message: 'ISBN ot found', err: err })
+      res.status(404).json({ error: "ISBN not found" });
+    });
+});
 
 /*
+TODO:
+
+Se ovan
+
+
+Fler routes
+
+Hantera errors
 
 
 
@@ -128,20 +160,7 @@ app.get('/books/:isbn', async (req, res) => {
 
 */
 
-
-
-
-
-
-
-// find ONE Book per NAME:
-
- 
-
-
-
-
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
-})
+  console.log(`Server running on http://localhost:${port}`);
+});
