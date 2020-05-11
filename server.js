@@ -32,7 +32,7 @@ if (process.env.RESET_DB) {
     await Book.deleteMany()
 
     data.forEach((book) => {
-      new Books(book).save()
+      new Book(book).save()
     })
   }
   seedDatabase()
