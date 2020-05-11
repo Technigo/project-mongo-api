@@ -2,48 +2,19 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import Book from './models/book'
 import booksData from './data/books.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Book = mongoose.model('Book', {
-  bookID: {
-    type: Number,
-  },
-  title: {
-    type: String,
-  },
-  authors: {
-    type: String,
-  },
-  average_rating: {
-    type: Number,
-  },
-  isbn13: {
-    type: Number,
-  },
-  language_code: {
-    type: String,
-  },
-  num_pages: {
-    type: Number,
-  },
-  ratings_count: {
-    type: Number,
-  },
-  text_reviews_count: {
-    type: Number,
-  },
-})
-
 if (process.env.RESET_DB) {
   console.log('Resetting database...')
 
   const seedDatabase = async () => {
     // Clears database
-    await Book.deleteMany({})
+    await Book.deleteMany()
 
     // Saves all books from booksData to the database
     await booksData.forEach(book => new Book(book).save())
@@ -51,7 +22,7 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-const port = process.env.PORT || 8088
+const port = process.env.PORT || 8080
 const app = express()
 
 const listEndpoints = require('express-list-endpoints')
