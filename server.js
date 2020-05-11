@@ -67,12 +67,21 @@ app.get('/', (req, res) => {
 
 // Route for all books
 app.get('/books', async (req, res) => {
-  const { page } = req.query
+  const { page, sort } = req.query
+
+  const sortQuery = (sort) => {
+    if (sort === 'rating_dsc') {
+      return { average_rating: -1 }
+    } else if (sort === 'rating_asc') {
+      return { average_rating: 1 }
+    }
+  }
 
   const numBooks = await Book.estimatedDocumentCount()
   const pageNo = +page || 1
   const perPage = 10
   const booksList = await Book.find()
+    .sort(sortQuery(sort))
     .limit(perPage)
     .skip(perPage * (pageNo - 1))
 
