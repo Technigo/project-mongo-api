@@ -57,7 +57,7 @@ app.get('/books', (req, res) => {
 
   Book.find().then(books => {
     let orderedBooks = books
-    const keyword = req.query.keyword.toLowerCase().replace(/ /g, '_')
+    const keyword = req.query.keyword
     const order = req.query.order
     const PAGE_SIZE = 20
     const page = +req.query.page || 1
@@ -79,10 +79,10 @@ app.get('/books', (req, res) => {
       } else {
         orderedBooks = orderedBooks.sort((a, b) => (a.bookID > b.bookID) ? 1 : -1)
       }
-      const firstResult = orderedBooks.filter((book) => book.authors.toLowerCase().replace(/ /gi, '_').includes(keyword))
+      const firstResult = orderedBooks.filter((book) => book.authors.toLowerCase().replace(/ /gi, '_').includes(keyword.toLowerCase().replace(/ /g, '_')))
       const secondResult = orderedBooks.filter((book) => {
 
-        if (book.title.toString().toLowerCase().replace(/ /gi, '_').includes(keyword) && firstResult.indexOf(book) === -1) {
+        if (book.title.toString().toLowerCase().replace(/ /gi, '_').includes(keyword.toLowerCase().replace(/ /g, '_')) && firstResult.indexOf(book) === -1) {
           return true
         } else {
           return false
