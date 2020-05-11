@@ -39,6 +39,10 @@ app.get('/', (req, res) => {
 // Route for all books
 app.get('/books', async (req, res) => {
   const { page, sort, title, author } = req.query
+  const pageNo = +page || 1
+  const perPage = 10
+  const numBooks = await Book.estimatedDocumentCount()
+  const ERROR_MESSAGE = 'No books found, please try a different query'
 
   const sortQuery = (sort) => {
     if (sort === 'rating_dsc') {
@@ -48,10 +52,6 @@ app.get('/books', async (req, res) => {
     }
   }
 
-  const numBooks = await Book.estimatedDocumentCount()
-  const pageNo = +page || 1
-  const perPage = 10
-
   const booksList = await Book.find({
     title: new RegExp(title, 'i'),
     authors: new RegExp(author, 'i')
@@ -59,8 +59,6 @@ app.get('/books', async (req, res) => {
     .sort(sortQuery(sort))
     .limit(perPage)
     .skip(perPage * (pageNo - 1))
-
-  const ERROR_MESSAGE = 'No books found, please try a different query'
 
   if (booksList.length === 0) {
     res.status(404).json({ error: ERROR_MESSAGE })
