@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 
 // Route for all books
 app.get('/books', async (req, res) => {
-  const { page, sort } = req.query
+  const { page, sort, title, author } = req.query
 
   const sortQuery = (sort) => {
     if (sort === 'rating_dsc') {
@@ -51,28 +51,46 @@ app.get('/books', async (req, res) => {
   const numBooks = await Book.estimatedDocumentCount()
   const pageNo = +page || 1
   const perPage = 10
-  const booksList = await Book.find()
+
+  const booksList = await Book.find({
+    title: new RegExp(title, 'i'),
+    authors: new RegExp(author, 'i')
+  })
     .sort(sortQuery(sort))
     .limit(perPage)
     .skip(perPage * (pageNo - 1))
 
-  res.json({
-    total_books: numBooks,
-    total_pages: Math.ceil(numBooks / perPage),
-    page: pageNo,
-    books: booksList
-  })
+  const ERROR_MESSAGE = 'No books found, please try a different query'
+
+  if (booksList.length === 0) {
+    res.status(404).json({ error: ERROR_MESSAGE })
+  } else if (title || author) {
+    res.json({
+      total_books: booksList.length,
+      total_pages: Math.ceil(booksList.length / perPage),
+      page: pageNo,
+      books: booksList
+    })
+  } else {
+    res.json({
+      total_books: numBooks,
+      total_pages: Math.ceil(numBooks / perPage),
+      page: pageNo,
+      books: booksList
+    })
+  }
 })
 
 // Route for single book using ISBN13 as param
 app.get('/books/:isbn13', async (req, res) => {
   const { isbn13 } = req.params
   const book = await Book.findOne({ isbn13 })
+  const ERROR_MESSAGE = `No book found with isbn13 ${isbn13}`
 
   if (book) {
     res.json(book)
   } else {
-    res.status(404).json({ error: `No book found with isbn13 ${isbn}` })
+    res.status(404).json({ error: ERROR_MESSAGE })
   }
 })
 
