@@ -23,32 +23,20 @@ const Track = mongoose.model("Track", {
   id: Number,
 });
 
-/*const Track = mongoose.model("Track", {
-  trackName: String,
-  length: Number,
-  danceability: Number,
-});*/
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    // raderar så det ej läggs till varje gång man laddar sida.
+    await Track.deleteMany({});
 
-/*const Genre = mongoose.model("Genre", {
-  genre: String,
-});*/
+    data.forEach((trackData) => {
+      new Track(trackData).save();
 
-//if (process.env.RESET_DB) {
-const seedDatabase = async () => {
-  // raderar så det ej läggs till varje gång man laddar sida.
-  await Track.deleteMany({});
-  //await Track.deleteMany({});
-  //await Genre.deleteMany({});
+      ///await tracksData.forEach((track) => new Track(track).save());
+    });
+  };
 
-  data.forEach((trackData) => {
-    new Track(trackData).save();
-    //new Track(artistdata).save();
-    //new Genre(topMusicData).save();
-  });
-};
-
-seedDatabase();
-//}
+  seedDatabase();
+}
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -61,30 +49,26 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   // Displays all movies and shows
   //res.json(data);
-  res.send("Hello Kajsa");
+  res.send("Hello WORLD");
 });
-
-/*app.get("/tracks", async (req, res) => {
-  const tracks = await Track.find();
-  console.log(tracks);
-  res.json(tracks);
-});*/
 
 app.get("/tracks", async (req, res) => {
   const tracks = await Track.find();
   //console.log(tracks);
   res.json(tracks);
 });
-// this artist search works : http://localhost:8080/artists
 
-/*app.get("/tracks/:id", async (req, res) => {
-  const tracks = await Track.findById(req.params.id);
-  if (tracks) {
-    res.json(tracks);
+app.get("/tracks/:trackName", async (req, res) => {
+  const { trackName } = req.params;
+  const track = await Track.findOne({ trackName: trackName });
+  if (Track) {
+    res.json(track);
   } else {
-    res.status(404).json({ error: "Track not found" });
+    res
+      .status(404)
+      .json({ error: `Could not find track with id=${trackName}` });
   }
-});*/
+});
 
 // Start the server
 app.listen(port, () => {
