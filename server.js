@@ -8,27 +8,27 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Content = mongoose.model("Content", {
-  // show_id: Number,
-  title: String,
-  director: String,
-  cast: String,
-  country: String,
-  date_added: String,
-  release_year: Number,
-  rating: String,
-  duration: String,
-  listed_in: String,
-  description: String,
-  type: String,
+const Show = mongoose.model("Show", {
+  show_id: { type: Number },
+  title: { type: String },
+  director: { type: String },
+  cast: { type: String },
+  country: { type: String },
+  date_added: { type: String },
+  release_year: { type: Number },
+  rating: { type: String },
+  duration: { type: String },
+  listed_in: { type: String },
+  description: { type: String },
+  type: { type: String },
 });
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Content.deleteMany();
+    await Show.deleteMany();
 
-    data.forEach((contentData) => {
-      new Content(contentData).save();
+    data.forEach((showData) => {
+      new Show(showData).save();
     });
   };
 
@@ -39,6 +39,7 @@ if (process.env.RESET_DB) {
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
+
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -51,21 +52,22 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
-app.get("/content", async (req, res) => {
-  const content = await Content.find();
-  res.json(content);
+app.get("/shows", async (req, res) => {
+  const show = await Show.find();
+  res.json(show);
 });
 
-app.get("/content/:id", async (req, res) => {
-  const contentById = await Content.findById(req.params.id);
+app.get("/shows/:show_id", async (req, res) => {
+  const { show_id } = req.params;
+  const showById = await Show.findOne({ show_id: show_id });
 
-  console.log(contentById);
-  if (contentById) {
-    res.json(contentById);
+  console.log(showById);
+  if (showById) {
+    res.json(showById);
   } else {
     res
       .status(404)
-      .json({ error: `Content with id number: ${contentById} not found` });
+      .json({ error: `Content with id number: ${showById} not found` });
   }
 });
 
