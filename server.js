@@ -3,7 +3,6 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-
 import { Dessert } from './data/dessert'
 import { Menu } from './data/menu'
 
@@ -32,7 +31,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 
-if (process.env.RESET_DATABASE) {
+if (process.env.RESET_DATABASE === 'true') {
   console.log('Resetting the database!')
   const seedDatabase = async () => {
     await Dessert.deleteMany()
