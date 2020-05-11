@@ -17,7 +17,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const Books = mongoose.model('Book', {
+const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
   authors: String,
@@ -29,7 +29,7 @@ const Books = mongoose.model('Book', {
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Books.deleteMany()
+    await Book.deleteMany()
 
     data.forEach((book) => {
       new Books(book).save()
@@ -55,7 +55,7 @@ them properly..*/
 
 app.get('/books', (req, res) => {
 
-  Books.find().then(books => {
+  Book.find().then(books => {
     let orderedBooks = books
     const keyword = req.query.keyword.toLowerCase().replace(/ /g, '_')
     const order = req.query.order
