@@ -124,7 +124,7 @@ app.get('/books', (req, res) => {
 
 app.put('/book/:id', async (req, res) => {
 
-  await const updatedBook = Book.findOneAndUpdate({ bookID: +req.params.id }, { img_url: req.body.img_url }, { new: true })
+  const updatedBook = await Book.findOneAndUpdate({ bookID: +req.params.id }, { img_url: req.body.img_url }, { new: true })
   res.json(updatedBook)
 })
 
