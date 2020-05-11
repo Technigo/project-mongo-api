@@ -35,6 +35,7 @@ if (process.env.RESET_DATABASE === 'true') {
   console.log('Resetting the database!')
   const seedDatabase = async () => {
     await Dessert.deleteMany()
+    await Menu.deleteMany()
 
     // Save dessrts
     const buns = new Dessert({
@@ -72,10 +73,6 @@ if (process.env.RESET_DATABASE === 'true') {
       time: 60,
     })
     await blueberry.save()
-
-
-    // Save food menu
-    await Menu.deleteMany()
 
     const pomodoro = new Menu({
       name: 'Pasta Pomodoro',
