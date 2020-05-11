@@ -56,6 +56,17 @@ app.get('/tracks', async (req, res) => {
   res.json(tracks)
 })
 
+// Endpoint to get a single track
+app.get('/tracks/:id', async (req, res) => {
+  const { id } = req.params;
+  const track = await Track.findOne({ id: id })
+  if (track) {
+    res.json(track);
+  } else {
+    res.status(404).json({ error: `Could not find track with id=${id}` });
+  }
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
