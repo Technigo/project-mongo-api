@@ -40,21 +40,17 @@ const Book = mongoose.model('Book', {
 
 if (process.env.RESET_DB) {
   console.log('Resetting database...')
+
   const seedDatabase = async () => {
+    // Clears database
     await Book.deleteMany({})
 
-    booksData.forEach(bookData => {
-      new Book(bookData).save()
-    })
+    // Saves all books from booksData to the database
+    await booksData.forEach(book => new Book(book).save())
   }
-
   seedDatabase()
 }
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8088
 const app = express()
 
@@ -71,11 +67,14 @@ app.get('/', (req, res) => {
 
 // Route for all books
 app.get('/books', async (req, res) => {
-  const { page, per_page } = req.query
+  const { page } = req.query
+
   const numBooks = await Book.estimatedDocumentCount()
   const pageNo = +page || 1
-  const perPage = +per_page || 10
-  const booksList = await Book.find().limit(perPage).skip(perPage * (pageNo - 1))
+  const perPage = 10
+  const booksList = await Book.find()
+    .limit(perPage)
+    .skip(perPage * (pageNo - 1))
 
   res.json({
     total_books: numBooks,
