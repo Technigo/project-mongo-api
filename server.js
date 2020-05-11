@@ -9,19 +9,37 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Book = mongoose.model('Book', {
-  bookID: Number,
-  title: String,
-  authors: String,
-  average_rating: Number,
-  isbn: Number,
-  isbn13: Number,
-  language_code: String,
-  num_pages: Number,
-  ratings_count: Number,
-  text_reviews_count: Number
+  bookID: {
+    type: Number,
+  },
+  title: {
+    type: String,
+  },
+  authors: {
+    type: String,
+  },
+  average_rating: {
+    type: Number,
+  },
+  isbn13: {
+    type: Number,
+  },
+  language_code: {
+    type: String,
+  },
+  num_pages: {
+    type: Number,
+  },
+  ratings_count: {
+    type: Number,
+  },
+  text_reviews_count: {
+    type: Number,
+  },
 })
 
 if (process.env.RESET_DB) {
+  console.log('Resetting database...')
   const seedDatabase = async () => {
     await Book.deleteMany({})
 
@@ -67,15 +85,15 @@ app.get('/books', async (req, res) => {
   })
 })
 
-// Route for single book using ISBN as param
-app.get('/books/:isbn', async (req, res) => {
-  const { isbn } = req.params
-  const book = await Book.findOne({ isbn })
+// Route for single book using ISBN13 as param
+app.get('/books/:isbn13', async (req, res) => {
+  const { isbn13 } = req.params
+  const book = await Book.findOne({ isbn13 })
 
   if (book) {
     res.json(book)
   } else {
-    res.status(404).json({ error: `No book found with isbn ${isbn}` })
+    res.status(404).json({ error: `No book found with isbn13 ${isbn}` })
   }
 })
 
