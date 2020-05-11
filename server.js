@@ -11,12 +11,15 @@ mongoose.Promise = Promise
 
 
 const Song = mongoose.model('Song', {
-  trackName: String,
-  artistName: String,
-  genre: String,
-  //type: mongoose.Schema.Types.ObjectId,
-  // ref: 'Artist',
-
+  trackName: {
+    type: String,
+  },
+  artistName: {
+    type: String,
+  },
+  genre: {
+    type: String,
+  }
 })
 
 const Artist = mongoose.model('Artist', {
@@ -31,7 +34,6 @@ if (process.env.RESET_DB) {
       new Song(songData).save()
     })
   }
-
   seedDatabase()
 }
 
@@ -43,8 +45,6 @@ app.use(cors())
 app.use(bodyParser.json())
 
 const listEndpoints = require('express-list-endpoints')
-
-
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -59,7 +59,7 @@ app.get('/hits', async (req, res) => {
 })
 
 //Path to one hitsong after id (why is this else statment not working?)
-// app.get('/hits/hit/:id', async (req, res) => {
+// app.get('/hits/:id', async (req, res) => {
 //   const hitSong = await Song.findById(req.params.id)
 //   if (hitSong) {
 //     res.json(hitSong)
@@ -69,14 +69,13 @@ app.get('/hits', async (req, res) => {
 // })
 
 // Path to hitsong with id 
-app.get('/hits/hit/:id', async (req, res) => {
+app.get('/hits/:id', async (req, res) => {
   let hitSong
   try {
     hitSong = await Song.findById(req.params.id)
   } catch (error) {
     return res.status(404).json({ message: "Hit song not found" })
   }
-
   if (hitSong) {
     res.json(hitSong)
   }
