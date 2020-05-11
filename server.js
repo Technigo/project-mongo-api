@@ -78,7 +78,7 @@ if (process.env.RESET_DATABASE === 'true') {
       name: 'Pasta Pomodoro',
       typeOf: 'Simple Italian Classic',
       ingredients: 5,
-      img_url: 'http://tiny.cc/fg7ooz',
+      img_url: 'http://tiny.cc/mfovoz',
       time: 15,
     })
     await pomodoro.save()
@@ -105,7 +105,7 @@ if (process.env.RESET_DATABASE === 'true') {
       name: 'Tikka Masala',
       typeOf: 'Indian Spices',
       ingredients: 7,
-      img_url: 'http://tiny.cc/371poz',
+      img_url: 'http://tiny.cc/0govoz',
       time: 20,
     })
     await masala.save()
