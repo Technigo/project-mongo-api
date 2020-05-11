@@ -3,18 +3,65 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+
+import netflixData from './data/netflix-titles.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
+
+const Netflixtitle = mongoose.model('Netflixtitle', {
+  show_id: {
+    type: Number,
+  },
+  title: {
+    type: String,
+  },
+  director: {
+    type: String,
+  },
+  cast: {
+    type: String,
+  },
+  country: {
+    type: String,
+  },
+  date_added: {
+    type: String,
+  },
+  release_year: {
+    type: Number,
+  },
+  rating: {
+    type: String,
+  },
+  duration: {
+    type: String,
+  },
+  listed_in: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  type: {
+    type: String,
+  },
+
+});
+
+if (process.env.RESET_DATABASE) {
+console.log('Resettnig database...')
+
+const seedDatabase = async () => {
+  // clear out database
+  await Netflixtitle.deleteMany();
+  // save all of the title from netflixData.json to the database
+  await netflixData.forEach((title) => new Netflixtitle(title).save()) 
+};
+seedDatabase();
+
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -29,7 +76,9 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  netflixData.find().then(titles => {
+    res.json(titles)
+  })
 })
 
 // Start the server
