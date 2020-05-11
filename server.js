@@ -81,11 +81,11 @@ app.get('/books', async (req, res) => {
   }
 })
 
-// Route for single book using ISBN13 as param
+// Route for single book using ISBN-13 as param
 app.get('/books/:isbn13', async (req, res) => {
   const { isbn13 } = req.params
   const book = await Book.findOne({ isbn13 })
-  const ERROR_MESSAGE = `No book found with isbn13 ${isbn13}`
+  const ERROR_MESSAGE = `No book found with ISBN-13 ${isbn13}`
 
   if (book) {
     res.json(book)
