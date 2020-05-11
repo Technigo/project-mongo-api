@@ -24,7 +24,11 @@ const Book = mongoose.model('Book', {
   average_rating: Number,
   num_pages: Number,
   ratings_count: Number,
-  text_reviews_count: Number
+  text_reviews_count: Number,
+  img_url: {
+    type: String,
+    default: ''
+  }
 })
 
 if (process.env.RESET_DB) {
@@ -122,7 +126,7 @@ app.get('/books', (req, res) => {
   })
 })
 
-app.put('/book/:id', async (req, res) => {
+app.put('/books/:id', async (req, res) => {
 
   const updatedBook = await Book.findOneAndUpdate({ bookID: +req.params.id }, { img_url: req.body.img_url }, { new: true })
   res.json(updatedBook)
