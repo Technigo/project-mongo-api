@@ -128,8 +128,8 @@ app.get('/books', (req, res) => {
 
 app.put('/books/:id', async (req, res) => {
 
-  const updatedBook = await Book.findOneAndUpdate({ bookID: +req.params.id }, { img_url: req.body.img_url }, { new: true })
-  res.json(updatedBook)
+  //const updatedBook = await Book.findOneAndUpdate({ bookID: +req.params.id }, { img_url: req.body.img_url }, { new: true })
+  res.json(req.body.img_url)
 })
 
 // Start the server
