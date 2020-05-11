@@ -41,6 +41,7 @@ app.get('/books', async (req, res) => {
   const { page, sort, title, author } = req.query
   const pageNo = +page || 1
   const perPage = 10
+  const skip = perPage * (pageNo - 1)
   const numBooks = await Book.estimatedDocumentCount()
   const ERROR_MESSAGE = 'No books found, please try a different query'
 
@@ -58,7 +59,7 @@ app.get('/books', async (req, res) => {
   })
     .sort(sortQuery(sort))
     .limit(perPage)
-    .skip(perPage * (pageNo - 1))
+    .skip(skip)
 
   if (booksList.length === 0) {
     res.status(404).json({ error: ERROR_MESSAGE })
