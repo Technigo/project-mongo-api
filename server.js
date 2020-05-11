@@ -25,13 +25,10 @@ const Track = mongoose.model("Track", {
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    // raderar så det ej läggs till varje gång man laddar sida.
     await Track.deleteMany({});
 
     data.forEach((trackData) => {
       new Track(trackData).save();
-
-      ///await tracksData.forEach((track) => new Track(track).save());
     });
   };
 
@@ -47,26 +44,23 @@ app.use(bodyParser.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  // Displays all movies and shows
-  //res.json(data);
   res.send("Hello WORLD");
 });
 
 app.get("/tracks", async (req, res) => {
   const tracks = await Track.find();
-  //console.log(tracks);
   res.json(tracks);
 });
 
 app.get("/tracks/:trackName", async (req, res) => {
   const { trackName } = req.params;
   const track = await Track.findOne({ trackName: trackName });
-  if (Track) {
+  if (track) {
     res.json(track);
   } else {
     res
       .status(404)
-      .json({ error: `Could not find track with id=${trackName}` });
+      .json({ error: `Could not find track with name ${trackName}` });
   }
 });
 

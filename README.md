@@ -4,6 +4,8 @@ This project is built using the MongoDB database to store and retrieve data from
 
 ## The problem
 
+I thought everything was hard, backend is really tricky. But the thing I was most struggling about is when i should run "RESET_DB=true npm start" in the terminal.
+
 ## Learning objectives
 
 - How to model data in Mongoose
