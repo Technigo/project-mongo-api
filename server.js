@@ -44,15 +44,25 @@ app.get('/', (req, res) => {
   res.send('try visiting /books')
 })
 
+/*I was able to use .limit and .skip to limit initial Books.find() like so:
+const page = +req.query.page || 1
+const PAGE_SIZE = 20
+Books.find().limit(PAGE_SIZE).skip((page * PAGE_SIZE) - PAGE_SIZE)
+But I couldn't implement this with my orderedBooks variable, since I was only finding 20 books at a time
+my sort function would just order those 20 books. Changing to next page would find the next 20 books as they
+appear in database and sort those, etc. It seems like I need to be finding all the books at once so I can order 
+them properly..*/
 
 app.get('/books', (req, res) => {
+
   Books.find().then(books => {
     let orderedBooks = books
-    const keyword = req.query.keyword
+    const keyword = req.query.keyword.toLowerCase().replace(/ /g, '_')
     const order = req.query.order
     const PAGE_SIZE = 20
     const page = +req.query.page || 1
     let selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+
     if (keyword) {
       if (order === 'highest') {
         orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? -1 : 1)
@@ -80,8 +90,13 @@ app.get('/books', (req, res) => {
       })
 
       const finalResult = firstResult.concat(secondResult)
-      selectedPage = finalResult.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
-      res.json(selectedPage)
+      if (finalResult.length > 0) {
+        selectedPage = finalResult.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+        res.json(selectedPage)
+      } else {
+        res.json({ error: `The keyword "${keyword}" does not match any book or author in the database.` })
+      }
+
     } else if (order === 'highest') {
       orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? -1 : 1)
       selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
