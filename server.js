@@ -14,26 +14,6 @@ mongoose.Promise = Promise;
 
 // TODO:
 /*
-  change type on:
-
-  isbn: {
-    type: String
-  },
-  isbn13: {
-    type: String
-  },
-
-Skriva om + await ??:
-
-    booksData.forEach((book) => {
-      new Book(book).save()
-    })
- så här:   
-await booksData.forEach((book) => new Book(book).save())
-
-
-Skriva om min :isbn med await:
-
 
 */
 
@@ -71,14 +51,7 @@ const Book = mongoose.model("Book", {
     type: Number,
   },
 });
-/*
-  isbn search idea: {
-    type: String,
-    // unique: true
-    // But give "Deprecation Warnings" in Node:
-    // https://mongoosejs.com/docs/deprecations.html
-  },
-*/
+
 
 // To reset database and the populate db:
 // $ RESET_DATABASE=true npm run dev
@@ -89,10 +62,11 @@ if (process.env.RESET_DATABASE) {
 
   const seedDatabase = async () => {
     await Book.deleteMany();
-
-    booksData.forEach((book) => {
-      new Book(book).save();
-    });
+    // new setup using await/async - but really no effect here:
+    await booksData.forEach((book) => new Book(book).save());
+    // booksData.forEach((book) => {
+    //   new Book(book).save();
+    // });
   };
   seedDatabase();
 }
@@ -143,22 +117,28 @@ app.get("/books/:isbn", async (req, res) => {
     });
 });
 
+
+
+/*
+  isbn search idea: {
+    type: String,
+    // unique: true
+    // But give "Deprecation Warnings" in Node:
+    // https://mongoosejs.com/docs/deprecations.html
+  },
+*/
+
 /*
 TODO:
 
-Se ovan
+More routes
 
-
-Fler routes
-
-Hantera errors
-
-
-
-
+Handle errors
 
 
 */
+
+
 
 // Start the server
 app.listen(port, () => {
