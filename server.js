@@ -39,7 +39,7 @@ app.get('/shows', async (req, res) => {
   }
   
   const show = await Shows.find(myFilter).collation({ locale: 'en_US', strength: 1 });
-
+  
   const page = +(req.query.page ?? 1);
   const pageSize = +(req.query.pageSize ?? 20); 
   const startIndex = (page -1) * pageSize;
@@ -91,10 +91,23 @@ app.get('/categories/:category', async (req, res) => {
 
   const categoryFind = await Shows.find( { type: category } ).collation({ locale: 'en_US', strength: 1 })
   
+  const page = +(req.query.page ?? 1);
+  const pageSize = +(req.query.pageSize ?? 20); 
+  const startIndex = (page -1) * pageSize;
+  const endIndex = startIndex + pageSize ;
+  const filteredCategory = categoryFind.slice(startIndex, endIndex)
+  const returnObject = { 
+    pageSize: pageSize,
+    page: page,
+    maxPages: Math.ceil(categoryFind.length/pageSize),
+    totalShows: categoryFind.length,
+    results: filteredCategory
+  }
+
   if (categoryFind.length === 0) {
     res.json(`There is no category named ${req.params.category}`)
   } else {
-    res.json(categoryFind)
+    res.json(returnObject)
   }
 })
 
