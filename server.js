@@ -85,14 +85,17 @@ app.get('/books/:isbn13', async (req, res) => {
   const { isbn13 } = req.params
   const ERROR_MESSAGE_404 = `No book found with ISBN-13 ${isbn13}`
   const ERROR_MESSAGE_400 = `${isbn13} is not a valid ISBN-13`
+  const isbnCheck = /^(978)([0-9]{10})$/
 
   try {
     const book = await Book.findOne({ isbn13 })
     if (book) {
       res.json(book)
-    } else {
+    } else if (!book && isbn13.match(isbnCheck)) {
       res.status(404).json({ error: ERROR_MESSAGE_404 })
-    }
+    } else (
+      res.status(400).json({ error: ERROR_MESSAGE_400 })
+    )
   } catch (err) {
     res.status(400).json({ error: ERROR_MESSAGE_400 })
   }
