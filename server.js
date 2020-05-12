@@ -48,12 +48,18 @@ app.get('/', (req, res) => {
 
 // Get all shows
 app.get('/shows', async (req, res) => {
-  const { title, sort } = req.query
-  let shows = await Show.find()
+  const { title } = req.query
+  const shows = await Show.find()
+  const showTitle = await Show.find({ title: title })
 
-  res.json(shows)
+  if (title) {
+    res.json(showTitle)
+  } else {
+    res.json(shows)
+  }
 
 })
+
 
 // Get show by ID
 app.get('/shows/:id', async (req, res) => {
