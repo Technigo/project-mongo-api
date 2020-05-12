@@ -47,6 +47,7 @@ const Book = mongoose.model("Book", {
   },
 });
 
+// -----------------------------------------------
 // To reset database and then populate db:
 // $ RESET_DATABASE=true npm run dev
 // Seed DATABASE using Async
@@ -80,10 +81,11 @@ app.use((req, res, next) => {
   }
 });
 
-// Start defining your routes here
+// -----------------------------------------------
+// Start defining routes here:
 app.get("/", (req, res) => {
   res.send(
-    "My API endpoints: /books ,/books/439554934 ,/books/sort?sort_by=average_rating ,/info/5eb945fdf667d249f9c15b41  plus handling errors"
+    "My API endpoints: /books ,/books/439554934 ,/sort?sort_by=average_rating ,/info/5eba83e3b3b1c00023249494  plus handling errors"
   );
 });
 
@@ -108,7 +110,7 @@ app.get("/books/:isbn", async (req, res) => {
   }
 });
 
-// Sort by rating:
+// To sort by rating:
 // http://localhost:8080/sort?sort_by=average_rating
 app.get("/sort", (req, res) => {
   const { sort_by } = req.query;
@@ -130,9 +132,9 @@ app.get("/sort", (req, res) => {
     });
 });
 
-// Return one book info by id:
-// http://localhost:8080/info/5eb945fdf667d249f9c15b41
-// Error handling via try catch to stop server error "UnhandledPromiseRejectionWarning"
+// To return one book info by id:
+// http://localhost:8080/info/5eba83e3b3b1c00023249572
+// And to handle server error via try/catch
 app.get("/info/:id", async (req, res) => {
   try {
     const bookId = await Book.findById(req.params.id);
@@ -146,12 +148,6 @@ app.get("/info/:id", async (req, res) => {
   }
 });
 
-/*
-TODO:
-- More routes, ?
-- Handle errors
-- Deploy db 
-*/
 
 // Start the server
 app.listen(port, () => {
