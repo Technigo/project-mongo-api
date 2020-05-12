@@ -53,16 +53,26 @@ app.get('/tracks', async (req, res) => {
   res.json(tracks)
 })
 
+// Endpoint to filter on genre
+app.get('/tracks/:genre', async (req, res) => {
+  const { genre } = req.params
+  const tracks = await Track.find()
+  const filteredByGenre = await tracks.filter((track) => track.genre.toString().toLowerCase().includes(genre))
+  res.json(filteredByGenre)
+})
+
 // Endpoint to get a single track
 app.get('/tracks/:id', async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params
   const track = await Track.findOne({ id: id })
   if (track) {
-    res.json(track);
+    res.json(track)
   } else {
-    res.status(404).json({ error: `Could not find track with id=${id}` });
+    res.status(404).json({ error: `Could not find track with id=${id}` })
   }
 })
+
+
 
 // Start the server
 app.listen(port, () => {
