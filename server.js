@@ -48,6 +48,27 @@ const Book = mongoose.model('Book', {
   }
 })
 
+const User = mongoose.model('User', {
+  username: {
+    type: String,
+    minlength: 3,
+    maxlength: 20
+  },
+  password: {
+    type: String,
+    minlength: 8
+  },
+  ratings: {
+    type: Array,
+    default: []
+  },
+  profilePicture: {
+    type: String,
+    default: ''
+  }
+})
+
+
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany()
@@ -187,6 +208,33 @@ app.post('/addbook', async (req, res) => {
     }
   ).save()
   res.send('book saved')
+})
+
+app.post('/createuser', async (req, res) => {
+
+  const existingUser = await User.findOne({ username: req.body.username })
+
+  if (!existingUser) {
+    new User(
+      {
+        username: req.body.username,
+        password: req.body.password,
+      }
+    ).save()
+    res.send('User created')
+  } else {
+    res.json({ error: 'That username already exists.' })
+  }
+})
+
+app.get('/login', async (req, res) => {
+  const existingUser = await User.findOne({ password: req.body.password, username: req.body.username })
+  if (existingUser) {
+    res.json(existingUser)
+  } else {
+    res.json({ error: 'Invalid password or username' })
+  }
+
 })
 
 // Start the server
