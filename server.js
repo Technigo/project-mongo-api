@@ -43,7 +43,7 @@ app.get('/books', async (req, res) => {
   const perPage = 10
   const skip = perPage * (pageNo - 1)
   const numBooks = await Book.estimatedDocumentCount()
-  const ERROR_MESSAGE = 'No books found, please try a different query'
+  const ERROR_MESSAGE_404 = 'No books found, please try a different query'
 
   const sortQuery = (sort) => {
     if (sort === 'rating_dsc') {
@@ -62,7 +62,7 @@ app.get('/books', async (req, res) => {
     .skip(skip)
 
   if (booksList.length === 0) {
-    res.status(404).json({ error: ERROR_MESSAGE })
+    res.status(404).json({ error: ERROR_MESSAGE_404 })
   } else if (title || author) {
     res.json({
       total_books: booksList.length,
@@ -83,13 +83,18 @@ app.get('/books', async (req, res) => {
 // Route for single book using ISBN-13 as param
 app.get('/books/:isbn13', async (req, res) => {
   const { isbn13 } = req.params
-  const book = await Book.findOne({ isbn13 })
-  const ERROR_MESSAGE = `No book found with ISBN-13 ${isbn13}`
+  const ERROR_MESSAGE_404 = `No book found with ISBN-13 ${isbn13}`
+  const ERROR_MESSAGE_400 = `${isbn13} is not a valid ISBN-13`
 
-  if (book) {
-    res.json(book)
-  } else {
-    res.status(404).json({ error: ERROR_MESSAGE })
+  try {
+    const book = await Book.findOne({ isbn13 })
+    if (book) {
+      res.json(book)
+    } else {
+      res.status(404).json({ error: ERROR_MESSAGE_404 })
+    }
+  } catch (err) {
+    res.status(400).json({ error: ERROR_MESSAGE_400 })
   }
 })
 
