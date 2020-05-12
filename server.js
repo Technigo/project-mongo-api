@@ -126,9 +126,32 @@ app.get('/books', (req, res) => {
   })
 })
 
+app.get('/books/:id', async (req, res) => {
+  const foundBook = await Book.findOne({ bookID: req.params.id })
+  if (foundBook) {
+    res.json(foundBook)
+  } else {
+    res.json({ error: `No book with id "${req.params.id}" exists.` })
+  }
+})
+
 app.put('/books/:id', async (req, res) => {
 
-  const updatedBook = await Book.findOneAndUpdate({ bookID: +req.params.id }, { img_url: req.body.img_url }, { new: true })
+  const foundBook = await Book.findOne({ bookID: req.params.id })
+
+  const setRating = (user_rating) => {
+
+    const totalRating = (foundBook.average_rating * foundBook.ratings_count) + user_rating
+    const totalNumber = foundBook.ratings_count + 1
+    const average = totalRating / totalNumber
+    return Math.round((average + Number.EPSILON) * 100) / 100
+  }
+
+  const updatedBook = await Book.findOneAndUpdate({ bookID: +req.params.id }, {
+    img_url: req.body.img_url ?? foundBook.img_url,
+    average_rating: req.body.user_rating ? setRating(+req.body.user_rating) : foundBook.average_rating,
+    ratings_count: req.body.user_rating ? foundBook.ratings_count + 1 : foundBook.ratings_count
+  }, { new: true })
   res.json(updatedBook)
 })
 
