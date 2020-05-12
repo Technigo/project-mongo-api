@@ -44,28 +44,47 @@ const app = express()
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable'})
+  }
+})
 
 app.get('/', (req, res) => {
   res.send('Netflix Shows')
 })
  
-app.get('/netflixshow', async (req, res) => {
+app.get('/netflixshow/type', async (req, res) => {
   const { type } = req.query
   let shows = await NetflixShow.find()
-  if (type) {
+  if (type) { 
     shows = shows.filter((show) => show.type.toString() === type)
+  }
+  if (shows.length === 0) {
+    res.status(404).send('Please select Movie or TV Show to filter on "type"')
   }
   res.json(shows)
 })
 
-
-
+app.get('/netflixshow/rating', async (req, res) => {
+  const { rating } = req.query
+  let shows = await NetflixShow.find()
+  if (rating) {
+    shows = shows.filter((show) => show.rating.toString() === rating)
+  }
+  if (shows.length === 0) {
+    res.status(404).send('Available ratings: TV-Y, TV-Y7, TV-Y7-FV, TV-G, G, TV-PG, PG,  PG-13, TV-14, TV-MA and R')
+  }
+  res.json(shows)
+})
 
 app.get('/netflixshow/title/:title', async (req, res) => {
   const { title } = req.params
-  const show = await NetflixShow.findOne({ title: title })
+  const show = await NetflixShow.findOne({ title })
   if (show) {
-    res.json(show);
+    res.json(show)
   } else {
     res.status(404).json({ error: `Could not find ${title}` })
   }
