@@ -71,7 +71,6 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(bodyParser.json());
-
 // Middleware for handling if "no connection to Mongodb":
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
@@ -88,7 +87,7 @@ app.get("/", (req, res) => {
   );
 });
 
-// a RESTful route to return all Books:
+// To return all Books:
 // http://localhost:8080/books
 app.get("/books", async (req, res) => {
   const books = await Book.find();
@@ -96,10 +95,9 @@ app.get("/books", async (req, res) => {
   res.json(books);
 });
 
-// a RESTful route to return ONE Book via ISBN nr, using async/await
-// http://localhost:8080/books/439785960
+// To return ONE Book via ISBN nr:
+// http://localhost:8080/books/312405545
 app.get("/books/:isbn", async (req, res) => {
-  // const isbn = req.params.isbn;
   const { isbn } = req.params;
   const book = await Book.findOne({ isbn: isbn });
 
@@ -110,46 +108,49 @@ app.get("/books/:isbn", async (req, res) => {
   }
 });
 
+// Sort by rating:
+// http://localhost:8080/sort?sort_by=average_rating
+app.get("/sort", (req, res) => {
+  const { sort_by } = req.query;
+  const sort = {};
 
-// Sort by rating: http://localhost:8080/books/sort?sort_by=average_rating
-app.get('/books/sort', (req, res) => {
-  const { sort_by } = req.query
-  const sort = {}
-  if (sort_by && ['average_rating'].includes(sort_by)) {
-    sort[sort_by] = -1
+  if (sort_by && ["average_rating"].includes(sort_by)) {
+    sort[sort_by] = -1;
   }
-
   Book.find({})
     .sort(sort)
     .then((results) => {
       if (results.length === 0) {
-        throw new Error('Nothing found')
+        throw new Error("Nothing found");
       }
-      res.json(results)
-    }).catch((err) => {
-      res.json({ message: err.message })
+      res.json(results);
     })
-})
+    .catch((err) => {
+      res.json({ message: err.message });
+    });
+});
 
-// Return one books info by id
+// Return one book info by id:
 // http://localhost:8080/info/5eb945fdf667d249f9c15b41
+// Error handling via try catch to stop server error "UnhandledPromiseRejectionWarning"
 app.get("/info/:id", async (req, res) => {
-  const bookId = await Book.findById(req.params.id);
-  if (bookId) {
-    res.json(bookId);
-  } else {
-    res.status(404).json({ error: `No match for id` });
+  try {
+    const bookId = await Book.findById(req.params.id);
+    if (bookId) {
+      res.json(bookId);
+    } else {
+      res.status(404).json({ error: "No match for id" });
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Invalid user id" });
   }
 });
 
-
 /*
 TODO:
-
 - More routes, ?
 - Handle errors
 - Deploy db 
-
 */
 
 // Start the server
