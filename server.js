@@ -26,9 +26,9 @@ const Show = mongoose.model("Show", {
     type: String
   },
   date_added: {
-    type: Number
+    type: String
   },
-  release_Year: {
+  release_year: {
     type: Number
   },
   rating: {
@@ -37,7 +37,7 @@ const Show = mongoose.model("Show", {
   duration: {
     type: String
   },
-  listed_In: {
+  listed_in: {
     type: String
   },
   description: {
@@ -80,15 +80,15 @@ app.get('/', (req, res) => {
 
 //Route for all shows
 app.get('/shows', async (req, res) => {
-  const show = await Show.find();
-  res.json(show);
-});
+  let shows = await Show.find()
+  res.json(shows)
+})
 
 // Route for single show by id
 
 app.get('/shows/:show_id', async (req, res) => {
   const { show_id } = req.params
-  const showId = await Show.findOne({ show_id })
+  const showId = await Show.findOne({ show_id: show_id })
 
   if (showId) {
     res.json(showId)
