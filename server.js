@@ -80,7 +80,7 @@ app.get('/', (req, res) => {
 
 //Route for all shows
 app.get('/shows', async (req, res) => {
-  let shows = await Show.find()
+  const shows = await Show.find()
   res.json(shows)
 })
 
@@ -88,10 +88,10 @@ app.get('/shows', async (req, res) => {
 
 app.get('/shows/:show_id', async (req, res) => {
   const { show_id } = req.params
-  const showId = await Show.findOne({ show_id: show_id })
+  const showById = await Show.findOne({ show_id: show_id })
 
-  if (showId) {
-    res.json(showId)
+  if (showById) {
+    res.json(showById)
   } else {
     res.status(404).json({ error: 'Show not found' })
   }
