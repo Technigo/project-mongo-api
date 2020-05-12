@@ -50,9 +50,9 @@ app.use((req, res, next) => {
 })
 
 app.get('/netflixshow', async (req, res) => {
-  const netflixShows = await NetflixShow.find();
-  res.json(netflixShows);
-});
+  const netflixShows = await NetflixShow.find()
+  res.json(netflixShows)
+})
  
 app.get('/netflixshow/type', async (req, res) => {
   const { type } = req.query
