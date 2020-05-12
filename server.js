@@ -44,6 +44,7 @@ if (process.env.RESET_DATABASE === 'true') {
       ingredients: 10,
       img_url: 'http://tiny.cc/ql7ooz',
       time: 240,
+      recipe: 'https://www.scandikitchen.co.uk/how-to-make-the-best-ever-real-scandi-cinnamon-buns/',
     })
     await buns.save()
 
@@ -53,6 +54,7 @@ if (process.env.RESET_DATABASE === 'true') {
       ingredients: 6,
       img_url: 'http://tiny.cc/sk7ooz',
       time: 30,
+      recipe: 'https://cooking.nytimes.com/recipes/9420-straight-up-rhubarb-pie',
     })
     await rhubarb.save()
 
@@ -62,6 +64,7 @@ if (process.env.RESET_DATABASE === 'true') {
       ingredients: 12,
       img_url: 'http://tiny.cc/4j7ooz',
       time: 30,
+      recipe: 'https://dailyinakitchen.com/2016/01/31/love-mums-karleksmums/',
     })
     await mums.save()
 
@@ -71,6 +74,7 @@ if (process.env.RESET_DATABASE === 'true') {
       ingredients: 8,
       img_url: 'http://tiny.cc/0y1poz',
       time: 60,
+      recipe: 'https://www.epicurious.com/recipes/food/views/blueberry-cheesecake-4302',
     })
     await blueberry.save()
 
@@ -80,6 +84,7 @@ if (process.env.RESET_DATABASE === 'true') {
       ingredients: 5,
       img_url: 'http://tiny.cc/mfovoz',
       time: 15,
+      recipe: 'https://www.bonappetit.com/recipe/pasta-al-pomodoro',
     })
     await pomodoro.save()
 
@@ -89,6 +94,7 @@ if (process.env.RESET_DATABASE === 'true') {
       ingredients: 12,
       img_url: 'http://tiny.cc/lh7ooz',
       time: 40,
+      recipe: 'https://www.foodandwine.com/comfort-food/best-taco-recipes',
     })
     await tacos.save()
 
@@ -98,6 +104,7 @@ if (process.env.RESET_DATABASE === 'true') {
       ingredients: 5,
       img_url: 'http://tiny.cc/zi7ooz',
       time: 30,
+      recipe: 'https://therecipecritic.com/the-best-swedish-meatballs/',
     })
     await meatballs.save()
 
@@ -107,6 +114,7 @@ if (process.env.RESET_DATABASE === 'true') {
       ingredients: 7,
       img_url: 'http://tiny.cc/0govoz',
       time: 20,
+      recipe: 'https://cafedelites.com/chicken-tikka-masala/',
     })
     await masala.save()
   }
@@ -149,7 +157,7 @@ app.get('/food/:id', async (req, res) => {
   if (foodItem) {
     res.json(foodItem)
   } else {
-    res.status(404).json({ error: 'Nothing to see here...'})
+    res.status(404).json({ error: 'Nothing to see here...' })
   }
 })
 
@@ -157,4 +165,16 @@ app.get('/food/:id', async (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
+})
+
+
+app.get('/shows/year/:release_year', async (req, res) => {
+  const { release_year } = req.params
+  const year = await Show.findOne({ release_year: release_year })
+
+  if (year) {
+    res.json(year)
+  } else {
+    res.status(404).json({ error: 'Not found' })
+  }
 })

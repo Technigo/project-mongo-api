@@ -6,4 +6,5 @@ export const Menu = mongoose.model('Menu', {
   ingredients: Number,
   img_url: String,
   time: Number,
+  recipe: String,
 })
