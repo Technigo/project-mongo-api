@@ -4,31 +4,33 @@ const Schema = mongoose.Schema
 
 const BookSchema = new Schema({
   bookID: {
-    type: Number,
+    type: Number
   },
   title: {
-    type: String,
+    type: String
   },
   authors: {
-    type: String,
+    type: String
   },
   average_rating: {
-    type: Number,
+    type: Number
   },
   isbn13: {
     type: Number,
+    min: 9780000000000,
+    max: 9999999999999
   },
   language_code: {
-    type: String,
+    type: String
   },
   num_pages: {
-    type: Number,
+    type: Number
   },
   ratings_count: {
-    type: Number,
+    type: Number
   },
   text_reviews_count: {
-    type: Number,
+    type: Number
   },
 })
 
