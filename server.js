@@ -17,14 +17,31 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+
+
 const Book = mongoose.model('Book', {
   bookID: Number,
-  title: String,
+  title: {
+    type: String
+
+  },
   authors: String,
-  average_rating: Number,
-  num_pages: Number,
-  ratings_count: Number,
-  text_reviews_count: Number,
+  average_rating: {
+    type: Number,
+    default: 0,
+  },
+  num_pages: {
+    type: Number,
+    default: 0
+  },
+  ratings_count: {
+    type: Number,
+    default: 0
+  },
+  text_reviews_count: {
+    type: Number,
+    default: 0
+  },
   img_url: {
     type: String,
     default: ''
@@ -140,7 +157,6 @@ app.put('/books/:id', async (req, res) => {
   const foundBook = await Book.findOne({ bookID: req.params.id })
 
   const setRating = (user_rating) => {
-
     const totalRating = (foundBook.average_rating * foundBook.ratings_count) + user_rating
     const totalNumber = foundBook.ratings_count + 1
     const average = totalRating / totalNumber
@@ -153,6 +169,24 @@ app.put('/books/:id', async (req, res) => {
     ratings_count: req.body.user_rating ? foundBook.ratings_count + 1 : foundBook.ratings_count
   }, { new: true })
   res.json(updatedBook)
+})
+
+app.post('/addbook', async (req, res) => {
+
+  const allBooks = await Book.find()
+  const getLastId = allBooks.sort((a, b) => (a.bookID > b.bookID) ? 1 : -1)
+
+  new Book(
+    {
+      bookID: getLastId[getLastId.length - 1].bookID + 1,
+      title: req.body.title,
+      authors: req.body.author,
+      img_url: req.body.image ?? '',
+      num_pages: req.body.pages ?? 0
+
+    }
+  ).save()
+  res.send('book saved')
 })
 
 // Start the server
