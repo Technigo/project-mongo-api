@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 
 import netflixData from './data/netflix-titles.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/titles"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -16,19 +16,35 @@ const Title = mongoose.model('Title', {
 
 });
 
+const Netflixtitle = mongoose.model('Netflixtitle', {
+
+  director: String,
+
+  title: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Title'
+  }
+
+});
+
+if (process.env.RESET_DATABASE) {
+
 const seedDatabase = async () => {
 
   await Title.deleteMany()
+  await Netflixtitle.deleteMany()
 
-  const title1 = new Title({title: 'Homeland'})
-  await title1.save()
+  const homeland = new Title({title: 'Homeland'})
+  await homeland.save()
 
-  const title2 = new Title({title: 'Once apon a time'})
-  await title2.save()
+  const onceapon = new Title({title: 'Once apon a time'})
+  await onceapon.save()
+
+  await new Netflixtitle({ director: "Myers", title: homeland}).save()
 
 }
 seedDatabase()
-
+}
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -48,6 +64,11 @@ app.get('/', (req, res) => {
 app.get('/titles', async (req, res) => {
   const titles = await Title.find()
   res.json(titles)
+})
+
+app.get('/netflixtitles', async (req, res) => {
+ const Netflixtitles = await Netflixtitle.find().populate('title')
+ res.json(Netflixtitles)
 })
 
 
