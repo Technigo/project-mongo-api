@@ -34,7 +34,7 @@ const seedDatabase = async () => {
 }
 seedDatabase()
 
-//   To override: PORT=9000 npm start
+// To override: PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -47,10 +47,25 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-// Endpoint to get all the tracks
+// Endpoint to get all the tracks and pagination
+// Queries: page and pageSize
+// Usage: localhost:8080/?page=2
+// Usage: localhost:8080/?page=2&pageSize=4
 app.get('/tracks', async (req, res) => {
   const tracks = await Track.find()
-  res.json(tracks)
+  const page = req.query.page ?? 0
+  const pageSize = req.query.pageSize ?? 10
+  const startIndex = page * pageSize
+  const endIndex = startIndex + +pageSize
+  const tracksForPage = tracks.slice(startIndex, endIndex)
+  const returnObject = {
+    pageSize: pageSize,
+    page: page,
+    maxPages: parseInt(tracks.length / pageSize),
+    numTracks: tracksForPage.length,
+    results: tracksForPage
+  }
+  res.json(returnObject)
 })
 
 // Endpoint to filter on genre
@@ -58,7 +73,12 @@ app.get('/tracks/:genre', async (req, res) => {
   const { genre } = req.params
   const tracks = await Track.find()
   const filteredByGenre = await tracks.filter((track) => track.genre.toString().toLowerCase().includes(genre))
-  res.json(filteredByGenre)
+  // This if-statement doesn´t work
+  if (filteredByGenre) {
+    res.json(filteredByGenre)
+  } else {
+    res.status(404).json({ error: `Could not find genre ${genre}` })
+  }
 })
 
 // Endpoint to get a single track
