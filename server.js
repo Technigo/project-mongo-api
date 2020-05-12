@@ -72,14 +72,20 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("My API endpoints: /books ,/books/439554934 , plus handling error if no id match");
+// Middleware for handling if "no connection to Mongodb":
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable " });
+  }
 });
 
-// test, test:
-app.get("/all", async (req, res) => {
-  res.json("lala");
+// Start defining your routes here
+app.get("/", (req, res) => {
+  res.send(
+    "My API endpoints: /books ,/books/439554934 ,/books/sort?sort_by=average_rating ,/info/5eb945fdf667d249f9c15b41  plus handling errors"
+  );
 });
 
 // a RESTful route to return all Books:
@@ -93,8 +99,10 @@ app.get("/books", async (req, res) => {
 // a RESTful route to return ONE Book via ISBN nr, using async/await
 // http://localhost:8080/books/439785960
 app.get("/books/:isbn", async (req, res) => {
-  const isbn = req.params.isbn;
+  // const isbn = req.params.isbn;
+  const { isbn } = req.params;
   const book = await Book.findOne({ isbn: isbn });
+
   if (book) {
     res.json(book);
   } else {
@@ -102,22 +110,45 @@ app.get("/books/:isbn", async (req, res) => {
   }
 });
 
-/*
-  isbn search idea: {
-    type: String,
-    // unique: true
-    // But give "Deprecation Warnings" in Node:
-    // https://mongoosejs.com/docs/deprecations.html
-  },
-*/
+
+// Sort by rating: http://localhost:8080/books/sort?sort_by=average_rating
+app.get('/books/sort', (req, res) => {
+  const { sort_by } = req.query
+  const sort = {}
+  if (sort_by && ['average_rating'].includes(sort_by)) {
+    sort[sort_by] = -1
+  }
+
+  Book.find({})
+    .sort(sort)
+    .then((results) => {
+      if (results.length === 0) {
+        throw new Error('Nothing found')
+      }
+      res.json(results)
+    }).catch((err) => {
+      res.json({ message: err.message })
+    })
+})
+
+// Return one books info by id
+// http://localhost:8080/info/5eb945fdf667d249f9c15b41
+app.get("/info/:id", async (req, res) => {
+  const bookId = await Book.findById(req.params.id);
+  if (bookId) {
+    res.json(bookId);
+  } else {
+    res.status(404).json({ error: `No match for id` });
+  }
+});
+
 
 /*
 TODO:
 
-- More routes
+- More routes, ?
 - Handle errors
-- Deploy db cloud
-
+- Deploy db 
 
 */
 
