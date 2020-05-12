@@ -227,7 +227,7 @@ app.post('/createuser', async (req, res) => {
   }
 })
 
-app.get('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
   const existingUser = await User.findOne({ password: req.body.password, username: req.body.username })
   if (existingUser) {
     res.json(existingUser)
