@@ -2,19 +2,64 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import netflixData from './data/netflix-titles.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
+
+//Mongoose model 
+const Show = mongoose.model("Show", {
+  show_id: {
+    type: Number
+  },
+  title: {
+    type: String
+  },
+  director: {
+    type: String
+  },
+  cast: {
+    type: String
+  },
+  Country: {
+    type: String
+  },
+  date_added: {
+    type: Number
+  },
+  release_Year: {
+    type: Number
+  },
+  rating: {
+    type: String
+  },
+  duration: {
+    type: String
+  },
+  listed_In: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  type: {
+    type: String
+  }
+})
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Show.deleteMany()
+
+    netflixData.forEach((show) => {
+      new Show(show).save()
+    })
+  }
+
+  seedDatabase()
+}
+
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -27,9 +72,29 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
+// Home page
+const listEndpoints = require('express-list-endpoints')
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(listEndpoints(app))
+})
+
+//Route for all shows
+app.get('/shows', async (req, res) => {
+  const show = await Show.find();
+  res.json(show);
+});
+
+// Route for single show by id
+
+app.get('/shows/:show_id', async (req, res) => {
+  const { show_id } = req.params
+  const showId = await Show.findOne({ show_id })
+
+  if (showId) {
+    res.json(showId)
+  } else {
+    res.status(404).json({ error: 'Show not found' })
+  }
 })
 
 // Start the server
