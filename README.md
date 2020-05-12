@@ -10,8 +10,6 @@ Also to model the database using Mongoose models, and persist the data in the da
 - Seeding a database locally and externally.
 - Deployed to Heroku and MongoDB cloud.
 
-Using VS Code, MongoDB Compass, Postman and Chrome.
-
 #### Tech used: 
 - Node.js, Express, MongoDB, MongoDB Atlas and JavaScript ES6
 - VS Code, MongoDB Compass, Postman and Chrome.
