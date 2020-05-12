@@ -49,13 +49,27 @@ app.get('/', (req, res) => {
   res.send('Netflix Shows')
 })
  
-app.get('/netflixshow', (req, res) => {
-  NetflixShow.find()
-    .then((shows) => {
-      res.json(shows)
-    })
+app.get('/netflixshow', async (req, res) => {
+  const { type } = req.query
+  let shows = await NetflixShow.find()
+  if (type) {
+    shows = shows.filter((show) => show.type.toString() === type)
+  }
+  res.json(shows)
 })
 
+
+
+
+app.get('/netflixshow/title/:title', async (req, res) => {
+  const { title } = req.params
+  const show = await NetflixShow.findOne({ title: title })
+  if (show) {
+    res.json(show);
+  } else {
+    res.status(404).json({ error: `Could not find ${title}` })
+  }
+})
 
 
 app.listen(port, () => {
