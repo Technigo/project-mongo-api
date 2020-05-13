@@ -54,7 +54,7 @@ app.get('/artists', async (req, res)=>{
   const queryRegex = new RegExp(nat, 'i');
   artists = await ArtistDetail.find({nationality: queryRegex},{id: 1, name : 1, nationality: 1}) 
 
-  if (artist.length) {
+  if (artists.length) {
     res.json(artists)
   }  
   else {
