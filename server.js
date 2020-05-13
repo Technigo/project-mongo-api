@@ -48,14 +48,23 @@ app.get('/', (req, res) => {
 
 // Get all shows
 app.get('/shows', async (req, res) => {
-  const { title } = req.query
-  const shows = await Show.find()
-  const showTitle = await Show.find({ title: title })
+  const { title, type } = req.query
 
-  if (title) {
-    res.json(showTitle)
+  // Regex to make query case insensitive
+  const regex = (query) => {
+    return new RegExp(query, 'i')
+  }
+
+  // const shows = await Show.find()
+  const showSearch = await Show.find({
+    title: regex(title),
+    type: regex(type)
+  })
+
+  if (showSearch) {
+    res.json(showSearch)
   } else {
-    res.json(shows)
+    res.status(404).json({ error: 'Not found' })
   }
 
 })
