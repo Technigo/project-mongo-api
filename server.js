@@ -48,8 +48,10 @@ app.get('/books', async (req, res) => {
   const { page, sort, title, author } = req.query
   const pageNo = +page || 1
   const perPage = 10
+  // skip: E.g. page 3: 10 * (3-1) = 20, sends 20 as parameter to .skip()
+  // skips index 0-19 so that page 3 starts with the book that has index 20
   const skip = perPage * (pageNo - 1)
-  const ERROR_MESSAGE_404 = 'No books found, please try a different query'
+  const error404 = 'No books found, please try a different query'
 
   // Used to sort bookslist based on sort query
   const sortQuery = (sort) => {
@@ -57,6 +59,12 @@ app.get('/books', async (req, res) => {
       return { average_rating: -1 }
     } else if (sort === 'rating_asc') {
       return { average_rating: 1 }
+    } else if (sort === 'pages_dsc') {
+      return { num_pages: -1 }
+    } else if (sort === 'pages_asc') {
+      return { num_pages: 1 }
+    } else if (sort === 'alphabetical') {
+      return { title: 1 }
     }
   }
 
@@ -79,7 +87,7 @@ app.get('/books', async (req, res) => {
 
   // JSON returned depending on the booksList being empty or not
   if (booksList.length === 0) {
-    res.status(404).json({ error: ERROR_MESSAGE_404 })
+    res.status(404).json({ error: error404 })
   } else {
     res.json({
       total_books: numBooks,
@@ -93,8 +101,8 @@ app.get('/books', async (req, res) => {
 // Route for single book using ISBN-13 as param
 app.get('/books/:isbn13', async (req, res) => {
   const { isbn13 } = req.params
-  const ERROR_MESSAGE_404 = `No book found with ISBN-13 ${isbn13}`
-  const ERROR_MESSAGE_400 = `${isbn13} is not a valid ISBN-13`
+  const error404 = `No book found with ISBN-13 ${isbn13}`
+  const error400 = `${isbn13} is not a valid ISBN-13`
   // Used to check if the isbn13 param starts with 978 followed by 10 numbers
   const isbnCheck = /^(978)([0-9]{10})$/
 
@@ -106,12 +114,12 @@ app.get('/books/:isbn13', async (req, res) => {
     if (book) {
       res.json(book)
     } else if (!book && isbn13.match(isbnCheck)) {
-      res.status(404).json({ error: ERROR_MESSAGE_404 })
+      res.status(404).json({ error: error404 })
     } else (
       err
     )
   } catch (err) {
-    res.status(400).json({ error: ERROR_MESSAGE_400 })
+    res.status(400).json({ error: error400 })
   }
 })
 
