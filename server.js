@@ -25,9 +25,6 @@ const Show = mongoose.model("Show", {
   Country: {
     type: String
   },
-  date_added: {
-    type: String
-  },
   release_year: {
     type: Number
   },
