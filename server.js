@@ -6,14 +6,6 @@ import mongoose from 'mongoose'
 import { Dessert } from './data/dessert'
 import { Menu } from './data/menu'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import netflixData from './data/netflix-titles.json'
-// import booksData from './data/books.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -124,7 +116,7 @@ if (process.env.RESET_DATABASE === 'true') {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world, next backend project!')
+  res.send('Documentation: \n \n /food - List of food \n /food/:id - View specific food item \n \n /dessert - List of desserts \n /dessert/:id - View specific dessert item')
 
 })
 
