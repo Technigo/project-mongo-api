@@ -1,8 +1,8 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
-import goldenGlobesData from './data/golden-globes.json'
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import goldenGlobesData from './data/golden-globes.json';
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -41,15 +41,15 @@ if (process.env.RESET_DATABASE) {
   seedDatabase();
 }
 
-const port = process.env.PORT || 9000
+const port = process.env.PORT || 8080
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
-    next()
+    next();
   } else {
-    res.status(503).json({ error: 'Service unavailable'})
+    res.status(503).json({ error: 'Service unavailable'});
   }
 })
 
@@ -69,7 +69,7 @@ app.get('/year/:year', async (req, res) => {
     } 
     
     if (category) {
-      mongoQuery.category = new RegExp(category, 'i')
+      mongoQuery.category = new RegExp(category, 'i');
     }
 
     const goldenGlobesYear = await GoldenGlobes.find(mongoQuery);
@@ -125,12 +125,12 @@ app.get('/nominee/:id', async (req, res) => {
     const goldenGlobesNominee = await GoldenGlobes.findOne({ _id: id });
     
     if (goldenGlobesNominee.length < 1) {
-      res.status(404).json({ error: 'Nominee not found' })
+      res.status(404).json({ error: 'Nominee not found' });
     } else {
-      res.json(goldenGlobesNominee)
+      res.json(goldenGlobesNominee);
     }
   } catch (err) {
-    res.status(400).json({ error: 'Invalid request'})
+    res.status(400).json({ error: 'Invalid request'});
   }
 })
 
