@@ -29,7 +29,7 @@ const Show = mongoose.model('Show', {
   }
 })
 
-if (process.env.RESET_DATABASE) {
+if (process.env.RESET_DB) {
   console.log('Resetting DB')
 
   const seedDatabase = async () => {
