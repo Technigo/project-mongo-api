@@ -48,22 +48,21 @@ app.get('/', (req, res) => {
 })
 
 app.get('/artists', async (req, res)=>{
-  const artists = await ArtistDetail.find({},{id: 1, name: 1, nationality: 1})
+  //const artists = await ArtistDetail.find({},{id: 1, name: 1, nationality: 1})
   const {nat} = req.query
-  let filteredArtist = artists.filter((item)=>item.nationality===nat)
-  if(nat) {
-    if (filteredArtist.length){
-    res.json(filteredArtist)
-    }
-    else{
-      res.status(404).json({error:"Artists not found"})
-    }
-  }
-  else{
+  let artists = []
+  const queryRegex = new RegExp(nat, 'i');
+  artists = await ArtistDetail.find({nationality: queryRegex},{id: 1, name : 1, nationality: 1}) 
+
+  if (artist.length) {
     res.json(artists)
+  }  
+  else {
+    res.status(404).json({error:"Artists not found"})
   }
   
 })
+// Array.from(Array(num),() => createOwnerData())
 
 app.get('/artists/id/:id', async (req, res)=>{
   try {
@@ -79,10 +78,11 @@ app.get('/artists/id/:id', async (req, res)=>{
   }
 })
 app.get('/artists/name/:name', async (req, res)=>{
-  const name = req.params.name
-  const artistId = await ArtistDetail.findOne ({ name })
-  if (artistId) {
-    res.json(artistId)
+  const {name} = req.params
+  const queryRegex = new RegExp(name, 'i');
+  const artistOne = await ArtistDetail.findOne ({ name:queryRegex })
+  if (artistOne) {
+    res.json(artistOne)
   }
   res.status(404).json({error:"artist not found"})
 })
