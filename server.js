@@ -103,7 +103,7 @@ app.get('/books/:isbn13', async (req, res) => {
   const { isbn13 } = req.params
   const error404 = `No book found with ISBN-13 ${isbn13}`
   const error400 = `${isbn13} is not a valid ISBN-13`
-  // Used to check if the isbn13 param starts with 978 followed by 10 numbers
+  // Used to check if the isbn13 param starts with 978 followed by 10 digits
   const isbnCheck = /^(978)([0-9]{10})$/
 
   // JSON returned depending on the book and the isbn13 param
