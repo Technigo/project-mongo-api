@@ -16,7 +16,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// This can be exported to externa file instead
+// This can be exported to external file instead
 const Michelin = mongoose.model('Michelin',{
   name: String,
   year: Number,
@@ -24,33 +24,11 @@ const Michelin = mongoose.model('Michelin',{
   longitude: Number,
   city: String,
   region: String,
-  zipCode: Number,
+  zipCode: String,
   cuisine: String,
   price: String,
   url: String,
 })
-
-
-//    BOOKS.JSON
-// bookID: Number,
-// title: String,
-// authors: String,
-// average_rating: Number,
-// isbn: Number,
-// isbn13: Number,
-// language_code: String,
-// num_pages: Number,
-// ratings_count: Number,
-// text_reviews_count: Number,
-
-
-//   ITEM-HISTORY.JSON
-// average: Number,
-// date: String,
-// highest: Number,
-// lowest: Number,
-// order_count: Number,
-// volume: Number,
 
 
 //   MICHELIN-RESTAURANTS
@@ -60,7 +38,7 @@ const Michelin = mongoose.model('Michelin',{
 // longitude: Number,
 // city: String,
 // region: String,
-// zipCode: Number,
+// zipCode: String,
 // cuisine: String,
 // price: String,
 // url: String,
@@ -77,42 +55,93 @@ if (process.env.RESET_DATABASE) {
 }
 
 
+const onlyUnique = (value, index, self) => { 
+  return self.indexOf(value) === index;
+}
+
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(`
+  <h1>2-star Michelin restaurants</h1>
+  <h3>This dataset contains restaurants all over the  world</h3>
+  <br>
+  <h2>Endpoints and querys</h2>
+  <li>/michelin</li>
+  <li>/michelin/regions</li>
+  <li>/michelin/regions?region=YOUR_COUNRY</li>
+  <li>/michelin/cuisines</li>
+  <li>/michelin/cuisines?cuisine=YOUR_CUISINE</li>
+  <li>/michelin/citys</li>
+  <li>/michelin/citys?city=YOUR_CITY</li>
+  `)
 })
 
-// Show all 50 restaurants
+// List all restaurants
 app.get('/michelin', async (req, res) => {
   const restaurant = await Michelin.find();
-  console.log(`Found ${restaurant.length} items..`);
-  res.json(restaurant);
+
+  if ( restaurant.length > 0  ) {
+    res.json(restaurant)
+  } else {
+    res.status(404).json({ message: `Error, no restaurants found.` })
+  }
 });
 
-// Region, filter by country michelin/:region
-app.get('/michelin/:region', ( req, res ) => {
-  const region = req.params.region
+// List all regions with /michelin/regions
+// Query region with /michelin/regions?region=sweden
+app.get('/michelin/regions/', async ( req, res ) => {
+  const { region } = req.query
 
-  let michelinByRegion = michelinData.filter((restaurant) => restaurant.region === region)
-  console.log(`Number of restaurants found: ${michelinByRegion.length}`)
-  
-  if ( michelinByRegion.length > 0 ){
-    res.json(michelinByRegion)
-  } else {
-    res.status(404).json({ message: `Error, no restaurants found in ${region}` })
+  let restaurantByRegion = await michelinData.filter((restaurant) => restaurant.region.toLowerCase() === region)
+  let getAllRegionsArr = await michelinData.map(restaurant => restaurant['region'])
+
+  let uniqueRegions = await getAllRegionsArr.filter( onlyUnique )
+
+  if ( restaurantByRegion.length > 0 ) {
+    res.json({ totalResults: restaurantByRegion.length, restaurantByRegion})
+  } else if ( region && restaurantByRegion.length === 0 ) {
+    res.status(404).json({ message: `Error, ${region} not found` })
   }
+  res.json({ totalResults: uniqueRegions.length, uniqueRegions})
+})
+
+// List all cuisines with /michelin/cuisines
+// Query cuisine with /michelin/cuisines?cuisine=creative
+app.get('/michelin/cuisines/', async ( req, res ) => {
+  const { cuisine } = req.query
+
+  let restaurantByCuisine = await michelinData.filter((restaurant) => restaurant.cuisine.toLowerCase() === cuisine )
+  let getAllCusinesArr = await michelinData.map(restaurant => restaurant['cuisine'])
+
+  let uniqueCusines = await getAllCusinesArr.filter( onlyUnique )
+
+  if ( restaurantByCuisine.length > 0 ) {
+    res.json({ totalResults: restaurantByCuisine.length , restaurantByCuisine})
+  } else if ( cuisine && restaurantByCuisine.length === 0 ) {
+    res.status(404).json({ message: `Error, ${cuisine} not found` })
+  }
+  res.json({ totalResults: uniqueCusines.length, uniqueCusines})
+})
+
+// List all citys with /michelin/citys
+// Query city with /michelin/citys?city=stockholm
+app.get('/michelin/citys/', async ( req, res ) => {
+  const { city } = req.query
+
+  let restaurantByCity = await michelinData.filter((restaurant) => restaurant.city.toLowerCase() === city )
+  let getAllCitysArr = await michelinData.map(restaurant => restaurant['city'])
+
+  let uniqueCitys = await getAllCitysArr.filter( onlyUnique )
+
+  if ( restaurantByCity.length > 0 ) {
+    res.json({ totalResults: restaurantByCity.length , restaurantByCity})
+  } else if ( city && restaurantByCity.length === 0 ) {
+    res.status(404).json({ message: `Error, no restaurants found in ${city}` })
+  }
+  res.json({ totalResults: uniqueCitys.length, uniqueCitys})
+  
 })
 
 
-// Store all cuisines in a list an show results michelin/cuisine
-// Laster filter by cuisine michelin/cuisine?cuisine=modern
-
-// Filter on price michelin/price?price=$
-
-// Filter by year michelin/:year
-
-// Create a put method and delete method?
-
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
