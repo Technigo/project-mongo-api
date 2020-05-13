@@ -62,9 +62,18 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+// Check connection with database
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
+})
+
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Welcome to my BOOKS database! Check the readme for endpoint documentation')
 })
 
 app.get('/books', async (req, res) => {
@@ -77,12 +86,16 @@ app.get('/books', async (req, res) => {
 })
 
 app.get('/books/:isbn', async (req, res) => {
-  const { isbn } = req.params;
-  const book = await Book.findOne({ isbn: isbn });
-  if (book) {
-    res.json(book);
-  } else {
-    res.status(404).json({ error: `Could not find book with isbn=${isbn}` });
+  try {
+    const { isbn } = req.params;
+    const book = await Book.findOne({ isbn: isbn });
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).json({ error: `Could not find book with isbn=${isbn}` });
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'invalid request' })
   }
 });
 
