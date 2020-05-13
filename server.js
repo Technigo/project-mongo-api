@@ -9,12 +9,24 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Show = mongoose.model('Show', {
-  show_id: { type: Number },
-  title: { type: String },
-  release_Year: { type: Number },
-  duration: { type: String },
-  description: { type: String },
-  type: { type: String }
+  show_id: {
+    type: Number
+  },
+  title: {
+    type: String
+  },
+  release_Year: {
+    type: String
+  },
+  duration: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  type: {
+    type: String
+  }
 })
 
 if (process.env.RESET_DATABASE) {
@@ -37,13 +49,15 @@ if (process.env.RESET_DATABASE) {
 const port = process.env.PORT || 8080
 const app = express()
 
+const listEndpoints = require('express-list-endpoints')
+
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world of Netflix!')
+  res.send(listEndpoints(app))
 })
 
 // Get all shows
@@ -64,11 +78,10 @@ app.get('/shows', async (req, res) => {
   if (showSearch) {
     res.json(showSearch)
   } else {
-    res.status(404).json({ error: 'Not found' })
+    res.status(404).json({ error: 'Show not found' })
   }
 
 })
-
 
 // Get show by ID
 app.get('/shows/:id', async (req, res) => {
