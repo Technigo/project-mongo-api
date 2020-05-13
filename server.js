@@ -16,6 +16,17 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+app.use((req, res, next) =>{
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable'})
+  }
+})
+
+app.use(bodyParser.json())
+
+// Model
 const Nominee = mongoose.model('Nominee', {
   nominee: String,
   year_award: Number,
@@ -23,59 +34,62 @@ const Nominee = mongoose.model('Nominee', {
   category: String,
   win: Boolean
 })
-
-new Nominee({ nominee: 'hej', year_film: 3, year_film: 4, win:true}).save()
-new Nominee({ nominee: 'hoj', year_film: 3, year_film: 4, win:true}).save()
-new Nominee({ nominee: 'hij', year_film: 3, year_film: 4, win:false}).save()
-
+// Hardcoded nominees
 /*
-const User = mongoose.model('User', {
-  username: {
-    type: String,
-    minlength: 3,
-    maxlength: 20
-  },
-  password: {
-    type: String,
-    minlength: 8
-  },
-  profilePicture: {
-    type: String,
-    default: ''
+new Nominee({ nominee: 'hej', year_film: 3, year_film: 4, win:true}).save()
+new Nominee({ nominee: 'hoj', year_film: 4, year_film: 4, win:true}).save()
+new Nominee({ nominee: 'haj', year_film: 5, year_film: 4, win:false}).save()
+*/
+
+// Start work on show category
+/*
+const Category = mongoose.model('Category', {
+  category: String, 
+    nominee: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Nominee'
   }
 }) */
 
 if (process.env.RESET_DB) {
+  console.log('reseting the database...')
+
   const seedDatabase = async () => {
     await Nominee.deleteMany()
-
-    data.forEach((nominee) => {
+    // Send all the json from data
+    await goldenGlobesData.forEach((nominee) => {
       new Nominee(nominee).save()
     })
   }
   seedDatabase()
 }
 
-// Start defining your routes here
+
 app.get('/', (req, res) => {
   Nominee.find().then(nominees => {
     res.json(nominees)
   })
 })
 
-app.get('/winners', (req, res) => {
-  res.send('Winner of Golden globes 2010-2019')
+app.get('/nominees', async (req, res) => {
+  const nominees = await Nominee.find()
+  res.json(nominees)
 })
 
 app.get('/:nominee', (req, res) => {
-  Nominee.findOne({nominee: req.params.nominee}).then(nominee => {
-   if (nominee) {
-      res.json(nominee)
-   } else {
-    res.status(404).json({error: 'Not found'})
-   }
+
+  Nominee.findOne({ nominee: req.params.nominee }).then(nominee => {
+    try {
+      if (nominee) {
+        res.json(nominee)
+      } else {
+        res.status(404).json(`error: Nominee ${nominee} not found`)
+      }
+    } catch (err) {
+    res.status(400).json(`error: Do not know what is wrong, sorry`)
+    }
   })
-})
+}) 
 
 // Start the server
 app.listen(port, () => {
