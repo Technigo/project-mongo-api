@@ -1,13 +1,25 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+An API  made with Node.js using Express framwork and storing the data in a Mongo database. The result is a RESTful API that provides food and desserts 🥑🌸🍦🌟
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Code
+
+I've used:
+  * **Node.js**
+  * **MongoDB**
+  * **Express**
+  * **mongoose**
+  * **RESTful API**
+  
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Completed the codealong and chose to try and create my own API in a small scale to understand how it works. Made two similar types of lists containing either food or dessert items with an endpoint that uses the id to show details about a specific item. Super fun to actually see your data "behind the scenes" before creating some frontend! Next up would be to sort on query and more items to retrive.
+
+There's a preliminary frontend to look at where I've used this API with React.js: https://github.com/bealun/mongo-api-frontend
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Backend: https://bealun-mongo-api.herokuapp.com/
+Frontend: https://food-page-bealun.netlify.app/
+
