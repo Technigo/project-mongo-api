@@ -1,13 +1,35 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+Continuing working on the API built in the Express API Project, this is a book API built in Node using Express. Instead of using a the data straight from books.json, the API uses MongoDB and Mongoose to store the data.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The following endpoints are available:
+- Root: `/`
+- Books: `/books`
+- Book by ISBN13: `/books/:isbn13`
+
+Queries can be used to sort or limit the `/books` endpoint:
+- Sort by rating, e.g. `/books?sort=sort_asc`
+- Select page, e.g. `/books?page=2`
+- Search books by author, e.g. `/books?author=rowling`
+- Search books by title, e.g. `/books?title=harry`
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The task was to use a database to store and retreive data used to produce a RESTful API. Using Mongoose model functions `.find()` or .`findOne()`, either a list of books or single book is returned as JSON. For the `/books` endpoint, model functions `.limit()` and `.skip()` are used for pagination and `.sort()` is used to sort the books using a query.
+
+## Learning objectives
+
+- How to model data in Mongoose
+- How to fetch items from a Mongo database using Mongoose
+- How to seed large amounts of data to a database
+
+## Tech
+
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- JavaScript ES6
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
