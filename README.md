@@ -33,3 +33,4 @@ The task was to use a database to store and retreive data used to produce a REST
 
 ## View it live
 
+https://fridamaria-mongo-api.herokuapp.com/
