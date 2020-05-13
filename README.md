@@ -19,3 +19,5 @@ I thought everything was hard, backend is really tricky. But the thing I was mos
 - Mongoose
 
 ## View it live
+
+https://mongo-api-kajsa.herokuapp.com/

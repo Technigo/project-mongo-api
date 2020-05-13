@@ -35,16 +35,17 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8090;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(bodyParser.json());
 
-// Start defining your routes here
+// Home page
+const listEndpoints = require("express-list-endpoints");
 app.get("/", (req, res) => {
-  res.send("Hello WORLD");
+  res.send(listEndpoints(app));
 });
 
 app.get("/tracks", async (req, res) => {
