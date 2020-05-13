@@ -77,8 +77,8 @@ app.get('/', (req, res) => {
 
 //Route for all shows
 app.get('/shows', async (req, res) => {
-  const { query } = req.query;
-  const queryRegex = new RegExp(query, 'i');
+  const { title } = req.query;
+  const queryRegex = new RegExp(title, 'i');
   const shows = await Show.find({ title: queryRegex })
   res.json(shows)
 })

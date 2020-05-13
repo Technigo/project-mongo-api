@@ -1,13 +1,27 @@
 # Mongo API Project
+This project was part of the Technigo programming bootcamp, it is a continuation of the Express API Project and is a Netflix API built in Node using Express. Instead of using data straight from netflix-titles.json, the API uses MongoDB and Mongoose to store the data.
 
-Replace this readme with your own information about your project. 
+The following endpoints are available:
+Root: /
+Shows: /books
+Show by id: /shows/:show_id
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Queries can be used to limit the /shows endpoint and search shows by title, e.g. /shows?title=What's Eating Gilbert Grape or /shows?title=gilbert
 
 ## The problem
+The task was to use a database to store and retreive data used to produce a RESTful API. Using Mongoose model functions .find() or .findOne(), either a list of shows or a single show is returned.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## Learning objectives
+- How to model data in Mongoose
+- How to fetch items from a Mongo database using Mongoose
+- How to seed large amounts of data to a database
+
+## Technologies used
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- JavaScript ES6
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://anna-project-mongo-api.herokuapp.com/ 
