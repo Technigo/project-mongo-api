@@ -49,7 +49,6 @@ app.get('/books', async (req, res) => {
   const pageNo = +page || 1
   const perPage = 10
   const skip = perPage * (pageNo - 1)
-  const numBooks = await Book.estimatedDocumentCount()
   const ERROR_MESSAGE_404 = 'No books found, please try a different query'
 
   // Used to sort bookslist based on sort query
@@ -71,16 +70,16 @@ app.get('/books', async (req, res) => {
     .limit(perPage)
     .skip(skip)
 
-  // JSON returned depending on the booksList and its queries
+  // Used to display total books, checking booksList length without pagination
+  const booksListNoPagination = await Book.find({
+    title: new RegExp(title, 'i'),
+    authors: new RegExp(author, 'i')
+  })
+  const numBooks = booksListNoPagination.length
+
+  // JSON returned depending on the booksList being empty or not
   if (booksList.length === 0) {
     res.status(404).json({ error: ERROR_MESSAGE_404 })
-  } else if (title || author) {
-    res.json({
-      total_books: booksList.length,
-      total_pages: Math.ceil(booksList.length / perPage),
-      page: pageNo,
-      books: booksList
-    })
   } else {
     res.json({
       total_books: numBooks,
