@@ -38,7 +38,7 @@ app.use((req, res, next) => {
   }
 })
 
-// Start defining your routes here
+// Root endpoint
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
@@ -52,6 +52,7 @@ app.get('/books', async (req, res) => {
   const numBooks = await Book.estimatedDocumentCount()
   const ERROR_MESSAGE_404 = 'No books found, please try a different query'
 
+  // Used to sort bookslist based on sort query
   const sortQuery = (sort) => {
     if (sort === 'rating_dsc') {
       return { average_rating: -1 }
@@ -60,6 +61,8 @@ app.get('/books', async (req, res) => {
     }
   }
 
+  // Bookslist with filters based on title and/or authors query
+  // Paginated using limit and skip, change page using page query
   const booksList = await Book.find({
     title: new RegExp(title, 'i'),
     authors: new RegExp(author, 'i')
@@ -68,6 +71,7 @@ app.get('/books', async (req, res) => {
     .limit(perPage)
     .skip(skip)
 
+  // JSON returned depending on the booksList and its queries
   if (booksList.length === 0) {
     res.status(404).json({ error: ERROR_MESSAGE_404 })
   } else if (title || author) {
@@ -92,8 +96,12 @@ app.get('/books/:isbn13', async (req, res) => {
   const { isbn13 } = req.params
   const ERROR_MESSAGE_404 = `No book found with ISBN-13 ${isbn13}`
   const ERROR_MESSAGE_400 = `${isbn13} is not a valid ISBN-13`
+  // Used to check if the isbn13 param starts with 978 followed by 10 numbers
   const isbnCheck = /^(978)([0-9]{10})$/
 
+  // JSON returned depending on the book and the isbn13 param
+  // Using the same error message for the last else and the catch (err)
+  // To else when number doesn't match the isbnCheck, to catch if it contains a letter
   try {
     const book = await Book.findOne({ isbn13 })
     if (book) {
@@ -101,7 +109,7 @@ app.get('/books/:isbn13', async (req, res) => {
     } else if (!book && isbn13.match(isbnCheck)) {
       res.status(404).json({ error: ERROR_MESSAGE_404 })
     } else (
-      res.status(400).json({ error: ERROR_MESSAGE_400 })
+      err
     )
   } catch (err) {
     res.status(400).json({ error: ERROR_MESSAGE_400 })
