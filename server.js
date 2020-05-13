@@ -49,12 +49,12 @@ app.use((req, res, next) => {
   }
 })
 
-app.get('/netflixshow', async (req, res) => {
+app.get('/netflixshows', async (req, res) => {
   const netflixShows = await NetflixShow.find()
   res.json(netflixShows)
 })
  
-app.get('/netflixshow/type', async (req, res) => {
+app.get('/netflixshows/type', async (req, res) => {
   const { type } = req.query
   let shows = await NetflixShow.find()
   if (type) { 
@@ -66,7 +66,7 @@ app.get('/netflixshow/type', async (req, res) => {
   res.json(shows)
 })
 
-app.get('/netflixshow/rating', async (req, res) => {
+app.get('/netflixshows/rating', async (req, res) => {
   const { rating } = req.query
   let shows = await NetflixShow.find()
   if (rating) {
@@ -75,10 +75,10 @@ app.get('/netflixshow/rating', async (req, res) => {
   if (shows.length === 0) {
     res.status(404).send('Available ratings: TV-Y, TV-Y7, TV-Y7-FV, TV-G, G, TV-PG, PG,  PG-13, TV-14, TV-MA and R')
   }
-  res.json(shows)
+  res.json(shows) 
 })
 
-app.get('/netflixshow/title/:title', async (req, res) => {
+app.get('/netflixshows/title/:title', async (req, res) => {
   const { title } = req.params
   const show = await NetflixShow.findOne({ title })
   if (show) {
@@ -87,7 +87,6 @@ app.get('/netflixshow/title/:title', async (req, res) => {
     res.status(404).json({ error: `Could not find ${title}` })
   }
 })
-
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
