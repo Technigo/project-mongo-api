@@ -11,19 +11,18 @@ mongoose.Promise = Promise
 
 
 const Song = mongoose.model('Song', {
+  id: {
+    type: Number
+  },
   trackName: {
-    type: String,
+    type: String
   },
   artistName: {
-    type: String,
+    type: String
   },
   genre: {
-    type: String,
+    type: String
   }
-})
-
-const Artist = mongoose.model('Artist', {
-  artistName: String
 })
 
 if (process.env.RESET_DB) {
@@ -51,38 +50,37 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-//list all the tophits 
+//list all the tophits and query songs by genre
 app.get('/hits', async (req, res) => {
-  const songs = await Song.find()
-  res.json(songs)
+  const { genre } = req.query
+  const searchSongs = await Song.find({
+    genre: new RegExp(genre, 'i'),
+  })
+  if (searchSongs.length > 0) {
+    res.json(searchSongs);
 
+  } else if (genre && searchSongs.length === 0) {
+    res.status(404).json({ message: 'Sorry, cannot find any songs in that genre' })
+
+  } else {
+    res.json(songData)
+  }
 })
 
-//Path to one hitsong after id (why is this else statment not working?)
-// app.get('/hits/:id', async (req, res) => {
-//   const hitSong = await Song.findById(req.params.id)
-//   if (hitSong) {
-//     res.json(hitSong)
-//   } else {
-//     res.status(404).json({ error: 'no song with that id found' })
-//   }
-// })
-
-// Path to hitsong with id 
+//Path to one hitsong after id 
 app.get('/hits/:id', async (req, res) => {
-  let hitSong
-  try {
-    hitSong = await Song.findById(req.params.id)
-  } catch (error) {
-    return res.status(404).json({ message: "Hit song not found" })
-  }
+  const { id } = req.params
+  const hitSong = await Song.findOne({ id: id })
   if (hitSong) {
     res.json(hitSong)
+  } else {
+    res.status(404).json({ error: 'no song with that id found' })
   }
 })
-
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
+
+//deployed https://hitsongsinmay.herokuapp.com/hits
