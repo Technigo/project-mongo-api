@@ -1,13 +1,32 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+API created with Express & MongoDB.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Description
 
-## The problem
+Available endpoints:
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Routes | Path
+--- | ---
+root | `/`
+shows | `/shows`
+show by id | `/shows/:id`
 
-## View it live
+Queries can be used to filter the `/shows` endpoint.
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Query | Path | Value
+--- | --- | ---
+title | `?title=:title` | *string*
+type | `?type=:type` | *'movies' / 'tv-shows'*
+
+
+## Tech
+- Mongo DB
+- Mongoose
+- Express
+- Node.js
+- Javascript
+
+
+## Deployed
+https://mongo-api-netflix.herokuapp.com/
