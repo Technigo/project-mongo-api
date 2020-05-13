@@ -68,9 +68,23 @@ app.get('/', (req, res) => {
 })
 
 app.get('/books', async (req, res) => {
-  const books = await Book.find()
+  const { query } = req.query;
+  const queryRegex = new RegExp(query, 'i')
+  const books = await Book.find({ title: queryRegex }).sort({
+    average_rating: -1,
+  })
   res.json(books)
 })
+
+app.get('/books/:isbn', async (req, res) => {
+  const { isbn } = req.params;
+  const book = await Book.findOne({ isbn: isbn });
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).json({ error: `Could not find book with isbn=${isbn}` });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
