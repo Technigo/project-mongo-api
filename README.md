@@ -1,13 +1,23 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project was to model my database using Mongoose models, and persist data in the database. The requirements wre to have a least two routes and have a restful API.
 
 ## The problem
+I was having trouble with the query's I was not quite sure on how to place it in the line of codes. 
+  const { query } = req.query
+   if (query) {
+    //localhost:5000/shows?query=Showtype 
+    const queryRegex = new RegExp(query, 'i')
+    const shows = await Show.find({ type: queryRegex })
+    res.json(shows)
+   } else {
+    //localhost:5000/shows
+    const shows = await Show.find();
+    res.json(shows)
+   }
+   It became easier for me to understand on how and in what order once I commented it out. 
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-by-tuliany.herokuapp.com/

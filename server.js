@@ -81,13 +81,13 @@ app.use(bodyParser.json())
 // Start defining your routes here
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.send('My endpoints= /shows & /shows?query=movie or /shows?query=Tv Show & /shows/:title & /shows/year/:release_year & /shows/country/:country' )
 })
 
 app.get('/shows', async (req, res) => {
   const { query } = req.query
    if (query) {
-    //localhost:5000/shows?query=Movie 
+    //localhost:5000/shows?query=Showtype 
     const queryRegex = new RegExp(query, 'i')
     const shows = await Show.find({ type: queryRegex })
     res.json(shows)
