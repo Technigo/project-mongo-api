@@ -52,9 +52,22 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+//route to all titles
 app.get('/titles', async (req, res) => {
   const titles = await Title.find()
   res.json(titles)
+})
+
+//route to one title by show_id
+
+app.get('/titles/:show_id', async (req, res) => {
+  const { show_id } = req.params
+  const title = await Title.findOne({ show_id: show_id })
+  if (title) {
+    res.json(title)
+  } else {
+    res.status(404).json({ error: `Could not find title with show id ${show_id}` });
+  }
 })
 
 // Start the server
