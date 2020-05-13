@@ -1,12 +1,12 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This project was about how you model data in Mongoose and fetch items from a Mongo database using Mongoose and also seed the data. 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I used data with 500 tophits from Spotify and made it a bit smaller using Mongoose model. I used a path listing all songs and that you could query songs by genre and find them by there id.
+
 
 ## View it live
 
