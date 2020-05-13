@@ -73,8 +73,7 @@ app.get('/tracks/:genre', async (req, res) => {
   const { genre } = req.params
   const tracks = await Track.find()
   const filteredByGenre = await tracks.filter((track) => track.genre.toString().toLowerCase().includes(genre))
-  // This if-statement doesn´t work
-  if (filteredByGenre) {
+  if (filteredByGenre.length > 0) {
     res.json(filteredByGenre)
   } else {
     res.status(404).json({ error: `Could not find genre ${genre}` })
