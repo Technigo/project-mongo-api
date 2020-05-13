@@ -1,0 +1,834 @@
+[
+  {
+  "average": 5842,
+  "date": "2019-04-12",
+  "highest": 5842,
+  "lowest": 5842,
+  "order_count": 1,
+  "volume": 57
+  },
+  {
+  "average": 5842,
+  "date": "2019-04-13",
+  "highest": 5842,
+  "lowest": 5842,
+  "order_count": 7,
+  "volume": 833
+  },
+  {
+  "average": 5842,
+  "date": "2019-04-17",
+  "highest": 5842,
+  "lowest": 5842,
+  "order_count": 1,
+  "volume": 61
+  },
+  {
+  "average": 5842,
+  "date": "2019-04-19",
+  "highest": 5842,
+  "lowest": 5842,
+  "order_count": 1,
+  "volume": 132
+  },
+  {
+  "average": 5842,
+  "date": "2019-04-22",
+  "highest": 5842,
+  "lowest": 5842,
+  "order_count": 1,
+  "volume": 6
+  },
+  {
+  "average": 5842,
+  "date": "2019-04-26",
+  "highest": 5842,
+  "lowest": 5842,
+  "order_count": 1,
+  "volume": 862
+  },
+  {
+  "average": 1,
+  "date": "2019-05-18",
+  "highest": 1,
+  "lowest": 1,
+  "order_count": 1,
+  "volume": 5
+  },
+  {
+  "average": 1,
+  "date": "2019-05-26",
+  "highest": 1,
+  "lowest": 1,
+  "order_count": 1,
+  "volume": 144
+  },
+  {
+  "average": 1000,
+  "date": "2019-10-27",
+  "highest": 1000,
+  "lowest": 1000,
+  "order_count": 1,
+  "volume": 55
+  },
+  {
+  "average": 1,
+  "date": "2019-10-28",
+  "highest": 1,
+  "lowest": 1,
+  "order_count": 1,
+  "volume": 1070
+  },
+  {
+  "average": 1000,
+  "date": "2019-10-30",
+  "highest": 1000,
+  "lowest": 1000,
+  "order_count": 1,
+  "volume": 108
+  },
+  {
+  "average": 133.07,
+  "date": "2019-11-02",
+  "highest": 133.07,
+  "lowest": 133.07,
+  "order_count": 1,
+  "volume": 48
+  },
+  {
+  "average": 1001,
+  "date": "2019-11-05",
+  "highest": 1001,
+  "lowest": 1001,
+  "order_count": 2,
+  "volume": 677
+  },
+  {
+  "average": 1002,
+  "date": "2019-11-11",
+  "highest": 1002,
+  "lowest": 1002,
+  "order_count": 2,
+  "volume": 446
+  },
+  {
+  "average": 1002,
+  "date": "2019-11-12",
+  "highest": 1002,
+  "lowest": 1002,
+  "order_count": 1,
+  "volume": 54
+  },
+  {
+  "average": 1002,
+  "date": "2019-11-14",
+  "highest": 1002,
+  "lowest": 1002,
+  "order_count": 2,
+  "volume": 252
+  },
+  {
+  "average": 1002.06,
+  "date": "2019-11-15",
+  "highest": 1002.06,
+  "lowest": 1002.06,
+  "order_count": 2,
+  "volume": 158
+  },
+  {
+  "average": 1002.1,
+  "date": "2019-11-16",
+  "highest": 1002.1,
+  "lowest": 1002.1,
+  "order_count": 3,
+  "volume": 181
+  },
+  {
+  "average": 1002.1,
+  "date": "2019-11-17",
+  "highest": 1002.1,
+  "lowest": 1002.1,
+  "order_count": 2,
+  "volume": 22
+  },
+  {
+  "average": 1002.1,
+  "date": "2019-11-18",
+  "highest": 1002.1,
+  "lowest": 1002.1,
+  "order_count": 2,
+  "volume": 90
+  },
+  {
+  "average": 1002.1,
+  "date": "2019-11-19",
+  "highest": 1002.1,
+  "lowest": 1002.1,
+  "order_count": 1,
+  "volume": 24
+  },
+  {
+  "average": 1002.1,
+  "date": "2019-11-20",
+  "highest": 1002.1,
+  "lowest": 1002.1,
+  "order_count": 1,
+  "volume": 6
+  },
+  {
+  "average": 1002.1,
+  "date": "2019-11-21",
+  "highest": 1002.1,
+  "lowest": 1002.1,
+  "order_count": 2,
+  "volume": 220
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-11-22",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 1
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-11-23",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 172
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-11-24",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 10
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-11-25",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 65
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-11-26",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 31
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-11-27",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 3,
+  "volume": 222
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-11-29",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 80
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-01",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 3,
+  "volume": 293
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-02",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 1
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-03",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 19
+  },
+  {
+  "average": 7090,
+  "date": "2019-12-05",
+  "highest": 7090,
+  "lowest": 7090,
+  "order_count": 2,
+  "volume": 639
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-06",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 4
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-07",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 5
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-08",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 9
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-10",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 10
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-11",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 61
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-12",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 44
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-13",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 92
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-14",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 4,
+  "volume": 175
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-15",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 684
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-16",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 71
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-17",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 49
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-18",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 104
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-19",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 9
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-21",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 194
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-22",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 9
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-24",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 9
+  },
+  {
+  "average": 7090,
+  "date": "2019-12-26",
+  "highest": 7090,
+  "lowest": 7090,
+  "order_count": 5,
+  "volume": 3057
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-27",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 227
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-29",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 51
+  },
+  {
+  "average": 1002.16,
+  "date": "2019-12-30",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 499
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-02",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 35
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-03",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 208
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-05",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 19
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-06",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 200
+  },
+  {
+  "average": 1002.11,
+  "date": "2020-01-08",
+  "highest": 1002.11,
+  "lowest": 1002.11,
+  "order_count": 1,
+  "volume": 15
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-09",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 5,
+  "volume": 465
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-10",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 103
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-15",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 82
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-16",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 20
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-18",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 45
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-19",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 4,
+  "volume": 1048
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-20",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 3,
+  "volume": 263
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-21",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 247
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-23",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 420
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-24",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 54
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-27",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 57
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-29",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 78
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-30",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 8,
+  "volume": 18
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-01-31",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 46
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-02",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 4,
+  "volume": 6
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-03",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 7
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-04",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 3,
+  "volume": 39
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-06",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 5,
+  "volume": 278
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-07",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 2,
+  "volume": 566
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-08",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 10
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-09",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 5,
+  "volume": 365
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-10",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 5,
+  "volume": 252
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-11",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 20
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-12",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 5,
+  "volume": 343
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-13",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 49
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-16",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 184
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-17",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 231
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-23",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 15
+  },
+  {
+  "average": 1002.16,
+  "date": "2020-02-25",
+  "highest": 1002.16,
+  "lowest": 1002.16,
+  "order_count": 1,
+  "volume": 277
+  },
+  {
+  "average": 6500,
+  "date": "2020-02-26",
+  "highest": 6500,
+  "lowest": 6500,
+  "order_count": 1,
+  "volume": 55
+  },
+  {
+  "average": 6500,
+  "date": "2020-02-27",
+  "highest": 6500,
+  "lowest": 6500,
+  "order_count": 4,
+  "volume": 278
+  },
+  {
+  "average": 6500,
+  "date": "2020-02-28",
+  "highest": 6500,
+  "lowest": 6500,
+  "order_count": 1,
+  "volume": 4667
+  },
+  {
+  "average": 4000,
+  "date": "2020-03-12",
+  "highest": 4000,
+  "lowest": 4000,
+  "order_count": 1,
+  "volume": 33
+  },
+  {
+  "average": 1,
+  "date": "2020-03-20",
+  "highest": 1,
+  "lowest": 1,
+  "order_count": 1,
+  "volume": 31
+  },
+  {
+  "average": 6195,
+  "date": "2020-03-22",
+  "highest": 6195,
+  "lowest": 6195,
+  "order_count": 1,
+  "volume": 1
+  },
+  {
+  "average": 1.01,
+  "date": "2020-03-30",
+  "highest": 1.01,
+  "lowest": 1.01,
+  "order_count": 1,
+  "volume": 51
+  },
+  {
+  "average": 5000,
+  "date": "2020-04-01",
+  "highest": 5000,
+  "lowest": 5000,
+  "order_count": 1,
+  "volume": 424
+  },
+  {
+  "average": 5000,
+  "date": "2020-04-03",
+  "highest": 5000,
+  "lowest": 5000,
+  "order_count": 1,
+  "volume": 76
+  },
+  {
+  "average": 6100,
+  "date": "2020-04-11",
+  "highest": 6100,
+  "lowest": 6100,
+  "order_count": 2,
+  "volume": 890
+  },
+  {
+  "average": 3196,
+  "date": "2020-04-22",
+  "highest": 3196,
+  "lowest": 3196,
+  "order_count": 3,
+  "volume": 617
+  },
+  {
+  "average": 4500,
+  "date": "2020-05-06",
+  "highest": 4500,
+  "lowest": 4500,
+  "order_count": 2,
+  "volume": 798
+  },
+  {
+  "average": 4900,
+  "date": "2020-05-07",
+  "highest": 4900,
+  "lowest": 4900,
+  "order_count": 2,
+  "volume": 1262
+  },
+  {
+  "average": 4500,
+  "date": "2020-05-08",
+  "highest": 4500,
+  "lowest": 4500,
+  "order_count": 4,
+  "volume": 447
+  },
+  {
+  "average": 6000,
+  "date": "2020-05-09",
+  "highest": 6000,
+  "lowest": 6000,
+  "order_count": 10,
+  "volume": 4908
+  },
+  {
+  "average": 4500,
+  "date": "2020-05-10",
+  "highest": 4500,
+  "lowest": 4500,
+  "order_count": 4,
+  "volume": 1449
+  }
+  ]
