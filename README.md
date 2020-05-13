@@ -1,6 +1,6 @@
 # Mongo API Project
 
-Continuing working on the API built in the Express API Project, this is a book API built in Node using Express. Instead of using a the data straight from books.json, the API uses MongoDB and Mongoose to store the data.
+Continuing working on the API built in the Express API Project, this is a book API built in Node using Express. Instead of using the data straight from books.json, the API uses MongoDB and Mongoose to store the data.
 
 The following endpoints are available:
 - Root: `/`
