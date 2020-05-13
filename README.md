@@ -1,13 +1,12 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This was the first time that I created a database with MongoDb and the tools that came with it.
+I used data about the Golden Globes nominations and my goal was to create endpoints to retrieve data on nominees from a certain category and/or year etc.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I used MongoDb and Mongoose to create the database model and used Postman to check the paths I created. I stored the database in MongoDb Cloud Atlas and used Heruko to deploy.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+http://first-mongodb-project.herokuapp.com/
