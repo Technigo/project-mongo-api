@@ -20,4 +20,7 @@
 
 # View it live
 
+- Paths: /, /shows, /shows/:show_id
+- Combinable queries: page/title/director/cast/country/year/genre/type
+
 https://perssons-express-mongo.herokuapp.com/
