@@ -34,12 +34,10 @@ if (process.env.RESET_DB) {
 
   seedDatabase();
 }
-
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -58,9 +56,9 @@ app.get("/", (req, res) => {
 app.get("/shows", async (req, res) => {
   const { page, title, director, cast, country, year, genre, type } = req.query;
 
-  const pageNo = +page || 1;
-  const perPage = 10;
-  const skip = perPage * (pageNo - 1);
+  const pageNbr = +page || 1;
+  const perPage = 20;
+  const skip = perPage * (pageNbr - 1);
 
   const searchShow = await Show.find({
     title: new RegExp(title, "i"),
