@@ -59,7 +59,7 @@ app.get('/shows', async (req, res) => {
   }
 
   if (returnObject.results.length === 0) {
-    res.json("No results to show")
+    res.status(204).json("No results to show")
   } else {
     res.json(returnObject)
   }
@@ -110,7 +110,7 @@ app.get('/categories/:category', async (req, res) => {
   }
 
   if (categoryFind.length === 0) {
-    res.json(`There is no category named ${req.params.category}`)
+    res.status(404).json(`There is no category named ${req.params.category}`)
   } else {
     res.json(returnObject)
   }
