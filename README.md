@@ -1,6 +1,6 @@
-# Project title
+# API using Express and Mongoose
 
-Created an API with RESTful endpoints that returns either an array or data or single item utsing Express for Node.js
+Created an API with RESTful endpoints that returns either an array of data or single item using Express and Mongoose. 
 
 ## The problem / Solution
 
