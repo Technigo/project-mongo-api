@@ -2,34 +2,143 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+const Track = mongoose.model('Track', {
+  id: {
+    type: Number,
+  },
+  trackName: {
+    type: String,
+  },
+  artistName: {
+    type: String,
+  },
+  genre: {
+    type: String,
+  },
+  popularity: {
+    type: Number,
+  }
+});
+
+const Artist = mongoose.model('Artist', {
+  artistName: {
+    type: String,
+  }
+});
+
+if (process.env.RESET_DB) {
+  console.log('Resetting database!');
+
+  const seedDatabase = async () => {
+    await Track.deleteMany();
+    await Artist.deleteMany();
+    topMusicData.forEach((trackdata) => {
+      new Track(trackdata).save();
+      new Artist(trackdata).save();
+    });
+  };
+  seedDatabase();
+}
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
-
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
+// Start defining routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.get('/allData', (req, res) => {
+  res.json(topMusicData)
+})
+
+//Find tracks and special track with query:
+
+/*
+app.get('/tracks', async (req, res) => {
+  const { query } = req.query;
+  const queryRegex = new RegExp(query, 'i');
+  const tracks = await Track.find({ trackName: queryRegex });
+  console.log(`Found ${tracks.length} tracks.`);
+  res.json(tracks)
+})
+*/
+
+//Find tracks:
+
+app.get('/tracks', async (req, res) => {
+  const tracks = await Track.find(); //populate('artist');
+  //console.log(`The artist of ${tracks[0].trackName} is ${tracks[0].artist.artistName}`);
+  res.json(tracks)
+  console.log(`Found ${tracks.length} tracks.`);
+})
+
+//Find tracks in special genre with paths:
+
+app.get('/tracks/:genre', async (req, res) => {
+  const { genre } = req.params
+  const tracks = await Track.find()
+  let tracksInGenre = tracks.filter((item) => item.genre.toLowerCase() === genre.toLowerCase())
+  if (tracksInGenre.length > 0) {
+    res.json(tracksInGenre)
+  } else {
+    res.status(404).json({ error: `Could not find any tracks within the ${genre} genre` })
+  }
+})
+
+//Find artists and special artist with query
+/*
+app.get('/artists', async (req, res) => {
+  const { query } = req.query;
+  const queryRegex = new RegExp(query, 'i');
+  const artists = await Artist.find({ artistName: queryRegex });
+  console.log(`Found ${artists.length} artists.`);
+  res.json(artists)
+})
+*/
+
+//Find artists
+
+app.get('/artists', async (req, res) => {
+  const artists = await Artist.find();
+  console.log(`Found ${artists.length} artists.`);
+  res.json(artists)
+})
+
+//Find special artist with paths
+
+app.get('/artists/:artistName', async (req, res) => {
+  const { artistName } = req.params;
+  const artist = await Artist.findOne({ artistName: artistName });
+  if (artist) {
+    res.json(artist)
+  } else {
+    res.status(404).json({ error: `Could not find the artist with artistName=${artistName}` })
+  }
+})
+
+//Find all tracks by special artists with paths
+
+app.get('/artists/:artistName/tracks', async (req, res) => {
+  const { artistName } = req.params;
+  const artist = await Artist.findOne({ artistName: artistName });
+  if (artist) {
+    const tracks = await Track.find({ artistName: artistName }).sort({ popularity: -1 })
+    res.json(tracks)
+  } else {
+    res.status(404).json({ error: `Could not find any track by ${artistName}` })
+  }
 })
 
 // Start the server
