@@ -2,15 +2,8 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import goldenGlobesData from './data/golden-globes.json'
+import Nomination from './models/nominations'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -27,10 +20,60 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+
+if (process.env.RESET_DATABASE) {
+  console.log('Resetting database ...')
+  const seedDatabase = async () => {
+    // Clear our database
+    await Nomination.deleteMany()
+    // Save all of the books from books.json to the database
+    await goldenGlobesData.forEach((nomination) => new Nomination(nomination).save())
+  }
+  seedDatabase()
+}
+
+/* new Nominations({
+  "year_film": 2009,
+  "year_award": 2010,
+  "ceremony": 67,
+  "category": "Best Motion Picture - Drama",
+  "nominee": "Avatar",
+  "film": "",
+  "win": true
+}).save() */
+
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
+
+app.get('/nominations', async (req, res) => {
+  const { nominee } = req.query
+  const nominee = req.query.nominee
+  if (nominee) {
+    const queryRegex = new RegExp(nominee, 'i')
+    const nominations = await Nomination.find({ nominee: queryRegex })
+    console.log(`found ${nominations.length} nominations...`)
+    res.json(nominations)
+  } else {
+    const nominations = await Nomination.find()
+    console.log(`found ${Nomination.length} nominations...`)
+    res.json(nominations)
+  }
+})
+
+
+
+app.get('/nominations/years/:year', async (req, res) => {
+  const { year } = req.params
+  const nomination = await Nomination.findOne({ year_award: year })
+  if (nomination) {
+    res.json(nomination)
+  } else {
+    res.status(404).json({ error: `Could not find nominations with id ${year}` })
+  }
+})
+
 
 // Start the server
 app.listen(port, () => {
