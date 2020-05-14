@@ -4,11 +4,12 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 //API input
-import { GoldenGlobeData } from './data/golden-globes.json'
+import { goldenGlobeData } from './data/golden-globes.json'
 
+const dbKey = 'mongodb+srv://ebbabw:gs4m4g4U6pC6ejLK@cluster0-yp7wy.mongodb.net/test?retryWrites=true&w=majority';
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbKey, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Nominee = mongoose.model('Nominee', {
@@ -19,17 +20,21 @@ const Nominee = mongoose.model('Nominee', {
   category: String,
   nominee: String,
   film: String,
-  win: Boolean,
+  win: Boolean
 
 })
 
- if (process.env.RESET_DATABASE === true) {
+ if (process.env.RESET_DATABASE) {
      console.log('Resettnig database...');
   
     const seedDatabase = async () => {
       await Nominee.deleteMany();
 
-      await GoldenGlobeData.forEach((nominee) => new Nominee(nominee).save());
+      goldenGlobeData.forEach((nominee) => {
+
+        new Nominee(nominee).save()
+
+      })
     
   }
 
