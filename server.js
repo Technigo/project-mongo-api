@@ -65,7 +65,7 @@ app.get('/nominations', async (req, res) => {
 
 app.get('/nominations/years/:year', async (req, res) => {
   const { year } = req.params
-  const nomination = await Nomination.findOne({ year_award: year })
+  const nomination = await Nomination.find({ year_award: year })
   if (nomination) {
     res.json(nomination)
   } else {
