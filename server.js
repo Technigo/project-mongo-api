@@ -41,7 +41,7 @@ if (process.env.RESET_DB) {
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8082
+const port = process.env.PORT || 8084
 const app = express()
 
 const listEndpoints = require('express-list-endpoints')
@@ -49,6 +49,13 @@ const listEndpoints = require('express-list-endpoints')
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
+})
 
 // Start defining your routes here
 app.get('/', (req, res) => {
@@ -56,12 +63,17 @@ app.get('/', (req, res) => {
 })
 
 //route to all titles & queries
+
 app.get('/titles', async (req, res) => {
   const { title, cast, country } = req.query
   //i means to ignore case
   const titleRegex = new RegExp(title, 'i')
   const castRegex = new RegExp(cast, 'i')
   const countryRegex = new RegExp(country, 'i')
+  //doesn't work when I use this Regex so it only searches for entire words. It works for the queries but it won't find titles anymore.
+  //   const titleRegex = new RegExp('\\b' + title + '\\b', 'i')
+  //   const castRegex = new RegExp('\\b' + cast + '\\b', 'i')
+  //   const countryRegex = new RegExp('\\b' + country + '\\b', 'i')
   //sorting in descending order, 1 for ascending
   const titles = await Title.find({
     title: titleRegex,
@@ -76,15 +88,36 @@ app.get('/titles', async (req, res) => {
 })
 
 //route to one title by show_id
-app.get('/titles/:show_id', async (req, res) => {
-  const { show_id } = req.params
-  const title = await Title.findOne({ show_id: show_id })
+// app.get('/titles/:show_id', async (req, res) => {
+//   const { show_id } = req.params
+//   const title = await Title.findOne({ show_id: show_id })
+//   if (title) {
+//     res.json(title)
+//   } else {
+//     res.status(404).json({ error: `Could not find title with show id ${show_id}` });
+//   }
+// })
+
+//route to one title by id (better than show_id?)
+app.get('/titles/:_id', async (req, res) => {
+  const { _id } = req.params
+  const title = await Title.findOne({ _id: _id })
   if (title) {
     res.json(title)
   } else {
-    res.status(404).json({ error: `Could not find title with show id ${show_id}` });
+    res.status(404).json({ error: `Could not find title with id ${_id}` });
   }
 })
+
+//doesn't work, from the codealong
+// app.get('titles/:id', async (req, res) => {
+//   const title = await Title.findById(req.params.id)
+//   if (title) {
+//     res.json(title)
+//   } else {
+//     res.status(404).json({ error: `The title with id: ${id} is not found` })
+//   }
+// })
 
 // Start the server
 app.listen(port, () => {
