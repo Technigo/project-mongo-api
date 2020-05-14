@@ -4,43 +4,47 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 //API input
-import { goldenGlobeData } from './data/golden-globes.json'
-
-const dbKey = 'mongodb+srv://ebbabw:gs4m4g4U6pC6ejLK@cluster0-yp7wy.mongodb.net/test?retryWrites=true&w=majority';
+import { goldenGlobeData } from "./data/golden-globes.json"
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(dbKey, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Nominee = mongoose.model('Nominee', {
 
-  year_film: Number,
-  year_award: Number,
-  ceremony: Number,
-  category: String,
-  nominee: String,
-  film: String,
-  win: Boolean
+  year_film: {
+    type: Number
+  },
+  year_award: {
+    type: Number
+  }, 
+  ceremony: {
+    type: Number
+  },
+  category:  {
+    type: String
+  },
+  nominee: {
+    type: String
+  },
+  film: {
+    type: String
+  },
+  win: {
+    type: Boolean
+  },
 
 })
 
- if (process.env.RESET_DATABASE) {
-     console.log('Resettnig database...');
-  
-    const seedDatabase = async () => {
-      await Nominee.deleteMany();
-
-      goldenGlobeData.forEach((nominee) => {
-
-        new Nominee(nominee).save()
-
-      })
+if (process.env.RESET_DATABASE) {
+  console.log("Resetting database...");
+  const seedDatabase = async () => {
+    await Nominee.deleteMany();
     
-  }
-
-  seedDatabase()
+    goldenGlobeData.forEach((nominee) => new Nominee(nominee).save());
+  };
+  seedDatabase();
 }
-
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -60,18 +64,14 @@ app.use((req, res, next) => {
 // Start defining your routes here
 
 app.get('/', (req, res) => {
-  res.send('Hello! use these routes')
+  res.send('Hello! use these routes /nominees')
 })
 
-app.get('/nominees', async (req, res) => {
-  const goldenGlobenom = await Nominee.find()
-  res.json(goldenGlobenom)
-})
 
-// app.get('/netflixtitles', async (req, res) => {
-//  const Netflixtitles = await Netflixtitle.find().populate('title')
-//  res.json(Netflixtitles)
-// })
+app.get("/nominees", async (req, res) => {
+  let goldenGlobes = await Nominee.find();
+  res.json(goldenGlobes);
+});
 
 
 // Start the server
@@ -81,10 +81,3 @@ app.listen(port, () => {
 
 
 
-
-// Method	Endpoints	Notes
-// GET	/product	Get all products
-// GET	/product/:id	Get single product
-// POST	/product	Add product
-// PUT	/product/:id	Update product
-// DELETE	/product/:id	Delete product
