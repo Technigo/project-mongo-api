@@ -4,44 +4,60 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 //API input
-import { goldenGlobeData } from "./data/golden-globes.json"
+import netflixTitles from './data/netflix-titles.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Nominee = mongoose.model('Nominee', {
+const Netflixdata = mongoose.model('Netflixdata', {
 
-  year_film: {
+  show_id: {
     type: Number
   },
-  year_award: {
-    type: Number
+  title: {
+    type: String
   }, 
-  ceremony: {
+  director: {
+    type: String
+  },
+  cast:  {
+    type: String
+  },
+  country: {
+    type: String
+  },
+  date_added: {
+    type: String
+  },
+  release_year: {
     type: Number
   },
-  category:  {
+  rating: {
     type: String
   },
-  nominee: {
+  duration: {
     type: String
   },
-  film: {
+  listed_in: {
     type: String
   },
-  win: {
-    type: Boolean
+  description: {
+    type: String
   },
+  type: {
+    type: String
+  }
+
 
 })
 
 if (process.env.RESET_DATABASE) {
   console.log("Resetting database...");
   const seedDatabase = async () => {
-    await Nominee.deleteMany();
+    await Netflixdata.deleteMany();
     
-    goldenGlobeData.forEach((nominee) => new Nominee(nominee).save());
+    netflixTitles.forEach((netflixdata) => new Netflixdata(netflixdata).save());
   };
   seedDatabase();
 }
@@ -69,8 +85,8 @@ app.get('/', (req, res) => {
 
 
 app.get("/nominees", async (req, res) => {
-  let goldenGlobes = await Nominee.find();
-  res.json(goldenGlobes);
+  const titles = await Netflixdata.find();
+  res.json(titles);
 });
 
 
