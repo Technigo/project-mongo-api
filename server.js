@@ -89,16 +89,28 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-// Get all songs
+/* // Get all songs
 app.get('/songs', async (req, res) => {
   const songs = await Song.find()
   console.log(`Found ${songs.length} songs ...`)
   res.json(songs)
+}) */
+
+// Get all feelgood songs
+app.get('/songs', async (req, res) => {
+  const feelgood = req.query.feelgood
+
+  let feelGoodSongs = await Song.find({})
+
+  if (feelgood === "true") {
+    feelGoodSongs = await Song.find({ valence: { $gte: 70 } })
+  }
+  res.json(feelGoodSongs)
 })
 
 // Get one song
-app.get('songs/:id', async (req, res) => {
-  const { id } = req.params
+app.get('/songs/:id', async (req, res) => {
+  const id = req.params.id
   const song = await Song.findOne({ id: id })
   if (song) {
     res.json(song)
@@ -107,16 +119,6 @@ app.get('songs/:id', async (req, res) => {
   }
 })
 
-/* // Get a genre
-app.get('genre/:genre', async (req, res) => {
-  const { genre } = req.params
-  const genre = await Song.find({ genre: genre })
-  if (genre) {
-    res.json(genre)
-  } else {
-    res.status(404).json({ error: `Could not find ${genre}` })
-  }
-}) */
 
 // Start the server
 app.listen(port, () => {
