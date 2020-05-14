@@ -1,13 +1,13 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+First project using Mongoose to model data and seed to database. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The assignment was to create a database and learn how to seed data to the database. I used different routes, parameters and querys to sort and present the data. I wanted a challenge so I also added querys to filter the data by pages since it was a lot of information in the json. I also created a frontend to my database to better understand how to structure the data in the database.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Database: https://malins-movie-api.herokuapp.com/
+
+Frontend: https://malins-mongodb-frontend.netlify.app/movies
