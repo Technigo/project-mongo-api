@@ -33,6 +33,18 @@ const Director = mongoose.model('Director', {
 
 })
 
+
+// const Netflixtitle = mongoose.model('Netflixtitle', {
+
+//   director: String,
+
+//   title: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'Title'
+//   }
+
+// });
+
 if (process.env.RESET_DATABASE) {
   console.log("Resetting database...");
   const seedDatabase = async () => {
@@ -69,14 +81,36 @@ app.get('/', (req, res) => {
 
 
 app.get("/netflixtitles", async (req, res) => {
-  const titles = await Netflixdata.find();
-  res.json(titles);
+  const { query } = req.query
+  const queryRegex = new RegExp(query, 'i');
+  const titles = await Netflixdata.find({title: queryRegex}).sort({
+    release_year: ""
+  })
+  console.log(`Found ${titles.length} movies and shows..`);
+  res.json(titles.reverse());
 });
+
+
+
+// app.get('/books', async (req, res) => {
+//   const { query } = req.query;
+//   const queryRegex = new RegExp(query, 'i');
+//   const books = await Book.find({ title: queryRegex }).sort({
+//     average_rating: -1,
+//   });
+//   console.log(`Found ${books.length} books..`);
+//   res.json(books);
+// });
 
 
 app.get("/netflixtitles/:directors", async (req, res) => {
   const director = await Director.find();
-  res.json(director);
+
+  if (director) {
+    res.json(director);
+  } else {
+    res.status(404).json({ error: 'error could not found' });
+  }
 });
 
 
