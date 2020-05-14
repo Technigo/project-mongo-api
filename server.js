@@ -2,9 +2,8 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import booksData from './data/books.json'
-import itemData from './data/item-history.json'
 import michelinData from './data/michelin-restaurants.json'
+import Michelin from './model/michelin'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -16,47 +15,17 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// This can be exported to external file instead
-const Michelin = mongoose.model('Michelin',{
-  name: String,
-  year: Number,
-  latitude: Number,
-  longitude: Number,
-  city: String,
-  region: String,
-  zipCode: String,
-  cuisine: String,
-  price: String,
-  url: String,
-})
-
-
-//   MICHELIN-RESTAURANTS
-// name: String,
-// year: Number,
-// latitude: Number,
-// longitude: Number,
-// city: String,
-// region: String,
-// zipCode: String,
-// cuisine: String,
-// price: String,
-// url: String,
-
 
 if (process.env.RESET_DATABASE) {
   console.log('Resetting database...');
 
   const seedDatabase = async () => {
       await Michelin.deleteMany();
+      console.log(`Deleting databse`)
       await michelinData.forEach((restaurant) => new Michelin(restaurant).save());
+      console.log(`Building new database`)
   };
   seedDatabase();
-}
-
-
-const onlyUnique = (value, index, self) => { 
-  return self.indexOf(value) === index;
 }
 
 app.get('/', (req, res) => {
@@ -91,17 +60,15 @@ app.get('/michelin', async (req, res) => {
 app.get('/michelin/regions/', async ( req, res ) => {
   const { region } = req.query
 
-  let restaurantByRegion = await michelinData.filter((restaurant) => restaurant.region.toLowerCase() === region)
-  let getAllRegionsArr = await michelinData.map(restaurant => restaurant['region'])
-
-  let uniqueRegions = await getAllRegionsArr.filter( onlyUnique )
+  let restaurantByRegion = await Michelin.find({ region })
+  let allUniqueRegions = await Michelin.find({},{'_id': 0,'region': 1}).distinct('region')
 
   if ( restaurantByRegion.length > 0 ) {
     res.json({ totalResults: restaurantByRegion.length, restaurantByRegion})
   } else if ( region && restaurantByRegion.length === 0 ) {
     res.status(404).json({ message: `Error, ${region} not found` })
   }
-  res.json({ totalResults: uniqueRegions.length, uniqueRegions})
+  res.json({ totalResults: allUniqueRegions.length, allUniqueRegions})
 })
 
 // List all cuisines with /michelin/cuisines
@@ -109,17 +76,15 @@ app.get('/michelin/regions/', async ( req, res ) => {
 app.get('/michelin/cuisines/', async ( req, res ) => {
   const { cuisine } = req.query
 
-  let restaurantByCuisine = await michelinData.filter((restaurant) => restaurant.cuisine.toLowerCase() === cuisine )
-  let getAllCusinesArr = await michelinData.map(restaurant => restaurant['cuisine'])
-
-  let uniqueCusines = await getAllCusinesArr.filter( onlyUnique )
+  let restaurantByCuisine = await Michelin.find({ cuisine })
+  let allUniqueCuisines = await Michelin.find({},{'_id': 0,'cuisine': 1}).distinct('cuisine')
 
   if ( restaurantByCuisine.length > 0 ) {
     res.json({ totalResults: restaurantByCuisine.length , restaurantByCuisine})
   } else if ( cuisine && restaurantByCuisine.length === 0 ) {
     res.status(404).json({ message: `Error, ${cuisine} not found` })
   }
-  res.json({ totalResults: uniqueCusines.length, uniqueCusines})
+  res.json({ totalResults: allUniqueCuisines.length, allUniqueCuisines})
 })
 
 // List all citys with /michelin/citys
@@ -127,18 +92,15 @@ app.get('/michelin/cuisines/', async ( req, res ) => {
 app.get('/michelin/citys/', async ( req, res ) => {
   const { city } = req.query
 
-  let restaurantByCity = await michelinData.filter((restaurant) => restaurant.city.toLowerCase() === city )
-  let getAllCitysArr = await michelinData.map(restaurant => restaurant['city'])
-
-  let uniqueCitys = await getAllCitysArr.filter( onlyUnique )
+  let restaurantByCity = await Michelin.find({ city })
+  let allUniqueCitys = await Michelin.find({},{'_id': 0,'city': 1}).distinct('city')
 
   if ( restaurantByCity.length > 0 ) {
     res.json({ totalResults: restaurantByCity.length , restaurantByCity})
   } else if ( city && restaurantByCity.length === 0 ) {
     res.status(404).json({ message: `Error, no restaurants found in ${city}` })
   }
-  res.json({ totalResults: uniqueCitys.length, uniqueCitys})
-  
+  res.json({ totalResults: allUniqueCitys.length, allUniqueCitys})
 })
 
 
