@@ -1,13 +1,34 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+Netflix API built in Node using Express. The API uses MongoDB and Mongoose to sort data.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+### Endpoints
+
+- Root: /
+- Shows: /shows
+- Shows by id: /shows/:show_id
+
+### Queries
+
+- Sort by release year
+- Search by title: /shows?title=harry
+- Search by director: /shows?director=tarantino
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Use a set of data and model the database using Mongoose models and persist my data in the database.
+
+## Learning objectives
+
+- How to model data in Mongoose
+- How to fetch from a Mongo database using Mongoose
+- How to seed large amounts of data to a database
+
+## Tech
+
+- Node.js
+- Express
+- MongoDB
+- Mongoose
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
