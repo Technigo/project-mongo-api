@@ -12,9 +12,11 @@ const Nominee = mongoose.model('Nominee', {
   nominee: {
     type: String,
   },
+  ceremony: {
+    type: Number,
+  },
   category: {
-    type: mongoose.Schema.Types.String,
-    ref: 'Category',
+    type: String,
   },
   year_award: {
     type: Number,
@@ -48,17 +50,6 @@ app.get('/', (req, res) => {
   res.send('Hello world');
 });
 
-// Shows a list of all the winners ever
-app.get('/winners', async (req, res) => {
-  const nominee = await Nominee.find();
-  const winners = nominee.filter((item) => item.win);
-  if (winners) {
-    res.json(winners);
-  } else {
-    res.status(404).json({ error: 'Winners not found' });
-  }
-});
-
 // Shows a list of all the winners a certain year
 app.get('/year/:year/winners', async (req, res) => {
   const year = req.params.year;
@@ -72,23 +63,28 @@ app.get('/year/:year/winners', async (req, res) => {
   }
 });
 
-// Shows all the nominees of a certain category a specific year
-app.get('/year/:year/categories/:category', async (req, res) => {
-  const year = req.params.year;
-  const findYear = await Nominee.find();
-  const certainYear = findYear.filter((item) => item.year_award === +year);
-  const category = req.params.category;
-  const findNominees = certainYear.filter((item) =>
-    item.category.toLowerCase().includes(category.toLowerCase())
-  );
-  if (findNominees.length > 0) {
-    res.json(findNominees);
-  } else {
-    res
-      .status(404)
-      .json({ error: 'Result not found for this category or year' });
+// Shows the winner of a certain category from a specific ceremony
+// example:/winner/ceremonies/68/categories/best motion picture - drama
+app.get(
+  '/winner/ceremonies/:ceremony/categories/:category',
+  async (req, res) => {
+    const ceremony = req.params.ceremony;
+    const nominees = await Nominee.find();
+    const certainYear = nominees.filter((item) => item.ceremony === +ceremony);
+    const category = req.params.category;
+    const findNominees = certainYear.filter((item) =>
+      item.category.toLowerCase().includes(category.toLowerCase())
+    );
+    const winner = findNominees.filter((item) => item.win);
+    if (winner.length > 0) {
+      res.json(winner);
+    } else {
+      res
+        .status(404)
+        .json({ error: 'Result not found for this category or year' });
+    }
   }
-});
+);
 
 // All nominations ever of a certain nominee
 // with ie GET "/nominees?query=joaquin"
