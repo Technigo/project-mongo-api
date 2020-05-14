@@ -23,8 +23,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/shows', async (req, res) => {   
-  const { year, country, actor } = req.query
+  const { title, year, country, actor } = req.query
   let myFilter = {};
+
+  if (title) {
+    myFilter['title'] = new RegExp(`${title}`, 'i')
+  }
   
   if (year) {
     myFilter['release_year'] = year;
@@ -133,10 +137,17 @@ if (process.env.RESET_DB) {
       show.cast = splitCast
 
       if (show.director === "") {
-        show.director = [];
+        show.director = "Unknown";
       } else {
         const splitDirectors = show.director.split(", ")
         show.director = splitDirectors
+      }
+
+      if (show.country === "") {
+        show.country = "Unknown";
+      } else {
+         const splitCountry = show.country.split(", ")
+         show.country = splitCountry
       }
   
 			new Shows(show).save()
