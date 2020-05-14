@@ -1,13 +1,18 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+For this project I created a backend with multiple endpoints and query parmeters using mongoDB and express.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I used the find() and findOne() query methods with params and queries to return items from the database. 
+I found that the .limit .skip and .sort methods were very useful for cutting down the amount of 
+logic and lines of code necessary to allow multipe queries to be used at once, such as keyword, order and page.
+
+I created a function to generate random title/author pairings as well as fake rating/page information. To do this
+I created an array with a number of null items and then ran a forEach on it to create many new Books, which took
+their title and author from indidviual arrays using Math.random(). 
 
 ## View it live
+https://philo-biblist.herokuapp.com/
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
