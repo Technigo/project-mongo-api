@@ -4,7 +4,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import goldenGlobesData from './data/golden-globes.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api"
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo-api'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
