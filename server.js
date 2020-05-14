@@ -112,16 +112,6 @@ app.get('/titles', async (req, res) => {
   }
 })
 
-// Use of MongoDB _id
-app.get('/titles/:_id', async (req, res) => {
-  const title = await Title.findById(req.params._id)
-  if (title) {
-    res.json(title)
-  } else {
-    res.status(404).json({ error: 'Artist not found' })
-  }
-})
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
