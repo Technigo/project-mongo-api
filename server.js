@@ -9,17 +9,17 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Show = mongoose.model('Show', {
-  title: String,
-  director: String,
-  cast: String,
-  country: String,
-  date_added: String,
-  release_year: Number,
-  rating: String,
-  duration: String,
-  listed_in: String,
-  description: String,
-  type: String
+  title: { type: String },
+  director: { type: String },
+  cast: { type: String },
+  country: { type: String },
+  date_added: { type: String },
+  release_year: { type: Number },
+  rating: { type: String },
+  duration: { type: String },
+  listed_in: { type: String },
+  description: { type: String },
+  type: { type: String }
 })
 
 const Director = mongoose.model('Director', {
