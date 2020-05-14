@@ -8,13 +8,14 @@ First I made the model and then seeded the database. I made two routes, one for 
 The next step would be to add pagination and more queries.
 
 ## Tech
--Heruko
--Express
--Mongo DB
--Mongoose
--Postman
--Javascript
+- Heruko
+- Express
+- Mongo DB
+- Mongoose
+- Postman
+- Javascript
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Take a look! 
+https://emmas-mongodb-project.herokuapp.com/
