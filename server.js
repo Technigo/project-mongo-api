@@ -49,7 +49,6 @@ app.get('/', (req, res) => {
 
 app.get('/nominations', async (req, res) => {
   const { nominee } = req.query
-  const nominee = req.query.nominee
   if (nominee) {
     const queryRegex = new RegExp(nominee, 'i')
     const nominations = await Nomination.find({ nominee: queryRegex })
