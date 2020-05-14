@@ -1,12 +1,19 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This is the project of the 18th week of Technigo's bootcamp where the task is to use Mongo DB and Mongoose to set up a database. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+First I made the model and then seeded the database. I made two routes, one for all the Netflix titles and one for a single title. I also made queries to be able to find shows by title, country and cast. 
+The next step would be to add pagination and more queries.
+
+## Tech
+-Heruko
+-Express
+-Mongo DB
+-Mongoose
+-Postman
+-Javascript
 
 ## View it live
 

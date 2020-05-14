@@ -9,7 +9,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-
+//model for the entries in the database
 const Title = mongoose.model('Title', {
   show_id: Number,
   title: String,
@@ -25,6 +25,7 @@ const Title = mongoose.model('Title', {
   type: String,
 })
 
+//seeding the database
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Title.deleteMany({})
@@ -43,23 +44,38 @@ if (process.env.RESET_DB) {
 const port = process.env.PORT || 8082
 const app = express()
 
+const listEndpoints = require('express-list-endpoints')
+
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(listEndpoints(app))
 })
 
-//route to all titles
+//route to all titles & queries
 app.get('/titles', async (req, res) => {
-  const titles = await Title.find()
-  res.json(titles)
+  const { title, cast, country } = req.query
+  //i means to ignore case
+  const titleRegex = new RegExp(title, 'i')
+  const castRegex = new RegExp(cast, 'i')
+  const countryRegex = new RegExp(country, 'i')
+  //sorting in descending order, 1 for ascending
+  const titles = await Title.find({
+    title: titleRegex,
+    cast: castRegex,
+    country: countryRegex,
+  }).sort({ release_year: -1 })
+  if (titles) {
+    res.json(titles)
+  } else {
+    res.status(404).json({ error: `No results, try another query` });
+  }
 })
 
 //route to one title by show_id
-
 app.get('/titles/:show_id', async (req, res) => {
   const { show_id } = req.params
   const title = await Title.findOne({ show_id: show_id })
