@@ -1,13 +1,30 @@
-# Mongo API Project
+# Project title
 
-Replace this readme with your own information about your project. 
+Created an API with RESTful endpoints that returns either an array or data or single item utsing Express for Node.js
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## The problem / Solution
 
-## The problem
+Planning and identifying useful endpoints to create, thinking about query options and filtering the data, also how to handle with bad query requests.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Endpoints
+* / (Info of each endpoint)
+* /michelin
+* /michelin/regions
+* /michelin/regions?region=YOUR_COUNTRY
+* /michelin/cuisines
+* /michelin/cuisines?cuisine=YOUR_CUISINE
+* /michelin/citys
+* /michelin/citys?city=YOUR_CITY
+* /michelin/:name
+* /michelin/year/:year
+
+## Build with 
+
+* Javascript
+* Node.js
+* Express
+* Mongoose
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+[Link](https://michelin-restaurants.herokuapp.com/)

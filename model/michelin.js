@@ -1,7 +1,10 @@
 import mongoose from 'mongoose'
 
 const Michelin = mongoose.model('Michelin',{
-  name: String,
+  name: {
+    type: String,
+    lowercase: true,
+  },
   year: Number,
   latitude: Number,
   longitude: Number,
