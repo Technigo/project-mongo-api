@@ -5,13 +5,14 @@ import mongoose from 'mongoose'
 import showData from './data/netflix-titles.json'
 import { Shows } from './models'
 
-const dotenv = require('dotenv');
-dotenv.config();
+const dotenv = require('dotenv')
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+const path = require('path')
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -19,12 +20,12 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.json("Start page")
+  res.sendFile(path.join(__dirname+'/public/index.html'))
 })
 
 app.get('/shows', async (req, res) => {   
   const { title, year, country, actor } = req.query
-  let myFilter = {};
+  let myFilter = {}
 
   if (title) {
     myFilter['title'] = new RegExp(`${title}`, 'i')
@@ -44,10 +45,10 @@ app.get('/shows', async (req, res) => {
   
   const show = await Shows.find(myFilter).collation({ locale: 'en_US', strength: 1 });
   
-  const page = +(req.query.page ?? 1);
-  const pageSize = +(req.query.pageSize ?? 20); 
-  const startIndex = (page -1) * pageSize;
-  const endIndex = startIndex + pageSize ;
+  const page = +(req.query.page ?? 1)
+  const pageSize = +(req.query.pageSize ?? 20)
+  const startIndex = (page -1) * pageSize
+  const endIndex = startIndex + pageSize 
   const filteredShows = show.slice(startIndex, endIndex)
   const returnObject = { 
     pageSize: pageSize,
@@ -95,10 +96,10 @@ app.get('/categories/:category', async (req, res) => {
 
   const categoryFind = await Shows.find( { type: category } ).collation({ locale: 'en_US', strength: 1 })
   
-  const page = +(req.query.page ?? 1);
-  const pageSize = +(req.query.pageSize ?? 20); 
-  const startIndex = (page -1) * pageSize;
-  const endIndex = startIndex + pageSize ;
+  const page = +(req.query.page ?? 1)
+  const pageSize = +(req.query.pageSize ?? 20)
+  const startIndex = (page -1) * pageSize
+  const endIndex = startIndex + pageSize 
   const filteredCategory = categoryFind.slice(startIndex, endIndex)
   const returnObject = { 
     pageSize: pageSize,
@@ -137,14 +138,14 @@ if (process.env.RESET_DB) {
       show.cast = splitCast
 
       if (show.director === "") {
-        show.director = "Unknown";
+        show.director = "Unknown"
       } else {
         const splitDirectors = show.director.split(", ")
         show.director = splitDirectors
       }
 
       if (show.country === "") {
-        show.country = "Unknown";
+        show.country = "Unknown"
       } else {
          const splitCountry = show.country.split(", ")
          show.country = splitCountry
