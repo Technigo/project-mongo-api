@@ -32,6 +32,7 @@ const Director = mongoose.model('Director', {
 
 const Title = mongoose.model('Title', {
   title: String,
+  _id: Number,
   director: {
     type: mongoose.Schema.Types.String,
     ref: 'Director'
@@ -108,6 +109,16 @@ app.get('/titles', async (req, res) => {
     res.json(titles)
   } else {
     res.status(404).json({ error: 'Title show not found' })
+  }
+})
+
+// Use of MongoDB _id
+app.get('/titles/:_id', async (req, res) => {
+  const title = await Title.findById(req.params._id)
+  if (title) {
+    res.json(title)
+  } else {
+    res.status(404).json({ error: 'Artist not found' })
   }
 })
 
