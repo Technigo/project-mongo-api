@@ -1,13 +1,33 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Creating API using MongoDB and Mongoose.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The task was to use a database to store and retrieve data from and use that data to produce a RESTful API. Learning how to model data in Mongoose. Mongoose functions: find, findOne and sort.
+
+ENDPOINTS: 
+
+Root: `/`
+Tracks: `/tracks`
+Search tracks by genre: `/tracks/:genre` (`/tracks/:pop`)
+Artists : `/artists`
+Search chosen artist: `/artists/:artistName` (`/artists/:Ed Sheeran`)
+Search tracks by chosen artist and sort on popularity: `/artists/:artistName/tracks` (`/artists/:Ed Sheeran/tracks`)
+
+Queries:
+Artists: `/artists` (`/artists?query=Ed Sheeran`)
+Sort chosen track by chosen artist on popularity: (`tracks?trackName=love&artist?artistName=ariana&sort=rating`)
+
+
+## Tech
+
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- JavaScript ES6
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-deployment.herokuapp.com/tracks

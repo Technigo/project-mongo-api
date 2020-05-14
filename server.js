@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
   res.send('Hello topMusic')
 })
 
-app.get('/allData', (req, res) => {
+app.get('/', (req, res) => {
   res.json(topMusicData)
 })
 
