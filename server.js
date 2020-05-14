@@ -44,7 +44,7 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Welcome! Start with path /tracks to get all the data.')
 })
 
 // Endpoint to get all the tracks and pagination
