@@ -67,7 +67,7 @@ app.get("/shows", async (req, res) => {
     listed_in: new RegExp(genre, "i"),
     type: new RegExp(type, "i"),
   })
-    //sort ascending
+    //sort release year
     .sort({ release_year: -1 });
 
   if (searchShow) {
