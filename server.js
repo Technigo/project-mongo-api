@@ -122,7 +122,14 @@ if (process.env.SEED_RANDOM) {
 
 
 app.get('/', (req, res) => {
-  res.send('try visiting /books')
+  res.json({
+    homepage: '/books',
+    queryOrder: '?order=highest, lowest, longest, shortest',
+    queryKeyword: '?keyword=an author or title',
+    queryPage: '?page=1,2,3,4...',
+    individualBook: '/books/1,2,3,4...',
+    keywordResultsCanBeOrdered: 'true'
+  })
 })
 
 
