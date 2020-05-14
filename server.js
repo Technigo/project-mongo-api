@@ -15,34 +15,44 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// const Nomination = mongoose.model('Nomination', {
-//   year_film: Number,
-//   year_award: Number,
-//   ceremony: Number,
-//   category: String,
-//   nominee: String,
-//   film: String,
-//   win: Boolean
-// })
-
 const Book = mongoose.model('Book', {
-  bookID: Number,
-  title: String,
-  authors: String,
-  average_rating: Number,
-  isbn: Number,
-  isbn13: Number,
-  language_code: String,
-  num_pages: Number,
-  ratings_count: Number,
-  text_reviews_count: Number
+  bookID: {
+    type: Number,
+  },
+  title: {
+    type: String,
+  },
+  authors: {
+    type: String,
+  },
+  average_rating: {
+    type: Number,
+  },
+  isbn: {
+    type: String,
+  },
+  isbn13: {
+    type: String,
+  },
+  language_code: {
+    type: String,
+  },
+  num_pages: {
+    type: Number,
+  },
+  ratings_count: {
+    type: Number,
+  },
+  text_reviews_count: {
+    type: Number,
+  },
 })
+
 
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany({})
-    await Author.deleteMany({})
 
     booksData.forEach((bookData) => {
       new Book(bookData).save()
@@ -51,10 +61,6 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -62,14 +68,31 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+
+//http://localhost:8080/books?title=harry&author=rowling&sort=rating
 app.get('/books', async (req, res) => {
-  const books = await Book.find()
+  const { title, author, sort } = req.query
+  const titleRegex = new RegExp(title, 'i')
+  const authorRegex = new RegExp(author, 'i')
+
+  const sortQuery = (sort) => {
+    if (sort === 'rating') {
+      return { average_rating: -1 }
+    }
+  }
+
+  const books = await Book.find({
+    title: titleRegex,
+    authors: authorRegex
+  })
+    .sort(sortQuery(sort))
+
   res.json(books)
+
 })
 
 app.get('/books/:id', async (req, res) => {
@@ -80,7 +103,6 @@ app.get('/books/:id', async (req, res) => {
     res.status(404).json({ error: 'Book not found' })
   }
 })
-
 
 // Start the server
 app.listen(port, () => {
