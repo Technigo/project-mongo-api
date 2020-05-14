@@ -81,7 +81,7 @@ app.get('/tracks/:genre', async (req, res) => {
 })
 
 // Endpoint to get a single track
-app.get('/tracks/:id', async (req, res) => {
+app.get('/track/:id', async (req, res) => {
   const { id } = req.params
   const track = await Track.findOne({ id: id })
   if (track) {
