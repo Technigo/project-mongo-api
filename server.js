@@ -45,9 +45,7 @@ if (process.env.RESET_DB) {
   };
   seedDatabase();
 }
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
+
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
@@ -56,15 +54,14 @@ app.use(bodyParser.json())
 
 // Start defining routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello topMusic')
 })
 
 app.get('/allData', (req, res) => {
   res.json(topMusicData)
 })
 
-//Find tracks and special track with query:
-
+//Find tracks and chosen track with query:
 /*
 app.get('/tracks', async (req, res) => {
   const { query } = req.query;
@@ -76,7 +73,6 @@ app.get('/tracks', async (req, res) => {
 */
 
 //Find tracks:
-
 app.get('/tracks', async (req, res) => {
   const tracks = await Track.find(); //populate('artist');
   //console.log(`The artist of ${tracks[0].trackName} is ${tracks[0].artist.artistName}`);
@@ -84,8 +80,7 @@ app.get('/tracks', async (req, res) => {
   console.log(`Found ${tracks.length} tracks.`);
 })
 
-//Find tracks in special genre with paths:
-
+//Find tracks in chosen genre with paths:
 app.get('/tracks/:genre', async (req, res) => {
   const { genre } = req.params
   const tracks = await Track.find()
@@ -97,7 +92,7 @@ app.get('/tracks/:genre', async (req, res) => {
   }
 })
 
-//Find artists and special artist with query
+//Find artists and chosen artist with query
 /*
 app.get('/artists', async (req, res) => {
   const { query } = req.query;
@@ -109,15 +104,13 @@ app.get('/artists', async (req, res) => {
 */
 
 //Find artists
-
 app.get('/artists', async (req, res) => {
   const artists = await Artist.find();
   console.log(`Found ${artists.length} artists.`);
   res.json(artists)
 })
 
-//Find special artist with paths
-
+//Find chosen artist with paths
 app.get('/artists/:artistName', async (req, res) => {
   const { artistName } = req.params;
   const artist = await Artist.findOne({ artistName: artistName });
@@ -128,8 +121,7 @@ app.get('/artists/:artistName', async (req, res) => {
   }
 })
 
-//Find all tracks by special artists with paths
-
+//Find all tracks by chosen artists with paths
 app.get('/artists/:artistName/tracks', async (req, res) => {
   const { artistName } = req.params;
   const artist = await Artist.findOne({ artistName: artistName });
@@ -140,6 +132,29 @@ app.get('/artists/:artistName/tracks', async (req, res) => {
     res.status(404).json({ error: `Could not find any track by ${artistName}` })
   }
 })
+
+//Sort chosen track by chosen artist on popularity
+/*
+app.get('/tracks', async (req, res) => {
+  const { trackName, artistName, sort } = req.query
+  const trackNameRegex = new RegExp(trackName, 'i')
+  const artistNameRegex = new RegExp(artistName, 'i')
+
+  const sortQuery = (sort) => {
+    if (sort === 'rating') {
+      return { popularity: -1 }
+    }
+  }
+
+  const tracks = await Track.find({
+    trackName: trackNameRegex,
+    artistName: artistNameRegex
+  })
+    .sort(sortQuery(sort))
+
+  res.json(tracks)
+})
+*/
 
 // Start the server
 app.listen(port, () => {
