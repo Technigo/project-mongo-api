@@ -31,7 +31,7 @@ const BookSchema = new Schema({
   },
   text_reviews_count: {
     type: Number
-  },
+  }
 })
 
 module.exports = new mongoose.model('Book', BookSchema)
