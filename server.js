@@ -16,6 +16,13 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
+})
 
 
 
@@ -69,99 +76,79 @@ const User = mongoose.model('User', {
 })
 
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Book.deleteMany()
+const createRandomBook = async (num, titlesArray, authorArray) => {
+  await Book.deleteMany()
+  const arr = Array.apply(null, Array(num))
 
+  arr.forEach((val, index) => {
+    new Book({
+      bookID: index,
+      title: titlesArray[parseInt(titlesArray.length * Math.random())],
+      authors: authorArray[parseInt(authorArray.length * Math.random())],
+      num_pages: parseInt(Math.random() * 2000),
+      ratings_count: parseInt(Math.random() * 10000),
+      average_rating: (Math.random() * 5).toFixed(2)
+
+    }).save()
+  })
+
+
+}
+if (process.env.SEED_RANDOM) {
+  const generateRandomBooks = () => {
+    const bookTitles = []
+    const authors = []
+    data.forEach((book) => bookTitles.push(book.title))
     data.forEach((book) => {
-      new Book(book).save()
+      if (!authors.includes(book.authors.split('-')[0])) {
+        authors.push(book.authors.split('-')[0])
+      }
     })
+    createRandomBook(500, bookTitles, authors)
   }
-  seedDatabase()
+  generateRandomBooks()
 }
 
-// Start defining your routes here
+// if (process.env.RESET_DB) {
+//   const seedDatabase = async () => {
+//     await Book.deleteMany()
+
+//     data.forEach((book) => {
+//       new Book(book).save()
+//     })
+//   }
+//   seedDatabase()
+// }
+
 
 app.get('/', (req, res) => {
   res.send('try visiting /books')
 })
 
-/*I was able to use .limit and .skip to limit initial Books.find() like so:
-const page = +req.query.page || 1
-const PAGE_SIZE = 20
-Books.find().limit(PAGE_SIZE).skip((page * PAGE_SIZE) - PAGE_SIZE)
-But I couldn't implement this with my orderedBooks variable, since I was only finding 20 books at a time
-my sort function would just order those 20 books. Changing to next page would find the next 20 books as they
-appear in database and sort those, etc. It seems like I need to be finding all the books at once so I can order 
-them properly..*/
 
-app.get('/books', (req, res) => {
 
-  Book.find().then(books => {
-    let orderedBooks = books
-    const keyword = req.query.keyword
-    const order = req.query.order
-    const PAGE_SIZE = 20
-    const page = +req.query.page || 1
-    let selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
+app.get('/books', async (req, res) => {
+  const keyword = req.query.keyword
+  const keyRegExp = new RegExp('\\b' + keyword + '\\b', 'i')
+  const order = req.query.order
+  const page = +req.query.page || 1
+  const PAGE_SIZE = 20
+  let mySort = order === 'highest' ? { average_rating: -1 } : order === 'lowest' ? { average_rating: 1 }
+    : order === 'longest' ? { num_pages: -1 } : order === 'shortest' ? { num_pages: 1 } : { bookID: 1 }
 
-    if (keyword) {
-      if (order === 'highest') {
-        orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? -1 : 1)
-
-      } else if (order === 'lowest') {
-        orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? 1 : -1)
-
-      } else if (order === 'longest') {
-        orderedBooks = orderedBooks.sort((a, b) => (a.num_pages > b.num_pages) ? -1 : 1)
-
-      } else if (order === 'shortest') {
-        orderedBooks = orderedBooks.sort((a, b) => (a.num_pages > b.num_pages) ? 1 : -1)
-
-      } else {
-        orderedBooks = orderedBooks.sort((a, b) => (a.bookID > b.bookID) ? 1 : -1)
-      }
-      const firstResult = orderedBooks.filter((book) => book.authors.toLowerCase().replace(/ /gi, '_').includes(keyword.toLowerCase().replace(/ /g, '_')))
-      const secondResult = orderedBooks.filter((book) => {
-
-        if (book.title.toString().toLowerCase().replace(/ /gi, '_').includes(keyword.toLowerCase().replace(/ /g, '_')) && firstResult.indexOf(book) === -1) {
-          return true
-        } else {
-          return false
-        }
-      })
-
-      const finalResult = firstResult.concat(secondResult)
-      if (finalResult.length > 0) {
-        selectedPage = finalResult.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
-        res.json(selectedPage)
-      } else {
-        res.json({ error: `The keyword "${keyword}" does not match any book or author in the database.` })
-      }
-
-    } else if (order === 'highest') {
-      orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? -1 : 1)
-      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
-      res.json(selectedPage)
-    } else if (order === 'lowest') {
-      orderedBooks = orderedBooks.sort((a, b) => (a.average_rating > b.average_rating) ? 1 : -1)
-      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
-      res.json(selectedPage)
-    } else if (order === 'longest') {
-      orderedBooks = orderedBooks.sort((a, b) => (a.num_pages > b.num_pages) ? -1 : 1)
-      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
-      res.json(selectedPage)
-    } else if (order === 'shortest') {
-      orderedBooks = orderedBooks.sort((a, b) => (a.num_pages > b.num_pages) ? 1 : -1)
-      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
-      res.json(selectedPage)
+  if (keyword) {
+    const books = await Book.find({ $or: [{ title: keyRegExp }, { authors: keyRegExp }] }).sort(mySort).limit(PAGE_SIZE).skip((page * PAGE_SIZE) - PAGE_SIZE)
+    console.log(keyRegExp)
+    if (books.length > 0) {
+      res.json(books)
     } else {
-      orderedBooks = orderedBooks.sort((a, b) => (a.bookID > b.bookID) ? 1 : -1)
-      selectedPage = orderedBooks.slice((page * PAGE_SIZE) - PAGE_SIZE, page * PAGE_SIZE)
-      res.json(selectedPage)
+      res.status(404).json({ error: `No books or authors in the database match the keyword '${keyword}'` })
     }
 
-  })
+  } else {
+    const books = await Book.find().sort(mySort).limit(PAGE_SIZE).skip((page * PAGE_SIZE) - PAGE_SIZE)
+    res.json(books)
+  }
 })
 
 app.get('/books/:id', async (req, res) => {
@@ -169,7 +156,7 @@ app.get('/books/:id', async (req, res) => {
   if (foundBook) {
     res.json(foundBook)
   } else {
-    res.json({ error: `No book with id "${req.params.id}" exists.` })
+    res.status(404).json({ error: `No book with id "${req.params.id}" exists.` })
   }
 })
 
@@ -209,6 +196,10 @@ app.post('/addbook', async (req, res) => {
   ).save()
   res.send('book saved')
 })
+
+//Below is some code I began expirimenting with for my front-end but which I decided to put
+//aside for time being as it would have taken too long to get it all working. (And I'm not sure)
+//if this is really how users would actually be created for a real website. 
 
 app.post('/createuser', async (req, res) => {
 
