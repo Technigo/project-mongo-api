@@ -15,4 +15,4 @@ Build a Mongo database
 - Javascript
 
 ## View it live
-https://netflix-mongo-annesophie.herokuapp.com/
+https://annesophie-mongo-project.herokuapp.com/
