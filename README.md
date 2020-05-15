@@ -1,13 +1,11 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Learning Mongo-Db, Heroku, Express, seeding databases and creating good endpoints. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+After working only front end it feels odd doing only the backend, I am very much looking forward to connecting the two! Would have liked more time to do better error handling in this one.. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Deployed on Heroku: https://wk18-mongodb-assignment.herokuapp.com/
