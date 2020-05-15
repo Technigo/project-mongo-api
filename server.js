@@ -1,7 +1,8 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -23,14 +24,24 @@ mongoose.Promise = Promise
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(bodyParser.json())
 
-// Start defining your routes here
+
+// Add middlewares to enable cors and json body parsing
+app.use(cors());
+app.use(bodyParser.json());
+
+
+//ROUTES *
 app.get('/', (req, res) => {
-  res.send('Hello world')
-})
+    res.send('We are on homepage');
+});
+
+//Import Routes *
+const postsRoute =require('./routes/posts');
+
+app.use('/posts', postsRoute);
+
+
 
 // Start the server
 app.listen(port, () => {
