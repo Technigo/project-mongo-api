@@ -8,6 +8,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/nominations"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.promise = Promise
 
+// MODEL
 const Nomination = mongoose.model('Nomination', {
   year_film: { type: Number },
   year_award: { type: Number },
@@ -18,6 +19,7 @@ const Nomination = mongoose.model('Nomination', {
   win: { type: Boolean }
 })
 
+// RESETTING AND SEEDING DATABASE
 if (process.env.RESET_DB) {
   console.log('Resetting database!')
   const seedDatabase = async () => {
@@ -37,10 +39,11 @@ if (process.env.RESET_DB) {
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
+// MIDDLEWARES
 app.use(cors())
 app.use(bodyParser.json())
 
+// CHECKS IF SERVICE IS AVAILABLE
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1 || 2) {
     next()
@@ -49,7 +52,7 @@ app.use((req, res, next) => {
   }
 })
 
-//Start defining your routes here
+// ROUTES
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
@@ -58,6 +61,7 @@ app.get('/', (req, res) => {
 app.get('/nominations', async (req, res) => {
   const { category, nominee, film } = req.query
 
+  // POSSIBLE QUERIES: CATEGORY, NOMINEE & FILM
   const showNominations = await Nomination.find({
     category: new RegExp(category, 'i'),
     nominee: new RegExp(nominee, 'i'),
@@ -71,15 +75,18 @@ app.get('/nominations', async (req, res) => {
   }
 })
 
+// SHOW NOMINATION BY ID
 app.get('/nominations/id/:id', async (req, res) => {
   const nominations = await Nomination.findById(req.params.id)
   res.json(nominations)
 })
 
+// SHOW ALL NOMINATIONS IN A YEAR
 app.get('/nominations/:year_award', async (req, res) => {
   const { year_award } = req.params
   let yearNominations = await Nomination.find({ year_award: year_award })
 
+  // FILTER THE NOMINATIONS IN A YEAR TO ONLY SHOW THE ONES WHO WON
   const showWin = req.query.win
 
   if (showWin && yearNominations) {
@@ -94,6 +101,7 @@ app.get('/nominations/:year_award', async (req, res) => {
   }
 })
 
+// SHOW ALL THE NOMINATION IN A SPECIFIC CATEGORY - E.G.: DRAMA, COMEDY, BEST DIRECTOR, SUPPORTING ROLE ETC.
 app.get('/nominations/category/:category', async (req, res) => {
   const nominations = await Nomination.find()
   const nominationCategory = req.params.category
@@ -101,6 +109,7 @@ app.get('/nominations/category/:category', async (req, res) => {
 
   let categories = nominations.filter((item) => item.category.includes(nominationCategory))
 
+  // FILTER A SPECIFIC CATEGORY BY WINS
   if (showCategoryWin && categories) {
     categories = categories.filter((item) => item.win === true)
   }
@@ -113,6 +122,7 @@ app.get('/nominations/category/:category', async (req, res) => {
   }
 })
 
+// SHOW A SPECIFIC CATEGORY AND A SPECIFIC YEAR
 app.get('/nominations/category/:category/year/:year', async (req, res) => {
   const nominations = await Nomination.find()
   const nominationCategory = req.params.category
@@ -121,6 +131,7 @@ app.get('/nominations/category/:category/year/:year', async (req, res) => {
 
   let categories = nominations.filter((item) => item.category.includes(nominationCategory))
 
+  // POSSIBLE TO FILTER TO SHOW ONLY WINS
   if (showWins && categories && year) {
     let wonCategories = categories.filter((item) => item.win === true)
     wonCategories = wonCategories.filter((item) => item.year_award === +year)
