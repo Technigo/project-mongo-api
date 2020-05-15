@@ -9,13 +9,13 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.promise = Promise
 
 const Nomination = mongoose.model('Nomination', {
-  year_film: Number,
-  year_award: Number,
-  ceremony: Number,
-  category: String,
-  nominee: String,
-  film: String,
-  win: Boolean
+  year_film: { type: Number },
+  year_award: { type: Number },
+  ceremony: { type: Number },
+  category: { type: String },
+  nominee: { type: String },
+  film: { type: String },
+  win: { type: Boolean }
 })
 
 if (process.env.RESET_DB) {
@@ -42,10 +42,10 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.use((req, res, next) => {
-  if(mongoose.connection.readyState === 1 || 2) {
+  if (mongoose.connection.readyState === 1 || 2) {
     next()
   } else {
-    res.status(503).json({ error: 'Service unavailable'})
+    res.status(503).json({ error: 'Service unavailable' })
   }
 })
 
@@ -54,16 +54,36 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+//SHOWS ALL THE NOMINATIONS
 app.get('/nominations', async (req, res) => {
-  let nominations = await Nomination.find()
+  // let nominations = await Nomination.find()
 
-  const nominee = req.query.nominee
-  // You can look for a specific nominee: http://localhost:8080/nominations?nominee=Homeland
+  // YOU CAN LOOK FOR A SPECIFIC NOMINEE: http://localhost:8080/nominations?nominee=Homeland
+  const { year, ceremony, category, nominee, film, win } = req.query
 
-  if(nominee) {
-    nominations = nominations.filter((item) => item.nominee === nominee)
+  // if(nominee) {
+  //   nominations = nominations.filter((item) => item.nominee === nominee)
+  // }
+  //   res.json(nominations)
+
+  const showNominations = await Nomination.find({
+    // year_award: new RegExp(year, 'i'),
+
+    category: new RegExp(category, 'i'),
+    nominee: new RegExp(nominee, 'i'),
+    film: new RegExp(film, 'i'),
+    // ceremony: ceremony
+    // win: new RegExp(win, 'i')
+  })
+
+  // const { showWin } = req.query;  // true or false
+  // const showNominations = await Nomination.find({win: showWin})
+
+  if (showNominations) {
+    res.json(showNominations)
+  } else {
+    res.status(404).json({ error: 'Error in search' })
   }
-    res.json(nominations)
 })
 
 app.get('/nominations/id/:id', async (req, res) => {
@@ -77,7 +97,7 @@ app.get('/nominations/:year_award', async (req, res) => {
 
   const showWin = req.query.win
 
-  if(showWin && yearNominations) {
+  if (showWin && yearNominations) {
     yearNominations = yearNominations.filter((item) => item.win === true)
   }
   res.json(yearNominations)
@@ -85,7 +105,7 @@ app.get('/nominations/:year_award', async (req, res) => {
   if (yearNominations) {
     res.json(yearNominations)
   } else {
-    res.status(404).json({ error: 'Not found'})
+    res.status(404).json({ error: 'Not found' })
   }
 })
 
@@ -104,7 +124,7 @@ app.get('/nominations/category/:category', async (req, res) => {
   if (categories) {
     res.json(categories)
   } else {
-    res.status(404).json({ error: 'Not found'})
+    res.status(404).json({ error: 'Not found' })
   }
 })
 
@@ -124,7 +144,7 @@ app.get('/nominations/category/:category/year/:year', async (req, res) => {
     const yearCategories = categories.filter((item) => item.year_award === +year)
     res.json(yearCategories)
   } else {
-    res.status(404).json({ error: 'Not found'})
+    res.status(404).json({ error: 'Not found' })
   }
 })
 
