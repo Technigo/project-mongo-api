@@ -22,13 +22,13 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-/* app.use((req, res, next) => {
+app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
   } else {
     res.status(503).json({ error: "service very unavailable" })
   }
-}) */
+})
 
 
 //Mongoose model - VARFÖR KOMMER DET INTE UPP
@@ -81,7 +81,7 @@ if (process.env.RESET_DATABASE) {  // RESET_DATABASE=true seeds database
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello Happy World')
 })
 
 app.get("/books", async (req, res) => {
@@ -96,7 +96,7 @@ app.get("/books/:isbn", async (req, res) => {
   if (book) {
     res.json(book)
   } else {
-    res.status(404).json({ error: `Cant find book isbn:${isbn}` })
+    res.status(404).json({ error: `Cant find book isbn:${isbn} did you miss a nr?` })
   }
 })
 
@@ -106,7 +106,7 @@ app.get("/authors", async (req, res) => {
     if (authors) {
       res.json(authors)
     } else {
-      res.status(404).json({ error: `Cant find author` })
+      res.status(404).json({ error: `Cant find the author person` })
     }
   } catch (err) {
     res.status(400).json({ error: "Author not found" })
