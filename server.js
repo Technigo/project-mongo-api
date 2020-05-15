@@ -22,13 +22,13 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-/* app.use((req, res, next) => {
+app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
   } else {
     res.status(503).json({ error: "service very unavailable" })
   }
-}) */
+})
 
 
 //Mongoose model - VARFÖR KOMMER DET INTE UPP
@@ -91,12 +91,16 @@ app.get("/books", async (req, res) => {
 })
 
 app.get("/books/:isbn", async (req, res) => {
-  const { isbn } = req.params
-  const book = await Book.findOne({ isbn: isbn })
-  if (book) {
-    res.json(book)
-  } else {
-    res.status(404).json({ error: `Cant find book isbn:${isbn} did you miss a nr?` })
+  try {
+    const { isbn } = req.params
+    const book = await Book.findOne({ isbn: isbn })
+    if (book) {
+      res.json(book)
+    } else {
+      res.status(404).json({ error: `Cant find book isbn:${isbn} did you miss a nr?` })
+    }
+  } catch (err) {
+    res.status(400).json({ error: `try a better question` })
   }
 })
 
