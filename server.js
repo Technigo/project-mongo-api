@@ -3,27 +3,11 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import netflixData from './data/netflix-titles.json'
-
+import NetflixShow from './models/show'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
-
-
-const NetflixShow = mongoose.model('NetflixShow', {
-  show_id: { type: Number },
-  title: { type: String },
-  director: { type: String },
-  cast: { type: String },
-  country: { type: String },
-  date_added: { type: String },
-  release_year: { type: Number },
-  rating: { type: String },
-  duration: { type: String },
-  listed_in: { type: String },
-  description: { type: String },
-  type: { type: String },
-})
 
 if (process.env.RESET_DB) {
   console.log('Resetting Database!')
@@ -49,8 +33,14 @@ app.use((req, res, next) => {
   }
 })
 
+app.get('/', (req, res) => {
+  res.send(`<p>Netflix show data with endpoints: <br> /netflixshows<br> /netflixshows?query="Your Query"<br> /netflixshows/type?type="Movie/TV Show"<br> /netflixshows/rating?rating="TV-Y/TV-Y7/TV-Y7-FV/TV-G/G/TV-PG/PG/PG-13/TV-14/TV-MA/R"<br> /netflixshows/title/"Your Title"<p>`)
+})
+
 app.get('/netflixshows', async (req, res) => {
-  const netflixShows = await NetflixShow.find()
+  const { query } = req.query
+  const queryRegEx = new RegExp(query, 'i') 
+  const netflixShows = await NetflixShow.find({ title: queryRegEx }).sort({title: 1})
   res.json(netflixShows)
 })
  
