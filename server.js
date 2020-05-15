@@ -32,7 +32,6 @@ const Director = mongoose.model('Director', {
 
   director: { type: String},
 
-
 })
 
 if (process.env.RESET_DATABASE) {
@@ -66,10 +65,8 @@ app.use((req, res, next) => {
 // Start defining your routes here
 
 app.get('/', (req, res) => {
-  res.send('Hello! use these routes /netflixtitles')
+  res.send('Hello! use these routes /netflixtitles (list all netflixtitles) /netflixtitles/directors (list all directors)')
 })
-
-
 
 app.get("/netflixtitles", async (req, res) => {
   const { query } = req.query
@@ -80,24 +77,26 @@ app.get("/netflixtitles", async (req, res) => {
   res.json(titles.reverse());
 });
 
-app.get('/netflixtitles/:id', async (req, res) => {
+// app.get('/netflixtitles/:id', async (req, res) => {
 
-  try {
-    const netflixID = await Netflixdata.findById(req.params.id)
+//   try {
+//     const netflixID = await Netflixdata.findById(req.params.id)
 
-    if(netflixID) {
-      res.json(netflixID)
-    } else {
-      res.status(404).json({error: 'Id not found'})
-    }
+//     if(netflixID) {
+//       res.json(netflixID)
+//     } else {
+//       res.status(404).json({error: 'Id not found'})
+//     }
 
-  } catch(err) {
-    res.status(400).json({error: 'Something is Invalid'})
-  }
+//   } catch(err) {
+//     res.status(400).json({error: 'Something is Invalid'})
+//   }
 
-})
+// })
 
-app.get("/netflixtitles/:directors", async (req, res) => {
+
+
+app.get('/netflixtitles/:directors', async (req, res) => {
   const director = await Director.find();
 
   try {
@@ -114,6 +113,10 @@ app.get("/netflixtitles/:directors", async (req, res) => {
 }
 
 });
+
+
+
+
 
 // Start the server
 app.listen(port, () => {
