@@ -96,9 +96,10 @@ app.get('/songs', async (req, res) => {
   res.json(songs)
 }) */
 
-// Get all feelgood songs
+// Get all songs: http://localhost:8080/songs
+// Get all feelgood songs: http://localhost:8080/songs?feelgood=true
 app.get('/songs', async (req, res) => {
-  const feelgood = req.query.feelgood
+  const { feelgood } = req.query
 
   let feelGoodSongs = await Song.find({})
 
@@ -108,9 +109,9 @@ app.get('/songs', async (req, res) => {
   res.json(feelGoodSongs)
 })
 
-// Get one song
+// Get one song via song id: http://localhost:8080/songs/4
 app.get('/songs/:id', async (req, res) => {
-  const id = req.params.id
+  const { id } = req.params
   const song = await Song.findOne({ id: id })
   if (song) {
     res.json(song)
@@ -119,6 +120,32 @@ app.get('/songs/:id', async (req, res) => {
   }
 })
 
+// Get one artist: http://localhost:8080/artist/Drake
+// Error handling not working
+app.get('/artist/:artist', async (req, res) => {
+  const { artist } = req.params
+  const artistRegex = new RegExp(artist, 'i')
+  const artistName = await Song.find({ artistName: artistRegex })
+  if (artistName) {
+    res.json(artistName)
+  } else {
+    res.status(404).json({ error: `Could not find artist with name ${artist}` })
+  }
+})
+
+// Get one genre: http://localhost:8080/genre/pop
+// Error handling not working
+app.get('/genre/:genre', async (req, res) => {
+  const { genre } = req.params
+  const genreName = await Song.find({ genre: genre })
+  if (genreName) {
+    res.json(genreName)
+  } else {
+    res.status(404).json({
+      error: `Could not find songs in genre ${genre}`
+    })
+  }
+})
 
 // Start the server
 app.listen(port, () => {
