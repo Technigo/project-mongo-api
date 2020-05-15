@@ -34,22 +34,6 @@ const Nominee = mongoose.model('Nominee', {
   category: String,
   win: Boolean
 })
-// Hardcoded nominees
-/*
-new Nominee({ nominee: 'hej', year_film: 3, year_film: 4, win:true}).save()
-new Nominee({ nominee: 'hoj', year_film: 4, year_film: 4, win:true}).save()
-new Nominee({ nominee: 'haj', year_film: 5, year_film: 4, win:false}).save()
-*/
-
-// Start work on show category
-/*
-const Category = mongoose.model('Category', {
-  category: String, 
-    nominee: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Nominee'
-  }
-}) */
 
 if (process.env.RESET_DB) {
   console.log('reseting the database...')
@@ -67,6 +51,7 @@ if (process.env.RESET_DB) {
 
 app.get('/', (req, res) => {
   Nominee.find().then(nominees => {
+    res.send('Welcome to golden globe library')
     res.json(nominees)
   })
 })
@@ -86,10 +71,33 @@ app.get('/:nominee', (req, res) => {
         res.status(404).json(`error: Nominee ${nominee} not found`)
       }
     } catch (err) {
-    res.status(400).json(`error: Do not know what is wrong, sorry`)
+    res.status(400).json(`Bad Request: this error is an HTTP status code that means that the request you sent to the website server, often something simple like a request to load a web page, was somehow incorrect or corrupted and the server couldn't understand it.`)
     }
   })
 }) 
+
+/* All nominations for specific year it was nominated and if winner*/
+app.get('/year/:year', (req, res) => { 
+  const year = req.params.year 
+  const winner = req.query.won 
+  let fromYear = globeData.filter((item) => item.year_award === +year) 
+  
+  if (winner) { 
+    fromYear = fromYear.filter((item) => item.win ) 
+  } 
+  res.json(fromYear) 
+})
+
+app.get('/winners', (_, res) => {
+
+  let winners = globeData.filter(item => {
+    return item.win === true
+  })
+  
+  res.json(winners)
+
+})
+
 
 // Start the server
 app.listen(port, () => {
