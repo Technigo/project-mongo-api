@@ -28,11 +28,15 @@ const Track = mongoose.model('Track', {
 })
 
 // Putting the data in the database
-const seedDatabase = async () => {
-  await Track.deleteMany()
-  topMusicData.forEach((track) => new Track(track).save())
+if (process.env.RESET_DATABASE) {
+  console.log('Resetting my database!')
+
+  const seedDatabase = async () => {
+    await Track.deleteMany()
+    topMusicData.forEach((track) => new Track(track).save())
+  }
+  seedDatabase()
 }
-seedDatabase()
 
 // To override: PORT=9000 npm start
 const port = process.env.PORT || 8080
