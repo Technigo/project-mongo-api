@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 
 // ROUTES
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Welcome to the Golden Globes API. Possible endpoints: /nominations (queries: category, nominee and film) /nominatons/id/:id /nominations/:year_award /nominations/category/:category /nominations/category/:category/year/:year')
 })
 
 //SHOWS ALL THE NOMINATIONS
