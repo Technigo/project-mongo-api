@@ -1,13 +1,21 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project was made during Technigo frontend boot camp. 
+The objective was to level up the APIs and start using a database to store and retrieve data from and use that data to produce a RESTful API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The challenge this time was getting all the tools to work and collaborate. Along with MongoDB and Mongoose, there were alot of installations to be done. Keeping track of Mongo Compass, Atlas, Postman and the code itself was for me quite a struggle, but also valuable knowledge!
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+// Get all songs: http://localhost:8080/songs
+// Get all feelgood songs: http://localhost:8080/songs?feelgood=true
+
+// Get one song via song id: http://localhost:8080/songs/4
+
+// Get one artist: http://localhost:8080/artist/Drake
+
+// Get one genre: http://localhost:8080/genre/pop
+
+

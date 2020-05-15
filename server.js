@@ -2,64 +2,15 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import Song from './models/song.js'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
 import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Song = mongoose.model('Song', {
-  id: {
-    type: Number,
-  },
-  trackName: {
-    type: String,
-  },
-  artistName: {
-    type: String,
-  },
-  genre: {
-    type: String,
-  },
-  bpm: {
-    type: Number,
-  },
-  energy: {
-    type: Number,
-  },
-  danceability: {
-    type: Number,
-  },
-  loudness: {
-    type: Number,
-  },
-  liveness: {
-    type: Number,
-  },
-  valence: {
-    type: Number,
-  },
-  length: {
-    type: Number,
-  },
-  acousticness: {
-    type: Number,
-  },
-  speechiness: {
-    type: Number,
-  },
-  popularity: {
-    type: Number,
-  },
-})
+// Moved model to separate file
 
 if (process.env.RESET_DATABASE) {
   console.log('Resetting database ...')
@@ -84,12 +35,12 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
+// Start defining routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-/* // Get all songs
+/* // Get all songs - removed since I get all songs in next endpoint
 app.get('/songs', async (req, res) => {
   const songs = await Song.find()
   console.log(`Found ${songs.length} songs ...`)
@@ -100,7 +51,6 @@ app.get('/songs', async (req, res) => {
 // Get all feelgood songs: http://localhost:8080/songs?feelgood=true
 app.get('/songs', async (req, res) => {
   const { feelgood } = req.query
-
   let feelGoodSongs = await Song.find({})
 
   if (feelgood === "true") {
