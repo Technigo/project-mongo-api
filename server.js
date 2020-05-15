@@ -56,28 +56,13 @@ app.get('/', (req, res) => {
 
 //SHOWS ALL THE NOMINATIONS
 app.get('/nominations', async (req, res) => {
-  // let nominations = await Nomination.find()
-
-  // YOU CAN LOOK FOR A SPECIFIC NOMINEE: http://localhost:8080/nominations?nominee=Homeland
-  const { year, ceremony, category, nominee, film, win } = req.query
-
-  // if(nominee) {
-  //   nominations = nominations.filter((item) => item.nominee === nominee)
-  // }
-  //   res.json(nominations)
+  const { category, nominee, film } = req.query
 
   const showNominations = await Nomination.find({
-    // year_award: new RegExp(year, 'i'),
-
     category: new RegExp(category, 'i'),
     nominee: new RegExp(nominee, 'i'),
     film: new RegExp(film, 'i'),
-    // ceremony: ceremony
-    // win: new RegExp(win, 'i')
   })
-
-  // const { showWin } = req.query;  // true or false
-  // const showNominations = await Nomination.find({win: showWin})
 
   if (showNominations) {
     res.json(showNominations)
