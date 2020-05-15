@@ -16,6 +16,7 @@ mongoose.Promise = Promise
 const Netflixdata = mongoose.model('Netflixdata', {
 
   title: { type: String }, 
+  director: { type: String },
   cast:  { type: String },
   country: { type: String },
   date_added: { type: String },
@@ -29,21 +30,10 @@ const Netflixdata = mongoose.model('Netflixdata', {
 
 const Director = mongoose.model('Director', {
 
-  director: { type: String },
+  director: { type: String},
+
 
 })
-
-
-// const Netflixtitle = mongoose.model('Netflixtitle', {
-
-//   director: String,
-
-//   title: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'Title'
-//   }
-
-// });
 
 if (process.env.RESET_DATABASE) {
   console.log("Resetting database...");
@@ -80,39 +70,15 @@ app.get('/', (req, res) => {
 })
 
 
+
 app.get("/netflixtitles", async (req, res) => {
   const { query } = req.query
   const queryRegex = new RegExp(query, 'i');
   const titles = await Netflixdata.find({title: queryRegex}).sort({
     release_year: ""
   })
-  console.log(`Found ${titles.length} movies and shows..`);
   res.json(titles.reverse());
 });
-
-
-
-// app.get('/books', async (req, res) => {
-//   const { query } = req.query;
-//   const queryRegex = new RegExp(query, 'i');
-//   const books = await Book.find({ title: queryRegex }).sort({
-//     average_rating: -1,
-//   });
-//   console.log(`Found ${books.length} books..`);
-//   res.json(books);
-// });
-
-
-app.get("/netflixtitles/:directors", async (req, res) => {
-  const director = await Director.find();
-
-  if (director) {
-    res.json(director);
-  } else {
-    res.status(404).json({ error: 'error could not found' });
-  }
-});
-
 
 app.get('/netflixtitles/:id', async (req, res) => {
 
@@ -131,37 +97,23 @@ app.get('/netflixtitles/:id', async (req, res) => {
 
 })
 
-// app.get('/netflixtitles/:country', async (req, res) => {
+app.get("/netflixtitles/:directors", async (req, res) => {
+  const director = await Director.find();
 
+  try {
 
-//     const netflixCountry = await Netflixdata.find(req.params.country)
-//     const filterByCountry =  netflixCountry.filter((item) => item.country).toLowerCase().includes(country).toLowerCase()
+  if (director) {
+    res.json(director);
+  } else {
+    res.status(404).json({ error: 'error could not found' });
+  }
 
-//     if(filterByCountry) {
-//       res.json(filterByCountry)
-//     } else {
-//       res.status(404).json({error: 'Country not found'})
-//     }
+} catch(err) {
+ res.status(400).json({error: 'Something is Invalid'})
 
-// })
+}
 
-// app.get("/netflixtitles/:country", async (req, res) => {
-
-//   const country = await Netflixdata.find(req.params.country)
-//   const filterByCountry = titlesbycountry.filter((title) => title.country.toString().toLowerCase().includes(country.toLowerCase())) 
-//   res.json(filterByCountry);
-// });
-
-// app.get('netflixtitles/:country', async (req, res) => {
-//   const { country } = req.params;
-//   const bycountry = await Netflixdata.findOne({ country: country });
-//   if (bycountry) {
-//     res.json(bycountry);
-//   } else {
-//     res.status(404).json({ error: 'Could not find' });
-//   }
-// });
-
+});
 
 // Start the server
 app.listen(port, () => {
