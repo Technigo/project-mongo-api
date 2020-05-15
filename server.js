@@ -22,13 +22,14 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+/* WHY IS THIS CAUSING THE HEROKU TO DISPLAY THE ERROR MESSAGE, WORKS FINE WITHOUT IT
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
   } else {
     res.status(503).json({ error: "service very unavailable" })
   }
-})
+}) */
 
 
 //Mongoose model - VARFÖR KOMMER DET INTE UPP
