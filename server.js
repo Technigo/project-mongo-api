@@ -86,7 +86,9 @@ app.get('/', (req, res) => {
 })
 
 app.get("/books", async (req, res) => {
-  const books = await Book.find()
+  const { query } = req.query
+  const queryRegex = new RegExp(query, "i") // ignores CaSe finds book - http://localhost:8080/books/?query=potter
+  const books = await Book.find({ title: queryRegex }).sort({ average_rating: -1 })
   console.log(`found ${books.length} books`)
   res.json(books)
 })
