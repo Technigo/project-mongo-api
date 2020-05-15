@@ -22,7 +22,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-/* WHY IS THIS CAUSING THE HEROKU TO DISPLAY THE ERROR MESSAGE, WORKS FINE WITHOUT IT
+/* HELP!!?  WHY IS THIS CAUSING THE HEROKU TO DISPLAY THE ERROR MESSAGE, WORKS FINE WITHOUT IT
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
