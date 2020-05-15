@@ -51,12 +51,12 @@ app.get('/songs', async (req, res) => {
 // Get all feelgood songs: http://localhost:8080/songs?feelgood=true
 app.get('/songs', async (req, res) => {
   const { feelgood } = req.query
-  let feelGoodSongs = await Song.find({})
+  let songs = await Song.find({})
 
   if (feelgood === "true") {
-    feelGoodSongs = await Song.find({ valence: { $gte: 70 } })
+    songs = await Song.find({ valence: { $gte: 70 } })
   }
-  res.json(feelGoodSongs)
+  res.json(songs)
 })
 
 // Get one song via song id: http://localhost:8080/songs/4
@@ -76,7 +76,7 @@ app.get('/artist/:artist', async (req, res) => {
   const { artist } = req.params
   const artistRegex = new RegExp(artist, 'i')
   const artistName = await Song.find({ artistName: artistRegex })
-  if (artistName) {
+  if (artistName.length !== 0) {
     res.json(artistName)
   } else {
     res.status(404).json({ error: `Could not find artist with name ${artist}` })
@@ -88,7 +88,7 @@ app.get('/artist/:artist', async (req, res) => {
 app.get('/genre/:genre', async (req, res) => {
   const { genre } = req.params
   const genreName = await Song.find({ genre: genre })
-  if (genreName) {
+  if (genreName.length !== 0) {
     res.json(genreName)
   } else {
     res.status(404).json({
