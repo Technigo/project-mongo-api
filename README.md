@@ -11,13 +11,13 @@ JavaScript ES6
 
 ## The problem
 
-I don't quite my head around thi
+I don't quite have my head around this
 
 Tried to return a singel netflixtitle id => was overrinding my other code 
 
 I managed to return (A list of directors) but was override by the ID funcation 
 
-Asked my team for help (but could quite fine the right way to ask about this isssue)
+Asked my team for help (but could not find the right way to ask about this isssue)
 
 Need to improve the returning of objects
 
