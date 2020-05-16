@@ -14,7 +14,8 @@ const Show = mongoose.model("Show", {
     type: Number
   },
   title: {
-    type: String
+    type: String,
+    required: true
   },
   director: {
     type: String
@@ -41,7 +42,8 @@ const Show = mongoose.model("Show", {
     type: String
   },
   type: {
-    type: String
+    type: String,
+    required: true
   }
 })
 
