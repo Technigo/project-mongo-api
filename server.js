@@ -2,37 +2,80 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import booksData from './data/books.json'
+import Book from './model/book'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+
+if (process.env.RESET_DATABASE) {
+  console.log('Resetting database')
+
+  const seedDatabase = async () => {
+      await Book.deleteMany()
+      await booksData.forEach((book) => new Book(book).save())
+
+  seedDatabase()
+}
+
+// PORT
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
+
+// MIDDLEWARES
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
+
+// DISCONNECTED DATABASE
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
 })
+
+
+// ROUTES
+app.get('/', (req, res) => {
+  res.send(`
+  <h1>500 book reviews</h1>
+  <h3>Read moore...</h3>
+  <li>/books</li>
+  <li>/books/autors/:authors</li>
+  `)
+})
+
+// List of all books
+app.get('/books', async (req, res) => {
+  const item = await Book.find();
+
+  if ( item.length > 0  ) {
+    res.json(item)
+  } else {
+    res.status(404).json({ message: `Error` })
+  }
+});
+
+// Find books by author 
+app.get('/books/authors/:authors', async ( req, res ) => {
+  const { authors } = req.params
+  const booksByAuthors = await Book.find({ authors: authors })
+
+  if ( booksByAuthors.length > 0 ) {
+    res.json({ totalResults: booksByAuthors.length, booksByAuthors})
+  } else {
+    res.status(404).json({ message: `Error` })
+  }
+})
+
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
-})
+})} 
