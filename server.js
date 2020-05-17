@@ -4,14 +4,6 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import goldenGlobesData from './data/golden-globes.json'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -21,24 +13,24 @@ const GoldenGlobe = mongoose.model('GoldenGlobe', {
   "year_film": {
     type: Number,
   },
-    "year_award": {
-      type: Number,
-    },
-    "ceremony": {
-      type: Number,
-    },
-    "category": {
-      type: String,
-    },
-    "nominee": {
-      type: String
-    },
-    "film": {
-      type: String,
-    },
-    "win": {
-      type: Boolean,
-    },
+  "year_award": {
+    type: Number,
+  },
+  "ceremony": {
+    type: Number,
+  },
+  "category": {
+    type: String,
+  },
+  "nominee": {
+    type: String
+  },
+  "film": {
+    type: String,
+  },
+  "win": {
+    type: Boolean,
+  },
 })
 
 if (process.env.RESET_DATABASE) {
@@ -59,42 +51,51 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+app.get('/', (req, res) => {
+  res.send('This is the Golden Globes API. Possible endpoints: /goldenGlobes (all nominations) (possible queries: film, nominee, category  ), /goldenGlobes/id/:id, /goldenGlobes/:year (possible query: win=true)')
+})
+
+//ALL GOLDEN GLOBES UNFILTERED
+//Query film (title)
+//Query nominees
+//Query category
 app.get('/goldenGlobes', async (req, res) => {
   const { film, nominee, category, } = req.query
-  
   //A way to tell Mongo how we want to filter this data
   const goldenGlobes = await GoldenGlobe.find({
-  //We turn it into a regular expression so we don't have to write the film title verbatum
-  //The string that comes in transforms to a regex and in every entry in the database
-  //film is checked to see if it matches the string that has been sent in
-  //We use a constructor:  new... in this case    new RegExp 
+    //We turn it into a regular expression so we don't have to write the film title verbatum
+    //The string that comes in transforms to a regex and in every entry in the database
+    //film is checked to see if it matches the string that has been sent in
+    //We use a constructor:  new... in this case    new RegExp 
     film: new RegExp(film, 'i'),
-  //We're saying to the find function, we want you to filter on the value we're sending in
-  //and we want you to filter the film (wich is the film-title) 
-    nominee: new RegExp(nominee, 'i', ),
+    //We're saying to the find function, we want you to filter on the value we're sending in
+    //and we want you to filter the film (wich is the film-title) 
+    nominee: new RegExp(nominee, 'i'),
     category: new RegExp(category, 'i'),
   })
-    console.log(`Found ${goldenGlobes.length} golden globes nominations`)
+  console.log(`Found ${goldenGlobes.length} golden globes nominations`)
   res.json(goldenGlobes)
 })
 
+//GOLDEN GLOBES FILTERED ON YEAR OF AWARDS
 app.get('/goldenGlobes/:year', async (req, res) => {
-  const  { year }  = req.params
-  let nominationYear = await GoldenGlobe.find({ year_award: year})
-  const  nominationWon  = req.query.win
-  
-  if (nominationYear && nominationWon){
+  const { year } = req.params
+  let nominationYear = await GoldenGlobe.find({ year_award: year })
+  const nominationWon = req.query.win
+
+  if (nominationYear && nominationWon) {
     nominationYear = nominationYear.filter((item) => item.win === true)
     res.json(nominationYear);
-  }else{
+  } else {
     res.status(404).json({ error: 'Not found' })
   }
-  })
+})
 
-  app.get('/goldenGlobes/id/:id', async (req, res) => {
-    const goldenGlobes = await goldenGlobes.findById(req.params.id)
-    res.json(nominations)
-  })
+//GOLDEN GLOBES FILTERED ON ID - RETURNS A SINGLE RESULT
+app.get('/goldenGlobes/id/:id', async (req, res) => {
+  const goldenGlobes = await goldenGlobes.findById(req.params.id)
+  res.json(nominations)
+})
 
 
 app.listen(port, () => {
