@@ -23,7 +23,7 @@ const Artist = mongoose.model('Artist', {
   danceability: Number
 })
 
-//if (process.env.RESET_DATABASE) {
+if (process.env.RESET_DATABASE) {
   console.log('resetting the database')
 const seedDatabase = async () => {
   await Artist.deleteMany()
@@ -33,7 +33,7 @@ const seedDatabase = async () => {
   })
 }
 seedDatabase()
-//}
+}
 
 app.get('/', (req, res) => {
    res.send('Write /artists to get the list of artists') 
