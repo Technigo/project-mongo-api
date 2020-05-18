@@ -1,10 +1,13 @@
+// 
+
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import mongoose from 'mongoose'
+import mongoose, { mongo } from 'mongoose'
 import booksData from "./data/books.json"
 import dotenv from "dotenv"
 
+const ERR_CANNOT_FIND_ISBN = "cant fint the book"
 
 dotenv.config()
 
@@ -52,6 +55,24 @@ const Book = mongoose.model("Book", {
   isbn: {
     type: String,
   },
+  read: {
+    type: Boolean,
+    default: false,
+  },
+  num_pages: {
+    type: Number,
+  },
+})
+
+const Review = mongoose.model("Review", {
+  review: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Book",
+  },
+  likes: {
+    type: Number,
+    default: 0,
+  },
 })
 
 // Vill skapa ett object för author, som tar värdet av book..
@@ -93,19 +114,52 @@ app.get("/books", async (req, res) => {
   res.json(books)
 })
 
+app.get("/books/unread", async (req, res) => {
+  const unreadBooks = await Book.find({ read: false })
+    .sort({ num_pages: -1 })
+    .limit(20)
+
+  res.status(200).json(unreadBooks)
+})
+app.get("/books/read", async (req, res) => {
+  const ReadBooks = await Book.find({ read: true })
+    .sort({ num_pages: -1 })
+    .limit(20)
+
+  res.status(200).json(ReadBooks)
+})
+
 app.get("/books/:isbn", async (req, res) => {
   try {
     const { isbn } = req.params
-    const book = await Book.findOne({ isbn: isbn })
+    console.log(`GET / books ${isbn}`)
+    const book = await Book.findOne({ isbn })
     if (book) {
-      res.json(book)
+      res.status(200).json(book)
     } else {
-      res.status(404).json({ error: `Cant find book isbn:${isbn} did you miss a nr?` })
+      res.status(404).json({ error: `Cant find book isbn:${isbn} did you miss a nr?` })  //Do I need two error messages & can I combine a message using isbn:${isbn} and the error constant I made above??
     }
   } catch (err) {
     res.status(400).json({ error: `try a better question` })
   }
 })
+
+// UPDATE to read status
+app.put("/books/:isbn/read", async (req, res) => {
+  const { isbn } = req.params
+  console.log(`PUT /books/${isbn}/read`)
+  await Book.updateOne({ isbn: isbn }, { read: true }) // what to find and the update
+  res.status(201).json()
+})
+
+app.post("/books/:isbn/review", async (req, res) => {
+  const { isbn } = req.params
+  const { review, book } = req.body
+  await Book.updateOne({ isbn: isbn }, { $inc: { text_reviews_count: 1 } }) // CAn I do {isbn} ?
+  await new Review({ review, book }).save() //change name
+  res.status(201).json() // consider use savedReview?
+})
+
 
 app.get("/authors", async (req, res) => {
   try {
