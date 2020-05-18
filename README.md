@@ -1,5 +1,8 @@
 # Mongo API Project
-Build a Mongo database
+Build a Mongo database.
+Possible routes: /shows /lists /directors
+Combinable query by type: /shows?type=movie, /directors/:id
+
 
 ## Learnings
 - Create routes
