@@ -63,6 +63,15 @@ app.get('/year/:year/winners', async (req, res) => {
   }
 });
 
+app.get('/nominations/:id', async (req, res) => {
+  const nomination = await Nominee.findById(req.params.id);
+  if (nomination) {
+    res.json(nomination);
+  } else {
+    res.status(404).json({ error: 'nomination not found' });
+  }
+});
+
 // Shows the winner of a certain category from a specific ceremony
 // example:/winner/ceremonies/68/categories/best motion picture - drama
 app.get(
