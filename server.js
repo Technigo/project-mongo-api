@@ -9,8 +9,9 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Show = mongoose.model('Show', {
-  title: { type: String },
-  director: { type: String },
+  show_id: { type: Number },
+  title: { type: String, required: true },
+  director: { type: String, required: true },
   cast: { type: String },
   country: { type: String },
   date_added: { type: String },
@@ -32,7 +33,7 @@ const Director = mongoose.model('Director', {
 
 const Title = mongoose.model('Title', {
   title: String,
-  _id: Number,
+  cast: String,
   director: {
     type: mongoose.Schema.Types.String,
     ref: 'Director'
@@ -73,7 +74,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Possible routes => paths: /shows, /lists, combinable queries: /shows?type="", /')
 })
 
 app.get('/shows', async (req, res) => {
@@ -103,21 +104,41 @@ app.get('/type', async (req, res) => {
   }
 })
 
+// http://localhost:8080/directors
 app.get('/directors', async (req, res) => {
-  const directors = await Director.find()
-  if (directors) {
-    res.json(directors)
+  const director = await Director.find()
+  if (director) {
+    res.json(director)
   } else {
     res.status(404).json({ error: 'Director not found' })
   }
 })
 
-app.get('/titles', async (req, res) => {
-  const titles = await Title.find().populate('director')
-  if (titles) {
-    res.json(titles)
+// http://localhost:8080/directors/5ebd47402adc471698c30bb6
+app.get('/directors/:id', async (req, res) => {
+  const director = await Director.findById(req.params.id)
+  if (director) {
+    res.json(director)
+  } else {
+    res.status(404).json({ error: "Director not found" })
+  }
+})
+
+app.get('/title', async (req, res) => {
+  const title = await Title.find()
+  if (title) {
+    res.json(title)
   } else {
     res.status(404).json({ error: 'Title show not found' })
+  }
+})
+
+app.get('/titles/:id', async (req, res) => {
+  const title = await Title.findById(req.params.id)
+  if (title) {
+    res.json(title)
+  } else {
+    res.status(404).json({ error: "Show not found" })
   }
 })
 
