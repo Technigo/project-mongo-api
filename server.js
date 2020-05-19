@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 // Start defining your routes here
 
 app.get('/', (req, res) => {
-  res.send('Hello! use these routes /netflixtitles (list all netflixtitles) /netflixtitles/directors (list all directors)')
+  res.send('Hello! use these routes /netflixtitles (list all netflixtitles)  /netflixtitles/:id (try 5ec44053d9b97d0023f16da1") /directors (list all directors)')
 })
 
 app.get("/netflixtitles", async (req, res) => {
