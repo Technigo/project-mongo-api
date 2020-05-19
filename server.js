@@ -95,7 +95,7 @@ app.get('/netflixtitles/:id', async (req, res) => {
 
 
 
-app.get('/netflixtitles/:directors', async (req, res) => {
+app.get('/directors', async (req, res) => {
       const { director } = req.params
       const directorByName = await Director.find();
 
