@@ -4,6 +4,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import showData from './data/netflix-titles.json'
 import { Shows } from './models'
+import { pageFilter } from './pageFilter'
 
 const dotenv = require('dotenv')
 dotenv.config()
@@ -24,7 +25,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/shows', async (req, res) => {   
-  const { title, year, country, actor } = req.query
+  const { title, year, country, actor, page, pageSize } = req.query
+
   let myFilter = {}
 
   if (title) {
@@ -42,32 +44,19 @@ app.get('/shows', async (req, res) => {
   if (actor) {
     myFilter['cast'] = new RegExp(`${actor}`, 'i')
   }
-  
-  const show = await Shows.find(myFilter).collation({ locale: 'en_US', strength: 1 });
-  
-  const page = +(req.query.page ?? 1)
-  const pageSize = +(req.query.pageSize ?? 20)
-  const startIndex = (page -1) * pageSize
-  const endIndex = startIndex + pageSize 
-  const filteredShows = show.slice(startIndex, endIndex)
-  const returnObject = { 
-    pageSize: pageSize,
-    page: page,
-    maxPages: Math.ceil(show.length/pageSize),
-    totalShows: show.length,
-    results: filteredShows
-  }
+    
+  const result = await pageFilter( Shows, page, pageSize, myFilter)
 
-  if (returnObject.results.length === 0) {
+  if (result.results === 0) {
     res.status(204).json("No results to show")
   } else {
-    res.json(returnObject)
+    res.json(result) 
   }
 })
 
 app.get('/shows/:id', async (req, res) => {
   
-  const show = await Shows.findOne({ show_id: req.params.id })
+  const show = await Shows.findById(req.params.id)
   
   if (show) {
     res.json(show)
@@ -93,26 +82,16 @@ app.get('/categories', async (req, res) => {
 
 app.get('/categories/:category', async (req, res) => {
   const { category } = req.params
+  const { page, pageSize } = req.query
 
-  const categoryFind = await Shows.find( { type: category } ).collation({ locale: 'en_US', strength: 1 })
-  
-  const page = +(req.query.page ?? 1)
-  const pageSize = +(req.query.pageSize ?? 20)
-  const startIndex = (page -1) * pageSize
-  const endIndex = startIndex + pageSize 
-  const filteredCategory = categoryFind.slice(startIndex, endIndex)
-  const returnObject = { 
-    pageSize: pageSize,
-    page: page,
-    maxPages: Math.ceil(categoryFind.length/pageSize),
-    totalShows: categoryFind.length,
-    results: filteredCategory
-  }
+  const myFilter = { type: category }
 
-  if (categoryFind.length === 0) {
+  const result = await pageFilter( Shows, page, pageSize, myFilter)
+   
+  if (result.totalShows === 0) {
     res.status(404).json(`There is no category named ${req.params.category}`)
   } else {
-    res.json(returnObject)
+    res.json(result)
   }
 })
 
