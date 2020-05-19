@@ -7,10 +7,9 @@ import mongoose from 'mongoose'
 import netflixTitles from './data/netflix-titles.json'
 
 
-const Key = 'mongodb+srv://ebbabw:gs4m4g4U6pC6ejLK@cluster0-yp7wy.mongodb.net/project-mongo?retryWrites=true&w=majority'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(Key, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Netflixdata = mongoose.model('Netflixdata', {
@@ -77,32 +76,33 @@ app.get("/netflixtitles", async (req, res) => {
   res.json(titles.reverse());
 });
 
-// app.get('/netflixtitles/:id', async (req, res) => {
+app.get('/netflixtitles/:id', async (req, res) => {
 
-//   try {
-//     const netflixID = await Netflixdata.findById(req.params.id)
+  try {
+    const netflixID = await Netflixdata.findById(req.params.id)
 
-//     if(netflixID) {
-//       res.json(netflixID)
-//     } else {
-//       res.status(404).json({error: 'Id not found'})
-//     }
+    if(netflixID) {
+      res.json(netflixID)
+    } else {
+      res.status(404).json({error: 'Id not found'})
+    }
 
-//   } catch(err) {
-//     res.status(400).json({error: 'Something is Invalid'})
-//   }
+  } catch(err) {
+    res.status(400).json({error: 'Something is Invalid'})
+  }
 
-// })
+})
 
 
 
 app.get('/netflixtitles/:directors', async (req, res) => {
-  const director = await Director.find();
+      const { director } = req.params
+      const directorByName = await Director.find();
 
   try {
 
-  if (director) {
-    res.json(director);
+  if (directorByName.length > 0) {
+    res.json(directorByName);
   } else {
     res.status(404).json({ error: 'error could not found' });
   }
@@ -113,10 +113,6 @@ app.get('/netflixtitles/:directors', async (req, res) => {
 }
 
 });
-
-
-
-
 
 // Start the server
 app.listen(port, () => {
