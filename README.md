@@ -14,4 +14,11 @@ I had problem deploying the app on Heroku where it would return an empty array. 
 
 https://mongo-backed-api.herokuapp.com/
 
-You can use query "nominee", "category", "win" to filter the API results. You can also use query "page" to set the page number, and you will see 20 nominations per page. If you want to see the nominations by year, use the endpoint /nominations/years/:year. ex. /nominations/years/2019
+You can use query "nominee", "category", "year", "win", and "page" with the endpoint /nominations to filter the API results. 
+e.g. /nominations?nominee=parasite
+     /nominations?category=Best Director - Motion Picture
+     /nominations?year=2019
+     /nominations?win=true
+     /nominations?page=20
+And to return a single result, you can use query "id" (mongoose id) with the endpoint /nomination to filter the results.
+e.g. /nomination?id=5ec3942d74689e6564b441c2
