@@ -26,13 +26,13 @@ app.use(cors())
 app.use(bodyParser.json())
 
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
   } else {
     res.status(503).json({ error: "service very unavailable" })
   }
-})
+}) */
 
 
 
