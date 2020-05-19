@@ -9,18 +9,18 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const Show = mongoose.model("Show", {
-  show_id: { type: Number },
-  title: { type: String },
-  director: { type: String },
-  cast: { type: String },
-  country: { type: String },
-  date_added: { type: String },
-  release_year: { type: String },
-  rating: { type: String },
-  duration: { type: String },
-  listed_in: { type: String },
-  description: { type: String },
-  type: { type: String },
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: String,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String,
 });
 
 if (process.env.RESET_DB) {
@@ -70,7 +70,8 @@ app.get("/shows", async (req, res) => {
     //sort release year
     .sort({ release_year: -1 });
 
-  if (searchShow) {
+  //Continue to else if nothing is found using fint
+  if (searchShow.length > 0) {
     res.json(searchShow);
   } else {
     res.status(404).json({
@@ -90,7 +91,9 @@ app.get("/shows/:show_id", async (req, res) => {
   } else {
     res
       .status(404)
-      .json({ error: `Content with id number: ${showById} not found` });
+      .json({
+        error: `Content with id number: ${req.params.show_id} not found`,
+      });
   }
 });
 
