@@ -11,7 +11,7 @@ const ERR_CANNOT_FIND_ISBN = "cant fint the book"
 
 dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-wk18" // create uniqe name for project
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/Books-wk18" // create uniqe name for project
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -146,7 +146,7 @@ app.get("/authors", async (req, res) => {
   }
 })
 
-/* app.get("/books/:isbn", async (req, res) => {
+app.get("/books/:isbn", async (req, res) => {
   try {
     const { isbn } = req.params
     console.log(`GET / books ${isbn}`)
@@ -159,7 +159,7 @@ app.get("/authors", async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: `try a better question` })
   }
-}) */
+})
 
 app.put("/books/:isbn/read", async (req, res) => {
   const { isbn } = req.params
