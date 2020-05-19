@@ -118,17 +118,33 @@ app.get("/books/unread", async (req, res) => {
   const unreadBooks = await Book.find({ read: false })
     .sort({ num_pages: -1 })
     .limit(20)
-
   res.status(200).json(unreadBooks)
 })
+
 app.get("/books/read", async (req, res) => {
   const ReadBooks = await Book.find({ read: true })
     .sort({ num_pages: -1 })
     .limit(20)
-
   res.status(200).json(ReadBooks)
 })
 
+
+
+// UPDATE to read status
+
+
+app.get("/authors", async (req, res) => {
+  try {
+    const authors = await Author.find().populate("books") //I cant really get this one to work, id like the author endpoint to show the differend books by the author. what is wrong?
+    if (authors) {
+      res.json(authors)
+    } else {
+      res.status(404).json({ error: `Cant find the author person` })
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Author not found" })
+  }
+})
 app.get("/books/:isbn", async (req, res) => {
   try {
     const { isbn } = req.params
@@ -144,7 +160,6 @@ app.get("/books/:isbn", async (req, res) => {
   }
 })
 
-// UPDATE to read status
 app.put("/books/:isbn/read", async (req, res) => {
   const { isbn } = req.params
   console.log(`PUT /books/${isbn}/read`)
@@ -161,18 +176,7 @@ app.post("/books/:isbn/review", async (req, res) => {
 })
 
 
-app.get("/authors", async (req, res) => {
-  try {
-    const authors = await Author.find().populate("books") //Author model
-    if (authors) {
-      res.json(authors)
-    } else {
-      res.status(404).json({ error: `Cant find the author person` })
-    }
-  } catch (err) {
-    res.status(400).json({ error: "Author not found" })
-  }
-})
+
 
 // Start the server
 app.listen(port, () => {
