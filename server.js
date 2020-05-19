@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 // Start defining your routes here
 
 app.get('/', (req, res) => {
-  res.send('Hello! use these routes try: https://ebbbw-project-mongo-api.herokuapp.com/netflixtitles (list all netflixtitles)  try: https://ebbbw-project-mongo-api.herokuapp.com/netflixtitles/5ec444091a8add0023c83368 try: https://ebbbw-project-mongo-api.herokuapp.com/directors')
+  res.send('Hello! use these routes try: /netflixtitles (list all netflixtitles) /netflixtitles/:id (search on id) try this out: /directors (list all directors)')
 })
 
 app.get("/netflixtitles", async (req, res) => {
