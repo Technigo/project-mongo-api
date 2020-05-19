@@ -25,7 +25,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-/* HELP!!?  WHY IS THIS CAUSING THE HEROKU TO DISPLAY THE ERROR MESSAGE, WORKS FINE WITHOUT IT
+/* HELP!!?  THIS is CAUSING THE HEROKU TO DISPLAY THE ERROR MESSAGE, WORKS FINE WITHOUT IT
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
@@ -145,6 +145,7 @@ app.get("/authors", async (req, res) => {
     res.status(400).json({ error: "Author not found" })
   }
 })
+
 app.get("/books/:isbn", async (req, res) => {
   try {
     const { isbn } = req.params
@@ -159,7 +160,7 @@ app.get("/books/:isbn", async (req, res) => {
     res.status(400).json({ error: `try a better question` })
   }
 })
-
+/* 
 app.put("/books/:isbn/read", async (req, res) => {
   const { isbn } = req.params
   console.log(`PUT /books/${isbn}/read`)
@@ -170,12 +171,11 @@ app.put("/books/:isbn/read", async (req, res) => {
 app.post("/books/:isbn/review", async (req, res) => {
   const { isbn } = req.params
   const { review, book } = req.body
-  await Book.updateOne({ isbn: isbn }, { $inc: { text_reviews_count: 1 } }) // CAn I do {isbn} ?
+  await Book.updateOne({ isbn: isbn }, { $inc: { text_reviews_count: 1 } }) // CAn I do only one isb {isbn} ?
   await new Review({ review, book }).save() //change name
   res.status(201).json() // consider use savedReview?
 })
-
-
+ */
 
 
 // Start the server
