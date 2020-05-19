@@ -114,7 +114,7 @@ app.get("/books", async (req, res) => {
   res.json(books)
 })
 
-app.get("/books/unread", async (req, res) => {
+/* app.get("/books/unread", async (req, res) => {
   const unreadBooks = await Book.find({ read: false })
     .sort({ num_pages: -1 })
     .limit(20)
@@ -126,7 +126,7 @@ app.get("/books/read", async (req, res) => {
     .sort({ num_pages: -1 })
     .limit(20)
   res.status(200).json(ReadBooks)
-})
+}) */
 
 
 
