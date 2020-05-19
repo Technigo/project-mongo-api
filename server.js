@@ -114,7 +114,7 @@ app.get("/books", async (req, res) => {
   res.json(books)
 })
 
-/* app.get("/books/unread", async (req, res) => {
+app.get("/books/unread", async (req, res) => {
   const unreadBooks = await Book.find({ read: false })
     .sort({ num_pages: -1 })
     .limit(20)
@@ -126,7 +126,7 @@ app.get("/books/read", async (req, res) => {
     .sort({ num_pages: -1 })
     .limit(20)
   res.status(200).json(ReadBooks)
-}) */
+})
 
 
 
@@ -146,7 +146,7 @@ app.get("/authors", async (req, res) => {
   }
 })
 
-app.get("/books/:isbn", async (req, res) => {
+/* app.get("/books/:isbn", async (req, res) => {
   try {
     const { isbn } = req.params
     console.log(`GET / books ${isbn}`)
@@ -159,8 +159,8 @@ app.get("/books/:isbn", async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: `try a better question` })
   }
-})
-/* 
+}) */
+
 app.put("/books/:isbn/read", async (req, res) => {
   const { isbn } = req.params
   console.log(`PUT /books/${isbn}/read`)
@@ -175,7 +175,7 @@ app.post("/books/:isbn/review", async (req, res) => {
   await new Review({ review, book }).save() //change name
   res.status(201).json() // consider use savedReview?
 })
- */
+
 
 
 // Start the server
