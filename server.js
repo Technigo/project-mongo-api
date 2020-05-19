@@ -12,7 +12,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Netflixdata = mongoose.model('Netflixdata', {
+const Netflixtitle = mongoose.model('Netflixtitle', {
 
   title: { type: String }, 
   director: { type: String },
@@ -36,11 +36,11 @@ const Director = mongoose.model('Director', {
 if (process.env.RESET_DATABASE) {
   console.log("Resetting database...");
   const seedDatabase = async () => {
-    await Netflixdata.deleteMany();
+    await Netflixtitle.deleteMany();
     await Director.deleteMany();
 
-    netflixTitles.forEach((netflixdata) => new Netflixdata(netflixdata).save());
-    netflixTitles.forEach((netflixdata) => new Director(netflixdata).save());
+    netflixTitles.forEach((netflix) => new Netflixtitle(netflix).save());
+    netflixTitles.forEach((netflix) => new Director(netflix).save());
 
   };
   seedDatabase();
@@ -70,7 +70,7 @@ app.get('/', (req, res) => {
 app.get("/netflixtitles", async (req, res) => {
   const { query } = req.query
   const queryRegex = new RegExp(query, 'i');
-  const titles = await Netflixdata.find({title: queryRegex}).sort({
+  const titles = await Netflixtitle.find({title: queryRegex}).sort({
     release_year: ""
   })
   res.json(titles.reverse());
@@ -79,7 +79,7 @@ app.get("/netflixtitles", async (req, res) => {
 app.get('/netflixtitles/:id', async (req, res) => {
 
   try {
-    const netflixID = await Netflixdata.findById(req.params.id)
+    const netflixID = await Netflixtitle.findById(req.params.id)
 
     if(netflixID) {
       res.json(netflixID)
@@ -96,7 +96,7 @@ app.get('/netflixtitles/:id', async (req, res) => {
 
 
 app.get('/directors', async (req, res) => {
-      const directorByName = await Director.find();
+      const directorByName = await Director.find(req.params.director);
     
   try {
 
