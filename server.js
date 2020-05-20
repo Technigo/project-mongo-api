@@ -11,13 +11,14 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 
+
 if (process.env.RESET_DATABASE) {
   console.log('Resetting database')
 
   const seedDatabase = async () => {
       await Book.deleteMany()
       await booksData.forEach((book) => new Book(book).save())
-
+  }
   seedDatabase()
 }
 
@@ -78,4 +79,4 @@ app.get('/books/authors/:authors', async ( req, res ) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
-})} 
+})
