@@ -88,6 +88,7 @@ app.get('/shows', async (req, res) => {
 
   const queryRegex = new RegExp(title, 'i')
   const shows = await Show.find({ title: queryRegex })
+    .sort({ release_year: -1 })
     .limit(perPage)
     .skip(skip)
   res.json(shows)
