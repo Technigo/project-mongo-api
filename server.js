@@ -79,9 +79,17 @@ app.get('/', (req, res) => {
 
 //Route for all shows
 app.get('/shows', async (req, res) => {
-  const { title } = req.query;
-  const queryRegex = new RegExp(title, 'i');
+  const { title, page } = req.query
+
+  // Pagination
+  const pageNbr = +page || 1
+  const perPage = 20
+  const skip = perPage * (pageNbr - 1)
+
+  const queryRegex = new RegExp(title, 'i')
   const shows = await Show.find({ title: queryRegex })
+    .limit(perPage)
+    .skip(skip)
   res.json(shows)
 })
 
