@@ -1,12 +1,7 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+This project was made during Technigo frontend boot camp. The objective was to model a database using Mongoose models. This is to
+level up the APIs and start using a database to store and retrieve data from and use that data to produce a RESTful API. 
 
 ## View it live
 
