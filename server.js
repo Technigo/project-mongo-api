@@ -3,18 +3,49 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/movies"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
+
+
+//mongoose models
+const Actor = mongoose.model('Actor', {
+  name: String
+});
+const Movie = mongoose.model('Movie', {
+  title: String,
+  year: Number,
+  actor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Actor'
+  }
+});
+
+//seed database with content 
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Actor.deleteMany()
+    await Movie.deleteMany()
+
+    const winslet = new Actor({ name: 'Kate Winslet' })
+    await winslet.save()
+
+    const dicaprio = new Actor({ name: 'Leonardo Di Caprio ' })
+    await dicaprio.save()
+
+    const depp = new Actor({ name: 'Johnny Depp' })
+    await depp.save()
+
+    await new Movie({ title: 'The Mountain Between Us', year: 2017, actor: winslet }).save()
+    await new Movie({ title: 'The Dressmaker', year: 2015, actor: winslet }).save()
+    await new Movie({ title: 'Public Enemies', year: 2009, actor: depp }).save()
+    await new Movie({title:'Black Mass', year: 2015, actor: depp}).save()
+    await new Movie({title:'Shutter Island', year: 2010, actor: dicaprio}).save()
+    await new Movie({title:'Once Upon a Time In Hollywood', year: 2019, actor: dicaprio}).save()
+  }
+  seedDatabase()
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -26,10 +57,36 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
+//if database is not connecting
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavalable' })
+  }
+})
 
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+//get all info from the Actor model
+app.get('/actors', async (req, res) => {
+  const actors = await Actor.find()
+  res.json(actors)
+})
+
+//get all movies from one actor
+app.get('/actors/:id/movies', async (req, res) => {
+  const actor = await Actor.findById(req.params.id)
+  const movies = await Movie.find({ actor: mongoose.Types.ObjectId(actor.id)})
+  res.json(movies)
+})
+
+//get movies with connection to actor
+app.get('/movies', async (req, res) => {
+  const movies = await Movie.find().populate('actor')
+  res.json(movies)
 })
 
 // Start the server
