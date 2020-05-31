@@ -45,7 +45,7 @@ if (process.env.RESET_DB) {
     await new Movie({title:'Once Upon a Time In Hollywood', year: 2019, actor: dicaprio}).save()
   }
   seedDatabase()
-}
+};
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -64,32 +64,70 @@ app.use((req, res, next) => {
   } else {
     res.status(503).json({ error: 'Service unavalable' })
   }
-})
+});
 
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
-})
+});
+
 //get all info from the Actor model
 app.get('/actors', async (req, res) => {
-  const actors = await Actor.find()
-  res.json(actors)
-})
+  try {
+    const actor = await Actor.find()
+      if (actor) {
+        res.json(actor)
+      } else {
+        res.status(404).json ({ error: 'Could not find actors' })
+      }
+  } catch(err) {
+    res.status(400).json ({ error: 'Invalid request' })
+  }
+});
+//get actor by id
+app.get('/actors/:id', async (req, res) => {
+  try {
+    const actor = await Actor.findById(req.params.id)
+      if (actor) {
+        res.json(actor)
+      } else {
+        res.status(404).json ({ error: 'Id not found' })
+      }
+  } catch(err) {
+    res.status(400).json ({ error: 'Invalid request' })
+  }
+});
 
 //get all movies from one actor
 app.get('/actors/:id/movies', async (req, res) => {
-  const actor = await Actor.findById(req.params.id)
-  const movies = await Movie.find({ actor: mongoose.Types.ObjectId(actor.id)})
-  res.json(movies)
-})
+  try {
+    const actor = await Actor.findById(req.params.id)
+    const movies = await Movie.find({ actor: mongoose.Types.ObjectId(actor.id)})
+      if(movies) {
+        res.json(movies)
+      } else {
+        res.status(404).json ({ error: 'Could not find movies' })
+      }
+  } catch(err) {
+    res.status(400).json ({ error: 'Invalid request' })
+  }
+});
 
 //get movies with connection to actor
 app.get('/movies', async (req, res) => {
-  const movies = await Movie.find().populate('actor')
-  res.json(movies)
-})
+  try {
+    const movies = await Movie.find().populate('actor')
+      if (movies) {
+        res.json(movies)
+      } else {
+        res.status(404).json ({ error: 'Could not find information' })
+      }
+  } catch(err) {
+    res.status(400).json ({ error: 'Invalid request' })
+  }
+});
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
-})
+});
