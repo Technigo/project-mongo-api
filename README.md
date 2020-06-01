@@ -7,5 +7,6 @@ How to model data in Mongoose. How to fetch items from a Mongo database using Mo
 Technologies used: MongoDB, Mongoose
 
 ## View it live
-https://git.heroku.com/mongo-api-aasa.git
+
+https://mongo-api-aasa.herokuapp.com/
 
