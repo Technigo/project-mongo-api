@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.send(`<p>Netflix show data with endpoints: <br> /netflixshows<br> /netflixshows?query="Your Query"<br> /netflixshows/type?type="Movie/TV Show"<br> /netflixshows/rating?rating="TV-Y/TV-Y7/TV-Y7-FV/TV-G/G/TV-PG/PG/PG-13/TV-14/TV-MA/R"<br> /netflixshows/title/"Your Title"<p>`)
+  const listEndpoints = require('express-list-endpoints')
 })
 
 app.get('/netflixshows', async (req, res) => {
