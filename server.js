@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import booksData from './data/books.json'
+import books from './data/books.json'
 import Book from './model/book'
 
 
@@ -49,8 +49,11 @@ app.get('/', (req, res) => {
   <h3>Read moore...</h3>
   <li>/books</li>
   <li>/books/autors/:authors</li>
+  <li>/books/ID/:bookID</li>
   `)
 })
+
+
 
 // List of all books
 app.get('/books', async (req, res) => {
@@ -62,6 +65,20 @@ app.get('/books', async (req, res) => {
     res.status(404).json({ message: `Error` })
   }
 });
+
+// Route for single book by id
+app.get('/books/ID/:bookID', async ( req, res ) => {
+  const { bookID } = req.params
+  const booksByID = await Book.findOne({ bookID: bookID })
+
+  if ( booksByID) {
+    res.json(booksByID)
+  } else {
+    res.status(404).json({ message: `Error, can not find the book.` })
+  }
+})
+
+
 
 // Find books by author 
 app.get('/books/authors/:authors', async ( req, res ) => {
