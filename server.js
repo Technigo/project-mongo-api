@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import books from './data/books.json'
+import booksData from './data/books.json'
 import Book from './model/book'
 
 
