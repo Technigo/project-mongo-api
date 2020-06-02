@@ -58,13 +58,13 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 //if database is not connecting
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next()
-  } else {
-    res.status(503).json({ error: 'Service unavalable' })
-  }
-});
+//app.use((req, res, next) => {
+ // if (mongoose.connection.readyState === 1) {
+  //  next()
+  //} else {
+ //   res.status(503).json({ error: 'Service unavalable' })
+ // }
+//});
 
 // Start defining your routes here
 app.get('/', (req, res) => {
