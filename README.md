@@ -22,7 +22,9 @@
 
 ## Strech goals reached 🧘
 
-
+* Implemented filters via query parameters to filter the data being returned from endpoints which return an array of data.
+* Implemented 'pages' using `[.skip()](https://mongoosejs.com/docs/api.html#query_Query-skip)` and `[.limit()](https://mongoosejs.com/docs/api.html#query_Query-limit)` to return only a selection of results from the array. 
+* On routes which return a single item, there's an error handle when the item doesn't exist.
 
 
 
