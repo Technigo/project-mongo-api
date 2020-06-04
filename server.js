@@ -4,10 +4,25 @@ import cors from 'cors'
 import mongoose, { mongo } from 'mongoose'
 import booksData from './data/books.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+// DATABASE
+
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+const Author = mongoose.model('Author', {
+  name: String
+})
+
+const Book = mongoose.model('Book', {
+  title: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author'
+  }
+})
+
+// SERVER
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
 //
@@ -28,13 +43,23 @@ app.use((req, res, next) => {
   }
 })
 
-// Routes
+// ROUTES
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+app.get('/authors', async (req, res) => {
+  const authors = await Author.find()
+  res.json(authors)
+})
 
-// Start the server
+app.get('/books', async (req, res) => {
+  const books = await Author.find().populate('author')
+  res.json(books)
+})
+
+
+// START
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
