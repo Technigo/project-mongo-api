@@ -8,7 +8,8 @@ const Book = mongoose.model('Book', {
     type: String,
   },
   authors: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author'
   },
   average_rating: {
     type: Number,
@@ -35,7 +36,3 @@ const Book = mongoose.model('Book', {
 
 export default Book
 
-// author: {
-//   type: mongoose.Schema.Types.ObjectId,
-//   ref: 'Author'
-// }

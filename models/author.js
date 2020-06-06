@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const Author = mongoose.model('Author', {
-  name: String
+  authors: String
 })
 
 export default Author

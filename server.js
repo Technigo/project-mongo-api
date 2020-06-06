@@ -14,10 +14,14 @@ mongoose.Promise = Promise
 
 // RESET DATABASE
 if (process.env.RESET_DATABASE) {
+  console.log(booksData.length)
+  console.log('Resetting data')
+
   const seedDatabase = async () => {
     await Book.deleteMany()
     await Author.deleteMany()
-    // await booksData.forEach((book) => new Book(book).save());
+    await booksData.forEach((author) => new Author(author).save())
+    await booksData.forEach((book) => new Book(book).save())
   }
   seedDatabase()
 }
@@ -58,23 +62,29 @@ app.get('/', (req, res) => {
 
 app.get('/authors', async (req, res) => {
   const authors = await Author.find()
+  console.log(`Found ${authors.length} authors..`)
   res.json(authors)
 })
 
 app.get('/books', async (req, res) => {
-  const books = await Author.find().populate('author')
-  res.json(books)
+  const { title } = req.query;
+  const queryRegex = new RegExp(title, 'i')
+  const books = await Book.find({ title: queryRegex }).populate('authors').sort({
+    average_rating: -1,
+  })
+  console.log(`Found ${books.length} books..`)
+  res.json(books);
 })
 
-app.get('/books', async (req, res) => {
-  const { query } = req.query;
-  const queryRegex = new RegExp(query, 'i');
-  const books = await Book.find({ title: queryRegex }).sort({
-    average_rating: -1,
-  });
-  res.json(books);
-});
-
+app.get('/books/:isbn', async (req, res) => {
+  const { isbn } = req.params
+  const book = await Book.findOne({ isbn: isbn })
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).json({ error: `Could not find book with isbn=${isbn}` })
+  }
+})
 
 // START SERVER
 app.listen(port, () => {
