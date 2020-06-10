@@ -129,10 +129,6 @@ app.get("/books/read", async (req, res) => {
   res.status(200).json(ReadBooks)
 })
 
-
-
-
-
 /// authors /: id / books
 app.get("/authors", async (req, res) => {
   try {
