@@ -43,8 +43,9 @@ const Book = mongoose.model("Book", {
   title: {
     type: String,
   },
-  authors: {
-    type: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Author", // Döp modeller med CAPS
   },
   average_rating: {
     type: Number,
@@ -77,11 +78,13 @@ const Review = mongoose.model("Review", {
 
 // Vill skapa ett object för author, som tar värdet av book..
 const Author = mongoose.model("Author", {
-  name: String,
-  books: {  //[] for a list/ arr of books by author
+  books: [{  //[] for a list/ arr of books by author, ADD[]!!!
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book"
-  }
+  }],
+  author: {
+    type: String,
+  },
 })
 
 if (process.env.RESET_DATABASE) {  // RESET_DATABASE=true seeds database 
@@ -113,7 +116,7 @@ app.get("/books", async (req, res) => {
   console.log(`found ${books.length} books`)
   res.json(books)
 })
-
+/// TURN THIS INTO QUERY ENPOINT /books?read=true
 app.get("/books/unread", async (req, res) => {
   const unreadBooks = await Book.find({ read: false })
     .sort({ num_pages: -1 })
@@ -132,7 +135,7 @@ app.get("/books/read", async (req, res) => {
 
 // UPDATE to read status
 
-
+/// authors /: id / books
 app.get("/authors", async (req, res) => {
   try {
     const authors = await Author.find().populate("books") //I cant really get this one to work, id like the author endpoint to show the differend books by the author. what is wrong?
@@ -145,6 +148,27 @@ app.get("/authors", async (req, res) => {
     res.status(400).json({ error: "Author not found" })
   }
 })
+app.get('/authors/:id', async (req, res) => {
+  const author = await Author.findById(req.params.id)
+  if (author) {
+    res.json(author)
+  } else {
+    res.status(404).json({ error: "Author not found" })
+  }
+})
+
+app.get("/authors/:id/books", async (req, res) => {
+  try {
+    const author = await Book.find()
+    if (author) {
+      const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) })
+      res.json(books)
+    }
+  } catch (err) {
+    res.status(404).json({ error: "Author not found" })
+  }
+})
+
 
 app.get("/books/:isbn", async (req, res) => {
   try {
@@ -171,7 +195,7 @@ app.put("/books/:isbn/read", async (req, res) => {
 app.post("/books/:isbn/review", async (req, res) => {
   const { isbn } = req.params
   const { review, book } = req.body
-  await Book.updateOne({ isbn: isbn }, { $inc: { text_reviews_count: 1 } }) // CAn I do only one isb {isbn} ?
+  await Book.updateOne({ isbn }, { $inc: { text_reviews_count: 1 } }) // CAn I do only one isb {isbn} ?
   await new Review({ review, book }).save() //change name
   res.status(201).json() // consider use savedReview?
 })
