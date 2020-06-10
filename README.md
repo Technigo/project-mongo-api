@@ -8,4 +8,5 @@ After working only front end it feels odd doing only the backend, I am very much
 
 ## View it live
 
-Deployed on Heroku: https://wk18-mongodb-assignment.herokuapp.com/
+Deployed on Heroku: 
+https://wk18-mongo-api.herokuapp.com/books
