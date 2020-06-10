@@ -7,7 +7,7 @@ import dotenv from "dotenv"
 
 const ERR_CANNOT_FIND_ISBN = "cant fint the book"
 dotenv.config()
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/Books-wk18" // create uniqe name for project
+const mongoUrl = process.env.MONGO_URL || "https://wk18-mongo-api.herokuapp.com/"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
