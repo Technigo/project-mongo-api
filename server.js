@@ -7,7 +7,6 @@ import dotenv from "dotenv"
 
 const ERR_CANNOT_FIND_ISBN = "cant fint the book"
 dotenv.config()
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/Books-wk18" // create uniqe name for project
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
@@ -29,7 +28,7 @@ app.use((req, res, next) => {
   } else {
     res.status(503).json({ error: "service very unavailable" })
   }
-}) */
+}) Work in progress */
 
 
 
