@@ -113,7 +113,6 @@ app.get("/books", async (req, res) => {
   res.json(books)
 })
 
-
 /// TURN THIS INTO QUERY ENPOINT /books?read=true
 app.get("/books/unread", async (req, res) => {
   const unreadBooks = await Book.find({ read: false })
@@ -162,7 +161,6 @@ app.get("/authors/:id/books", async (req, res) => {
     res.status(404).json({ error: "Author not found" })
   }
 })
-
 
 app.get("/books/:isbn", async (req, res) => {
   try {
