@@ -5,7 +5,7 @@ import mongoose, { mongo } from 'mongoose'
 import booksData from "./data/books.json"
 import dotenv from "dotenv"
 
-const ERR_CANNOT_FIND_ISBN = "cant fint the book"
+const ERR_CANNOT_FIND_ISBN = "cant find the book"
 dotenv.config()
 const mongoUrl = process.env.MONGO_URL || "https://wk18-mongo-api.herokuapp.com"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
