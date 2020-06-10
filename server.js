@@ -1,5 +1,3 @@
-// 
-
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
@@ -133,12 +131,12 @@ app.get("/books/read", async (req, res) => {
 
 
 
-// UPDATE to read status
+
 
 /// authors /: id / books
 app.get("/authors", async (req, res) => {
   try {
-    const authors = await Author.find().populate("books") //I cant really get this one to work, id like the author endpoint to show the differend books by the author. what is wrong?
+    const authors = await Author.find().populate("books")
     if (authors) {
       res.json(authors)
     } else {
