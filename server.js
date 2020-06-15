@@ -41,7 +41,7 @@ const Book = mongoose.model("Book", {
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Author", // Döp modeller med CAPS
+    ref: "Author",
   },
   average_rating: {
     type: Number,
