@@ -84,12 +84,31 @@ app.get('/goldenGlobes/:year', async (req, res) => {
   const nominationWon = req.query.win
 
   if (nominationYear && nominationWon) {
-    nominationYear = nominationYear.filter((item) => item.win === true)
-    res.json(nominationYear);
-  } else {
-    res.status(404).json({ error: 'Not found' })
-  }
+        nominationYear = nominationYear.filter((item) => item.win === true)
+        res.json(nominationYear);
+      } else if (nominationYear){
+          res.json(nominationYear)
+        }else{
+          res.status(404).json({ error: 'Not found' })
+        }
+
 })
+  
+  
+  
+  // if (nominationYear){
+  //   res.json(nominationYear)
+  // }
+  //   if (nominationYear && nominationWon) {
+  //     nominationYear = nominationYear.filter((item) => item.win === true)
+  //     res.json(nominationYear);
+  //   } else {
+  //     res.status(404).json({ error: 'Not found' })
+  //   }
+  // })
+  
+
+
 
 //GOLDEN GLOBES FILTERED ON ID - RETURNS A SINGLE RESULT
 app.get('/goldenGlobes/id/:id', async (req, res) => {
