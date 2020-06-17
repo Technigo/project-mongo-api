@@ -77,6 +77,12 @@ app.get('/goldenGlobes', async (req, res) => {
   res.json(goldenGlobes)
 })
 
+//GOLDEN GLOBES FILTERED ON ID - RETURNS A SINGLE RESULT
+app.get('/goldenGlobes/id/:id', async (req, res) => {
+  const goldenGlobesId = await GoldenGlobe.findById(req.params.id)
+  res.json(goldenGlobesId)
+})
+
 //GOLDEN GLOBES FILTERED ON YEAR OF AWARDS
 app.get('/goldenGlobes/:year', async (req, res) => {
   const { year } = req.params
@@ -93,11 +99,7 @@ app.get('/goldenGlobes/:year', async (req, res) => {
         }
 })
 
-//GOLDEN GLOBES FILTERED ON ID - RETURNS A SINGLE RESULT
-app.get('/goldenGlobes/id/:id', async (req, res) => {
-  const goldenGlobes = await goldenGlobes.findById(req.params.id)
-  res.json(nominations)
-})
+
 
 
 app.listen(port, () => {
