@@ -58,6 +58,7 @@ app.use(bodyParser.json())
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+  console.log(mongoUrl)
 })
 
 // Start the server
