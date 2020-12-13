@@ -9,10 +9,38 @@ import mongoose from 'mongoose'
 // import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
 // import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
+import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
+const Show = mongoose.model('Show', {
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
+})
+
+if (process.env.RESET_DB) {
+	const seedDatabase = async () => {
+    await Show.deleteMany({})
+
+		netflixData.forEach((showData) => {
+			new Show(showData).save()
+		})
+  }
+
+  seedDatabase()
+}
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+console.log(mongoUrl)
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
