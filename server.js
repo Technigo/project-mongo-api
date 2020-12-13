@@ -52,3 +52,9 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+// For this setup to work, two Config Vars need to be added in Heroku:
+// MONGO_URL equal to the connection string generated in MongoDB Cloud Atlas
+// for this project
+// And also RESET_DB with value true has to be added so the seedDatabase function
+// is effectively called
