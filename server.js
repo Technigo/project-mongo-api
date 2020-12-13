@@ -70,6 +70,12 @@ app.get('/', (req, res) => {
   console.log(mongoUrl)
 })
 
+app.get('/shows', async (req, res) => {
+  console.log('Test')
+  const shows = await Show.find()
+  res.json(shows)
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
