@@ -10,7 +10,14 @@ import mongoose from 'mongoose'
 // import avocadoSalesData from './data/avocado-sales.json'
 // import booksData from './data/books.json'
 import netflixData from './data/netflix-titles.json'
+console.log(netflixData.length)
 // import topMusicData from './data/top-music.json'
+
+//const mongoUrl = "mongodb+srv://dbUser:dbUserOlofTechnigo@cluster0.x2ofn.mongodb.net/projectMongo?retryWrites=true&w=majority"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+console.log(mongoUrl)
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.Promise = Promise
 
 const Show = mongoose.model('Show', {
   show_id: Number,
@@ -27,22 +34,23 @@ const Show = mongoose.model('Show', {
   type: String
 })
 
-if (process.env.RESET_DB) {
-	const seedDatabase = async () => {
-    await Show.deleteMany({})
+// Show.deleteMany().then(() => {
+// netflixData.forEach((showData) => {
+//   new Show(showData).save()
+// })})
 
-		netflixData.forEach((showData) => {
-			new Show(showData).save()
-		})
-  }
+ if (process.env.RESET_DB) {
+  console.log('resetting database')
+ 	const seedDatabase = async () => {
+     await Show.deleteMany({})
 
-  seedDatabase()
-}
+ 		netflixData.forEach((showData) => {
+ 			new Show(showData).save()
+ 		})
+   }
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-console.log(mongoUrl)
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.Promise = Promise
+   seedDatabase()
+ }
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
