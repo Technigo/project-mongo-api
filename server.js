@@ -59,7 +59,7 @@ app.get('/books', async (req, res) => {
 });
 
 // Route to get a single book based on its ID
-app.get('/books/:bookID', async (req, res) => {
+app.get('/books/book/:bookID', async (req, res) => {
   const singleBook = await Book.findOne({ bookID: req.params.bookID });
 
   if (!singleBook) {
@@ -81,6 +81,13 @@ app.get('/books/authors/:authorName', async (req, res) => {
   }
 
   res.json(authorBooks);
+});
+
+// Route to get Top Rated books, rating higher or equal to 4
+// $gte is MongoDB's comparison query operator for greater or equal to
+app.get('/books/top-rated', async (req, res) => {
+  const topBooks = await Book.find({ average_rating: { $gte: 4 } });
+  res.json(topBooks);
 });
 
 // Start the server
