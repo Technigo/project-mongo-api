@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import mongoose from 'mongoose'
+import mongoose, { connection } from 'mongoose'
 
 import netflixData from './data/netflix-titles.json'
 
@@ -44,6 +44,14 @@ if (process.env.RESET_DATABASE){
 app.use(cors())
 app.use(bodyParser.json())
 
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1){
+    next()
+  } else {
+    res.status(503).json({error: 'Service unavailable'})
+  }
+})
+
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
@@ -52,6 +60,36 @@ app.get('/', (req, res) => {
 app.get('/shows', async (req, res) => {
   const shows = await Show.find()
   res.json(shows)
+})
+
+app.get('/shows/:id', async (req, res) => {
+  const {id} = req.params
+ try { 
+  const singleShow = await Show.findOne({show_id: id})
+  if(singleShow){  
+    res.json(singleShow)
+  } else {
+    res.status(404).json({error: "Show not found"})
+  }
+} catch (err) {
+  res.status(400).json({error: "Invalid ID"})
+}
+
+})
+
+app.get('/shows/year/:year', async (req, res) => {
+  const {year} = req.params
+ try { 
+  const filteredOnYears = await Show.find({release_year: year})
+  if(filteredOnYears){  
+    res.json(filteredOnYears)
+  } else {
+    res.status(404).json({error: "Show not found"})
+  }
+} catch (err) {
+  res.status(400).json({error: "Invalid ID"})
+}
+
 })
 
 // Start the server
