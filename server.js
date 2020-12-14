@@ -83,18 +83,36 @@ app.get('/', (req, res) => {
 
 //______________All books
 app.get('/books', async (req, res) => {
-  const { title, author, page } = req.query
+  const { title, author, language, page } = req.query
+  const pageNumber = +page || 1 //why does ?page=0 console logged out as 1? 
+  console.log(pageNumber)
+  /* is line 87 is shorthand for: ?????
+  https://www.sitepoint.com/shorthand-javascript-techniques/
+  
+  if (page !== null || page !== undefined || page !== '') {
+     let variable2 = page;
+  }
+
+  const variable2 = page || 'new';
+
+  */
+
+  const pageSize = 20
+  const skip = pageSize * (pageNumber -1)
 
   //första authors = definering i modell , author = query parameter.
   let books = await Book.find({
     title: new RegExp(title, 'i'),
-    authors: new RegExp(author, 'i')
+    authors: new RegExp(author, 'i'),
+    language_code: new RegExp(language, 'i')
   })
-    .sort({ average_rating: - 1 })
-  console.log(books)
+    .sort({ average_rating: - 1 }) //hard coded to sort data accordingly to this.
+    .limit(pageSize)
+    .skip(skip)
+
 
   if (books) {
-    res.json(books)
+    res.json({ currentPage: pageNumber, pageSize: pageSize, skip: skip, results: books })
   } else {
     res.status(404).send({ error: "No books found"})
   }
