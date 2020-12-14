@@ -160,7 +160,7 @@ app.get("/api/albums", async (req, res) => {
 			};
 			res.json(returnObj);
 		} else {
-			res.status(404).send({ error: "Not Found" });
+			res.status(404).send(errorMsg);
 		}
 	}
 });
@@ -171,7 +171,7 @@ app.get("/api/albums/top10", async (req, res) => {
 	if (topTenAlbums.length > 0) {
 		res.json(topTenAlbums);
 	} else {
-		res.status(404).send({ error: "Not Found" });
+		res.status(404).send(errorMsg);
 	}
 });
 
@@ -181,7 +181,7 @@ app.get("/api/albums/bottom10", async (req, res) => {
 	if (bottomTenAlbums.length > 0) {
 		res.json(bottomTenAlbums);
 	} else {
-		res.status(404).send({ error: "Not Found" });
+		res.status(404).send(errorMsg);
 	}
 });
 
@@ -193,7 +193,7 @@ app.get("/api/albums/placement/:placement", async (req, res) => {
 	if (singleAlbumFiltered.length > 0) {
 		res.json(singleAlbumFiltered);
 	} else {
-		res.status(404).send({ error: "Not Found" });
+		res.status(404).send(errorMsg);
 	}
 });
 
@@ -207,7 +207,7 @@ app.get("/api/albums/title/:title", async (req, res) => {
 	if (singleAlbumFiltered.length > 0) {
 		res.json(singleAlbumFiltered);
 	} else {
-		res.status(404).send({ error: "Not Found" });
+		res.status(404).send(errorMsg);
 	}
 });
 
