@@ -1,0 +1,802 @@
+[
+  {
+    "Number": 1,
+    "Year": 1967,
+    "Album": "Sgt. Pepper's Lonely Hearts Club Band",
+    "Artist": "The Beatles",
+    "Genre": "Rock",
+    "Subgenre": "Rock and Roll, Psychedelic Rock"
+  },
+  {
+    "Number": 2,
+    "Year": 1966,
+    "Album": "Pet Sounds",
+    "Artist": "The Beach Boys",
+    "Genre": "Rock",
+    "Subgenre": "Pop Rock, Psychedelic Rock"
+  },
+  {
+    "Number": 3,
+    "Year": 1966,
+    "Album": "Revolver",
+    "Artist": "The Beatles",
+    "Genre": "Rock",
+    "Subgenre": "Psychedelic Rock, Pop Rock"
+  },
+  {
+    "Number": 4,
+    "Year": 1965,
+    "Album": "Highway 61 Revisited",
+    "Artist": "Bob Dylan",
+    "Genre": "Rock",
+    "Subgenre": "Folk Rock, Blues Rock"
+  },
+  {
+    "Number": 5,
+    "Year": 1965,
+    "Album": "Rubber Soul",
+    "Artist": "The Beatles",
+    "Genre": "Rock, Pop",
+    "Subgenre": "Pop Rock"
+  },
+  {
+    "Number": 6,
+    "Year": 1971,
+    "Album": "What's Going On",
+    "Artist": "Marvin Gaye",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Soul"
+  },
+  {
+    "Number": 7,
+    "Year": 1972,
+    "Album": "Exile on Main St.",
+    "Artist": "The Rolling Stones",
+    "Genre": "Rock",
+    "Subgenre": "Blues Rock, Rock and Roll, Classic Rock"
+  },
+  {
+    "Number": 8,
+    "Year": 1979,
+    "Album": "London Calling",
+    "Artist": "The Clash",
+    "Genre": "Rock",
+    "Subgenre": "Punk, New Wave"
+  },
+  {
+    "Number": 9,
+    "Year": 1966,
+    "Album": "Blonde on Blonde",
+    "Artist": "Bob Dylan",
+    "Genre": "Rock, Blues",
+    "Subgenre": "Folk Rock, Rhythm and Blues"
+  },
+  {
+    "Number": 10,
+    "Year": 1968,
+    "Album": "The Beatles (\"The White Album\")",
+    "Artist": "The Beatles",
+    "Genre": "Rock",
+    "Subgenre": "Rock and Roll, Pop Rock, Psychedelic Rock, Experimental"
+  },
+  {
+    "Number": 11,
+    "Year": 1976,
+    "Album": "The Sun Sessions",
+    "Artist": "Elvis Presley",
+    "Genre": "Rock",
+    "Subgenre": "Rock and Roll"
+  },
+  {
+    "Number": 12,
+    "Year": 1959,
+    "Album": "Kind of Blue",
+    "Artist": "Miles Davis",
+    "Genre": "Jazz",
+    "Subgenre": "Modal"
+  },
+  {
+    "Number": 13,
+    "Year": 1967,
+    "Album": "The Velvet Underground and Nico",
+    "Artist": "The Velvet Underground",
+    "Genre": "Rock",
+    "Subgenre": "Garage Rock, Art Rock, Experimental"
+  },
+  {
+    "Number": 14,
+    "Year": 1969,
+    "Album": "Abbey Road",
+    "Artist": "The Beatles",
+    "Genre": "Rock",
+    "Subgenre": "Psychedelic Rock, Classic Rock, Pop Rock"
+  },
+  {
+    "Number": 15,
+    "Year": 1967,
+    "Album": "Are You Experienced",
+    "Artist": "The Jimi Hendrix Experience",
+    "Genre": "Rock, Blues",
+    "Subgenre": "Blues Rock, Psychedelic Rock"
+  },
+  {
+    "Number": 16,
+    "Year": 1975,
+    "Album": "Blood on the Tracks",
+    "Artist": "Bob Dylan",
+    "Genre": "Rock",
+    "Subgenre": "Folk Rock, Acoustic, Ballad"
+  },
+  {
+    "Number": 17,
+    "Year": 1991,
+    "Album": "Nevermind",
+    "Artist": "Nirvana",
+    "Genre": "Rock",
+    "Subgenre": "Alternative Rock, Grunge"
+  },
+  {
+    "Number": 18,
+    "Year": 1975,
+    "Album": "Born to Run",
+    "Artist": "Bruce Springsteen",
+    "Genre": "Rock",
+    "Subgenre": "Pop Rock"
+  },
+  {
+    "Number": 19,
+    "Year": 1968,
+    "Album": "Astral Weeks",
+    "Artist": "Van Morrison",
+    "Genre": "Jazz, Rock, Blues, Folk, World, Country",
+    "Subgenre": "Acoustic, Classic Rock, Free Improvisation"
+  },
+  {
+    "Number": 20,
+    "Year": 1982,
+    "Album": "Thriller",
+    "Artist": "Michael Jackson",
+    "Genre": "Funk / Soul, Pop",
+    "Subgenre": "Disco"
+  },
+  {
+    "Number": 21,
+    "Year": 1982,
+    "Album": "The Great Twenty_Eight",
+    "Artist": "Chuck Berry",
+    "Genre": "Rock",
+    "Subgenre": "Rock and Roll"
+  },
+  {
+    "Number": 22,
+    "Year": 1990,
+    "Album": "The Complete Recordings",
+    "Artist": "Robert Johnson",
+    "Genre": "Blues",
+    "Subgenre": "Delta Blues"
+  },
+  {
+    "Number": 23,
+    "Year": 1970,
+    "Album": "John Lennon/Plastic Ono Band",
+    "Artist": "John Lennon / Plastic Ono Band",
+    "Genre": "Rock",
+    "Subgenre": "Pop Rock"
+  },
+  {
+    "Number": 24,
+    "Year": 1973,
+    "Album": "Innervisions",
+    "Artist": "Stevie Wonder",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Soul"
+  },
+  {
+    "Number": 25,
+    "Year": 1963,
+    "Album": "Live at the Apollo, 1962",
+    "Artist": "James Brown",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Rhythm and Blues, Soul"
+  },
+  {
+    "Number": 26,
+    "Year": 1977,
+    "Album": "Rumours",
+    "Artist": "Fleetwood Mac",
+    "Genre": "Rock",
+    "Subgenre": "Pop Rock"
+  },
+  {
+    "Number": 27,
+    "Year": 1987,
+    "Album": "The Joshua Tree",
+    "Artist": "U2",
+    "Genre": "Rock",
+    "Subgenre": "Alternative Rock, Pop Rock"
+  },
+  {
+    "Number": 28,
+    "Year": 1971,
+    "Album": "Who's Next",
+    "Artist": "The Who",
+    "Genre": "Rock",
+    "Subgenre": "Hard Rock, Mod, Prog Rock, Psychedelic Rock"
+  },
+  {
+    "Number": 29,
+    "Year": 1969,
+    "Album": "Led Zeppelin",
+    "Artist": "Led Zeppelin",
+    "Genre": "Rock",
+    "Subgenre": "Blues Rock, Hard Rock"
+  },
+  {
+    "Number": 30,
+    "Year": 1971,
+    "Album": "Blue",
+    "Artist": "Joni Mitchell",
+    "Genre": "Pop",
+    "Subgenre": "Acoustic, Ballad, Folk"
+  },
+  {
+    "Number": 31,
+    "Year": 1965,
+    "Album": "Bringing It All Back Home",
+    "Artist": "Bob Dylan",
+    "Genre": "Rock, Folk, World, Country",
+    "Subgenre": "Folk Rock, Folk"
+  },
+  {
+    "Number": 32,
+    "Year": 1969,
+    "Album": "Let It Bleed",
+    "Artist": "The Rolling Stones",
+    "Genre": "Rock",
+    "Subgenre": "Blues Rock, Hard Rock"
+  },
+  {
+    "Number": 33,
+    "Year": 1976,
+    "Album": "Ramones",
+    "Artist": "Ramones",
+    "Genre": "Rock",
+    "Subgenre": "Rock and Roll, Punk"
+  },
+  {
+    "Number": 34,
+    "Year": 1968,
+    "Album": "Music From Big Pink",
+    "Artist": "The Band",
+    "Genre": "Rock",
+    "Subgenre": "Folk Rock, Acoustic, Blues Rock"
+  },
+  {
+    "Number": 35,
+    "Year": 1972,
+    "Album": "The Rise and Fall of Ziggy Stardust and the Spiders From Mars",
+    "Artist": "David Bowie",
+    "Genre": "Rock",
+    "Subgenre": "Classic Rock, Glam"
+  },
+  {
+    "Number": 36,
+    "Year": 1971,
+    "Album": "Tapestry",
+    "Artist": "Carole King",
+    "Genre": "Rock, Pop",
+    "Subgenre": "Folk Rock, Soft Rock"
+  },
+  {
+    "Number": 37,
+    "Year": 1976,
+    "Album": "Hotel California",
+    "Artist": "Eagles",
+    "Genre": "Rock",
+    "Subgenre": "Classic Rock"
+  },
+  {
+    "Number": 38,
+    "Year": 2001,
+    "Album": "The Anthology",
+    "Artist": "Muddy Waters",
+    "Genre": "Folk, World, Country",
+    "Subgenre": "Folk"
+  },
+  {
+    "Number": 39,
+    "Year": 1963,
+    "Album": "Please Please Me",
+    "Artist": "The Beatles",
+    "Genre": "Rock",
+    "Subgenre": "Beat, Rock and Roll"
+  },
+  {
+    "Number": 40,
+    "Year": 1967,
+    "Album": "Forever Changes",
+    "Artist": "Love",
+    "Genre": "Rock",
+    "Subgenre": "Folk Rock, Psychedelic Rock"
+  },
+  {
+    "Number": 41,
+    "Year": 1977,
+    "Album": "Never Mind the Bollocks Here's the Sex Pistols",
+    "Artist": "Sex Pistols",
+    "Genre": "Rock",
+    "Subgenre": "Punk"
+  },
+  {
+    "Number": 42,
+    "Year": 1967,
+    "Album": "The Doors",
+    "Artist": "The Doors",
+    "Genre": "Rock",
+    "Subgenre": "Psychedelic Rock"
+  },
+  {
+    "Number": 43,
+    "Year": 1973,
+    "Album": "The Dark Side of the Moon",
+    "Artist": "Pink Floyd",
+    "Genre": "Rock",
+    "Subgenre": "Prog Rock"
+  },
+  {
+    "Number": 44,
+    "Year": 1975,
+    "Album": "Horses",
+    "Artist": "Patti Smith",
+    "Genre": "Rock",
+    "Subgenre": "Art Rock"
+  },
+  {
+    "Number": 45,
+    "Year": 1969,
+    "Album": "The Band (\"The Brown Album\")",
+    "Artist": "The Band",
+    "Genre": "Classical, Stage and Screen",
+    "Subgenre": "Soundtrack, Modern Classical, Contemporary, Score"
+  },
+  {
+    "Number": 46,
+    "Year": 1984,
+    "Album": "Legend: The Best of Bob Marley and The Wailers",
+    "Artist": "Bob Marley and The Wailers",
+    "Genre": "Reggae",
+    "Subgenre": "Reggae, Roots Reggae"
+  },
+  {
+    "Number": 47,
+    "Year": 1965,
+    "Album": "A Love Supreme",
+    "Artist": "John Coltrane",
+    "Genre": "Jazz",
+    "Subgenre": "Free Jazz, Hard Bop, Modal"
+  },
+  {
+    "Number": 48,
+    "Year": 1988,
+    "Album": "It Takes a Nation of Millions to Hold Us Back",
+    "Artist": "Public Enemy",
+    "Genre": "Hip Hop",
+    "Subgenre": "Conscious"
+  },
+  {
+    "Number": 49,
+    "Year": 1971,
+    "Album": "At Fillmore East",
+    "Artist": "The Allman Brothers Band",
+    "Genre": "Rock, Blues",
+    "Subgenre": "Blues Rock"
+  },
+  {
+    "Number": 50,
+    "Year": 1957,
+    "Album": "Here's Little Richard",
+    "Artist": "Little Richard",
+    "Genre": "Rock, Blues",
+    "Subgenre": "Rock and Roll, Rhythm and Blues"
+  },
+  {
+    "Number": 51,
+    "Year": 1970,
+    "Album": "Bridge Over Troubled Water",
+    "Artist": "Simon and Garfunkel",
+    "Genre": "Rock",
+    "Subgenre": "Folk Rock, Classic Rock"
+  },
+  {
+    "Number": 52,
+    "Year": 1975,
+    "Album": "Greatest Hits",
+    "Artist": "Al Green",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Soul"
+  },
+  {
+    "Number": 53,
+    "Year": 1964,
+    "Album": "Meet The Beatles!",
+    "Artist": "The Beatles",
+    "Genre": "Rock",
+    "Subgenre": "Beat, Rock and Roll"
+  },
+  {
+    "Number": 54,
+    "Year": 1991,
+    "Album": "The Birth of Soul",
+    "Artist": "Ray Charles",
+    "Genre": "Jazz, Funk / Soul",
+    "Subgenre": "Rhythm and Blues, Big Band, Soul, Soul-Jazz"
+  },
+  {
+    "Number": 55,
+    "Year": 1968,
+    "Album": "Electric Ladyland",
+    "Artist": "The Jimi Hendrix Experience",
+    "Genre": "Rock, Blues",
+    "Subgenre": "Electric Blues, Psychedelic Rock"
+  },
+  {
+    "Number": 56,
+    "Year": 1956,
+    "Album": "Elvis Presley",
+    "Artist": "Elvis Presley",
+    "Genre": "Rock",
+    "Subgenre": "Rock and Roll, Rockabilly"
+  },
+  {
+    "Number": 57,
+    "Year": 1976,
+    "Album": "Songs in the Key of Life",
+    "Artist": "Stevie Wonder",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Soul, Disco"
+  },
+  {
+    "Number": 58,
+    "Year": 1968,
+    "Album": "Beggars Banquet",
+    "Artist": "The Rolling Stones",
+    "Genre": "Rock, Funk / Soul, Pop",
+    "Subgenre": "Blues Rock, Southern Rock, Classic Rock"
+  },
+  {
+    "Number": 59,
+    "Year": 1976,
+    "Album": "Chronicle: The 20 Greatest Hits",
+    "Artist": "Creedence Clearwater Revival",
+    "Genre": "Rock",
+    "Subgenre": "None"
+  },
+  {
+    "Number": 60,
+    "Year": 1969,
+    "Album": "Trout Mask Replica",
+    "Artist": "Captain Beefheart and His Magic Band",
+    "Genre": "Rock, Blues",
+    "Subgenre": "Dialogue, Field Recording, Avantgarde, Electric Blues, Psychedelic Rock, Experimental"
+  },
+  {
+    "Number": 61,
+    "Year": 1970,
+    "Album": "Greatest Hits",
+    "Artist": "Sly and The Family Stone",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Rhythm and Blues, Funk"
+  },
+  {
+    "Number": 62,
+    "Year": 1987,
+    "Album": "Appetite for Destruction",
+    "Artist": "Guns N' Roses",
+    "Genre": "Rock",
+    "Subgenre": "Hard Rock, Heavy Metal"
+  },
+  {
+    "Number": 63,
+    "Year": 1991,
+    "Album": "Achtung Baby",
+    "Artist": "U2",
+    "Genre": "Electronic, Rock",
+    "Subgenre": "Pop Rock, Synth-pop, Alternative Rock, Arena Rock"
+  },
+  {
+    "Number": 64,
+    "Year": 1971,
+    "Album": "Sticky Fingers",
+    "Artist": "The Rolling Stones",
+    "Genre": "Rock",
+    "Subgenre": "Classic Rock"
+  },
+  {
+    "Number": 65,
+    "Year": 1991,
+    "Album": "Back to Mono (1958-1969)",
+    "Artist": "Phil Spector",
+    "Genre": "Rock, Funk / Soul, Pop",
+    "Subgenre": "Doo Wop, Pop Rock, Ballad, Rhythm and Blues"
+  },
+  {
+    "Number": 66,
+    "Year": 1970,
+    "Album": "Moondance",
+    "Artist": "Van Morrison",
+    "Genre": "Jazz, Rock, Funk / Soul, Folk, World, Country",
+    "Subgenre": "Folk Rock, Rhythm and Blues, Classic Rock, Contemporary Jazz"
+  },
+  {
+    "Number": 67,
+    "Year": 2000,
+    "Album": "Kid A",
+    "Artist": "Radiohead",
+    "Genre": "Electronic, Rock",
+    "Subgenre": "Alternative Rock, IDM, Experimental"
+  },
+  {
+    "Number": 68,
+    "Year": 1979,
+    "Album": "Off the Wall",
+    "Artist": "Michael Jackson",
+    "Genre": "Funk / Soul, Pop",
+    "Subgenre": "Disco, Soul, Ballad"
+  },
+  {
+    "Number": 69,
+    "Year": 1971,
+    "Album": "[Led Zeppelin IV]",
+    "Artist": "Led Zeppelin",
+    "Genre": "Rock",
+    "Subgenre": "Hard Rock, Classic Rock, Blues Rock"
+  },
+  {
+    "Number": 70,
+    "Year": 1977,
+    "Album": "The Stranger",
+    "Artist": "Billy Joel",
+    "Genre": "Rock",
+    "Subgenre": "Pop Rock"
+  },
+  {
+    "Number": 71,
+    "Year": 1986,
+    "Album": "Graceland",
+    "Artist": "Paul Simon",
+    "Genre": "Jazz, Rock, Funk / Soul, Pop, Folk, World, Country",
+    "Subgenre": "Folk Rock, Pop Rock, African, Afrobeat, Zydeco, Funk, Rhythm and Blues"
+  },
+  {
+    "Number": 72,
+    "Year": 1972,
+    "Album": "Superfly",
+    "Artist": "Curtis Mayfield",
+    "Genre": "Funk / Soul, Stage and Screen",
+    "Subgenre": "Soundtrack, Soul"
+  },
+  {
+    "Number": 73,
+    "Year": 1975,
+    "Album": "Physical Graffiti",
+    "Artist": "Led Zeppelin",
+    "Genre": "Rock",
+    "Subgenre": "Classic Rock"
+  },
+  {
+    "Number": 74,
+    "Year": 1970,
+    "Album": "After the Gold Rush",
+    "Artist": "Neil Young",
+    "Genre": "Rock",
+    "Subgenre": "Rock and Roll, Country Rock"
+  },
+  {
+    "Number": 75,
+    "Year": 1991,
+    "Album": "Star Time",
+    "Artist": "James Brown",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Soul, Funk, Disco"
+  },
+  {
+    "Number": 76,
+    "Year": 1984,
+    "Album": "Purple Rain",
+    "Artist": "Prince and the Revolution",
+    "Genre": "Electronic, Rock, Funk / Soul, Stage and Screen",
+    "Subgenre": "Pop Rock, Funk, Soundtrack, Synth-pop"
+  },
+  {
+    "Number": 77,
+    "Year": 1980,
+    "Album": "Back in Black",
+    "Artist": "AC/DC",
+    "Genre": "Rock",
+    "Subgenre": "Hard Rock"
+  },
+  {
+    "Number": 78,
+    "Year": 1965,
+    "Album": "Otis Blue: Otis Redding Sings Soul",
+    "Artist": "Otis Redding",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Soul"
+  },
+  {
+    "Number": 79,
+    "Year": 1969,
+    "Album": "Led Zeppelin II",
+    "Artist": "Led Zeppelin",
+    "Genre": "Rock",
+    "Subgenre": "Blues Rock, Classic Rock, Hard Rock"
+  },
+  {
+    "Number": 80,
+    "Year": 1971,
+    "Album": "Imagine",
+    "Artist": "John Lennon",
+    "Genre": "Rock",
+    "Subgenre": "Pop Rock"
+  },
+  {
+    "Number": 81,
+    "Year": 1977,
+    "Album": "The Clash",
+    "Artist": "The Clash",
+    "Genre": "Rock",
+    "Subgenre": "Punk"
+  },
+  {
+    "Number": 82,
+    "Year": 1972,
+    "Album": "Harvest",
+    "Artist": "Neil Young",
+    "Genre": "Rock",
+    "Subgenre": "Folk Rock, Country Rock, Classic Rock"
+  },
+  {
+    "Number": 83,
+    "Year": 1967,
+    "Album": "Axis: Bold as Love",
+    "Artist": "The Jimi Hendrix Experience",
+    "Genre": "Rock",
+    "Subgenre": "Psychedelic Rock, Electric Blues"
+  },
+  {
+    "Number": 84,
+    "Year": 1967,
+    "Album": "I Never Loved a Man the Way I Love You",
+    "Artist": "Aretha Franklin",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Soul"
+  },
+  {
+    "Number": 85,
+    "Year": 1968,
+    "Album": "Lady Soul",
+    "Artist": "Aretha Franklin",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Soul"
+  },
+  {
+    "Number": 86,
+    "Year": 1984,
+    "Album": "Born in the U.S.A.",
+    "Artist": "Bruce Springsteen",
+    "Genre": "Rock",
+    "Subgenre": "Pop Rock"
+  },
+  {
+    "Number": 87,
+    "Year": 1979,
+    "Album": "The Wall",
+    "Artist": "Pink Floyd",
+    "Genre": "Rock",
+    "Subgenre": "Alternative Rock, Prog Rock"
+  },
+  {
+    "Number": 88,
+    "Year": 1968,
+    "Album": "At Folsom Prison",
+    "Artist": "Johnny Cash",
+    "Genre": "Folk, World, Country",
+    "Subgenre": "Country"
+  },
+  {
+    "Number": 89,
+    "Year": 1969,
+    "Album": "Dusty in Memphis",
+    "Artist": "Dusty Springfield",
+    "Genre": "Rock, Funk / Soul",
+    "Subgenre": "Pop Rock, Soul"
+  },
+  {
+    "Number": 90,
+    "Year": 1972,
+    "Album": "Talking Book",
+    "Artist": "Stevie Wonder",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Soul, Funk"
+  },
+  {
+    "Number": 91,
+    "Year": 1973,
+    "Album": "Goodbye Yellow Brick Road",
+    "Artist": "Elton John",
+    "Genre": "Rock",
+    "Subgenre": "Pop Rock, Classic Rock"
+  },
+  {
+    "Number": 92,
+    "Year": 1978,
+    "Album": "20 Golden Greats",
+    "Artist": "Buddy Holly",
+    "Genre": "Rock",
+    "Subgenre": "Rock and Roll"
+  },
+  {
+    "Number": 93,
+    "Year": 1987,
+    "Album": "Sign \"Peace\" the Times",
+    "Artist": "Prince",
+    "Genre": "Rock, Reggae",
+    "Subgenre": "Ska, Reggae-Pop"
+  },
+  {
+    "Number": 94,
+    "Year": 1984,
+    "Album": "40 Greatest Hits",
+    "Artist": "Hank Williams",
+    "Genre": "Folk, World, Country",
+    "Subgenre": "Country"
+  },
+  {
+    "Number": 95,
+    "Year": 1970,
+    "Album": "Bitches Brew",
+    "Artist": "Miles Davis",
+    "Genre": "Jazz",
+    "Subgenre": "Fusion"
+  },
+  {
+    "Number": 96,
+    "Year": 1969,
+    "Album": "Tommy",
+    "Artist": "The Who",
+    "Genre": "Rock",
+    "Subgenre": "Psychedelic Rock"
+  },
+  {
+    "Number": 97,
+    "Year": 1963,
+    "Album": "The Freewheelin' Bob Dylan",
+    "Artist": "Bob Dylan",
+    "Genre": "Folk, World, Country",
+    "Subgenre": "Folk"
+  },
+  {
+    "Number": 98,
+    "Year": 1978,
+    "Album": "This Year's Model",
+    "Artist": "Elvis Costello",
+    "Genre": "Rock",
+    "Subgenre": "New Wave"
+  },
+  {
+    "Number": 99,
+    "Year": 1971,
+    "Album": "There's a Riot Goin' On",
+    "Artist": "Sly and The Family Stone",
+    "Genre": "Funk / Soul",
+    "Subgenre": "Rhythm and Blues, Funk"
+  },
+  {
+    "Number": 100,
+    "Year": 1968,
+    "Album": "Odessey and Oracle",
+    "Artist": "The Zombies",
+    "Genre": "Rock",
+    "Subgenre": "Psychedelic Rock"
+  }
+]
