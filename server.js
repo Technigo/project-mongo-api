@@ -1,18 +1,11 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import spotifyData from "./data/spotify-releases.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-spotify"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -27,9 +20,43 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+const Release = new mongoose.model("Release", {
+  album_type: String,
+  // artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, type: String, uri: String }],
+  artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, uri: String }],
+  available_markets: [String],
+  external_urls: { spotify: String },
+  href: String,
+  id: String,
+  images: [{ height: Number, url: String, width: Number }],
+  name: String,
+  release_date: String,
+  release_date_precision: String,
+  total_tracks: Number,
+  type: String,
+  uri: String
+});
+
+if (process.env.RESET_DATABASE) {
+  const populateDatabase = async () => {
+    await Release.deleteMany();
+
+    spotifyData.forEach(item => {
+      const newRelease = new Release(item);
+      newRelease.save();
+    })
+  }
+  populateDatabase();
+};
+
 // Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
+app.get("/", (req, res) => {
+  res.send("Hello world")
+})
+
+app.get("/releases", async (req, res) => {
+  const allReleases = await Release.find();
+  res.json(allReleases);
 })
 
 // Start the server
