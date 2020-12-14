@@ -69,6 +69,20 @@ app.get('/books/:bookID', async (req, res) => {
   res.json(singleBook);
 });
 
+// Route to get books by a specific author
+app.get('/books/authors/:authorName', async (req, res) => {
+  const paramsAuthorName = req.params.authorName;
+  // Added a regex so that it will search non-case-sensitive and if the name is included
+  // in the authors string
+  const authorBooks = await Book.find({ authors: { $regex : new RegExp(paramsAuthorName, "i") } });
+   
+  if (authorBooks.length === 0) {
+    res.status(404).json("Sorry, could not find any books by thay author, double check author name :(");
+  }
+
+  res.json(authorBooks);
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
