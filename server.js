@@ -28,7 +28,7 @@ const Book = mongoose.model('Book', {
 // RESET_DB environment variable is present and is true
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    // Starts by deleting any pre-existing Book objects to preven duplicates
+    // Starts by deleting any pre-existing Book objects to prevent duplicates
     await Book.deleteMany({});
     
     // Creates a new Book instance for each book in the booksData
@@ -56,6 +56,12 @@ app.get('/', (req, res) => {
 app.get('/books', async (req, res) => {
   const allBooks = await Book.find();
   res.json(allBooks);
+});
+
+// Route to get a single book based on its ID
+app.get('/books/:bookID', async (req, res) => {
+  const singleBook = await Book.findOne({ bookID: req.params.bookID });
+  res.json(singleBook);
 });
 
 // Start the server
