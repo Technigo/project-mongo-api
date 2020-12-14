@@ -60,13 +60,19 @@ app.get('/books', async (req, res) => {
 
 // Route to get a single book based on its ID
 app.get('/books/book/:bookID', async (req, res) => {
-  const singleBook = await Book.findOne({ bookID: req.params.bookID });
+  try {
+    const singleBook = await Book.findOne({ bookID: req.params.bookID });
 
-  if (!singleBook) {
-    res.status(404).json("Sorry, invalid Book ID! :(");
+    if (singleBook) {
+      res.json(singleBook);
+    } else {
+      // Error when the book id format is valid, but still no book is found with that id
+      res.status(404).json("Sorry, no books found with that ID :(");
+    }
+  } catch (err) {
+    // error when the book id format is wrong, an invalid book id is entered
+    res.status(400).json({ error: "Invalid Book ID, double check book id value" })
   }
-
-  res.json(singleBook);
 });
 
 // Route to get books by a specific author
