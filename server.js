@@ -83,31 +83,15 @@ app.get('/', (req, res) => {
 
 //______________All books
 app.get('/books', async (req, res) => {
-  const { title, author, sort } = req.query
-  const titleRegex = new RegExp(title, 'i')
-  console.log(`title regex: ${titleRegex}`)
-  const authorRegex = new RegExp(author, 'i')
-  console.log(`author regex: ${authorRegex}`)
-  let books = await Book.find()
+  const { title, author, page } = req.query
 
-//sort by rating
-  if(sort === "rating_dsc") {
-    books = await Book.find().sort({ 
-      average_rating: -1,
-  })} else if (sort === "rating_asc") {
-    books = await Book.find().sort({
-      average_rating: 1,
-  })};
-
-  //filter by author
-  if (author) {
-    books = await Book.find({ authors: authorRegex });
-  };
-
-  //filter by title
-  if (title) {
-    books = await Book.find({ title: titleRegex });
-  };
+  //första authors = definering i modell , author = query parameter.
+  let books = await Book.find({
+    title: new RegExp(title, 'i'),
+    authors: new RegExp(author, 'i')
+  })
+    .sort({ average_rating: - 1 })
+  console.log(books)
 
   if (books) {
     res.json(books)
@@ -116,9 +100,7 @@ app.get('/books', async (req, res) => {
   }
 })
 
-//____________Single book 
-// /books/:id endpoint
-// RETURNS: A single book by id from books.json
+//____________Single book
 app.get('/books/:id', async (req, res) => {
   const { id } = req.params;
 
