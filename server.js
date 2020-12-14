@@ -32,20 +32,9 @@ if (process.env.RESET_DATABASE){
     console.log("Resetting database")
     await Show.deleteMany()
 
-    const chocolate = new Show({
-      "title": "Chocolate",
-      "director": "",
-      "cast": "Ha Ji-won, Yoon Kye-sang, Jang Seung-jo, Kang Bu-ja, Lee Jae-ryong, Min Jin-woong, Kim Won-hae, Yoo Teo",
-      "country": "South Korea",
-      "date_added": "November 30, 2019",
-      "release_year": 2019,
-      "rating": "TV-14",
-      "duration": "1 Season",
-      "listed_in": "International TV Shows, Korean TV Shows, Romantic TV Shows",
-      "description": "Brought together by meaningful meals in the past and present, a doctor and a chef are reacquainted when they begin working at a hospice ward.",
-      "type": "TV Show"})
-
-    await chocolate.save()
+    netflixData.forEach((showData) => {
+      new Show(showData).save()
+    })
   }
 
  seedDatabase()
