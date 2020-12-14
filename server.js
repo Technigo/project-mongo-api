@@ -61,6 +61,11 @@ app.get('/books', async (req, res) => {
 // Route to get a single book based on its ID
 app.get('/books/:bookID', async (req, res) => {
   const singleBook = await Book.findOne({ bookID: req.params.bookID });
+
+  if (!singleBook) {
+    res.status(404).json("Sorry, invalid Book ID! :(");
+  }
+
   res.json(singleBook);
 });
 
