@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 
 import booksData from './data/books.json';
 
+// Code for setting up our Mongo database
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -23,15 +24,18 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 });
 
+// Function to start seeding our Database, will only run if
+// RESET_DB environment variable is present and is true
 if (process.env.RESET_DB) {
-	const seedDatabase = async () => {
+  const seedDatabase = async () => {
+    // Starts by deleting any pre-existing Book objects to preven duplicates
     await Book.deleteMany({});
-
-		booksData.forEach((bookData) => {
-			new Book(bookData).save();
-		})
-  }
-
+    
+    // Creates a new Book instance for each book in the booksData
+    booksData.forEach((bookData) => {
+      new Book(bookData).save();
+    })
+  };
   seedDatabase();
 };
 
@@ -43,9 +47,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Start defining your routes here
+// ROUTES
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.send('Hello world, welcome to Vane Bookish API, powered by MongoDB now!');
+});
+
+// Route to get all the books in the database
+app.get('/books', async (req, res) => {
+  const allBooks = await Book.find();
+  res.json(allBooks);
 });
 
 // Start the server
