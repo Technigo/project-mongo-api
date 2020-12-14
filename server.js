@@ -1,228 +1,221 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import mongoose from 'mongoose';
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import mongoose from "mongoose";
+import albums from "./data/albums.json";
+import errorMsg from "./assets/errormsg.json";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
- import albums from './data/albums.json';
-
-
+/*Database */
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 /*SEED THE DATABASE*/
-const Album = mongoose.model('Album', {
-  // Properties defined here match the keys from the people.json file
-  number : Number,
-  year : Number,
-  album : String,
-  artist : String,
-  genre : String,
-  subgenre : String
+const Album = mongoose.model("Album", {
+	number: Number,
+	year: Number,
+	album: String,
+	artist: String,
+	genre: String,
+	subgenre: String,
 });
 
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
-    console.log("seeding database");
-    await Album.deleteMany({})
+		console.log("seeding database");
+		await Album.deleteMany({});
 
 		albums.forEach((albumData) => {
-			new Album(albumData).save()
-		})
-  }
+			new Album(albumData).save();
+		});
+	};
 
-  seedDatabase();
-} 
+	seedDatabase();
+}
 
+/*API*/
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
-const port = process.env.PORT || 8080
-const app = express()
+const port = process.env.PORT || 8080;
+const app = express();
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(bodyParser.json())
+app.use(cors());
+app.use(bodyParser.json());
+const myEndpoints = require("express-list-endpoints");
 
-// Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
-})
-
-/*COLLECTIONS*/ 
-//Get all the albums from the database .
-app.get('/api/albums',async (req,res) => {
-  
-  const filterYear = req.query.year;
-  const filterArtist = req.query.artist;
-  const filterGenre = req.query.genre;
-  const page = req.query.page || 1;
-  const pageSize = 50;
-  const skipIndex = pageSize * (page - 1);
-
-  const sortBy = req.query.sortBy;
-  const sortOrder = req.query.sortOrder;
-  let sortQuery = { number : 1};
-  
-  let artistFilter = null;
-  let yearFilter = null;
-  let genreFilter = null;
-  let filterArray = [];
-
-
-  //Check if there are sorting parameters in the query. If not, the default is used. If one param, the other param is default.
-  if(sortBy || sortOrder){
-    const querySortBy = !sortBy ? "number" : sortBy.toLowerCase();
-    const querySortOrder = !sortOrder ? 1 : sortOrder;
-    sortQuery = {[querySortBy] : querySortOrder};
-    console.log("SortQuery" , sortQuery);
-  }
-
-    if(!filterYear && !filterGenre && !filterArtist){
-    console.log("no query filters, get all the albums");
-      console.log("skipIndex:", skipIndex);
-      console.log("Limit:" , pageSize);
-    const albumsData = await Album.find().sort(sortQuery).skip(skipIndex).limit(pageSize);
-    //.limit(pageSize).skipIndex(skipIndex);
-     if(albumsData){
-        res.json(albumsData);
-      }
-      else{
-        res.status(404).json({ error : "Not Found"});
-      };
-    }
-
-    //Filters NEW START
-
-  
-   if(filterYear || filterGenre || filterArtist)
-   {
-     console.log("Found query parameters"); 
-    if(filterArtist){
-      artistFilter = { artist : filterArtist };
-      filterArray.push(artistFilter);
-      }
-      if(filterYear){
-      yearFilter = { year : filterYear };
-      filterArray.push(yearFilter);
-      }
-      if(filterGenre){
-      genreFilter = { genre : filterGenre };
-        filterArray.push(genreFilter);
-      }
-      console.log(filterArray);
-    
-      const albumsDataFiltered = await Album.find({$and: filterArray}).collation({locale: "en", strength: 2}).sort(sortQuery).skip(skipIndex).limit(pageSize);
-      res.json(albumsDataFiltered); 
-   }
-
-
-    //Filter NEW END
-
-
-    /*
-    //Backlog - how to filter on everything at the same time? 
-    if(filterArtist){
-      console.log("filter is artist", filterArtist);
-      const albumsDataFiltered = await Album.find({artist : new RegExp(`^${filterArtist}$`, 'i')}).sort(sortQuery);
-      res.json(albumsDataFiltered); 
-    }
-    if(filterYear){
-      const albumsDataFiltered = await Album.find({year : filterYear}).sort(sortQuery);
-        res.json(albumsDataFiltered); 
-    }
-    if(filterGenre){
-      //.collation({locale: "en", strength: 2});
-      const albumsDataFiltered = await Album.find({genre : new RegExp(`^${filterGenre}$`, 'i')}).sort(sortQuery);
-        res.json(albumsDataFiltered); 
-    }
-   
-*/
-    /*if(filterArtist){
-      console.log("Filter on artist and year");
-      const albumsDataFiltered = await Album.find({Artist:"The Beatles"});
-      res.json(albumsDataFiltered);
-    }*/
-  }
-
-)
-
-//Special endpoint for testing purposes
-//{ artist: "The Beatles", year : 1966 }
-app.get('/api/albums/filterAll',async (req,res) => {
-
-  const artistParam = "the beatles";
-  const yearParam = 1966;
-  const genreParam = "Rock"; 
-  let artistFilter = "";
-  let yearFilter = null;
-  let genreFilter = "";
-  let filterArray = [];
-
- if(artistParam || yearParam || genreParam)
- {
-  if(artistParam){
-    artistFilter = { artist : artistParam };
-    filterArray.push(artistFilter);
-    }
-    if(yearParam){
-    yearFilter = { year : yearParam };
-    filterArray.push(yearFilter);
-    }
-    if(genreParam){
-    genreFilter = { genre : genreParam };
-      filterArray.push(genreFilter);
-    }
-    console.log(filterArray);
-  
-    const albumsDataFiltered = await Album.find({$and: filterArray}).collation({locale: "en", strength: 2});
-    res.json(albumsDataFiltered); 
- }
- 
+app.get("/", (req, res) => {
+	res.send(myEndpoints(app));
 });
 
-//Get top10  albums from the database .
-app.get('/api/albums/top10',async (req,res) => {
-  const topTenAlbums = await Album.find().sort({number : 1}).limit(10);
-  res.json(topTenAlbums);
-}
-)
+/*COLLECTIONS*/
+//Get all the albums from the database .
+app.get("/api/albums", async (req, res) => {
+	const filterYear = req.query.year;
+	const filterArtist = req.query.artist;
+	const filterGenre = req.query.genre;
+	const filterYearTo = req.query.yearTo;
+	const filterYearFrom = req.query.yearFrom;
+	const noFilters =
+		!filterYear &&
+		!filterArtist &&
+		!filterGenre &&
+		!filterYearTo &&
+		!filterYearFrom
+			? true
+			: false;
 
-//Get bottom10  albums from the database .
-app.get('/api/albums/bottom10',async (req,res) => {
-  const bottomTenAlbums = await Album.find().sort({number : -1}).limit(10);
-  res.json(bottomTenAlbums);
-}
-)
+	const page = req.query.page || 1;
+	const pageSize = 50;
+	const skipIndex = pageSize * (page - 1);
 
-/*Single Items*/
+	const sortBy = req.query.sortBy;
+	const sortOrder = req.query.sortOrder;
+	let sortQuery = { number: 1 };
 
-//Get by placement in list 
-app.get('/api/albums/placement/:placement', async (req,res) => {
-  const placement = req.params.placement;
-  const singleAlbumFiltered = await Album.findOne({number : placement});
-  res.json(singleAlbumFiltered); 
-})
+	let artistFilter = null;
+	let yearFilter = null;
+	let genreFilter = null;
+	let yearToFilter = null;
+	let yearFromFilter = null;
+	let filterArray = [];
+
+	//Check if there are sorting parameters in the query. If not, the default is used. If one param, the other param is default.
+	if (sortBy || sortOrder) {
+		const querySortBy = !sortBy ? "number" : sortBy.toLowerCase();
+		const querySortOrder = !sortOrder ? 1 : sortOrder;
+		sortQuery = { [querySortBy]: querySortOrder };
+		console.log("SortQuery", sortQuery);
+	}
+
+	//if(!filterYear && !filterGenre && !filterArtist){
+	if (noFilters) {
+		console.log("no query filters, get all the albums");
+
+		const albumsData = await Album.find()
+			.sort(sortQuery)
+			.skip(skipIndex)
+			.limit(pageSize);
+		const albumsTotalCount = await Album.find()
+			.sort(sortQuery)
+			.countDocuments();
+
+		//.limit(pageSize).skipIndex(skipIndex);
+
+		//Create an albumsdata object with additional information
+		if (albumsData.length > 0) {
+			const returnObj = {
+				albumsTotalCount: albumsTotalCount,
+				albumsReturned: albumsData.length,
+				pageSize: pageSize,
+				page: page,
+				results: albumsData,
+			};
+			res.json(returnObj);
+		} else {
+			res.status(404).send(errorMsg);
+		}
+	}
+
+	if (!noFilters) {
+		console.log("Found query parameters");
+		if (filterArtist) {
+			artistFilter = { artist: filterArtist };
+			filterArray.push(artistFilter);
+		}
+		if (filterYear) {
+			yearFilter = { year: filterYear };
+			filterArray.push(yearFilter);
+		}
+		if (filterGenre) {
+			genreFilter = { genre: filterGenre };
+			filterArray.push(genreFilter);
+		}
+		//Range cannot be used in combination with exact.
+		if (filterYearFrom && !filterYear) {
+			yearFromFilter = { year: { $gte: filterYearFrom } };
+			filterArray.push(yearFromFilter);
+		}
+
+		if (filterYearTo && !filterYear) {
+			yearToFilter = { year: { $lte: filterYearTo } };
+			filterArray.push(yearToFilter);
+		}
+		console.log(filterArray);
+
+		const albumsDataFiltered = await Album.find({ $and: filterArray })
+			.collation({ locale: "en", strength: 2 })
+			.sort(sortQuery)
+			.skip(skipIndex)
+			.limit(pageSize);
+		const albumsTotalMatchCount = await Album.find({ $and: filterArray })
+			.collation({ locale: "en", strength: 2 })
+			.countDocuments();
+
+		if (albumsDataFiltered.length > 0) {
+			const returnObj = {
+				albumsTotalCount: albumsTotalMatchCount,
+				albumsReturned: albumsDataFiltered.length,
+				pageSize: pageSize,
+				page: page,
+				filters: filterArray,
+				results: albumsDataFiltered,
+			};
+			res.json(returnObj);
+		} else {
+			res.status(404).send({ error: "Not Found" });
+		}
+	}
+});
+
+//Get top10 albums from the database .
+app.get("/api/albums/top10", async (req, res) => {
+	const topTenAlbums = await Album.find().sort({ number: 1 }).limit(10);
+	if (topTenAlbums.length > 0) {
+		res.json(topTenAlbums);
+	} else {
+		res.status(404).send({ error: "Not Found" });
+	}
+});
+
+//Get bottom10 albums from the database .
+app.get("/api/albums/bottom10", async (req, res) => {
+	const bottomTenAlbums = await Album.find().sort({ number: -1 }).limit(10);
+	if (bottomTenAlbums.length > 0) {
+		res.json(bottomTenAlbums);
+	} else {
+		res.status(404).send({ error: "Not Found" });
+	}
+});
+
+/*SINGLE ITEMS*/
+
+//Get by placement in list
+app.get("/api/albums/placement/:placement", async (req, res) => {
+	const placement = req.params.placement;
+	const singleAlbumFiltered = await Album.findOne({ number: placement });
+	if (singleAlbumFiltered.length > 0) {
+		res.json(singleAlbumFiltered);
+	} else {
+		res.status(404).send({ error: "Not Found" });
+	}
+});
 
 //Get by album title
-app.get('/api/albums/title/:title', async (req,res) => {
-  const title = req.params.title.replaceAll('+',' ');
-  console.log({title});
-  const singleAlbumFiltered = await Album.findOne({album : title}).collation({locale: "en", strength: 2});
-  res.json(singleAlbumFiltered); 
-})
-
-
-
-
-
+app.get("/api/albums/title/:title", async (req, res) => {
+	const title = req.params.title.replaceAll("+", " ");
+	console.log({ title });
+	const singleAlbumFiltered = await Album.findOne({ album: title }).collation({
+		locale: "en",
+		strength: 2,
+	});
+	if (singleAlbumFiltered.length > 0) {
+		res.json(singleAlbumFiltered);
+	} else {
+		res.status(404).send({ error: "Not Found" });
+	}
+});
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
-})
+	console.log(`Server running on http://localhost:${port}`);
+});
