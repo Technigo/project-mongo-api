@@ -4,9 +4,16 @@ import cors from "cors";
 import mongoose from "mongoose";
 import albums from "./data/albums.json";
 import errorMsg from "./assets/errormsg.json";
+import dotenv from "dotenv";
+
+/*ENVIRONMENT VARIABLES*/
+require("dotenv").config();
 
 /*Database */
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl =
+	process.env.MONGO_URL ||
+	`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cluster0.qxpka.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
