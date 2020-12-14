@@ -83,26 +83,31 @@ app.get('/', (req, res) => {
 
 //______________All books
 app.get('/books', async (req, res) => {
-  const books = await Book.find()
-  console.log(`get books ${books}`)
+  const { title, author, sort } = req.query
+  const titleRegex = new RegExp(title, 'i')
+  console.log(`title regex: ${titleRegex}`)
+  const authorRegex = new RegExp(author, 'i')
+  console.log(`author regex: ${authorRegex}`)
+  let books = await Book.find()
 
 //sort by rating
-// if(sort === "rating_dsc") {
-//   booksList = booksList.sort((a, b) => (b.average_rating - a.average_rating));
-// } else if (sort === "rating_asc") {
-//   booksList = booksList.sort((a, b) => (a.average_rating - b.average_rating));
-// };
+  if(sort === "rating_dsc") {
+    books = await Book.find().sort({ 
+      average_rating: -1,
+  })} else if (sort === "rating_asc") {
+    books = await Book.find().sort({
+      average_rating: 1,
+  })};
 
-//filter by author
-if (author) {
-  booksList = booksList.filter((item) => item.authors.toString().toLowerCase().includes(author.toLowerCase()));
-};
+  //filter by author
+  if (author) {
+    books = await Book.find({ authors: authorRegex });
+  };
 
-//filter by title
-if (title) {
-  booksList = booksList.filter((item) => item.title.toString().toLowerCase().includes(title.toLowerCase()));
-};
-
+  //filter by title
+  if (title) {
+    books = await Book.find({ title: titleRegex });
+  };
 
   if (books) {
     res.json(books)
@@ -116,10 +121,15 @@ if (title) {
 // RETURNS: A single book by id from books.json
 app.get('/books/:id', async (req, res) => {
   const { id } = req.params;
+
+  try {
   const singleBook = await Book.findOne({ bookID: id });
-  if (singleBook) {
-    res.json(singleBook);
-  } else res.status(404).send({ error: `No book with id: ${id} found.` });
+    if (singleBook) {
+      res.json(singleBook);
+    } else res.status(404).send({ error: `No book with id: ${id} found.` });
+  } catch {
+    res.status(400).send({ error: `${id} is not a valid bookID`})
+  }
 });
 
 // Start the server
