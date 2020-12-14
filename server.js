@@ -10,11 +10,45 @@ import mongoose from 'mongoose'
 // import avocadoSalesData from './data/avocado-sales.json'
 // import booksData from './data/books.json'
 // import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import topMusicData from './data/top-music.json';
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.Promise = Promise
+// Connection to the database
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
+
+// Song model
+const Song = mongoose.model('Song', {
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number
+});
+
+// Function to start seeding database 
+if (process.env.RESET_DB) { 
+  console.log('Resetting Database!');
+
+  const seedDatabase = async () => { 
+    await Song.deleteMany({});
+
+    topMusicData.forEach((songData) => { 
+      new Song(songData).save();
+    });
+  };
+  seedDatabase()
+};
+
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -28,9 +62,15 @@ app.use(cors())
 app.use(bodyParser.json())
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
-})
+app.get('/', (request, response) => {
+  response.send('Oh Hello! Welcome to Top Songs API, on MongoDB!')
+});
+
+// Route to get all top songs data 
+app.get('/songs', async (request, response) => {
+  const allSongs = await Song.find();
+  response.json(allSongs);
+});
 
 // Start the server
 app.listen(port, () => {
