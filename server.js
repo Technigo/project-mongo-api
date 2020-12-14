@@ -61,17 +61,23 @@ app.get('/api/albums',async (req,res) => {
   const filterYear = req.query.year;
   const filterArtist = req.query.artist;
   const filterGenre = req.query.genre;
+  const page = req.query.page || 1;
+  const pageSize = 50;
+  const skipIndex = pageSize * (page - 1);
+
   const sortBy = req.query.sortBy;
   const sortOrder = req.query.sortOrder;
-  let sortQuery = { Number : 1};
-  //Default sortQuery
-  //let sortQuery = "Number : 1";
-console.log(req.query);
+  let sortQuery = { number : 1};
   
- 
+  let artistFilter = null;
+  let yearFilter = null;
+  let genreFilter = null;
+  let filterArray = [];
+
+
   //Check if there are sorting parameters in the query. If not, the default is used. If one param, the other param is default.
   if(sortBy || sortOrder){
-    const querySortBy = !sortBy ? "Number" : sortBy.toLowerCase();
+    const querySortBy = !sortBy ? "number" : sortBy.toLowerCase();
     const querySortOrder = !sortOrder ? 1 : sortOrder;
     sortQuery = {[querySortBy] : querySortOrder};
     console.log("SortQuery" , sortQuery);
@@ -79,8 +85,10 @@ console.log(req.query);
 
     if(!filterYear && !filterGenre && !filterArtist){
     console.log("no query filters, get all the albums");
-
-     const albumsData = await Album.find().sort(sortQuery);
+      console.log("skipIndex:", skipIndex);
+      console.log("Limit:" , pageSize);
+    const albumsData = await Album.find().sort(sortQuery).skip(skipIndex).limit(pageSize);
+    //.limit(pageSize).skipIndex(skipIndex);
      if(albumsData){
         res.json(albumsData);
       }
@@ -91,10 +99,6 @@ console.log(req.query);
 
     //Filters NEW START
 
-    let artistFilter = null;
-    let yearFilter = null;
-    let genreFilter = null;
-    let filterArray = [];
   
    if(filterYear || filterGenre || filterArtist)
    {
@@ -113,7 +117,7 @@ console.log(req.query);
       }
       console.log(filterArray);
     
-      const albumsDataFiltered = await Album.find({$and: filterArray}).collation({locale: "en", strength: 2}).sort(sortQuery);
+      const albumsDataFiltered = await Album.find({$and: filterArray}).collation({locale: "en", strength: 2}).sort(sortQuery).skip(skipIndex).limit(pageSize);
       res.json(albumsDataFiltered); 
    }
 
@@ -184,14 +188,14 @@ app.get('/api/albums/filterAll',async (req,res) => {
 
 //Get top10  albums from the database .
 app.get('/api/albums/top10',async (req,res) => {
-  const topTenAlbums = await Album.find().limit(10).sort({Number : 1});
+  const topTenAlbums = await Album.find().sort({number : 1}).limit(10);
   res.json(topTenAlbums);
 }
 )
 
 //Get bottom10  albums from the database .
 app.get('/api/albums/bottom10',async (req,res) => {
-  const bottomTenAlbums = await Album.find().limit(10).sort({Number : -1});
+  const bottomTenAlbums = await Album.find().sort({number : -1}).limit(10);
   res.json(bottomTenAlbums);
 }
 )
@@ -201,7 +205,7 @@ app.get('/api/albums/bottom10',async (req,res) => {
 //Get by placement in list 
 app.get('/api/albums/placement/:placement', async (req,res) => {
   const placement = req.params.placement;
-  const singleAlbumFiltered = await Album.findOne({Number : placement});
+  const singleAlbumFiltered = await Album.findOne({number : placement});
   res.json(singleAlbumFiltered); 
 })
 
@@ -209,7 +213,7 @@ app.get('/api/albums/placement/:placement', async (req,res) => {
 app.get('/api/albums/title/:title', async (req,res) => {
   const title = req.params.title.replaceAll('+',' ');
   console.log({title});
-  const singleAlbumFiltered = await Album.findOne({Album : new RegExp(`^${title}$`, 'i')});
+  const singleAlbumFiltered = await Album.findOne({album : title}).collation({locale: "en", strength: 2});
   res.json(singleAlbumFiltered); 
 })
 
