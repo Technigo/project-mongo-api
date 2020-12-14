@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "*",
+    "@babel/helper-compilation-targets": "*",
     "@babel/node": "*",
     "@babel/preset-env": "*",
     "body-parser": "*",
