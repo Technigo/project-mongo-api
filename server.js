@@ -12,11 +12,10 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 // Mongoose models
-// write new mongoose ???
 const Book = mongoose.model('Book', {
   title: String,
   bookID: Number,
-  isbn: Number,
+  isbn: String,
   average_rating: Number,
 
   // Tells the server that this relates to the Author model id
@@ -55,12 +54,8 @@ if (process.env.RESET_DATABASE) {
       })
     })
   }
-  // await booksData.forEach((book) => new Book(book).save());
-  // await booksData.forEach((author) => new Author(author).save());
-
   seedDatabase();
 }
-
 
 // Defines the port the app will run on. 
 const port = process.env.PORT || 8080;
@@ -83,9 +78,8 @@ app.use((req, res, next) => {
   }
 });
 
-// API Endpoints
-// First page
-
+// API ENDPOINTS
+// To list all the endpoints in the first view
 const listEndpoints = require('express-list-endpoints');
 app.get('/', (req, res) => {
   //res.send('Books API created by Gabriella Bolin using MongoDB.');
@@ -94,14 +88,16 @@ app.get('/', (req, res) => {
 
 // To return all books
 app.get('/books', async (req, res) => {
-  // Possibility to search on title with query params '/books?title=potter' 
+  // Possibility to search on title with query params as example: '/books?title=potter' 
   const { title } = req.query;
   const queryRegex = new RegExp(title, 'i');
   const books = await Book.find({ title: queryRegex }).sort({
     average_rating: -1,
   }).populate('author');
+  // Add an object telling the user how many books the API contains
+  const returnObject = { numberOfBooks: books.length, books };
   if (books) {
-    res.json(books);
+    res.json(returnObject);
   } else {
     // Error handling
     res.status(404).json({ error: 'Data not found' });
@@ -110,17 +106,13 @@ app.get('/books', async (req, res) => {
 
 // To return books with particular ID eg. '/books/955'
 app.get('/books/:bookID', async (req, res) => {
-  try {
-    const { bookID } = req.params;
-    const book = await Book.findOne({ bookID: bookID });
-    if (book) {
-      res.json(book);
-    } else {
-      // Error handling
-      res.status(404).json({ error: `Book with id: ${bookID} not found` });
-    }
-  } catch (err) {
-    res.status(400).json({ error: 'Invalid book id' });
+  const { bookID } = req.params;
+  const book = await Book.findOne({ bookID: bookID });
+  if (book) {
+    res.json(book);
+  } else {
+    // Error handling
+    res.status(404).json({ error: `Book with id: ${bookID} not found` });
   }
 });
 
@@ -140,11 +132,9 @@ app.get('/books/:isbn', async (req, res) => {
   }
 });
 
-// RESTroute to return all authors
+// Route to return all authors
 app.get('/authors', async (req, res) => {
   const authors = await Author.find();
-  // const authors = books.map((item) => item.authors)
-  // const uniqueAuthors = [...new Set(authors)];
   if (authors) {
     res.json(authors);
   } else {
@@ -152,37 +142,6 @@ app.get('/authors', async (req, res) => {
     res.status(404).json({ error: 'Data not found' });
   }
 });
-
-// // To return that choosen bookID for an author
-// app.get('authors/:id', async (req, res) => {
-//   try {
-//     const author = await Authors.findById(req.params.id);
-//     if (author) {
-//       res.json(author);
-//     } else {
-//       // Error handling
-//       res.status(404).json({ error: 'Author not found' });
-//     }
-//   } catch (error) {
-//     res.status(400).json({ error: 'Invalid author id' });
-//   }
-// });
-
-// // To return books for a particular author
-// app.get('/authors/:id/books', async (req, res) => {
-//   try {
-//     const author = await Authors.findById(req.params.id);
-//     if (author) {
-//       const books = await Book.find({ author: mongoose.Types.ObjectId(authors.id) });
-//       res.json(books);
-//     } else {
-//       // Error handling
-//       res.status(404).json({ error: 'Author not found' });
-//     }
-//   } catch (error) {
-//     res.status(400).json({ error: 'Invalid author id' });
-//   }
-// });
 
 // Start the server
 app.listen(port, () => {
