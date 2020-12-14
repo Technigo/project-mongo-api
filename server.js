@@ -4,8 +4,6 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 
 import booksData from './data/books.json';
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
