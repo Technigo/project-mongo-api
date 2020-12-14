@@ -3,23 +3,12 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import membersData from './data/technigo-staff.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -27,9 +16,41 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+const Member = new mongoose.model('Member', {
+  name: String,
+  surname: String,
+  role: String,
+  lettersInName: Number,
+  isPapa: Boolean
+});
+
+if (process.env.RESET_DATABASE) {
+  const populateDatabase = async () => {
+    await Member.deleteMany();
+  
+    membersData.forEach(item => {
+      const newMember = new Member(item);
+      newMember.save();
+    })
+  }
+  populateDatabase();
+}
+
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.get('/members', async (req, res) => {
+  const allMembers = await Member.find();
+  res.json(allMembers);
+})
+
+app.get('/members/:name', async (req, res) => {
+  const singleMember = await Member.findOne({ name: req.params.name });
+
+  res.json(singleMember);
+
 })
 
 // Start the server
