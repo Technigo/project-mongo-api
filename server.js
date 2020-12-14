@@ -72,24 +72,32 @@ app.get('/shows/:id', async (req, res) => {
     res.status(404).json({error: "Show not found"})
   }
 } catch (err) {
-  res.status(400).json({error: "Invalid ID"})
+  res.status(400).json({error: "Invalid show ID"})
 }
-
 })
 
 app.get('/shows/year/:year', async (req, res) => {
   const {year} = req.params
  try { 
   const filteredOnYears = await Show.find({release_year: year})
-  if(filteredOnYears){  
+  if(filteredOnYears.length > 0){  
     res.json(filteredOnYears)
   } else {
-    res.status(404).json({error: "Show not found"})
+    res.status(404).json({error: "No shows found"})
   }
 } catch (err) {
-  res.status(400).json({error: "Invalid ID"})
+  res.status(400).json({error: "Invalid input"})
 }
+})
 
+app.get('/shows/type/movies', async (req, res) => {
+  const movies = await Show.find({type: "Movie"}) 
+  res.json(movies)
+})
+
+app.get('/shows/type/tv-shows', async (req, res) => {
+  const tvShows = await Show.find({type: "TV Show"}) 
+  res.json(tvShows)
 })
 
 // Start the server
