@@ -1,12 +1,16 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+In this project I created an API with RESTful endpoints using MongoDB as database to store and retrieve data. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I used json data including 499 books and created different endpoints and query parameters. I also added the express-list-endpoints package to summarize the existing endpoints. I used the mongoose package to making seed data and to create queries. 
+
+I created two models, one for the books and one for the authors. To get an array of unique authors I had to create a new array for the authors. The authors are connected to the books they have written but since they change id for each reload of the data I did not create any endpoints including searching on id per author. 
+
+I added middlewares to handle connection errors to the database and I did also added error handlers for all GET-requests. 
+
+With the mongoose method `find()` I retrieve one collection of all books and one collection of all authors. With the method `findOne()` I retrieve book with specific bookID or isbn. 
 
 ## Learning Objectives
 
@@ -18,7 +22,14 @@ Describe how you approached to problem, and what tools and techniques you used t
 
 ## Tech
 
+- Node
+
+- API's
+
+- MongoDB
+
+- Heroku
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Link to the deployed API: https://books-mongo-api.herokuapp.com/
