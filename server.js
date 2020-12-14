@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 
 import goldenGlobesData from './data/golden-globes.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/nominations"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -19,6 +19,21 @@ const MovieNominee = mongoose.model('MovieNominee', {
     win: Boolean
 })
 
+const seedDataBase = async () => {
+  const avatar = new MovieNominee({
+    "year_film": 2009,
+    "year_award": 2010,
+    "ceremony": 67,
+    "category": "Best Motion Picture - Drama",
+    "nominee": "Avatar",
+    "film": "",
+    "win": true
+  })
+  await avatar.save()
+}
+
+seedDataBase()
+
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -29,7 +44,7 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-app.get('/nominations', async (req,res) => {
+app.get('/nominations', async (req, res) => {
   const nominations = await MovieNominee.find()
   res.json(nominations)
 })
