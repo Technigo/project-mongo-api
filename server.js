@@ -53,9 +53,21 @@ if (process.env.RESET_DATABASE) {
 }
 
 
-// Start defining your routes here
+// ROUTES
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.get('/books', async (req, res) => {
+  const allBooks = await Book.find();
+  res.json(allBooks)
+})
+
+app.get('/books/:id', async (req, res) => {
+  const { id } = req.params;
+  const singleBook = await Book.find({ bookID: +id })
+  
+  res.json(singleBook);
 })
 
 // Start the server
