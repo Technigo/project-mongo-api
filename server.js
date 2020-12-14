@@ -29,8 +29,9 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-app.get('/nominations', (req,res) => {
-
+app.get('/nominations', async (req,res) => {
+  const nominations = await MovieNominee.find()
+  res.json(nominations)
 })
 
 app.listen(port, () => {
