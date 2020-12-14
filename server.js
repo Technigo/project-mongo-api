@@ -22,19 +22,16 @@ const Album = mongoose.model("Album", {
 
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
-		console.log("seeding database");
 		await Album.deleteMany({});
 
 		albums.forEach((albumData) => {
 			new Album(albumData).save();
 		});
 	};
-
 	seedDatabase();
 }
 
 /*API*/
-
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -84,13 +81,9 @@ app.get("/api/albums", async (req, res) => {
 		const querySortBy = !sortBy ? "number" : sortBy.toLowerCase();
 		const querySortOrder = !sortOrder ? 1 : sortOrder;
 		sortQuery = { [querySortBy]: querySortOrder };
-		console.log("SortQuery", sortQuery);
 	}
 
-	//if(!filterYear && !filterGenre && !filterArtist){
 	if (noFilters) {
-		console.log("no query filters, get all the albums");
-
 		const albumsData = await Album.find()
 			.sort(sortQuery)
 			.skip(skipIndex)
@@ -98,8 +91,6 @@ app.get("/api/albums", async (req, res) => {
 		const albumsTotalCount = await Album.find()
 			.sort(sortQuery)
 			.countDocuments();
-
-		//.limit(pageSize).skipIndex(skipIndex);
 
 		//Create an albumsdata object with additional information
 		if (albumsData.length > 0) {
@@ -117,7 +108,6 @@ app.get("/api/albums", async (req, res) => {
 	}
 
 	if (!noFilters) {
-		console.log("Found query parameters");
 		if (filterArtist) {
 			artistFilter = { artist: filterArtist };
 			filterArray.push(artistFilter);
@@ -140,13 +130,14 @@ app.get("/api/albums", async (req, res) => {
 			yearToFilter = { year: { $lte: filterYearTo } };
 			filterArray.push(yearToFilter);
 		}
-		console.log(filterArray);
 
+		//Using collation with strength 2 to ignore case in search.
 		const albumsDataFiltered = await Album.find({ $and: filterArray })
 			.collation({ locale: "en", strength: 2 })
 			.sort(sortQuery)
 			.skip(skipIndex)
 			.limit(pageSize);
+
 		const albumsTotalMatchCount = await Album.find({ $and: filterArray })
 			.collation({ locale: "en", strength: 2 })
 			.countDocuments();
@@ -167,7 +158,7 @@ app.get("/api/albums", async (req, res) => {
 	}
 });
 
-//Get top10 albums from the database .
+//Get top10 albums
 app.get("/api/albums/top10", async (req, res) => {
 	const topTenAlbums = await Album.find().sort({ number: 1 }).limit(10);
 	if (topTenAlbums.length > 0) {
@@ -177,7 +168,7 @@ app.get("/api/albums/top10", async (req, res) => {
 	}
 });
 
-//Get bottom10 albums from the database .
+//Get bottom10 albums
 app.get("/api/albums/bottom10", async (req, res) => {
 	const bottomTenAlbums = await Album.find().sort({ number: -1 }).limit(10);
 	if (bottomTenAlbums.length > 0) {
@@ -188,7 +179,6 @@ app.get("/api/albums/bottom10", async (req, res) => {
 });
 
 /*SINGLE ITEMS*/
-
 //Get by placement in list
 app.get("/api/albums/placement/:placement", async (req, res) => {
 	const placement = req.params.placement;
@@ -203,7 +193,6 @@ app.get("/api/albums/placement/:placement", async (req, res) => {
 //Get by album title
 app.get("/api/albums/title/:title", async (req, res) => {
 	const title = req.params.title.replaceAll("+", " ");
-	console.log({ title });
 	const singleAlbumFiltered = await Album.findOne({ album: title }).collation({
 		locale: "en",
 		strength: 2,
