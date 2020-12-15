@@ -14,7 +14,7 @@ console.log(netflixData.length)
 // import topMusicData from './data/top-music.json'
 
 //const mongoUrl = "mongodb+srv://dbUser:dbUserOlofTechnigo@cluster0.x2ofn.mongodb.net/projectMongo?retryWrites=true&w=majority"
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL /*|| "mongodb://localhost/project-mongo"*/
 console.log(mongoUrl)
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
