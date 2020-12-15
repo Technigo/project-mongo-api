@@ -67,9 +67,30 @@ app.get('/', (req, res) => {
   res.send('Hello again world')
 })
 
+//why would you have an error message here? 
+//i stands for ignore case -->in regexp
 app.get('/books', async (req, res) => {
-  const allBooks = await Book.find()
-  res.json(allBooks)
+  const { title, author, rating } = req.query
+  const titleRegex = new RegExp(title, 'i')
+  const authorRegex = new RegExp(author, 'i')
+
+  const sortBooks = (rating) => {
+    if (rating === 'high') {
+      return {average_rating: -1}
+    } else if (rating === 'low') {
+      return {average_rating: 1}
+    } else {
+      return res.status(400).json({ error: 'invalid value. Sort by high or low' })
+    }
+  }
+
+  const books = await Book.find({
+    title: titleRegex,
+    authors: authorRegex
+  })
+    .sort(sortBooks(rating))
+
+  res.json(books)
 })
 
 //findOne returns one element. returns an object instead of an array with an object
