@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 import booksData from './data/books.json'
 
 // CODE FOR DATABASE
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -17,16 +17,36 @@ const Author = mongoose.model('Author', {
 
 // BOOK MODEL
 const Book = mongoose.model('Book', {
-  bookID: Number,
-  title: String,
-  author: String,
-  average_rating: Number,
-  isbn: String,
-  isbn13: Number,
-  language_code: String,
-  num_pages: Number,
-  ratings_count: Number,
-  text_reviews_count: Number
+  bookID: {
+    type: Number,
+  },
+  title: {
+    type: String,
+  },
+  authors: {
+    type: String,
+  },
+  average_rating: {
+    type: Number,
+  },
+  isbn: {
+    type: String,
+  },
+  isbn13: {
+    type: String,
+  },
+  language_code: {
+    type: String,
+  },
+  num_pages: {
+    type: Number,
+  },
+  ratings_count: {
+    type: Number,
+  },
+  text_reviews_count: {
+    type: Number,
+  },
 }) 
 
 // RESET DATABASE - Deleting existing data to prevent dublicates
@@ -34,6 +54,8 @@ if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
     await Book.deleteMany()
     await booksData.forEach(book => new Book(book).save())
+    await Author.deleteMany() 
+    await booksData.forEach(item => new Author(item).save())
   }
   seedDatabase()
 }
@@ -55,11 +77,13 @@ app.get('/', (req, res) => {
 app.get('/books', async (req, res) => {
   const allBooks = await Book.find()
   res.json(allBooks)
+  
 })
 
 // ENDPOINT SINGLE BOOK
-app.get('/books:id', async (req, res) => {
-  const singleBook = await Book.findById(req.params.id)
+app.get('/books/:id', async (req, res) => {
+  const {id} = req.params
+  const singleBook = await Book.findOne({ bookID: id })
 
   if(singleBook) {
     res.json(singleBook)
@@ -70,7 +94,7 @@ app.get('/books:id', async (req, res) => {
 
 // ENDPOINT AUTHOR
 app.get('/authors', async (req, res) => {
-  const authors = await Author.find()
+  const authors = await Author.find({})
   res.json(authors)
 })
 
@@ -78,4 +102,3 @@ app.get('/authors', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
-
