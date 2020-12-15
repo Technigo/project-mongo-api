@@ -1,4 +1,4 @@
-import express, { response } from 'express'
+import express, { request, response } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -87,11 +87,19 @@ app.get('/topsongs/songs/:id', async (request, response) => {
     };
 });
 
-//Top songs, order them by popularity 
+// Route to get the most popular songs 
+app.get('/topsongs/most-popular', async (request, response) => {
+  const mostPopular = await Song.find({ popularity: { $gte: 90 } });
+  response.json(mostPopular);
+});
+
 //Search from genre?
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 }); 
+
+// NOTE: $gte is the MongoDB comparison operator 
+// https://docs.mongodb.com/manual/reference/operator/query/gte/
 
