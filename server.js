@@ -49,7 +49,7 @@ app.use(bodyParser.json());
 
 // ROUTES
 app.get('/', (req, res) => {
-  res.send('Hello world, welcome to Vane Bookish API, powered by MongoDB now!');
+  res.send('Hello world, welcome to Vane Bookish API, now powered by MongoDB!');
 });
 
 // Route to get all the books in the database
@@ -71,7 +71,7 @@ app.get('/books/book/:bookID', async (req, res) => {
     }
   } catch (err) {
     // error when the book id format is wrong, an invalid book id is entered
-    res.status(400).json({ error: "Invalid Book ID, double check book id value" })
+    res.status(400).json({ error: "Invalid Book ID, double check book id value" });
   }
 });
 
