@@ -1,10 +1,10 @@
-# Mongo API Project 🖥
+# Mongo API Project  🖥
 
 This project follows on from my project express-api where I used a set of data locally. This time I model my database using Mongoose models, and persist the data in a database.
 
-## View it live 👀
+## View it live  👀
 
-## The problem. 🤓
+## The problem  🤓
 
 The API I have worked with has: 
 
@@ -14,7 +14,7 @@ The API I have worked with has:
 - The API make use of Mongoose models to model the data and use these models to fetch data from the database.
 - The API is [RESTful](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/)
 
-## Learnings 🌟
+## Learnings  🌟
 
 During this project I have learnt:
 
