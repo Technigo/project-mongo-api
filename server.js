@@ -53,7 +53,6 @@ app.get('/avocados', async (req, res) => {
 })
 
 app.get('/', async (req, res) => {
-  const allAvocados = await Avocado.find()
   res.send("We are advocates of avocados")
 })
 
