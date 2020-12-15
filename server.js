@@ -3,13 +3,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
 import topMusicData from './data/top-music.json';
 
 // Connection to the database
@@ -36,8 +29,8 @@ const Song = mongoose.model('Song', {
 });
 
 // Function to start seeding database 
-//IMPORTANT: 
-// With this setup two Config Vars need to be added on Heroku
+// IMPORTANT: 
+// With this setup two Config Vars needed to be added on Heroku
 // - MONGO_URL: connection string generated in MongoDB Cloud Atlas
 // - RESET_DB: with value true so the seedDatabase function is called
 if (process.env.RESET_DB) { 
@@ -53,9 +46,8 @@ if (process.env.RESET_DB) {
   seedDatabase();
 };
 
-
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
+// Defines the port the app will run on. 
+// Can be overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080;
@@ -65,15 +57,27 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Routes
+// ROUTES
 app.get('/', (request, response) => {
   response.send('Oh Hello! Welcome to Top Songs API, on MongoDB!');
 });
 
-// Route to get all top songs data 
+// Route to get all top songs data + request query for genre
+// i.e. topsongs?genre=pop
+//Added a Regex to return all the genres that include a certain word, 
+//since the genres are several words on the same string, not case sensitive.
 app.get('/topsongs', async (request, response) => {
-  const allSongs = await Song.find();
-  response.json(allSongs);
+  const { genre } = request.query;
+  let conditions = {}; 
+
+  if (genre) { 
+    conditions = {genre: { $regex: genre , $options: 'i' }}
+  };
+  const songs = await Song.find(conditions);
+  if (songs.length === 0) {
+    response.status(404).json({ error: 'Bummer! That genre is not in the Top Songs'});
+  };
+  response.json(songs);
 });
 
 // Route to get the most popular top songs 
@@ -92,20 +96,8 @@ app.get('/topsongs/songs/:id', async (request, response) => {
     };
 });
 
-//Route to get songs by genre 
-//Added a Regex to return all the genres that include a certain word, 
-//since the genres are several words on the same string
-app.get('/topsongs/genre/:genre', async (request, response) => { 
-  const genreParams = request.params.genre;
-  const songs = await Song.find({genre: { $regex: genreParams, $options: 'i' }});
-  if(songs.length > 0) {
-    response.json(songs)
-  } else { 
-    response.status(404).json({ error: 'Oh bummer! That genre is not on the Top Songs'});
-  };
-});
-
-//Route to get songs by artist
+//Route to get songs by artist 
+//Added a Regex to return all the artists with a matching string, not case sensitive
 app.get('/topsongs/artists/:artistName', async (request, response) => { 
   const artistParams = request.params.artistName;
   const artist = await Song.find({artistName: { $regex: artistParams, $options: 'i' }});
@@ -124,5 +116,16 @@ app.listen(port, () => {
 // NOTE: $gte is the MongoDB comparison operator 
 // https://docs.mongodb.com/manual/reference/operator/query/gte/
 
-// Regex in MongDB https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex
+// Regex in MongoDB https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex
 
+//Other Approach to get song by genre without a request query
+//Route to get songs by genre 
+// app.get('/topsongs/genre/:genre', async (request, response) => { 
+//   const genreParams = request.params.genre;
+//   const songs = await Song.find({genre: { $regex: genreParams, $options: 'i' }});
+//   if(songs.length > 0) {
+//     response.json(songs)
+//   } else { 
+//     response.status(404).json({ error: 'Oh bummer! That genre is not on the Top Songs'});
+//   };
+// });
