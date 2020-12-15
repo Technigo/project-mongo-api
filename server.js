@@ -2,54 +2,36 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-//import booksData from './data/books.json'
+import booksData from './data/books.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 //_____________create my modules
-//model is a method /function function that takes two argument
-//Member in this case and second argument an object = blueprint
-//the object is called schema - new instances of modules
-//DOCUMENTATION https://mongoosejs.com/docs/
 const Book = mongoose.model('Book', {
-  bookID: {
-    type: Number,
-  },
-  title: {
-    type: String,
-  },
-  authors: {
-    type: String,
-  },
-  average_rating: {
-    type: Number,
-  },
-  isbn: {
-    type: String,
-  },
-  isbn13: {
-    type: String,
-  },
-  language_code: {
-    type: String,
-  },
-  num_pages: {
-    type: Number,
-  },
-  ratings_count: {
-    type: Number,
-  },
-  text_reviews_count: {
-    type: Number,
-  },
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: String,
+  isbn13: String,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
+});
+
+const Author = mongoose.model('Author', {
+  authors: String,
 });
 
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
     await Book.deleteMany(); //clear database
+    await Author.deleteMany(); //clear database
     await booksData.forEach((item) => new Book(item).save()); //single object from json array
+    await booksData.forEach((item) => new Author(item).save()); //single object from json array
   };
   seedDatabase();
 };
@@ -87,19 +69,6 @@ app.get('/books', async (req, res) => {
   const pageNumber = +page || 1; //why does ?page=0 console logged out as 1? 
   const pageSize = 20;
   const skip = pageSize * (pageNumber -1);
-  //console.log(pageNumber);
-  /* is line 87 is shorthand for: ?????
-  https://www.sitepoint.com/shorthand-javascript-techniques/
-  
-  if (page !== null || page !== undefined || page !== '') {
-     let variable2 = page;
-  }
-
-  const variable2 = page || 'new';
-
-  */
-
-
   //första authors = definering i modell , author = query parameter. - REMOVE
   let books = await Book.find({
     title: new RegExp(title, 'i'),
@@ -111,7 +80,12 @@ app.get('/books', async (req, res) => {
     .skip(skip)
 
   if (books) {
-    res.json({ currentPage: pageNumber, pageSize: pageSize, skip: skip, results: books });
+    res.json({ 
+      currentPage: pageNumber, 
+      pageSize: pageSize, 
+      numberOfResults: books.length, 
+      results: books 
+    });
   } else {
     res.status(404).send({ error: "No books found"});
   };
@@ -133,18 +107,19 @@ app.get('/books/:id', async (req, res) => {
 
 //______________Array of authors
 app.get("/authors", async (req, res) => {
-  const { authors } = req.query;
-  const authorsArray = await Book.find({ authors: {$in: authors}});
+  const { author } = req.query;
+  const authorsArray = await Author.find({});
   console.log(authorsArray);
-  //const uniqueAuthorsArray = [...new Set(authorsArray)];
+
+  const uniqueAuthorsArray = [...new Set(authorsArray)];
   
-  if (!authorsArray) {
+  if (!uniqueAuthorsArray) {
     res
     .status(404)
     .send({Error: "something went wrong"});
   };
   //res.send({authors: uniqueAuthorsArray.length, results: uniqueAuthorsArray});
-  res.send({ results: authorsArray });
+  res.send({ results: uniqueAuthorsArray });
 });
 
 //_____________Start the server
