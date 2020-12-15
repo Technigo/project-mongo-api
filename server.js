@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { response } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -16,6 +16,7 @@ import topMusicData from './data/top-music.json';
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
+
 
 // Song model
 const Song = mongoose.model('Song', {
@@ -36,6 +37,10 @@ const Song = mongoose.model('Song', {
 });
 
 // Function to start seeding database 
+//IMPORTANT: 
+// With this setup two Config Vars need to be added on Heroku
+// - MONGO_URL: connection string generated in MongoDB Cloud Atlas
+// - RESET_DB: with value true so the seedDatabase function is called
 if (process.env.RESET_DB) { 
   console.log('Resetting Database!');
 
@@ -61,18 +66,32 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
+// Routes
 app.get('/', (request, response) => {
   response.send('Oh Hello! Welcome to Top Songs API, on MongoDB!')
 });
 
 // Route to get all top songs data 
-app.get('/songs', async (request, response) => {
+app.get('/topsongs', async (request, response) => {
   const allSongs = await Song.find();
   response.json(allSongs);
 });
 
+// Route to get song by id
+app.get('/topsongs/songs/:id', async (request, response) => { 
+    const song = await Song.findOne({ id: request.params.id });
+    if (song) { 
+      response.json(song);
+    } else { 
+      response.status(404).json({ error: 'Oh No! Song not found'});
+    };
+});
+
+//Top songs, order them by popularity 
+//Search from genre?
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
-})
+}); 
+
