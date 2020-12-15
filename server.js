@@ -15,6 +15,7 @@ const Book = mongoose.model('Book', {
   bookID: Number,
   isbn: String,
   average_rating: Number,
+  ratings_count: Number,
 
   // Tells the server that this relates to the Author model id
   author: {
@@ -48,6 +49,7 @@ if (process.env.RESET_DATABASE) {
           average_rating: book.average_rating,
           isbn: book.isbn,
           bookID: book.bookID,
+          ratings_count: book.ratings_count,
         }).save()
       })
     })
