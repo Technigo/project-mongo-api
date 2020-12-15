@@ -22,8 +22,7 @@ app.use(bodyParser.json())
 
 const Release = new mongoose.model("Release", {
   album_type: String,
-  // artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, type: String, uri: String }],
-  artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, uri: String }],
+  artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, artist_type: String, uri: String }],
   available_markets: [String],
   external_urls: { spotify: String },
   href: String,
