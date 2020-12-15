@@ -1,7 +1,7 @@
-import express, { request, response } from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express, { request, response } from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -16,7 +16,6 @@ import topMusicData from './data/top-music.json';
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-
 
 // Song model
 const Song = mongoose.model('Song', {
@@ -51,7 +50,7 @@ if (process.env.RESET_DB) {
       new Song(songData).save();
     });
   };
-  seedDatabase()
+  seedDatabase();
 };
 
 
@@ -59,16 +58,16 @@ if (process.env.RESET_DB) {
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8080
-const app = express()
+const port = process.env.PORT || 8080;
+const app = express();
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(bodyParser.json())
+app.use(cors());
+app.use(bodyParser.json());
 
 // Routes
 app.get('/', (request, response) => {
-  response.send('Oh Hello! Welcome to Top Songs API, on MongoDB!')
+  response.send('Oh Hello! Welcome to Top Songs API, on MongoDB!');
 });
 
 // Route to get all top songs data 
@@ -98,8 +97,23 @@ app.get('/topsongs/songs/:id', async (request, response) => {
 //since the genres are several words on the same string
 app.get('/topsongs/genre/:genre', async (request, response) => { 
   const genreParams = request.params.genre;
-  const genre = await Song.find({genre: { $regex: genreParams, $options: 'i' }});
-  response.json(genre)
+  const songs = await Song.find({genre: { $regex: genreParams, $options: 'i' }});
+  if(songs.length > 0) {
+    response.json(songs)
+  } else { 
+    response.status(404).json({ error: 'Oh bummer! That genre is not on the Top Songs'});
+  };
+});
+
+//Route to get songs by artist
+app.get('/topsongs/artists/:artistName', async (request, response) => { 
+  const artistParams = request.params.artistName;
+  const artist = await Song.find({artistName: { $regex: artistParams, $options: 'i' }});
+  if(artist.length > 0) {
+    response.json(artist)
+  } else { 
+    response.status(404).json({ error: 'Oh bummer! That artist is not on Top Songs (yet!)'});
+  };
 });
 
 // Start the server
@@ -109,4 +123,6 @@ app.listen(port, () => {
 
 // NOTE: $gte is the MongoDB comparison operator 
 // https://docs.mongodb.com/manual/reference/operator/query/gte/
+
+// Regex in MongDB https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex
 
