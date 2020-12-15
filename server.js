@@ -10,7 +10,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const port = process.env.PORT || 8081
+const port = process.env.PORT || 8082
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -71,14 +71,10 @@ app.get('/books', async (request, response) => {
   if (search) {
     findTitle = { $regex: ("\\b" + search + "\\b"), $options: "i" }
     findAuthor = { $regex: ("\\b" + search + "\\b"), $options: "i" }
-  } else {
-    null
   }
 
   if (language) {
     findLanguage = { $regex: language, $options: "i" }
-  } else {
-    null
   }
 
   if (sort) {
@@ -91,11 +87,9 @@ app.get('/books', async (request, response) => {
         { error: "Wrong sort input" }
       )
     }
-  } else {
-    null
   }
 
-  if (search && language && sort || search && language || search & sort || language && sort) {
+  if (search && language) {
     books = await Book.find({
       $and: [{
         $or: [
@@ -110,9 +104,7 @@ app.get('/books', async (request, response) => {
     ).sort(
       sortBooks
     ).exec()
-  }
-
-  if (search && !language || language && !search) {
+  } else if (search && !language || language && !search) {
     books = await Book.find({
       $or: [{
         $or: [
@@ -128,10 +120,6 @@ app.get('/books', async (request, response) => {
       sortBooks
     ).exec()
   } else {
-    null
-  }
-
-  if (sort && !search && !language || !sort && !search && !language) {
     books = await Book.find(
       {},
       filteredFields
@@ -148,7 +136,6 @@ app.get('/books', async (request, response) => {
     )
   }
 })
-
 
 app.get('/books/:id', async (request, response) => {
   try {
