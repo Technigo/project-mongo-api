@@ -65,7 +65,26 @@ app.get('/', (req, res) => {
   // })
 })
 
-// restful path to database
+/// this is not sorted now - so I have to sort it
+// or maybe it's sorted via id given by database?
+
+// restful endpoint to entire database
+// has to use async and await since lines of code has to be
+// executed in specific order
+app.get('/profanities', async (req, res) => {
+  const allProfanities = await Profanity.find()
+  res.json(allProfanities)
+})
+
+// restful endpoint to one single element of database
+// returns one object from the database
+app.get('/profanities/:id', async (req, res) => {
+  const singleProfanity = await Profanity.findOne({ id: req.params.id })
+  res.json(singleProfanity)
+})
+
+
+
 // app.get('/profanities', async (req, res) => {
 //   const profanities = await Profanity.find()
 //   res.json(profanities)
