@@ -51,8 +51,14 @@ app.use((req, res, next) => {
   }
 })
 
-// Start defining your routes here
+
 app.get('/', (req, res) => {
+  const myEndpoints = require('express-list-endpoints')
+  // Displays the endpoints that are available 
+  res.send(myEndpoints(app))
+})
+
+app.get('/netflixitems', (req, res) => {
   NetflixItem.find().then(movies => {
     res.json(movies)
   })
