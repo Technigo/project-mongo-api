@@ -6,7 +6,7 @@ This project's goal is to look at how to use **Mongodb** to store data, and how 
 
 - My first step was to get my database to work on **MongoDB Atlas**, since I knew my API server had to be deployed to Heroku. There were a lot of steps to follow, so it was a bit hard figuring out where to start, but once it was up and running, the rest of the project was smoother. Good point to remember while doing this setup was to add all needed Config Vars to Heroku so the database will be seeded and run as intended 😁
 - Once I had the database working, it was time to create the different **endpoints**: different from my previous project, this time the data needed to be manipulated with **mongoose operators** instead of vanilla JS. So I learned about mongoose methods to **find() and findOne()**, and also logical and comparison operators like **$gte** which I'm using on the Top Rated endpoint.
-- I also had to make use of a **regular expression** in order to get my Search by Author endpoint work. Since we don't manipulate data with vanilla JS (toLowerCase()), a regex is needed to make this find case-insensitive.
+- I also had to make use of a **regular expression** in order to get my Search by Author endpoint to work. Since we don't manipulate data with vanilla JS (toLowerCase()), a regex is needed to make this find case-insensitive.
 - Interesting also to learn about **environment variables** and how they are used. Key part in order for my Atlas hosted database to connect to my Heroku server app 💪
 
 ## Documentation - CORE ROUTES
