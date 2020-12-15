@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // 
-// import goldenGlobesData from './data/golden-globes.json'
+import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
 // import booksData from './data/books.json'
 // import netflixData from './data/netflix-titles.json'
@@ -26,6 +26,30 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
+
+
+const Data = new mongoose.model('Data', {
+    year_film: Number,
+    year_award: Number,
+    ceremony: Number,
+    category: String,
+    nominee: String,
+    film: String,
+    win: Boolean
+})
+
+if (process.env.RESET_DATABASE) {
+	const seedDatabase = async () => {
+    await Data.deleteMany()
+
+		goldenGlobesData.forEach((nominationData) => {
+      const newData = new Data(nominationData)
+      newData.save()
+		})
+  }
+  seedDatabase()
+}
+
 
 // Start defining your routes here
 app.get('/', (req, res) => {
