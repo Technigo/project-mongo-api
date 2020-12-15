@@ -1,19 +1,19 @@
 # Mongo API Project
 
-This project follows on from my project express-api where I used a set of data locally. This time I model my database using Mongoose models, and persist the data in the database.
+This project follows on from my project express-api where I used a set of data locally. This time I model my database using Mongoose models, and persist the data in a database.
 
 ## View it live
 
 
 ## The problem
 
-I have fulfilled the following requriements: 
+The API I have worked with has: 
 
-- The API should have 2 routes. 
+- Two different routes. 
 - One endpoint to return a **collection** of results (array of elements)
 - One endpoint to return a **single** result (single element).
-- The API should make use of Mongoose models to model the data and use these models to fetch data from the database.
-- The API should be [RESTful](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/)
+- The API make use of Mongoose models to model the data and use these models to fetch data from the database.
+- The API is [RESTful](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/)
 
 ## Learnings
 
