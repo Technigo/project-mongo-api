@@ -52,6 +52,11 @@ app.get('/avocados', async (req, res) => {
   res.json(allAvocados)
 })
 
+app.get('/', async (req, res) => {
+  const allAvocados = await Avocado.find()
+  res.send("We are advocates of avocados")
+})
+
 app.get('/avocados/id/:id', async (req, res) => {
   const singleAvocado = await Avocado.findOne({ id: req.params.id })
   res.json(singleAvocado)
