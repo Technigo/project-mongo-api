@@ -12,6 +12,8 @@ I added middlewares to handle connection errors to the database and I did also a
 
 With the mongoose method `find()` I retrieve one collection of all books and one collection of all authors. With the method `findOne()` I retrieve book with specific bookID or isbn. 
 
+In the end I added pagination to the backend data by using the mongoose methods `.skip()` and `.limit()`. That was really fun to learn how to use. Right now the first page is page=0, I hope I will have time to change this further on.
+
 ## Learning Objectives
 
 - How to model data in Mongoose
