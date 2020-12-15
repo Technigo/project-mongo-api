@@ -13,3 +13,5 @@ Also this is the first time we started using async/await as an alternative metho
 ## View it live
 
 https://project-mongo-api-olof.herokuapp.com/shows
+https://project-mongo-api-olof.herokuapp.com/shows/{country}
+https://project-mongo-api-olof.herokuapp.com/shows/limited/?page={page number}
