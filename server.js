@@ -91,11 +91,28 @@ app.get('/books', async (req, res) => {
   // Possibility to search on title with query params as example: '/books?title=potter' 
   const { title } = req.query;
   const queryRegex = new RegExp(title, 'i');
-  const books = await Book.find({ title: queryRegex }).sort({
-    average_rating: -1,
-  }).populate('author');
-  // Add an object telling the user how many books the API contains
-  const returnObject = { numberOfBooks: books.length, books };
+  // Possibility to search on page with page parameter (minValue = 0, default = 0)
+  // Usage example: '/books?page=2'
+  const page = req.query.page ?? 0; // Get first 20 when typing 'page=0'
+  const pageSize = 20; // Shows 20 per page
+  const startIndex = page * pageSize; // Calculate startindex
+  const endIndex = startIndex + pageSize;  // Calculate endindex
+  const books = await Book.find(); // All books
+  // Sorts the books based on average_rating, populates it with 
+  // the author collection and adds pagination
+  const limitedBooks = await Book.find({
+    title: queryRegex
+  }).sort({
+    average_rating: -1
+  }).populate('author').skip(startIndex).limit(endIndex);
+  // Add an object telling the user how many books the API contains, how many pages, books per page etc. 
+  const returnObject = {
+    pageSize: pageSize,
+    page: page,
+    maxPages: parseInt(books.length / pageSize),
+    numberOfBooks: books.length,
+    limitedBooks,
+  };
   if (books) {
     res.json(returnObject);
   } else {
