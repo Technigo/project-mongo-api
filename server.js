@@ -38,6 +38,7 @@ const Data = new mongoose.model('Data', {
     win: Boolean
 })
 
+//async await handles the asynchronous code. By doing this we first clear the database and it doesn't preceed with code on line 46 before the await on code 44 is finished. This is how we avoid adding the same data to the database all the time.
 if (process.env.RESET_DATABASE) {
 	const seedDatabase = async () => {
     await Data.deleteMany()
@@ -56,8 +57,16 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-app.get('/nominations', (req, res) => {
-  res.json(goldenGlobesData)
+app.get('/nominations', async (req, res) => {
+  const allNominations = await Data.find()
+  res.json(allNominations)
+})
+
+app.get('/nominations/:nominee', async (req, res) => {
+  const nominee = req.params.nominee
+  const singleNominee = await Data.find({nominee: req.params.nominee})
+
+  res.json(singleNominee)
 })
 
 // Start the server
