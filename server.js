@@ -3,105 +3,75 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
 import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+const port = process.env.PORT || 8099
+const app = express()
 
-const Author = mongoose.model('Author', {
+app.use(cors())
+app.use(bodyParser.json())
+ 
+
+const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
   authors: String,
-})
-
-//const Author = mongoose.model('Author', {
- // name: String,
-//})
-
-const Book = mongoose.model('Book', {
-  title: String,
-  author: {
-    type:mongoose.Schema.Types.ObjectId,
-    ref: 'Author'
-  }
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
 })
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Author.deleteMany()
     await Book.deleteMany()
 
-    booksData.forEach((authorData) => {
-      new Author(authorData).save()
+    booksData.forEach((item) => {
+      new Book(item).save()
     }) 
-  
-    //const tolkien = new Author({ name: 'J.R.R Tolkien'})
-    //await tolkien.save()
-    
-    const rowling = new Author({ name: 'J.K Rowling' })
-    await rowling.save()
-    
-    await new Book ({ title: "Harry Potter", author: rowling }).save()
   }
   seedDatabase()
 }
 
-//   PORT=9000 npm start
-const port = process.env.PORT || 8095
-const app = express()
-
-// Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(bodyParser.json())
-
-
-
-// Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Welcome!')
 })
 
-
-app.get('/authors', async ( req, res) => {
-  const authors = await Author.find()
-  res.json(authors)
+app.get('/books', async ( req, res) => {
+  const allBooks = await Book.find()
+  res.json(allBooks)
 })
 
-app.get('/authors/:authors', async ( req, res) => {
-  const author = await Author.findById(req.params.id)
-  if (author) {
-    res.json(author)
+app.get('/books/book/:bookID', async (req, res) => {
+  const oneBook = await Book.findOne( { bookID: req.params.bookID })
+  if (oneBook) {
+    res.json(oneBook)
   } else {
-    res.status(404).json({ error: 'No Author found' })
+    res.status(404).json({ error: 'No book found with that ID' })
   }
 })
 
-app.get('/authors/:id/books', async (req, res) => {
-  const author = await Author.findById(req.params.id)
-  if(author) {
-    const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) })
-    res.json(books)
-  } else {
-    res.status(404).json({ error: 'No Author found' })
-  } 
-})
+app.get('/books/authors/:authorName', async (req, res) => {
+  const AuthorName = req.params.authorName
 
-app.get('/books', async (req,res) => {
-  const books = await Book.find().populate('author')
-  if(books) {
-    res.json(books) 
+  const authorBooks = await Book.find({ authors: { $regex : new RegExp(AuthorName, "i") } })
+  // regex added so the search is non-case-sensitive
+
+  if ( authorBooks.length === 0) {
+    res.status(404).json('no books found by that author')
   } else {
-    res.status(404).json({ error: 'No books found'})
+    res.json(authorBooks)
   }
 })
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })

@@ -1,13 +1,21 @@
 # Mongo API Project
-
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project was made during the Technigo Bootcamp.  The goal was to practice how to use Mongodb to store data and how to query that data from an API.  
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+- I've created endpoints and i've used mongoose operations instead of vanilla JS since the data needed to be manipulated.
+- I've learned how to use the mongoose methods find() and findOne().
+
+## Routes 
+
+GET /welcome 
+
+GET /books - displays 500 books
+
+GET /books/book/:bookID - displays a single book based on the bookID parameter. Error message will show if the bookID is invalid.
+
+GET /books/authors/:authorName  - displays books by a specific author. I've added Regex so that the search will be non-case-sensitive and and Error will show if no author is found.  
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
