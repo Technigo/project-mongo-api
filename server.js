@@ -14,7 +14,7 @@ console.log(netflixData.length)
 // import topMusicData from './data/top-music.json'
 
 //const mongoUrl = "mongodb+srv://dbUser:dbUserOlofTechnigo@cluster0.x2ofn.mongodb.net/projectMongo?retryWrites=true&w=majority"
-const mongoUrl = process.env.MONGO_URL /*|| "mongodb://localhost/project-mongo"*/
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 console.log(mongoUrl)
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
@@ -70,9 +70,26 @@ app.get('/', (req, res) => {
   console.log(mongoUrl)
 })
 
+//All shows
+
 app.get('/shows', async (req, res) => {
-  console.log('Test')
   const shows = await Show.find()
+  res.json(shows)
+})
+
+//shows limited to 10 documents, paginated with query "page"
+
+app.get('/shows/limited', async (req, res) => {
+  const page = req.query.page
+  const shows = await Show.find().skip(page * 10 - 10).limit(10)
+  res.json(shows)
+})
+
+//parameter country
+
+app.get('/shows/:country', async (req, res) => {
+  const { country } = req.params
+  const shows = await Show.find( {country: country })
   res.json(shows)
 })
 

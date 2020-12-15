@@ -1,13 +1,15 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This weeks assignment was all about starting to use a NoSQL database to connect to our backend. For this we used MongoDB.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+It was a bit tricky to get the MongoDB client up and running. First installed it locally, hooked it up to the express server with the help of Mongoose, and then finally deployed to Heroku.
+
+Really int
+
+Also this is the first time we started using async/await as an alternative method to the fetch API for writing asynchronous code.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-olof.herokuapp.com/shows
