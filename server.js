@@ -9,8 +9,9 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 const app = express();
+const listEndpoints = require("express-list-endpoints");
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -25,14 +26,37 @@ const Album = new mongoose.model("Album", {
   critic: String,
 });
 
-const populateDatabase = () => {
-  Album.deleteMany(); //DeleteMany is a method provided by Mongoose package
-};
+if (process.env.RESET_DATABASE) {
+  const populateDatabase = async () => {
+    await Album.deleteMany(); //DeleteMany is a method provided by Mongoose package
+
+    albumData.forEach(item => {
+      const newAlbum = new Album(item);
+      newAlbum.save(); //Save is a method from Mongoose
+    });
+  };
+  populateDatabase();
+}
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send(listEndpoints(app));
 });
+
+app.get("/albums", async (req, res) => {
+  const allAlbums = await Album.find();
+  res.json(allAlbums);
+});
+
+app.get("/albums/:album", async (req, res) => {
+  const { album } = req.params;
+  if (album) {
+    const findAlbum = await Album.findOne({ albumName: req.params.album });
+    res.json(findAlbum);
+  }
+});
+
+app.get("/albums/artist");
 
 // Start the server
 app.listen(port, () => {
