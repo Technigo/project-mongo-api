@@ -27,4 +27,4 @@ Available routes:
 Queries available:
 title/author/page/language
 
-[Book API] (https://thereselinden-mongo-book-api.herokuapp.com/)
+[Book API](https://thereselinden-mongo-book-api.herokuapp.com/)
