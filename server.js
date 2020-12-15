@@ -4,9 +4,9 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import booksData from './data/books.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb+srv://thli:VnoP3ss1D4gvm60v@cluster0.igmsc.mongodb.net/project-mongo?retryWrites=true&w=majority";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 
-//"mongodb://localhost/project-mongo"
+//"mongodb+srv://thli:VnoP3ss1D4gvm60v@cluster0.igmsc.mongodb.net/project-mongo?retryWrites=true&w=majority"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
