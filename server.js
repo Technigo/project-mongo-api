@@ -77,6 +77,12 @@ app.get('/topsongs', async (request, response) => {
   response.json(allSongs);
 });
 
+// Route to get the most popular top songs 
+app.get('/topsongs/most-popular', async (request, response) => {
+  const mostPopular = await Song.find({ popularity: { $gte: 90 } });
+  response.json(mostPopular);
+});
+
 // Route to get song by id
 app.get('/topsongs/songs/:id', async (request, response) => { 
     const song = await Song.findOne({ id: request.params.id });
@@ -87,13 +93,14 @@ app.get('/topsongs/songs/:id', async (request, response) => {
     };
 });
 
-// Route to get the most popular songs 
-app.get('/topsongs/most-popular', async (request, response) => {
-  const mostPopular = await Song.find({ popularity: { $gte: 90 } });
-  response.json(mostPopular);
+//Route to get songs by genre 
+//Added a Regex to return all the genres that include a certain word, 
+//since the genres are several words on the same string
+app.get('/topsongs/genre/:genre', async (request, response) => { 
+  const genreParams = request.params.genre;
+  const genre = await Song.find({genre: { $regex: genreParams, $options: 'i' }});
+  response.json(genre)
 });
-
-//Search from genre?
 
 // Start the server
 app.listen(port, () => {
