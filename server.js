@@ -42,8 +42,8 @@ if (process.env.RESET_DATABASE) {
 	const seedDatabase = async () => {
     await Data.deleteMany()
 
-		goldenGlobesData.forEach((nominationData) => {
-      const newData = new Data(nominationData)
+	goldenGlobesData.forEach((nominationData) => {
+    const newData = new Data(nominationData)
       newData.save()
 		})
   }
@@ -54,6 +54,10 @@ if (process.env.RESET_DATABASE) {
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.get('/nominations', (req, res) => {
+  res.json(goldenGlobesData)
 })
 
 // Start the server
