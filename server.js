@@ -3,14 +3,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import avocadoSalesData from './data/avocado-sales.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -27,9 +20,39 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
+const Avocado = new mongoose.model('Avocado', {
+    id: Number,
+    date: Date,
+    averagePrice: Number,
+    totalVolume: Number,
+    totalBagsSold: Number,
+    smallBagsSold: Number,
+    largeBagsSold: Number,
+    xLargeBagsSold: Number,
+    region: String
+})
+
+if (process.env.RESET_DATABASE) {
+  const seedDatabase = async () => {
+    await Avocado.deleteMany()
+  
+    avocadoSalesData.forEach(item => {
+      const newAvocado = new Avocado(item);
+      newAvocado.save()
+    })
+  }
+  seedDatabase()
+}
+
+app.get('/avocados', async (req, res) => {
+  const allAvocados = await Avocado.find()
+  res.json(allAvocados)
+})
+
+app.get('/avocados/id/:id', async (req, res) => {
+  const singleAvocado = await Avocado.findOne({ id: req.params.id })
+  res.json(singleAvocado)
+
 })
 
 // Start the server
