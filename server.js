@@ -1,4 +1,4 @@
-import express, { query } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -11,8 +11,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Creating the model/structure of the database and what data will be stored there for each array element. This model is based on the books.json data set, but it can be based on any kind of data set. Can be string, number and boolean written as values, but which one it is depends on what the properties of the keys are written as in the initial data set.
-// Changed bookID in the data set to _id so then I could query using findById() to find a specific id of a book
+// Creating the model/structure of each of the instances that will be entered into the database. This model is based on the object structure/keys/values defined for the array elements in the books.json data set. We write the key name and the value type of each of the object keys as defined in the books.json.
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
@@ -27,21 +26,23 @@ const Book = mongoose.model('Book', {
 });
 
 /* Seeding database: 
-Means that this data is sent to our database when it's first started.
-Mongoose async/await operations - helping with asynchronous handling?
-Creating a new author based on the mongoose model above.
-Then saving this to the mongodb database
+1. Seeding database means that the data defined in the function is sent to our database when the database is first started.
+2. Mongoose async/await operations is being used to wait for the operation deleteMany to finish before it goes on to re-populate the database with the array of books. 
+3. Creating a new instance based on the Books mongoose model above and the books.json array of data which is being iterated over and saved to the mongoDB database.
+4. If statement will be true if I have entered the environment variable RESET_DB and equalled it to true when doing npm run dev in the terminal. This will signify that I want the database to be re-run and that the seeding of the database will begin!
 */
-const seedDatabase = async () => {
-// deleteMany will allow for the data that was stored on the database on the last get request to be deleted so that there are no dupications of data. Then the new Authors will be created again.
-  await Book.deleteMany({});
-
-  bookData.forEach((bookData) => {
-    new Book(bookData).save();
-  })
-};
-
-seedDatabase();
+if(process.env.RESET_DB) {
+  const seedDatabase = async () => {
+  // deleteMany will allow for the data that was stored on the database on the last get request to be deleted so that there are no dupications of data. Then the new Authors will be created again.
+    await Book.deleteMany({});
+  
+    bookData.forEach((bookData) => {
+      new Book(bookData).save();
+    })
+  };
+  
+  seedDatabase();
+}
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -56,13 +57,13 @@ app.get('/', (request, response) => {
 });
 
 // First endpoint that will return the whole array of books data
-// Async and await are being used as find is asyncronous and might take some time to return the data being fetched from the server?
+// Async and await are being used as find is asyncronous and might take some time to return the data being fetched from the server.
 app.get('/books', async (request, response) => {
   const {author, title, language, averagerating } = request.query;
 
   // RegExp is a regular expression object that is used to match the author string/text added to the query parameter with a pattern. 
   if(author) {
-    const authorRegexp = new RegExp(author);
+    const authorRegexp = new RegExp(author, "i");
     const queryAuthor = await Book.find({authors: authorRegexp});
     if(queryAuthor.length === 0){
       return response.status(404).json({ error: "Sorry that we don't have any data for that author"});
@@ -71,7 +72,7 @@ app.get('/books', async (request, response) => {
   }
 
   if(title) {
-    const titleRegexp = new RegExp(title);
+    const titleRegexp = new RegExp(title, "i");
     const queryTitle = await Book.find({title: titleRegexp});
     if(queryTitle.length === 0){
       return response.status(404).json({ error: "Sorry that we don't have any data for that title"});
@@ -80,7 +81,7 @@ app.get('/books', async (request, response) => {
   }
 
   if(language) {
-    const langRegexp = new RegExp(language);
+    const langRegexp = new RegExp(language, "i");
     const queryLanguage = await Book.find({language_code: langRegexp});
     if(queryLanguage.length === 0){
       return response.status(404).json({ error: "Sorry that we don't have any data for that language"});
