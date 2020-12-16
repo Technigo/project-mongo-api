@@ -12,9 +12,19 @@ import mongoose from 'mongoose'
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/movies"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
+
+const Actor = mongoose.model('Actor', {
+  name: String
+})
+
+Actor.deleteMany().then(() => {
+  new Actor({ name: 'Nicole Kidman'}).save()
+  new Actor({ name: 'Angelina Jolie'}).save()
+})
+
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -29,7 +39,19 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  Actor.find().then(actors => {
+    res.json(actors)
+  })
+})
+
+app.get('/:name', (req, res) => {
+  Actor.findOne({name: req.params.name}).then(actor => {
+    if(actor) {
+      res.json(actor)
+    } else {
+      res.status(404).json({ error: 'Not found' })
+    }
+  })
 })
 
 // Start the server
