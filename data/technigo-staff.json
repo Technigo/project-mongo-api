@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Van",
+    "surname": "Taylor",
+    "role": "Code coach",
+    "lettersInName": 3,
+    "isPapa": false
+  },
+  {
+    "name": "Poya",
+    "surname": "Tavakolian",
+    "role": "Project manager",
+    "lettersInName": 4,
+    "isPapa": true
+  },
+  {
+    "name": "Matilda",
+    "surname": "Arvidsson",
+    "role": "Code coach",
+    "lettersInName": 7,
+    "isPapa": false
+  },
+  {
+    "name": "Maksymilian",
+    "surname": "Olszewski",
+    "role": "Code coach",
+    "lettersInName": 11,
+    "isPapa": false
+  }
+]
