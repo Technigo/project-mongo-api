@@ -56,12 +56,12 @@ app.get("/books", async (req, res) => {
     res.json(allBooks);
 });
 
-app.get("/books/id/:bookId", async (req, res) => {
+app.get("/books/id/:bookID", async (req, res) => {
   try {
-    const singleBook = await Book.findOne({ bookID: req.params.bookID });
+    const queriedBook = await Book.findOne({ bookID: req.params.bookID });
 
-    if (singleBook) {
-      res.json(singleBook);
+    if (queriedBook) {
+      res.json(queriedBook);
     } else {
       res.status(404).json("Hmm, we can't find that book in our database. Try searching another ID!");
     }
@@ -70,7 +70,7 @@ app.get("/books/id/:bookId", async (req, res) => {
   }
 });
 
-app.get("/books/:isbn", async (req, res) => { try {
+app.get("/books/isbn/:isbn", async (req, res) => { try {
     const { isbn } = req.params;
     const book = await Book.findOne({ isbn: isbn });
     if (book) {
@@ -83,9 +83,9 @@ app.get("/books/:isbn", async (req, res) => { try {
   }
 });
 
-app.get('/books/author/:authors', async (req, res) => {
-  const searchAuthor = req.params.authors;
-  const thisBookAuthor = await Book.find({ authors: { $regex : new RegExp(searchAuthor, "i") } });
+app.get('/books/authors/:author', async (req, res) => {
+  const searchedAuthor = req.params.author;
+  const thisBookAuthor = await Book.find({ authors: { $regex : new RegExp(searchedAuthor, "i") } });
   if (thisBookAuthor.length === 0) {
     res.status(404).json("No books have been found by such author. Perhaps try searching another author?");
   }
