@@ -57,7 +57,7 @@ if (process.env.RESET_DATABASE) {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Golden Globes nominations in MongoDB')
+  res.send('Golden Globes nominations API in MongoDB')
 })
 
 //Shows all nominations. We can also query for information, for example to see all the movies that won we have to add to the URL: ?win=true. We can also add other things like for example the name of the film: ?win=true&film=Avatar
