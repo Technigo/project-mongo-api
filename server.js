@@ -126,6 +126,12 @@ app.get("/volcanos/:name", async (req, res) => {
   res.json(singleVolcano);
 });
 
+app.get("/volcanos/country/:Country", (req, res) => {
+  Volcano.find(req.params, (err, data) => {
+    res.json(data);
+  });
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
