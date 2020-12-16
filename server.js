@@ -20,10 +20,44 @@ const Actor = mongoose.model('Actor', {
   name: String
 })
 
-Actor.deleteMany().then(() => {
-  new Actor({ name: 'Nicole Kidman'}).save()
-  new Actor({ name: 'Angelina Jolie'}).save()
+const Movie = mongoose.model('Movie', {
+  title: String,
+  actor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Actor'
+  }
 })
+
+
+//Command: RESET_DATABASE=true npm run dev 
+
+if (process.env.RESET_DATABASE) {
+  console.log('resetting database!')
+
+  const seedDatabase = async () => {
+    await Actor.deleteMany()
+    await Movie.deleteMany()
+    
+    const pitt = new Actor({ name: 'Brad Pitt' })
+    await pitt.save()
+  
+    const hopkins = new Actor({ name: 'Anthony Hopkins' })
+    await hopkins.save()
+
+    await new Movie({ title: 'The Silence of the Lambs', actor: hopkins }).save()
+    await new Movie({ title: 'Bobby', actor: hopkins }).save()
+    await new Movie({ title: 'Hannibal', actor: hopkins }).save()
+    await new Movie({ title: 'Troja', actor: pitt }).save()
+    await new Movie({ title: 'Mr. & Mrs. Smith ', actor: pitt }).save()
+    await new Movie({ title: 'Fight Club', actor: pitt }).save()
+  }
+  seedDatabase()
+}
+
+//Actor.deleteMany().then(() => {
+  //new Actor({ name: 'Nicole Kidman'}).save()
+  //new Actor({ name: 'Angelina Jolie'}).save()
+//})
 
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
@@ -44,15 +78,25 @@ app.get('/', (req, res) => {
   })
 })
 
-app.get('/:name', (req, res) => {
-  Actor.findOne({name: req.params.name}).then(actor => {
-    if(actor) {
-      res.json(actor)
-    } else {
-      res.status(404).json({ error: 'Not found' })
-    }
-  })
+app.get('/actors', async (req, res) => {
+  const actors = await Actor.find()
+  res.json(actors)
 })
+
+app.get('/movies', async (req, res) => {
+  const movies = await Movie.find().populate('actor')
+  res.json(movies)
+})
+
+//app.get('/:name', (req, res) => {
+  //Actor.findOne({name: req.params.name}).then(actor => {
+    //if(actor) {
+      //res.json(actor)
+    //} else {
+      //res.status(404).json({ error: 'Not found' })
+    //}
+  //})
+//})
 
 // Start the server
 app.listen(port, () => {
