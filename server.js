@@ -83,6 +83,25 @@ app.get('/actors', async (req, res) => {
   res.json(actors)
 })
 
+app.get('/actors/:id', async (req, res) => {
+  const actor = await Actor.findById(req.params.id)
+  if (actor) {
+    res.json(actor)
+  } else {
+    res.status(404).json({ error: 'Actor not found' })
+  }
+})
+
+app.get('/actors/:id/movies', async (req, res) => {
+  const actor = await Actor.findById(req.params.id) 
+  if (actor) {
+    const movies = await Movie.find({ actor: mongoose.Types.ObjectId(actor.id) })
+    res.json(movies)
+  } else {
+    res.status(404).json({ error: 'Actor not found' })
+  }
+})
+
 app.get('/movies', async (req, res) => {
   const movies = await Movie.find().populate('actor')
   res.json(movies)
