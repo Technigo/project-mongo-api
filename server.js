@@ -92,7 +92,16 @@ app.get('/books/authors/:authorName', async (req, res) => {
 // Route to get Top Rated books, rating higher or equal to 4
 // $gte is MongoDB's comparison query operator for greater or equal to
 app.get('/books/top-rated', async (req, res) => {
+  const quickReadParam = req.query.quickRead;
   const topBooks = await Book.find({ average_rating: { $gte: 4 } });
+
+  // If the quickRead query param is added, it will show Top Rated books which
+  // have less than 600 pages
+  if (quickReadParam) {
+    const topQuickReadBooks = await Book.find({ average_rating: { $gte: 4 }, num_pages: { $lte: 600 } });
+    res.json(topQuickReadBooks);
+  }
+
   res.json(topBooks);
 });
 
