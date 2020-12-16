@@ -112,6 +112,32 @@ app.get('/books/:id', async (request, response) => {
   }  
 })
 
+// Created an object outlining the documentation. Can be found on the start page of the api url
+const documentation = {
+  "Endpoint 1": {
+    "https://clairebookapi.herokuapp.com/books": "Returns the entire books array",
+
+    "https://clairebookapi.herokuapp.com/books?author=choose": "Returns books by a specific author using the author query string parameter. It will return an array with one or more elements, if the author isn't valid then you will get an error message.",
+
+    "https://clairebookapi.herokuapp.com/books?title=choose": "Use this endpoint to return books with a specific title using the title query string parameter. It will return an array with one or more elements, if the author isn't valid then you'll get an error message.",
+
+    "https://clairebookapi.herokuapp.com/books?language=choose":  "Use this endpoint to return books written in a specific language using the title query string parameter. It will return an array with one or more elements. The following languages are valid: eng, en-GB, en-US, spa, fre, ger, ara, por, grc, mul. If the language isn't valid then you'll get an error message.",
+    
+    "https://clairebookapi.herokuapp.com/books?averagerating=choose": "Use this endpoint to return books with a specific average rating using the averagerating query string parameter. It will return an array with one or more elements. If the average rating isn't found you'll get an error message.",
+  },
+  
+  "Endpoint 2": {
+    "https://books-deployment.herokuapp.com/books/:id": " Use this endpoint to return books with a specific id and replace :id with a number.",
+  },
+};
+
+  /* --- Third endpoint --
+Path for my api documentation to be found which is the homepage of the url
+*/
+app.get('/documentation', (request, response) => {
+  response.json(documentation);
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
