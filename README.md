@@ -8,7 +8,7 @@ This project follows on from my project express-api where I used a set of data l
 
 The API I have worked with has: 
 
-- Two different routes. 
+- Two different routes making use of both queries and params.
 - One endpoint to return a **collection** of results (array of elements)
 - One endpoint to return a **single** result (single element).
 - The API make use of Mongoose models to model the data and use these models to fetch data from the database.
