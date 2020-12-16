@@ -42,7 +42,7 @@ const Data = new mongoose.model('Data', {
 })
 
 //async await handles the asynchronous code (because we are using a database). By doing this we first clear the database 
-// and it doesn't preceed with code on line 46 before the await on code 44 is finished. This is how we avoid adding the same data to the database all the time.
+// and it doesn't proceed with code on line 46 until the await on code 44 is finished. This is how we avoid adding the same data to the database all the time.
 if (process.env.RESET_DATABASE) {
 	const seedDatabase = async () => {
     await Data.deleteMany()
@@ -57,19 +57,19 @@ if (process.env.RESET_DATABASE) {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Golden Globes in MongoDB')
+  res.send('Golden Globes nominations in MongoDB')
 })
 
-//Shows all nominations. We can also query for information. For example to see all the movies that won add to the URL: ?win=true. We can also add for example the name of the film: ?win=true&film=Avatar
+//Shows all nominations. We can also query for information, for example to see all the movies that won we have to add to the URL: ?win=true. We can also add other things like for example the name of the film: ?win=true&film=Avatar
 app.get('/nominations', async (req, res) => {
   const queryParameters = req.query
   const allNominations = await Data.find(req.query)
   res.json(allNominations)
 })
 
-//It will return one object with a specified actor, for example 'Sandra Bullock', if there is no such name it will return an error message. We can use Find instead of FindOne  which will give us all
+//This will return one object with a specified actor, for example 'Sandra Bullock', if there is no such name it will return an error message. If we use Find instead of FindOne it will return all
 // the objects with Sandra Bulllock as nominee.
-app.get('/nominations/:nominee', async (req, res) => {
+app.get('/nominations/nominee/:nominee', async (req, res) => {
   const nominee = req.params.nominee
   const singleNominee = await Data.findOne({nominee: req.params.nominee})
 
@@ -79,6 +79,14 @@ app.get('/nominations/:nominee', async (req, res) => {
 
   res.json(singleNominee)
   }
+})
+
+//Shows all nominations from a specified year
+app.get('/nominations/year/:year', async (req, res) => {
+  const year = req.params.year
+  const nominationYear = await Data.find({ year_award: req.params.year});
+
+  res.json(nominationYear)
 })
 
 // Start the server
