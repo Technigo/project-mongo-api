@@ -25,7 +25,7 @@ const Book = mongoose.model('Book', {
 
 if (process.env.RESET_DB) {
 
-  const runDatabase = async () => {
+  const seedDatabase = async () => {
     // Deletes any pre-existing Book objects to prevent duplicates
     await Book.deleteMany({});
     
@@ -33,9 +33,9 @@ if (process.env.RESET_DB) {
     booksData.forEach((booksData) => {
       new Book(booksData).save();
     })
-  };
-  runDatabase();
-};
+  }
+  seedDatabase();
+}
 
 
 // Defines the port the app will run on. Defaults to 8080
@@ -70,16 +70,30 @@ app.get('/books', async (request, response) => {
         response.status(404).json({ error: "Sorry, book not found" })
       }
     } catch (err) {
-      res.status(400).json({ error: "Sorry, invalid Book ID" });
+      res.status(400).json({ error: "Sorry, invalid Book ID" })
     }
   })
 
+// Endpoint/route that return books by a specific author
+  app.get('/books/authors/:authorName', async (request, response) => {
+    const paramsAuthorName = request.params.authorName;
+
+    const authorBooks = await Book.find({ authors: { $regex : new RegExp(paramsAuthorName, "i") } });
+  
+    if (authorBooks.length === 0) {
+      response.status(404).json("Sorry, no books found by that author");
+    }
+    response.json(authorBooks);
+  });
+
+
+
   // Endpoint/route that return top rated books with a rating over 4
   app.get('/books/top-rated', async (request, response) => {
-    const topRatedBooks = await Book.find({ average_rating: { $gte: 4 } });
+    const topRatedBooks = await Book.find({ average_rating: { $gte: 4 } })
 
     response.json(topRatedBooks);
-  });
+  })
   
 
 // Start the server
