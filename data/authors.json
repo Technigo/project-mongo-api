@@ -1,0 +1,998 @@
+[
+    {
+      "authors": "J.K. Rowling-Mary GrandPré"
+    },
+    {
+      "authors": "J.K. Rowling"
+    },
+    {
+      "authors": "W. Frederick Zimmerman"
+    },
+    {
+      "authors": "Douglas Adams"
+    },
+    {
+      "authors": "Douglas Adams-Stephen Fry"
+    },
+    {
+      "authors": "Bill Bryson-William Roberts"
+    },
+    {
+      "authors": "Bill Bryson"
+    },
+    {
+      "authors": "J.R.R. Tolkien"
+    },
+    {
+      "authors": "J.R.R. Tolkien-Alan  Lee"
+    },
+    {
+      "authors": "Chris   Smith-Christopher  Lee-Richard Taylor"
+    },
+    {
+      "authors": "Jude Fisher"
+    },
+    {
+      "authors": "James Hamilton-Paterson"
+    },
+    {
+      "authors": "Dave Thomas-David Heinemeier Hansson-Leon Breedt-Mike Clark-Thomas  Fuchs-Andreas  Schwarz"
+    },
+    {
+      "authors": "Gary Paulsen"
+    },
+    {
+      "authors": "Donna Ickes-Edward Sciranko-Keith Vasconcelles"
+    },
+    {
+      "authors": "Molly Hatchet"
+    },
+    {
+      "authors": "Dale Peck"
+    },
+    {
+      "authors": "Angela Knight-Sahara Kelly-Judy Mays-Marteeka Karland-Kate Douglas-Shelby Morgen-Lacey Savage-Kate Hill-Willa Okati"
+    },
+    {
+      "authors": "Delia Sherman"
+    },
+    {
+      "authors": "Patricia A. McKillip"
+    },
+    {
+      "authors": "Zilpha Keatley Snyder"
+    },
+    {
+      "authors": "Kate Horsley"
+    },
+    {
+      "authors": "Philippa Carr"
+    },
+    {
+      "authors": "Edward P. Jones"
+    },
+    {
+      "authors": "Edward P. Jones-Kevin R. Free"
+    },
+    {
+      "authors": "Satyajit Das"
+    },
+    {
+      "authors": "Mark Smylie"
+    },
+    {
+      "authors": "John McPhee-William Howarth"
+    },
+    {
+      "authors": "John McPhee"
+    },
+    {
+      "authors": "Wendy Wasserstein"
+    },
+    {
+      "authors": "Heidi Hayes Jacobs"
+    },
+    {
+      "authors": "Heidi Boyd"
+    },
+    {
+      "authors": "Heidi Baker-Rolland Baker"
+    },
+    {
+      "authors": "Johanna Spyri-Beverly Cleary-Angelo  Rinaldi"
+    },
+    {
+      "authors": "Rolland Baker-Heidi Baker"
+    },
+    {
+      "authors": "Heidi Murkoff-Sharon Mazel-Heidi Murkoff-Arlene Eisenberg-Sandee Hathaway-Mark D. Widome"
+    },
+    {
+      "authors": "Heidi Fleiss-Libby Keatinge"
+    },
+    {
+      "authors": "Frank Herbert"
+    },
+    {
+      "authors": "Brian Herbert"
+    },
+    {
+      "authors": "Frank Herbert-Brian Herbert-Kevin J. Anderson"
+    },
+    {
+      "authors": "Bryce Courtenay"
+    },
+    {
+      "authors": "John C. Maxwell-Stephen R. Graves-Thomas G. Addington"
+    },
+    {
+      "authors": "Dave Lakhani"
+    },
+    {
+      "authors": "Louis E. Catron"
+    },
+    {
+      "authors": "Adam Ginsberg"
+    },
+    {
+      "authors": "Marsha Collier"
+    },
+    {
+      "authors": "Chris Malta-Lisa Suttora"
+    },
+    {
+      "authors": "Julia Wilkinson"
+    },
+    {
+      "authors": "Lucas Carlson-Leonard Richardson"
+    },
+    {
+      "authors": "Ruby Ann Boxcar"
+    },
+    {
+      "authors": "Rob Orsini"
+    },
+    {
+      "authors": "Leo Tolstoy-Richard Pevear-Larissa Volokhonsky"
+    },
+    {
+      "authors": "Leo Tolstoy-David Magarshack-Priscilla Meyer"
+    },
+    {
+      "authors": "Leo Tolstoy-Richard Pevear-Larissa Volokhonsky-John Bayley"
+    },
+    {
+      "authors": "Marianne Sturman-Leo Tolstoy"
+    },
+    {
+      "authors": "Leo Tolstoy-Amy Mandelker-Constance Garnett"
+    },
+    {
+      "authors": "Leo Tolstoy-Louise Maude-Aylmer Maude"
+    },
+    {
+      "authors": "Leo Tolstoy-Constance Garnett-Amy Mandelker"
+    },
+    {
+      "authors": "Gloria Goldreich"
+    },
+    {
+      "authors": "Anthony Thorlby"
+    },
+    {
+      "authors": "Mulk Raj Anand-E.M. Forster"
+    },
+    {
+      "authors": "John Banville"
+    },
+    {
+      "authors": "Eliot Ness-Oscar Fraley"
+    },
+    {
+      "authors": "Narendra Jadhav"
+    },
+    {
+      "authors": "V.T. Rajshekar-Y.N. Kly"
+    },
+    {
+      "authors": "Vasant Moon-Gail Omvedt-Eleanor Zelliot"
+    },
+    {
+      "authors": "Barry R. Cournoyer"
+    },
+    {
+      "authors": "John Carratello-Patty Carratello-Theresa Wright"
+    },
+    {
+      "authors": "George Smoot-Keay Davidson"
+    },
+    {
+      "authors": "Madeleine L'Engle"
+    },
+    {
+      "authors": "Tara MacCarthy"
+    },
+    {
+      "authors": "Cynthia Harrod-Eagles"
+    },
+    {
+      "authors": "Charles Todd"
+    },
+    {
+      "authors": "Ewan McGregor-Charley Boorman-Robert Uhlig"
+    },
+    {
+      "authors": "Daniel Abraham"
+    },
+    {
+      "authors": "Charles Willeford-James Lee Burke"
+    },
+    {
+      "authors": "Charles Willeford-Lawrence Block"
+    },
+    {
+      "authors": "Charles Willeford-Elmore Leonard"
+    },
+    {
+      "authors": "Tom Wolfe"
+    },
+    {
+      "authors": "Edward Lear-Laura Huliska-Beith-Edward Mendelson"
+    },
+    {
+      "authors": "Quentin Blake"
+    },
+    {
+      "authors": "Henry Miller-Thomas H. Moore"
+    },
+    {
+      "authors": "Henry Miller"
+    },
+    {
+      "authors": "Henry Miller-Jiří Níl"
+    },
+    {
+      "authors": "Henry James-Patricia Crick"
+    },
+    {
+      "authors": "Henry James-Gabriel Brownstein-Mary Cregan"
+    },
+    {
+      "authors": "Marguerite Duras-Barbara Bray-Maxine Hong Kingston"
+    },
+    {
+      "authors": "Marguerite Duras-Barbara Bray-قلسم روبین"
+    },
+    {
+      "authors": "Marguerite Duras-Richard Seever"
+    },
+    {
+      "authors": "Marguerite Duras-Barbara Bray-Helen Lane Cumberford"
+    },
+    {
+      "authors": "Marguerite Duras"
+    },
+    {
+      "authors": "Kahlil Gibran-Suheil Bushrui-Salma H. Al-Kuzbari"
+    },
+    {
+      "authors": "Jean Gibran-جبران خليل جبران-Kahlil Gibran"
+    },
+    {
+      "authors": "Kahlil Gibran-John Walbridge-Robin Waterfield"
+    },
+    {
+      "authors": "Kahlil Gibran-جبران خليل جبران"
+    },
+    {
+      "authors": "Kahlil Gibran-جبران خليل جبران-Anthony R. Ferris"
+    },
+    {
+      "authors": "Robert Louis Stevenson"
+    },
+    {
+      "authors": "Robert Louis Stevenson-Scott McKowen"
+    },
+    {
+      "authors": "Robert Louis Stevenson-N.C. Wyeth-Timothy Meis"
+    },
+    {
+      "authors": "Robert Louis Stevenson-Milo Winter"
+    },
+    {
+      "authors": "Deidre S. Laiken-A.J. McAllister-Robert Louis Stevenson"
+    },
+    {
+      "authors": "George Eliot-Edmund White"
+    },
+    {
+      "authors": "Ralph Ginzburg"
+    },
+    {
+      "authors": "Gabriel García Márquez-Gregory Rabassa"
+    },
+    {
+      "authors": "Gabriel García Márquez"
+    },
+    {
+      "authors": "Dr. Seuss"
+    },
+    {
+      "authors": "Debbie Raleigh"
+    },
+    {
+      "authors": "Kevin Henkes"
+    },
+    {
+      "authors": "Patrick Süskind"
+    },
+    {
+      "authors": "Tom Robbins"
+    },
+    {
+      "authors": "Patrick Süskind-John E. Woods"
+    },
+    {
+      "authors": "Robert A. Heinlein"
+    },
+    {
+      "authors": "Robert A. Heinlein-Stephen Hickman"
+    },
+    {
+      "authors": "Nick  Webb"
+    },
+    {
+      "authors": "Terry Jones"
+    },
+    {
+      "authors": "Douglas Adams-Christopher Cerf"
+    },
+    {
+      "authors": "Norton Juster-Jules Feiffer"
+    },
+    {
+      "authors": "Susan Nanus-Norton Juster"
+    },
+    {
+      "authors": "Harry G. Frankfurt"
+    },
+    {
+      "authors": "Nick Flynn"
+    },
+    {
+      "authors": "Garry Wills"
+    },
+    {
+      "authors": "Abraham Lincoln-Michael McCurdy"
+    },
+    {
+      "authors": "Don DeLillo"
+    },
+    {
+      "authors": "Thomas Pynchon"
+    },
+    {
+      "authors": "Richard Fariña-Thomas Pynchon"
+    },
+    {
+      "authors": "Joan Didion"
+    },
+    {
+      "authors": "Joan Didion-John Leonard"
+    },
+    {
+      "authors": "Joan Didion-David Thomson"
+    },
+    {
+      "authors": "Paul Auster-Art Spiegelman-Luc Sante"
+    },
+    {
+      "authors": "Paul Auster"
+    },
+    {
+      "authors": "Peter Moon-Preston B. Nichols-Nina Helms"
+    },
+    {
+      "authors": "Paul Karasik-David Mazzucchelli-Paul Auster-Bob Callahan"
+    },
+    {
+      "authors": "Jared Diamond"
+    },
+    {
+      "authors": "Stephen Leeb-Glen C. Strathy"
+    },
+    {
+      "authors": "Joseph A. Tainter"
+    },
+    {
+      "authors": "Robert D. Putnam"
+    },
+    {
+      "authors": "Philip K. Howard"
+    },
+    {
+      "authors": "Joy Harjo-Gloria Bird-Beth Cuthand-Valerie Martinez-Patricia Blanco"
+    },
+    {
+      "authors": "Nikola Tesla"
+    },
+    {
+      "authors": "Marc J.  Seifer-William H. Terbo"
+    },
+    {
+      "authors": "Carol Dommermuth-Costa"
+    },
+    {
+      "authors": "Nikola Tesla-David Hatcher Childress"
+    },
+    {
+      "authors": "Eric Hobsbawm-Terence O. Ranger-Hugh Trevor-Roper-Prys Morgan-David Cannadine-Bernard S. Cohn"
+    },
+    {
+      "authors": "Julie Elizabeth Leto-Leslie Kelly-Kimberly Raye"
+    },
+    {
+      "authors": "Dave Thomas-Chad Fowler-Andy Hunt"
+    },
+    {
+      "authors": "Maureen Kelly-CliffsNotes-William Golding"
+    },
+    {
+      "authors": "William Golding"
+    },
+    {
+      "authors": "William Golding-Ben Gibson-E.M. Forster-Edmund L. Epstein"
+    },
+    {
+      "authors": "Victor Davis Hanson"
+    },
+    {
+      "authors": "Ephraim Sevela-Antonina W. Bouis"
+    },
+    {
+      "authors": "Alice Sebold"
+    },
+    {
+      "authors": "Sharyn McCrumb"
+    },
+    {
+      "authors": "Dave Shea-Molly E. Holzschlag"
+    },
+    {
+      "authors": "Elizabeth Castro"
+    },
+    {
+      "authors": "Michael Ochs-Patrick Javault-Ulrike Wasel"
+    },
+    {
+      "authors": "Chuck Klosterman"
+    },
+    {
+      "authors": "Eric Schlosser"
+    },
+    {
+      "authors": "Jane Feather"
+    },
+    {
+      "authors": "Robert M. Pirsig"
+    },
+    {
+      "authors": "Kevin O'Malley-Carol Heyer-Scott Goto"
+    },
+    {
+      "authors": "Ronald L. DiSanto-Thomas J. Steele"
+    },
+    {
+      "authors": "John Harold Haynes"
+    },
+    {
+      "authors": "Catharine M. Fishel-Bill Gardner"
+    },
+    {
+      "authors": "Leo Tolstoy-Hugh McLean"
+    },
+    {
+      "authors": "Leo Tolstoy-Henry Gifford-Aylmer Maude-Louise Maude"
+    },
+    {
+      "authors": "Leo Tolstoy-Constance Garnett"
+    },
+    {
+      "authors": "Brian Herbert-Kevin J. Anderson"
+    },
+    {
+      "authors": "Ayn Rand-Leonard Peikoff"
+    },
+    {
+      "authors": "Ayn Rand"
+    },
+    {
+      "authors": "Ayn Rand-Nathaniel Branden"
+    },
+    {
+      "authors": "Ayn Rand-Nathaniel Branden-Alan Greenspan-Robert Hessen"
+    },
+    {
+      "authors": "Ayn Rand-Michael S. Berliner-Leonard Peikoff"
+    },
+    {
+      "authors": "J.J. Isler-Peter Isler"
+    },
+    {
+      "authors": "Colin  Wells"
+    },
+    {
+      "authors": "Billy Collins"
+    },
+    {
+      "authors": "Christopher Caswell"
+    },
+    {
+      "authors": "Kevin Trudeau"
+    },
+    {
+      "authors": "Bernard Malamud-Kevin Baker"
+    },
+    {
+      "authors": "Anne Tyler"
+    },
+    {
+      "authors": "Gary Colombo-Bonnie Lisle"
+    },
+    {
+      "authors": "Thomas E. Skidmore-Peter H. Smith"
+    },
+    {
+      "authors": "Philip Roth"
+    },
+    {
+      "authors": "Jon Stewart-Ben Karlin-David Javerbaum-Rich Bloomquist-Steve Bodow-Tim Carvell-Eric Drysdale-J.R. Havlan-Scott Jacobson-Tom Johnson-Rob Kutner-Chris Regan-Jason Reich-Jason Ross-Stephen Colbert-Samantha Bee-Rob Corddry-Brendan Hay-Ed Helms"
+    },
+    {
+      "authors": "Jon Stewart"
+    },
+    {
+      "authors": "Gabriel García Márquez-Gregory Rabassa-J.S. Bernstein"
+    },
+    {
+      "authors": "Gabriel García Márquez-Edith Grossman"
+    },
+    {
+      "authors": "Brian Greene"
+    },
+    {
+      "authors": "Upasika Kee Nanayon-Thanissaro Bhikkhu"
+    },
+    {
+      "authors": "Rob Humphreys-Beth Chaplin-Rebecca Morrill"
+    },
+    {
+      "authors": "Lonely Planet-Sarah Johnstone-Tom Masters"
+    },
+    {
+      "authors": "Lonely Planet-Sarah Johnstone-Steve Fallon"
+    },
+    {
+      "authors": "Lonely Planet-Steve Fallon-Pat Yale"
+    },
+    {
+      "authors": "Lonely Planet-Mark Honan"
+    },
+    {
+      "authors": "H.G. Bissinger"
+    },
+    {
+      "authors": "Neal Stephenson"
+    },
+    {
+      "authors": "Neal Stephenson-J. Frederick George"
+    },
+    {
+      "authors": "Neal Stephenson-George F. Jewsbury-Stephen  Bury"
+    },
+    {
+      "authors": "Neal Stephenson-Joachim Körber"
+    },
+    {
+      "authors": "Dan Harrington-Bill Robertie"
+    },
+    {
+      "authors": "Donald A. Norman"
+    },
+    {
+      "authors": "Alex C. Jones-Diane M. Hanson-Stephen K. Ray"
+    },
+    {
+      "authors": "Paulo Coelho-Alan R. Clarke-James Noel Smith"
+    },
+    {
+      "authors": "Paulo Coelho-Alan R. Clarke-Özdemir İnce"
+    },
+    {
+      "authors": "Hiromu Arakawa-Akira Watanabe"
+    },
+    {
+      "authors": "Paulo Coelho-Alan R. Clarke-Mœbius"
+    },
+    {
+      "authors": "Khaled Hosseini"
+    },
+    {
+      "authors": "Robert   Harris"
+    },
+    {
+      "authors": "Edward Bulwer-Lytton-John Gregory Betancourt"
+    },
+    {
+      "authors": "John Steinbeck"
+    },
+    {
+      "authors": "John Steinbeck-Jim Taylor"
+    },
+    {
+      "authors": "Neil Strauss"
+    },
+    {
+      "authors": "Ellen Raskin"
+    },
+    {
+      "authors": "Arthur Golden"
+    },
+    {
+      "authors": "David        James-Peggy Mulloy-Rob Marshall-Arthur Golden"
+    },
+    {
+      "authors": "Mineko Iwasaki-Rande Brown"
+    },
+    {
+      "authors": "J. Torres-Eric  Kim"
+    },
+    {
+      "authors": "Margaret Johnson-Philip Prowse"
+    },
+    {
+      "authors": "Nora Roberts"
+    },
+    {
+      "authors": "Gary Chapman"
+    },
+    {
+      "authors": "Dan Brown"
+    },
+    {
+      "authors": "Dan Brown-Raúl Amundaray"
+    },
+    {
+      "authors": "Dan Brown-Daniel Roche"
+    },
+    {
+      "authors": "Dan Brown-دان براون-فايزة المنجد-محمد فداء الهاشمي"
+    },
+    {
+      "authors": "P.J. Parrish"
+    },
+    {
+      "authors": "V.C. Andrews"
+    },
+    {
+      "authors": "Thomas J. Stanley-William D. Danko"
+    },
+    {
+      "authors": "Napoleon Hill"
+    },
+    {
+      "authors": "Mike   Mason"
+    },
+    {
+      "authors": "Riki Anne Wilchins"
+    },
+    {
+      "authors": "Donald J. Trump-Tony Schwartz"
+    },
+    {
+      "authors": "George S. Clason"
+    },
+    {
+      "authors": "Trevanian-Gisela Stege"
+    },
+    {
+      "authors": "David McCullough"
+    },
+    {
+      "authors": "Peter  Stone-Sherman Edwards"
+    },
+    {
+      "authors": "Robert J. Allison"
+    },
+    {
+      "authors": "Robert Morgan"
+    },
+    {
+      "authors": "Pearl S. Buck"
+    },
+    {
+      "authors": "Rick Warren"
+    },
+    {
+      "authors": "Lisa See"
+    },
+    {
+      "authors": "John Grisham"
+    },
+    {
+      "authors": "Robert A. Caro"
+    },
+    {
+      "authors": "Stephen W. Frey"
+    },
+    {
+      "authors": "Bill Phillips-Michael D'Orso"
+    },
+    {
+      "authors": "Pamela Peeke-Cindy Crawford"
+    },
+    {
+      "authors": "Bill Phillips"
+    },
+    {
+      "authors": "Robert G. Hagstrom-Bill Miller-Kenneth L. Fisher"
+    },
+    {
+      "authors": "Robert P. Miles-Tom Osborne"
+    },
+    {
+      "authors": "Marvin N. Olasky-John R. Perry"
+    },
+    {
+      "authors": "Barbara Park-Denise Brunkus"
+    },
+    {
+      "authors": "Sarah Mlynowski"
+    },
+    {
+      "authors": "Michael   Lewis"
+    },
+    {
+      "authors": "Frank McConnell"
+    },
+    {
+      "authors": "Giada De Laurentiis-Victoria Pearson"
+    },
+    {
+      "authors": "Giada De Laurentiis"
+    },
+    {
+      "authors": "Tyler Florence-Petrina Tinslay"
+    },
+    {
+      "authors": "Tyler Florence-JoAnn Cianciulli-Bill Bettencourt-Bobby Flay"
+    },
+    {
+      "authors": "Steven D. Levitt-Stephen J. Dubner"
+    },
+    {
+      "authors": "Steven D. Levitt-Stephen J. Dubner-Carlos Braga"
+    },
+    {
+      "authors": "Barry Eisler"
+    },
+    {
+      "authors": "Yann Martel"
+    },
+    {
+      "authors": "Yann Martel-Nicole Martel-Emile Martel"
+    },
+    {
+      "authors": "Carlos Ruiz Zafón-Lucia Graves"
+    },
+    {
+      "authors": "Robert Templer"
+    },
+    {
+      "authors": "James Frey"
+    },
+    {
+      "authors": "Python Bonkers"
+    },
+    {
+      "authors": "James Pinocchio-Pablo Fenjves"
+    },
+    {
+      "authors": "James M. Kouzes-Barry Z. Posner"
+    },
+    {
+      "authors": "Donald T. Phillips"
+    },
+    {
+      "authors": "Gary Yukl"
+    },
+    {
+      "authors": "Rudolph W. Giuliani"
+    },
+    {
+      "authors": "John Gray"
+    },
+    {
+      "authors": "Ron  Louis-David Copeland"
+    },
+    {
+      "authors": "Jean M. Auel"
+    },
+    {
+      "authors": "Jean M. Auel-Donada  Peters"
+    },
+    {
+      "authors": "Doug Walsh"
+    },
+    {
+      "authors": "Robert Greene-Joost Elffers"
+    },
+    {
+      "authors": "Steven Pressfield"
+    },
+    {
+      "authors": "Margaret Weis-Tracy Hickman"
+    },
+    {
+      "authors": "Thomas Harlan"
+    },
+    {
+      "authors": "Steven Pressfield-Robert McKee"
+    },
+    {
+      "authors": "Stephen J. Rosen-Steven Pressfield"
+    },
+    {
+      "authors": "David J. Danelo-Steven Pressfield"
+    },
+    {
+      "authors": "Plato-Walter Hamilton"
+    },
+    {
+      "authors": "Plato-Robin Waterfield"
+    },
+    {
+      "authors": "Plato-C.J. Rowe"
+    },
+    {
+      "authors": "Plato-Harold North Fowler"
+    },
+    {
+      "authors": "Babrius-Phaedrus-Ben Edwin Perry"
+    },
+    {
+      "authors": "Plato-John Burnet-Hipparchus"
+    },
+    {
+      "authors": "Plato-Benjamin Jowett"
+    },
+    {
+      "authors": "Josef Pieper-Richard Winston-Clara Winston"
+    },
+    {
+      "authors": "Plato-C.D.C. Reeve"
+    },
+    {
+      "authors": "Plato-James H. Nichols Jr."
+    },
+    {
+      "authors": "Plato-Walter Hamilton-Chris Emlyn-Jones"
+    },
+    {
+      "authors": "Plato-W.R.M. Lamb"
+    },
+    {
+      "authors": "Herodotus-Aubrey de Sélincourt-John M. Marincola"
+    },
+    {
+      "authors": "Herodotus-Henry Francis Cary"
+    },
+    {
+      "authors": "Herodotus-Carolyn Dewald-Robin Waterfield"
+    },
+    {
+      "authors": "Herodotus-Aubrey de Sélincourt-Andrew Robert Burn"
+    },
+    {
+      "authors": "Herodotus-Jennifer Tolbert Roberts-Walter Blanco"
+    },
+    {
+      "authors": "Herodotus-Edward Henry Blakeney-George Rawlinson-Rosalind Thomas"
+    },
+    {
+      "authors": "Herodotus-Peter Grene"
+    },
+    {
+      "authors": "Homer-Robert Fagles-Bernard Knox"
+    },
+    {
+      "authors": "Homer-Stanley Lombardo-Sheila Murnaghan"
+    },
+    {
+      "authors": "Homer-Robert Fitzgerald-Andrew Ford"
+    },
+    {
+      "authors": "Homer-E.V. Rieu-Peter Jones-D.C.H. Rieu"
+    },
+    {
+      "authors": "Homer-W.H.D. Rouse"
+    },
+    {
+      "authors": "Homer-Sheila Murnaghan-Stanley Lombardo"
+    },
+    {
+      "authors": "Homer-Robert Fitzgerald-D.S. Carne-Ross"
+    },
+    {
+      "authors": "Homer-Richmond Lattimore"
+    },
+    {
+      "authors": "Virgil-Barbara Weiden Boyd"
+    },
+    {
+      "authors": "Virgil-Henry Rushton Fairclough-G.P. Goold"
+    },
+    {
+      "authors": "Ed Roberson"
+    },
+    {
+      "authors": "Virgil-Cecil Day-Lewis"
+    },
+    {
+      "authors": "Paul  Kirk"
+    },
+    {
+      "authors": "William Shakespeare-G. Blakemore Evans"
+    },
+    {
+      "authors": "William Shakespeare-Stephen Orgel-A.R. Braunmuller"
+    },
+    {
+      "authors": "William Shakespeare"
+    },
+    {
+      "authors": "William Shakespeare-Harold Bloom-Rex Gibson"
+    },
+    {
+      "authors": "William Shakespeare-Stanley Wells-Gary Taylor"
+    },
+    {
+      "authors": "Reduced Shakespeare Company-Jess Borgeson-Adam Long-Daniel Singer-Jess Winfield"
+    },
+    {
+      "authors": "Paulo Coelho-Alan R. Clarke"
+    },
+    {
+      "authors": "Paulo Coelho"
+    },
+    {
+      "authors": "Paulo Coelho-Margaret Jull Costa"
+    },
+    {
+      "authors": "Paulo Coelho-Clifford E. Landers"
+    },
+    {
+      "authors": "Carla Lynn Stockton"
+    },
+    {
+      "authors": "William Shakespeare-Terri Mategrano"
+    },
+    {
+      "authors": "Giorgio De Santillana-Hertha Von Dechend"
+    },
+    {
+      "authors": "Thucydides-C.F. Smith"
+    },
+    {
+      "authors": "Thucydides-Paul Woodruff"
+    },
+    {
+      "authors": "Thucydides-Steven Lattimore"
+    },
+    {
+      "authors": "Thucydides-Jennifer Tolbert Roberts-Walter Blanco"
+    },
+    {
+      "authors": "Cynthia W. Shelmerdine"
+    }
+  ]

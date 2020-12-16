@@ -2,19 +2,22 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import booksData from './data/books.json'
+import booksData from './data/books.json';
+import authorsData from './data/authors.json';
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-
-//"mongodb+srv://thli:VnoP3ss1D4gvm60v@cluster0.igmsc.mongodb.net/project-mongo?retryWrites=true&w=majority"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.Promise = Promise
 
 //_____________create my modules
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
-  authors: String,
+  //authors: String,
+  authors: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author',
+  },
   average_rating: Number,
   isbn: String,
   isbn13: String,
@@ -30,10 +33,38 @@ const Author = mongoose.model('Author', {
 
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
-    await Book.deleteMany(); //clear database
-    await Author.deleteMany(); //clear database
-    await booksData.forEach((item) => new Book(item).save()); //single object from json array
-    await booksData.forEach((item) => new Author(item).save()); //single object from json array
+    await Book.deleteMany()
+    await Author.deleteMany()
+    //await booksData.forEach((item) => new Book(item).save())
+    //await authorsData.forEach((item) => new Author(item).save())
+
+
+    let authorsArray = [];
+
+    authorsData.forEach( async item => {
+      const newAuthor = new Author(item);
+      
+      // We push each newRole to array roles
+      authorsArray.push(newAuthor);
+      await newAuthor.save();
+    })
+  
+    booksData.forEach(async bookItem => {
+
+      // We create new member for element in membersData array from JSON file
+      // Important thing to notice: in JSON file we had property "role" with
+      // hardcoded string value. We need it to detect which role model should
+      // each member have. Later on, hardcoded "role" property will be
+      // overwritten by new "role" property, the one with value of ObjectId type.
+      // For further reference on that, check out last example from website below,
+      // the one about keys collision : https://davidwalsh.name/merge-objects
+      const newBook = new Book({
+        ...bookItem,
+        authors: authorsArray.find(authorItem => authorItem.authors === bookItem.authors)
+      });
+      await newBook.save();
+    })
+
   };
   seedDatabase();
 };
@@ -41,21 +72,21 @@ if (process.env.RESET_DATABASE) {
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
+//_____________Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(bodyParser.json());
-const listEndpoints = require('express-list-endpoints')
+const listEndpoints = require('express-list-endpoints');
 
-//____________error message in case server is down
+//_____________Error message in case server is down
 app.use((req, res, next) => {
   if(mongoose.connection.readyState === 1) {
-    next() //to execute next get response
+    next();
   } else {
     res.status(503).send({ error: "service unavailable"});
   };
 });
 
-//____________Start defining your routes here
+//_____________Start defining your routes here
 app.get('/', (req, res) => {
   if(!res) {
       res
@@ -74,19 +105,19 @@ app.get('/books', async (req, res) => {
   //första authors = definering i modell , author = query parameter. - REMOVE
   let books = await Book.find({
     title: new RegExp(title, 'i'),
-    authors: new RegExp(author, 'i'),
-    language_code: new RegExp(language, 'i')
-  })
-    .sort({ average_rating: - 1 }) //hard coded to sort data accordingly to this.
+    //authors: new RegExp(author, 'i'),
+    language_code: new RegExp(language, 'i'),
+  }).populate('authors') //to get Author model information in /books
+    .sort({ average_rating: - 1 })
     .limit(pageSize)
-    .skip(skip)
+    .skip(skip);
 
   if (books) {
     res.json({ 
       currentPage: pageNumber, 
       pageSize: pageSize, 
       numberOfResults: books.length, 
-      results: books 
+      results: books,
     });
   } else {
     res.status(404).send({ error: "No books found"});
@@ -98,30 +129,52 @@ app.get('/books/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-  const singleBook = await Book.findOne({ bookID: id });
+  const singleBook = await Book.findOne({ bookID: +id });
     if (singleBook) {
       res.json(singleBook);
     } else res.status(404).send({ error: `No book with id: ${id} found.` });
   } catch {
-    res.status(400).send({ error: `${id} is not a valid bookID`});
+    res
+    .status(400)
+    .send({ error: `${id} is not a valid bookID`});
   };
 });
 
-//______________Array of authors
+//_____________Array of authors
 app.get("/authors", async (req, res) => {
-  const { author } = req.query;
-  const authorsArray = await Author.find({});
-  console.log(authorsArray);
+  const { author } = req.query
+  const authorsArray = await Author.find({
+    authors: new RegExp(author, 'i'),
+  });
 
-  const uniqueAuthorsArray = [...new Set(authorsArray)];
-  
-  if (!uniqueAuthorsArray) {
+  if (!authorsArray) {
     res
     .status(404)
     .send({Error: "something went wrong"});
   };
-  //res.send({authors: uniqueAuthorsArray.length, results: uniqueAuthorsArray});
-  res.send({ results: uniqueAuthorsArray });
+  res.send({ author: authorsArray });
+});
+
+app.get('/authors/:id', async (req, res) => {
+  const singleAuthor = await Author.findById(req.params.id);
+  if (singleAuthor) {
+    res.json(singleAuthor);
+  } else {
+    res.status(404).json({ error: 'Author not found' });
+  }
+});
+
+
+app.get('/authors/:id/books', async (req, res) => {
+  const author = await Author.findById(req.params.id);
+  if (author) {
+    const books = await Book.find({
+      authors: mongoose.Types.ObjectId(author.id)
+    });
+    res.json(books);
+  } else {
+    res.status(404).json({ error: 'authors/:id/books' });
+  }
 });
 
 //_____________Start the server
@@ -135,3 +188,6 @@ app.listen(port, () => {
 //testa felmeddelandet starta
 //brew services start mongodb-community@4.4 
 //brew services stop mongodb-community@4.4 
+//RESET_DATABASE=TRUE npm run dev
+
+//7jpxZB0mhKob9Zri  
