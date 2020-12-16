@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 
 import booksData from './data/books.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb+srv://sandra:H36bUcASMid6eQW@cluster0.ixgfn.mongodb.net/booksDb"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
