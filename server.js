@@ -12,13 +12,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const port = process.env.PORT || 8099
-const app = express()
-
-app.use(cors())
-app.use(bodyParser.json())
- 
-
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
@@ -42,6 +35,13 @@ if (process.env.RESET_DB) {
   }
   seedDatabase()
 }
+
+const port = process.env.PORT || 8099
+const app = express()
+
+app.use(cors())
+app.use(bodyParser.json())
+ 
 
 app.get('/', (req, res) => {
   res.send('Welcome!')
