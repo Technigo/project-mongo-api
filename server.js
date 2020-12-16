@@ -47,6 +47,16 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+// express starts by using the middleware, check if database is connected. If ok,
+// express goes on to first route. If not, it returns error 503
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable '})
+  }
+})
+
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
@@ -58,10 +68,18 @@ app.get('/nominations', async (req, res) => {
 })
 
 app.get('/nominations/:nominee', async (req, res) => {
+  try {
   // const { nominee } = req.params  SAME as below
   // find() returns array, findOne() returns object. The first in order to match.
-  const singleNominee = await Nomination.findOne({ nominee: req.params.nominee });
-  res.json(singleNominee);
+    const singleNominee = await Nomination.findOne({ nominee: req.params.nominee });
+    if (singleNominee) {
+      res.json(singleNominee)
+    } else {
+      res.status(404).json({ error: 'Nominee not found' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid nominee' })
+  }
 })
 
 // Start the server
