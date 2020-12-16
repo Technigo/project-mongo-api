@@ -8,13 +8,13 @@
     "wand": "11\"  Holly  phoenix feather",
     "patronus": "Stag",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Bright green",
+    "blood_status": "Half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Bright green",
     "loyalty": "Albus Dumbledore | Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Parseltongue| Defence Against the Dark Arts | Seeker",
-    "birth-date": "31 July 1980",
-    "death-date": ""
+    "birth_date": "31 July 1980",
+    "death_date": ""
   },
   {
     "id": 2,
@@ -25,13 +25,13 @@
     "wand": "12\" Ash unicorn tail hair",
     "patronus": "Jack Russell terrier",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Blue",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Blue",
     "loyalty": "Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Wizard chess | Quidditch goalkeeping",
-    "birth-date": "1 March 1980",
-    "death-date": ""
+    "birth_date": "1 March 1980",
+    "death_date": ""
   },
   {
     "id": 3,
@@ -42,13 +42,13 @@
     "wand": "10�\"  vine wood dragon heartstring",
     "patronus": "Otter",
     "species": "Human",
-    "blood-status": "Muggle-born",
-    "hair-colour": "Brown",
-    "eye-colour": "Brown",
+    "blood_status": "Muggle-born",
+    "hair_colour": "Brown",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Almost everything",
-    "birth-date": "19 September,�1979",
-    "death-date": ""
+    "birth_date": "19 September,�1979",
+    "death_date": ""
   },
   {
     "id": 4,
@@ -59,13 +59,13 @@
     "wand": "15\" Elder Thestral tail hair core",
     "patronus": "Phoenix",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Silver| formerly auburn",
-    "eye-colour": "Blue",
+    "blood_status": "Half-blood",
+    "hair_colour": "Silver| formerly auburn",
+    "eye_colour": "Blue",
     "loyalty": "Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Considered by many to be one of the most powerful wizards of his time",
-    "birth-date": "Late August 1881",
-    "death-date": "30 June,�1997�"
+    "birth_date": "Late August 1881",
+    "death_date": "30 June,�1997�"
   },
   {
     "id": 5,
@@ -76,13 +76,13 @@
     "wand": "16\"  Oak unknown core",
     "patronus": "None",
     "species": "Half-Human/Half-Giant",
-    "blood-status": "Part-Human�(Half-giant)",
-    "hair-colour": "Black",
-    "eye-colour": "Black",
+    "blood_status": "Part-Human�(Half-giant)",
+    "hair_colour": "Black",
+    "eye_colour": "Black",
     "loyalty": "Albus Dumbledore | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Resistant to stunning spells| above average strength | crossbowmanship",
-    "birth-date": "6 December�1928",
-    "death-date": ""
+    "birth_date": "6 December�1928",
+    "death_date": ""
   },
   {
     "id": 6,
@@ -93,13 +93,13 @@
     "wand": "13\" Cherry unicorn hair",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Blond",
-    "eye-colour": "",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Blond",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Herbology",
-    "birth-date": "30 July,�1980",
-    "death-date": ""
+    "birth_date": "30 July,�1980",
+    "death_date": ""
   },
   {
     "id": 7,
@@ -110,13 +110,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Brown",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Beater",
-    "birth-date": "1 April,�1978�",
-    "death-date": "2 May,�1998"
+    "birth_date": "1 April,�1978�",
+    "death_date": "2 May,�1998"
   },
   {
     "id": 8,
@@ -127,13 +127,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Brown",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Beater",
-    "birth-date": "1 April,�1978�",
-    "death-date": ""
+    "birth_date": "1 April,�1978�",
+    "death_date": ""
   },
   {
     "id": 9,
@@ -144,13 +144,13 @@
     "wand": "Unknown",
     "patronus": "Horse",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Bright brown",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Bright brown",
     "loyalty": "Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Chaser| Bat-Bogey hex",
-    "birth-date": "11 August,�1981",
-    "death-date": ""
+    "birth_date": "11 August,�1981",
+    "death_date": ""
   },
   {
     "id": 10,
@@ -161,13 +161,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Muggle-born",
-    "hair-colour": "Black",
-    "eye-colour": "Brown",
+    "blood_status": "Muggle-born",
+    "hair_colour": "Black",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Chaser",
-    "birth-date": "�1 September�1979-�31 August�1980",
-    "death-date": ""
+    "birth_date": "�1 September�1979-�31 August�1980",
+    "death_date": ""
   },
   {
     "id": 11,
@@ -178,13 +178,13 @@
     "wand": "Unknown",
     "patronus": "Fox",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Sandy",
-    "eye-colour": "",
+    "blood_status": "Half-blood",
+    "hair_colour": "Sandy",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Pyrotechnics",
-    "birth-date": "�1 September�1979-�31 August�1981",
-    "death-date": ""
+    "birth_date": "�1 September�1979-�31 August�1981",
+    "death_date": ""
   },
   {
     "id": 12,
@@ -195,13 +195,13 @@
     "wand": "10�\"  Willow  unknown core",
     "patronus": "Doe",
     "species": "Human",
-    "blood-status": "Muggle-born",
-    "hair-colour": "Auburn",
-    "eye-colour": "Bright green",
+    "blood_status": "Muggle-born",
+    "hair_colour": "Auburn",
+    "eye_colour": "Bright green",
     "loyalty": "Order of the Phoenix",
     "skills": "",
-    "birth-date": "30 January,�1960�",
-    "death-date": "31 October,�1981"
+    "birth_date": "30 January,�1960�",
+    "death_date": "31 October,�1981"
   },
   {
     "id": 13,
@@ -212,13 +212,13 @@
     "wand": "11\"  Mahogany  unknown core",
     "patronus": "Stag",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Hazel",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Hazel",
     "loyalty": "Order of the Phoenix",
     "skills": "Animagus| Seeker",
-    "birth-date": "27 March,�1960",
-    "death-date": "31 October,�1981"
+    "birth_date": "27 March,�1960",
+    "death_date": "31 October,�1981"
   },
   {
     "id": 14,
@@ -229,13 +229,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Grey",
     "loyalty": "Order of the Phoenix",
     "skills": "Animagus| nonverbal magic| Charms",
-    "birth-date": "3 November,�1959",
-    "death-date": "18 June,�1996"
+    "birth_date": "3 November,�1959",
+    "death_date": "18 June,�1996"
   },
   {
     "id": 15,
@@ -246,13 +246,13 @@
     "wand": "10�\" Cypress unicorn hair",
     "patronus": "Wolf",
     "species": "Werewolf",
-    "blood-status": "Half-blood",
-    "hair-colour": "Light brown flecked with grey",
-    "eye-colour": "Green",
+    "blood_status": "Half-blood",
+    "hair_colour": "Light brown flecked with grey",
+    "eye_colour": "Green",
     "loyalty": "Order of the Phoenix",
     "skills": "Exceptionally gifted in Defence Against the Dark Arts",
-    "birth-date": "10 March,�1960",
-    "death-date": "2 May,�1998"
+    "birth_date": "10 March,�1960",
+    "death_date": "2 May,�1998"
   },
   {
     "id": 16,
@@ -263,13 +263,13 @@
     "wand": "9�\" Chestnut dragon heartstring",
     "patronus": "None",
     "species": "Human",
-    "blood-status": "Half-blood�or�pure-blood",
-    "hair-colour": "Colourless and balding",
-    "eye-colour": "Blue",
+    "blood_status": "Half-blood�or�pure-blood",
+    "hair_colour": "Colourless and balding",
+    "eye_colour": "Blue",
     "loyalty": "Lord Voldemort| Death Eaters",
     "skills": "Animagus",
-    "birth-date": "1 September�1959-�31 August�1960",
-    "death-date": "Late�March�1998"
+    "birth_date": "1 September�1959-�31 August�1960",
+    "death_date": "Late�March�1998"
   },
   {
     "id": 17,
@@ -280,13 +280,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Blue",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Blue",
     "loyalty": "Order of the Phoenix| Hogwarts School of Witchcraft and Wizardry |British Ministry of Magic",
     "skills": "Intelligent| hard-working| a model student",
-    "birth-date": "22 August,�1976�",
-    "death-date": ""
+    "birth_date": "22 August,�1976�",
+    "death_date": ""
   },
   {
     "id": 18,
@@ -297,13 +297,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�(Werewolf�traits)",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Blue",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Blue",
     "loyalty": "Order of the Phoenix",
     "skills": "Highly skilled curse-breaker for Gringotts Wizarding Bank| very intelligent| past Hogwarts Head Boy",
-    "birth-date": "29 November, 1970",
-    "death-date": ""
+    "birth_date": "29 November, 1970",
+    "death_date": ""
   },
   {
     "id": 19,
@@ -314,13 +314,13 @@
     "wand": "12\"  Ash unicorn tail hair",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Grey",
     "loyalty": "Order of the Phoenix | Gringotts Wizarding Bank",
     "skills": "Highly skilled dragon trainer| one-time Gryffindor Seeker",
-    "birth-date": "12 December,�1972",
-    "death-date": ""
+    "birth_date": "12 December,�1972",
+    "death_date": ""
   },
   {
     "id": 20,
@@ -331,13 +331,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Brown",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Quidditch commentary | broadcasting",
-    "birth-date": "�1 September�1977-�31 August�1978",
-    "death-date": ""
+    "birth_date": "�1 September�1977-�31 August�1978",
+    "death_date": ""
   },
   {
     "id": 21,
@@ -348,13 +348,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�Half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�Half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Hogwarts School of Witchcraft and Wizardry",
     "skills": "Keeper|  Captain of the Gryffindor Quidditch team",
-    "birth-date": "�October�1975�-�31 August�1976",
-    "death-date": ""
+    "birth_date": "�October�1975�-�31 August�1976",
+    "death_date": ""
   },
   {
     "id": 22,
@@ -365,13 +365,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Unknown",
-    "hair-colour": "Brown",
-    "eye-colour": "Brown",
+    "blood_status": "Unknown",
+    "hair_colour": "Brown",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Chaser",
-    "birth-date": "24���30 October,�1977",
-    "death-date": ""
+    "birth_date": "24���30 October,�1977",
+    "death_date": ""
   },
   {
     "id": 23,
@@ -382,13 +382,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Brown",
-    "eye-colour": "Brown",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Brown",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Chaser",
-    "birth-date": "�1 September�1978-�31 August�1979",
-    "death-date": ""
+    "birth_date": "�1 September�1978-�31 August�1979",
+    "death_date": ""
   },
   {
     "id": 24,
@@ -399,13 +399,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Brown",
-    "eye-colour": "Brown",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Brown",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Chaser",
-    "birth-date": "1 September�1977-�31 August�1978",
-    "death-date": ""
+    "birth_date": "1 September�1977-�31 August�1978",
+    "death_date": ""
   },
   {
     "id": 25,
@@ -416,13 +416,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Blond",
-    "eye-colour": "Blue",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Blond",
+    "eye_colour": "Blue",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Divination",
-    "birth-date": "�1 September�1979-�31 August�1980",
-    "death-date": "2 May,�1998"
+    "birth_date": "�1 September�1979-�31 August�1980",
+    "death_date": "2 May,�1998"
   },
   {
     "id": 26,
@@ -433,13 +433,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Dark",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Dark",
+    "eye_colour": "Dark",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Divination",
-    "birth-date": "�1 September�1979- 21 April�1980",
-    "death-date": ""
+    "birth_date": "�1 September�1979- 21 April�1980",
+    "death_date": ""
   },
   {
     "id": 27,
@@ -450,13 +450,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Dark",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Spiking Chocolate Cauldrons with love potion",
-    "birth-date": "�1 September�1981- 31 August�1982",
-    "death-date": ""
+    "birth_date": "�1 September�1981- 31 August�1982",
+    "death_date": ""
   },
   {
     "id": 28,
@@ -467,13 +467,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Muggle-born",
-    "hair-colour": "Mousy",
-    "eye-colour": "",
+    "blood_status": "Muggle-born",
+    "hair_colour": "Mousy",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Photography",
-    "birth-date": "�3 May - 31 August�1981",
-    "death-date": "2 May,�1998"
+    "birth_date": "�3 May - 31 August�1981",
+    "death_date": "2 May,�1998"
   },
   {
     "id": 29,
@@ -484,13 +484,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Blond",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Blond",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Quidditch Keeper",
-    "birth-date": "�1 September�1978-�31 August�1979",
-    "death-date": ""
+    "birth_date": "�1 September�1978-�31 August�1979",
+    "death_date": ""
   },
   {
     "id": 30,
@@ -501,13 +501,13 @@
     "wand": "9�\" Fir dragon heartstring",
     "patronus": "Cat",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Green",
+    "blood_status": "Half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Green",
     "loyalty": "Albus Dumbledore | Order of the Phoenix | Hogwarts School of Witchcraft and Wizardry",
     "skills": "Animagus�",
-    "birth-date": "4 October",
-    "death-date": ""
+    "birth_date": "4 October",
+    "death_date": ""
   },
   {
     "id": 31,
@@ -518,13 +518,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Bright brown",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Bright brown",
     "loyalty": "Order of the Phoenix",
     "skills": "Household spells| healing magic",
-    "birth-date": "30 October,�1949�",
-    "death-date": ""
+    "birth_date": "30 October,�1949�",
+    "death_date": ""
   },
   {
     "id": 32,
@@ -535,13 +535,13 @@
     "wand": "Unknown",
     "patronus": "Weasel",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Green",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Green",
     "loyalty": "Order of the Phoenix| British Ministry of Magic",
     "skills": "Muggle world works",
-    "birth-date": "6 February,�1950",
-    "death-date": ""
+    "birth_date": "6 February,�1950",
+    "death_date": ""
   },
   {
     "id": 33,
@@ -552,13 +552,13 @@
     "wand": "9\" Alder unicorn hair bendy",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Lord Voldemort",
     "skills": "Learned in the theory of Defensive Magic| less adept in the practise",
-    "birth-date": "26 September,1970�or earlier",
-    "death-date": "4 June�1992"
+    "birth_date": "26 September,1970�or earlier",
+    "death_date": "4 June�1992"
   },
   {
     "id": 34,
@@ -569,13 +569,13 @@
     "wand": "Unknown",
     "patronus": "Swan",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Dark",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Seeker",
-    "birth-date": "1 September�1978-31 August�1979",
-    "death-date": ""
+    "birth_date": "1 September�1978-31 August�1979",
+    "death_date": ""
   },
   {
     "id": 35,
@@ -586,13 +586,13 @@
     "wand": "Unknown",
     "patronus": "Hare",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Dirty-blonde",
-    "eye-colour": "Pale silvery",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Dirty-blonde",
+    "eye_colour": "Pale silvery",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Spotting Nargles",
-    "birth-date": "13 February,�1981",
-    "death-date": ""
+    "birth_date": "13 February,�1981",
+    "death_date": ""
   },
   {
     "id": 36,
@@ -603,13 +603,13 @@
     "wand": "9\" Cherry dragon heartstring",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Blond",
-    "eye-colour": "Blue",
+    "blood_status": "Half-blood",
+    "hair_colour": "Blond",
+    "eye_colour": "Blue",
     "loyalty": "",
     "skills": "",
-    "birth-date": "26 January 1964",
-    "death-date": ""
+    "birth_date": "26 January 1964",
+    "death_date": ""
   },
   {
     "id": 37,
@@ -620,13 +620,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human(goblin ancestry)",
-    "blood-status": "Part-Goblin",
-    "hair-colour": "White",
-    "eye-colour": "",
+    "blood_status": "Part-Goblin",
+    "hair_colour": "White",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Charms",
-    "birth-date": "17 October�1958�or earlier�",
-    "death-date": ""
+    "birth_date": "17 October�1958�or earlier�",
+    "death_date": ""
   },
   {
     "id": 38,
@@ -637,13 +637,13 @@
     "wand": "9 �� hazel unicorn hair core",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "A Seer, though the gift is unpredictable and unconscious",
-    "birth-date": "9 March prior to 1962",
-    "death-date": ""
+    "birth_date": "9 March prior to 1962",
+    "death_date": ""
   },
   {
     "id": 39,
@@ -654,13 +654,13 @@
     "wand": "12�\" Hornbeam dragon heartstring",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "",
-    "eye-colour": "Silvery",
+    "blood_status": "Half-blood",
+    "hair_colour": "",
+    "eye_colour": "Silvery",
     "loyalty": "",
     "skills": "An incomparable understanding of wandcraft",
-    "birth-date": "25 September,�pre�1908",
-    "death-date": ""
+    "birth_date": "25 September,�pre�1908",
+    "death_date": ""
   },
   {
     "id": 40,
@@ -671,13 +671,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Ghost",
-    "blood-status": "Muggle-born",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Muggle-born",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "",
-    "birth-date": "14 June�1928�-13 June�1929",
-    "death-date": "13 June,�1943"
+    "birth_date": "14 June�1928�-13 June�1929",
+    "death_date": "13 June,�1943"
   },
   {
     "id": 41,
@@ -688,13 +688,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Dark",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Dark",
+    "eye_colour": "Dark",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Prefect",
-    "birth-date": "�1 September�1979 - 21 April�1980",
-    "death-date": ""
+    "birth_date": "�1 September�1979 - 21 April�1980",
+    "death_date": ""
   },
   {
     "id": 42,
@@ -705,13 +705,13 @@
     "wand": "Unknown",
     "patronus": "Squirrel",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Brown",
+    "blood_status": "Half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Potions",
-    "birth-date": "�1 September�1979 - 31 August�1980",
-    "death-date": ""
+    "birth_date": "�1 September�1979 - 31 August�1980",
+    "death_date": ""
   },
   {
     "id": 43,
@@ -722,13 +722,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Reddish-blonde",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Reddish-blonde",
+    "eye_colour": "Grey",
     "loyalty": "",
     "skills": "Covering up the spots that blight her face after betraying Dumbledore's Army",
-    "birth-date": "1978-1979",
-    "death-date": ""
+    "birth_date": "1978-1979",
+    "death_date": ""
   },
   {
     "id": 44,
@@ -739,13 +739,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Potions, also knowledgable about Charms",
-    "birth-date": "1 September�1979-�21 April�1980",
-    "death-date": ""
+    "birth_date": "1 September�1979-�21 April�1980",
+    "death_date": ""
   },
   {
     "id": 45,
@@ -756,13 +756,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Blonde",
-    "eye-colour": "Grey",
+    "blood_status": "Half-blood",
+    "hair_colour": "Blonde",
+    "eye_colour": "Grey",
     "loyalty": "Dumbledore's Army |Hogwarts School of Witchcraft and Wizardry",
     "skills": "Prefect",
-    "birth-date": "�1 September�1979-�31 August�1980",
-    "death-date": ""
+    "birth_date": "�1 September�1979-�31 August�1980",
+    "death_date": ""
   },
   {
     "id": 46,
@@ -773,13 +773,13 @@
     "wand": "Unknown",
     "patronus": "Doe",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Black",
+    "blood_status": "Half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Black",
     "loyalty": "",
     "skills": "Extremely skilled at potions and Occlumency",
-    "birth-date": "9 January 1960",
-    "death-date": "2 May,�1998"
+    "birth_date": "9 January 1960",
+    "death_date": "2 May,�1998"
   },
   {
     "id": 47,
@@ -790,13 +790,13 @@
     "wand": "10\" Hawthorn unicorn hair",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "White-blond",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood",
+    "hair_colour": "White-blond",
+    "eye_colour": "Grey",
     "loyalty": "",
     "skills": "Prefect, Seeker",
-    "birth-date": "5 June, 1980",
-    "death-date": ""
+    "birth_date": "5 June, 1980",
+    "death_date": ""
   },
   {
     "id": 48,
@@ -807,13 +807,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Black",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Black",
     "loyalty": "",
     "skills": "Beater",
-    "birth-date": "c. 1979-1980",
-    "death-date": "2 May,�1998"
+    "birth_date": "c. 1979-1980",
+    "death_date": "2 May,�1998"
   },
   {
     "id": 49,
@@ -824,13 +824,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Brown",
-    "eye-colour": "",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Brown",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Beater",
-    "birth-date": "1 September�1979-31 August�1980",
-    "death-date": ""
+    "birth_date": "1 September�1979-31 August�1980",
+    "death_date": ""
   },
   {
     "id": 50,
@@ -841,13 +841,13 @@
     "wand": "12�\" Walnut dragon heartstring",
     "patronus": "",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Black",
-    "eye-colour": "",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Black",
+    "eye_colour": "",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "She is a duellist of great skill and an experienced Occlumens",
-    "birth-date": 1951,
-    "death-date": "2 May,�1998"
+    "birth_date": 1951,
+    "death_date": "2 May,�1998"
   },
   {
     "id": 51,
@@ -858,13 +858,13 @@
     "wand": "8\" Birch dragon heartstring",
     "patronus": "Cat",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Iron grey",
-    "eye-colour": "",
+    "blood_status": "Half-blood",
+    "hair_colour": "Iron grey",
+    "eye_colour": "",
     "loyalty": "Ministry of Magic",
     "skills": "Her punishment quill is of her own invention",
-    "birth-date": "26 August",
-    "death-date": ""
+    "birth_date": "26 August",
+    "death_date": ""
   },
   {
     "id": 52,
@@ -875,13 +875,13 @@
     "wand": "10�\" Cedar dragon heartstring fairly flexible",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Bald",
-    "eye-colour": "Gooseberry",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Bald",
+    "eye_colour": "Gooseberry",
     "loyalty": "",
     "skills": "Accomplished Occlumens, expert Potioneer, advanced self-transfiguration",
-    "birth-date": "28 April",
-    "death-date": ""
+    "birth_date": "28 April",
+    "death_date": ""
   },
   {
     "id": 53,
@@ -892,13 +892,13 @@
     "wand": "Elm and dragon heartstring",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "White-blond",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood",
+    "hair_colour": "White-blond",
+    "eye_colour": "Grey",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "Skilled duellist and potioneer",
-    "birth-date": "c. 1954",
-    "death-date": ""
+    "birth_date": "c. 1954",
+    "death_date": ""
   },
   {
     "id": 54,
@@ -909,13 +909,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Blonde",
-    "eye-colour": "Blue",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Blonde",
+    "eye_colour": "Blue",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "",
-    "birth-date": 1955,
-    "death-date": ""
+    "birth_date": 1955,
+    "death_date": ""
   },
   {
     "id": 55,
@@ -926,13 +926,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Black",
-    "eye-colour": "",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Black",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Seeker",
-    "birth-date": 1961,
-    "death-date": 1979
+    "birth_date": 1961,
+    "death_date": 1979
   },
   {
     "id": 56,
@@ -943,13 +943,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Prefect",
-    "birth-date": "�1 September�1979- 31 August�1980",
-    "death-date": ""
+    "birth_date": "�1 September�1979- 31 August�1980",
+    "death_date": ""
   },
   {
     "id": 57,
@@ -960,13 +960,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Brown",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Brown",
     "loyalty": "",
     "skills": "Chaser",
-    "birth-date": "1 September,�1979���21 April,�1980",
-    "death-date": ""
+    "birth_date": "1 September,�1979���21 April,�1980",
+    "death_date": ""
   },
   {
     "id": 58,
@@ -977,13 +977,13 @@
     "wand": "13�\" Yew phoenix feather core",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Bald",
-    "eye-colour": "Scarlet�",
+    "blood_status": "Half-blood",
+    "hair_colour": "Bald",
+    "eye_colour": "Scarlet�",
     "loyalty": "",
     "skills": "Dark Lord, Outstanding manipulation, Parseltongue, Heir of Slytherin, Dark magic, Inferi creation and control",
-    "birth-date": "31 December 1926",
-    "death-date": "2 May,�1998"
+    "birth_date": "31 December 1926",
+    "death_date": "2 May,�1998"
   },
   {
     "id": 59,
@@ -994,13 +994,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Brown",
-    "eye-colour": "",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Brown",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "",
-    "birth-date": "1 September,�1979���21 April,�1980",
-    "death-date": ""
+    "birth_date": "1 September,�1979���21 April,�1980",
+    "death_date": ""
   },
   {
     "id": 60,
@@ -1011,13 +1011,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Dark",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Dark",
+    "eye_colour": "Dark",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "",
-    "birth-date": "Pre�1964",
-    "death-date": ""
+    "birth_date": "Pre�1964",
+    "death_date": ""
   },
   {
     "id": 61,
@@ -1028,13 +1028,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "",
+    "blood_status": "Half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "",
-    "birth-date": "1 September�1979-�31 August�1980�",
-    "death-date": ""
+    "birth_date": "1 September�1979-�31 August�1980�",
+    "death_date": ""
   },
   {
     "id": 62,
@@ -1045,13 +1045,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Brown",
-    "eye-colour": "Brown",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Brown",
+    "eye_colour": "Brown",
     "loyalty": "",
     "skills": "Quidditch captain, Chaser",
-    "birth-date": "In or prior to c.1981",
-    "death-date": ""
+    "birth_date": "In or prior to c.1981",
+    "death_date": ""
   },
   {
     "id": 63,
@@ -1062,13 +1062,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Ghost",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Controlling Peeves",
-    "birth-date": "Post�982",
-    "death-date": "11th century"
+    "birth_date": "Post�982",
+    "death_date": "11th century"
   },
   {
     "id": 64,
@@ -1079,13 +1079,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Chaser, Captain",
-    "birth-date": "�1 September�1975-�31 August�1976",
-    "death-date": ""
+    "birth_date": "�1 September�1975-�31 August�1976",
+    "death_date": ""
   },
   {
     "id": 65,
@@ -1096,13 +1096,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Muggle-born�or�half-blood[",
-    "hair-colour": "Blonde",
-    "eye-colour": "",
+    "blood_status": "Muggle-born�or�half-blood[",
+    "hair_colour": "Blonde",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Prefect",
-    "birth-date": "�1 September�1975-�31 August�1976",
-    "death-date": ""
+    "birth_date": "�1 September�1975-�31 August�1976",
+    "death_date": ""
   },
   {
     "id": 66,
@@ -1113,13 +1113,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "",
-    "hair-colour": "Dark",
-    "eye-colour": "Dark",
+    "blood_status": "",
+    "hair_colour": "Dark",
+    "eye_colour": "Dark",
     "loyalty": "",
     "skills": "Quidditch Captain, Chaser",
-    "birth-date": "�1 September�1977- 31 August�1978",
-    "death-date": ""
+    "birth_date": "�1 September�1977- 31 August�1978",
+    "death_date": ""
   },
   {
     "id": 67,
@@ -1130,13 +1130,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Brown",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Brown",
+    "eye_colour": "Dark",
     "loyalty": "",
     "skills": "",
-    "birth-date": "�1 September�1978 - 31 August�1979",
-    "death-date": ""
+    "birth_date": "�1 September�1978 - 31 August�1979",
+    "death_date": ""
   },
   {
     "id": 68,
@@ -1147,13 +1147,13 @@
     "wand": "snakewood, Basilisk horn",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Grey",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Grey",
+    "eye_colour": "Dark",
     "loyalty": "",
     "skills": "Accomplished Legilimens and one of the first recorded Parselmouths",
-    "birth-date": "Pre�976",
-    "death-date": "11th century"
+    "birth_date": "Pre�976",
+    "death_date": "11th century"
   },
   {
     "id": 69,
@@ -1164,13 +1164,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood or half-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Green",
+    "blood_status": "Pure-blood or half-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Green",
     "loyalty": "",
     "skills": "The most accomplished duellist of his time",
-    "birth-date": "Pre�976",
-    "death-date": "11th century"
+    "birth_date": "Pre�976",
+    "death_date": "11th century"
   },
   {
     "id": 70,
@@ -1181,13 +1181,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood or half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood or half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Dark",
     "loyalty": "",
     "skills": "Extremely skilled witch, known for her intelligence and wisdom",
-    "birth-date": "Pre�976",
-    "death-date": "11th century"
+    "birth_date": "Pre�976",
+    "death_date": "11th century"
   },
   {
     "id": 71,
@@ -1198,13 +1198,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Ghost",
-    "blood-status": "",
-    "hair-colour": "Grey",
-    "eye-colour": "",
+    "blood_status": "",
+    "hair_colour": "Grey",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "",
-    "birth-date": "1401�-1475",
-    "death-date": "31 October,�1492"
+    "birth_date": "1401�-1475",
+    "death_date": "31 October,�1492"
   },
   {
     "id": 72,
@@ -1215,13 +1215,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Ghost",
-    "blood-status": "",
-    "hair-colour": "White (balding)",
-    "eye-colour": "Black",
+    "blood_status": "",
+    "hair_colour": "White (balding)",
+    "eye_colour": "Black",
     "loyalty": "",
     "skills": "Boring a class with facts that might be interesting if anyone else was giving the lesson",
-    "birth-date": "",
-    "death-date": "Pre�1970s"
+    "birth_date": "",
+    "death_date": "Pre�1970s"
   },
   {
     "id": 73,
@@ -1232,13 +1232,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Straw blond",
-    "eye-colour": "Pale, freckled",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Straw blond",
+    "eye_colour": "Pale, freckled",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "Skilled potioneer",
-    "birth-date": 1962,
-    "death-date": "1995-1996"
+    "birth_date": 1962,
+    "death_date": "1995-1996"
   },
   {
     "id": 74,
@@ -1249,13 +1249,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Blonde",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Blonde",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Teaching and studying the Muggle world",
-    "birth-date": "Before�1976",
-    "death-date": "Late�July, 1997"
+    "birth_date": "Before�1976",
+    "death_date": "Late�July, 1997"
   },
   {
     "id": 75,
@@ -1266,13 +1266,13 @@
     "wand": "",
     "patronus": "",
     "species": "Centaur",
-    "blood-status": "",
-    "hair-colour": "White-blond",
-    "eye-colour": "Astonishingly blue",
+    "blood_status": "",
+    "hair_colour": "White-blond",
+    "eye_colour": "Astonishingly blue",
     "loyalty": "",
     "skills": "",
-    "birth-date": "",
-    "death-date": ""
+    "birth_date": "",
+    "death_date": ""
   },
   {
     "id": 76,
@@ -1283,13 +1283,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "Spreading anti-Muggle propaganda",
-    "birth-date": "Pre�1981",
-    "death-date": ""
+    "birth_date": "Pre�1981",
+    "death_date": ""
   },
   {
     "id": 77,
@@ -1300,13 +1300,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "Cruciatus Curse",
-    "birth-date": "Pre�1982",
-    "death-date": ""
+    "birth_date": "Pre�1982",
+    "death_date": ""
   },
   {
     "id": 78,
@@ -1317,13 +1317,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Brown",
-    "eye-colour": "Blue",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Brown",
+    "eye_colour": "Blue",
     "loyalty": "",
     "skills": "Food-related Charms. Many traditional Hogwarts recipes originated with her",
-    "birth-date": "Pre�976",
-    "death-date": "11th century"
+    "birth_date": "Pre�976",
+    "death_date": "11th century"
   },
   {
     "id": 79,
@@ -1334,13 +1334,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Ghost",
-    "blood-status": "",
-    "hair-colour": "Brown",
-    "eye-colour": "",
+    "blood_status": "",
+    "hair_colour": "Brown",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Curing peasants of the pox",
-    "birth-date": "10th century",
-    "death-date": "Pre�1988"
+    "birth_date": "10th century",
+    "death_date": "Pre�1988"
   },
   {
     "id": 80,
@@ -1351,13 +1351,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Ghost",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "Grey",
     "loyalty": "",
     "skills": "",
-    "birth-date": "Post�982",
-    "death-date": "996-1000"
+    "birth_date": "Post�982",
+    "death_date": "996-1000"
   },
   {
     "id": 81,
@@ -1368,13 +1368,13 @@
     "wand": "Unknown",
     "patronus": "Jack rabbit, Wolf",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Variable",
-    "eye-colour": "Variable",
+    "blood_status": "Half-blood",
+    "hair_colour": "Variable",
+    "eye_colour": "Variable",
     "loyalty": "Ministry of Magic | Order of the Phoenix",
     "skills": "Talented Auror, Metamorphmagus",
-    "birth-date": "�1 September�1972-�31 August�1973",
-    "death-date": "2 May,�1998"
+    "birth_date": "�1 September�1972-�31 August�1973",
+    "death_date": "2 May,�1998"
   },
   {
     "id": 82,
@@ -1385,13 +1385,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "",
+    "eye_colour": "Grey",
     "loyalty": "",
     "skills": "Herbology",
-    "birth-date": "15 May",
-    "death-date": ""
+    "birth_date": "15 May",
+    "death_date": ""
   },
   {
     "id": 83,
@@ -1402,13 +1402,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Red brown",
-    "eye-colour": "Blue",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Red brown",
+    "eye_colour": "Blue",
     "loyalty": "",
     "skills": "Magizoology, Order of Merlin, Second Class",
-    "birth-date": "24 February 1897",
-    "death-date": ""
+    "birth_date": "24 February 1897",
+    "death_date": ""
   },
   {
     "id": 84,
@@ -1419,13 +1419,13 @@
     "wand": "12�\", Ash, unicorn hair",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Dark",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Dark",
+    "eye_colour": "Grey",
     "loyalty": "",
     "skills": "Skilled Seeker",
-    "birth-date": "1 September�- 30 October�1977",
-    "death-date": "24 June, 1995"
+    "birth_date": "1 September�- 30 October�1977",
+    "death_date": "24 June, 1995"
   },
   {
     "id": 85,
@@ -1436,13 +1436,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Muggle-born",
-    "hair-colour": "Red",
-    "eye-colour": "",
+    "blood_status": "Muggle-born",
+    "hair_colour": "Red",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army",
     "skills": "",
-    "birth-date": "1 September�1979- 31 August�1980",
-    "death-date": ""
+    "birth_date": "1 September�1979- 31 August�1980",
+    "death_date": ""
   },
   {
     "id": 86,
@@ -1453,13 +1453,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Blonde",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Blonde",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army",
     "skills": "Chaser",
-    "birth-date": "1 September�1979 -�2 May�1981",
-    "death-date": ""
+    "birth_date": "1 September�1979 -�2 May�1981",
+    "death_date": ""
   },
   {
     "id": 87,
@@ -1470,13 +1470,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Blonde",
-    "eye-colour": "Brown",
+    "blood_status": "Half-blood",
+    "hair_colour": "Blonde",
+    "eye_colour": "Brown",
     "loyalty": "Dumbledore's Army",
     "skills": "Defensive spells, learned with Dumbledore's Army",
-    "birth-date": "1 September�1979 -�31 August�1980",
-    "death-date": ""
+    "birth_date": "1 September�1979 -�31 August�1980",
+    "death_date": ""
   },
   {
     "id": 88,
@@ -1487,13 +1487,13 @@
     "wand": "Unknown",
     "patronus": "Boar",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Blond",
-    "eye-colour": "",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Blond",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army",
     "skills": "Revising, being a Prefect, getting the wrong end of the stick",
-    "birth-date": "21 April�1980�- 31 August�1980",
-    "death-date": ""
+    "birth_date": "21 April�1980�- 31 August�1980",
+    "death_date": ""
   },
   {
     "id": 89,
@@ -1504,13 +1504,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army",
     "skills": "Defensive spells, learned with Dumbledore's Army",
-    "birth-date": "1 September�1979 - 31 August�1980",
-    "death-date": ""
+    "birth_date": "1 September�1979 - 31 August�1980",
+    "death_date": ""
   },
   {
     "id": 90,
@@ -1521,13 +1521,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "Liaising with giants",
-    "birth-date": "In or before�1970s",
-    "death-date": ""
+    "birth_date": "In or before�1970s",
+    "death_date": ""
   },
   {
     "id": 91,
@@ -1538,13 +1538,13 @@
     "wand": "Unknown",
     "patronus": "None",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Brown/greying",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Brown/greying",
+    "eye_colour": "",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "Spying for Lord Voldemort",
-    "birth-date": "pre�1964",
-    "death-date": ""
+    "birth_date": "pre�1964",
+    "death_date": ""
   },
   {
     "id": 92,
@@ -1555,13 +1555,13 @@
     "wand": "Unknown",
     "patronus": "None",
     "species": "Human",
-    "blood-status": "Pure-blood�or�Half-blood",
-    "hair-colour": "Dark",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�Half-blood",
+    "hair_colour": "Dark",
+    "eye_colour": "",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "Duelling. Fought and killed Molly Weasley's brothers and Remus Lupin",
-    "birth-date": "pre�1950",
-    "death-date": ""
+    "birth_date": "pre�1950",
+    "death_date": ""
   },
   {
     "id": 93,
@@ -1572,13 +1572,13 @@
     "wand": "Unknown",
     "patronus": "None",
     "species": "Human",
-    "blood-status": "Pure-blood�or�Half-blood",
-    "hair-colour": "Blonde",
-    "eye-colour": "Blue",
+    "blood_status": "Pure-blood�or�Half-blood",
+    "hair_colour": "Blonde",
+    "eye_colour": "Blue",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "Imperius curse, undercover work",
-    "birth-date": "Pre�1970s",
-    "death-date": ""
+    "birth_date": "Pre�1970s",
+    "death_date": ""
   },
   {
     "id": 94,
@@ -1589,13 +1589,13 @@
     "wand": "Unknown",
     "patronus": "None",
     "species": "Human",
-    "blood-status": "Pure-blood�or�Half-blood",
-    "hair-colour": "Silver| formerly black",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�Half-blood",
+    "hair_colour": "Silver| formerly black",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Skilled in the Dark Arts",
-    "birth-date": "pre�1965",
-    "death-date": "24 June,�1995���31 July,�1996"
+    "birth_date": "pre�1965",
+    "death_date": "24 June,�1995���31 July,�1996"
   },
   {
     "id": 95,
@@ -1606,13 +1606,13 @@
     "wand": "Unknown",
     "patronus": "Lynx",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Bald",
-    "eye-colour": "Black",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Bald",
+    "eye_colour": "Black",
     "loyalty": "Order of the Phoenix",
     "skills": "Exceptionally skilled duellist and Auror",
-    "birth-date": "Pre�1973",
-    "death-date": ""
+    "birth_date": "Pre�1973",
+    "death_date": ""
   },
   {
     "id": 96,
@@ -1623,13 +1623,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Grey",
-    "eye-colour": "One dark,�one electric blue",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Grey",
+    "eye_colour": "One dark,�one electric blue",
     "loyalty": "Order of the Phoenix",
     "skills": "A highly accomplished Auror and an outstanding duellist, also skilled in non-verbal magic",
-    "birth-date": "Pre�1960",
-    "death-date": "27 July,�1997"
+    "birth_date": "Pre�1960",
+    "death_date": "27 July,�1997"
   },
   {
     "id": 97,
@@ -1640,13 +1640,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Blonde",
-    "eye-colour": "",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Blonde",
+    "eye_colour": "",
     "loyalty": "Original Order of the Phoenix",
     "skills": "Auror",
-    "birth-date": "",
-    "death-date": ""
+    "birth_date": "",
+    "death_date": ""
   },
   {
     "id": 98,
@@ -1657,13 +1657,13 @@
     "wand": "Inherited by his son, Neville. It was broken in battle at the Department of Mysteries.",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Blonde",
-    "eye-colour": "",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Blonde",
+    "eye_colour": "",
     "loyalty": "Original Order of the Phoenix",
     "skills": "Auror",
-    "birth-date": "�1 September�1957�-�31 August�1959�or earlier",
-    "death-date": ""
+    "birth_date": "�1 September�1957�-�31 August�1959�or earlier",
+    "death_date": ""
   },
   {
     "id": 99,
@@ -1674,13 +1674,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "",
-    "hair-colour": "Tawny",
-    "eye-colour": "Yellowish",
+    "blood_status": "",
+    "hair_colour": "Tawny",
+    "eye_colour": "Yellowish",
     "loyalty": "Minister of Magic",
     "skills": "Highly regarded as a skilled Auror",
-    "birth-date": "Pre�1968",
-    "death-date": "1 August,�1997"
+    "birth_date": "Pre�1968",
+    "death_date": "1 August,�1997"
   },
   {
     "id": 100,
@@ -1691,13 +1691,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood�or�Half-blood",
-    "hair-colour": "Grey",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�Half-blood",
+    "hair_colour": "Grey",
+    "eye_colour": "",
     "loyalty": "Minister of Magic",
     "skills": "Turning a blind eye to the continuing threat of Dark Magic in the name of keeping up morale",
-    "birth-date": "Pre�1964",
-    "death-date": ""
+    "birth_date": "Pre�1964",
+    "death_date": ""
   },
   {
     "id": 101,
@@ -1708,13 +1708,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Grey",
-    "eye-colour": "",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Grey",
+    "eye_colour": "",
     "loyalty": "Minister of Magic",
     "skills": "Multilingual, able to fight the Imperius curse",
-    "birth-date": "Pre�1940",
-    "death-date": "27 May, 1995"
+    "birth_date": "Pre�1940",
+    "death_date": "27 May, 1995"
   },
   {
     "id": 102,
@@ -1725,13 +1725,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Brown",
-    "eye-colour": "Ruddy",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Brown",
+    "eye_colour": "Ruddy",
     "loyalty": "Minister of Magic",
     "skills": "Works for the Department for the Regulation and Control of Magical Creatures",
-    "birth-date": "",
-    "death-date": ""
+    "birth_date": "",
+    "death_date": ""
   },
   {
     "id": 103,
@@ -1742,13 +1742,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Order of the Phoenix",
     "skills": "An enthusiastic volunteer for the Order and a helpful escort for Harry and his relatives",
-    "birth-date": "Pre�1964",
-    "death-date": ""
+    "birth_date": "Pre�1964",
+    "death_date": ""
   },
   {
     "id": 104,
@@ -1759,13 +1759,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Silver",
-    "eye-colour": "Grey/Blue[",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Silver",
+    "eye_colour": "Grey/Blue[",
     "loyalty": "Order of the Phoenix",
     "skills": "Writing",
-    "birth-date": "1 September 1880 - 31 August 1881",
-    "death-date": ""
+    "birth_date": "1 September 1880 - 31 August 1881",
+    "death_date": ""
   },
   {
     "id": 105,
@@ -1776,13 +1776,13 @@
     "wand": "9�\", Rosewood, veela hair",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Quarter-Veela",
-    "hair-colour": "Silvery-blonde",
-    "eye-colour": "Dark blue[",
+    "blood_status": "Quarter-Veela",
+    "hair_colour": "Silvery-blonde",
+    "eye_colour": "Dark blue[",
     "loyalty": "Order of the Phoenix",
     "skills": "part Veela, and therefore possesses some of their magical powers. She was also selected to compete in the Triwizard Tournament",
-    "birth-date": "Pre�30 October,�1977",
-    "death-date": ""
+    "birth_date": "Pre�30 October,�1977",
+    "death_date": ""
   },
   {
     "id": 106,
@@ -1793,13 +1793,13 @@
     "wand": "Unknown",
     "patronus": "Goat",
     "species": "Human",
-    "blood-status": "Half-blood",
-    "hair-colour": "Grey",
-    "eye-colour": "Bright Blue",
+    "blood_status": "Half-blood",
+    "hair_colour": "Grey",
+    "eye_colour": "Bright Blue",
     "loyalty": "Order of the Phoenix",
     "skills": "Bartending, caring for Ariana",
-    "birth-date": "�1 September�1883-31 August�1884",
-    "death-date": ""
+    "birth_date": "�1 September�1883-31 August�1884",
+    "death_date": ""
   },
   {
     "id": 107,
@@ -1810,13 +1810,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human",
-    "blood-status": "Half-blood[",
-    "hair-colour": "Ginger",
-    "eye-colour": "Brown",
+    "blood_status": "Half-blood[",
+    "hair_colour": "Ginger",
+    "eye_colour": "Brown",
     "loyalty": "Order of the Phoenix",
     "skills": "Gathering information for the Order, dealing in stolen cauldrons, 'acquiring' the odd Muggle car",
-    "birth-date": "Before�1962",
-    "death-date": ""
+    "birth_date": "Before�1962",
+    "death_date": ""
   },
   {
     "id": 108,
@@ -1827,13 +1827,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Straw-coloured",
-    "eye-colour": "Brown",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Straw-coloured",
+    "eye_colour": "Brown",
     "loyalty": "Order of the Phoenix",
     "skills": "Carrying out guard duty for the Order",
-    "birth-date": "�8 September�1956 -�7 September�1957",
-    "death-date": ""
+    "birth_date": "�8 September�1956 -�7 September�1957",
+    "death_date": ""
   },
   {
     "id": 109,
@@ -1844,13 +1844,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Black",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Black",
+    "eye_colour": "",
     "loyalty": "Order of the Phoenix",
     "skills": "Carrying out escort missions for the Order",
-    "birth-date": "Pre 1978",
-    "death-date": ""
+    "birth_date": "Pre 1978",
+    "death_date": ""
   },
   {
     "id": 110,
@@ -1861,13 +1861,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "",
-    "hair-colour": "Red",
-    "eye-colour": "Brown",
+    "blood_status": "",
+    "hair_colour": "Red",
+    "eye_colour": "Brown",
     "loyalty": "Original Order of the Phoenix",
     "skills": "",
-    "birth-date": "",
-    "death-date": "July,�1981"
+    "birth_date": "",
+    "death_date": "July,�1981"
   },
   {
     "id": 111,
@@ -1878,13 +1878,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Grey",
     "loyalty": "Original Order of the Phoenix",
     "skills": "Duelling",
-    "birth-date": "",
-    "death-date": 1981
+    "birth_date": "",
+    "death_date": 1981
   },
   {
     "id": 112,
@@ -1895,13 +1895,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood",
-    "hair-colour": "Red",
-    "eye-colour": "Dark Grey",
+    "blood_status": "Pure-blood",
+    "hair_colour": "Red",
+    "eye_colour": "Dark Grey",
     "loyalty": "Original Order of the Phoenix",
     "skills": "Duelling",
-    "birth-date": "",
-    "death-date": 1981
+    "birth_date": "",
+    "death_date": 1981
   },
   {
     "id": 113,
@@ -1912,13 +1912,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Order of the Phoenix",
     "skills": "",
-    "birth-date": "pre�1964",
-    "death-date": "Early�July,�1996"
+    "birth_date": "pre�1964",
+    "death_date": "Early�July,�1996"
   },
   {
     "id": 114,
@@ -1929,13 +1929,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Reddish-brown",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Reddish-brown",
+    "eye_colour": "Grey",
     "loyalty": "Original Order of the Phoenix",
     "skills": "Said to be a great wizard",
-    "birth-date": "",
-    "death-date": 1981
+    "birth_date": "",
+    "death_date": 1981
   },
   {
     "id": 115,
@@ -1946,13 +1946,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "",
-    "hair-colour": "Black",
-    "eye-colour": "Brown",
+    "blood_status": "",
+    "hair_colour": "Black",
+    "eye_colour": "Brown",
     "loyalty": "Original Order of the Phoenix",
     "skills": "",
-    "birth-date": "",
-    "death-date": 1981
+    "birth_date": "",
+    "death_date": 1981
   },
   {
     "id": 116,
@@ -1963,13 +1963,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human",
-    "blood-status": "",
-    "hair-colour": "Black",
-    "eye-colour": "Black",
+    "blood_status": "",
+    "hair_colour": "Black",
+    "eye_colour": "Black",
     "loyalty": "Original Order of the Phoenix",
     "skills": "",
-    "birth-date": "",
-    "death-date": 1981
+    "birth_date": "",
+    "death_date": 1981
   },
   {
     "id": 117,
@@ -1980,13 +1980,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Half-Human/Half-Giant",
-    "blood-status": "Part-Human�(Half-giant)",
-    "hair-colour": "Brown",
-    "eye-colour": "Black",
+    "blood_status": "Part-Human�(Half-giant)",
+    "hair_colour": "Brown",
+    "eye_colour": "Black",
     "loyalty": "",
     "skills": "An �excellent dancer�, in the words of Dumbledore himself",
-    "birth-date": "",
-    "death-date": ""
+    "birth_date": "",
+    "death_date": ""
   },
   {
     "id": 118,
@@ -1997,13 +1997,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�",
-    "blood-status": "Quarter-Veela",
-    "hair-colour": "Silvery-blonde",
-    "eye-colour": "",
+    "blood_status": "Quarter-Veela",
+    "hair_colour": "Silvery-blonde",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "part Veela and therefore may possess some of their magical powers",
-    "birth-date": "�31 July�1985 -�30 July�1986",
-    "death-date": ""
+    "birth_date": "�31 July�1985 -�30 July�1986",
+    "death_date": ""
   },
   {
     "id": 119,
@@ -2014,13 +2014,13 @@
     "wand": "10�\", Hornbeam, dragon heartstring",
     "patronus": "Unknown",
     "species": "Human�",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Dark",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Dark",
+    "eye_colour": "Dark",
     "loyalty": "",
     "skills": "One of the best Seekers in the world",
-    "birth-date": "April-August,�1976",
-    "death-date": ""
+    "birth_date": "April-August,�1976",
+    "death_date": ""
   },
   {
     "id": 120,
@@ -2031,13 +2031,13 @@
     "wand": "",
     "patronus": "",
     "species": "Human�",
-    "blood-status": "Muggle",
-    "hair-colour": "Blonde",
-    "eye-colour": "",
+    "blood_status": "Muggle",
+    "hair_colour": "Blonde",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "",
-    "birth-date": "Pre�1960",
-    "death-date": ""
+    "birth_date": "Pre�1960",
+    "death_date": ""
   },
   {
     "id": 121,
@@ -2048,13 +2048,13 @@
     "wand": "",
     "patronus": "",
     "species": "Human�",
-    "blood-status": "Muggle",
-    "hair-colour": "Black",
-    "eye-colour": "",
+    "blood_status": "Muggle",
+    "hair_colour": "Black",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Schmoozing clients, pretending magic doesn't exist",
-    "birth-date": "Pre�1954",
-    "death-date": ""
+    "birth_date": "Pre�1954",
+    "death_date": ""
   },
   {
     "id": 122,
@@ -2065,13 +2065,13 @@
     "wand": "",
     "patronus": "",
     "species": "Human�",
-    "blood-status": "Muggle",
-    "hair-colour": "Blond",
-    "eye-colour": "Blue",
+    "blood_status": "Muggle",
+    "hair_colour": "Blond",
+    "eye_colour": "Blue",
     "loyalty": "",
     "skills": "",
-    "birth-date": "�23 June�1980",
-    "death-date": ""
+    "birth_date": "�23 June�1980",
+    "death_date": ""
   },
   {
     "id": 123,
@@ -2082,13 +2082,13 @@
     "wand": "",
     "patronus": "",
     "species": "Human�",
-    "blood-status": "Muggle",
-    "hair-colour": "Grey",
-    "eye-colour": "",
+    "blood_status": "Muggle",
+    "hair_colour": "Grey",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Breeding bulldogs",
-    "birth-date": "Pre�1954",
-    "death-date": ""
+    "birth_date": "Pre�1954",
+    "death_date": ""
   },
   {
     "id": 124,
@@ -2099,13 +2099,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�",
-    "blood-status": "Muggle-born",
-    "hair-colour": "Mousy brown",
-    "eye-colour": "",
+    "blood_status": "Muggle-born",
+    "hair_colour": "Mousy brown",
+    "eye_colour": "",
     "loyalty": "Dumbledore's Army",
     "skills": "",
-    "birth-date": "�1 September�1982 - 31 August�1983",
-    "death-date": ""
+    "birth_date": "�1 September�1982 - 31 August�1983",
+    "death_date": ""
   },
   {
     "id": 125,
@@ -2116,13 +2116,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�",
-    "blood-status": "Half-blood",
-    "hair-colour": "Jet-black",
-    "eye-colour": "Bright green",
+    "blood_status": "Half-blood",
+    "hair_colour": "Jet-black",
+    "eye_colour": "Bright green",
     "loyalty": "",
     "skills": "",
-    "birth-date": "Between�1 September�2005-31 August�2006",
-    "death-date": ""
+    "birth_date": "Between�1 September�2005-31 August�2006",
+    "death_date": ""
   },
   {
     "id": 126,
@@ -2133,13 +2133,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�",
-    "blood-status": "Pure-blood",
-    "hair-colour": "White blond",
-    "eye-colour": "Grey",
+    "blood_status": "Pure-blood",
+    "hair_colour": "White blond",
+    "eye_colour": "Grey",
     "loyalty": "",
     "skills": "",
-    "birth-date": "Between�1 September�2005-31 August�2007",
-    "death-date": ""
+    "birth_date": "Between�1 September�2005-31 August�2007",
+    "death_date": ""
   },
   {
     "id": 127,
@@ -2150,13 +2150,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�(Metamorphmagus)",
-    "blood-status": "Half-blood",
-    "hair-colour": "Variable",
-    "eye-colour": "Variable",
+    "blood_status": "Half-blood",
+    "hair_colour": "Variable",
+    "eye_colour": "Variable",
     "loyalty": "",
     "skills": "",
-    "birth-date": "April,�1998",
-    "death-date": ""
+    "birth_date": "April,�1998",
+    "death_date": ""
   },
   {
     "id": 128,
@@ -2167,13 +2167,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�",
-    "blood-status": "Half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "",
-    "birth-date": "1 September�2003-31 August�2004",
-    "death-date": ""
+    "birth_date": "1 September�2003-31 August�2004",
+    "death_date": ""
   },
   {
     "id": 129,
@@ -2184,13 +2184,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�",
-    "blood-status": "Half-blood",
-    "hair-colour": "Red",
-    "eye-colour": "",
+    "blood_status": "Half-blood",
+    "hair_colour": "Red",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Chaser",
-    "birth-date": "1 September�2005-31 August�2006�",
-    "death-date": ""
+    "birth_date": "1 September�2005-31 August�2006�",
+    "death_date": ""
   },
   {
     "id": 130,
@@ -2201,13 +2201,13 @@
     "wand": "",
     "patronus": "",
     "species": "Human�",
-    "blood-status": "Squib",
-    "hair-colour": "Grey",
-    "eye-colour": "Pale",
+    "blood_status": "Squib",
+    "hair_colour": "Grey",
+    "eye_colour": "Pale",
     "loyalty": "Hogwarts School of Witchcraft and Wizardry",
     "skills": "Sniffing out mischief",
-    "birth-date": "Pre�1951",
-    "death-date": ""
+    "birth_date": "Pre�1951",
+    "death_date": ""
   },
   {
     "id": 131,
@@ -2218,13 +2218,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human�",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Hogwarts School of Witchcraft and Wizardry",
     "skills": "Skilled medical healer",
-    "birth-date": "pre�1954",
-    "death-date": ""
+    "birth_date": "pre�1954",
+    "death_date": ""
   },
   {
     "id": 132,
@@ -2235,13 +2235,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human�",
-    "blood-status": "",
-    "hair-colour": "Grey",
-    "eye-colour": "Yellow",
+    "blood_status": "",
+    "hair_colour": "Grey",
+    "eye_colour": "Yellow",
     "loyalty": "Hogwarts School of Witchcraft and Wizardry",
     "skills": "Teaching, flying, refereeing Quidditch matches",
-    "birth-date": "pre�1918",
-    "death-date": ""
+    "birth_date": "pre�1918",
+    "death_date": ""
   },
   {
     "id": 133,
@@ -2252,13 +2252,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human�",
-    "blood-status": "",
-    "hair-colour": "",
-    "eye-colour": "",
+    "blood_status": "",
+    "hair_colour": "",
+    "eye_colour": "",
     "loyalty": "Hogwarts School of Witchcraft and Wizardry",
     "skills": "",
-    "birth-date": "Pre�1966",
-    "death-date": ""
+    "birth_date": "Pre�1966",
+    "death_date": ""
   },
   {
     "id": 134,
@@ -2269,13 +2269,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Dark",
-    "eye-colour": "Dark",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Dark",
+    "eye_colour": "Dark",
     "loyalty": "Hogwarts School of Witchcraft and Wizardry",
     "skills": "",
-    "birth-date": "Pre�1968",
-    "death-date": ""
+    "birth_date": "Pre�1968",
+    "death_date": ""
   },
   {
     "id": 135,
@@ -2286,13 +2286,13 @@
     "wand": "Unknown",
     "patronus": "Unknown",
     "species": "Human�",
-    "blood-status": "",
-    "hair-colour": "Black",
-    "eye-colour": "",
+    "blood_status": "",
+    "hair_colour": "Black",
+    "eye_colour": "",
     "loyalty": "Hogwarts School of Witchcraft and Wizardry",
     "skills": "",
-    "birth-date": "Before�1974",
-    "death-date": ""
+    "birth_date": "Before�1974",
+    "death_date": ""
   },
   {
     "id": 136,
@@ -2303,13 +2303,13 @@
     "wand": "Unknown",
     "patronus": "Non-corporeal",
     "species": "Human�",
-    "blood-status": "",
-    "hair-colour": "Grey",
-    "eye-colour": "",
+    "blood_status": "",
+    "hair_colour": "Grey",
+    "eye_colour": "",
     "loyalty": "Hogwarts School of Witchcraft and Wizardry",
     "skills": "",
-    "birth-date": "",
-    "death-date": ""
+    "birth_date": "",
+    "death_date": ""
   },
   {
     "id": 137,
@@ -2320,13 +2320,13 @@
     "wand": "Unknown",
     "patronus": "None",
     "species": "Werewolf",
-    "blood-status": "",
-    "hair-colour": "Grey",
-    "eye-colour": "",
+    "blood_status": "",
+    "hair_colour": "Grey",
+    "eye_colour": "",
     "loyalty": "Lord Voldemort �| Death Eaters",
     "skills": "Physical combat",
-    "birth-date": "Pre�1945",
-    "death-date": ""
+    "birth_date": "Pre�1945",
+    "death_date": ""
   },
   {
     "id": 138,
@@ -2337,13 +2337,13 @@
     "wand": "15\", Elder, Thestral tail hair core",
     "patronus": "",
     "species": "Human�",
-    "blood-status": "Pure-blood�or�half-blood",
-    "hair-colour": "Blond",
-    "eye-colour": "Blue",
+    "blood_status": "Pure-blood�or�half-blood",
+    "hair_colour": "Blond",
+    "eye_colour": "Blue",
     "loyalty": "Gellert Grindelwald's Acolytes",
     "skills": "Duelling",
-    "birth-date": 1883,
-    "death-date": "March,�1998"
+    "birth_date": 1883,
+    "death_date": "March,�1998"
   },
   {
     "id": 139,
@@ -2354,13 +2354,13 @@
     "wand": "",
     "patronus": "",
     "species": "House elf",
-    "blood-status": "",
-    "hair-colour": "Green",
-    "eye-colour": "",
+    "blood_status": "",
+    "hair_colour": "Green",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "A type of magic specific to house-elves, performed without a wand which includes the ability to apparate, disarm and make objects levitate",
-    "birth-date": "28 June",
-    "death-date": "Late�March,�1998"
+    "birth_date": "28 June",
+    "death_date": "Late�March,�1998"
   },
   {
     "id": 140,
@@ -2371,12 +2371,12 @@
     "wand": "",
     "patronus": "",
     "species": "House elf",
-    "blood-status": "",
-    "hair-colour": "White",
-    "eye-colour": "",
+    "blood_status": "",
+    "hair_colour": "White",
+    "eye_colour": "",
     "loyalty": "",
     "skills": "Magic performed without a wand which includes the ability to apparate, disarm and make objects levitate",
-    "birth-date": "",
-    "death-date": ""
+    "birth_date": "",
+    "death_date": ""
   }
 ]
