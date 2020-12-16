@@ -12,9 +12,46 @@ import mongoose from 'mongoose'
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+
+//creating the database 
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
+
+const Author = mongoose.model('Author', {
+  name: String
+})
+
+const Book = mongoose.model('Book', {
+  title: String,
+  author: { // this will be related to the authors already in the database.
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author'
+   }
+})
+
+if (process.env.RESET_DATABASE) { // by using the if statement, database will only be reset when writing RESET_DATABASE=true npm run dev in console. 
+  console.log('Resetting database!')
+
+  const seedDatabase = async () => {
+    await Author.deleteMany() // to prevent duplication when saving
+    await Book.deleteMany() // to prevent duplication when saving
+
+    const tolkien = new Author({ name: 'J.R.R Tolkien' })
+    await tolkien.save()
+  
+    const rowling = new Author({ name: 'J.K Rowling' })
+    await rowling.save()
+
+    await new Book({ title: "Harry Potter and the Philosopher's stone", author: rowling }).save()
+    await new Book({ title: "Harry Potter and the Chamber of Secrets", author: rowling }).save()
+    await new Book({ title: "Harry Potter and the Prisoner of Azkaban", author: rowling }).save()
+    await new Book({ title: "The Lord of the Rings", author: tolkien }).save()
+    await new Book({ title: "The Hobbit", author: tolkien }).save()
+  }
+  //invoke function
+  seedDatabase()
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -27,9 +64,39 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.get('/authors', async (req, res) => {
+  const authors = await Author.find()
+  res.json(authors)
+})
+
+app.get('/authors/:id', async (req, res) => {
+  if (author) {
+    const author = await Author.findById(req.params.id)
+    res.json(author)
+  } else {
+    res.status(404).json({ error: 'Author not found' })
+  }
+})
+
+app.get('/authors/:id/books', async (req, res) => {
+  const author = await Author.findById(req.params.id)
+  if (author) {
+    const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) })
+    res.json(books)
+  } else {
+    res.status(404).json({ error: 'Author not found' })
+  }
+})
+
+app.get('/books', async (req, res) => {
+  const books = await Book.find().populate('author') // populate will create a relationship beween the author and books
+  res.json(books)
 })
 
 // Start the server
