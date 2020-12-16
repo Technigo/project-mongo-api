@@ -24,7 +24,7 @@ const Nomination = new mongoose.model('Nomination', {
 });
 
 // Start MongoDB: RESET_DB=true npm run dev
-//if (process.env.RESET_DB) {
+if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
     await Nomination.deleteMany();
 
@@ -34,7 +34,7 @@ const Nomination = new mongoose.model('Nomination', {
 		})
   }
   seedDatabase();
-
+}
 
 
 
