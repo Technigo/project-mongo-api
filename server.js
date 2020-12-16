@@ -36,7 +36,7 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-const port = process.env.PORT || 8099
+const port = process.env.PORT || 8098
 const app = express()
 
 app.use(cors())

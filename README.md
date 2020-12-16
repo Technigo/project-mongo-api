@@ -1,10 +1,11 @@
 # Mongo API Project
-This project was made during the Technigo Bootcamp.  The goal was to practice how to use Mongodb to store data and how to query that data from an API.  
+This project was made during the Technigo Bootcamp. The goal was to practice how to use Mongodb to store data and how to query that data from an API.  
 
 ## The problem
 
 - I've created endpoints and i've used mongoose operations instead of vanilla JS since the data needed to be manipulated.
 - I've learned how to use the mongoose methods find() and findOne().
+- I've created an account on Mongodb Atlas and succesfully manage to store my data. 
 
 ## Routes 
 
@@ -18,4 +19,4 @@ GET /books/authors/:authorName  - displays books by a specific author. I've adde
 
 
 ## View it live
-
+https://books-api-technigo.herokuapp.com/
