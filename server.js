@@ -4,16 +4,13 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 import booksData from './data/books.json'
+import Book from './models/book'
 
 //connecting to the database
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8081
 const app = express()
 
@@ -30,22 +27,6 @@ app.use((req, res, next) => {
   } else {
     res.status(503).json({ error: 'service unavailable' })
   }
-})
-
-//second param --> object--> called schema
-//start with capital letter reserved for Models in Mongoose.
-//string is going to be name of collection with the 1st string param -->  start with lower case and with and ends with an s
-const Book = new mongoose.model('Book', {
-  bookID: Number,
-  title: String,
-  authors: String,
-  average_rating: Number,
-  isbn: Number,
-  isbn13: Number,
-  language_code: String,
-  num_pages: Number,
-  ratings_count: Number,
-  text_reviews_count: Number
 })
 
 //clean database before population
@@ -67,30 +48,44 @@ app.get('/', (req, res) => {
   res.send('Hello again world')
 })
 
-//why would you have an error message here? 
+//what is the correct error message here? 
+//limit is amount of search results for a single page
 //i stands for ignore case -->in regexp
+//math.ceil rounds the number up to the next largest integer.
 app.get('/books', async (req, res) => {
-  const { title, author, rating } = req.query
+  const { title, author, rating, page = 1, limit = 10 } = req.query
   const titleRegex = new RegExp(title, 'i')
   const authorRegex = new RegExp(author, 'i')
 
-  const sortBooks = (rating) => {
-    if (rating === 'high') {
-      return {average_rating: -1}
-    } else if (rating === 'low') {
-      return {average_rating: 1}
-    } else {
-      return res.status(400).json({ error: 'invalid value. Sort by high or low' })
+  try {
+    const sortBooks = (rating) => {
+      if (rating === 'high') {
+        return {average_rating: - 1}
+      } else if (rating === 'low') {
+        return {average_rating: 1}
+      }
     }
+
+    const books = await Book.find({
+      title: titleRegex,
+      authors: authorRegex
+    })
+      .sort(sortBooks(rating))
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec()
+    
+    //gets total amount of documents in the Book collection
+    //totalPages - takes the above and divides it with the limit(nr of results per page) to get the total amount of pages
+    const count = await Book.countDocuments()
+    res.json({
+      books,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page
+    })
+  } catch(err) {
+    res.status(404).json({ error: 'books not found'})
   }
-
-  const books = await Book.find({
-    title: titleRegex,
-    authors: authorRegex
-  })
-    .sort(sortBooks(rating))
-
-  res.json(books)
 })
 
 //findOne returns one element. returns an object instead of an array with an object
