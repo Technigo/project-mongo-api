@@ -36,8 +36,6 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-
-
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example: PORT=9000 npm start
 const port = process.env.PORT || 8080
@@ -49,7 +47,8 @@ app.use(bodyParser.json())
 
 // express starts by using the middleware, check if database is connected. If ok,
 // express goes on to first route. If not, it returns error 503
-app.use((req, res, next) => {
+
+  app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
   } else {
@@ -63,12 +62,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/nominations', async (req, res) => {
-  const allNominations = await Nomination.find();
-  res.json(allNominations);
+    //const queryParameters = req.query;
+    const allNominations = await Nomination.find(req.query);
+    if (allNominations) {
+      res.json(allNominations)
+    } else {
+      res.status(404).json({ error: 'Nominations not found'})
+    }
 })
 
 app.get('/nominations/:nominee', async (req, res) => {
-  try {
   // const { nominee } = req.params  SAME as below
   // find() returns array, findOne() returns object. The first in order to match.
     const singleNominee = await Nomination.findOne({ nominee: req.params.nominee });
@@ -77,9 +80,6 @@ app.get('/nominations/:nominee', async (req, res) => {
     } else {
       res.status(404).json({ error: 'Nominee not found' })
     }
-  } catch (err) {
-    res.status(400).json({ error: 'Invalid nominee' })
-  }
 })
 
 // Start the server
