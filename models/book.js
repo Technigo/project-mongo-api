@@ -2,13 +2,13 @@ import mongoose from 'mongoose'
 //second param --> object--> called schema
 //start with capital letter reserved for Models in Mongoose.
 //string is going to be name of collection with the 1st string param -->  start with lower case and with and ends with an s
-//what to do with isbn? one of the isbn:s is not a number. it has an X
+//isbn is a string because some items have letters 
 const Book = new mongoose.model('Book', {
   bookID: Number,
   title: String,
   authors: String,
   average_rating: Number,
-  isbn: Number,
+  isbn: String,
   isbn13: Number,
   language_code: String,
   num_pages: Number,
