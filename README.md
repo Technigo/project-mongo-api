@@ -4,7 +4,9 @@ In this project I learned about MongoDB and Mongoose. I have used the API Golden
 
 ## The problem
 
-First I had to seed the MongoDB with the data from my API. In order to do that I had to model data in Mongoose. It was a bit tricky to get everything in place, and to get the data to show in the MongoDB compass a crucial step is to write: RESET_DATABASE=true npm run dev in the terminal. By doing this we first clear the database and then save the data. Since the code is asynchronous, we have to use async/await, otherwise the same data will be added to the database everytime we save.
+First I had to seed the MongoDB with the data from my API. In order to do that I had to model data in Mongoose. It was a bit tricky to get everything in place, and in order to get the data into the MongoDB compass, a crucial step is to write: RESET_DATABASE=true npm run dev in the terminal. By doing this we first clear the database and then save the data. Since the code is asynchronous, we have to use async/await, otherwise the same data will be added to the database everytime we save.
+
+I then created endpoints to return a collection of results as well as single results using Mongoose queries.
 
 ## View it live
 
