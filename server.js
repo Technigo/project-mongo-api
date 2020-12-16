@@ -68,9 +68,9 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
-    next(); //to execute next get response
+    next(); // To execute next get response
   } else {
-    res.status(503).send({ error: 'service unavailable' });
+    res.status(503).send({ error: 'Service unavailable.' });
   }
 });
 
@@ -100,13 +100,14 @@ app.get('/', (req, res) => {
 //  - language
 //     usage: /books/?language=en-US
 app.get('/books', async (req, res) => {
-  const { title, author, language, page } = req.query;
-  const pageNumber = +page || 1; // Why does ?page=0 console logged out as 1?
+  const { title, author, lang, page } = req.query;
+  const pageNumber = +page || 1;
+  // const pageNumber = page ?? 1; // 1 as default
   console.log(pageNumber);
   /*
   https://www.sitepoint.com/shorthand-javascript-techniques/
   
-  if (page !== null || page !== undefined || page !== '') {
+  if (page !== null || page !== undefined || page !== '' || page !== 0) {
      let variable2 = page;
   }
   const variable2 = page || 'new';
@@ -118,17 +119,21 @@ app.get('/books', async (req, res) => {
 
   // Books with filters based on title and/or authors and/or language query
   // Paginated using limit and skip, change page using page query
-  let books = await Book.find({
+  const books = await Book.find({
     title: new RegExp(title, 'i'),
     authors: new RegExp(author, 'i'),
-    language_code: new RegExp(language, 'i')
+    language_code: new RegExp(lang, 'i')
   })
     .sort({ average_rating: -1 }) // Hard coded to sort data descending by average_rating.
     .limit(pageSize)
     .skip(skip);
 
   // Used to display total books, without pagination
-  const booksNoPagination = await Book.find();
+  const booksNoPagination = await Book.find({
+    title: new RegExp(title, 'i'),
+    authors: new RegExp(author, 'i'),
+    language_code: new RegExp(lang, 'i')
+  });
   const totalNumberOfBooks = booksNoPagination.length;
 
   const returnObject = {
@@ -137,7 +142,6 @@ app.get('/books', async (req, res) => {
     currentPage: pageNumber,
     pageSize: pageSize,
     skip: skip,
-    numberOfBooks: books.length,
     results: books
   };
 
@@ -151,12 +155,33 @@ app.get('/books', async (req, res) => {
   }
 });
 
+// /books/top-20-rated endpoint
+// RETURNS: A list of 20 top rated books from books.json
+app.get('/books/top-20-rated', async (req, res) => {
+  const top20Rated = await Book.find({})
+    .sort({ average_rating: -1 }) // Hard coded to sort data descending by average_rating.
+    .limit(20); // Hard coded to 20
+
+  if (top20Rated.length === 0) {
+    res.status(404).send({
+      error: 'Sorry, no books where found.'
+    });
+  } else
+    res.json({
+      totalNumberOfBooks: top20Rated.length,
+      topTwentyRated:
+        'A list of 20 top rated books sorted in descending by average_rating',
+      results: top20Rated
+    });
+});
+
 // /books/:id endpoint
 // RETURNS: A single book by id from mongoDB (project-mongo, mongoose model'Book')
 app.get('/books/:id', async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const singleBook = await Book.findOne({ bookID: id });
+
     if (singleBook) {
       res.json(singleBook);
     } else res.status(404).send({ error: `No book with id: ${id} found.` });
