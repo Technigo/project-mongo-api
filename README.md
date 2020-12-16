@@ -25,6 +25,8 @@ This search is non-case-sensitive and will also show results even if the name is
 An error message will show if no books are found by that author, double check author name.
 ### GET /books/top-rated
 Will show books from the database that have an "average_rating" property equal or higher than 4 ⭐
+### GET /books/top-rated?quickRead=true
+Will show books that are both Top Rated and have less than 600 pages.
 
 ## View it live
 
