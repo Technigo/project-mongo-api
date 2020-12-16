@@ -5,7 +5,6 @@ import mongoose from 'mongoose'
 
 import goldenGlobesData from './data/golden-globes.json'
 //console.log(goldenGlobesData)
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-anna"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
@@ -25,7 +24,7 @@ const Nomination = new mongoose.model('Nomination', {
 });
 
 // Start MongoDB: RESET_DB=true npm run dev
-if (process.env.RESET_DB) {
+//if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
     await Nomination.deleteMany();
 
@@ -35,7 +34,9 @@ if (process.env.RESET_DB) {
 		})
   }
   seedDatabase();
-}
+
+
+
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example: PORT=9000 npm start
