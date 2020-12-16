@@ -1,7 +1,8 @@
-import express from "express";
+import express, {request, response} from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+
 import booksData from "./data/books.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -24,6 +25,7 @@ const Book = mongoose.model("Book", {
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
     await Book.deleteMany({});
+    
     booksData.forEach((bookData) => {
       new Book(bookData).save();
     });
@@ -43,66 +45,66 @@ app.get("/", (request, response) => {
   response.send(myEndpoints(app));
 });
 
-app.use((req, res, next) => {
+app.use((request, response, next) => {
   if (mongoose.connection.readyState === 1) {
     next();
   } else {
-    res.status(503).json({ error: "Service unavailable" });
+    response.status(503).json({ error: "Service unavailable" });
   }
 });
 
-app.get("/books", async (req, res) => {
+app.get("/books", async (request, response) => {
   const allBooks = await Book.find().populate("authors");
-  res.json(allBooks);
+  response.json(allBooks);
 });
 
-app.get("/books/id/:bookID", async (req, res) => {
+app.get("/books/id/:bookID", async (request, response) => {
   try {
-    const queriedBook = await Book.findById({ bookID: req.params.bookID });
+    const queriedBook = await Book.findById({ bookID: request.params.bookID });
 
     if (queriedBook) {
-      res.json(queriedBook);
+      response.json(queriedBook);
     } else {
-      res
+      response
         .status(404)
         .json(
           "Hmm, we can't find that book in our database. Try searching another ID!"
         );
     }
   } catch (err) {
-    res.status(400).json({ error: "No such book ID" });
+    response.status(400).json({ error: "No such book ID" });
   }
 });
 
-app.get("/books/isbn/:isbn", async (req, res) => {
+app.get("/books/isbn/:isbn", async (request, response) => {
   try {
-    const { isbn } = req.params;
+    const { isbn } = request.params;
     const book = await Book.findOne({ isbn: isbn });
     if (book) {
-      res.json(book);
+      response.json(book);
     } else {
-      res
+      response
         .status(404)
         .json({ error: `No books found with the following isbn=${isbn}` });
     }
   } catch (err) {
-    res.status(400).json({ error: "invalid request" });
+    response.status(400).json({ error: "invalid request" });
   }
 });
 
-app.get("/books/authors/:author", async (req, res) => {
-  const searchedAuthor = req.params.author;
+app.get("/books/authors/:author", async (request, response) => {
+  const searchedAuthor = request.params.author;
   const thisBookAuthor = await Book.find({
     authors: { $regex: new RegExp(searchedAuthor, "i") },
   });
   if (thisBookAuthor.length === 0) {
-    res
+    response
       .status(404)
       .json(
         "No books have been found by such author. Perhaps try searching another author?"
       );
   }
-  res.json(thisBookAuthor);
+  response.json(thisBookAuthor);
 });
 // Start the server
 app.listen(port, () => {
