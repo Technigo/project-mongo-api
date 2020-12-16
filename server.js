@@ -2,18 +2,17 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
-
-//import booksData from './data/books.json'
+import booksData from './data/books.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Author = mongoose.model("Author", {
+const Author = new mongoose.model("Author", { //here we initialize our custom mongoose model, with a string "Author" and an object (called skimmed).
   name: String,
 });
 
-const Book = mongoose.model("Book", {
+const Book = new mongoose.model("Book", {
   title: String,
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -28,14 +27,15 @@ if (process.env.RESET_DATABASE) {
     await Author.deleteMany(); // fixes so it does not load more objects with new rendering
     await Book.deleteMany();
 
-    const tolkien = new Author({ name: "Tolkien" });
-    await tolkien.save();
+    booksData.forEach(item => {
+      const newAuthor = new Author(item);
+      newAuthor.save();
+    });
 
-    const duras = new Author({ name: "Duras" });
-    await duras.save();
-
-    await new Book({ title: "Harry", author: tolkien }).save();
-    await new Book({ title: "Larry", author: duras }).save();
+    booksData.forEach(item => {
+      const newBook = new Book(item);
+      newBook.save();
+    });
   };
   seedDatabase();
 }
