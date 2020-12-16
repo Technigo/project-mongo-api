@@ -2,8 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-
-import goldenGlobesData from './data/golden-globes.json'
+import endpoints from 'express-list-endpoints'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/nominations"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -26,6 +25,7 @@ const Category = mongoose.model('Category', {
   category: String
 })
 
+//Idea is to use this to display all winners from a certain year
 const Award = mongoose.model('Award', {
   year_award: Number,
   category: {
@@ -138,7 +138,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(endpoints(app))
 })
 
 app.get('/categories', async(req, res) => {
