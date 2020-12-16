@@ -3,6 +3,8 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import booksData from './data/books.json'
+
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // 
@@ -12,14 +14,11 @@ import mongoose from 'mongoose'
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
+// these three lines of code are the essens about the backend being connected to the database
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -27,10 +26,40 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
+const Member = new mongoose.model('Member', {
+  name: String,
+  surname: String,
+  lettersInName: Number,
+  isPapa: Boolean
+});
+
+if (process.env.RESET_DATABASE)  {
+const booksData = () => {
+  Member.deleteMany();
+
+  booksData.forEach(item => {
+    const newMember = new Member(item)
+    newMember.save();
+  })
+}
+  booksData();
+}
+// Start defining your routes herecon
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
+
+app.get('members', (req, res) => {
+  const booksData = Member.find();
+  res.json(booksData);
+})
+
+app.get('/members/:name', async (req, res) => {
+  const singleMember = Member.find({ name: req.params.title })
+
+  res.json(singleMember)
+})
+
 
 // Start the server
 app.listen(port, () => {
