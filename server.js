@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 
 import booksData from './data/books.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://sandra:H36bUcASMid6eQW@cluster0.ixgfn.mongodb.net/booksDb"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -46,13 +46,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/books', async (req, res) => {
-  const allBooks = await Book.find({ authors: { "$regex": req.query.author ?? '' }, title: { "$regex": req.query.title ?? '' } })
+  const allBooks = await Book
+    .find({ authors: { "$regex": req.query.author ?? '' }, title: { "$regex": req.query.title ?? '' } })
+    .sort({ title: 'asc', authors: -1 })
   res.json(allBooks)
 })
 
 app.get('/books/:id', async (req, res) => {
   const book = await Book.findById(req.params.id)
-  res.json(book)
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).json({ error: "Not found" });
+  }
 })
 
 app.listen(port, () => {
