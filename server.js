@@ -1,38 +1,69 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+ 
+import goldenGlobesData from './data/golden-globes.json'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.Promise = Promise
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8080
-const app = express()
+const port = process.env.PORT || 8080;
+const app = express();
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(bodyParser.json())
+app.use(cors());
+app.use(bodyParser.json());
 
-// Start defining your routes here
+const Movie = new mongoose.model('Movie', {
+  year_film: Number,
+  year_award: Number,
+  ceremony: Number,
+  category: String,
+  nominee: String,
+  film: String,
+  win: Boolean
+});
+
+if (process.env.RESET_DATABASE) {
+  const seedDatabase = async () => {
+    await Movie.deleteMany();
+
+    goldenGlobesData.forEach(item => {
+      const newMovie = new Movie(item);
+      newMovie.save();
+    });
+  }
+  seedDatabase();
+}
+
+
+// Routes
 app.get('/', (req, res) => {
   res.send('Hello world')
-})
+});
 
-// Start the server
+//This returns all movie nominations
+app.get('/movies', async (req, res) => {
+  const allMovies = await Movie.find();
+  res.json(allMovies);
+});
+
+//This returns one single movie based on the name of the nomineed movie
+app.get('/movies/nominee/:nominee', async (req, res) => {
+  const { nominee } = req.params;
+
+  const singleNominee = await Movie.findOne({ nominee: req.params.nominee });
+  
+  res.json(singleNominee);
+});
+
+// Starting the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
-})
+});
