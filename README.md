@@ -1,7 +1,7 @@
 # Mongo API Project
-This project was made during the Technigo Bootcamp. The goal was to practice how to use Mongodb to store data and how to query that data from an API.  
+This project was made during the Technigo Bootcamp. The goal was to practice how to use Mongodb to store data and how to query that data from an API using mongoose operations.  
 
-## The problem
+## What i've learned
 
 - I've created endpoints and i've used mongoose operations instead of vanilla JS since the data needed to be manipulated.
 - I've learned how to use the mongoose methods find() and findOne().
