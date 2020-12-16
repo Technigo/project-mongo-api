@@ -116,7 +116,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/volcanos", async (req, res) => {
-  const allVolcanos = await Volcano.find();
+  const allVolcanos = await Volcano.find(req.query).limit(10);
   res.json(allVolcanos);
 });
 
@@ -126,6 +126,7 @@ app.get("/volcanos/:name", async (req, res) => {
   res.json(singleVolcano);
 });
 
+// Having below version as ref:
 app.get("/volcanos/country/:Country", (req, res) => {
   Volcano.find(req.params, (err, data) => {
     res.json(data);
