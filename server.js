@@ -7,7 +7,7 @@ import booksData from "./data/books.json"
 
 // CODE FOR DATABASE
 const mongoUrl =
-  process.env.MONGO_URL || "mongodb://localhost/project-mongo-api"
+  process.env.MONGO_URL || "mongodb://localhost/book-api"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
