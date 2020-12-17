@@ -20,20 +20,30 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+// const Release = new mongoose.model("Release", {
+//   album_type: String,
+//   artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, artist_type: String, uri: String }],
+//   available_markets: [String],
+//   external_urls: { spotify: String },
+//   href: String,
+//   id: String,
+//   images: [{ height: Number, url: String, width: Number }],
+//   name: String,
+//   release_date: String,
+//   release_date_precision: String,
+//   total_tracks: Number,
+//   type: String,
+//   uri: String
+// });
+
 const Release = new mongoose.model("Release", {
   album_type: String,
-  artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, artist_type: String, uri: String }],
-  available_markets: [String],
+  artists: [{ external_urls: { spotify: String }, name: String }],
   external_urls: { spotify: String },
-  href: String,
-  id: String,
   images: [{ height: Number, url: String, width: Number }],
   name: String,
   release_date: String,
-  release_date_precision: String,
-  total_tracks: Number,
-  type: String,
-  uri: String
+  total_tracks: Number
 });
 
 if (process.env.RESET_DATABASE) {
@@ -41,21 +51,31 @@ if (process.env.RESET_DATABASE) {
     await Release.deleteMany();
 
     spotifyData.forEach(item => {
-      const newRelease = new Release(item);
-      newRelease.save();
+      new Release(item).save();
     })
   }
   populateDatabase();
 };
 
+// error message
+const ERROR_RELEASES_NOT_FOUND = { error: "No release matched your request" };
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello world")
+  res.send("Welcome to the Spotify Releases API")
 })
 
+// This route will return a collection of releases
 app.get("/releases", async (req, res) => {
-  const allReleases = await Release.find();
-  res.json(allReleases);
+  const allReleases = await Release.find(req.query);
+  if (allReleases.length === 0) {
+    res.status(404).json(ERROR_RELEASES_NOT_FOUND);
+  } else {
+    res.json({
+      total: allReleases.length,
+      releases: allReleases
+    });
+  }
 })
 
 // Start the server
