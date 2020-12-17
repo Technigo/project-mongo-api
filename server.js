@@ -54,6 +54,7 @@ if (process.env.RESET_DB) {
 const port = process.env.PORT || 8080
 const app = express()
 const myEndPoints = require('express-list-endpoints')
+const ERROR = { error: 'Data not found'}
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -204,13 +205,11 @@ app.get('/books/language/search', async (req, res) => {
       res.json(returnObj)
     }
   } catch (err) {
-    res.status(400).json({ error: 'Data not found'})
+    res.status(400).json(ERROR)
   }
 })
 //CREATE NEW COLLECTION OF TOP 40 ENGLISH BOOK
-
-
-//create new API endpoints to printout top 40 English book from new collection
+//create new data collection called top40EngBook from the current Book collection, then create an API endpoints to printout top 40 English book from new collection
 app.get('/top40rating/english', async (req, res) => {
   try {
     const top40EngBooks = await Book.aggregate([
@@ -228,9 +227,9 @@ app.get('/top40rating/english', async (req, res) => {
       { $limit: 40},
       { $out: 'top40EngBook'}//this function is to split the new set of data into a new collection called 'top40EngBook'
     ])
-    //these codes are mostly to practise the way to access the new collection 'top40EngBook'. The whole API maybe not semantically correct, just purely for practising purpose.
+    //these codes are mostly to practise the way to access the new collection 'top40EngBook' inside the endpoint. The whole API endpoint maybe not semantically correct, just purely for practising purpose.
     mongoose.connection.db.collections('top40EngBook',async (error, collections) => {
-      const results= await collections[1].find().toArray(function(err, data){
+      const results= await collections[1].find().toArray((err, data) => {
         const returnObj = {
           amountOfData: data.length,
           results: data
@@ -239,17 +238,22 @@ app.get('/top40rating/english', async (req, res) => {
       })
     })
   } catch (err) {
-    res.status(400).json({ error: 'Data not found'})
+    res.status(400).json(ERROR)
   }
 })
 
 //this API is created from a new collection 'top40EngBook', not from the book collection.
 app.get('/newcollection', async(req, res) => {
-  mongoose.connection.db.collections('top40EngBook',async (error, collections) => {
-    const results= await collections[1].find().toArray((err, data) => {
-    res.json(data)
+  try {
+    mongoose.connection.db.collections('top40EngBook',async (error, collections) => {
+      const results= await collections[1].find().toArray((err, data) => {
+      res.json(data)
+      })
     })
-  })
+  } catch(err) {
+    res.status(400).json(ERROR)
+  }
+  
 })
 
 // Start the server
