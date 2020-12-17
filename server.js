@@ -24,10 +24,10 @@ const Nomination = new mongoose.model('Nomination', {
 });
 
 // Start MongoDB: RESET_DB=true npm run dev
+// To populate database: remove if-statement, push, put if-statement back, push again
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
     await Nomination.deleteMany();
-
 		goldenGlobesData.forEach(item => {
       const newNomination = new Nomination(item);
       newNomination.save();
