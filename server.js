@@ -7,7 +7,6 @@ import mongoose from 'mongoose'
 // to get started!
 // 
 import goldenGlobesData from './data/golden-globes.json'
-console.log(goldenGlobesData.length)
 // import avocadoSalesData from './data/avocado-sales.json'
 // import booksData from './data/books.json'
 // import netflixData from './data/netflix-titles.json'
@@ -92,6 +91,7 @@ app.get('/nominations/year/:year', async (req, res) => {
 //Shows a specified category. This is another way of writing the code instead of using async/await.
 app.get('/nominations/category/:category', (req, res) => {
   Data.find(req.params, (err, data) => {
+    
     res.json(data);
   })
 })

@@ -22,4 +22,4 @@ In this endpoint we can query for all kind of information in the objects, for ex
 
 or use two queries like this ?win=true&nominee=Claire Danes: https://project-mongo-api-ingela.herokuapp.com/nominations?win=true&nominee=Claire%20Danes
 
-Shows a specified category: https://project-mongo-api-ingela.herokuapp.com//nominations/category/Best%20Motion%20Picture%20-%20Drama
+Shows a specified category: https://project-mongo-api-ingela.herokuapp.com/nominations/category/Best%20Motion%20Picture%20-%20Drama
