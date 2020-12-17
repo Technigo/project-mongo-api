@@ -4,21 +4,16 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 
-//import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
 import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+// Defines the port the app will run on.
 const port = process.env.PORT || 8080
 const app = express()
+
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
@@ -84,45 +79,46 @@ app.get('/records20', async (req, res) => {
     res.json(allRecords)
   })
 
-// app.get('/records/:genre', (req,res) => {
-//   Record.find({genre: req.params.genre}).then(record => {
-//       res.json(record);
-//     })
-//     .catch(error => {
-//       res.status(400).json({error: 'Not found'});
-    
-//   })
-// })
-//empty array
-app.get('/records/:trackName', (req, res) => {
-  Record.findOne({ trackName: req.params.trackName })
-    .then(data => {
-      res.json(data)
-  })
-    .catch(error => {
-      res.status(400).json({error: 'Not found'});
-  })
-  })
+app.get('/records/id/:id', async (req, res) => {
+  const recordByID = await Record.findOne({ id: req.params.id });
+  if(recordByID) {
+    res.json(recordByID);
+  } else { 
+    response.status(404).json({ error: 'Song not found'});
+    };
+  });
 
 //provided by mongoose finds specific endpoints
-app.get('/records/artist_name/:artistName', (req,res) => {
-  Record.find(req.params, (err,data) => {
-    res.json(data);
-  })
-})
+// app.get('/records/artist_name/:artistName', (req,res) => {
+//   Record.find(req.params, (err,data) => {
+//     res.json(data);
+//   })
+// })
 
-//dont know if it works, probably unnecessary as queries are used fir everything
-app.get('/records/popularity', (req,res) => {
-  Record.find({popularity: req.params.popularity })
-    .then(record => {
-      res.json(record);
-    })
-    .catch(error => {
-      res.status(400).json({error: 'Not found'}); 
-  })
-})
+//regex 
+app.get('/records/artists/:artistName', async (req,res) => {
+  const artistByNameSearch = req.params.artistName;
+  const artist = await Record.find({artistName:{ $regex: artistByNameSearch, $options: "i" }});
+  //const artist = await Record.find({artistName:{ $regex: "\\b" + artistNameSearch + "\\b", $options: "i" }});
+  if(artist.length > 0) {
+    res.json(artist)
+  } else { 
+    res.status(404).json({ error: 'No such artist found'});
+  };
+});
+
+//find short songs
+app.get('/records/short', async (req, res) => {
+  const shortRecords = await Record.find({ length: { $lt: 170 } });
+  res.json(shortRecords);
+});
+//find dancable songs
+app.get('/topsongs/dance', async (req, res) => {
+  const dancingRecords = await Record.find({ danceability: { $gte: 80 } });
+  res.json(dancingRecords);
+});
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
-})
+});
