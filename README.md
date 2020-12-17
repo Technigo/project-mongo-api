@@ -1,13 +1,45 @@
-# Mongo API Project
+# Project: Mongo API - Overview
+Time to level-up my APIs! In this project I start to use a database from which data can be retrieved and stored.
 
-Replace this readme with your own information about your project. 
+Learning objectives:
+- How to model data in Mongoose
+- How to fetch items from a Mongo database using Mongoose
+- How to seed large amounts of data to a database
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+<!-- ## Approach -->
 
-## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## Core Tech
+- MongoDB
+- Mongoose
+- Heroku
+- API
+- Postman
 
-## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+## Completed Requirements
+<!-- 🔵  Blue Level -->
+<!-- - Your API should be deployed to Heroku or similar hosting service. -->
+<!-- - Your database should be deployed using mongo cloud or similar. -->
+<!-- - Your API should have at least 2 routes. Try to push yourself to do more, though! -->
+<!-- - A minimum of one endpoint to return a **collection** of results (array of elements) -->
+<!-- - A minimum of one endpoint to return a **single** result (single element). -->
+<!-- - Your API should make use of Mongoose models to model your data and use these models to fetch data from the database. -->
+<!-- - Your API should be [RESTful](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/) -->
+
+
+<!-- 🔴  Red Level (Intermediary Goals) -->
+<!-- *The Red Level requirements from the previous project can be applied here as well.* -->
+
+<!-- - If you are doing any sort of manipulation after retrieving the data from the database.  Try using mongoose to do these operations instead. -->
+<!-- - Accept filters via query parameters to filter (via mongoose) the data you return from endpoints which return an array of data. -->
+
+
+<!-- ⚫ Black Level (Advanced Goals) -->
+<!-- *The Black Level requirements from the previous project can be applied here as well.* -->
+
+<!-- - Try implementing 'pages' using `[.skip()](https://mongoosejs.com/docs/api.html#query_Query-skip)` and `[.limit()](https://mongoosejs.com/docs/api.html#query_Query-limit)` (instead of `.slice()`) to return only a selection of results from the array. You could then use a query parameter to allow the client to ask for the next 'page'. -->
+<!-- - Try to create an endpoint that uses [mongoose's aggregate function](https://mongoosejs.com/docs/api/aggregate.html#aggregate_Aggregate) which allows you to use the [MongoDB aggregate pipeline](https://docs.mongodb.com/manual/core/aggregation-pipeline/). This is super-useful when doing more complex operations on database data, and a lot faster! -->
+
+
+<!-- ## View it live -->

@@ -1,0 +1,45 @@
+Project: Mongo API
+
+this time you should model your database using Mongoose models, and persist your data in the database.
+
+ [convert from CSV to JSON](https://www.csvjson.com/csv2json).
+
+In order to get all this data into your database, you'll need to write some code to generate the data - see the 'Making seed data' section further down for tips on how to do this.
+
+Once you have the data stored, you will need to write appropriate RESTful endpoints to return the data and make use of [Mongoose Queries](https://mongoosejs.com/docs/queries.html) to find and return the correct data given the route and any filter params passed.
+
+
+## How to get started 💪🏼
+4. Install dependencies: `npm install`
+5. Start the development server: `npm run dev`
+
+## Making seed data 🧞‍♂️
+[Seeding a database](https://en.wikipedia.org/wiki/Database_seeding) is a process in which an initial set of data is provided to a database when it is being installed or set up. In the videos for this week, we showed a way to generate a small amount of data, but in this project, some of the JSON files have thousands of rows, so we don't want to have it all in our server file.
+
+Instead, we can load the JSON and iterate over it to generate a lot of entries in our database. Let's say we had a file called `people.json`, and a `Person` model and the person model has exactly the same property names as the objects in the JSON file. Then we could write something like this in our server file to seed the database from the JSON:
+
+```jsx
+import data from './people.json'
+
+const Person = mongoose.model('Person', {
+  // Properties defined here match the keys from the people.json file
+})
+
+if (process.env.RESET_DB) {
+	const seedDatabase = async () => {
+    await People.deleteMany({})
+
+		data.forEach((personData) => {
+			new Person(personData).save()
+		})
+  }
+
+  seedDatabase()
+}
+```
+
+This whole process can be a little tricky and relies on your models having the same keys. Give it a try and if you run into issues, don't hesitate to ask your team, ask in slack, or post your code on stack overflow to get some help!
+
+## How to hand in the code 🎯
+- Navigate to your repo and create a Pull Request into the Technigo repo
+- Wait for the code review

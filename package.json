@@ -9,18 +9,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/node": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mongoose": "^5.8.9",
-    "nodemon": "^2.0.2"
+    "@babel/core": "*",
+    "@babel/helper-compilation-targets": "*",
+    "@babel/node": "*",
+    "@babel/preset-env": "*",
+    "body-parser": "*",
+    "check": "*",
+    "cors": "*",
+    "dotenv": "*",
+    "express": "*",
+    "mongoose": "*",
+    "nodemon": "*"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-import": "^0.13.0"
+    "eslint": "*",
+    "eslint-config-airbnb": "*",
+    "eslint-config-import": "*"
   }
 }
