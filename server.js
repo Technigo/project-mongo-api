@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 import booksData from './data/books.json'
 
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/bookCollection"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/book-project"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -31,9 +31,6 @@ const Book = mongoose.model('Book', {
   },
   language_code: {
     type: String,
-    lenght: 3
-    //How to put the validation of string of 3 character here
-    //How to print out error message if data input was not aligned
   },
   num_pages: {
     type: Number
@@ -44,14 +41,12 @@ const Book = mongoose.model('Book', {
   text_reviews_count: {
     type: Number
   }
-
 })
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany()
-    await booksData.forEach((book) => new Book(book).save())
-    //Why await does not have any impact on this function???
+    booksData.forEach(async (book) => await new Book(book).save())
   }
   seedDatabase()
 }
@@ -73,6 +68,8 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
+    
+  
   if(!res) {
     res
     .status(404)
@@ -210,40 +207,50 @@ app.get('/books/language/search', async (req, res) => {
     res.status(400).json({ error: 'Data not found'})
   }
 })
+//CREATE NEW COLLECTION OF TOP 40 ENGLISH BOOK
 
+
+//create new API endpoints to printout top 40 English book from new collection
 app.get('/top40rating/english', async (req, res) => {
   try {
-    const books = await Book.aggregate([
+    const top40EngBooks = await Book.aggregate([
       { $match: {language_code: { $in: ['eng', 'en-GB', 'en-US']}}},
       { $project: {
         _id: 0,
-        // isbn: 0,
-        // isbn13: 0,
-        isbn: {
-          isbn: "$isbn",
-          isbn13: "$isbn13"
-        },
-        rating: "$average_rating",
+        isbn: 0,
+        isbn13: 0,
+        language_code: 0,
         ratings_count: 0,
         text_reviews_count: 0,
         __v: 0
       }},
       { $sort: {average_rating: -1, authors: 1}},
       { $limit: 40},
-      { $out: 'top40EngBooks'}
+      { $out: 'top40EngBook'}//this function is to split the new set of data into a new collection called 'top40EngBook'
     ])
-  const top40Books = await bookCollection/top40EngBooks.find()
-  console.log(top40Books, 'top40Books')
-    const returnObj = {
-      amountOfData: books.length,
-      results: top40Books
-    }
-    res.json(returnObj)
+    //these codes are mostly to practise the way to access the new collection 'top40EngBook'. The whole API maybe not semantically correct, just purely for practising purpose.
+    mongoose.connection.db.collections('top40EngBook',async (error, collections) => {
+      const results= await collections[1].find().toArray(function(err, data){
+        const returnObj = {
+          amountOfData: data.length,
+          results: data
+        }  
+        res.json(returnObj)
+      })
+    })
   } catch (err) {
     res.status(400).json({ error: 'Data not found'})
   }
 })
 
+//this API is created from a new collection 'top40EngBook', not from the book collection.
+app.get('/newcollection', async(req, res) => {
+  mongoose.connection.db.collections('top40EngBook',async (error, collections) => {
+    const results= await collections[1].find().toArray((err, data) => {
+    res.json(data)
+    })
+  })
+})
 
 // Start the server
 app.listen(port, () => {
