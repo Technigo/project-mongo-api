@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/shows', async (req, res) => {
-  const {title, page} = req.query
+  const {title, page, limit} = req.query
   if(title){
     Show.find(
       {"title": {"$regex": title, "$options": "i" }}, 
@@ -77,47 +77,63 @@ app.get('/shows', async (req, res) => {
       shows.length > 0 ? res.json(shows) : res.status(404).json({error: "Page not found"})
     }
     else {
-      const shows = await Show.find().limit(20)
+      const shows = await Show.find().limit(limit ? +limit : 20)
       res.json(shows)
     }
 })
 
 app.get('/shows/:id', async (req, res) => {
   const {id} = req.params
- try { 
-  const singleShow = await Show.findOne({show_id: id})
-  if(singleShow){  
-    res.json(singleShow)
-  } else {
-    res.status(404).json({error: "Show not found"})
+  try { 
+    const singleShow = await Show.findOne({show_id: id})
+    if(singleShow){  
+      res.json(singleShow)
+    } else {
+      res.status(404).json({error: "Show not found"})
+    }
+  } catch (err) {
+    res.status(400).json({error: "Invalid show ID"})
   }
-} catch (err) {
-  res.status(400).json({error: "Invalid show ID"})
-}
 })
 
 app.get('/shows/year/:year', async (req, res) => {
   const {year} = req.params
- try { 
-  const filteredOnYears = await Show.find({release_year: year})
-  if(filteredOnYears.length > 0){  
-    res.json(filteredOnYears)
-  } else {
-    res.status(404).json({error: "No shows found"})
+  try { 
+    const filteredOnYears = await Show.find({release_year: year})
+    if(filteredOnYears.length > 0){  
+      res.json(filteredOnYears)
+    } else {
+      res.status(404).json({error: "No shows found"})
+    }
+  } catch (err) {
+    res.status(400).json({error: "Invalid input"})
   }
-} catch (err) {
-  res.status(400).json({error: "Invalid input"})
-}
 })
 
 app.get('/shows/type/movies', async (req, res) => {
-  const movies = await Show.find({type: "Movie"}) 
-  res.json(movies)
+  const {page, limit} = req.query
+  if (page) {
+    const skipPages = (+page - 1) * 20
+    const movies = await Show.find({type: "Movie"}).skip(skipPages).limit(limit ? +limit : 20)
+    movies.length > 0 ? res.json(movies) : res.status(404).json({error: "Page not found"})
+  }
+  else {
+    const movies = await Show.find({type: "Movie"}).limit(limit ? +limit : 20)
+    res.json(movies)
+  }
 })
 
 app.get('/shows/type/tv-shows', async (req, res) => {
-  const tvShows = await Show.find({type: "TV Show"}) 
-  res.json(tvShows)
+  const {page, limit} = req.query
+  if (page) {
+    const skipPages = (+page - 1) * 20
+    const tvShows = await Show.find({type: "TV Show"}).skip(skipPages).limit(limit ? +limit : 20)
+    tvShows.length > 0 ? res.json(tvShows) : res.status(404).json({error: "Page not found"})
+  }
+  else {
+    const tvShows = await Show.find({type: "TV Show"}).limit(limit ? +limit : 20)
+    res.json(tvShows)
+  }
 })
 
 // Start the server
