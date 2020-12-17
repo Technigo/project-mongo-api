@@ -55,10 +55,6 @@ app.get('/', (req, res) => {
   res.send('Welcome to the Songs data API')
 })
 
-app.get('/alltracks', async (req, res) => {
-  const allMusic = await Music.find()
-  res.json(allMusic)
-})
 // All info from JSON
 app.get('/alltracks', async (req, res) => {
   const allMusic = await Music.find()
