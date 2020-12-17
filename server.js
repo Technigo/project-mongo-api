@@ -5,15 +5,14 @@ import mongoose from 'mongoose';
 import booksData from './data/books.json';
 import authorsData from './data/authors.json';
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.Promise = Promise
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
 
 //_____________create my modules
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
-  //authors: String,
   authors: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Author',
@@ -33,38 +32,25 @@ const Author = mongoose.model('Author', {
 
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
-    await Book.deleteMany()
-    await Author.deleteMany()
-    //await booksData.forEach((item) => new Book(item).save())
-    //await authorsData.forEach((item) => new Author(item).save())
-
+    await Book.deleteMany();
+    await Author.deleteMany();
 
     let authorsArray = [];
 
     authorsData.forEach( async item => {
       const newAuthor = new Author(item);
       
-      // We push each newRole to array roles
       authorsArray.push(newAuthor);
       await newAuthor.save();
     })
   
     booksData.forEach(async bookItem => {
-
-      // We create new member for element in membersData array from JSON file
-      // Important thing to notice: in JSON file we had property "role" with
-      // hardcoded string value. We need it to detect which role model should
-      // each member have. Later on, hardcoded "role" property will be
-      // overwritten by new "role" property, the one with value of ObjectId type.
-      // For further reference on that, check out last example from website below,
-      // the one about keys collision : https://davidwalsh.name/merge-objects
       const newBook = new Book({
         ...bookItem,
         authors: authorsArray.find(authorItem => authorItem.authors === bookItem.authors)
       });
       await newBook.save();
-    })
-
+    });
   };
   seedDatabase();
 };
@@ -98,16 +84,14 @@ app.get('/', (req, res) => {
 
 //_____________All books
 app.get('/books', async (req, res) => {
-  const { title, author, language, page } = req.query;
-  const pageNumber = +page || 1; //why does ?page=0 console logged out as 1? 
+  const { title, language, page } = req.query;
+  const pageNumber = +page || 1; 
   const pageSize = 20;
   const skip = pageSize * (pageNumber -1);
-  //första authors = definering i modell , author = query parameter. - REMOVE
   let books = await Book.find({
     title: new RegExp(title, 'i'),
-    //authors: new RegExp(author, 'i'),
     language_code: new RegExp(language, 'i'),
-  }).populate('authors') //to get Author model information in /books
+  }).populate('authors') 
     .sort({ average_rating: - 1 })
     .limit(pageSize)
     .skip(skip);
@@ -142,7 +126,7 @@ app.get('/books/:id', async (req, res) => {
 
 //_____________Array of authors
 app.get("/authors", async (req, res) => {
-  const { author } = req.query
+  const { author } = req.query;
   const authorsArray = await Author.find({
     authors: new RegExp(author, 'i'),
   });
@@ -153,8 +137,9 @@ app.get("/authors", async (req, res) => {
     .send({Error: "something went wrong"});
   };
   res.send({ author: authorsArray });
-});
+}); 
 
+//_____________Single author based in ID
 app.get('/authors/:id', async (req, res) => {
   const singleAuthor = await Author.findById(req.params.id);
   if (singleAuthor) {
@@ -164,13 +149,13 @@ app.get('/authors/:id', async (req, res) => {
   }
 });
 
-
+//_____________Books created by author based on authors ID
 app.get('/authors/:id/books', async (req, res) => {
   const author = await Author.findById(req.params.id);
   if (author) {
     const books = await Book.find({
       authors: mongoose.Types.ObjectId(author.id)
-    });
+    }).populate('authors');
     res.json(books);
   } else {
     res.status(404).json({ error: 'authors/:id/books' });
@@ -181,13 +166,3 @@ app.get('/authors/:id/books', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-//npm install @babel/helper-compilation-targets 
-// INCASE PROBLEM STARTING NPM RUN DEV
-
-//testa felmeddelandet starta
-//brew services start mongodb-community@4.4 
-//brew services stop mongodb-community@4.4 
-//RESET_DATABASE=TRUE npm run dev
-
-//7jpxZB0mhKob9Zri  
