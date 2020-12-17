@@ -1,13 +1,27 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This project is done as a part of Technigo boot camp. 
+The focus for the project was to model data in Mongoose, fetch items from a Mongo database using Mongoose and seed large amounts of data to a database.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Endpoints
 
-## The problem
+https://elle-mongo-api-project.herokuapp.com/books returns all books.
+https://elle-mongo-api-project.herokuapp.com/books?title=TITLE search by title. shows book/books including title word. Not case sensitive.
+https://elle-mongo-api-project.herokuapp.com/books?author=AUTHOR search by author. shows book/books including author name. Not case sensitive.
+https://elle-mongo-api-project.herokuapp.com/books?rating=high sorts books on highest average rating.
+https://elle-mongo-api-project.herokuapp.com/books?rating=high sorts books on lowest average rating.
+https://elle-mongo-api-project.herokuapp.com/books?page=PAGENR shows requested page nr.
+https://elle-mongo-api-project.herokuapp.com/books?limit=LIMITNR edits amount of search result for each page.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+https://elle-mongo-api-project.herokuapp.com/books/book/BOOKID returns a single result based on bookID.
+
+## TECH
+Javascript
+Node.js
+Express
+Mongoose
+Mongo DB
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://elle-mongo-api-project.herokuapp.com/
