@@ -50,7 +50,8 @@ app.get('/', (req, res) => {
 
 //This returns all movie nominations
 app.get('/movies', async (req, res) => {
-  const allMovies = await Movie.find();
+  const queryParameters = req.query;
+  const allMovies = await Movie.find(req.query);
   res.json(allMovies);
 });
 
@@ -65,5 +66,5 @@ app.get('/movies/nominee/:nominee', async (req, res) => {
 
 // Starting the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
+  console.log(`Server running on http://localhost:${port}`);
 });
