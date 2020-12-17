@@ -67,6 +67,13 @@ app.get('/tracks', async (req, res) => {
   res.json(allTracks)
 })
 
+app.get('/tracks/:id', async (req, res) => {
+  const id = req.params.id;
+  const singleTracks = await Tracks.find({ id: +id })
+
+  res.json(singleTracks);
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
