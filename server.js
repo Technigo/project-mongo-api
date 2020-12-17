@@ -59,7 +59,7 @@ app.use(bodyParser.json());
 
 // ROUTES
 app.get('/', (request, response) => {
-  response.send('Oh Hello! Welcome to Top Songs API, on MongoDB!');
+  response.send('Oh Hello! Welcome to Top Songs API, provided by MongoDB!');
 });
 
 // Route to get all top songs data + request query for genre
