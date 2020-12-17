@@ -44,9 +44,8 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello! To see the whole list of show type in /shows')
 })
 
 app.get('/shows', async (req, res) => {
