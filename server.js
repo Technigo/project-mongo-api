@@ -14,12 +14,11 @@ mongoose.Promise = Promise
 const port = process.env.PORT || 8081
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
-//is the database working- catch if not
-//if next isn't invoked than express won't call the next line of code.
+//if the database working- catch if not
+//if next isn't invoked then express won't call the next line of code.
 //use mongoose ready state. if 1 then connected
 app.use((req, res, next) => {
   if(mongoose.connection.readyState === 1){
@@ -29,8 +28,7 @@ app.use((req, res, next) => {
   }
 })
 
-//clean database before population
-//stop until deleteMany is finished--> only populate after the data base is clean
+//cleans database before population
 if (process.env.RESET_DATABASE) {
   const populateDatabase = async () => {
     await Book.deleteMany()
@@ -43,12 +41,10 @@ if (process.env.RESET_DATABASE) {
   populateDatabase()
 }
 
-// Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello again world')
 })
 
-//what is the correct error message here? 
 //limit is amount of search results for a single page
 //i stands for ignore case -->in regexp
 //math.ceil rounds the number up to the next largest integer.
