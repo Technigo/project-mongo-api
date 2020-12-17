@@ -23,9 +23,10 @@ const Book = mongoose.model("Book", {
 });
 
 if (process.env.RESET_DATABASE) {
+  //RESET_DATABASE=true npm run dev
   console.log("Resetting database");
 
-  const seedDatabase = async () => {
+  const populateDatabase = async () => {
     await Book.deleteMany(); // fixes so it does not load more objects with new rendering
 
     booksData.forEach((item) => {
@@ -33,7 +34,7 @@ if (process.env.RESET_DATABASE) {
       newBook.save();
     });
   };
-  seedDatabase();
+  populateDatabase();
 }
 
 // Defines the port the app will run on. Defaults to 8080, but can be
@@ -47,19 +48,38 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Global error
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else { 
+    res.status(503).json({ error: 'Not available' })
+  }
+})
+
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("API of books");
 });
 
-app.get("/books/:id", async (req, res) => {
-  const books = await Book.find();
-  res.json(books);
+//gets all the books
+app.get("/books/", async (req, res) => {
+  const allBooks = await Book.find(); // looks for all attributes
+  res.json(allBooks);
 });
 
-app.get("/books/id/:id", async (req, res) => {
-  const book = await Book.findById(req.params.bookID);
-  res.json(book);
+//gets the books from a specific author (when searching for name)
+app.get("/author/:name/", async (req, res) => {
+  try {
+    const singleAuthor = await Book.findOne({ authors: req.params.name });
+    if (singleAuthor) {
+      res.json(singleAuthor);
+    } else {
+      res.status(404).json({ error: "Author not found" });
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Invalid author name" });
+  }
 });
 
 // Start the server
