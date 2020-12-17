@@ -58,11 +58,12 @@ if (process.env.RESET_DB) {
 
 const port = process.env.PORT || 8080
 const app = express()
+const myEndPoints = require('express-list-endpoints')
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
+//handling data connection error
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
@@ -71,22 +72,34 @@ app.use((req, res, next) => {
   }
 })
 
-// Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  if(!res) {
+    res
+    .status(404)
+    .send({ error: 'Oops! Something goes wrong. Try again later!'})
+  }
+  res.send(myEndPoints(app))
 })
-
+//API endpoints for books with query options for author, title; otherwise, display 20 data per page (sorted by average_rating) and allow user to request for more pages
 app.get('/books', async (req, res) => {
-  //How to simplify these codes
   const { title, author } = req.query
 
   const queryTitleRegex = new RegExp(title, 'i')
   const queryAuthorRegex = new RegExp(author, 'i')
 
-  if (title) {
+  if (title && author) {
+    const books = await Book.find({ title: queryTitleRegex, authors:queryAuthorRegex })
+    const returnObj = {
+      filterByTitle: title,
+      filterByAuthor: author,
+      amountOfData: books.length,
+      results: books
+    }
+    res.json(returnObj)
+  } else if (title) {
     const books = await Book.find({ title: queryTitleRegex }).sort({ average_rating: -1 })
     const returnObj = {
-      filterby: title,
+      filterByTitle: title,
       amountOfData: books.length,
       results: books
     }
@@ -94,7 +107,7 @@ app.get('/books', async (req, res) => {
   } else if (author) {
     const books = await Book.find({ authors: queryAuthorRegex }).sort({ average_rating: -1})
     const returnObj = {
-      filterBy: author,
+      filterByAuthor: author,
       amountOfData: books.length,
       results: books
     }
@@ -102,45 +115,38 @@ app.get('/books', async (req, res) => {
   } else {
     const { page } = req.query
     const pageSize = 20
-    const skipData = page * pageSize
+    const skipData = page ? page * pageSize : 0;
+    
     const amountOfData = await Book.find().count()
     const totalNumberOfPage = Math.ceil(amountOfData / pageSize)
+    
     let returnObj = {
       totalAmountOfData: amountOfData,
       totalNumberOfPage: totalNumberOfPage,
-      pageSize: pageSize
+      pageSize: pageSize,
+      currentPage: page || 1,
+      results: []
     }
-    if (!page || page === 0) {
-      const books = await Book.find()
-        .sort({ average_rating: -1})
-        .limit(pageSize)
-      returnObj = {
-        ...returnObj,
-        currentPage: 1,
-        results: books
-      }
-      res.json(returnObj)
-    } else if (page > 0) {
-      const books = await Book.find()
-        .sort({ average_rating: -1})
-        .skip(skipData)
-        .limit(pageSize)
-      returnObj = {
-        ...returnObj,
-        currentPage: page,
-        results: books
-      }
-      res.json(returnObj)
-    } else {
+
+    const books = await Book.find()
+      .sort({ average_rating: -1 })
+      .skip(skipData)
+      .limit(pageSize)
+    
+    if (!books.length) {
       res.json({ error: 'Oops! Page not found'})
+    } else {
+      res.json({
+        ...returnObj,
+        results: books
+      })
     }
   }
 })
-
+// filter book by Id using findById() function and handling error
 app.get('/books/:id', async (req, res) => {
-  const { id } = req.params
   try {
-    const book = await Book.findById(id)
+    const book = await Book.findById(req.params)
     if (book) {
       res.json(book)
     } else {
@@ -151,10 +157,11 @@ app.get('/books/:id', async (req, res) => {
   }
 })
 
-app.get('/books/:isbn', async (req, res) => {
-  const { isbn } = req.params
+//filter books by isbn with findOne() function and handling error
+
+app.get('/books/isbn/:isbn', async (req, res) => {
   try {
-    const book = await Book.findOne({ isbn: isbn })
+    const book = await Book.findOne(req.params)
     if (book) {
     res.json(book)
     } else {
@@ -165,32 +172,77 @@ app.get('/books/:isbn', async (req, res) => {
   }
 })
 
-//API below is to try using MongoDB's aggregate function
-//sort and group books by language
+//APIs BELOW IS TO PRACTISE MONGODB AGGREGATE FUNCTIONS
 
+//sort and group books by language. If there is no lang query, group the data by language, authors and titles
 app.get('/books/language/search', async (req, res) => {
-  const { lang } = req.query
-  if (lang) {
-    const books = await Book.aggregate([
-      { $match: { language_code: lang} }
-    ]).sort({ average_rating: -1})
-    const returnObj = {
-      amountOfData: books.length,
-      results: books
+  try {
+    const { lang } = req.query
+    if (lang) {
+      const books = await Book.aggregate([
+        { $match: { language_code: lang}},
+        { $sort: {title: 1}}
+      ])
+      const returnObj = {
+        amountOfData: books.length,
+        results: books
+      }
+      res.json(returnObj)
+    } else {
+    //If there is no query in the language search, then group books by language, author and title. Then, sort authors ascedingly and sort title ascendingly
+      const books = await Book.aggregate([
+        { $group: {_id: {
+          language: "$language_code", 
+          authors: "$authors", 
+          title: "$title"
+        }}},
+        { $sort: {"_id.authors": 1, "_id.title": 1}}
+      ]
+      //   {allowDiskUse: true} //this line is to enable MongoDB to use temporary memory in case the stage exceed limited RAM, mainly for practising mongoDB stage, not necessary for the small size data of this project.
+      )
+      const returnObj = {
+        amountOfData: books.length,
+        results: books
+      }
+      res.json(returnObj)
     }
-    res.json(returnObj)
-  } else {
-    const books = await Book.aggregate([
-      { $group: {_id: {language: "$language_code", authors: "$authors", title: "$title"}}}
-    ])
-    const returnObj = {
-      amountOfData: books.length,
-      results: books
-    }
-    res.json(returnObj)
+  } catch (err) {
+    res.status(400).json({ error: 'Data not found'})
   }
 })
 
+app.get('/top40rating/english', async (req, res) => {
+  try {
+    const books = await Book.aggregate([
+      { $match: {language_code: { $in: ['eng', 'en-GB', 'en-US']}}},
+      { $project: {
+        _id: 0,
+        // isbn: 0,
+        // isbn13: 0,
+        isbn: {
+          isbn: "$isbn",
+          isbn13: "$isbn13"
+        },
+        rating: "$average_rating",
+        ratings_count: 0,
+        text_reviews_count: 0,
+        __v: 0
+      }},
+      { $sort: {average_rating: -1, authors: 1}},
+      { $limit: 40},
+      { $out: 'top40EngBooks'}
+    ])
+  const top40Books = await bookCollection/top40EngBooks.find()
+  console.log(top40Books, 'top40Books')
+    const returnObj = {
+      amountOfData: books.length,
+      results: top40Books
+    }
+    res.json(returnObj)
+  } catch (err) {
+    res.status(400).json({ error: 'Data not found'})
+  }
+})
 
 
 // Start the server
