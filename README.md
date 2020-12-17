@@ -32,8 +32,6 @@ The main requirements were to:
 8. Help channel in Slack
 
 ## View it live 👀
-https://clairebookapi.herokuapp.com/
-
 https://clairebookapi.herokuapp.com/documentation
 This url will take you to the documentation. After that it's just a case of choosing which endpoint you want to use!
 
