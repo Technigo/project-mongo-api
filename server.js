@@ -68,12 +68,12 @@ app.get('/nominations', async (req, res) => {
 })
 
 //This will return one object with a specified actor, for example 'Sandra Bullock', if there is no such name it will return an error message. If we use Find instead of FindOne it will return all
-// the objects with Sandra Bulllock as nominee.
+// the objects with Sandra Bulllock as nominee. Works also with lowercase: sandra bullock.
 app.get('/nominations/nominee/:nominee', async (req, res) => {
   const nominee = req.params.nominee
-  const singleNominee = await Data.findOne({nominee: req.params.nominee})
+  const singleNominee = await Data.findOne({nominee: { $regex: nominee, $options: 'i'}})
 
-  if (singleNominee.length === 0) {
+  if (!singleNominee) {
     res.status(404).json(ERROR)
   } else {
 
@@ -84,9 +84,16 @@ app.get('/nominations/nominee/:nominee', async (req, res) => {
 //Shows all nominations from a specified year
 app.get('/nominations/year/:year', async (req, res) => {
   const year = req.params.year
-  const nominationYear = await Data.find({ year_award: req.params.year});
+  const nominationYear = await Data.find({ year_award: year});
 
   res.json(nominationYear)
+})
+
+//Shows a specified category. This is another way of writing the code instead of using async/await.
+app.get('/nominations/category/:category', (req, res) => {
+  Data.find(req.params, (err, data) => {
+    res.json(data);
+  })
 })
 
 // Start the server
