@@ -3,23 +3,40 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import netflixData from './data/netflix-titles.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/show"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+const Show = mongoose.model('Show', {
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  descriotion: String,
+  type: String
+})
+
+if (process.env.RESET_DATABASE) {
+  const seedDatabase = async () => {
+    await Show.deleteMany()
+  
+    netflixData.forEach(item => {
+      const newShow = new Show(item)
+      newShow.save()
+    })
+  
+  }
+  seedDatabase()
+} 
+
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -30,6 +47,17 @@ app.use(bodyParser.json())
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.get('/shows', async (req, res) => {
+  const allShows = await Show.find()
+  res.json(allShows)
+})
+
+app.get('/shows/:show_id', async (req, res) => {
+  const singleShow = await Show.findOne({ show_id: req.params.show_id })
+
+  res.json(singleShow)
 })
 
 // Start the server
