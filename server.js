@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import mongoose, { get } from 'mongoose'
+import mongoose from 'mongoose'
 
 import topMusicData from './data/top-music.json'
 
@@ -51,9 +51,16 @@ if (process.env.RESET_DATABASE) {
   }
   populateDataBase()
 }
+app.get('/', (req, res) => {
+  res.send('Welcome to the Songs data API')
+})
 
+app.get('/alltracks', async (req, res) => {
+  const allMusic = await Music.find()
+  res.json(allMusic)
+})
 // All info from JSON
-app.get('/', async (req, res) => {
+app.get('/alltracks', async (req, res) => {
   const allMusic = await Music.find()
   res.json(allMusic)
 })
