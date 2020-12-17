@@ -30,7 +30,7 @@ const Movie = new mongoose.model('Movie', {
   win: Boolean
 });
 
-if (process.env.RESET_DATABASE) {
+if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Movie.deleteMany();
 
@@ -45,7 +45,7 @@ if (process.env.RESET_DATABASE) {
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Welcome to Golden Globes API where you can find information about all the movies nominated')
 });
 
 //This returns all movie nominations
