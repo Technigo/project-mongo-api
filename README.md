@@ -1,8 +1,19 @@
 # Mongo API Project
 
-A project to practice using MongoDB and Mongoose to store data from an API. The API is built in Node using express. 
+A project to practice using MongoDB and Mongoose to store data from an API. 
+The API is built in Node using express. 
 
-## Endpoints
+## Endpoints available
+
+* Root: /
+* Books: /books
+* Books by ID: /books/'id-number'
+
+Queries to sort/limit the book endpoint:
+
+* Search by title: /books?='title-name'
+* Sort by author: /books?author='name of author'
+* Sort by language: /books?language='(ara, eng, fre, mul, por, spa)' 
 
 ## Tech
 

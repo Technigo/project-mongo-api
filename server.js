@@ -1,23 +1,18 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express from "express"
+import bodyParser from "body-parser"
+import cors from "cors"
+import mongoose from "mongoose"
 
-import booksData from './data/books.json'
-
+import booksData from "./data/books.json"
 
 // CODE FOR DATABASE
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api"
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://localhost/project-mongo-api"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// AUTHOR MODEL
-const Author = mongoose.model('Author', {
-  authors: String
-})
-
 // BOOK MODEL
-const Book = mongoose.model('Book', {
+const Book = mongoose.model("Book", {
   bookID: {
     type: Number,
   },
@@ -48,15 +43,13 @@ const Book = mongoose.model('Book', {
   text_reviews_count: {
     type: Number,
   },
-}) 
+})
 
 // RESET DATABASE - Deleting existing data to prevent dublicates
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
     await Book.deleteMany()
-    await booksData.forEach(book => new Book(book).save())
-    await Author.deleteMany() 
-    await booksData.forEach(item => new Author(item).save())
+    await booksData.forEach((book) => new Book(book).save())
   }
   seedDatabase()
 }
@@ -65,38 +58,36 @@ if (process.env.RESET_DATABASE) {
 const port = process.env.PORT || 8080
 const app = express()
 
-// MIDDLEWARES  
+// MIDDLEWARES
 app.use(cors())
 app.use(bodyParser.json())
 
 // ROUTES
-app.get('/', (req, res) => {
-	res.send('This is an API with books')
+app.get("/", (req, res) => {
+  res.send("This is an API with books")
 })
 
 // ENDPOINT BOOKS
-app.get('/books', async (req, res) => {
-  const allBooks = await Book.find()
+app.get("/books", async (req, res) => {
+  const { author, title, language } = req.query
+  let allBooks = await Book.find({
+    authors: new RegExp(author, "i"),
+    title: new RegExp(title, "i"),
+    language_code: new RegExp(language, "i"),
+  })
   res.json(allBooks)
-  
 })
 
 // ENDPOINT SINGLE BOOK
-app.get('/books/:id', async (req, res) => {
-  const {id} = req.params
+app.get("/books/:id", async (req, res) => {
+  const { id } = req.params
   const singleBook = await Book.findOne({ bookID: id })
 
-  if(singleBook) {
+  if (singleBook) {
     res.json(singleBook)
   } else {
-    res.status(404).json({ error: 'Book not found '})
+    res.status(404).json({ error: "Book not found " })
   }
-})
-
-// ENDPOINT AUTHOR
-app.get('/authors', async (req, res) => {
-  const authors = await Author.find({})
-  res.json(authors)
 })
 
 // START SERVER
