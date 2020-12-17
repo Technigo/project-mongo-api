@@ -21,3 +21,5 @@ Shows all objects from a specified year (year of the award): https://project-mon
 In this endpoint we can query for all kind of information in the objects, for example to see all the movies that have won we could add this to the base URL: ?win=true. https://project-mongo-api-ingela.herokuapp.com/nominations?win=true
 
 or use two queries like this ?win=true&nominee=Claire Danes: https://project-mongo-api-ingela.herokuapp.com/nominations?win=true&nominee=Claire%20Danes
+
+Shows a specified category: https://project-mongo-api-ingela.herokuapp.com//nominations/category/Best%20Motion%20Picture%20-%20Drama
