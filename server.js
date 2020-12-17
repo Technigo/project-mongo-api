@@ -127,7 +127,7 @@ const documentation = {
   },
   
   "Endpoint 2": {
-    "https://books-deployment.herokuapp.com/books/:id": " Use this endpoint to return books with a specific id and replace :id with a number.",
+    "https://books-deployment.herokuapp.com/books/enterbookidnumber": " Use this endpoint to return books with a specific id and replace :id with a number.",
   },
 };
 
