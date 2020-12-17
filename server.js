@@ -36,20 +36,19 @@ const Record = new mongoose.model('Record', {
   popularity: Number
 });
 
-//populating database
+//Populating database
 
 if(process.env.RESET_DATABASE) {
   const populateDatabase = async () => {
     await Record.deleteMany();
-    topMusicData.forEach(async item => {
-      const newRecord = new Record(item);
-      await newRecord.save();
+    topMusicData.forEach(record => {
+      new Record(record).save();
     })
   }
   populateDatabase();
 }
 
-//error of server
+//Provide error of server
 
 app.use((req, res, next) => {
 if(mongoose.connection.readyState === 1) {
@@ -59,26 +58,22 @@ if(mongoose.connection.readyState === 1) {
 }
 })
 
-//Start defining your routes here
-// app.get('/', (req, res) => {
-//   //fetch('...', {headers: { Authorization: "my secret api key"}})
-//   res.send(process.env.API_KEY)
-//   })
-
 app.get('/', (req, res) => {
     res.send('Hello world')
   })
-//here we can see all records and query by every record and a combination of them
+//Find all records and query by every attribute and a combination of them
   app.get('/records', async (req, res) => {
   const allRecords = await Record.find(req.query);
   res.json(allRecords)
   })
-//how to make it dynamic 20, 30 etc
+
+  //Limiting returning data
 app.get('/records20', async (req, res) => {
   const allRecords = await Record.find(req.query).skip(20).limit(20);
     res.json(allRecords)
   })
 
+  //Route to find one specific record by id
 app.get('/records/id/:id', async (req, res) => {
   const recordByID = await Record.findOne({ id: req.params.id });
   if(recordByID) {
@@ -88,34 +83,37 @@ app.get('/records/id/:id', async (req, res) => {
     };
   });
 
-//provided by mongoose finds specific endpoints
-// app.get('/records/artist_name/:artistName', (req,res) => {
-//   Record.find(req.params, (err,data) => {
-//     res.json(data);
-//   })
-// })
-
-//regex 
+//Route to find records by artist name using regex that allows case insensitivity and search by one word in a string
 app.get('/records/artists/:artistName', async (req,res) => {
   const artistByNameSearch = req.params.artistName;
-  const artist = await Record.find({artistName:{ $regex: artistByNameSearch, $options: "i" }});
-  //const artist = await Record.find({artistName:{ $regex: "\\b" + artistNameSearch + "\\b", $options: "i" }});
+  const artist = await Record.find({artistName:{ $regex: ("\\b" + artistByNameSearch + "\\b"), $options: "i" }});
   if(artist.length > 0) {
     res.json(artist)
   } else { 
     res.status(404).json({ error: 'No such artist found'});
   };
 });
+//Route to find records by song name using regex that allows case insensitivity and search by one word in a string
+app.get('/records/song_name/:trackName', async (req,res) => {
+  const recordByNameSearch = req.params.trackName;
+  const record = await Record.find({trackName:{ $regex: ("\\b" + recordByNameSearch + "\\b"), $options: "i" }});
+//text search for ignoring spaces
+  if(record.length > 0) {
+    res.json(record)
+  } else { 
+    res.status(404).json({ error: 'No such song found'});
+  };
+});
 
-//find short songs
+//Route to find short songs
 app.get('/records/short', async (req, res) => {
   const shortRecords = await Record.find({ length: { $lt: 170 } });
-  res.json(shortRecords);
+    res.json(shortRecords);
 });
-//find dancable songs
+//Route to find danceable songs
 app.get('/topsongs/dance', async (req, res) => {
   const dancingRecords = await Record.find({ danceability: { $gte: 80 } });
-  res.json(dancingRecords);
+    res.json(dancingRecords);
 });
 
 // Start the server

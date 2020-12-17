@@ -1,13 +1,22 @@
-# Mongo API Project
+## Project 16: MongoDB API Project
 
-Replace this readme with your own information about your project. 
+Created my first API using MongoDB
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## The process
 
-## The problem
+- I got familiar with the database I chose to work with
+- Read through MongoDB documentation
+- Thought about some endpoint that would make sense
+- Created endpoint using methods like find(), findOne() for filtering data and also comparison operators like $gte and $lt
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## Focus
+
+- How to build an API using MongoDB
+- How to create routes in the API with Mongo
+- Practice data manipulation methods with Mongo
+
+## Challenges to solve
+
+Connect different collections
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
