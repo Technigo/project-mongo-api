@@ -58,8 +58,28 @@ app.get('/', (req, res) => {
 })
 
 app.get('/shows', async (req, res) => {
-  const shows = await Show.find()
-  res.json(shows)
+  const {title, page} = req.query
+  if(title){
+    Show.find(
+      {"title": {"$regex": title, "$options": "i" }}, 
+      (error, filteredOnTitle) => {
+        if(error){
+          res.json({error: error})
+        } else if (filteredOnTitle.length === 0){
+          res.status(404).json({error: "Show not found"})
+        } else {
+          res.json(filteredOnTitle)
+        }
+      })
+  } else if (page) {
+      const skipPages = (+page - 1) * 20
+      const shows = await Show.find().skip(skipPages).limit(20)
+      shows.length > 0 ? res.json(shows) : res.status(404).json({error: "Page not found"})
+    }
+    else {
+      const shows = await Show.find().limit(20)
+      res.json(shows)
+    }
 })
 
 app.get('/shows/:id', async (req, res) => {
