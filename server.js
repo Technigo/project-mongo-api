@@ -71,6 +71,14 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else { 
+    res.status(503).json({ error: 'Service not available' })
+  }
+})
+
 // Start defining your routes here
 app.get('/', (req, res) => {
   Actor.find().then(actors => {
@@ -84,11 +92,15 @@ app.get('/actors', async (req, res) => {
 })
 
 app.get('/actors/:id', async (req, res) => {
-  const actor = await Actor.findById(req.params.id)
-  if (actor) {
-    res.json(actor)
-  } else {
-    res.status(404).json({ error: 'Actor not found' })
+  try {
+    const actor = await Actor.findById(req.params.id)
+    if (actor) {
+      res.json(actor)
+    } else {
+      res.status(404).json({ error: 'Actor not found' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid user id' })
   }
 })
 
