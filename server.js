@@ -51,11 +51,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Welcome message when you enter the url
-app.get('/', (request, response) => {
-  res.json("Welcome to Claire's book API 🌼 For documentation go to https://books-deployment.herokuapp.com/documentation");
-});
-
 // First endpoint that will return the whole array of books data
 // Async and await are being used as find is asyncronous and might take some time to return the data being fetched from the server.
 app.get('/books', async (request, response) => {
@@ -114,6 +109,7 @@ app.get('/books/:id', async (request, response) => {
 
 // Created an object outlining the documentation. Can be found on the start page of the api url
 const documentation = {
+  "Welcome": "Welcome to Claire's book API 🌼",
   "Endpoint 1": {
     "https://clairebookapi.herokuapp.com/books": "Returns the entire books array",
 

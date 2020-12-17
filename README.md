@@ -11,7 +11,7 @@ The main requirements were to:
 ## The method 🅰️ ➡️ 🅱️
 1. As we'd already created an API with a number of different endpoints last week the main thing to learn/understand was how to create the database, how to interact with it using Mongoose and how to adapt our API endpoints using mongoose queries and functions which allows us to access the database. 
 2. Set up my MongoDB database and then installed and imported Mongoose. 
-3. Implemented the relevant code which allows for the server.js to connect to the MongoD database.
+3. Implemented the relevant code which allows for the server.js to connect to the MongoDB database.
 4. Decided to continue using the same dataset that I used last week, books.json.
 5. Created a mongoose model which represents the structure of the objects in the dataset using and which will be the structure for the instances that will be entered into the database.
 6. Then seeded the database in order for the dataset using to be saved to the database. As the dataset is an array of objects used forEach() to iterate over each array element.
