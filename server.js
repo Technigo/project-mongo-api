@@ -3,62 +3,82 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-import booksData from './data/books.json'
+import netflixData from './data/netflix-titles.json'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
-// these three lines of code are the essens about the backend being connected to the database
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+const Director = mongoose.model('Director', {
+  name: String,
+})
+
+const Title = mongoose.model('Title', {
+  title: String,
+
+  director: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Director'
+  }
+})
+
+if (process.env.RESET_DATABASE) {
+  const seedDatabase = async () => {
+    await Director.deleteMany()
+
+    netflixData.forEach(item => {
+      const director = new director(item)
+       director.save();
+    })
+  }
+
+  seedDatabase()
+}
+
+
 const port = process.env.PORT || 8080
 const app = express()
+
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
-const Member = new mongoose.model('Member', {
-  name: String,
-  surname: String,
-  lettersInName: Number,
-  isPapa: Boolean
-});
-
-if (process.env.RESET_DATABASE)  {
-const booksData = () => {
-  Member.deleteMany();
-
-  booksData.forEach(item => {
-    const newMember = new Member(item)
-    newMember.save();
-  })
-}
-  booksData();
-}
-// Start defining your routes herecon
+// Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-app.get('members', (req, res) => {
-  const booksData = Member.find();
-  res.json(booksData);
+app.get('/directors', async (req, res) => {
+  const directors = await Director.find()
+  res.json(directors)
 })
 
-app.get('/members/:name', async (req, res) => {
-  const singleMember = Member.find({ name: req.params.title })
+app.get('/directors/:id', async (req, res) => {
+  const director = await Director.findById(req.params.id)
+  if (director) {
+    res.json(director)
+  } else {
+    res.status(404).json({ error: 'Author not found' })
+  }
 
-  res.json(singleMember)
 })
+
+app.get('/directors/:id/titles', async (req, res) => {
+  const director = await Director.findById(req.params.id)
+  if (director) {
+    const titles = await Title.find({ director: mongoose.Types.ObjectId(director.id) })
+    res.json(titles)
+  } else {
+    res.status(404).json({ error: 'Author not found' })
+  }
+})
+
+app.get('/titles', async (req, res) => {
+  const titles = await Title.find().populate('author')
+  res.json(titles)
+})
+
 
 
 // Start the server
