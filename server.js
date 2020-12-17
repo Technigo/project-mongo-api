@@ -3,6 +3,8 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import topMusicData from './data/top-music.json'
+
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // 
@@ -10,7 +12,6 @@ import mongoose from 'mongoose'
 // import avocadoSalesData from './data/avocado-sales.json'
 // import booksData from './data/books.json'
 // import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -27,9 +28,43 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
+const Tracks = new mongoose.model('Tracks', {
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number
+});
+
+if (process.env.RESET_DATABASE) {
+const populateDatabase = () => {
+  Tracks.deleteMany();
+
+  topMusicData.forEach(item => {
+    const newTracks = new Tracks(item)
+    newTracks.save();
+    })
+  }
+  populateDatabase();
+}
+
+// Routes 
 app.get('/', (req, res) => {
   res.send('Hello world')
+})
+
+app.get('/tracks', async (req, res) => {
+  const allTracks = await Tracks.find();
+  res.json(allTracks)
 })
 
 // Start the server
