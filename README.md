@@ -34,8 +34,8 @@ The main requirements were to:
 ## View it live 👀
 https://clairebookapi.herokuapp.com/
 
-This url will take you to the documentation. After that it's just a case of choosing which endpoint you want to use!
 https://clairebookapi.herokuapp.com/documentation
+This url will take you to the documentation. After that it's just a case of choosing which endpoint you want to use!
 
 
 
