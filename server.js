@@ -31,26 +31,25 @@ const Event = new mongoose.model('Event', {
 });
 
 // To reset and populate database ------------
-if (process.env.RESET_DATABASE) {
-  const populateDatabase = async () => {
-    await Talk.deleteMany();
-    await Event.deleteMany();
 
-    tedData.forEach((item) => {
-      item.tags = JSON.parse(item.tags);
-      const newTalk = new Talk(item);
-      newTalk.save();
-    });
+const populateDatabase = async () => {
+  await Talk.deleteMany();
+  await Event.deleteMany();
 
-    // Remove all dublicate events and create a new array
-    const allEvents = Array.from(new Set(tedData.map((talk) => talk.event)));
-    allEvents.forEach((item) => {
-      const newEvent = new Event({ name: item });
-      newEvent.save();
-    });
-  };
-  populateDatabase();
-}
+  tedData.forEach((item) => {
+    item.tags = JSON.parse(item.tags);
+    const newTalk = new Talk(item);
+    newTalk.save();
+  });
+
+  // Remove all dublicate events and create a new array
+  const allEvents = Array.from(new Set(tedData.map((talk) => talk.event)));
+  allEvents.forEach((item) => {
+    const newEvent = new Event({ name: item });
+    newEvent.save();
+  });
+};
+populateDatabase();
 
 // Routes ----------------------------------------------------------------
 app.get('/', (req, res) => {
