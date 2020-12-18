@@ -12,7 +12,6 @@ mongoose.Promise = Promise;
 const Book = mongoose.model("Book", {
   bookID: Number,
   authors: String,
-  authors: String,
   average_rating: Number,
   isbn: String,
   isbn13: Number,
@@ -53,15 +52,15 @@ app.use((request, response, next) => {
   }
 });
 
-app.get("/books", async (request, response) => {
-  const allBooks = await Book.find().populate("authors");
+app.get('/books', async (request, response) => {
+  const allBooks = await Book.find();
   response.json(allBooks);
 });
 
-app.get("/books/id/:bookID", async (request, response) => {
+app.get("/books/find/:bookID", async (request, response) => {
   try {
-    const queriedBook = await Book.findById({ bookID: request.params.bookID });
-
+    const queriedBook = await Book.findOne({ bookID: request.params.bookID });
+    
     if (queriedBook) {
       response.json(queriedBook);
     } else {
