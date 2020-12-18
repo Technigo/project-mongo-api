@@ -41,8 +41,8 @@ const Record = new mongoose.model('Record', {
 if(process.env.RESET_DATABASE) {
   const populateDatabase = async () => {
     await Record.deleteMany();
-    topMusicData.forEach(record => {
-      new Record(record).save();
+    topMusicData.forEach(async item => {
+      await new Record(item).save();
     })
   }
   populateDatabase();
@@ -59,12 +59,13 @@ if(mongoose.connection.readyState === 1) {
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello world')
+    res.send('Hello, welcome to this music records api built with MongoDB')
   })
+
 //Find all records and query by every attribute and a combination of them
   app.get('/records', async (req, res) => {
   const allRecords = await Record.find(req.query);
-  res.json(allRecords)
+    res.json(allRecords)
   })
 
   //Limiting returning data
