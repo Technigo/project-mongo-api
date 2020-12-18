@@ -32,7 +32,6 @@ const Author = mongoose.model('Author', {
 
 if (process.env.RESET_DATABASE) {
   // POPULATING DATABASE WITH TWO COLLECTIONS (WITH RELATIONS)
-
   const populateDatabase = async () => {
     // First of all, clear current content of two collections
     await Book.deleteMany();
@@ -105,8 +104,7 @@ app.get('/', (req, res) => {
 });
 
 // /books endpoint
-// RETURNS: A list of books from mongoDB
-// with PAGINATION as default with 20 results per page
+// RETURNS: A list of books from mongoDB with PAGINATION as default with 20 results per page
 //
 // PARAMETERS:
 //  - page
@@ -118,15 +116,8 @@ app.get('/', (req, res) => {
 app.get('/books', async (req, res) => {
   const { title, lang, page } = req.query;
   const pageNumber = +page || 1;
-
-  // https://www.sitepoint.com/shorthand-javascript-techniques/
-  //
-  // if (page !== null || page !== undefined || page !== '' || page !== 0) {
-  //    let pageNumber = page;
-  // }
-  // const PageNumber = page || 'new';
-
   const pageSize = 20;
+
   // skip: E.g. page 3: 20 * (3-1) = 40, sends 40 as parameter to .skip()
   // skips index 0-39 so that page 3 starts with the book that has index 40
   const skip = pageSize * (pageNumber - 1);
@@ -169,7 +160,7 @@ app.get('/books', async (req, res) => {
 });
 
 // /books/top-20-rated endpoint
-// RETURNS: A list of 20 top rated books from books.json
+// RETURNS: A list of 20 top rated books from mongoDB
 app.get('/books/top-20-rated', async (req, res) => {
   const top20Rated = await Book.find()
     .populate('authors')
@@ -206,9 +197,11 @@ app.get('/books/:id', async (req, res) => {
 });
 
 // /authors endpoint
-// RETURNS: A list of unique authors from books.json
-
-//_____________Array of authors
+// RETURNS: A list of authors from mongoDB
+//
+// PARAMETERS:
+//  - author
+//     usage: //authors/?author=douglas
 app.get('/authors', async (req, res) => {
   const { author } = req.query;
   const authorsArray = await Author.find({
@@ -224,7 +217,8 @@ app.get('/authors', async (req, res) => {
   });
 });
 
-//_____________Single author based in ID
+// /authors/:id endpoint
+// RETURNS: A single author by id from mongoDB
 app.get('/authors/:id', async (req, res) => {
   const { id } = req.params;
 
@@ -240,7 +234,8 @@ app.get('/authors/:id', async (req, res) => {
   }
 });
 
-//_____________Books created by author based on authors ID
+// /authors/:id/books
+// RETURNS: Books by author based on authors ID from mongoDB
 app.get('/authors/:id/books', async (req, res) => {
   const { id } = req.params;
   const author = await Author.findById({ _id: id });
