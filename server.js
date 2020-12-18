@@ -82,10 +82,25 @@ app.get("/books/isbn/:isbn/", async (req, res) => {
   }
 });
 
+//gets a book by id
+app.get("/books/id/:id/", async (req, res) => {
+  try {
+    const bookById = await Book.findById(req.params.id);
+    if (bookById) {
+      res.json(bookById);
+    } else {
+      res.status(404).json({ error: "Id not found" });
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Invalid id number" });
+  }
+});
+
 //gets the books from a specific author (when searching for name)
 app.get("/books/author/:name/", async (req, res) => {
   try {
-    const singleAuthor = await Book.find({ authors: req.params.name });
+    const authorRegexp = new RegExp(req.params.name, "i");
+    const singleAuthor = await Book.find({ authors: authorRegexp });
     if (singleAuthor) {
       res.json(singleAuthor);
     } else {
