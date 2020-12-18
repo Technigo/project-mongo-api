@@ -46,6 +46,7 @@ app.get("/", (request, response) => {
 
 app.use((request, response, next) => {
   if (mongoose.connection.readyState === 1) {
+    console.log("Database working")
     next();
   } else {
     response.status(503).json({ error: "Service unavailable" });
