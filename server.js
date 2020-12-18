@@ -78,7 +78,7 @@ app.get('/books/:id', async (req, res) => {
   }
 })
 
-//get books from a chosen author
+//get books from chosen author
 app.get('/books/authors/:author', async (req, res) => {
   const booksByAuthor = await Book.find({ authors: req.params.author })
   if (booksByAuthor.length > 0) {
