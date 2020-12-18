@@ -44,14 +44,14 @@ app.get("/", (request, response) => {
   response.send(myEndpoints(app));
 });
 
-app.use((request, response, next) => {
-  if (mongoose.connection.readyState === 1) {
-    console.log("Database working")
-    next();
-  } else {
-    response.status(503).json({ error: "Service unavailable" });
-  }
-});
+// app.use((request, response, next) => {
+//   if (mongoose.connection.readyState === 1) {
+//     console.log("Database working")
+//     next();
+//   } else {
+//     response.status(503).json({ error: "Service unavailable" });
+//   }
+// });
 
 app.get('/books', async (request, response) => {
   const allBooks = await Book.find();
