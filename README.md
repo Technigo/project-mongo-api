@@ -1,13 +1,11 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project aims to practise how to migrate data from json file into the MongoDB database by using mongoose package and create different API endpoints with GET methods.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+This week project went quite well. I managed to solve most of the problems. I leared how to use skip() and limit() to split data into differnt pages in the API. Moreover, what I was proud of is I practise using MongoDB aggregate function and various stages in the database pipeline.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://bookmongodb.herokuapp.com/books
