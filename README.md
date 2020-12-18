@@ -1,13 +1,35 @@
-# Mongo API Project
+# Music Database & API
 
-Replace this readme with your own information about your project. 
+This database contains a list of fifty music tracks from the last couple of years. You can reach the data via an API. I built this project during the Technigo bootcamp fro frontend developers in fall 2020.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## What it does
 
-## The problem
+The catabase contains a set of fifty songs and some information about them:
+- the track name
+- the artist(s) name
+- the genre
+- the beats per minute (bpm)
+- a popularity rank
+You can search the data through API endpoints.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## The approach
+
+The project's data is is stored in a JSON file inside the project. The server.js-file will populate a Mongo database with data from the file. It will store it in two collections, one for artists, one for music tracks. To do this, it follows mongoose models for an artist or a track respectively. 
+
+The database is populated throug a seedDatabase-function. 
+
+Moreover, I created endpoints to access the data via an API. You can reach lists of all tracks and all artists as well as search for a specific artists or track by its id. You can also access a list of tracks by a certain artist. 
+
+There is even the option to query for all properties of a track and for the parameter "isPop" that will give you all the tracks from different pop genres like dance pop, electropop, australian pop etc.
+When querying for an artist by his/her name, the parameter isn't case sensitive and will give you every artist whose name inludes what you were looking for. 
+
+## Tech used
+
+- ES6
+- Express
+- Mongo DB
+- Mongoose
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+You can access the project here: https://week18music50.herokuapp.com/tracks 
