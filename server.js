@@ -3,15 +3,6 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
 import profanityData from './data/profanity-dictionary.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/profanity"
@@ -28,6 +19,7 @@ const Profanity = new mongoose.model('Profanity', {
   category: String,
   language: String
 })
+
 
 // clear database and populate it with the data
 // using async function
@@ -60,19 +52,14 @@ app.use(bodyParser.json())
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
-  // Profanity.find().then(profanities => {
-  //   res.json(profanities)
-  // })
 })
-
-/// this is not sorted now - so I have to sort it
-// or maybe it's sorted via id given by database?
 
 // restful endpoint to entire database
 // has to use async and await since lines of code has to be
 // executed in specific order
+// queries 
 app.get('/profanities', async (req, res) => {
-  const allProfanities = await Profanity.find()
+  const allProfanities = await Profanity.find(req.query)
   res.json(allProfanities)
 })
 
@@ -82,13 +69,6 @@ app.get('/profanities/:id', async (req, res) => {
   const singleProfanity = await Profanity.findOne({ id: req.params.id })
   res.json(singleProfanity)
 })
-
-
-
-// app.get('/profanities', async (req, res) => {
-//   const profanities = await Profanity.find()
-//   res.json(profanities)
-// })
 
 // Start the server
 app.listen(port, () => {
