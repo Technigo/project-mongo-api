@@ -37,7 +37,7 @@ const Music = new mongoose.model('Music',{
   popularity: Number
 })
 
-//Custom enviormental Variable
+//Custom enviormental Variable    ---    RESET_DATABASE=true npm run dev
 if (process.env.RESET_DATABASE) {
   console.log('Resetting Database!')
   // Function to populate the DBase 
@@ -56,13 +56,13 @@ app.get('/', (req, res) => {
 })
 
 // All info from JSON
-app.get('/alltracks', async (req, res) => {
+app.get('/topsongs', async (req, res) => {
   const allMusic = await Music.find()
   res.json(allMusic)
 })
 
 //Searching with conditionals
-app.get('/tracks', async (req, res) => {
+app.get('/topsongs/tracks', async (req, res) => {
   const bpmQuery = parseInt(req.query.bpm)
   const lengthQuery = parseInt(req.query.length)
   const popularityQuery = parseInt(req.query.popularity)
@@ -82,7 +82,7 @@ app.get('/tracks', async (req, res) => {
 })
 
 // Looking for track by ID
-app.get('/tracks/:id', async (req, res) => { 
+app.get('/topsongs/tracks/:id', async (req, res) => { 
   const song = await Music.findOne({ id: req.params.id });
 
   if (song) { 
@@ -96,3 +96,9 @@ app.get('/tracks/:id', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
+
+
+app.get('/topsongs/most-popular', async (request, response) => {
+  const mostPopular = await Song.find({ popularity: { $gte: 90 } });
+  response.json(mostPopular);
+});
