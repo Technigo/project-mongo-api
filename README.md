@@ -1,13 +1,38 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+In this week's project it was time to level-up my APIs and start using a database to store and retrieve data from and use that data to produce a RESTful API.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## What I have learnt
 
-## The problem
+* How to model data in Mongoose
+* How to fetch items from a Mongo database using Mongoose
+* How to seed large amounts of data to a database
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## The process and structure
+
+I decided to re-use last weeks setup of my Book API and replicate those endpoints and now fetch items from my Mongo database using Mongoose.
+
+Avaialble endpoints:
+
+* Root: /
+* Books: /books
+* Books top 20 rated: /books/top-20-rated 
+* Book by id: /books/:id
+* Authors: /authors
+* Author by id: /authors/:id (new)
+* Books by specific author: /authors/:id/books (new)
+
+
+### Core Tech
+
+* Javascript
+* Express
+* Mongo DB
+* Moongoose
+* Heroku
+* Postman
+* MongoDB Compass
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+[Book API with Mongo DB by Ylva at Heroku](https://book-api-mongodb-by-ylva.herokuapp.com/)
