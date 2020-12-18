@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 
 import profanityData from './data/profanity-dictionary.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/profanity"
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/profanity'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -49,6 +49,17 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+// Middleware
+// Error message if server is down
+// has to be place before routs
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).send({ error: 'service unavailable' })
+  }
+})
+
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
@@ -66,8 +77,16 @@ app.get('/profanities', async (req, res) => {
 // restful endpoint to one single element of database
 // returns one object from the database
 app.get('/profanities/:id', async (req, res) => {
-  const singleProfanity = await Profanity.findOne({ id: req.params.id })
-  res.json(singleProfanity)
+  try {
+    const singleProfanity = await Profanity.findOne({ id: req.params.id })
+    if (singleProfanity) {
+      return res.json(singleProfanity)
+    } else {
+      res.status(404).json({ error: 'profanity not found' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid profanity ID' })
+  }
 })
 
 // Start the server
