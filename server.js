@@ -80,20 +80,49 @@ app.get("/releases/:id", async (req, res) => {
 
 // This route will return a collection of releases for the specified artist
 app.get("/releases/artist/:artist", async (req, res) => {
-  const { artist } = req.params;
-  const singleArtist = await Release.find({ name: artist })
-  console.log(singleArtist);
-  // const filteredReleases = spotifyData.filter(
-  //   (item) => item.artists.map((artist) => artist.name).toString() === artist
-  // );
-  // if (filteredReleases.length === 0) {
-  //   res.status(404).json(ERROR_RELEASES_NOT_FOUND);
-  // } else {
-  //   res.json({
-  //     total: filteredReleases.length,
-  //     releases: filteredReleases
-  //   });
-  // };
+  const artistQuery = await Release.find({
+    artists: { $elemMatch: { name: new RegExp(req.params.artist, "i") } }
+  })
+  if (artistQuery.length === 0) {
+    res.status(404).json(ERROR_RELEASES_NOT_FOUND);
+  } else {
+    res.json({
+      total: artistQuery.length,
+      releases: artistQuery
+    });
+  }
+});
+
+// This route will return a collection of releases for the specified artist
+app.get("/releases/title/:title", async (req, res) => {
+  const titleQuery = await Release.find({
+    name: new RegExp(req.params.title, "i")
+  })
+  if (titleQuery.length === 0) {
+    res.status(404).json(ERROR_RELEASES_NOT_FOUND);
+  } else {
+    res.json({
+      total: titleQuery.length,
+      releases: titleQuery
+    });
+  }
+});
+
+// This route will return a collection of releases in the specified market for the specified type
+app.get("/releases/market/:market/type/:type", async (req, res) => {
+
+  const filteredReleases = await Release.find({
+    available_markets: req.params.market,
+    album_type: req.params.type
+  })
+  if (filteredReleases.length === 0) {
+    res.status(404).json(ERROR_RELEASES_NOT_FOUND);
+  } else {
+    res.json({
+      total: filteredReleases.length,
+      releases: filteredReleases
+    });
+  };
 });
 
 // Start the server
