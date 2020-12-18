@@ -23,7 +23,7 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 });
 
-if (process.env.RESET_DB) {
+if (process.env.RESET_DATABASE) {
 
   const seedDatabase = async () => {
     // Deletes any pre-existing Book objects to prevent duplicates
@@ -85,7 +85,6 @@ app.get('/books', async (request, response) => {
     }
     response.json(authorBooks);
   });
-
 
 
   // Endpoint/route that return top rated books with a rating over 4
