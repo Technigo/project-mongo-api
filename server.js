@@ -31,7 +31,7 @@ if (process.env.RESET_DATABASE) {
     profanityData.forEach(item => {
       const newProfanity = new Profanity(item)
       newProfanity.save(function (err, item) {
-        if (err) return console.error(err);
+        if (err) return console.error(err)
       })
     })
   }
