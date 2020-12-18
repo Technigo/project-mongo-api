@@ -2,15 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import booksData from './data/books.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -27,9 +19,54 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
+//Model for Book
+const Book = new mongoose.model('Book', {
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
+})
+
+if (process.env.RESET_DATABASE) {
+  const populateDatabase = async () => {
+    await Book.deleteMany()
+
+    booksData.forEach(item => {
+      const newBook = new Book(item)
+      newBook.save()
+    })
+  }
+  populateDatabase()
+}
+
+//________ Routes/Endpoints ________ //
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.json('👋 Welcome to Emmas book and book reviews API! Use the /books endpoint to get started 📚🦉. Use the parameter id to find one book, for example: books/5.')
+})
+
+//Finding all books
+app.get('/books', async (req, res) => {
+  const allBooks = await Book.find()
+  res.json(allBooks)
+})
+
+//Finding a single book based on bookID
+app.get('/books/:bookID', async (req, res) => {
+  try {
+    const singleBook = await Book.findOne({ bookID: req.params.bookID })
+
+    if (singleBook) {
+      res.json(singleBook)
+    } else {
+      res.status(404).json({error: 'Book not found'})
+    }
+    } catch (error) {
+      res.status(400).json({error: 'Invalid book id'})
+    }
 })
 
 // Start the server
