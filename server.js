@@ -109,12 +109,21 @@ app.get('/records/song_name/:trackName', async (req,res) => {
 //Route to find short songs
 app.get('/records/short', async (req, res) => {
   const shortRecords = await Record.find({ length: { $lt: 170 } });
-    res.json(shortRecords);
+  if(shortRecords.length > 0) {
+    res.json(shortRecords)
+  } else { 
+    res.status(404).json({ error: 'No such song found'});
+  };
 });
+
 //Route to find danceable songs
 app.get('/topsongs/dance', async (req, res) => {
   const dancingRecords = await Record.find({ danceability: { $gte: 80 } });
-    res.json(dancingRecords);
+  if(dancingRecords.length > 0) {
+    res.json(dancingRecords)
+  } else { 
+    res.status(404).json({ error: 'No such song found'});
+  };
 });
 
 // Start the server
