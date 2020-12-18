@@ -12,4 +12,4 @@ One issue I had when doing this project was the issue of multiple categories wit
 To avoid this I created a set, which I late used in a forEach-loop to seed my database with categories.
 
 ## View it live
-
+<a href='https://project-goldenglobes-mongodb.herokuapp.com'>Project Golden Globes Mongo </a>
