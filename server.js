@@ -9,7 +9,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-//_____________create my modules
+//_____________create modules
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
@@ -68,16 +68,18 @@ app.use((req, res, next) => {
   if(mongoose.connection.readyState === 1) {
     next();
   } else {
-    res.status(503).send({ error: "service unavailable"});
+    res
+    .status(503)
+    .send({ error: "service unavailable"});
   };
 });
 
-//_____________Start defining your routes here
+//_____________Routes
 app.get('/', (req, res) => {
   if(!res) {
-      res
-      .status(404)
-      .send({ Error: 'Sorry, a problem occured try again later' });
+    res
+    .status(404)
+    .send({ Error: 'Sorry, a problem occured try again later' });
   }
   else res.send(listEndpoints(app));
 });
@@ -88,13 +90,14 @@ app.get('/books', async (req, res) => {
   const pageNumber = +page || 1; 
   const pageSize = 20;
   const skip = pageSize * (pageNumber -1);
-  let books = await Book.find({
+  const books = await Book.find({
     title: new RegExp(title, 'i'),
     language_code: new RegExp(language, 'i'),
-  }).populate('authors') 
-    .sort({ average_rating: - 1 })
-    .limit(pageSize)
-    .skip(skip);
+  })
+  .populate('authors') 
+  .sort({ average_rating: - 1 })
+  .limit(pageSize)
+  .skip(skip);
 
   if (books) {
     res.json({ 
@@ -104,7 +107,9 @@ app.get('/books', async (req, res) => {
       results: books,
     });
   } else {
-    res.status(404).send({ error: "No books found"});
+    res
+    .status(404)
+    .send({ error: "No books found"});
   };
 });
 
@@ -115,8 +120,10 @@ app.get('/books/:id', async (req, res) => {
   try {
   const singleBook = await Book.findOne({ bookID: +id });
     if (singleBook) {
-      res.json(singleBook);
-    } else res.status(404).send({ error: `No book with id: ${id} found.` });
+      res.json({ result: singleBook });
+    } else res
+      .status(404)
+      .send({ error: `No book with id: ${id} found.`});
   } catch {
     res
     .status(400)
@@ -126,26 +133,39 @@ app.get('/books/:id', async (req, res) => {
 
 //_____________Array of authors
 app.get("/authors", async (req, res) => {
-  const { author } = req.query;
+  const { author, page } = req.query;
+  const pageNumber = +page || 1; 
+  const pageSize = 20;
+  const skip = pageSize * (pageNumber -1);
+
   const authorsArray = await Author.find({
     authors: new RegExp(author, 'i'),
-  });
+  }) 
+  .sort({ authors: 1 })
+  .limit(pageSize)
+  .skip(skip);;
 
   if (!authorsArray) {
     res
     .status(404)
-    .send({Error: "something went wrong"});
+    .send({Error: "something went wrong" });
   };
-  res.send({ author: authorsArray });
+  res.send({ 
+    currentPage: pageNumber,
+    numberOfResults: authorsArray.length, 
+    results: authorsArray 
+  });
 }); 
 
 //_____________Single author based in ID
 app.get('/authors/:id', async (req, res) => {
   const singleAuthor = await Author.findById(req.params.id);
   if (singleAuthor) {
-    res.json(singleAuthor);
+    res.json({ result: singleAuthor});
   } else {
-    res.status(404).json({ error: 'Author not found' });
+    res
+    .status(404)
+    .json({ error: 'Author not found' });
   }
 });
 
@@ -155,10 +175,17 @@ app.get('/authors/:id/books', async (req, res) => {
   if (author) {
     const books = await Book.find({
       authors: mongoose.Types.ObjectId(author.id)
-    }).populate('authors');
-    res.json(books);
+    })
+    .populate('authors')
+    .sort({ average_rating: -1 });
+    res.json({ 
+      numberOfBooks: books.length, 
+      results: books 
+    });
   } else {
-    res.status(404).json({ error: 'authors/:id/books' });
+    res
+    .status(404)
+    .json({ error: 'authors/:id/books' });
   }
 });
 
