@@ -7,7 +7,7 @@ import regionData from './data/regions.json'
 import covid19Data from './data/c19-sv.json'
 
 // connect to MongoDB
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/c19se"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/c19"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -70,7 +70,6 @@ app.use((req, res, next) => {
 const listEndpoints = require('express-list-endpoints')
 
 app.get('/', (req, res) => {
-  // res.send('Hallå! This API is a coding project by Peggy @blipsandclicks made during Technigo bootcamp 2020 Fall session for educational purposes only. Please do not use this API, instead refer to the original data source Folkhälsomyndigheten. They provide interactive data visualisations and some raw data here: https://www.folkhalsomyndigheten.se/smittskydd-beredskap/utbrott/aktuella-utbrott/covid-19/statistik-och-analyser/bekraftade-fall-i-sverige/')
   res.send(listEndpoints(app))
 })
 

@@ -44,4 +44,8 @@ Learning objectives:
 <!-- - Try to create an endpoint that uses [mongoose's aggregate function](https://mongoosejs.com/docs/api/aggregate.html#aggregate_Aggregate) which allows you to use the [MongoDB aggregate pipeline](https://docs.mongodb.com/manual/core/aggregation-pipeline/). This is super-useful when doing more complex operations on database data, and a lot faster! -->
 
 
+## Sources
+This API is a coding project by Peggy @blipsandclicks made during Technigo bootcamp 2020 Fall session for educational purposes only. Please do not use this API, instead refer to the original data source Folkhälsomyndigheten. They provide interactive data visualisations and some raw data here: https://www.folkhalsomyndigheten.se/smittskydd-beredskap/utbrott/aktuella-utbrott/covid-19/statistik-och-analyser/bekraftade-fall-i-sverige/'
+
 ## View it live
+https://project-sweden-covid19-data.herokuapp.com/
