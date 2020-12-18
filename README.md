@@ -26,7 +26,7 @@ Shows all songs in the dataset
 
 Shows the songs that match totally or partially the searched genre, song length and popularity respectively.
 
-/topsongs/songs/:id
+/topsongs/tracks/:id
 
 Shows a single song based on that song's id parameter.
 
@@ -37,7 +37,8 @@ MongoDB
 Mongoose
 Node.js
 Express
+Heroku
+
 View it live 🔴
 
-Top Songs API 🎶 
 songs-dummy-data.herokuapp.com
