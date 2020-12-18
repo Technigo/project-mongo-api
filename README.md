@@ -14,7 +14,7 @@ The API makes use of Mongoose models to model data and use these models to fetch
 The API is [RESTful](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/)
 
 One issue I had when doing this project was the issue of multiple categories with different id:s, even though the value of the category was the same.
-To avoid this I created a set, which I late used in a forEach-loop to seed my database with categories.
+To avoid this I created a set, which I later used in a forEach-loop to seed my database with categories.
 
 ## Tech
 Javascript
