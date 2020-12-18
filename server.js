@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import mongoose, { connection } from 'mongoose'
+import mongoose from 'mongoose'
 
 import books from './data/books.json'
 
@@ -10,7 +10,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const port = process.env.PORT || 8082
+const port = process.env.PORT || 8084
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -68,16 +68,22 @@ app.get('/books', async (request, response) => {
   let findLanguage = null
   let sortBooks = null
 
-  if (search) {
+  const limitBooks = 20
+
+  if (search) { // if user has queried search
     findTitle = { $regex: ("\\b" + search + "\\b"), $options: "i" }
     findAuthor = { $regex: ("\\b" + search + "\\b"), $options: "i" }
+  } else {
+    null
   }
 
-  if (language) {
+  if (language) { // if the user has queried language
     findLanguage = { $regex: language, $options: "i" }
+  } else {
+    null
   }
 
-  if (sort) {
+  if (sort) { // if the user has queried sort
     if (sort === 'pages-asc') {
       sortBooks = { num_pages: 1 }
     } else if (sort === 'rating-desc') {
@@ -87,44 +93,56 @@ app.get('/books', async (request, response) => {
         { error: "Wrong sort input" }
       )
     }
+  } else {
+    null
   }
 
-  if (search && language) {
+  if (search && language) { // the user has queried search and language
     books = await Book.find({
       $and: [{
         $or: [
-          { authors: findAuthor },
-          { title: findTitle }
+          { authors: findAuthor }, // will not be null as user has queried search, defined above
+          { title: findTitle } // will not be null as user has querid search, defined above
         ]
       },
-      { language_code: findLanguage }
+      { language_code: findLanguage } // will not be null as user has queried language, defined above
       ]
     },
-      filteredFields
+      filteredFields // defined above
     ).sort(
-      sortBooks
+      sortBooks // depending on if the user has queried sort or not, this will be null or the value defined above
+    ).limit(
+      limitBooks // defined above
     ).exec()
-  } else if (search && !language || language && !search) {
+  }
+
+  else if (search && !language || language && !search) { // the user has queried either search or language, but not both
     books = await Book.find({
       $or: [{
         $or: [
-          { authors: findAuthor },
-          { title: findTitle }
+          { authors: findAuthor }, // will either be null or the value defined above depending on user query
+          { title: findTitle } // will either be null or the value defined above depending on user query
         ]
       },
-      { language_code: findLanguage }
+      { language_code: findLanguage } // will either be null or the value defined above depending on user query
       ]
     },
-      filteredFields
+      filteredFields // defined above
     ).sort(
-      sortBooks
+      sortBooks // depending on if the user has queried sort or not, this will be null or the value defined above
+    ).limit(
+      limitBooks // defined above
     ).exec()
-  } else {
+  }
+
+  else { // the user has not queried for search nor language
     books = await Book.find(
-      {},
-      filteredFields
+      {}, // no filter query
+      filteredFields // defined above
     ).sort(
-      sortBooks
+      sortBooks // depending on if the user has queried sort or not, this will be null or the value defined above
+    ).limit(
+      limitBooks // defined above
     ).exec()
   }
 
@@ -139,7 +157,7 @@ app.get('/books', async (request, response) => {
 
 app.get('/books/:id', async (request, response) => {
   try {
-    const book = await Book.findById(
+    const book = await Book.findOne(
       { _id: request.params.id },
       filteredFields
     ).exec()
