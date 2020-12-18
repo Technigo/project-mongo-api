@@ -3,92 +3,81 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-import regionList from './data/regions.json'
-import caseTotals from './data/c19-sv.json'
+import regionData from './data/regions.json'
+import covid19Data from './data/c19-sv.json'
 
-// Connect to MongoDB
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/covid19-sweden"
+// connect to MongoDB
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/c19se"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Define development port
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json parsing
 app.use(cors())
 app.use(bodyParser.json())
- 
-// Define data models
-const Region = new mongoose.model('Region', {
-  id: Number,
-  region: String,
+
+// define data models
+const RegionKey = mongoose.model('RegionKey', {
+  regionId: Number,
+  region: String
 })
 
-const Total = new mongoose.model('Total', {
+const Report = mongoose.model('Report', {
   cases: Number,
   deaths: Number,
-  id: {
+  regionNum: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Region',
+    ref: 'RegionKey'
   }
 })
 
-// Listens for RESET_DB=true
+// listens for RESET_DB=true
 if (process.env.RESET_DB) {
-  console.log('Resetting DB!')
-
-  // Clear the db
   const seed = async () => {
-    await Region.deleteMany()
-    await Total.deleteMany()
+    // clear db before repopulating
+    await RegionKey.deleteMany()
+    await Report.deleteMany()
 
-    // Create array for instance
     let instanceArray = []
 
-    const eachRegion = regionList.map(item => item.region)
-    const setRegion = new Set(eachRegion)
-    
-    setRegion.forEach(async item => {
-      const newRegion = new Region(item)
-      instanceArray.push(newRegion)
-      await newRegion.save()
+    regionData.forEach(async item => {
+    const newRegion = new RegionKey(item)
+    instanceArray.push(newRegion)
+    await newRegion.save()
     })
-    
-    caseTotals.forEach(async caseItem => {
-      const newTotal = new Total({
-        ...caseItem,
-        id: instanceArray.find(regionKey => regionKey.id === caseItem.id)
+
+    covid19Data.forEach(async reportItem => {
+      const newReport = new Report({
+        ...reportItem,
+        regionNum: instanceArray.find(key => key.regionId === reportItem.regionNum)
       })
-      await newTotal.save()
+      await newReport.save()
     })
   }
   seed()
 }
 
-// route definitions
 app.get('/', (req, res) => {
-  res.send('This API is a coding project by Peggy @blipsandclicks made during Technigo bootcamp 2020 Fall session for educational purposes only. Please do not use this API, instead refer to the original data source Folkhälsomyndigheten. They provide interactive data visualisations and some raw data here: https://www.folkhalsomyndigheten.se/smittskydd-beredskap/utbrott/aktuella-utbrott/covid-19/statistik-och-analyser/bekraftade-fall-i-sverige/')
+  res.send('Hallå! This API is a coding project by Peggy @blipsandclicks made during Technigo bootcamp 2020 Fall session for educational purposes only. Please do not use this API, instead refer to the original data source Folkhälsomyndigheten. They provide interactive data visualisations and some raw data here: https://www.folkhalsomyndigheten.se/smittskydd-beredskap/utbrott/aktuella-utbrott/covid-19/statistik-och-analyser/bekraftade-fall-i-sverige/')
 })
 
-// route for regions and their IDs
+// get all regions and their objectIDs
 app.get('/regions', async (req, res) => {
-  const allRegions = await Region.find()
-  res.json(allRegions)
+  const regionList = await RegionKey.find()
+  res.json(regionList)
 })
 
-// route of covid-19 data by region ID
-// app.get('/totals', async (req,res) => {
-//   const allTotals = await Total.find()
-//   res.json(allTotals)
-// })
-
-// route of a single set of totals by region ID
-// using findOne to return a single object
-// app.get('/totals/:id', async (req,res) => {
-//   const getTotals = await Total.findOne({ id })
-//   res.json(getTotals)
-// })
+// get one region's report using that region's objectID
+app.get('/reports/:id', async (req,res) => {
+  const region = await RegionKey.findById(req.params.id)
+  if (region) {
+    const regionalReport = await Report.find({ regionNum: mongoose.Types.ObjectId(region.id) })
+    res.json(regionalReport)
+  } else {
+    res.status(404).json({ error: 'Region not found' })
+  }
+})
 
 // start server
 app.listen(port, () => {

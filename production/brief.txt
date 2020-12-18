@@ -3,18 +3,6 @@ Project: Mongo API
 clean up package.json before pull req
 
 
-
-this time you should model your database using Mongoose models, and persist your data in the database.
-
-In order to get all this data into your database, you'll need to write some code to generate the data - see the 'Making seed data' section further down for tips on how to do this.
-
-Once you have the data stored, you will need to write appropriate RESTful endpoints to return the data and make use of [Mongoose Queries](https://mongoosejs.com/docs/queries.html) to find and return the correct data given the route and any filter params passed.
-
-
-## How to get started 💪🏼
-4. Install dependencies: `npm install`
-5. Start the development server: `npm run dev`
-
 ## Making seed data 🧞‍♂️
 [Seeding a database](https://en.wikipedia.org/wiki/Database_seeding) is a process in which an initial set of data is provided to a database when it is being installed or set up. In the videos for this week, we showed a way to generate a small amount of data, but in this project, some of the JSON files have thousands of rows, so we don't want to have it all in our server file.
 
@@ -40,7 +28,7 @@ if (process.env.RESET_DB) {
 }
 ```
 
-This whole process can be a little tricky and relies on your models having the same keys. Give it a try and if you run into issues, don't hesitate to ask your team, ask in slack, or post your code on stack overflow to get some help!
+This whole process can be a little tricky and relies on your models having the same keys.
 
 ## How to hand in the code 🎯
 - Navigate to your repo and create a Pull Request into the Technigo repo
@@ -48,13 +36,14 @@ This whole process can be a little tricky and relies on your models having the s
 
 
 
-    // try to get region names pushed into the Total array based on key
 
-    // try endpoint for 100 and fewer deaths
+
+
+// try to get region names pushed into the Total array based on key
+    
+    
+// try endpoint for 100 and fewer deaths
 
 // or even a function to tally up up total number of cases across regions and total number of covid-deaths to return in a string
 
 // add in error messages
-
-// moa for non-case sensitive regex - books
-// sofia for using simpler IDs - music
