@@ -19,7 +19,7 @@ https://project-book-api-mongo.herokuapp.com/books - queries all books in the da
 
 https://project-book-api-mongo.herokuapp.com/books/5fdcf9581b727a002a3d314b - queries one book in the dataset identified by it's _id
 
-https://project-book-api-mongo.herokuapp.com/books?search=anna - with search you query either title or author
+https://project-book-api-mongo.herokuapp.com/books?search=anna - with search you query on title and author name
 
 https://project-book-api-mongo.herokuapp.com/books?language=spa - queries on language, exampels: eng, spa, en-GB, en-US, ara
 
