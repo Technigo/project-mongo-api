@@ -51,11 +51,11 @@ app.use(bodyParser.json());
 // Global error
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
-    next()
-  } else { 
-    res.status(503).json({ error: 'Not available' })
+    next();
+  } else {
+    res.status(503).json({ error: "Not available" });
   }
-})
+});
 
 // Start defining your routes here
 app.get("/", (req, res) => {
@@ -68,10 +68,24 @@ app.get("/books/", async (req, res) => {
   res.json(allBooks);
 });
 
-//gets the books from a specific author (when searching for name)
-app.get("/author/:name/", async (req, res) => {
+//gets a book by the isbn number
+app.get("/books/isbn/:isbn/", async (req, res) => {
   try {
-    const singleAuthor = await Book.findOne({ authors: req.params.name });
+    const singleBook = await Book.findOne({ isbn: req.params.isbn });
+    if (singleBook) {
+      res.json(singleBook);
+    } else {
+      res.status(404).json({ error: "Isbn not found" });
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Invalid isbn number" });
+  }
+});
+
+//gets the books from a specific author (when searching for name)
+app.get("/books/author/:name/", async (req, res) => {
+  try {
+    const singleAuthor = await Book.find({ authors: req.params.name });
     if (singleAuthor) {
       res.json(singleAuthor);
     } else {
