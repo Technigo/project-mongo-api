@@ -32,7 +32,7 @@ if (process.env.RESET_DATABASE) {
   seedDatabase();
 }
 
-const port = process.env.PORT || 2000;
+const port = process.env.PORT || 4000;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
