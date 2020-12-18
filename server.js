@@ -80,7 +80,7 @@ app.get('/records/id/:id', async (req, res) => {
   if(recordByID) {
     res.json(recordByID);
   } else { 
-    response.status(404).json({ error: 'Song not found'});
+    res.status(404).json({ error: 'Song not found'});
     };
   });
 
