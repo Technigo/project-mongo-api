@@ -1,8 +1,10 @@
 Project: Mongo API
 
-this time you should model your database using Mongoose models, and persist your data in the database.
+clean up package.json before pull req
 
- [convert from CSV to JSON](https://www.csvjson.com/csv2json).
+
+
+this time you should model your database using Mongoose models, and persist your data in the database.
 
 In order to get all this data into your database, you'll need to write some code to generate the data - see the 'Making seed data' section further down for tips on how to do this.
 
@@ -43,3 +45,16 @@ This whole process can be a little tricky and relies on your models having the s
 ## How to hand in the code 🎯
 - Navigate to your repo and create a Pull Request into the Technigo repo
 - Wait for the code review
+
+
+
+    // try to get region names pushed into the Total array based on key
+
+    // try endpoint for 100 and fewer deaths
+
+// or even a function to tally up up total number of cases across regions and total number of covid-deaths to return in a string
+
+// add in error messages
+
+// moa for non-case sensitive regex - books
+// sofia for using simpler IDs - music

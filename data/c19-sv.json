@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "cases": 3391,
+    "deaths": 33
+  },
+  {
+    "id": 2,
+    "cases": 8713,
+    "deaths": 211
+  },
+  {
+    "id": 3,
+    "cases": 1931,
+    "deaths": 21
+  },
+  {
+    "id": 4,
+    "cases": 10588,
+    "deaths": 259
+  },
+  {
+    "id": 5,
+    "cases": 9350,
+    "deaths": 125
+  },
+  {
+    "id": 6,
+    "cases": 3786,
+    "deaths": 70
+  },
+  {
+    "id": 7,
+    "cases": 14759,
+    "deaths": 277
+  },
+  {
+    "id": 8,
+    "cases": 4853,
+    "deaths": 96
+  },
+  {
+    "id": 9,
+    "cases": 7004,
+    "deaths": 168
+  },
+  {
+    "id": 10,
+    "cases": 6791,
+    "deaths": 123
+  },
+  {
+    "id": 11,
+    "cases": 48766,
+    "deaths": 582
+  },
+  {
+    "id": 12,
+    "cases": 103105,
+    "deaths": 3038
+  },
+  {
+    "id": 13,
+    "cases": 7583,
+    "deaths": 297
+  },
+  {
+    "id": 14,
+    "cases": 15142,
+    "deaths": 332
+  },
+  {
+    "id": 15,
+    "cases": 4893,
+    "deaths": 110
+  },
+  {
+    "id": 16,
+    "cases": 6751,
+    "deaths": 64
+  },
+  {
+    "id": 17,
+    "cases": 8275,
+    "deaths": 184
+  },
+  {
+    "id": 18,
+    "cases": 11837,
+    "deaths": 232
+  },
+  {
+    "id": 19,
+    "cases": 56682,
+    "deaths": 1120
+  },
+  {
+    "id": 20,
+    "cases": 11762,
+    "deaths": 206
+  },
+  {
+    "id": 21,
+    "cases": 11504,
+    "deaths": 345
+  }
+]

@@ -1,5 +1,6 @@
 # Project: Mongo API - Overview
-Time to level-up my APIs! In this project I start to use a database from which data can be retrieved and stored.
+Building my first Mongo db. 
+Project done as a part of Technigo bootcamp.
 
 Learning objectives:
 - How to model data in Mongoose
@@ -12,20 +13,21 @@ Learning objectives:
 ## Core Tech
 - MongoDB
 - Mongoose
+- Express
 - Heroku
-- API
 - Postman
+- JavaScript
 
 
 ## Completed Requirements
-<!-- 🔵  Blue Level -->
+🔵  Blue Level
 <!-- - Your API should be deployed to Heroku or similar hosting service. -->
 <!-- - Your database should be deployed using mongo cloud or similar. -->
-<!-- - Your API should have at least 2 routes. Try to push yourself to do more, though! -->
-<!-- - A minimum of one endpoint to return a **collection** of results (array of elements) -->
+- The API should have at least 2 routes.
+- A minimum of one endpoint to return a **collection** of results (array of elements)
 <!-- - A minimum of one endpoint to return a **single** result (single element). -->
-<!-- - Your API should make use of Mongoose models to model your data and use these models to fetch data from the database. -->
-<!-- - Your API should be [RESTful](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/) -->
+- The API should make use of Mongoose models to model your data and use these models to fetch data from the database.
+- The API should be [RESTful](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/)
 
 
 <!-- 🔴  Red Level (Intermediary Goals) -->

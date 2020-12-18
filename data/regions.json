@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "region": "Blekinge"
+  },
+  {
+    "id": 2,
+    "region": "Dalarna"
+  },
+  {
+    "id": 3,
+    "region": "Gotland"
+  },
+  {
+    "id": 4,
+    "region": "Gävleborg"
+  },
+  {
+    "id": 5,
+    "region": "Halland"
+  },
+  {
+    "id": 6,
+    "region": "Jämtland Härjedalen"
+  },
+  {
+    "id": 7,
+    "region": "Jönköping"
+  },
+  {
+    "id": 8,
+    "region": "Kalmar"
+  },
+  {
+    "id": 9,
+    "region": "Kronoberg"
+  },
+  {
+    "id": 10,
+    "region": "Norrbotten"
+  },
+  {
+    "id": 11,
+    "region": "Skåne"
+  },
+  {
+    "id": 12,
+    "region": "Stockholm"
+  },
+  {
+    "id": 13,
+    "region": "Sörmland"
+  },
+  {
+    "id": 14,
+    "region": "Uppsala"
+  },
+  {
+    "id": 15,
+    "region": "Värmland"
+  },
+  {
+    "id": 16,
+    "region": "Västerbotten"
+  },
+  {
+    "id": 17,
+    "region": "Västernorrland"
+  },
+  {
+    "id": 18,
+    "region": "Västmanland"
+  },
+  {
+    "id": 19,
+    "region": "Västra Götaland"
+  },
+  {
+    "id": 20,
+    "region": "Örebro"
+  },
+  {
+    "id": 21,
+    "region": "Östergötland"
+  }
+]
