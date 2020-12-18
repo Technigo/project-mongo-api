@@ -25,7 +25,7 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number,
 });
 
-if (process.env.RESET_DATEBASE) {
+if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany({})
 
