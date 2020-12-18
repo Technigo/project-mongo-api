@@ -1,13 +1,15 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This is an API using a database I've created.
+I created the database using MongoDB and models of data using mongoose.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+In this API you can find categories for the Golden Globes and see all nominations for each category.
+You can also display all nominations if you'd like to.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+One issue I had when doing this project was the issue of multiple categories with different id:s, even though the value of the category was the same.
+To avoid this I created a set, which I late used in a forEach-loop to seed my database with categories.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.

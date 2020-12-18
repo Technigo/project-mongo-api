@@ -4,131 +4,60 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import endpoints from 'express-list-endpoints'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/nominations"
+import goldenData from './data/golden-globes.json'
+
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/nominations'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const MovieNominee = mongoose.model('MovieNominee', {
   year_film: Number,
-    year_award: Number,
-    ceremony: Number,
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category'
-    },
-    nominee: String,
-    film: String,
-    win: Boolean
+  year_award: Number,
+  ceremony: Number,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+  },
+  nominee: String,
+  film: String,
+  win: Boolean,
 })
 
 const Category = mongoose.model('Category', {
-  category: String
+  category: String,
 })
 
-//Idea is to use this to display all winners from a certain year
-const Award = mongoose.model('Award', {
-  year_award: Number,
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category'
-  },
-  win: Boolean
-})
-
-const seedCategories = async () => {
-  await Category.deleteMany()
-
-  const motionPictureDrama = new Category({
-    'category': 'Best Motion Picture - Drama'
-  })
-  await motionPictureDrama.save()
-
-  const motionMusicalComedy = new Category({
-    'category': 'Best Motion Picture - Musical or Comedy'
-  })
-  await motionMusicalComedy.save()
-
-  const actressDrama = new Category({
-    'category': 'Best Performance by an Actress in a Motion Picture - Drama'
-  })
-  await actressDrama.save()
-
-  const actorDrama = new Category({
-    'category': 'Best Performance by an Actor in a Motion Picture - Drama'
-  })
-  await actorDrama.save()
-
-  const actressComedyMusical = new Category({
-    'category': 'Best Performance by an Actress in a Motion Picture - Musical or Comedy'
-  })
-  await actressComedyMusical.save()
-
-  const actorComedyMusical = new Category({
-    'category': 'Best Performance by an Actor in a Motion Picture - Musical or Comedy'
-  })
-  await actorComedyMusical.save()
-
-  const supportingActress = new Category({
-    'category': 'Best Performance by an Actress in a Supporting Role in any Motion Picture'
-  })
-  await supportingActress.save()
-
-  const supportingActor = new Category({
-    'category': 'Best Performance by an Actor in a Supporting Role in any Motion Picture'
-  })
-  await supportingActor.save()
-}
-
-if(process.env.RESET_DATABASE){
-  const seedDataBase = async () => {
-    console.log('Resetting database')
-    await MovieNominee.deleteMany()
+if (process.env.RESET_DATABASE) {
+  const seedDataBase = async (res) => {
+    console.log('Resetting database!')
     await Category.deleteMany()
+    await MovieNominee.deleteMany()
 
-  const motionPictureDrama = new Category({
-    'category': 'Best Motion Picture - Drama'
-  })
-  await motionPictureDrama.save()
+    let categoryDocuments = []
 
-  const motionMusicalComedy = new Category({
-    'category': 'Best Motion Picture - Musical or Comedy'
-  })
-  await motionMusicalComedy.save()
+    const categories = goldenData.map(item => item.category)
+    const categorySet = new Set(categories)
 
-    const avatar = new MovieNominee({
-      "year_film": 2009,
-      "year_award": 2010,
-      "ceremony": 67,
-      "category": motionPictureDrama,
-      "nominee": "Avatar",
-      "film": "",
-      "win": true
+    categorySet.forEach(item => {
+      const category = new Category({category: item})
+      categoryDocuments.push(category)
+      category.save((error) => {
+        if (error) return console.log(error)
+      })
     })
-    await avatar.save()
-  
-    const hurtlocker = new MovieNominee({
-        "year_film": 2009,
-        "year_award": 2010,
-        "ceremony": 67,
-        "category": motionPictureDrama,
-        "nominee": "Hurt Locker, The",
-        "film": "",
-        "win": false
+
+    goldenData.forEach(item => {
+      const nomination = new MovieNominee({
+        ...item,
+        category: categoryDocuments.find(category => category.category === item.category)
+      })
+      nomination.save((error, item) => {
+        if (error) return console.log(error)
+      })
     })
-    await hurtlocker.save()
-    const hangover = new MovieNominee({
-      "year_film": 2009,
-      "year_award": 2010,
-      "ceremony": 67,
-      "category": motionMusicalComedy,
-      "nominee": "Hangover, The",
-      "film": "",
-      "win": true
-  })
-  await hangover.save()
+
   }
   seedDataBase()
-  //seedCategories()
 }
 
 const port = process.env.PORT || 8080
@@ -141,27 +70,34 @@ app.get('/', (req, res) => {
   res.send(endpoints(app))
 })
 
-app.get('/categories', async(req, res) => {
+app.get('/nominations', async (req, res) => {
+  const movieNominations = await MovieNominee.find()
+  res.json(movieNominations)
+})
+
+app.get('/categories', async (req, res) => {
   const categories = await Category.find()
   res.json(categories)
 })
 
 app.get('/categories/:id/', async (req, res) => {
   const category = await Category.findById(req.params.id)
-  if(category) {
+  if (category) {
     res.json(category)
   } else {
-    res.status(404).json({error: 'No category found'})
-}
+    res.status(404).json({ error: 'No category found' })
+  }
 })
 
 app.get('/categories/:id/nominations', async (req, res) => {
   const category = await Category.findById(req.params.id)
-  if(category) {
-    const nominations = await MovieNominee.find({ category: mongoose.Types.ObjectId(category.id) })
+  if (category) {
+    const nominations = await MovieNominee.find({
+      category: mongoose.Types.ObjectId(category.id),
+    })
     res.json(nominations)
   } else {
-    res.status(404).json({error: 'No nominations found'})
+    res.status(404).json({ error: 'No nominations found' })
   }
 })
 
