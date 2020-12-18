@@ -11,12 +11,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/c19se"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const port = process.env.PORT || 8080
-const app = express()
-
-app.use(cors())
-app.use(bodyParser.json())
-
 // define data models
 const RegionKey = mongoose.model('RegionKey', {
   regionId: Number,
@@ -58,8 +52,26 @@ if (process.env.RESET_DB) {
   seed()
 }
 
+const port = process.env.PORT || 8080
+const app = express()
+
+app.use(cors())
+app.use(bodyParser.json())
+
+// middleware to detect if db is available and throws error to user if it is not.
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+   next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable'})
+  }
+})
+
+const listEndpoints = require('express-list-endpoints')
+
 app.get('/', (req, res) => {
-  res.send('Hallå! This API is a coding project by Peggy @blipsandclicks made during Technigo bootcamp 2020 Fall session for educational purposes only. Please do not use this API, instead refer to the original data source Folkhälsomyndigheten. They provide interactive data visualisations and some raw data here: https://www.folkhalsomyndigheten.se/smittskydd-beredskap/utbrott/aktuella-utbrott/covid-19/statistik-och-analyser/bekraftade-fall-i-sverige/')
+  // res.send('Hallå! This API is a coding project by Peggy @blipsandclicks made during Technigo bootcamp 2020 Fall session for educational purposes only. Please do not use this API, instead refer to the original data source Folkhälsomyndigheten. They provide interactive data visualisations and some raw data here: https://www.folkhalsomyndigheten.se/smittskydd-beredskap/utbrott/aktuella-utbrott/covid-19/statistik-och-analyser/bekraftade-fall-i-sverige/')
+  res.send(listEndpoints(app))
 })
 
 // get all regions and their objectIDs
@@ -70,13 +82,17 @@ app.get('/regions', async (req, res) => {
 
 // get one region's report using that region's objectID
 app.get('/reports/:id', async (req,res) => {
-  const region = await RegionKey.findById(req.params.id)
-  if (region) {
-    const regionalReport = await Report.find({ regionNum: mongoose.Types.ObjectId(region.id) })
-    res.json(regionalReport)
-  } else {
-    res.status(404).json({ error: 'Region not found' })
-  }
+  try {
+    const region = await RegionKey.findById(req.params.id)
+    if (region) {
+      const regionalReport = await Report.find({ regionNum: mongoose.Types.ObjectId(region.id) })
+      res.json(regionalReport)
+    } else {
+      res.status(404).json({ error: 'Region not found' })
+    } 
+  } catch(err) {
+      res.status(400).json({ error: 'Invalid region id'})
+    }
 })
 
 // start server
