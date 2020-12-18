@@ -2,55 +2,72 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-//import booksData from './data/books.json';
+import booksData from './data/books.json';
+import authorsData from './data/authors.json';
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
+// Create my database model's
 const Book = mongoose.model('Book', {
-  bookID: {
-    type: Number
-  },
-  title: {
-    type: String
-  },
+  bookID: Number,
+  title: String,
   authors: {
-    type: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author'
   },
-  average_rating: {
-    type: Number
-  },
-  isbn: {
-    type: String
-  },
-  isbn13: {
-    type: String
-  },
-  language_code: {
-    type: String
-  },
-  num_pages: {
-    type: Number
-  },
-  ratings_count: {
-    type: Number
-  },
-  text_reviews_count: {
-    type: Number
-  }
+  average_rating: Number,
+  isbn: String,
+  isbn13: String,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
+});
+
+const Author = mongoose.model('Author', {
+  authors: String
 });
 
 if (process.env.RESET_DATABASE) {
-  console.log('Resetting database...');
+  // POPULATING DATABASE WITH TWO COLLECTIONS (WITH RELATIONS)
 
-  const seedDatabase = async () => {
-    // Clear our database
+  const populateDatabase = async () => {
+    // First of all, clear current content of two collections
     await Book.deleteMany();
-    // Save all of the books from books.json to the database
-    await booksData.forEach((book) => new Book(book).save());
+    await Author.deleteMany();
+
+    // Next, declare empty array in which later on will
+    // store all authors from authors.json (of Author models)
+    let authorsArray = [];
+
+    authorsData.forEach(async (item) => {
+      const newAuthor = new Author(item);
+
+      // Push each newAuthor to array authorsArray
+      authorsArray.push(newAuthor);
+      await newAuthor.save();
+    });
+
+    // Create new book for element in booksData array from JSON file.
+    // Important thing to notice: in JSON file we had property "authors" with
+    // hardcoded string value. We need it to detect which author model should
+    // each book have. Later on, hardcoded "authors" property will be
+    // overwritten by new "authors" property, the one with value of ObjectId type.
+    // For further reference on that, check out last example from website below,
+    // the one about keys collision : https://davidwalsh.name/merge-objects
+    booksData.forEach(async (bookItem) => {
+      const newBook = new Book({
+        ...bookItem,
+        authors: authorsArray.find(
+          (authorItem) => authorItem.authors === bookItem.authors
+        )
+      });
+      await newBook.save();
+    });
   };
-  seedDatabase();
+  populateDatabase();
 }
 
 // Defines the port the app will run on. Defaults to 8080, but can be
@@ -66,6 +83,7 @@ const myEndpoints = require('express-list-endpoints');
 app.use(cors());
 app.use(bodyParser.json());
 
+// Error message in case server is down
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next(); // To execute next get response
@@ -87,7 +105,7 @@ app.get('/', (req, res) => {
 });
 
 // /books endpoint
-// RETURNS: A list of books from mongoDB (project-mongo, mongoose model'Book')
+// RETURNS: A list of books from mongoDB
 // with PAGINATION as default with 20 results per page
 //
 // PARAMETERS:
@@ -95,35 +113,31 @@ app.get('/', (req, res) => {
 //     usage: /books/?page=4
 //  - title
 //     usage: /books/?title=harry
-//  - author
-//     usage: /books/?author=douglas adams
 //  - language
 //     usage: /books/?language=en-US
 app.get('/books', async (req, res) => {
-  const { title, author, lang, page } = req.query;
+  const { title, lang, page } = req.query;
   const pageNumber = +page || 1;
-  // const pageNumber = page ?? 1; // 1 as default
-  console.log(pageNumber);
-  /*
-  https://www.sitepoint.com/shorthand-javascript-techniques/
-  
-  if (page !== null || page !== undefined || page !== '' || page !== 0) {
-     let variable2 = page;
-  }
-  const variable2 = page || 'new';
-  */
+
+  // https://www.sitepoint.com/shorthand-javascript-techniques/
+  //
+  // if (page !== null || page !== undefined || page !== '' || page !== 0) {
+  //    let pageNumber = page;
+  // }
+  // const PageNumber = page || 'new';
+
   const pageSize = 20;
   // skip: E.g. page 3: 20 * (3-1) = 40, sends 40 as parameter to .skip()
   // skips index 0-39 so that page 3 starts with the book that has index 40
   const skip = pageSize * (pageNumber - 1);
 
-  // Books with filters based on title and/or authors and/or language query
+  // Books with filters based on title and/or lang query
   // Paginated using limit and skip, change page using page query
   const books = await Book.find({
     title: new RegExp(title, 'i'),
-    authors: new RegExp(author, 'i'),
     language_code: new RegExp(lang, 'i')
   })
+    .populate('authors')
     .sort({ average_rating: -1 }) // Hard coded to sort data descending by average_rating.
     .limit(pageSize)
     .skip(skip);
@@ -131,7 +145,6 @@ app.get('/books', async (req, res) => {
   // Used to display total books, without pagination
   const booksNoPagination = await Book.find({
     title: new RegExp(title, 'i'),
-    authors: new RegExp(author, 'i'),
     language_code: new RegExp(lang, 'i')
   });
   const totalNumberOfBooks = booksNoPagination.length;
@@ -158,7 +171,8 @@ app.get('/books', async (req, res) => {
 // /books/top-20-rated endpoint
 // RETURNS: A list of 20 top rated books from books.json
 app.get('/books/top-20-rated', async (req, res) => {
-  const top20Rated = await Book.find({})
+  const top20Rated = await Book.find()
+    .populate('authors')
     .sort({ average_rating: -1 }) // Hard coded to sort data descending by average_rating.
     .limit(20); // Hard coded to 20
 
@@ -168,17 +182,18 @@ app.get('/books/top-20-rated', async (req, res) => {
     });
   } else
     res.json({
-      totalNumberOfBooks: top20Rated.length,
       topTwentyRated:
         'A list of 20 top rated books sorted in descending by average_rating',
+      totalNumberOfBooks: top20Rated.length,
       results: top20Rated
     });
 });
 
 // /books/:id endpoint
-// RETURNS: A single book by id from mongoDB (project-mongo, mongoose model'Book')
+// RETURNS: A single book by id from mongoDB
 app.get('/books/:id', async (req, res) => {
   const { id } = req.params;
+
   try {
     const singleBook = await Book.findOne({ bookID: id });
 
@@ -187,6 +202,58 @@ app.get('/books/:id', async (req, res) => {
     } else res.status(404).send({ error: `No book with id: ${id} found.` });
   } catch {
     res.status(400).send({ error: `${id} is not a valid bookID.` });
+  }
+});
+
+// /authors endpoint
+// RETURNS: A list of unique authors from books.json
+
+//_____________Array of authors
+app.get('/authors', async (req, res) => {
+  const { author } = req.query;
+  const authorsArray = await Author.find({
+    authors: new RegExp(author, 'i')
+  });
+
+  if (!authorsArray) {
+    res.status(404).send({ Error: 'something went wrong' });
+  }
+  res.send({
+    totalNumberOfAuthors: authorsArray.length,
+    authors: authorsArray
+  });
+});
+
+//_____________Single author based in ID
+app.get('/authors/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const singleAuthor = await Author.findById({ _id: id });
+    if (singleAuthor) {
+      res.json(singleAuthor);
+    } else {
+      res.status(404).json({ error: 'Author not found' });
+    }
+  } catch {
+    res.status(400).send({ error: `${id} is not a valid author id (_id).` });
+  }
+});
+
+//_____________Books created by author based on authors ID
+app.get('/authors/:id/books', async (req, res) => {
+  const { id } = req.params;
+  const author = await Author.findById({ _id: id });
+  if (author) {
+    const books = await Book.find({
+      authors: mongoose.Types.ObjectId(author.id)
+    }).populate('authors');
+    res.json({
+      totalNumberOfBooks: books.length,
+      books: books
+    });
+  } else {
+    res.status(404).json({ error: `No books found with author id ${id}.` });
   }
 });
 
