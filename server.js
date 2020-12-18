@@ -39,10 +39,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const myEndpoints = require("express-list-endpoints");
-app.get("/", (request, response) => {
-  response.send(myEndpoints(app));
-});
+// const myEndpoints = require("express-list-endpoints");
+// app.get("/", (request, response) => {
+//   response.send(myEndpoints(app));
+// });
 
 app.use((request, response, next) => {
   if (mongoose.connection.readyState === 1) {
