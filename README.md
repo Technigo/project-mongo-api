@@ -1,13 +1,15 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+For this project, I have used MongoDB to build a database to store data and later on manipulated it with mongoose.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Endpoints:
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+*/* Initial page
+*/books* - lists all the books
+*/books/find/:bookID* - finds books by id
+*/books/isbn/:isbn* - finds books by isnb number
+*/books/authors/:author* - finds books by author
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Link to my deployed project: https://katsiez-mongo-book-api.herokuapp.com/
