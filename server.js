@@ -117,7 +117,7 @@ app.get('/records/short', async (req, res) => {
 });
 
 //Route to find danceable songs
-app.get('/topsongs/dance', async (req, res) => {
+app.get('/records/dance', async (req, res) => {
   const dancingRecords = await Record.find({ danceability: { $gte: 80 } });
   if(dancingRecords.length > 0) {
     res.json(dancingRecords)
