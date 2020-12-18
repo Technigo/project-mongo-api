@@ -96,7 +96,7 @@ app.get('/shows/:id', async (req, res) => {
   }
 })
 
-app.get('/shows/year/:year', async (req, res) => {
+app.get('/shows/released/:year', async (req, res) => {
   const {year} = req.params
   try { 
     const filteredOnYears = await Show.find({release_year: year})
