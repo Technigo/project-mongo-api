@@ -20,7 +20,7 @@ page - /shows?page={number} lists the 20 shows of that page in the API
 
 limit - /shows?limit={number} limits the number of shows in the result
 
-## The problem
+## The process
 
 I started with getting my data into the mongo database locally with the mongoose method mongoose.model(). Then I created the first route "shows" to make sure I could reach the data with mongoos method .find(). When this worked I started creating more routes and queries based on the data of the dataset, added error handling and more filter as I had the time. For example to limit the amout of results and picking what "page" to fetch. The API is then connected to Heroku and the database to the cloud with MongoDB Atlas.
 
