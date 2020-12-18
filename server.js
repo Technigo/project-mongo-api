@@ -54,7 +54,7 @@ if (process.env.RESET_DATABASE) {
 
 
 app.get('/', (req, res) => {
-  res.send('Welcom to my book-API')
+  res.send('Welcome to my book-API 📚')
 })
 
 //get all books
