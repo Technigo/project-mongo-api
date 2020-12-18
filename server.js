@@ -4,13 +4,6 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 import booksData from './data/books.json'
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -104,6 +97,7 @@ app.get('/books/titles/:title', async (req, res) => {
     res.status(404).json({ error: "Invalid title" })  
 }
 })
+
 
 // Start the server
 app.listen(port, () => {
