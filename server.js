@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import booksData from './data/books.json';
+import bookData from './data/books.json';
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -25,11 +25,11 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number,
 });
 
-if (process.env.RESET_DB) {
+if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
     await Book.deleteMany({})
 
-    booksData.forEach((bookData) => {
+    bookData.forEach((bookData) => {
       new Book(bookData).save()
     })
   }
