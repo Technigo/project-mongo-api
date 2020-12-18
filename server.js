@@ -43,6 +43,9 @@ app.use(bodyParser.json());
 // app.get("/", (request, response) => {
 //   response.send(myEndpoints(app));
 // });
+app.get('/', (request, response) => {
+  response.send('My MongoDB books API');
+});
 
 app.use((request, response, next) => {
   if (mongoose.connection.readyState === 1) {
