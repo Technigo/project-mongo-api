@@ -1,13 +1,15 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+### This project is from Technigo's front-end developer boot camp, Fall 2020.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+In this project, Mongoose models is used to model and persist data from a database. It uses appropriate RESTful endpoints to return the data and makes use of Mongoose Queries.
 
-## The problem
+## Tech
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+* Mongoose
+* Async & Await
+* Error handling
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+<a href="https://database-profanity.herokuapp.com/profanities">Access the database here</a>
