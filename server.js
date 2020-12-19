@@ -17,17 +17,17 @@ app.use(cors())
 app.use(bodyParser.json())
 
 //Middleware to handle connections errors
-// app.use((req, res, next) => {
-//   try {
-//     if (mongoose.connection.readyState === 1) {
-//       next()
-//     } else {
-//       res.status(503).json({ error: 'Service unavailable' });
-//     }
-//   } catch (error) {
-//     res.status(400).json({ error: 'Error! Could not access the server.' });
-//   }
-// })
+app.use((req, res, next) => {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      next()
+    } else {
+      res.status(503).json({ error: 'Service unavailable' });
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Error! Could not access the server.' });
+  }
+})
 
 const Book = new mongoose.model('Book', {
   bookID: Number,
