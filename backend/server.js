@@ -48,11 +48,15 @@ app.get("/volcanos", async (req, res) => {
   console.log("query", req.query);
 
   const { Name, Country, sort, height, page, limit = 20 } = req.query;
-  const volcanoRegex = new RegExp(`\\b${Name}\\b`, "i");
+  // const volcanoRegex = new RegExp(`\\b${Name}\\b`, "i");
+
+  const volcanoRegex = (regEx) => {
+    return new RegExp(`\\b${regEx}\\b`, "i");
+  };
 
   const findVulcanos = () => {
-    if (Name) return { Name: volcanoRegex };
-    if (Country) return { Country };
+    if (Name) return { Name: volcanoRegex(Name) };
+    if (Country) return { Country: volcanoRegex(Country) };
     if (height) return { ElevationMeters: { $gte: height } };
   };
 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-export const VolcanoList = ({ setSelectedVolcano }) => {
-  const [volcanos, setVolcanos] = useState([]);
+import { VolcanoListFooter } from "./VolcanoListFooter";
 
-  const URL = "https://my-volcanos.herokuapp.com/volcanos?sort=name";
+export const VolcanoList = ({ volcanos, setVolcanos, setSelectedVolcano }) => {
+  const [page, setPage] = useState(1);
+
+  const URL = `https://my-volcanos.herokuapp.com/volcanos?sort=${volcanos}&page=${page}`;
 
   useEffect(() => {
     fetch(URL)
@@ -35,6 +37,7 @@ export const VolcanoList = ({ setSelectedVolcano }) => {
           </article>
         ))}
       </main>
+      <VolcanoListFooter page={page} setPage={setPage} volcanos={volcanos} />
     </>
   );
 };

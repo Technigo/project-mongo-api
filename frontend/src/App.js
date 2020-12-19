@@ -4,14 +4,22 @@ import { VolcanoList } from "./components/VolcanoList";
 import { Volcano } from "./components/Volcano";
 
 function App() {
+  const [volcanos, setVolcanos] = useState([]);
   const [selectedVolcano, setSelectedVolcano] = useState("");
 
   return (
     <>
       {!selectedVolcano ? (
-        <VolcanoList setSelectedVolcano={setSelectedVolcano} />
+        <VolcanoList
+          volcanos={volcanos}
+          setVolcanos={setVolcanos}
+          setSelectedVolcano={setSelectedVolcano}
+        />
       ) : (
-        <Volcano selectedVolcano={selectedVolcano} />
+        <Volcano
+          selectedVolcano={selectedVolcano}
+          setSelectedVolcano={setSelectedVolcano}
+        />
       )}
     </>
   );

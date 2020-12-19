@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export const Volcano = ({ selectedVolcano }) => {
+export const Volcano = ({ selectedVolcano, setSelectedVolcano }) => {
   const [theVolcano, setTheVolcano] = useState();
 
   const URL = `https://my-volcanos.herokuapp.com/volcanos/${selectedVolcano}`;
@@ -22,6 +22,7 @@ export const Volcano = ({ selectedVolcano }) => {
   return (
     <div>
       <h3>{theVolcano?.Name}</h3>
+      <button onClick={() => setSelectedVolcano(null)}>back</button>
     </div>
   );
 };
