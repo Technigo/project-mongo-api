@@ -51,17 +51,22 @@ if (process.env.RESET_DATABASE) {
   populateDatabase()
 }
 
-
 app.get('/', (req, res) => {
   res.send('Hello sourdough!')
 })
 
 app.get('/topsongs', async (req, res) => {
-  const queryParameters = req.query
-  console.log(queryParameters)
+  let filteredTopsongs = await TopSong.find()
+  const { minDanceability, maxDanceability, genre, length } = req.query
 
-  const allTopsongs = await TopSong.find()
-  res.json(allTopsongs)
+  if(maxDanceability) {
+    filteredTopsongs = filteredTopsongs.filter(track => track.danceability <= maxDanceability)
+  }
+  if (minDanceability) {
+    filteredTopsongs = filteredTopsongs.filter(track => track.danceability >= minDanceability)
+  } 
+
+  res.json(filteredTopsongs)
 })
 
 
@@ -83,14 +88,8 @@ app.get('/topsongs/track/:track', async (req, res) => {
   } else {
     res.json(findTrack)
   }
-}) 
+})
 
-// Prio : 1, Make error massage! 2, more endpoints
-
-// {being able to search for one artist
-// being able to search for one track
-
-// able to search for songs based on 'danceability' - up-tempo or slow. 
 // search based on genre? }
 
 app.listen(port, () => {
