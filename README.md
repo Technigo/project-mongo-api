@@ -11,4 +11,10 @@ Add a title with reg ex for enabling intuitive search, as well as a year endpoin
 
 ## View it live
 
-https://simple-mongo-db.herokuapp.com/shows/
+https://simple-mongo-db.herokuapp.com/
+
+Endpoints:
+ https://simple-mongo-db.herokuapp.com/shows   /returns whole array of netflixdata 
+ https://simple-mongo-db.herokuapp.com/shows/81171862    /returns single show based on json.show-id 
+
+ https://simple-mongo-db.herokuapp.com/shows/director/546f6b61204d634261726f72   /returns show(s) by director db created objectId 

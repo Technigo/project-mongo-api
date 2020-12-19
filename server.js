@@ -4,9 +4,8 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 import netflixData from './data/netflix-titles.json' 
-//connecting to mongodb
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-//connecting database to mongoose
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -28,14 +27,12 @@ const Show = mongoose.model('Show', {
 
 if (process.env.RESET_DATABASE) {
     console.log('Resetting database!');
-  //first clean database and then populate
   const seedDatabase = async () => {
-    //do not proceeed until deleteMany ie db cleaned
+  
     await Show.deleteMany();
     await Director.deleteMany();
    
     netflixData.forEach(item => {
-        //whatever specified in Schema, single object from json array
         const newShow = new Show(item);
         newShow.save();
       })
@@ -46,11 +43,9 @@ if (process.env.RESET_DATABASE) {
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
-//error handling disconnected server
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
@@ -59,19 +54,13 @@ app.use((req, res, next) => {
   }
 })
 
-// Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello current endpoints: /shows || shows/id || shows/director/objectid')
 })
 
-
-
-//whole array of netflixdata / https://simple-mongo-db.herokuapp.com/shows/
 app.get('/shows', async (req, res) =>  {
-  // res.json(netflixData);
   try {
     const allShows = await Show.find();
-    //can not be excuted until show.find is executed
     if(allShows) {
       res.json(allShows)
     } else {
@@ -82,8 +71,6 @@ app.get('/shows', async (req, res) =>  {
   }
   })
 
-  
-//single show based on json.show-id / https://simple-mongo-db.herokuapp.com/shows/81171862
 app.get('/shows/:id', async (req, res) => {
     try {
     const showId = await Show.findOne({ show_id: req.params.id })
@@ -97,15 +84,12 @@ app.get('/shows/:id', async (req, res) => {
   }
   })
 
-  //returns show(s) by director db created objectId / https://simple-mongo-db.herokuapp.com/shows/director/546f6b61204d634261726f72
   app.get('/shows/director/:director', (req, res) => {
     Show.find(req.params, (err, data) => {
       res.json(data)
     })
   })
 
-
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
