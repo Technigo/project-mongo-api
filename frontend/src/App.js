@@ -3,7 +3,6 @@ import "./App.css";
 import { VolcanoList } from "./components/VolcanoList";
 
 function App() {
-  // const [volcanos, setVolcanos] = useState();
   return <VolcanoList />;
 }
 
