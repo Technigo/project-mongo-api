@@ -26,16 +26,13 @@ const Show = mongoose.model('Show', {
   type: String,
 })
 
-
-
-
-  if (process.env.RESET_DATABASE) {
+if (process.env.RESET_DATABASE) {
     console.log('Resetting database!');
   //first clean database and then populate
   const seedDatabase = async () => {
     //do not proceeed until deleteMany ie db cleaned
     await Show.deleteMany();
-    // await Director.deleteMany();
+    await Director.deleteMany();
    
     netflixData.forEach(item => {
         //whatever specified in Schema, single object from json array
@@ -64,11 +61,12 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello current endpoints: /shows || shows/id || shows/director/objectid')
 })
 
 
-//whole array of netflixdata
+
+//whole array of netflixdata / https://simple-mongo-db.herokuapp.com/shows/
 app.get('/shows', async (req, res) =>  {
   // res.json(netflixData);
   try {
@@ -85,7 +83,7 @@ app.get('/shows', async (req, res) =>  {
   })
 
   
-//single show based on json.show-id // http://localhost:8080/shows/81132444
+//single show based on json.show-id / https://simple-mongo-db.herokuapp.com/shows/81171862
 app.get('/shows/:id', async (req, res) => {
     try {
     const showId = await Show.findOne({ show_id: req.params.id })
@@ -99,7 +97,7 @@ app.get('/shows/:id', async (req, res) => {
   }
   })
 
-  //returns show(s) by director db objectId / http://localhost:8080/shows/director/53636f7474204d6341626f79
+  //returns show(s) by director db created objectId / https://simple-mongo-db.herokuapp.com/shows/director/546f6b61204d634261726f72
   app.get('/shows/director/:director', (req, res) => {
     Show.find(req.params, (err, data) => {
       res.json(data)
