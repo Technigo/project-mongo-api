@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-export const VolcanoList = () => {
+export const VolcanoList = ({ setSelectedVolcano }) => {
   const [volcanos, setVolcanos] = useState([]);
-  const [selectedVolcano, setSelectedVolcano] = useState();
 
   const URL = "https://my-volcanos.herokuapp.com/volcanos?sort=name";
 
@@ -19,9 +18,9 @@ export const VolcanoList = () => {
 
   console.log(volcanos);
 
-  const handleOnClickVolcano = (Number) => {
-    setSelectedVolcano(Number);
-    console.log("clicked", Number);
+  const handleOnClickVolcano = (Name) => {
+    setSelectedVolcano(Name);
+    console.log("clicked", Name);
   };
 
   return (
@@ -29,8 +28,9 @@ export const VolcanoList = () => {
       <main>
         {volcanos.map((volcano) => (
           <article>
-            <button onClick={() => handleOnClickVolcano(volcano.Number)}>
+            <button onClick={() => handleOnClickVolcano(volcano.Name)}>
               <p>{volcano.Name}</p>
+              <p>{volcano.Country}</p>
             </button>
           </article>
         ))}
