@@ -58,6 +58,7 @@ app.get('/', (req, res) => {
 app.get('/topsongs', async (req, res) => {
   let filteredTopsongs = await TopSong.find()
   const { minDanceability, maxDanceability, genre, length } = req.query
+ 
 
   if(maxDanceability) {
     filteredTopsongs = filteredTopsongs.filter(track => track.danceability <= maxDanceability)
@@ -72,25 +73,34 @@ app.get('/topsongs', async (req, res) => {
 
 app.get('/topsongs/artist/:artist', async (req, res) => {
   const artistRegexp = new RegExp(req.params.artist, "i")
-  const findArtist = await TopSong.find({ artistName: artistRegexp })
-  if (findArtist.length === 0) {
+  const songsWithArtist = await TopSong.find({ artistName: artistRegexp })
+  if (songsWithArtist.length === 0) {
     res.status(404).json(ERROR_404)
   } else {
-    res.json(findArtist)
+    res.json(songsWithArtist)
   }
 })
 
 app.get('/topsongs/track/:track', async (req, res) => {
   const trackRegexp = new RegExp(req.params.track, "i")
-  const findTrack = await TopSong.find({ trackName: trackRegexp })
-  if (findTrack.length === 0) {
+  const songsWithTrack = await TopSong.find({ trackName: trackRegexp })
+  if (songsWithTrack.length === 0) {
     res.status(404).json(ERROR_404)
   } else {
-    res.json(findTrack)
+    res.json(songsWithTrack)
   }
 })
 
-// search based on genre? }
+ // search based on genre?
+ app.get('topsong/genre/:genre', async (req, res) => {
+   const genreRegExp= new RegExp(req.params.genre, "i")
+   const songsInGenre = await TopSong.find({ genre: genreRegExp })
+   if(songsInGenre.length === 0 ){
+    res.status(404).json(ERROR_404)
+   } else {
+     res.json(songsInGenre)
+   }
+ })
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
