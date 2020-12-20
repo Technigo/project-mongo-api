@@ -1,23 +1,30 @@
-import express from 'express';
+import express, { response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import eruptionsData from './data/volcanic-eruptions.json';
 
+// Database URL and connection
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Database model for the volcanic eruption object
+// Defines the port the app will run on. Defaults to 8080, but can be
+// overridden when starting the server. For example:
+//
+//   PORT=9000 npm start
+const port = process.env.PORT || 8080;
+const app = express();
 
+// Add middlewares to enable cors and json body parsing
+app.use(cors());
+app.use(bodyParser.json());
+
+// To list all endpoints
+const endpoints = require('express-list-endpoints');
+
+// Database model for the volcanic eruption object
 const Eruption = mongoose.model('Eruption', {
   id: Number,
   name: String,
@@ -32,20 +39,38 @@ const Eruption = mongoose.model('Eruption', {
   dominant_rock_type: String,
   tectonic_setting: String,
 });
-// Defines the port the app will run on. Defaults to 8080, but can be
-// overridden when starting the server. For example:
+
+// Populate database if the environment variable RESET_DATABASE is true
+if (process.env.RESET_DATABASE) {
+  const populateDatabase = async () => {
+    await Eruption.deleteMany();
+
+    eruptionsData.forEach(item => {
+      new Eruption(item).save();
+    });
+  };
+  populateDatabase();
+}
+
+// Error message if database connection is down
+app.use((request, response, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).send({ error: 'Service unavailable' });
+  }
+});
+
+// / endpoint (root)
+// RETURNS: A list of all endpoints as an array
 //
-//   PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
+app.get('/', (request, response) => {
+  response.send(endpoints(app));
+});
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(bodyParser.json());
-
-// Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world');
+app.get('/eruptions', async (request, response) => {
+  const allEruptions = await Eruption.find();
+  response.json(allEruptions);
 });
 
 // Start the server
