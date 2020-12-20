@@ -11,29 +11,50 @@ export const Volcano = ({ selectedVolcano, setSelectedVolcano }) => {
         return res.json();
       })
       .then((data) => {
-        console.log("data", data);
-
         setTheVolcano(data);
       });
   }, [URL]);
 
-  console.log("the volcano", theVolcano);
-
   return (
     <article>
       <h3>{theVolcano?.Name}</h3>
-      <p>
+
+      <p className="country-paragraph">
         {theVolcano?.Country}, {theVolcano?.Region}
       </p>
 
-      <p>Type: {theVolcano?.Type}</p>
-      <p>Activity evidence: {theVolcano?.ActivityEvidence}</p>
-      <p>Last Known Eruption: {theVolcano?.LastKnownEruption}</p>
-      <p>Latitude: {theVolcano?.Latitude}</p>
-      <p>Longitude: {theVolcano?.Longitude}</p>
-      <p>Elevation meters: {theVolcano?.ElevationMeters}</p>
-      <p>Dominant rock type: {theVolcano?.DominantRockType}</p>
-      <p>Tectonic setting: {theVolcano?.TectonicSetting}</p>
+      <p>
+        <span className="key">Type:</span>{" "}
+        <span className="value">{theVolcano?.Type}</span>
+      </p>
+      <p>
+        <span className="key">Activity evidence:</span>{" "}
+        <span className="value">{theVolcano?.ActivityEvidence}</span>
+      </p>
+      <p>
+        <span className="key">Elevation meters:</span>{" "}
+        <span className="value">{theVolcano?.ElevationMeters}</span>
+      </p>
+      <p>
+        <span className="key">Last Known Eruption:</span>{" "}
+        <span className="value">{theVolcano?.LastKnownEruption}</span>
+      </p>
+      <p>
+        <span className="key">Latitude:</span>{" "}
+        <span className="value">{theVolcano?.Latitude}</span>
+      </p>
+      <p>
+        <span className="key">Longitude:</span>{" "}
+        <span className="value">{theVolcano?.Longitude}</span>
+      </p>
+      <p>
+        <span className="key">Dominant rock type:</span>{" "}
+        <span className="value">{theVolcano?.DominantRockType}</span>
+      </p>
+      <p>
+        <span className="key">Tectonic setting:</span>{" "}
+        <span className="value">{theVolcano?.TectonicSetting}</span>
+      </p>
       <button onClick={() => setSelectedVolcano(null)}>back</button>
     </article>
   );

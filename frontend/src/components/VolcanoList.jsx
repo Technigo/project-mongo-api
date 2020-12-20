@@ -14,12 +14,10 @@ export const VolcanoList = ({
   setPage,
 }) => {
   const URL = `https://my-volcanos.herokuapp.com/volcanos?page=${page}&sort=${sort}&Name=${searchByName}&Country=${searchByCountry}&height=${searchMinHeight}`;
-  // const URL = `https://my-volcanos.herokuapp.com/volcanos?sort=${sort}&page=${page}&Name=${searchByName}&Country=${searchByCountry}`;
 
   useEffect(() => {
     fetch(URL)
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((data) => {
@@ -27,13 +25,10 @@ export const VolcanoList = ({
       });
   }, [URL, setVolcanos]);
 
-  console.log(volcanos);
-
   const handleOnClickVolcano = (Name) => {
     setSelectedVolcano(Name);
-    console.log("clicked", Name);
   };
-  console.log("page", page);
+
   return (
     <>
       <main>
@@ -45,7 +40,7 @@ export const VolcanoList = ({
             >
               <h2>{volcano.Name} / </h2>
               <p>{volcano.Country} / </p>
-              <p>{volcano.ElevationMeters} m</p>
+              <p>{volcano.ElevationMeters}&nbsp;m</p>
             </button>
           </div>
         ))}

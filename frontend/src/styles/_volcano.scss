@@ -6,15 +6,36 @@ article {
 
   h3 {
     font-size: 52px;
+    font-weight: 600;
   }
   p {
     font-size: 28px;
     margin-left: 6px;
     line-height: 44px;
   }
+  .country-paragraph {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .key {
+    font-weight: 300;
+  }
+  .value {
+    font-style: italic;
+    text-transform: uppercase;
+  }
   button {
     @include basicButton;
 
-    margin-left: auto;
+    margin: 10px 0 20px auto;
+    background: $secondaryBackground;
+    color: $primaryFont;
+    border: 1px solid $secondaryBackground;
+    mix-blend-mode: lighten;
+
+    &:hover {
+      color: $secondaryFont;
+    }
   }
 }
