@@ -4,3 +4,8 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
+
+slask/server_original.js
+slask/server-lecture1.js
+slask/server-lecture2.js
+slask/server-nominees-test.js
