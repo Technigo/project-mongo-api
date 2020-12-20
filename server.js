@@ -62,14 +62,22 @@ app.get("/shows", async (req, res) => {
 
 app.get("/shows/:title", async (req, res) => {
   const searchTitle = await Show.findOne({ title: req.params.title });
-  res.json(searchTitle);
+  if (searchTitle) {
+    res.json(searchTitle);
+  } else {
+    res.status(404).json({ error: "Title not found" });
+  }
 });
 
 app.get("/shows/releaseyear/:releaseyear", async (req, res) => {
   const releaseyear = await Show.find({
     release_year: req.params.releaseyear,
   });
-  res.json(releaseyear);
+  if (releaseyear) {
+    res.json(releaseyear);
+  } else {
+    res.status(404).json({ error: "Year not found" });
+  }
 });
 
 // Start the server
