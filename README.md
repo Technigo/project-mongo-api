@@ -13,14 +13,11 @@ In this project I've created an API with RESTful endpoints using MongoDB as data
 I used json data including 499 books and created different endpoints and query parameters. I used the tmothed findAll() to get all the book from the database and thje method finOne() to get books by one author or a book with a specific title. To handle error I  added middlewaress to the database and I also added error handlers for all GET-requests.
 
 ## Endpoints:
-Authors: books/authors
-Author by id: /authors/:id (new)
-Books by specific author: /authors/:id/books (new)
-Root: /
-Books: /books
-Book by id: /books/:id
-Book by title: /titles/:title
-Sort book by rating and choose nr of books to dislplay: /toplist/:nr
+* Root: /
+* All books: /books
+* Books by specific authors: /authors/:author
+* Books by title: /titles/:title
+* Book by id: /books/:id
 
 ## Tech:
 * MongoDB
