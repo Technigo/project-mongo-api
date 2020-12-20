@@ -23,8 +23,18 @@ app.use(cors())
 app.use(bodyParser.json())
 
 const Release = new mongoose.model("Release", {
-  album_type: String,
-  artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, artist_type: String, uri: String }],
+  // album_type: String,
+  album_type: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Type"
+  },
+  // artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, artist_type: String, uri: String }],
+  artists: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Artist"
+    }
+  ],
   available_markets: [String],
   external_urls: { spotify: String },
   href: String,
@@ -66,20 +76,20 @@ if (process.env.RESET_DATABASE) {
       await newType.save();
     });
 
-    let artists = []
+    let listOfArtists = []
 
     spotifyArtists.forEach(async item => {
       const newArtist = new Artist(item);
-      artists.push(newArtist);
+      listOfArtists.push(newArtist);
       await newArtist.save();
     });
 
     spotifyData.forEach(async releaseItem => {
-      // const newRelease = new Release({
-      //   ...releaseItem,
-      //   album_type: types.find(typeItem => typeItem.album_type === releaseItem.album_type)
-      // });
-      const newRelease = new Release(releaseItem)
+      const newRelease = new Release({
+        ...releaseItem,
+        album_type: types.find(typeItem => typeItem.album_type === releaseItem.album_type),
+        artists: listOfArtists.filter(artistItem => artistItem.release_id === releaseItem.id)
+      });
       await newRelease.save();
     });
   }
@@ -96,7 +106,7 @@ app.get("/", (req, res) => {
 
 // This route will return a collection of releases
 app.get("/releases", async (req, res) => {
-  const allReleases = await Release.find(req.query);
+  const allReleases = await Release.find(req.query).populate("album_type").populate("artists");
   if (allReleases.length === 0) {
     res.status(404).json(ERROR_RELEASES_NOT_FOUND);
   } else {
@@ -109,7 +119,7 @@ app.get("/releases", async (req, res) => {
 
 // This route will return a single release based on id
 app.get("/releases/:id", async (req, res) => {
-  const release = await Release.findOne({ id: req.params.id });
+  const release = await Release.findOne({ id: req.params.id }).populate("album_type").populate("artists");
   if (!release) {
     res.status(404).json(ERROR_RELEASES_NOT_FOUND);
   } else {
@@ -119,9 +129,40 @@ app.get("/releases/:id", async (req, res) => {
 
 // This route will return a collection of releases with an artist name containing the specified word(s)
 app.get("/releases/artist/:artist", async (req, res) => {
-  const artistQuery = await Release.find({
-    artists: { $elemMatch: { name: new RegExp(req.params.artist, "i") } }
-  })
+  // The function below was used when the artists were embedded sub-documents
+  // const artistQuery = await Release.find({
+  //   artists: { $elemMatch: { name: new RegExp(req.params.artist, "i") } }
+  // })
+
+  // This function works when the artists are stored in the separate collection artists
+  // and referenced in the collection releases.
+  const artistQuery = await Release.aggregate([
+    {
+      $unwind: "$artists"
+    },
+    {
+      $lookup: {
+        from: "artists",
+        localField: "artists",
+        foreignField: "_id",
+        as: "artists"
+      }
+    },
+    {
+      $lookup: {
+        from: "types",
+        localField: "album_type",
+        foreignField: "_id",
+        as: "album_type"
+      }
+    },
+    {
+      $match: {
+        "artists.name": new RegExp(req.params.artist, "i")
+      }
+    }
+  ]);
+
   if (artistQuery.length === 0) {
     res.status(404).json(ERROR_RELEASES_NOT_FOUND);
   } else {
@@ -136,7 +177,7 @@ app.get("/releases/artist/:artist", async (req, res) => {
 app.get("/releases/title/:title", async (req, res) => {
   const titleQuery = await Release.find({
     name: new RegExp(req.params.title, "i")
-  })
+  }).populate("album_type").populate("artists")
   if (titleQuery.length === 0) {
     res.status(404).json(ERROR_RELEASES_NOT_FOUND);
   } else {
@@ -149,9 +190,29 @@ app.get("/releases/title/:title", async (req, res) => {
 
 // This route will return a collection of releases with a type containing the specified word(s)
 app.get("/releases/type/:type", async (req, res) => {
-  const typeQuery = await Release.find({
-    album_type: new RegExp(req.params.type, "i")
-  })
+  const typeQuery = await Release.aggregate([
+    {
+      $lookup: {
+        from: "types",
+        localField: "album_type",
+        foreignField: "_id",
+        as: "album_type"
+      }
+    },
+    {
+      $lookup: {
+        from: "artists",
+        localField: "artists",
+        foreignField: "_id",
+        as: "artists"
+      }
+    },
+    {
+      $match: {
+        "album_type.album_type": new RegExp(req.params.type, "i")
+      }
+    }
+  ]);
   if (typeQuery.length === 0) {
     res.status(404).json(ERROR_RELEASES_NOT_FOUND);
   } else {
@@ -164,10 +225,32 @@ app.get("/releases/type/:type", async (req, res) => {
 
 // This route will return a collection of releases in the specified market for the specified type
 app.get("/releases/market/:market/type/:type", async (req, res) => {
-  const filteredReleases = await Release.find({
-    available_markets: req.params.market,
-    album_type: req.params.type
-  })
+  const filteredReleases = await Release.aggregate([
+    {
+      $lookup: {
+        from: "types",
+        localField: "album_type",
+        foreignField: "_id",
+        as: "album_type"
+      }
+    },
+    {
+      $lookup: {
+        from: "artists",
+        localField: "artists",
+        foreignField: "_id",
+        as: "artists"
+      }
+    },
+    {
+      $match: {
+        $and: [
+          { "album_type.album_type": new RegExp(req.params.type, "i") },
+          { available_markets: req.params.market }
+        ]
+      }
+    }
+  ]);
   if (filteredReleases.length === 0) {
     res.status(404).json(ERROR_RELEASES_NOT_FOUND);
   } else {
@@ -186,7 +269,20 @@ app.get("/types", async (req, res) => {
   } else {
     res.json({
       total: allTypes.length,
-      releases: allTypes
+      types: allTypes
+    });
+  }
+});
+
+// This route will return a list of all available artists.
+app.get("/artists", async (req, res) => {
+  const allArtists = await Artist.find();
+  if (allArtists.length === 0) {
+    res.status(404).json(ERROR_RELEASES_NOT_FOUND);
+  } else {
+    res.json({
+      total: allArtists.length,
+      artists: allArtists
     });
   }
 });
