@@ -17,7 +17,7 @@ const mongoUrl =
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-/*SEED THE DATABASE*/
+/*Model for the album object*/
 const Album = mongoose.model("Album", {
 	number: Number,
 	year: Number,
@@ -27,10 +27,10 @@ const Album = mongoose.model("Album", {
 	subgenre: String,
 });
 
+/*Seed the database if the environment variable reset_tdb is true*/
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
 		await Album.deleteMany({});
-
 		albums.forEach((albumData) => {
 			new Album(albumData).save();
 		});
@@ -47,6 +47,7 @@ app.use(cors());
 app.use(bodyParser.json());
 const myEndpoints = require("express-list-endpoints");
 
+/*List all of the endpoints on / */
 app.get("/", (req, res) => {
 	res.send(myEndpoints(app));
 });
@@ -83,7 +84,7 @@ app.get("/api/albums", async (req, res) => {
 	let yearFromFilter = null;
 	let filterArray = [];
 
-	//Check if there are sorting parameters in the query. If not, the default is used. If one param, the other param is default.
+	//Check if there are sorting parameters in the query. If not, the default is used. If only one param, the other param is default.
 	if (sortBy || sortOrder) {
 		const querySortBy = !sortBy ? "number" : sortBy.toLowerCase();
 		const querySortOrder = !sortOrder ? 1 : sortOrder;
