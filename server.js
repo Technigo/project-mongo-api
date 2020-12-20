@@ -67,13 +67,20 @@ app.get("/", (request, response) => {
 //localhost:8080/books
 app.get('/books', async (request, response) => {
 
-  const books = await Book.find()
+  try {
+    const books = await Book.find()
 
-  if (books) {
-    response.json(books)
-  } else {
-    response.status(404).json({ error: `No books were found.` })
+    if (books) {
+      response.json(books)
+    } else {
+      response.status(404).json({ error: `No books were found.` })
+    }
   }
+
+  catch (err) {
+    response.status(400).json({ error: `Invalid request.` })
+  }
+
 })
 
 
