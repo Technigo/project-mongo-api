@@ -1,0 +1,13 @@
+
+# This file tells netlify where the code for this project is and
+# how it should build the JavaScript assets to deploy from.
+[build]
+  base = "frontend/"
+  publish = "build/"
+  command = "CI=false && npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
+  
