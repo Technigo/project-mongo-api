@@ -4,6 +4,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import spotifyData from "./data/spotify-releases.json";
+import spotifyTypes from "./data/spotify-types.json";
+import spotifyArtists from "./data/spotify-artists.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-spotify"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -36,13 +38,50 @@ const Release = new mongoose.model("Release", {
   uri: String
 });
 
+const Type = new mongoose.model("Type", {
+  album_type: String,
+});
+
+const Artist = new mongoose.model("Artist", {
+  external_urls: { spotify: String },
+  href: String,
+  id: String,
+  name: String,
+  artist_type: String,
+  uri: String,
+  release_id: String
+});
+
 if (process.env.RESET_DATABASE) {
   const populateDatabase = async () => {
+    await Type.deleteMany();
+    await Artist.deleteMany();
     await Release.deleteMany();
 
-    spotifyData.forEach(item => {
-      new Release(item).save();
-    })
+    let types = [];
+
+    spotifyTypes.forEach(async item => {
+      const newType = new Type(item);
+      types.push(newType);
+      await newType.save();
+    });
+
+    let artists = []
+
+    spotifyArtists.forEach(async item => {
+      const newArtist = new Artist(item);
+      artists.push(newArtist);
+      await newArtist.save();
+    });
+
+    spotifyData.forEach(async releaseItem => {
+      // const newRelease = new Release({
+      //   ...releaseItem,
+      //   album_type: types.find(typeItem => typeItem.album_type === releaseItem.album_type)
+      // });
+      const newRelease = new Release(releaseItem)
+      await newRelease.save();
+    });
   }
   populateDatabase();
 };
@@ -78,7 +117,7 @@ app.get("/releases/:id", async (req, res) => {
   }
 });
 
-// This route will return a collection of releases for the specified artist
+// This route will return a collection of releases with an artist name containing the specified word(s)
 app.get("/releases/artist/:artist", async (req, res) => {
   const artistQuery = await Release.find({
     artists: { $elemMatch: { name: new RegExp(req.params.artist, "i") } }
@@ -93,7 +132,7 @@ app.get("/releases/artist/:artist", async (req, res) => {
   }
 });
 
-// This route will return a collection of releases for the specified artist
+// This route will return a collection of releases with a title containing the specified word(s) 
 app.get("/releases/title/:title", async (req, res) => {
   const titleQuery = await Release.find({
     name: new RegExp(req.params.title, "i")
@@ -108,9 +147,23 @@ app.get("/releases/title/:title", async (req, res) => {
   }
 });
 
+// This route will return a collection of releases with a type containing the specified word(s)
+app.get("/releases/type/:type", async (req, res) => {
+  const typeQuery = await Release.find({
+    album_type: new RegExp(req.params.type, "i")
+  })
+  if (typeQuery.length === 0) {
+    res.status(404).json(ERROR_RELEASES_NOT_FOUND);
+  } else {
+    res.json({
+      total: typeQuery.length,
+      releases: typeQuery
+    });
+  }
+});
+
 // This route will return a collection of releases in the specified market for the specified type
 app.get("/releases/market/:market/type/:type", async (req, res) => {
-
   const filteredReleases = await Release.find({
     available_markets: req.params.market,
     album_type: req.params.type
@@ -123,6 +176,19 @@ app.get("/releases/market/:market/type/:type", async (req, res) => {
       releases: filteredReleases
     });
   };
+});
+
+// This route will return a list of all available release types.
+app.get("/types", async (req, res) => {
+  const allTypes = await Type.find();
+  if (allTypes.length === 0) {
+    res.status(404).json(ERROR_RELEASES_NOT_FOUND);
+  } else {
+    res.json({
+      total: allTypes.length,
+      releases: allTypes
+    });
+  }
 });
 
 // Start the server
