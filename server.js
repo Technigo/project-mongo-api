@@ -27,7 +27,7 @@ const Artist = mongoose.model('Artist', {
 })
 
 if (process.env.RESET_DATABASE) {
-  const populateDatabase = async () => {
+  const seedDatabase = async () => {
     await Artist.deleteMany({})
   
     topMusicData.forEach((item) => {
@@ -35,7 +35,7 @@ if (process.env.RESET_DATABASE) {
       newArtist.save()
     })
   }
-  populateDatabase()
+  seedDatabase()
 }
 
 const port = process.env.PORT || 8081
