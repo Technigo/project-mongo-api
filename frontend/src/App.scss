@@ -1,0 +1,21 @@
+@import "./styles/config";
+@import "./styles/header";
+@import "./styles/volcano";
+@import "./styles/volcanolist";
+@import "./styles/footer";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $fonstStack;
+  background-image: url("./assets/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@import "./styles/tablet";
+@import "./styles/mobile";

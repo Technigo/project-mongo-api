@@ -17,7 +17,6 @@ export const Header = ({
 
   const handleOnChangeHeight = (event) => {
     setSearchMinHeight(event.target.value);
-    console.log("number", event.target.value);
   };
 
   return (
@@ -35,13 +34,11 @@ export const Header = ({
           placeholder="Find country"
           onChange={(event) => handleOnChangeCountry(event)}
         />
-
         <input
           type="number"
           placeholder="Min height"
           onChange={(event) => handleOnChangeHeight(event)}
         />
-
         <select onChange={(event) => setSort(event.target.value)} value={sort}>
           <option value="">Sort volcanos</option>
           <option value="name">Name</option>

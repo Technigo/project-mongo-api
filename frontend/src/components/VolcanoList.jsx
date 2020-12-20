@@ -13,7 +13,7 @@ export const VolcanoList = ({
   page,
   setPage,
 }) => {
-  const URL = `http://localhost:8080/volcanos?page=${page}&sort=${sort}&Name=${searchByName}&Country=${searchByCountry}&height=${searchMinHeight}`;
+  const URL = `https://my-volcanos.herokuapp.com/volcanos?page=${page}&sort=${sort}&Name=${searchByName}&Country=${searchByCountry}&height=${searchMinHeight}`;
   // const URL = `https://my-volcanos.herokuapp.com/volcanos?sort=${sort}&page=${page}&Name=${searchByName}&Country=${searchByCountry}`;
 
   useEffect(() => {

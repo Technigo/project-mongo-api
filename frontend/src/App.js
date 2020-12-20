@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./App.scss";
 import { VolcanoList } from "./components/VolcanoList";
 import { Volcano } from "./components/Volcano";
 import { Header } from "./components/Header";
