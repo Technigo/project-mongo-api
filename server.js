@@ -9,22 +9,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const port = process.env.PORT || 8082;
-const app = express();
-const listEndpoints = require("express-list-endpoints");
-
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(bodyParser.json());
-
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next();
-  } else {
-    res.status(503).json({ error: `Database unavailable` });
-  }
-});
-
 const Album = new mongoose.model("Album", {
   position: Number,
   artist: String,
@@ -46,13 +30,35 @@ if (process.env.RESET_DATABASE) {
   seedDatabase();
 }
 
+const port = process.env.PORT || 8082;
+const app = express();
+const listEndpoints = require("express-list-endpoints");
+
+app.use(cors());
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: `Service unavailable` });
+  }
+});
+
 app.get("/", (req, res) => {
   res.send(listEndpoints(app));
 });
 
 app.get("/albums", async (req, res) => {
-  const allAlbums = await Album.find(req.query); // This allows all database fields to be queries
-  res.json(allAlbums);
+  const allAlbums = await Album.find(req.query); // Clean way of setting queries. This allows all database fields to be queries
+  if (allAlbums) {
+    res.json({
+      numberOfResults: allAlbums.length,
+      results: allAlbums,
+    });
+  } else {
+    res.status(404).send({ error: `No albums found` });
+  }
 });
 
 app.get("/albums/:position", async (req, res) => {
@@ -65,7 +71,7 @@ app.get("/albums/:position", async (req, res) => {
   }
 });
 
-app.get("/albums/id/:id", async (req, res) => {
+app.get("/albumid/:id", async (req, res) => {
   try {
     const albumById = await Album.findById(req.params.id);
     if (albumById) {
@@ -78,16 +84,6 @@ app.get("/albums/id/:id", async (req, res) => {
   }
 });
 
-// app.get("/albums/:album", async (req, res) => {
-//   // const { album } = req.params;
-//   // if (album) {
-//   //   const findAlbum = await Album.findOne({ albumName: req.params.album });
-//   //   res.json(findAlbum);}
-//   const singleAlbum = await Album.findOne({ albumName: req.params.album });
-//   res.json(singleAlbum);
-// });
-
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
