@@ -25,4 +25,6 @@ Query-params:
 
 ## View it live
 
+https://hanna-mongodb-netflix-api.herokuapp.com/netflix-titles
+
 
