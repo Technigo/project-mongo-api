@@ -14,7 +14,7 @@ Then I created a /release/:id route returning a single release with a specified 
 The first endpoint /releases accept filters via query parameterers but, because of the data structure, I could not reproduce the same query params for this endpoint as in the previous project.
 Instead, I challenged myself by creating 2 additional collections (types and artists) and referencing to them in the main collection releases. I created 2 separate endpoints (/types and /artists) for these new collections.
 
-To compensate the limitations of the query params in /releases, I created additional endpoints using mongoose's aggregate functions $unwind, $lookup and $match:
+To compensate the limitations of the query params in /releases, I created additional endpoints using Mongoose's aggregate functions $unwind, $lookup and $match:
 - /releases/artist/:artist to return a collection of releases with an artist name containing the specified word(s)
 - /releases/title/:title to return a collection of releases with a title containing the specified word(s)
 - /releases/type/:type to return a collection of releases with a type containing the specified word(s)
@@ -25,5 +25,5 @@ If I had more time, I would have used more of the MongoDB aggregate pipeline to 
 ## View it live
 
 You can take a look at the result on https://spotify-releases-v2.herokuapp.com/
-You are welcome to visit my pull request https://github.com/Technigo/project-express-api/pull/122 and leave some comments about my code.
+You are welcome to visit my pull request https://github.com/Technigo/project-mongo-api/pull/117 and leave some comments about my code.
 Enjoy!
