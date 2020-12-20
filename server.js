@@ -69,7 +69,11 @@ app.get('/books', async (request, response) => {
 
   const books = await Book.find()
 
-  response.json(books)
+  if (books) {
+    response.json(books)
+  } else {
+    response.status(404).json({ error: `No books were found.` })
+  }
 })
 
 
