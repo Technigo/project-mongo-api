@@ -42,7 +42,9 @@ if (process.env.RESET_DATABASE) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send(`Welcome to the Top music API with ${data.length} listed tracks.`);
+  res.send(
+    `Welcome to the Top Music API with ${topMusicData.length} listed tracks.`
+  );
 });
 
 app.get("/tracks", async (req, res) => {
@@ -65,9 +67,9 @@ app.get("/artists/:artist/tracks", (req, res) => {
   const singleArtist = topMusicData.filter((item) =>
     item.artistName.includes(artistCapitalized)
   );
-  console.log(singleArtist)
+  console.log(singleArtist);
   if (singleArtist.length === 0) {
-    res.status(404).json({ error: "Artist not found" });    
+    res.status(404).json({ error: "Artist not found" });
   } else {
     res.json(singleArtist);
   }
