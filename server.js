@@ -47,8 +47,8 @@ if (process.env.RESET_DATABASE) {
     await Event.deleteMany();
     await Speaker.deleteMany();
 
-    let events = [];
-    let speakers = [];
+    let events = [{}];
+    let speakers = [{}];
 
     // EVENTS - Remove all dublicate events and create a new array
     const allEvents = Array.from(new Set(tedData.map((talk) => talk.event)));
@@ -66,8 +66,8 @@ if (process.env.RESET_DATABASE) {
       const newSpeaker = new Speaker({
         name: item,
       });
-      speakers.push(newSpeaker);
       newSpeaker.save();
+      speakers.push(newSpeaker);
     });
 
     // ALL TALKS - including connected events and speakers
@@ -97,24 +97,16 @@ app.get('/', (req, res) => {
 app.get('/talks', (req, res) => {
   const queriedTalks = req.query.search;
   const queryRegex = new RegExp(queriedTalks, 'i');
-  Talk.find({ name: queryRegex }, (err, data) => {
-    if (err) {
-      res.status(400).json({ error: 'Invalid request' });
-    } else {
-      const page = req.query.page ?? 1;
-      const pageSize = 50;
-      const startIndex = page * pageSize - pageSize;
-      const endIndex = startIndex + pageSize;
-      const talksForPage = data.slice(startIndex, endIndex);
-      const returnData = {
-        Page: `${page}/${Math.ceil(data.length / pageSize)}`,
-        Talks: `${startIndex}-${endIndex}`,
-        'Total amount of talks': data.length,
-        data: talksForPage,
-      };
-      res.json(returnData);
-    }
-  });
+  Talk.find({ name: queryRegex })
+    .populate('event')
+    .populate('main_speaker')
+    .then((data) => {
+      if (data.length === 0) {
+        res.status(400).json({ error: 'Invalid request' });
+      } else {
+        res.json(data);
+      }
+    });
 });
 
 // TALKS BY ID --------------------------------
@@ -161,24 +153,19 @@ app.get('/events/:id', (req, res) => {
 });
 
 // TALKS BY EVENT -----------------------
-app.get('/events/:id/talks', (req, res) => {
-  Event.findById(req.params.id, (err, data) => {
-    const event = data.name;
-
-    Talk.find({ event: req.params.id }, (err, data) => {
-      if (data.length === 0) {
-        res.status(404).json({
-          error: `Couldn't find any talks by ${req.params.id}`,
-        });
-      } else {
-        res.json({
-          Event: event,
-          'Amount of talks': data.length,
-          data: data,
-        });
-      }
-    });
-  });
+app.get('/events/:id/talks', async (req, res) => {
+  const event = await Event.findById(req.params.id);
+  Talk.find({ event: event })
+    .populate('event')
+    .populate('main_speaker')
+    .then((data) => {
+      res.json({
+        Event: event.name,
+        'Amount of talks': data.length,
+        data: data,
+      });
+    })
+    .catch((error) => res.status(400).json(error));
 });
 
 // SPEAKERS --------------------------------
@@ -200,7 +187,7 @@ app.get('/speakers/:id', (req, res) => {
   Speaker.findById(req.params.id, (err, data) => {
     if (err) {
       res.status(404).json({
-        error: `Could not find any talk with the id ${req.params.id}`,
+        error: `Could not find any speaker with the id ${req.params.id}`,
       });
     } else {
       res.json(data);
@@ -209,24 +196,25 @@ app.get('/speakers/:id', (req, res) => {
 });
 
 // TALKS BY SPEAKER -----------------------
-app.get('/speakers/:id/talks', (req, res) => {
-  Speaker.findById(req.params.id, (err, data) => {
-    const speaker = data.name;
-
-    Talk.find({ main_speaker: req.params.id }, (err, data) => {
+app.get('/speakers/:id/talks', async (req, res) => {
+  const speaker = await Speaker.findById(req.params.id);
+  Talk.find({ main_speaker: speaker })
+    .populate('event')
+    .populate('main_speaker')
+    .then((data) => {
       if (data.length === 0) {
         res.status(404).json({
-          error: `Couldn't find any talks by ${req.params.id}`,
+          error: `Could not find any talks by ${req.params.id}`,
         });
       } else {
         res.json({
-          Speaker: speaker,
+          Speaker: speaker.name,
           'Amount of talks': data.length,
           data: data,
         });
       }
-    });
-  });
+    })
+    .catch((error) => console.log(error));
 });
 
 // CATEGORIES --------------------------------
@@ -261,7 +249,7 @@ app.get('/categories/:category/talks', (req, res) => {
   Talk.find({ tags: queryRegex }, (err, data) => {
     if (data.length === 0) {
       res.status(404).json({
-        error: `Couldn't find any talks by ${queriedSpeaker}`,
+        error: `Couldn't find any talks on ${queriedCategory}`,
       });
     } else {
       res.json({
