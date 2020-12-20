@@ -52,7 +52,7 @@ if (process.env.RESET_DATABASE) {
 }
 
 app.get('/', (req, res) => {
-  res.send('Hello sourdough!')
+  res.send('Hello sourdough! Here you can search after your favourite /artist, /track or /genre. Enjoy!')
 })
 
 app.get('/topsongs', async (req, res) => {
