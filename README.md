@@ -1,13 +1,26 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+For this project I have used Mongodb to store and retrieve data from a RESTful API. The data is fetched from a json file and populated to the database.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The API has different routes for tracks and artist.
 
-## The problem
+## Documentation
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+To find data in the API
+
+List all tracks:
+https://api-top-music.herokuapp.com/tracks
+
+List all track with query, example:
+https://api-top-music.herokuapp.com/tracks?genre=pop
+
+Fetch single track:
+https://api-top-music.herokuapp.com/tracks/:id
+
+List all tracks from specific artist:
+https://api-top-music.herokuapp.com/artists/:artist/tracks
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://api-top-music.herokuapp.com/
