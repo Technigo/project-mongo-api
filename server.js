@@ -1,5 +1,5 @@
 import express from 'express'
-import bodyParser from 'body-parser'
+import bodyParser, { json } from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
@@ -28,53 +28,134 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+// Mongoose models 
+const Artist = new mongoose.model('Artist', {
+  name: String
+});
+
 const Tracks = new mongoose.model('Tracks', {
   id: Number,
   trackName: String,
-  artistName: String,
   genre: String,
   bpm: Number,
   energy: Number,
-  danceability: Number,
-  loudness: Number,
-  liveness: Number,
-  valence: Number,
   length: Number,
-  acousticness: Number,
-  speechiness: Number,
-  popularity: Number
+  popularity: Number,
+  artistName: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Artist'
+  }
 });
 
-if (process.env.RESET_DATABASE) {
-const populateDatabase = () => {
-  Tracks.deleteMany();
+// Populating database 
 
-  topMusicData.forEach(item => {
-    const newTracks = new Tracks(item)
-    newTracks.save();
+if (process.env.RESET_DATABASE) {
+  const populateDatabase = async () => {
+    // Prevent getting multiple same responses, this starts with deleting what is existing
+    await Tracks.deleteMany();
+    await Artist.deleteMany();
+
+    topMusicData.forEach(item => {
+      const newTracks = new Tracks(item)
+      newTracks.save();
+    });
+
+    // Create an array with unique tracks from topMusicData 
+    const artists = topMusicData.map((item) => item.artistName)
+    const uniqueArtists = Array.from(new Set(artists));
+
+    // Creates artist array mongoose model 
+    uniqueArtists.forEach(async artist => {
+      const newArtist = new Artist({ name: artist });
+
+      artist.push(newArtist)
+      await newArtist.save();
+    });
+
+    //Creates an array of the tracks objects according to the mongoose model
+    topMusicData.forEach(async trackItem => {
+      const newTrack = new Tracks({
+        ...trackItem,
+        artistName: artists.find((artist) => artist.name === trackItem.artistName)
+      });
+      await newTrack.save();
     })
-  }
+  };
   populateDatabase();
-}
+};
+
+// A middleware to handle server connections errors 
+app.use((req, res, next) => {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      next()
+    } else {
+      res.status(503).json({error: 'Service unavailable' });
+    } 
+    } catch (error) {
+      res.status(400).json({ error: 'Error! Could not access the server.'})
+  }
+});
 
 // Routes 
 app.get('/', (req, res) => {
-  res.send('Hello world')
-})
+  res.send('Welcome to the music API')
+});
 
+// Route to all tracks
 app.get('/tracks', async (req, res) => {
   const allTracks = await Tracks.find();
   res.json(allTracks)
-})
+});
 
+// Route to find a specific track per id 
 app.get('/tracks/:id', async (req, res) => {
-  const id = req.params.id;
-  const singleTracks = await Tracks.find({ id: +id })
+  const singleTracks = await Tracks.findOne({ id: req.params.id })
 
-  res.json(singleTracks);
-})
+  if (singleTracks) {
+    res.json(singleTracks);
+  } else {
+    res.status(404).json({ error: 'Could not find this track' })
+  }
+});
+
+// Route to search by tracknamr
+app.get('/tracks/:name', async (req, res) => {
+  const { name } = req.params;
+  const singleName = await Tracks.findOne({ trackName: name })
+  res.json(singleName);
+});
+
+// Limiting returning data
+app.get('/tracks20', async (req, res) => {
+  const allTracks = await Tracks.find(req.query).skip(20).limit(20);
+  res.json(allTracks);
+});
+
+// Get all artists 
+app.get('/artists', async (req, res) => {
+  const artists = await Artist.find({ Artist });
+  if (artists) {
+    res.json(artists);
+  } else {
+    // Error handling
+    res.status(404).json({ error: 'Artists not found' });
+  };
+});
+
+// Route all tracks by a certain artist 
+app.get('/artists/:id/tracks', async (req, res) => {
+  const artist = await Tracks.findById(req.params.id);
+
+  if (artist) {
+    const tracks = await Tracks.find({ artistName: mongoose.Types.ObjectId(artist.id) });
+    res.json(tracks);
+  } else {
+    res.status(404).json({error: 'Artist not found!' })
+  }
+});
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
-})
+});
