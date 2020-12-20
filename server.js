@@ -45,13 +45,18 @@ if (process.env.RESET_DATABASE) {
 
 //________ Routes/Endpoints ________ //
 app.get('/', (req, res) => {
-  res.json('👋 Welcome to Emmas book and book reviews API! Use the /books endpoint to get started 📚🦉. Use the parameter id to find one book, for example: books/5.')
+  res.json('👋 Welcome to Emmas book and book reviews API! Use the /books endpoint to see all books 📚🦉. Use the id-parameter to find one book, for example: books/5.')
 })
 
 //Finding all books
 app.get('/books', async (req, res) => {
   const allBooks = await Book.find()
-  res.json(allBooks)
+
+    if (!allBooks) {
+      res.status(404).json({error: 'Books not found'})
+    } else {
+      res.json(allBooks)
+    } 
 })
 
 //Finding a single book based on bookID
@@ -63,8 +68,8 @@ app.get('/books/:bookID', async (req, res) => {
       res.json(singleBook)
     } else {
       res.status(404).json({error: 'Book not found'})
-    }
-    } catch (error) {
+    } 
+  } catch (error) {
       res.status(400).json({error: 'Invalid book id'})
     }
 })

@@ -1,13 +1,17 @@
-# Mongo API Project
+# Mongo API Project 🍃
 
-Replace this readme with your own information about your project. 
+The purpose for this project was to start learning about MongoDB, using a database to store and retrieve data from and use that data to produce a RESTful API.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Solving the project 💡
 
-## The problem
+I used the books data from the previous project to create the model Book for my data. I used the mongoose method findOne() to be able to find one book based on its id. Other routes/endpoints are the root / and /books endpoint to se all  the books in the data. I also added error-handling in all get-requests.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## Tech ⚡️
+- MongoDB
+- Mongoose
+- Node.js
+- Express
 
-## View it live
+## View it live 👩‍💻
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Link to the deployed project: 
