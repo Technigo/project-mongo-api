@@ -1,13 +1,30 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+A RESTful book API built in Node.js using Express and data from MongoDB containing book list. :books:
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## :brain: Learning objectives
+- how to model data in Mongoose
+- how to fetch items from a Mongo database using Mongoose
+- how to seed large amounts of data to a database
 
-## The problem
+## :heavy_check_mark: Features
+- List of 499 books: https://project-mongo-db.herokuapp.com/books
+- Single book by ISBN13: https://project-mongo-db.herokuapp.com/books/9780060920081
+- Returning an error message if the book was not found (when searched by ISBN13)
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## :chart_with_upwards_trend: Future improvements
+- make a list of top 20 books based on average ranking
+- implement pages 
+- create documentation for the endpoints
+- using mongoose to manipulate data after retrieving from the database
+ 
+## :robot: Tech used 
+- JavaScript
+- Node.js
+- Express
+- MongoDB
+- Mongo Compass
+- MongoDB Atlas
 
-## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+## :eyes: View it live
+https://project-mongo-db.herokuapp.com/
