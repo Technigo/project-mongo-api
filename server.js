@@ -17,8 +17,6 @@ app.use(bodyParser.json())
 
 const ERROR_404 = "Sorry, can't find what you are looking for, please try again"
 
-
-// when searching for artists- all artists-
 const TopSong = mongoose.model('TopSong', {
   id: Number,
   trackName: String,
@@ -58,18 +56,16 @@ app.get('/', (req, res) => {
 app.get('/topsongs', async (req, res) => {
   let filteredTopsongs = await TopSong.find()
   const { minDanceability, maxDanceability, genre, length } = req.query
- 
 
-  if(maxDanceability) {
+  if (maxDanceability) {
     filteredTopsongs = filteredTopsongs.filter(track => track.danceability <= maxDanceability)
   }
   if (minDanceability) {
     filteredTopsongs = filteredTopsongs.filter(track => track.danceability >= minDanceability)
-  } 
+  }
 
   res.json(filteredTopsongs)
 })
-
 
 app.get('/topsongs/artist/:artist', async (req, res) => {
   const artistRegexp = new RegExp(req.params.artist, "i")
@@ -91,20 +87,16 @@ app.get('/topsongs/track/:track', async (req, res) => {
   }
 })
 
- // search based on genre?
- app.get('topsong/genre/:genre', async (req, res) => {
-   const genreRegExp= new RegExp(req.params.genre, "i")
-   const songsInGenre = await TopSong.find({ genre: genreRegExp })
-   if(songsInGenre.length === 0 ){
+app.get('topsong/genre/:genre', async (req, res) => {
+  const genreRegExp = new RegExp(req.params.genre, "i")
+  const songsInGenre = await TopSong.find({ genre: genreRegExp })
+  if (songsInGenre.length === 0) {
     res.status(404).json(ERROR_404)
-   } else {
-     res.json(songsInGenre)
-   }
- })
+  } else {
+    res.json(songsInGenre)
+  }
+})
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
-
-
-// do a map over all the artist so it returns a list og all artists in the list. 
