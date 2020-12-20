@@ -23,12 +23,10 @@ app.use(cors())
 app.use(bodyParser.json())
 
 const Release = new mongoose.model("Release", {
-  // album_type: String,
   album_type: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Type"
   },
-  // artists: [{ external_urls: { spotify: String }, href: String, id: String, name: String, artist_type: String, uri: String }],
   artists: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -129,13 +127,6 @@ app.get("/releases/:id", async (req, res) => {
 
 // This route will return a collection of releases with an artist name containing the specified word(s)
 app.get("/releases/artist/:artist", async (req, res) => {
-  // The function below was used when the artists were embedded sub-documents
-  // const artistQuery = await Release.find({
-  //   artists: { $elemMatch: { name: new RegExp(req.params.artist, "i") } }
-  // })
-
-  // This function works when the artists are stored in the separate collection artists
-  // and referenced in the collection releases.
   const artistQuery = await Release.aggregate([
     {
       $unwind: "$artists"
