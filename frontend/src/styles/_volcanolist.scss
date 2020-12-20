@@ -1,2 +1,28 @@
 main {
+  h2,
+  p {
+    display: inline;
+    font-size: 44px;
+  }
+
+  h2 {
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+  }
+
+  .button-card {
+    background: none;
+    border: none;
+    padding: 10px;
+    text-align: left;
+
+    cursor: pointer;
+
+    &:hover {
+      color: lighten($primaryFont, 10%);
+      opacity: 0.4;
+      transition: 0.1s ease;
+    }
+  }
 }

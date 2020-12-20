@@ -1,0 +1,20 @@
+article {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+
+  h3 {
+    font-size: 52px;
+  }
+  p {
+    font-size: 28px;
+    margin-left: 6px;
+    line-height: 44px;
+  }
+  button {
+    @include basicButton;
+
+    margin-left: auto;
+  }
+}

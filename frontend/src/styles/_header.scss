@@ -1,7 +1,7 @@
 header {
   display: flex;
   justify-content: space-between;
-  height: 300px;
+  height: 250px;
   padding: 20px 0;
 
   .header-left-container {
@@ -10,10 +10,12 @@ header {
   }
 
   h1 {
-    color: black;
-    font-size: 62px;
+    color: $primaryFont;
+    font-size: 72px;
     display: inline;
-    mix-blend-mode: darken;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
 
   input {

@@ -38,13 +38,16 @@ export const VolcanoList = ({
     <>
       <main>
         {volcanos.map((volcano) => (
-          <article>
-            <button onClick={() => handleOnClickVolcano(volcano.Name)}>
-              <p>{volcano.Name}</p>
-              <p>{volcano.Country}</p>
-              <p>{volcano.ElevationMeters}</p>
+          <div>
+            <button
+              className="button-card"
+              onClick={() => handleOnClickVolcano(volcano.Name)}
+            >
+              <h2>{volcano.Name} / </h2>
+              <p>{volcano.Country} / </p>
+              <p>{volcano.ElevationMeters} m</p>
             </button>
-          </article>
+          </div>
         ))}
       </main>
       <VolcanoListFooter page={page} setPage={setPage} volcanos={volcanos} />
