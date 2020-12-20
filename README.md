@@ -15,17 +15,17 @@ Welcome page - contains a list of available routes
 
 ### /albums
 
-Returns all albums - or query results
+Returns an array of all albums - or query results
 Here I use a handy line of code which will return all albums unless there is a query. This enables all available data fields to be queried with multiple queries also possible
 query example: /albums?artist=The Beatles&year=1965
 
 ### /albums/:position
 
-Returns one item
+Returns single object item
 
 ### /albumid/:id
 
-Returns one item
+Returns single object item
 
 ## Tech
 
