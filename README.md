@@ -1,13 +1,12 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This weeks project was to create a REST api using express, and to store and retrieve data in mongoDB.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started out modeling the db-object and tried seeding the database. Then I tried out some different queries to get the feel of the syntax. I re-used my endpoints from the last api-project, but added the retreival of data from the DB.
+I experimented with the $and operator a little bit apart from the regular filter queries with only one parameter. As I am used to relational databases and SQL I think it was a bit challenging but very useful.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://karolin-albums-mongodb.herokuapp.com/
