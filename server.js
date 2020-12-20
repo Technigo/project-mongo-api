@@ -27,18 +27,18 @@ const Artist = mongoose.model('Artist', {
 })
 
 if (process.env.RESET_DATABASE) {
-  const seedDatabase = () => {
-    Artist.deleteMany()
+  const populateDatabase = async () => {
+    await Artist.deleteMany({})
   
-    topMusicData.forEach(item => {
+    topMusicData.forEach((item) => {
       const newArtist = new Artist(item)
       newArtist.save()
     })
   }
-  seedDatabase()
+  populateDatabase()
 }
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8081
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -47,13 +47,13 @@ app.use(bodyParser.json())
 
 
 app.get('/', (req, res) => {
-  res.send('Hello!')
+  res.send('API of top songs on Spotify using Mondo DB!')
 })
 
-app.get('/artists', async (req, res) => {
-  const artists = await Artist.find()
-  res.json(artists)
-})
+// app.get('/artists', async (req, res) => {
+//   const artists = await Artist.find()
+//   res.json(artists)
+// })
 
 // Endpoint 1, all the data with 50 popular songs on Spotify 
 app.get('/songs', (req, res) => {
