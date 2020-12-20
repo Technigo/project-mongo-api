@@ -60,9 +60,11 @@ app.get("/shows", async (req, res) => {
   console.log(shows);
 });
 
-app.get("/shows/:country", async (req, res) => {
-  const showCountry = await Show.findOne({ country: req.params.country });
-  res.json(showCountry);
+app.get("/shows/:releaseyear", async (req, res) => {
+  const releaseyear = await Show.findOne({
+    release_year: req.params.releaseyear,
+  });
+  res.json(releaseyear);
 });
 
 // Start the server
