@@ -13,9 +13,7 @@ import netflixData from "./data/netflix-titles.json";
 console.log(netflixData.length);
 // import topMusicData from './data/top-music.json'
 
-//const mongoUrl = "mongodb+srv://dbUser:dbUserOlofTechnigo@cluster0.x2ofn.mongodb.net/projectMongo?retryWrites=true&w=majority"
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-console.log(mongoUrl);
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -65,9 +63,7 @@ app.use(bodyParser.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  console.log("Test");
-  res.send("Hello world");
-  console.log(mongoUrl);
+  res.send("Projet Mongo API by Olof");
 });
 
 //All shows
@@ -82,7 +78,7 @@ app.get("/shows", async (req, res) => {
 app.get("/shows/limited", async (req, res) => {
   const page = req.query.page;
   const shows = await Show.find()
-    .skip((page === 0 ? page : 1) * 10 - 10) //page value 0 will resort to 1 since monbgoDB doesn't accept otherwise.
+    .skip((page === 0 ? page : 1) * 10 - 10) //page value 0 will resort to 1 since monbgoDB doesn't accept otherwise. Strangely this works locally but not deployed to heroku...
     .limit(10);
   res.json(shows);
 });
