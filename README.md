@@ -1,13 +1,24 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+The assignment was to store and retrieve data in a database in MongoDB using a RESTful API made with Express. The API uses data from Kaggle.com and contains the following endpoints:
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Root: / Eruptions: /eruptions Eruption by id: /eruptions/:id Types: /types Types by id: /types/:id Eruptions by type id: /types/:id/eruptions
 
-## The problem
+## Learning Objectives
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+- Model data in Mongoose
+- Fetch items from a MongoDB using Mongoose
+- Seed large amounts of data to a database
+
+## Tech
+
+- JavaScript
+- Mongoose
+- Express
+- MongoDB
+- Heroku
+- Postman
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://eruption-db.herokuapp.com/
