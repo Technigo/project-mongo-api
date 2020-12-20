@@ -1,1 +1,30 @@
 $fonstStack: "Roboto", sans-serif;
+$primaryFont: #000;
+
+@mixin basicInput {
+  font-family: "Roboto", sans-serif;
+  color: $primaryFont;
+
+  height: 40px;
+  width: 180px;
+
+  display: block;
+  background: none;
+  border: 1px solid #000;
+
+  font-size: 16px;
+  font-weight: 300;
+  padding-left: 10px;
+  margin: 4px 0;
+
+  text-transform: uppercase;
+
+  &:focus {
+    outline: none;
+    font-style: italic;
+  }
+
+  &::placeholder {
+    color: $primaryFont;
+  }
+}

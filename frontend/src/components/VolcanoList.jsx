@@ -42,6 +42,7 @@ export const VolcanoList = ({
             <button onClick={() => handleOnClickVolcano(volcano.Name)}>
               <p>{volcano.Name}</p>
               <p>{volcano.Country}</p>
+              <p>{volcano.ElevationMeters}</p>
             </button>
           </article>
         ))}

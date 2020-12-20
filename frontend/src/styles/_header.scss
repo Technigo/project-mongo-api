@@ -1,0 +1,27 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 300px;
+  padding: 20px 0;
+
+  .header-left-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    color: black;
+    font-size: 62px;
+    display: inline;
+    mix-blend-mode: darken;
+  }
+
+  input {
+    @include basicInput;
+  }
+
+  select {
+    @include basicInput;
+    margin: 10px 0 0 10px;
+  }
+}

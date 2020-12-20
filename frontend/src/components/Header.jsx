@@ -21,7 +21,17 @@ export const Header = ({
 
   return (
     <header>
-      <h1>Cool volcanos</h1>
+      <div className="header-left-container">
+        <h1>Cool volcanos</h1>
+
+        <select onChange={(event) => setSort(event.target.value)} value={sort}>
+          <option value="">Sort volcanos</option>
+          <option value="name">Name</option>
+          <option value="country">Country</option>
+          <option value="height">Height</option>
+        </select>
+      </div>
+
       <div>
         <input
           type="text"
@@ -39,12 +49,6 @@ export const Header = ({
           placeholder="Min height"
           onChange={(event) => handleOnChangeHeight(event)}
         />
-        <select onChange={(event) => setSort(event.target.value)} value={sort}>
-          <option value="">Sort volcanos</option>
-          <option value="name">Name</option>
-          <option value="country">Country</option>
-          <option value="height">Height</option>
-        </select>
       </div>
     </header>
   );
