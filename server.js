@@ -60,8 +60,13 @@ app.get("/shows", async (req, res) => {
   console.log(shows);
 });
 
-app.get("/shows/:releaseyear", async (req, res) => {
-  const releaseyear = await Show.findOne({
+app.get("/shows/:title", async (req, res) => {
+  const searchTitle = await Show.findOne({ title: req.params.title });
+  res.json(searchTitle);
+});
+
+app.get("/shows/releaseyear/:releaseyear", async (req, res) => {
+  const releaseyear = await Show.find({
     release_year: req.params.releaseyear,
   });
   res.json(releaseyear);
