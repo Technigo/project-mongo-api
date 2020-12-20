@@ -75,7 +75,7 @@ app.get('/characters', async (req, res) => {
   }
 })
 
-// Shows one character with a unique id
+// Shows one character with unique id
 app.get('/characters/id/:id', async (req, res) => {
   const { id } = req.params
   const singleID = await Character.findOne({ id: id })
