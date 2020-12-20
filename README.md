@@ -1,13 +1,25 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+Using MongoDB as a database to store and retrieve data I have created an API with RESTful endpoints. 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## The Problem
 
-## The problem
+I decided to use a json data file including Netflix-shows. I created different routes and endpoints in which the user can search for a specific title in the array and find all the movies/tvshows that were released in a specific year. 
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Using mongoose I created a model for the show. Using find() the user is able to search and retrieve an array of titles or movies/tvshows from a specific year. Using the method findOne() the user can retrive an object of one specific title in the array of shows. 
 
+## Learning objectives
+
+- How to model data in Mongoose
+- How to fetch items from a Mongo database using Mongoose
+- How to seed large amounts of data to a database
+
+## Tech used
+
+- Node.js
+- API's
+- Heroku
+- MongoDB
 ## View it live
 
 Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
