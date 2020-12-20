@@ -1,11 +1,7 @@
-import express from 'express'
+import express, { request, response } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
 
 import booksData from './data/books.json'
 
@@ -27,8 +23,6 @@ const Book = mongoose.model("Book", {
   text_reviews_count: Number
 })
 
-//WHAT IF I WANT TO KEEP THE isbn: Number? HOW TO FIX ALL OF THEM TO type number?
-
 //custom environmental variable
 if (process.env.RESET_DATABASE) {
 
@@ -38,7 +32,11 @@ if (process.env.RESET_DATABASE) {
     await Book.deleteMany()
 
     booksData.forEach(book => {
+
+      //new document
       const newBook = new Book(book)
+
+      //saving the document to database
       newBook.save()
     })
   }
@@ -99,13 +97,56 @@ app.use(cors())
 app.use(bodyParser.json())
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  Book.find().then(book => {
-    res.json(book)
-  })
+//localhost:8080/
+app.get("/", (request, response) => {
+  //TODO: update with all possible endpoints
+  response.send("Hello, visitor. Endpoints with data: / -> the front page, /books -> returns a list of all books, ")
 })
 
-app.get("/:authors", (req, res) => {
+// --- returns all books ---
+//localhost:8080/books
+app.get('/books', async (request, response) => {
+
+  const books = await Book.find()
+  response.json(books)
+})
+
+// --- returns a book based on its ISBN13
+//localhost:8080/id/:isbn13
+
+
+// ---TODO: returns book by isbn13 ---
+app.get("/books/:isbn13", async (request, response) => {
+
+  //get isbn13 from the endpoint
+  const bookId = request.params.isbn13
+  console.log(`Isbn13: ${bookId}`)
+
+  // compare the number to one in the database
+  const bookISBN13 = await Book.findOne({ isbn13: bookId })
+
+  if (bookISBN13) {
+    response.json(bookISBN13)
+  } else {
+    response.status(404).json({ error: `The book with ISBN13 ${bookId} was not found.` })
+  }
+})
+
+// --- retuns all authors ---
+// I guess I need a new collection (authors only?) to do that?
+// app.get("/authors", async (request, response) => {
+//   const authors = await Books.find()
+//   response.json(authors)
+// })
+
+// ---- returns the first document with searched author ----
+//TODO: returns all books from an author -> need to connect the books with authors 
+app.get("/:author", (request, response) => {
+
+  //includes function
+  // await Book.filter({ author: req.params.author.toLocaleLowerCase() })
+  //define what can be included -> input can be lowercase, compare to lowercased db entry
+
   Book.findOne({ authors: req.params.authors }).then(book => {
     if (book) {
       res.json(book)
