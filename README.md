@@ -1,13 +1,28 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This objective of this project was to make a REST API that stores data in a Mongo DB database using Mogoose models.
+In this project I used data on Netflix titles.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+# Endpoints
+-All Netflix-titles: '/netflix-titles'
+-All titles from specific year: '/netflix-titles/year/:year'
+-One title by ID: 'netflix-titles/id/:id'
 
-## The problem
+Query-params:
+-Find title by title-name. Example: '/netflix-titles?title=taxi'
+-Find title(s) by specific director. Example: '/netflix-titles?director=scorsese'
+-Find title(s) with specific actor. Example: '/netflix-titles?actor=foster'
+-Find titles from country. Example: '/netflix-titles?country=germany'
+-Find titles by type (TV or Movie etc). Example: '/netflix-titles?type=tv'
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## Tech used
+-Express
+-Mongo DB
+-Mongoose
+-Mongo DB Compass
+-Heroku
+-Postman
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+
