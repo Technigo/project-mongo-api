@@ -14,4 +14,4 @@ I used the books data from the previous project to create the model Book for my 
 
 ## View it live 👩‍💻
 
-Link to the deployed project: 
+Link to the deployed project: https://w18-project-mongo-api.herokuapp.com/
