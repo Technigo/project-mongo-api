@@ -4,99 +4,92 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 
-import databooks from './databooks/books.json'
+import booksData from './data/books.json'
 
 
-//Book modell and author model and relate a book to an author, the connection to yhe database 
+//Author model and connection to database 
 //database
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-//defining models
-const Author = mongoose.model('Author', {
-  name: String,
-})
-
-const Book = mongoose.model('Book', {
-  title: String,
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Author'
-  }
-})
-
-if (process.env.RESET_DATABASE) {
-
-
-const seedDatabase = async () => {
-  await Author.deleteMany()
-  
-    const tolkien = new Author({ name: 'J.R.R Tolkien' })
-    await tolkien.save()
-  
-    const rowling = new Author({ name: 'J.K Rowling' })
-    await rowling.save()
-
-    await new Book ({ title: "Harry Potter and the Philosopher's stone", author: rowling }).save()
-    await new Book ({ title: "Harry Potter and the Philosopher's stone", author: rowling }).save()
-    await new Book ({ title: "Harry Potter and the Philosopher's stone", author: rowling }).save()
-    await new Book ({ title: "Harry Potter and the Philosopher's stone", author: rowling }).save()
-    await new Book ({ title: "Harry Potter and the Philosopher's stone", author: rowling }).save()
-  
-  }
-  seedDatabase()
-
-}
-
 const port = process.env.PORT || 8080
 const app = express()
+
+
+//defining models
+const Author = mongoose.model('Author', {
+  title: String,
+  authors: String,
+  isbn: Number
+})
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
+
+if (process.env.RESET_DATABASE) {
+
+const seedDatabase = async () => {
+  await Author.deleteMany()
+
+
+  booksData.forEach (item => {
+       const newAuthor = new Author(item)
+         newAuthor.save()
+        }) 
+ 
+  }
+  seedDatabase()
+}
+
+// Routes here
 app.get('/', (req, res) => {
-  res.send('Hello Wooooorld')
+  res.send('Welcome, this is the restfull Authors Backend')
 })
 
 
 app.get('/authors', async (req, res) => {
-  const authors = await Author.find()
-  res.json(authors)
-  
-})
+  const allAuthors = await Author.find(req.query)
+   console.log(allAuthors)
 
-app.get('/authors/:id', async (req, res) => {
-  const author = await Author.findById(req.param.id)
-  if (author) {
-    res.json(author)
+   if (allAuthors.length > 0) {
+    res.json(allAuthors)
   } else {
-    res.json(404).json({ error })
+    res.status(404).json({ error: 'Sorry, could not find the data'})
   }
   
 })
 
-
-app.get('/authors/:id/books', async (req, res) => {
-  const author = await Author.findById(req.params.id)
-  if (author){
-    const books = await Book.find({ author: mongoose.Types.ObjectId(author.id )})
-  res.json(books)
-  } else {
-    res.json(404).json({ error })
-  }
+// //get singel author
+// app.get('/authors/author/:id', async (req, res) => {
+//   const singleAuthor = await Author.findOne({id: req.params.id})
+//   if (singleAuthor) {
+//     res.json(singleAuthor)
+//   } else {
+//     res.status(404).json({ error: 'Sorry, could not find the author' })
+//   }
   
 })
 
-
-
-app.get('/books', async (req, res) => {
-  const books = await Book.find().populate('author')
-  res.json(books)
+// app.get('/books', async (req, res) => {
+//   const books = await Book.find().populate('author')
+//   res.json(books)
   
-})
+// })
+
+// app.get('/authors/:id/books', async (req, res) => {
+//   const author = await Author.findById(req.params.id)
+//   if (author){
+//     const books = await Book.find({ author: mongoose.Types.ObjectId(author.id)})
+//   res.json(books)
+//   } else {
+//     res.json(404).json({ error })
+//   }
+  
+// })
+
 
 // Start the server
 app.listen(port, () => {
