@@ -48,16 +48,15 @@ app.get("/volcanos", async (req, res) => {
   console.log("query", req.query);
 
   const { Name, Country, sort, height, page, limit = 20 } = req.query;
-  // const volcanoRegex = new RegExp(`\\b${Name}\\b`, "i");
 
   const volcanoRegex = (regEx) => {
     return new RegExp(`\\b${regEx}\\b`, "i");
   };
 
-  const findVulcanos = () => {
-    if (Name) return { Name: volcanoRegex(Name) };
-    if (Country) return { Country: volcanoRegex(Country) };
-    if (height) return { ElevationMeters: { $gte: height } };
+  const findVulcanos = {
+    Name: volcanoRegex(Name),
+    Country: volcanoRegex(Country),
+    ElevationMeters: { $gte: height || 0 },
   };
 
   const sortVulcanos = () => {
@@ -66,10 +65,11 @@ app.get("/volcanos", async (req, res) => {
     if (sort === "country") return { Country: 1 };
   };
 
-  const filteredVolcanos = await Volcano.find(findVulcanos())
+  const filteredVolcanos = await Volcano.find(findVulcanos)
     .sort(sortVulcanos())
     .skip((page - 1) * limit)
     .limit(limit);
+
   res.json(filteredVolcanos);
 });
 
