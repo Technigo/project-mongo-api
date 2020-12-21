@@ -1,13 +1,21 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This project was about creating an API with RESTful endpoints using MongoDB as database to store and retrieve data.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+# Tech
+Node
+
+API's
+
+MongoDB
+
+Heroku
 
 ## The problem
+The purpose with this project was to learn about how to model data in Mongoose, how the fetch items from a Mongo database using Mongoose and how to seed large amounts of data to a database.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The data I used was from a raw data file with top-music from which I created two models, one for Tracks and one for Artist and routed different endpoints from. I also added middlewares to handle connection errors. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Link to the deployed API: http://agnes-topmusic.herokuapp.com/
