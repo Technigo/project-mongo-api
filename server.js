@@ -21,7 +21,7 @@ mongoose.Promise = Promise
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8081
+const port = process.env.PORT || 8080
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -106,13 +106,16 @@ app.get('/tracks', async (req, res) => {
 
 // Route to find a specific track per id 
 app.get('/tracks/:id', async (req, res) => {
+  try {
   const singleTracks = await Tracks.findOne({ id: req.params.id })
-
   if (singleTracks) {
     res.json(singleTracks);
   } else {
-    res.status(404).json({ error: 'Could not find this track' })
+    res.status(404).json({ error: 'Could not find this track' });
   }
+} catch (error) {
+  res.status(400).json({ error: 'Invalid track id' });
+}
 });
 
 // Route to search by tracknamr
