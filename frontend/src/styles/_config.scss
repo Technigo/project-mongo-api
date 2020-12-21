@@ -23,6 +23,12 @@ $secondaryBackground: #f2f2f2;
   padding-left: 10px;
   margin: 4px 0;
   text-transform: uppercase;
+  transition: 0.1s ease;
+
+  &:hover {
+    background: rgba($color: #fff, $alpha: 0.5);
+    transition: 0.2s ease;
+  }
 
   &:focus {
     outline: none;
@@ -37,11 +43,14 @@ $secondaryBackground: #f2f2f2;
 @mixin basicButton {
   margin-left: 4px;
   width: 70px;
-  background: #000;
+
+  background: $primaryBackground;
   color: $secondaryFont;
-  font-size: 22px;
   border: $primaryBorder;
+
+  font-size: 22px;
   padding: 4px 10px;
+
   mix-blend-mode: darken;
   transition: 0.2s ease;
   cursor: pointer;

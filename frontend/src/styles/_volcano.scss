@@ -18,13 +18,10 @@ article {
     font-weight: 600;
     margin-bottom: 10px;
   }
-  .key {
+  span {
     font-weight: 300;
   }
-  .value {
-    font-style: italic;
-    text-transform: uppercase;
-  }
+
   button {
     @include basicButton;
 

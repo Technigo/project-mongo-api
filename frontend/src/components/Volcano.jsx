@@ -24,36 +24,36 @@ export const Volcano = ({ selectedVolcano, setSelectedVolcano }) => {
       </p>
 
       <p>
-        <span className="key">Type:</span>{" "}
-        <span className="value">{theVolcano?.Type}</span>
+        <span>Type: </span>
+        {theVolcano?.Type}
       </p>
       <p>
-        <span className="key">Activity evidence:</span>{" "}
-        <span className="value">{theVolcano?.ActivityEvidence}</span>
+        <span>Activity evidence: </span>
+        {theVolcano?.ActivityEvidence}
       </p>
       <p>
-        <span className="key">Elevation meters:</span>{" "}
-        <span className="value">{theVolcano?.ElevationMeters}</span>
+        <span>Elevation meters: </span>
+        {theVolcano?.ElevationMeters}
       </p>
       <p>
-        <span className="key">Last Known Eruption:</span>{" "}
-        <span className="value">{theVolcano?.LastKnownEruption}</span>
+        <span>Last Known Eruption: </span>
+        {theVolcano?.LastKnownEruption}
       </p>
       <p>
-        <span className="key">Latitude:</span>{" "}
-        <span className="value">{theVolcano?.Latitude}</span>
+        <span>Latitude: </span>
+        {theVolcano?.Latitude}
       </p>
       <p>
-        <span className="key">Longitude:</span>{" "}
-        <span className="value">{theVolcano?.Longitude}</span>
+        <span>Longitude: </span>
+        {theVolcano?.Longitude}
       </p>
       <p>
-        <span className="key">Dominant rock type:</span>{" "}
-        <span className="value">{theVolcano?.DominantRockType}</span>
+        <span>Dominant rock type: </span>
+        {theVolcano?.DominantRockType}
       </p>
       <p>
-        <span className="key">Tectonic setting:</span>{" "}
-        <span className="value">{theVolcano?.TectonicSetting}</span>
+        <span>Tectonic setting: </span>
+        {theVolcano?.TectonicSetting}
       </p>
       <button onClick={() => setSelectedVolcano(null)}>back</button>
     </article>

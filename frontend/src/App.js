@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import "./App.scss";
+
 import { VolcanoList } from "./components/VolcanoList";
 import { Volcano } from "./components/Volcano";
 import { Header } from "./components/Header";
+
+import "./App.scss";
 
 function App() {
   const [page, setPage] = useState(1);

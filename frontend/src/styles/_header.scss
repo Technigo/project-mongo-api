@@ -14,17 +14,29 @@ header {
     font-size: 72px;
     font-weight: 900;
     display: inline;
-    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    margin-bottom: 10px;
   }
 
   input {
     @include basicInput;
   }
 
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   select {
     @include basicInput;
     margin: 10px 0 0 10px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    outline: none;
   }
 }
