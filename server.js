@@ -21,7 +21,7 @@ mongoose.Promise = Promise
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8081
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -86,15 +86,11 @@ if (process.env.RESET_DATABASE) {
 
 // A middleware to handle server connections errors 
 app.use((req, res, next) => {
-  try {
     if (mongoose.connection.readyState === 1) {
       next();
     } else {
-      res.status(503).json({error: 'Service unavailable' });
-    } 
-    } catch (error) {
-      res.status(400).json({ error: 'Error! Could not access the server.'})
-  };
+      res.status(500).json({ error: "Service unavailable" });
+  }
 });
 
 // Routes 
@@ -134,7 +130,7 @@ app.get('/tracks20', async (req, res) => {
 
 // Get all artists 
 app.get('/artists', async (req, res) => {
-  const artists = await Artist.find({ Artist });
+  const artists = await Artist.find(req.query);
   if (artists) {
     res.json(artists);
   } else {
