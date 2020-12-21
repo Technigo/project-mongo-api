@@ -54,8 +54,8 @@ app.get("/volcanos", async (req, res) => {
   };
 
   const findVulcanos = {
-    Name: volcanoRegex(Name),
-    Country: volcanoRegex(Country),
+    Name: volcanoRegex(Name ?? ""),
+    Country: volcanoRegex(Country ?? ""),
     ElevationMeters: { $gte: height || 0 },
   };
 
