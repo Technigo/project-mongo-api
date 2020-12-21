@@ -2,6 +2,12 @@ footer {
   text-align: right;
   padding: 20px 10px 50px;
 
+  p {
+    @include basicParagraph;
+    text-align: left;
+    font-style: italic;
+  }
+
   button {
     @include basicButton;
   }

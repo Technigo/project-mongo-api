@@ -1,0 +1,45 @@
+@media (max-width: 688px) {
+  header {
+    flex-direction: column;
+    margin-bottom: 40px;
+    h1 {
+      font-size: 38px;
+      text-align: center;
+    }
+    select {
+      margin-left: 10px;
+    }
+    input {
+      margin: 4px 0 0 10px;
+    }
+    .header-right-container {
+      padding-top: 0;
+    }
+  }
+
+  main {
+    h2,
+    p {
+      font-size: 28px;
+    }
+  }
+
+  article {
+    margin: 0 10px 60px 0;
+
+    .volcano-top-container {
+      align-items: flex-start;
+    }
+    h3 {
+      font-size: 36px;
+    }
+    p,
+    .country-paragraph {
+      font-size: 28px;
+      line-height: 36px;
+    }
+    button {
+      margin: 4px 0 12px 0;
+    }
+  }
+}

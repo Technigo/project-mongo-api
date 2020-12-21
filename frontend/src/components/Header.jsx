@@ -32,7 +32,7 @@ export const Header = ({
         </select>
       </div>
 
-      <div>
+      <div className="header-right-container">
         <input
           type="text"
           placeholder="Find volcano"

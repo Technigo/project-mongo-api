@@ -1,12 +1,19 @@
 header {
   display: flex;
   justify-content: space-between;
-  height: 250px;
+  margin-bottom: 80px;
+
   padding: 20px 0;
 
   .header-left-container {
     display: flex;
     flex-direction: column;
+  }
+  .header-right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 12px;
   }
 
   h1 {

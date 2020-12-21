@@ -1,4 +1,5 @@
 @import "./styles/config";
+@import "./styles/loading";
 @import "./styles/header";
 @import "./styles/volcano";
 @import "./styles/volcanolist";
@@ -12,10 +13,11 @@
 
 body {
   font-family: $fonstStack;
-  background: #000;
+  background: $primaryBackground;
   background-image: url("./assets/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 100vh;
   padding: 0 8%;
 }
 

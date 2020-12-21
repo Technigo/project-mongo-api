@@ -17,7 +17,10 @@ export const Volcano = ({ selectedVolcano, setSelectedVolcano }) => {
 
   return (
     <article>
-      <h3>{theVolcano?.Name}</h3>
+      <div className="volcano-top-container">
+        <h3>{theVolcano?.Name}</h3>
+        <button onClick={() => setSelectedVolcano(null)}>back</button>
+      </div>
 
       <p className="country-paragraph">
         {theVolcano?.Country}, {theVolcano?.Region}
@@ -36,7 +39,7 @@ export const Volcano = ({ selectedVolcano, setSelectedVolcano }) => {
         {theVolcano?.ElevationMeters}
       </p>
       <p>
-        <span>Last Known Eruption: </span>
+        <span>Last known eruption: </span>
         {theVolcano?.LastKnownEruption}
       </p>
       <p>
@@ -55,7 +58,6 @@ export const Volcano = ({ selectedVolcano, setSelectedVolcano }) => {
         <span>Tectonic setting: </span>
         {theVolcano?.TectonicSetting}
       </p>
-      <button onClick={() => setSelectedVolcano(null)}>back</button>
     </article>
   );
 };

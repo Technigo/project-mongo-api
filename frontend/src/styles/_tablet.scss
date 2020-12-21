@@ -1,0 +1,14 @@
+@media (max-width: 1024px) {
+  body {
+    padding: 0 4%;
+  }
+
+  header {
+    h1 {
+      font-size: 50px;
+    }
+    .header-left-container {
+      justify-content: space-between;
+    }
+  }
+}

@@ -2,21 +2,28 @@ article {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 10px;
+  padding: 0 4px 10px 10px;
+
+  .volcano-top-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   h3 {
+    display: inline;
     font-size: 52px;
     font-weight: 600;
   }
   p {
-    font-size: 28px;
+    @include basicParagraph;
     margin-left: 6px;
-    line-height: 44px;
+    line-height: 50px;
   }
   .country-paragraph {
     font-size: 30px;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 22px;
   }
   span {
     font-weight: 300;
@@ -25,14 +32,13 @@ article {
   button {
     @include basicButton;
 
-    margin: 10px 0 20px auto;
-    background: $secondaryBackground;
-    color: $primaryFont;
-    border: 1px solid $secondaryBackground;
-    mix-blend-mode: lighten;
-
+    height: 38px;
+    background: $primaryBackground;
+    color: $secondaryFont;
+    border: $primaryBorder;
+    mix-blend-mode: darken;
     &:hover {
-      color: $secondaryFont;
+      color: $primaryFont;
     }
   }
 }

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { VolcanoListFooter } from "./VolcanoListFooter";
 
 export const VolcanoList = ({
+  setLoading,
   volcanos,
   sort,
   setVolcanos,
@@ -16,12 +17,17 @@ export const VolcanoList = ({
   const URL = `https://my-volcanos.herokuapp.com/volcanos?page=${page}&sort=${sort}&Name=${searchByName}&Country=${searchByCountry}&height=${searchMinHeight}`;
 
   useEffect(() => {
+    console.log("loading start");
+
+    setLoading(true);
+
     fetch(URL)
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         setVolcanos(data);
+        setLoading(false);
       });
   }, [URL, setVolcanos]);
 

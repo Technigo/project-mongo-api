@@ -1,5 +1,6 @@
 $fonstStack: "Roboto", sans-serif;
 $primaryBorder: 1px solid #000;
+$secondaryBorder: 2px solid #f2f2f2;
 
 $primaryFont: #000;
 $secondaryFont: #fff;
@@ -8,7 +9,7 @@ $primaryBackground: #000;
 $secondaryBackground: #f2f2f2;
 
 @mixin basicInput {
-  font-family: "Roboto", sans-serif;
+  font-family: $fonstStack;
   color: $primaryFont;
 
   height: 40px;
@@ -21,7 +22,6 @@ $secondaryBackground: #f2f2f2;
   font-size: 16px;
   font-weight: 300;
   padding-left: 10px;
-  margin: 4px 0;
   text-transform: uppercase;
   transition: 0.1s ease;
 
@@ -44,19 +44,19 @@ $secondaryBackground: #f2f2f2;
   margin-left: 4px;
   width: 70px;
 
-  background: $primaryBackground;
-  color: $secondaryFont;
-  border: $primaryBorder;
+  background: $secondaryBackground;
+  color: $primaryFont;
+  border: $secondaryBorder;
 
   font-size: 22px;
   padding: 4px 10px;
 
-  mix-blend-mode: darken;
+  mix-blend-mode: lighten;
   transition: 0.2s ease;
   cursor: pointer;
 
   &:hover {
-    color: $primaryFont;
+    color: $secondaryFont;
     background: none;
     transition: 0.2s ease;
   }
@@ -64,4 +64,9 @@ $secondaryBackground: #f2f2f2;
   &:active {
     outline: none;
   }
+}
+
+@mixin basicParagraph {
+  font-size: 28px;
+  font-weight: 500;
 }
