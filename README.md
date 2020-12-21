@@ -1,13 +1,23 @@
-# Mongo API Project
+# Mongo API Project&ensp;|&ensp;[View Live &#10132;](https://cool-volcanos.netlify.app/)
 
-Replace this readme with your own information about your project. 
+Backend using Node and Express stored with mongoDB and mongoose. Frontend in React and styled with sass.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Core Tech
 
-## The problem
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- RESTful API
+- React
+- Sass
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+![Mockup](mockup.jpg)
 
-## View it live
+## Backend link
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://my-volcanos.herokuapp.com/volcanos/
+
+## View it live frontend
+
+https://cool-volcanos.netlify.app/
