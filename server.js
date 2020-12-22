@@ -55,20 +55,22 @@ if (process.env.RESET_DATABASE) {
     await Tracks.deleteMany();
     await Artist.deleteMany();
 
-    topMusicData.forEach(item => {
-      const newTracks = new Tracks(item)
-      newTracks.save();
-    });
+    // topMusicData.forEach(item => {
+    //   const newTracks = new Tracks(item)
+    //   newTracks.save();
+    // });
 
     // Create an array with unique tracks from topMusicData 
-    const artists = topMusicData.map((item) => item.artistName)
-    const uniqueArtists = Array.from(new Set(artists));
+    const allArtists = topMusicData.map((item) => item.artistName)
+    const uniqueArtists = Array.from(new Set(allArtists));
 
-    // Creates artist array mongoose model 
+    // Create an array of artist object following the mongoose model 
+    let artists = [];
+
     uniqueArtists.forEach(async artist => {
       const newArtist = new Artist({ name: artist });
 
-      artist.push(newArtist)
+      artists.push(newArtist);
       await newArtist.save();
     });
 
@@ -96,6 +98,7 @@ app.use((req, res, next) => {
 // Routes 
 app.get('/', (req, res) => {
   res.send('Welcome to the music API')
+
 });
 
 // Route to all tracks
@@ -133,13 +136,9 @@ app.get('/tracks20', async (req, res) => {
 
 // Get all artists 
 app.get('/artists', async (req, res) => {
-  const artists = await Artist.find(req.query);
-  if (artists) {
-    res.json(artists);
-  } else {
-    // Error handling
-    res.status(404).json({ error: 'Artists not found' });
-  };
+  const allArtist = await Artist.find();
+    res.json(allArtist); 
+    console.log(allArtist)
 });
 
 // Route all tracks by a certain artist 
