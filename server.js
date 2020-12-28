@@ -53,10 +53,8 @@ if (process.env.RESET_DATABASE) {
   const populateDatabase = async () => {
     await Type.deleteMany();
     await Eruption.deleteMany();
-    //await Region.deleteMany();
 
     let types = [];
-    let regions = [];
 
     // Types - remove duplicates and create new array
     const allTypes = Array.from(
@@ -66,7 +64,6 @@ if (process.env.RESET_DATABASE) {
       const newType = new Type({ type: item });
       types.push(newType);
       await newType.save();
-      //.push(new Type(item).save());
     });
 
     // Eruptions - all volcanic eruptions from the data
