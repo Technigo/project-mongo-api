@@ -70,20 +70,20 @@ app.get('/books', async (request, response) => {
 
   const limitBooks = 20
 
-  if (search) { // if user has queried search
+  if (search) {
     findTitle = { $regex: ("\\b" + search + "\\b"), $options: "i" }
     findAuthor = { $regex: ("\\b" + search + "\\b"), $options: "i" }
   } else {
     null
   }
 
-  if (language) { // if the user has queried language
+  if (language) {
     findLanguage = { $regex: language, $options: "i" }
   } else {
     null
   }
 
-  if (sort) { // if the user has queried sort
+  if (sort) {
     if (sort === 'pages-asc') {
       sortBooks = { num_pages: 1 }
     } else if (sort === 'rating-desc') {
@@ -97,52 +97,52 @@ app.get('/books', async (request, response) => {
     null
   }
 
-  if (search && language) { // the user has queried search and language
+  if (search && language) {
     books = await Book.find({
       $and: [{
         $or: [
-          { authors: findAuthor }, // will not be null as user has queried search, defined above
-          { title: findTitle } // will not be null as user has querid search, defined above
+          { authors: findAuthor },
+          { title: findTitle }
         ]
       },
-      { language_code: findLanguage } // will not be null as user has queried language, defined above
+      { language_code: findLanguage }
       ]
     },
-      filteredFields // defined above
+      filteredFields
     ).sort(
-      sortBooks // depending on if the user has queried sort or not, this will be null or the value defined above
+      sortBooks
     ).limit(
-      limitBooks // defined above
+      limitBooks
     ).exec()
   }
 
-  else if (search && !language || language && !search) { // the user has queried either search or language, but not both
+  else if (search && !language || language && !search) {
     books = await Book.find({
       $or: [{
         $or: [
-          { authors: findAuthor }, // will either be null or the value defined above depending on user query
-          { title: findTitle } // will either be null or the value defined above depending on user query
+          { authors: findAuthor },
+          { title: findTitle }
         ]
       },
-      { language_code: findLanguage } // will either be null or the value defined above depending on user query
+      { language_code: findLanguage }
       ]
     },
-      filteredFields // defined above
+      filteredFields
     ).sort(
-      sortBooks // depending on if the user has queried sort or not, this will be null or the value defined above
+      sortBooks
     ).limit(
-      limitBooks // defined above
+      limitBooks
     ).exec()
   }
 
-  else { // the user has not queried for search nor language
+  else {
     books = await Book.find(
-      {}, // no filter query
-      filteredFields // defined above
+      {},
+      filteredFields
     ).sort(
-      sortBooks // depending on if the user has queried sort or not, this will be null or the value defined above
+      sortBooks
     ).limit(
-      limitBooks // defined above
+      limitBooks
     ).exec()
   }
 
