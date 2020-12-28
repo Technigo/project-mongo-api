@@ -83,7 +83,7 @@ app.use((request, response, next) => {
   if (mongoose.connection.readyState === 1) {
     next();
   } else {
-    res.status(503).send({ error: 'Service unavailable' });
+    response.status(503).send({ error: 'Service unavailable' });
   }
 });
 
