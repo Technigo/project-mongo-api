@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 
 import data from "./data/netflix-titles.json";
 
+const listEndpoints = require("express-list-endpoints");
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/shows";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -42,7 +44,7 @@ if (process.env.RESET_DATABASE) {
 }
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send(listEndpoints(app));
 });
 
 app.get("/shows", async (req, res) => {
