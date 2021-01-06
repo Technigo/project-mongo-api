@@ -82,11 +82,10 @@ app.use((req, res, next) => {
 // To list all the endpoints in the first view
 const listEndpoints = require('express-list-endpoints');
 app.get('/', (req, res) => {
-  //res.send('Books API created by Gabriella Bolin using MongoDB.');
   res.send(listEndpoints(app));
 });
 
-// To return all books
+// To return books
 app.get('/books', async (req, res) => {
   // Possibility to search on title with query params as example: '/books?title=potter' 
   const { title } = req.query;
