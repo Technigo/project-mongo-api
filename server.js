@@ -9,6 +9,12 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+const port = process.env.PORT || 8081
+const app = express()
+
+app.use(cors())
+app.use(bodyParser.json())
+
 const Artist = mongoose.model('Artist', {
   id: Number,
   trackName: String,
@@ -38,40 +44,28 @@ if (process.env.RESET_DATABASE) {
   seedDatabase()
 }
 
-const port = process.env.PORT || 8081
-const app = express()
-
-// Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(bodyParser.json())
-
-
 app.get('/', (req, res) => {
   res.send('API of top songs on Spotify using Mondo DB!')
 })
 
-// app.get('/artists', async (req, res) => {
-//   const artists = await Artist.find()
-//   res.json(artists)
-// })
-
 // Endpoint 1, all the data with 50 popular songs on Spotify 
-app.get('/songs', (req, res) => {
-  res.json(topMusicData)
+app.get('/songs', async (req, res) => {
+  const songs = await Artist.find()
+  res.json(songs)
 })
 
 // Endpoint 2, sorting the data on music genre
-app.get('/genre/:genre', (req, res) => {
-  const genre = req.params.genre
-  const songGenre = topMusicData.filter((item) => item.genre === genre)
-  res.json(songGenre)
+app.get('/genre/:genre', async (req, res) => {
+  const { genre } = req.params
+  const singleGenre = await Artist.find({genre: genre})
+  res.json(singleGenre)
 })
 
 // Endpoint 3, showing only one song identified by id
-app.get('/songs/:id', (req, res) => {
-  const id = req.params.id
-  const singleSong = topMusicData.find((song) => song.id === +id)
-    res.json(singleSong)
+app.get('/songs/id/:id', async (req, res) => {
+  const { id } = req.params
+  const singleId = await Artist.findOne({id: id})
+  res.json(singleId)
 })
 
 // Start the server
