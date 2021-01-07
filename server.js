@@ -95,7 +95,6 @@ app.get('/books', async (req, res) => {
   const page = req.query.page ?? 0; // Get first 20 when typing 'page=0'
   const pageSize = 20; // Shows 20 per page
   const startIndex = page * pageSize; // Calculate startindex
-  const endIndex = startIndex + pageSize;  // Calculate endindex
   const books = await Book.find(); // All books
   // Sorts the books based on average_rating, populates it with 
   // the author collection and adds pagination
@@ -103,7 +102,7 @@ app.get('/books', async (req, res) => {
     title: queryRegex
   }).sort({
     average_rating: -1
-  }).populate('author').skip(startIndex).limit(endIndex);
+  }).populate('author').skip(startIndex).limit(pageSize);
   // Add an object telling the user how many books the API contains, how many pages, books per page etc. 
   const returnObject = {
     pageSize: pageSize,
@@ -113,7 +112,7 @@ app.get('/books', async (req, res) => {
     limitedBooks,
   };
   if (books) {
-    res.json(returnObject);
+    res.status(200).json(returnObject);
   } else {
     // Error handling
     res.status(404).json({ error: 'Data not found' });
