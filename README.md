@@ -14,7 +14,8 @@ With the mongoose method `find()` I retrieve one collection of all books and one
 
 In the end I added pagination to the backend data by using the mongoose methods `.skip()` and `.limit()`. That was really fun to learn how to use. Right now the first page is page=0, I hope I will have time to change this further on.
 
-Front End repo: https://github.com/Gabbi-89/frontend-book-api (Not finished)
+Front End repo: https://github.com/Gabbi-89/frontend-book-api 
+Front End live webpage: https://500-books.netlify.app/
 
 ## Learning Objectives
 

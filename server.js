@@ -30,7 +30,6 @@ const Author = mongoose.model('Author', {
 
 // To make it run only when we want to
 if (process.env.RESET_DATABASE) {
-  console.log('Resetting database!');
   const seedDatabase = async () => {
     // To not get several same responses, start with deleting what's already there
     await Book.deleteMany({});
