@@ -23,7 +23,7 @@ Root: Welcome page
 
 Shows all songs in the dataset
 
-/topsongs/tracks?genre=:genre
+/topsongs/tracks?bpm=:bpm
 /topsongs/tracks?length=:length
 /topsongs/tracks?popularity=:popularity
 
