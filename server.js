@@ -98,7 +98,3 @@ app.listen(port, () => {
 })
 
 
-app.get('/topsongs/most-popular', async (request, response) => {
-  const mostPopular = await Song.find({ popularity: { $gte: 90 } });
-  response.json(mostPopular);
-});
