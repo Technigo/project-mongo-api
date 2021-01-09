@@ -34,7 +34,7 @@ if (process.env.RESET_DATABASE) {
     });
   };
   seedDatabase();
-}
+};
 
 // Routes starts here
 app.get("/", (req, res) => {
@@ -43,8 +43,7 @@ app.get("/", (req, res) => {
 
 //Get all authors
 app.get("/authors", async (req, res) => {
-  const allAuthors = await Author.find(req.query);
-  console.log(allAuthors);
+  const allAuthors = await Author.find();
 
   if (allAuthors.length > 0) {
     res.json(allAuthors);
