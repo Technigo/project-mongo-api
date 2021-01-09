@@ -55,6 +55,14 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+app.use((request, response, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    response.status(503).json({ error: 'Service unavailable' })
+  }
+})
+
 // Start defining your routes here
 //localhost:8080/
 app.get("/", (request, response) => {
