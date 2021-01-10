@@ -15,4 +15,4 @@ To create this API I had to work with NodeJs, express, Mongoose and MongoDb. I l
 
 ## View it live
 
-https://books-api-sandra-shumanteva.herokuapp.com/
+https://sandra-mongo-api.herokuapp.com/
