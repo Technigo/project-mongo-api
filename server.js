@@ -50,16 +50,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/globes', async (req, res) => {
-  const queryParameters = req.query;
-  console.log(queryParameters);
-
   const allGlobes = await Globe.find(req.query);
   res.json(allGlobes);
 })
 
 app.get('/globes/:nominee', async (req, res) => {
   const globeNominee = await Globe.findOne({ nominee: req.params.nominee });
-
   res.json(globeNominee);
 })
 
