@@ -5,12 +5,9 @@ import mongoose from 'mongoose'
 
 import goldenGlobesData from './data/golden-globes.json'
 
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
-
-
 
 const port = process.env.PORT || 9000
 const app = express()
@@ -27,7 +24,10 @@ const Globe = new mongoose.model('Globe', {
     category: String,
     nominee: String,
     film: String,
-    win: Boolean
+    win: {
+      type: Boolean,
+      required: true 
+    } 
 });
 
 
@@ -50,14 +50,17 @@ app.get('/', (req, res) => {
 })
 
 app.get('/globes', async (req, res) => {
-  const allGlobes = await Globe.find();
+  const queryParameters = req.query;
+  console.log(queryParameters);
+
+  const allGlobes = await Globe.find(req.query);
   res.json(allGlobes);
 })
 
 app.get('/globes/:nominee', async (req, res) => {
-  const oneNominee = await Globe.findOne({ nominee: req.params.nominee });
+  const globeNominee = await Globe.findOne({ nominee: req.params.nominee });
 
-  res.json(oneNominee);
+  res.json(globeNominee);
 })
 
 // Start the server
