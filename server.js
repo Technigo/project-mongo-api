@@ -190,8 +190,9 @@ app.get("/api/albums/bottom10", async (req, res) => {
 //Get by placement in list
 app.get("/api/albums/placement/:placement", async (req, res) => {
 	const placement = req.params.placement;
+	console.log(placement);
 	const singleAlbumFiltered = await Album.findOne({ number: placement });
-	if (singleAlbumFiltered.length > 0) {
+	if (singleAlbumFiltered) {
 		res.json(singleAlbumFiltered);
 	} else {
 		res.status(404).send(errorMsg);
@@ -201,11 +202,13 @@ app.get("/api/albums/placement/:placement", async (req, res) => {
 //Get by album title
 app.get("/api/albums/title/:title", async (req, res) => {
 	const title = req.params.title.replaceAll("+", " ");
+	console.log(title);
 	const singleAlbumFiltered = await Album.findOne({ album: title }).collation({
 		locale: "en",
 		strength: 2,
 	});
-	if (singleAlbumFiltered.length > 0) {
+
+	if (singleAlbumFiltered) {
 		res.json(singleAlbumFiltered);
 	} else {
 		res.status(404).send(errorMsg);
