@@ -18,4 +18,4 @@ The data I used was from a raw data file with top-music from which I created two
 
 ## View it live
 
-Link to the deployed API: http://agnes-topmusic.herokuapp.com/
+Link to the deployed API: https://aggesmusic.herokuapp.com/
