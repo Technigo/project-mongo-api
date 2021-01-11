@@ -52,8 +52,8 @@ app.get("/tracks", async (req, res) => {
   res.json(allTracks);
 });
 
-app.get("/track/:id", async (req, res) => {
-  const singleTrack = await Track.findById(id);
+app.get("/tracks/:id", async (req, res) => {
+  const singleTrack = await Track.findById(req.params.id);
   if (singleTrack) {
     res.json(singleTrack);
   } else {
