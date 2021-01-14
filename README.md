@@ -35,7 +35,7 @@ Returns single object item
 - Express
 - JavaScript
 - Heroku
-- MongoDB Atlas
+- MongoDB Atlas & Compass
 - Postman
 
 ## View it live

@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
 app.get("/albums", async (req, res) => {
   const allAlbums = await Album.find(req.query); // Clean way of setting queries. This allows all database fields to be queries
   if (allAlbums) {
-    res.json({
+    res.status(200).json({
       numberOfResults: allAlbums.length,
       results: allAlbums,
     });
@@ -65,7 +65,7 @@ app.get("/albums/:position", async (req, res) => {
   const { position } = req.params;
   const singleAlbum = await Album.findOne({ position: +position });
   if (singleAlbum) {
-    res.json(singleAlbum);
+    res.status(200).json(singleAlbum);
   } else {
     res.status(404).send({ error: `No album found for position: ${position}` });
   }
@@ -75,7 +75,7 @@ app.get("/albumid/:id", async (req, res) => {
   try {
     const albumById = await Album.findById(req.params.id);
     if (albumById) {
-      res.json(albumById);
+      res.status(200).json(albumById);
     } else {
       res.status(404).json({ error: `Album not found` });
     }
