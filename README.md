@@ -16,9 +16,9 @@ Shows all songs in the dataset
 Shows the songs that match totally or partially the searched genre.
 ### /topsongs/most-popular
 Shows the top songs with popularity over 90.
-### /topsongs/songs/:id
+### /topsongs/:id
 Shows a single song based on that song's id parameter. 
-### /topsongs/artists/artistName
+### /topsongs/artists/:artistName
 Shows a song by a specific artist that matches totally or partially the artist's name. 
 
 ## Tech ⚡️

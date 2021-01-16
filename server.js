@@ -64,8 +64,8 @@ app.get('/', (request, response) => {
 
 // Route to get all top songs data + request query for genre
 // i.e. topsongs?genre=pop
-//Added a Regex to return all the genres that include a certain word, 
-//since the genres are several words on the same string, not case sensitive.
+// Added a Regex to return all the genres that include a certain word, 
+// since the genres are several words on the same string, not case sensitive.
 app.get('/topsongs', async (request, response) => {
   const { genre } = request.query;
   let conditions = {}; 
@@ -87,7 +87,7 @@ app.get('/topsongs/most-popular', async (request, response) => {
 });
 
 // Route to get song by id
-app.get('/topsongs/songs/:id', async (request, response) => { 
+app.get('/topsongs/:id', async (request, response) => { 
     const song = await Song.findOne({ id: request.params.id });
     if (song) { 
       response.json(song);
@@ -96,8 +96,8 @@ app.get('/topsongs/songs/:id', async (request, response) => {
     };
 });
 
-//Route to get songs by artist 
-//Added a Regex to return all the artists with a matching string, not case sensitive
+// Route to get songs by artist 
+// Added a Regex to return all the artists with a matching string, not case sensitive
 app.get('/topsongs/artists/:artistName', async (request, response) => { 
   const artistParams = request.params.artistName;
   const artist = await Song.find({artistName: { $regex: artistParams, $options: 'i' }});
