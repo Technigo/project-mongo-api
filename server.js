@@ -73,9 +73,25 @@ app.get("/shows", async (req, res) => {
   res.json(shows);
 });
 
+//Get one show by showid
+
+app.get('/shows/:id', async (req, res) => {
+  try {
+  console.log(req.params)
+  const showId = await Show.findOne({ show_id: req.params.id })
+  if(showId) {
+    res.json(showId)
+  } else {
+    res.status(404).json({ error: 'Show not found' })
+  }
+} catch (err) {
+  res.status(400).json({ error: 'Invalid show id' })
+}
+})
+
 //shows limited to 10 documents, paginated with query "page"
 
-app.get("/shows/limited", async (req, res) => {
+app.get("/shows", async (req, res) => {
   const page = req.query.page;
   const shows = await Show.find()
     .skip((page === 0 ? page : 1) * 10 - 10) //page value 0 will resort to 1 since monbgoDB doesn't accept otherwise. Strangely this works locally but not deployed to heroku...
@@ -85,9 +101,9 @@ app.get("/shows/limited", async (req, res) => {
 
 //parameter country
 
-app.get("/shows/:country", async (req, res) => {
+app.get("/shows/countries/:country", async (req, res) => {
   const { country } = req.params;
-  const shows = await Show.find({ country: country });
+  const shows = await Show.find({ country });
   res.json(shows);
 });
 
