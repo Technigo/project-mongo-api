@@ -49,8 +49,8 @@ if (process.env.RESET_DATABASE) {
 	goldenGlobesData.forEach((nominationData) => {
     const newData = new Data(nominationData)
       newData.save()
-		})
-  }
+	})
+}
   seedDatabase()
 }
 
@@ -75,8 +75,7 @@ app.get('/nominations/nominee/:nominee', async (req, res) => {
   if (!singleNominee) {
     res.status(404).json(ERROR)
   } else {
-
-  res.json(singleNominee)
+    res.json(singleNominee)
   }
 })
 
@@ -90,8 +89,7 @@ app.get('/nominations/year/:year', async (req, res) => {
 
 //Shows a specified category. This is another way of writing the code instead of using async/await.
 app.get('/nominations/category/:category', (req, res) => {
-  Data.find(req.params, (err, data) => {
-    
+  Data.find(req.params, (err, data) => {    
     res.json(data);
   })
 })

@@ -1,6 +1,6 @@
 # Mongo API Project
 
-In this project I learned about MongoDB and Mongoose. I have used the API Golden globes nominations 2010-2019. 
+In this project I learned about MongoDB and Mongoose. I have used the API Golden globes nominations 2010 (to current year). 
 
 ## The problem
 
