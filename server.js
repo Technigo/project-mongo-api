@@ -15,7 +15,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const Artist = mongoose.model('Artist', {
+const Songs = mongoose.model('Songs', {
   id: Number,
   trackName: String,
   artistName: String,
@@ -34,10 +34,10 @@ const Artist = mongoose.model('Artist', {
 
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
-    await Artist.deleteMany({})
+    await Songs.deleteMany({})
   
     topMusicData.forEach((item) => {
-      const newArtist = new Artist(item)
+      const newArtist = new Songs(item)
       newArtist.save()
     })
   }
@@ -45,26 +45,26 @@ if (process.env.RESET_DATABASE) {
 }
 
 app.get('/', (req, res) => {
-  res.send('API of top songs on Spotify using Mondo DB!')
+  res.send('API of top songs on Spotify using Mongo DB!')
 })
 
 // Endpoint 1, all the data with 50 popular songs on Spotify 
 app.get('/songs', async (req, res) => {
-  const songs = await Artist.find()
+  const songs = await Songs.find()
   res.json(songs)
 })
 
 // Endpoint 2, sorting the data on music genre
 app.get('/genre/:genre', async (req, res) => {
   const { genre } = req.params
-  const singleGenre = await Artist.find({genre: genre})
+  const singleGenre = await Songs.find({genre: genre})
   res.json(singleGenre)
 })
 
 // Endpoint 3, showing only one song identified by id
 app.get('/songs/id/:id', async (req, res) => {
   const { id } = req.params
-  const singleId = await Artist.findOne({id: id})
+  const singleId = await Songs.findOne({id: id})
   res.json(singleId)
 })
 
