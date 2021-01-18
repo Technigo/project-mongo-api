@@ -14,7 +14,7 @@ https://project-mongo-api-ingela.herokuapp.com/
 
 Shows and array of all nominations: https://project-mongo-api-ingela.herokuapp.com/nominations
 
-Shows one object with a specified name (a nominee, could be a film or an actor): https://project-mongo-api-ingela.herokuapp.com/nominations/nominee/Sandra%20Bullock
+Shows one object, the winner from a specified year and within a specified genre: https://project-mongo-api-ingela.herokuapp.com/nominations/2011/Best%20Motion%20Picture%20-%20Animated/winner
 
 Shows all objects from a specified year (year of the award): https://project-mongo-api-ingela.herokuapp.com/nominations/year/2019
 
