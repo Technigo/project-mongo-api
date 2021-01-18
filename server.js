@@ -28,21 +28,21 @@ const Author = mongoose.model('Author', {
   name: String
 });
 
-// To make it run only when we want to
+// To populted database and to make it run 
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
-    // To not get several same responses, start with deleting what's already there
+    // To not get several same responses, start with clearing the database
     await Book.deleteMany({});
     await Author.deleteMany({});
 
     // Creating an array with unique authors from booksData. 
     const uniqueAuthors = [... new Set(booksData.map(book => book.authors))];
-    await uniqueAuthors.forEach(async (authorName) => {
+    uniqueAuthors.forEach(async (authorName) => {
       const author = await new Author({ name: authorName }).save()
 
       // Sending books info for each of the authors books
-      await booksData.filter(book => book.authors === author.name).forEach(async (book) => {
-        await new Book({
+      booksData.filter(book => book.authors === author.name).forEach(async (book) => {
+        new Book({
           title: book.title,
           author: author,
           average_rating: book.average_rating,
@@ -54,7 +54,7 @@ if (process.env.RESET_DATABASE) {
     })
   }
   seedDatabase();
-}
+};
 
 // Defines the port the app will run on. 
 const port = process.env.PORT || 8080;
@@ -103,35 +103,43 @@ app.get('/books', async (req, res) => {
     average_rating: -1
   }).populate('author').skip(startIndex).limit(pageSize);
   // Add an object telling the user how many books the API contains, how many pages, books per page etc. 
-  const returnObject = {
-    pageSize: pageSize,
-    page: page,
-    maxPages: parseInt(books.length / pageSize),
-    numberOfBooks: books.length,
-    limitedBooks,
-  };
-  if (books) {
-    res.status(200).json(returnObject);
-  } else {
-    // Error handling
-    res.status(404).json({ error: 'Data not found' });
+  try {
+    const returnObject = {
+      pageSize: pageSize,
+      page: page,
+      maxPages: parseInt(books.length / pageSize),
+      numberOfBooks: books.length,
+      limitedBooks,
+    };
+    if (books) {
+      res.status(200).json(returnObject);
+    } else {
+      // Error handling
+      res.status(404).json({ error: 'Data not found' });
+    }
+  } catch (error) {
+    res.status(404).json(error);
   }
 });
 
 // To return books with particular ID eg. '/books/955'
 app.get('/books/:bookID', async (req, res) => {
-  const { bookID } = req.params;
-  const book = await Book.findOne({ bookID: bookID });
-  if (book) {
-    res.json(book);
-  } else {
-    // Error handling
-    res.status(404).json({ error: `Book with id: ${bookID} not found` });
+  try {
+    const { bookID } = req.params;
+    const book = await Book.findOne({ bookID: bookID });
+    if (book) {
+      res.json(book);
+    } else {
+      // Error handling
+      res.status(404).json({ error: `Book with id: ${bookID} not found` });
+    }
+  } catch (error) {
+    res.status(400).json(error);
   }
 });
 
 // To return book by it's ISBN, eg. '/books/802415318'
-app.get('/books/:isbn', async (req, res) => {
+app.get('/books/isbn/:isbn', async (req, res) => {
   try {
     const { isbn } = req.params;
     const book = await Book.findOne({ isbn: isbn });
@@ -142,18 +150,38 @@ app.get('/books/:isbn', async (req, res) => {
       res.status(404).json({ error: `Book with isbn: ${isbn} could not be found!` });
     }
   } catch (error) {
-    res.status(400).json({ error: 'Invalid author id' });
+    res.status(400).json(error);
   }
 });
 
 // Route to return all authors
 app.get('/authors', async (req, res) => {
-  const authors = await Author.find();
-  if (authors) {
-    res.json(authors);
-  } else {
-    // Error handling
-    res.status(404).json({ error: 'Data not found' });
+  // Added query to be able to search with query parameters
+  try {
+    const authors = await Author.find(req.query);
+    if (authors) {
+      res.json(authors);
+    } else {
+      // Error handling
+      res.status(404).json({ error: 'Data not found' });
+    }
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
+
+app.get('/authors/:author', async (req, res) => {
+  try {
+    const { name } = req.params;
+    const author = await Author.findOne({ name: name });
+    if (author) {
+      res.json(author);
+    } else {
+      res.status(404).json({ error: `Author with name: ${name} could not be found!` })
+    }
+  } catch (error) {
+    res.status(400).json(error);
   }
 });
 
