@@ -66,17 +66,12 @@ app.get('/nominations', async (req, res) => {
   res.json(allNominations)
 })
 
-//This will return one object with a specified actor, for example 'Sandra Bullock', if there is no such name it will return an error message. If we use Find instead of FindOne it will return all
-// the objects with Sandra Bulllock as nominee. Works also with lowercase: sandra bullock.
-app.get('/nominations/nominee/:nominee', async (req, res) => {
-  const nominee = req.params.nominee
-  const singleNominee = await Data.findOne({nominee: { $regex: nominee, $options: 'i'}})
-
-  if (!singleNominee) {
-    res.status(404).json(ERROR)
-  } else {
-    res.json(singleNominee)
-  }
+//This will return a winner in a specified year in a specified category. Category can also be written in lowercase.
+app.get('/nominations/:year/:category/winner', async (req, res) => {
+  const { year, category } = req.params
+  const winner = await Data.find(
+  { year_award: year, category: { $regex: category, $options: 'i'}, win: true })
+  res.json(winner)
 })
 
 //Shows all nominations from a specified year
