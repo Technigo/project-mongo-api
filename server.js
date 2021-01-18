@@ -66,6 +66,15 @@ app.get('/nominations', async (req, res) => {
   res.json(allNominations)
 })
 
+
+//This will return a nominee with a specified id
+app.get('/nominations/nominee/:id', async (req, res) => {
+  const id = req.params.id
+  const singleNominee = await Data.findById(id)
+  res.json(singleNominee)
+})
+
+
 //This will return a winner in a specified year in a specified category. Category can also be written in lowercase.
 app.get('/nominations/:year/:category/winner', async (req, res) => {
   const { year, category } = req.params
@@ -78,7 +87,6 @@ app.get('/nominations/:year/:category/winner', async (req, res) => {
 app.get('/nominations/year/:year', async (req, res) => {
   const year = req.params.year
   const nominationYear = await Data.find({ year_award: year});
-
   res.json(nominationYear)
 })
 
