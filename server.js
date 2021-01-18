@@ -9,10 +9,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -62,13 +58,12 @@ app.get('/movies', async (req, res) => {
   }
 });
 
-//This returns one single movie based on the name of the nomineed movie
-app.get('/movies/nominee/:nominee', async (req, res) => {
-  const singleNominee = await Movie.findOne({ nominee: req.params.nominee });
-
-  if (singleNominee) {
-    res.json(singleNominee);
-  } else {
+//This returns one single movie based on the id of the nominee
+app.get('/movies/:id', async (req, res) => {
+  try {
+    const singleNominee = await Movie.findOne({ _id: req.params.id }); 
+    res.json(singleNominee); 
+  } catch {
     res.status(404).json({ error: 'Invalid nominee'});
   }
 });
