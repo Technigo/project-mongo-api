@@ -52,7 +52,7 @@ app.get("/books", async (req, res) => {
   }
 });
 
-//Get a single title for a book
+//Get a book by its id in det database (bookID)
 app.get("/books/:id", async (req, res) => {
   const { id } = req.params;
   const singleBook = await Book.find({ bookID: +id });
