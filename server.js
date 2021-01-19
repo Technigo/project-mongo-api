@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
-import listEndpoints from 'express-list-endpoints';
+import listEndpoints from "express-list-endpoints";
 
 import booksData from "./data/books.json";
 
@@ -30,11 +30,11 @@ if (process.env.RESET_DATABASE) {
     await Book.deleteMany();
 
     booksData.forEach((item) => {
-      const newBook = new Book(item).save()
+      const newBook = new Book(item).save();
     });
   };
   seedDatabase();
-};
+}
 
 // Routes starts here
 app.get("/", (req, res) => {
