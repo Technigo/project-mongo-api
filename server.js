@@ -6,7 +6,7 @@ import listEndpoints from 'express-list-endpoints';
 
 import booksData from "./data/books.json";
 
-//Author model and connection to database
+//Book model and connection to database
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-books";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -18,7 +18,7 @@ const app = express();
 const Book = mongoose.model("Book", {
   title: String,
   authors: String,
-  isbn: Number,
+  bookID: Number,
 });
 
 // Add middlewares to enable cors and json body parsing
@@ -30,8 +30,7 @@ if (process.env.RESET_DATABASE) {
     await Book.deleteMany();
 
     booksData.forEach((item) => {
-      const newBook = new Book(item);
-      newBook.save();
+      const newBook = new Book(item).save()
     });
   };
   seedDatabase();
@@ -46,7 +45,6 @@ app.get("/", (req, res) => {
 //Get all books
 app.get("/books", async (req, res) => {
   const allBooks = await Book.find();
-
   if (allBooks.length > 0) {
     res.json(allBooks);
   } else {
@@ -55,11 +53,11 @@ app.get("/books", async (req, res) => {
 });
 
 //Get a single title for a book
-app.get("/books/title/:title", async (req, res) => {
-  const singleTitle = await Book.findOne({ title: req.params.title });
-
-  if (singleTitle) {
-    res.json(singleTitle);
+app.get("/books/:id", async (req, res) => {
+  const { id } = req.params;
+  const singleBook = await Book.find({ bookID: +id });
+  if (singleBook) {
+    res.json(singleBook);
   } else {
     res.status(404).json({ error: "Sorry, could not find the title" });
   }
