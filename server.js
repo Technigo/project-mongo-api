@@ -158,7 +158,7 @@ app.get('/books/isbn/:isbn', async (req, res) => {
 app.get('/authors', async (req, res) => {
   // Added query to be able to search with query parameters
   try {
-    const authors = await Author.find(req.query);
+    const authors = await Author.find(req.query).sort({ name: 'asc' });
     if (authors) {
       res.json(authors);
     } else {
@@ -171,19 +171,19 @@ app.get('/authors', async (req, res) => {
 });
 
 
-app.get('/authors/:author', async (req, res) => {
-  try {
-    const { name } = req.params;
-    const author = await Author.findOne({ name: name });
-    if (author) {
-      res.json(author);
-    } else {
-      res.status(404).json({ error: `Author with name: ${name} could not be found!` })
-    }
-  } catch (error) {
-    res.status(400).json(error);
-  }
-});
+// app.get('/authors/:author', async (req, res) => {
+//   try {
+//     const { name } = req.params;
+//     const author = await Author.findOne({ name: name });
+//     if (author) {
+//       res.json(author);
+//     } else {
+//       res.status(404).json({ error: `Author with name: ${name} could not be found!` })
+//     }
+//   } catch (error) {
+//     res.status(400).json(error);
+//   }
+// });
 
 // Start the server
 app.listen(port, () => {
