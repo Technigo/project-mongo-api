@@ -27,11 +27,11 @@ app.use(bodyParser.json());
 
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
-    await Author.deleteMany();
+    await Book.deleteMany();
 
     booksData.forEach((item) => {
       const newBook = new Book(item);
-      newAuthor.save();
+      newBook.save();
     });
   };
   seedDatabase();
@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
   res.send(listEndpoints(app));
 });
 
-//Get all authors
+//Get all books
 app.get("/books", async (req, res) => {
   const allBooks = await Book.find();
 
@@ -54,7 +54,7 @@ app.get("/books", async (req, res) => {
   }
 });
 
-//Get a single title for an author
+//Get a single title for a book
 app.get("/books/title/:title", async (req, res) => {
   const singleTitle = await Book.findOne({ title: req.params.title });
 
