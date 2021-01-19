@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+import listEndpoints from 'express-list-endpoints';
 
 import booksData from "./data/books.json";
 
@@ -14,7 +15,7 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 //A model
-const Author = mongoose.model("Author", {
+const Book = mongoose.model("Book", {
   title: String,
   authors: String,
   isbn: Number,
@@ -29,7 +30,7 @@ if (process.env.RESET_DATABASE) {
     await Author.deleteMany();
 
     booksData.forEach((item) => {
-      const newAuthor = new Author(item);
+      const newBook = new Book(item);
       newAuthor.save();
     });
   };
@@ -38,23 +39,24 @@ if (process.env.RESET_DATABASE) {
 
 // Routes starts here
 app.get("/", (req, res) => {
-  res.send("Welcome, this is the database full of great authors and books");
+  // res.send("Welcome, this is the database full of great books");
+  res.send(listEndpoints(app));
 });
 
 //Get all authors
-app.get("/authors", async (req, res) => {
-  const allAuthors = await Author.find();
+app.get("/books", async (req, res) => {
+  const allBooks = await Book.find();
 
-  if (allAuthors.length > 0) {
-    res.json(allAuthors);
+  if (allBooks.length > 0) {
+    res.json(allBooks);
   } else {
     res.status(404).json({ error: "Sorry, could not find the data" });
   }
 });
 
 //Get a single title for an author
-app.get("/authors/title/:title", async (req, res) => {
-  const singleTitle = await Author.findOne({ title: req.params.title });
+app.get("/books/title/:title", async (req, res) => {
+  const singleTitle = await Book.findOne({ title: req.params.title });
 
   if (singleTitle) {
     res.json(singleTitle);
@@ -62,6 +64,9 @@ app.get("/authors/title/:title", async (req, res) => {
     res.status(404).json({ error: "Sorry, could not find the title" });
   }
 });
+
+// leaving this console.log here for future referense
+// console.log(listEndpoints(app));
 
 // Start the server
 app.listen(port, () => {
