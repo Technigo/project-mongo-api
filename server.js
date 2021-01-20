@@ -52,10 +52,10 @@ app.get("/shows", async (req, res) => {
   res.json(shows);
 });
 
-app.get("/shows/:title", async (req, res) => {
-  const searchTitle = await Show.findOne({ title: req.params.title });
-  if (searchTitle) {
-    res.json(searchTitle);
+app.get("/shows/:id", async (req, res) => {
+  const searchId = await Show.findOne({ show_id: req.params.id });
+  if (searchId) {
+    res.json(searchId);
   } else {
     res.status(404).json({ error: "Title not found" });
   }
