@@ -3,38 +3,11 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-import netflixData from './data/netflix-titles.json'
+import membersData from './data/groData.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/gro-project"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
-
-const Director = mongoose.model('Director', {
-  name: String,
-})
-
-const Title = mongoose.model('Title', {
-  title: String,
-
-  director: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Director'
-  }
-})
-
-if (process.env.RESET_DATABASE) {
-  const seedDatabase = async () => {
-    await Director.deleteMany()
-
-    netflixData.forEach(item => {
-      const director = new director(item)
-       director.save();
-    })
-  }
-
-  seedDatabase()
-}
-
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -44,42 +17,49 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+const Member = new mongoose.model('Member', {
+  id: Number,
+  name: String,
+  email: String,
+  password: String,
+  food: {
+    type: String,
+    food_id: Number,
+    rating: Number,
+    timestamp: Date
+  }
+})
+
+
+if(process.env.RESET_DATABASE){
+  const populateDatabase = async () => {
+    await Member.deleteMany();
+  
+    membersData.forEach(item => {
+      const newMember = new Member(item);
+      newMember.save();
+    })
+  }
+  populateDatabase();
+}
+
+app.get('/members', async (req, res) => {
+  const allMembers = await Member.find();
+  res.json(allMembers);
+});
+
+app.get('/members/:name', async (req, res) => {
+  const singleMember = await Member.find({ name: req.params.name });
+
+  res.json(singleMember);
+});
+
+
+
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
-
-app.get('/directors', async (req, res) => {
-  const directors = await Director.find()
-  res.json(directors)
-})
-
-app.get('/directors/:id', async (req, res) => {
-  const director = await Director.findById(req.params.id)
-  if (director) {
-    res.json(director)
-  } else {
-    res.status(404).json({ error: 'Author not found' })
-  }
-
-})
-
-app.get('/directors/:id/titles', async (req, res) => {
-  const director = await Director.findById(req.params.id)
-  if (director) {
-    const titles = await Title.find({ director: mongoose.Types.ObjectId(director.id) })
-    res.json(titles)
-  } else {
-    res.status(404).json({ error: 'Author not found' })
-  }
-})
-
-app.get('/titles', async (req, res) => {
-  const titles = await Title.find().populate('author')
-  res.json(titles)
-})
-
-
 
 // Start the server
 app.listen(port, () => {

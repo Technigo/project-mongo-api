@@ -1,0 +1,88 @@
+[
+
+    {
+        "id": 1,
+        "user_name": "Edith",
+        "email": "edith@gmail.com",
+        "password": "htide",
+        "food": [
+            {
+                "name": "Carrot",
+                "food_id": 3,
+                "rating": 5,
+                "timestamp": 2021-01-21
+            },
+            {
+                "name": "Apple",
+                "food_id": 2,
+                "rating": 2,
+                "timestamp": 2021-01-21
+            },
+            {
+                "name": "Broccoli",
+                "food_id": 1,
+                "rating": 3,
+                "timestamp": 2021-01-21
+            },
+            {
+                "name": "Carrot",
+                "food_id": 3,
+                "rating": 4,
+                "timestamp": 2021-01-21
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "user_name": "Stella",
+        "email": "stella@gmail.com",
+        "password": "allets",
+        "food": [
+            {
+                "name": "Apple",
+                "food_id": 2,
+                "rating": 2,
+                "timestamp": 2021-01-21
+            },
+            {
+                "name": "Broccoli",
+                "food_id": 1,
+                "rating": 3,
+                "timestamp": 2021-01-21
+            },
+            {
+                "name": "Carrot",
+                "food_id": 3,
+                "rating": 4,
+                "timestamp": 2021-01-21
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "user_name": "Frank",
+        "email": "frank@gmail.com",
+        "password": "knarf",
+        "food": [
+            {
+                "name": "Broccoli",
+                "food_id": 1,
+                "rating": 3,
+                "timestamp": 2021
+            },
+            {
+                "name": "Carrot",
+                "food_id": 3,
+                "rating": 2,
+                "timestamp": 2021
+            },
+            {
+                "name": "Apple",
+                "food_id": 2,
+                "rating": 5,
+                "timestamp": 2021
+            }
+
+        ]
+    }
+]

@@ -1,0 +1,46 @@
+[
+
+    {
+        "id": 1,
+        "name": "Edith",
+        "email": "edith@gmail.com",
+        "password": "htide",
+        "food": [
+            {
+                "type": "Broccoli",
+                "food_id": 1,
+                "rating": 3,
+                "timestamp": 2021
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Stella",
+        "email": "stella@gmail.com",
+        "password": "allets",
+        "food": [
+            {
+                "type": "Broccoli",
+                "food_id": 1,
+                "rating": 3,
+                "timestamp": 2021
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Frank",
+        "email": "frank@gmail.com",
+        "password": "knarf",
+        "food": [
+            {
+                "type": "Broccoli",
+                "food_id": 1,
+                "rating": 3,
+                "timestamp": 2021
+            }
+        ]
+    }
+]
+
