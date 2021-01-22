@@ -23,7 +23,7 @@ const Member = new mongoose.model('Member', {
   email: String,
   password: String,
   food: {
-    type: String,
+    name: String,
     food_id: Number,
     rating: Number,
     timestamp: Date

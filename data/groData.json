@@ -7,7 +7,7 @@
         "password": "htide",
         "food": [
             {
-                "type": "Broccoli",
+                "name": "Broccoli",
                 "food_id": 1,
                 "rating": 3,
                 "timestamp": 2021
@@ -21,7 +21,7 @@
         "password": "allets",
         "food": [
             {
-                "type": "Broccoli",
+                "name": "Broccoli",
                 "food_id": 1,
                 "rating": 3,
                 "timestamp": 2021
@@ -35,7 +35,7 @@
         "password": "knarf",
         "food": [
             {
-                "type": "Broccoli",
+                "name": "Broccoli",
                 "food_id": 1,
                 "rating": 3,
                 "timestamp": 2021
