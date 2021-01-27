@@ -55,7 +55,6 @@ app.get('/', (req, res) => {
   res.send('Hello Internet')
 })
 
-//FUNGERAR 
 // Returns all the nominations 
 // 2 
 app.get('/nominations', async (req, res) => {
@@ -67,7 +66,6 @@ app.get('/nominations', async (req, res) => {
   }
 })
 
-//FUNGERAR 
 //Returns all the nominations for a specific movie or actor 
 // 3
 app.get('/nominations/:nominee', async (req, res) => {
@@ -79,8 +77,13 @@ app.get('/nominations/:nominee', async (req, res) => {
   }
 })
 
-//FUNGERAR
-// Returns winners from a certain year 
+// returns all the winners
+app.get('/nominations/win', async (req, res) => {
+  const win = await goldenGlobesData.find({ win: true })
+  res.json(win)
+})
+
+// Returns winners from a certain year using query params
 // 4
 app.get('/nominations/:year', async (req, res) => {
   const year = req.params.year
@@ -94,20 +97,17 @@ app.get('/nominations/:year', async (req, res) => {
   res.json(nominationsFromYear)
 })
 
-
-// // Returns year/ category / winner 
-// app.get('/nominations/:cermony/:category/winner', async (req, res) => {
-//   const { cermony, category } = req.params
-//   let categoryWinner = await Nomination.find(
-//   { 
-//     category: category, 
-//     cermony: cermony, 
-//     win: true
-//   })
-//   res.json(categoryWinner)
-// })
-
-
+// Returns year/ category / winner 
+app.get('/nominations/:cermony/:category/win', async (req, res) => {
+  const { cermony, category } = req.params
+  let categoryWinner = await goldenGlobesData.find(
+  { 
+    category: category, 
+    cermony: cermony, 
+    win: true
+  })
+  res.json(categoryWinner)
+})
 
 // Start the server
 app.listen(port, () => {
@@ -116,7 +116,7 @@ app.listen(port, () => {
 
 
 
-// 1
-// 2 
-// 3 http://localhost:9000/nominations/2011?win=true
-// 4 
+// 1 http://localhost:9000/
+// 2 http://localhost:9000/nominations/
+// 3 http://localhost:9000/nominations/Emily%20Blunt
+// 4 http://localhost:9000/nominations/2011?win=true
