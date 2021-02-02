@@ -48,6 +48,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/nominations', async (req, res) => {
+  
   const getNominations = await Nomination.find(req.query)
 
   if (getNominations) {
@@ -58,8 +59,8 @@ app.get('/nominations', async (req, res) => {
 })
 
 app.get('/nominations/:nominee', async (req, res) => {
-  const { nominee } = req.params
-  const fixedNominations = await Nomination.findOne({ nominee: nominee })
+  // const { nominee } = req.params
+  const fixedNominations = await Nomination.findOne({ nominee: req.params.nominee })
 
   if (fixedNominations) {
   res.json(fixedNominations)
