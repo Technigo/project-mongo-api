@@ -3,9 +3,6 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
 import goldenGlobesData from './data/golden-globes.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
@@ -60,9 +57,9 @@ app.get('/nominations', async (req, res) => {
   }
 })
 
-app.get('/nominations/:year', async (req, res) => {
-  const { year } = req.params
-  const fixedNominations = await Nomination.find({ year_award: year })
+app.get('/nominations/:nominee', async (req, res) => {
+  const { nominee } = req.params
+  const fixedNominations = await Nomination.findOne({ nominee: nominee })
 
   if (fixedNominations) {
   res.json(fixedNominations)
