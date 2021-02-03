@@ -57,7 +57,7 @@ app.get('/nominations', async (req, res) => {
 
 //route to a single item
 
-app.get('/nominations/nominee(id', async (req, res) => {
+app.get('/nominations/nominee/:id', async (req, res) => {
 	const singleNominee = await Nomination.findOne({
 		_id: req.params.id,
 	});
