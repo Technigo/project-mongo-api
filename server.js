@@ -44,10 +44,10 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello welcome to my golden globe api!')
 })
 
-app.get('/nominations', async (req, res) => {
+app.get('/nominees', async (req, res) => {
   
   const getNominations = await Nomination.find(req.query)
 
@@ -58,15 +58,14 @@ app.get('/nominations', async (req, res) => {
   }
 })
 
-app.get('/nominations/:nominee', async (req, res) => {
-  // const { nominee } = req.params
-  const fixedNominations = await Nomination.findOne({ nominee: req.params.nominee })
-
-  if (fixedNominations) {
-  res.json(fixedNominations)
-  } else {
-    res.status(404).json({ error: 'There is no year like this'})
-  }
+app.get('/nominees/:year/:category', async (req, res) => {
+  const { year, category } = req.params
+  let filteredNominees = await Nominee.find(
+    { 
+      year_award: year, 
+      category: category
+    })
+  res.json(filteredNominees)
 })
 
 // Start the server
