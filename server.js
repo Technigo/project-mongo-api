@@ -31,7 +31,7 @@ if (process.env.RESET_DB) {
     goldenGlobesData.forEach(item => {
       const newNomination = new Nomination(item);
       newNomination.save();
-		})
+    })
   }
   seedDatabase();
 }
