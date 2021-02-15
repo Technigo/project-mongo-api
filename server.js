@@ -61,25 +61,41 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+// Endpoint returning all nominations 
 app.get('/nominations', async (req, res) => {
-    //const queryParameters = req.query;
-    const allNominations = await Nomination.find(req.query);
-    if (allNominations) {
-      res.json(allNominations)
-    } else {
-      res.status(404).json({ error: 'Nominations not found'})
-    }
+  //const queryParameters = req.query;
+  const allNominations = await Nomination.find(req.query);
+  if (allNominations) {
+    res.json(allNominations)
+  } else {
+    res.status(404).json({ error: 'Nominations not found' })
+  }
 })
 
-app.get('/nominations/:nominee', async (req, res) => {
-  // const { nominee } = req.params  SAME as below
-  // find() returns array, findOne() returns object. The first in order to match.
-    const singleNominee = await Nomination.findOne({ nominee: req.params.nominee });
-    if (singleNominee) {
-      res.json(singleNominee)
-    } else {
-      res.status(404).json({ error: 'Nominee not found' })
-    }
+// Endpoint returning all winners:
+app.get('/nominations?win=true', async (req, res) => {
+  const winners = await Nominee.find({ win: true });
+  if (winners) {
+    res.json(winners)
+  } else {
+    res.status(404).json({ error: 'Winners not found' })
+  }
+})
+
+// Endpoint returning one winner of a category a defined year
+app.get('/nominee/:year/:category/win=true', async (req, res) => {
+  const { year, category } = req.params
+  let filteredNominees = await Nominee.find(
+    {
+      year_award: year,
+      category: category,
+      win: true
+    });
+  if (filteredNominees) {
+    res.json(filteredNominees)
+  } else {
+    res.status(404).json({ error: 'Winner not found' })
+  }
 })
 
 // Start the server
