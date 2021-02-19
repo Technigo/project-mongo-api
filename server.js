@@ -5,9 +5,12 @@ import mongoose from 'mongoose'
 
 import goldenGlobesData from './data/golden-globes.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "https://project-mongo-api-claudia.herokuapp.com/"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
+
+//saved 
+//mongodb://localhost/project-mongo
 
 const port = process.env.PORT || 9000
 const app = express()
