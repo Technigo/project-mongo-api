@@ -68,6 +68,22 @@ app.get('/nominees/:year/:category', async (req, res) => {
   res.json(filteredNominees)
 })
 
+//ONE ENDPOINT 
+app.get('/nominee/:year/:category/win=true', async (req, res) => {
+  const { year, category } = req.params
+  let filteredNominees = await Nominee.find(
+    {
+      year_award: year,
+      category: category,
+      win: true
+    });
+  if (filteredNominees) {
+    res.json(filteredNominees)
+  } else {
+    res.status(404).json({ error: 'Winner not found' })
+  }
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
