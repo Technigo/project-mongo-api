@@ -80,7 +80,7 @@ app.get('/nominee/:year/:category/win=true', async (req, res) => {
   if (filteredNominees) {
     res.json(filteredNominees)
   } else {
-    res.status(404).json({ error: 'Winner not found' })
+    res.status(404).json({ error: 'Not found' })
   }
 })
 
