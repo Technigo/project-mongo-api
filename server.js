@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/albums", async (req, res) => {
-  const allAlbums = await Album.find(req.query); // Clean way of setting queries. This allows all database fields to be queries
+  const allAlbums = await Album.find(req.query).sort({ position: 1 }); // Clean way of setting queries. This allows all database fields to be queries
   if (allAlbums) {
     res.status(200).json({
       numberOfResults: allAlbums.length,
