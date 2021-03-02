@@ -30,4 +30,4 @@ Will show books that are both Top Rated and have less than 600 pages.
 
 ## View it live
 
-Powered by MongoDB, you can find this Bookish API live on Heroku at: https://vane-books-mongo-api.herokuapp.com/
+FOR LIMITED STORAGE REASONS, HAD TO TAKE THE SERVER DOWN FROM HEROKU 😥 (So it's not currently deployed anywhere) - Powered by MongoDB, you can find this Bookish API live on Heroku at: https://vane-books-mongo-api.herokuapp.com/
