@@ -9,9 +9,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-//saved https://project-mongo-api-claudia.herokuapp.com/
-//mongodb://localhost/project-mongo
-
 const port = process.env.PORT || 9000
 const app = express()
 
@@ -28,7 +25,7 @@ const Nomination = new mongoose.model('Nomination', {
     nominee: String,
     film: String,
     win: Boolean, 
-});
+})
 
 
 if (process.env.RESET_DATABASE) {
@@ -38,10 +35,10 @@ if (process.env.RESET_DATABASE) {
 
     goldenGlobesData.forEach(item => {
       const newNomination = new Nomination(item)
-      newNomination.save();
+      newNomination.save()
     })
   }
-  populateDatabase();
+  populateDatabase()
 }
 
 app.use((req, res, next) => {
@@ -61,7 +58,7 @@ app.get('/', (req, res) => {
 // Returns all the nominations 
 // 2 
 app.get('/nominations', async (req, res) => {
-  const allNominations = await Nomination.find(req.query);
+  const allNominations = await Nomination.find(req.query)
   if (allNominations) {
     res.json(allNominations)
   } else {
@@ -69,48 +66,48 @@ app.get('/nominations', async (req, res) => {
   }
 })
 
-//Returns all the nominations for a specific movie or actor 
-// 3
-app.get('/nominations/:nominee', async (req, res) => {
-  const oneNominee = await Nomination.find({ nominee: req.params.nominee });
-  if (oneNominee) {
-    res.json(oneNominee)
-  } else {
-    res.status(404).json({ error: 'Nominee not found' })
-  }
-})
+// //Returns all the nominations for a specific movie or actor 
+// // 3
+// app.get('/nominations/:nominee', async (req, res) => {
+//   const oneNominee = await Nomination.find({ nominee: req.params.nominee });
+//   if (oneNominee) {
+//     res.json(oneNominee)
+//   } else {
+//     res.status(404).json({ error: 'Nominee not found' })
+//   }
+// })
 
-// returns all the winners
-app.get('/nominations/win', async (req, res) => {
-  const win = await goldenGlobesData.find({ win: true })
-  res.json(win)
-})
+// // returns all the winners
+// app.get('/nominations/win', async (req, res) => {
+//   const win = await goldenGlobesData.find({ win: true })
+//   res.json(win)
+// })
 
-// Returns winners from a certain year using query params
-// 4
-app.get('/nominations/:year', async (req, res) => {
-  const year = req.params.year
-  const showWon = req.query.win 
-  let nominationsFromYear =  await goldenGlobesData.filter((item) => item.year_award === +year)
+// // Returns winners from a certain year using query params
+// // 4
+// app.get('/nominations/:year', async (req, res) => {
+//   const year = req.params.year
+//   const showWon = req.query.win 
+//   let nominationsFromYear =  await goldenGlobesData.filter((item) => item.year_award === +year)
 
-  if (showWon) {
-    nominationsFromYear = nominationsFromYear.filter((item) => item.win)
-  }
+//   if (showWon) {
+//     nominationsFromYear = nominationsFromYear.filter((item) => item.win)
+//   }
 
-  res.json(nominationsFromYear)
-})
+//   res.json(nominationsFromYear)
+// })
 
-// Returns year/ category / winner 
-app.get('/nominations/:cermony/:category/win', async (req, res) => {
-  const { cermony, category } = req.params
-  let categoryWinner = await goldenGlobesData.find(
-  { 
-    category: category, 
-    cermony: cermony, 
-    win: true
-  })
-  res.json(categoryWinner)
-})
+// // Returns year/ category / winner 
+// app.get('/nominations/:cermony/:category/win', async (req, res) => {
+//   const { cermony, category } = req.params
+//   let categoryWinner = await goldenGlobesData.find(
+//   { 
+//     category: category, 
+//     cermony: cermony, 
+//     win: true
+//   })
+//   res.json(categoryWinner)
+// })
 
 // Start the server
 app.listen(port, () => {
