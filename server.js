@@ -55,8 +55,8 @@ app.get('/', (req, res) => {
   res.send('Hello Internet')
 })
 
-// Returns all the nominations 
-// 2 
+//Returns all the nominations 
+//2 
 app.get('/nominations', async (req, res) => {
   const allNominations = await Nomination.find(req.query)
   if (allNominations) {
@@ -66,48 +66,52 @@ app.get('/nominations', async (req, res) => {
   }
 })
 
-// //Returns all the nominations for a specific movie or actor 
-// // 3
-// app.get('/nominations/:nominee', async (req, res) => {
-//   const oneNominee = await Nomination.find({ nominee: req.params.nominee });
-//   if (oneNominee) {
-//     res.json(oneNominee)
-//   } else {
-//     res.status(404).json({ error: 'Nominee not found' })
-//   }
-// })
 
-// // returns all the winners
-// app.get('/nominations/win', async (req, res) => {
-//   const win = await goldenGlobesData.find({ win: true })
-//   res.json(win)
-// })
 
-// // Returns winners from a certain year using query params
-// // 4
-// app.get('/nominations/:year', async (req, res) => {
-//   const year = req.params.year
-//   const showWon = req.query.win 
-//   let nominationsFromYear =  await goldenGlobesData.filter((item) => item.year_award === +year)
+//Returns all the nominations for a specific movie or actor 
+// 3
+app.get('/nominations/:nominee', async (req, res) => {
+  const oneNominee = await Nomination.find({ nominee: req.params.nominee });
+  if (oneNominee) {
+    res.json(oneNominee)
+  } else {
+    res.status(404).json({ error: 'Nominee not found' })
+  }
+})
 
-//   if (showWon) {
-//     nominationsFromYear = nominationsFromYear.filter((item) => item.win)
-//   }
+// returns all the winners
+app.get('/nominations/win', async (req, res) => {
+  const win = await Nomination.find({ win: true })
+  res.json(win)
+})
 
-//   res.json(nominationsFromYear)
-// })
 
-// // Returns year/ category / winner 
-// app.get('/nominations/:cermony/:category/win', async (req, res) => {
-//   const { cermony, category } = req.params
-//   let categoryWinner = await goldenGlobesData.find(
-//   { 
-//     category: category, 
-//     cermony: cermony, 
-//     win: true
-//   })
-//   res.json(categoryWinner)
-// })
+
+// Returns winners from a certain year using query params
+// 4
+app.get('/nominations/:year', async (req, res) => {
+  const year = req.params.year
+  const showWon = req.query.win 
+  let nominationsFromYear =  await Nomination.filter((item) => item.year_award === +year)
+
+  if (showWon) {
+    nominationsFromYear = nominationsFromYear.filter((item) => item.win)
+  }
+
+  res.json(nominationsFromYear)
+})
+
+// Returns year/ category / winner 
+app.get('/nominations/:cermony/:category/win', async (req, res) => {
+  const { cermony, category } = req.params
+  let categoryWinner = await Nomination.find(
+  { 
+    category: category, 
+    cermony: cermony, 
+    win: true
+  })
+  res.json(categoryWinner)
+})
 
 // Start the server
 app.listen(port, () => {
