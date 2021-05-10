@@ -1,0 +1,70 @@
+[
+    {
+        "name": "BitDegree",
+        "language": "English",
+        "type": "Learning platform",
+        "programming_language": "Python, JavaScript, CSS, HTML, PHP, SQL, Bootstrap, JQuery, Git",
+        "topic": "Coding resources, code examples, guides, tutorials, video courses",
+        "url": "https://www.bitdegree.org/learn/",
+        "description": "A site where you can find plenty of explained code examples in different programming languages, lot of informative articles, video guides and tutorials.",
+        "offer_training": true,
+        "free_or_paid": "free"
+    },
+    {
+        "name": "Coursera",
+        "language": "English",
+        "type": "Education platform",
+        "programming_language": "Python, CSS, JavaScript, HTML",
+        "topic": "Education resource",
+        "url": "https://www.coursera.org/",
+        "description": "A site where they have gathered plenty of courses and programs where you can study online at some of the most well recognized schools in the world. Study for free, and pay if you want to get a certificate after completing your courses.",
+        "offer_training": true,
+        "free_or_paid": "free, paid"
+    },
+    {
+        "name": "Codecademy",
+        "language": "English",
+        "type": "Learning platform",
+        "programming_language": "HTML, CSS, JavaScript, Python, SQL, Kotlin, Swift",
+        "topic": "Educational articles, online training, forum",
+        "url": "https://www.codecademy.com/",
+        "description": "A very popular website where you can learn to code in different programming languages. You can start learning for free, but can also update to a paid subscription in order to get full access.",
+        "offer_training": true,
+        "free_or_paid": "free, paid"
+    },
+    {
+        "name": "edX",
+        "language": "English",
+        "type": "Education platform",
+        "programming_language": "HTML, CSS, JavaScript, Java, Python, Node, React, React Native, Bootstrap",
+        "topic": "Education resource",
+        "url": "https://www.edx.org/course/subject/computer-science",
+        "description": "A platform where you can find hundreds of courses and programs at well recognized universities and schools around the world. Join a program in data science or learn how to program with Python, it's all there.",
+        "offer_training": true,
+        "free_or_paid": "paid"
+    },
+    {
+        "name": "Codewars",
+        "language": "English",
+        "type": "Code challenges",
+        "programming_language": "JavaScript, C, SQL, Swift, Java, Kotlin, PHP, Perl, Python, Ruby",
+        "topic": "Code challenges",
+        "url": "https://www.codewars.com/",
+        "description": "Practice and improve your skills by accepting code challenges in the programming language of your choice.",
+        "offer_training": true,
+        "free_or_paid": "free"
+    },
+    {
+        "name": "Udemy",
+        "language": "English",
+        "type": "Education platform",
+        "programming_language": "Python, Ruby, Java, JavaScript, CSS, HTML, Bootstrap, Angular, React, React Native, Node",
+        "topic": "Online courses",
+        "url": "https://www.udemy.com/",
+        "description": "Platform with hundreds of online courses within different topics. You can study for a month or for a year, depending on which goals you strive to achieve.",
+        "offer_training": true,
+        "free_or_paid": "paid"
+    }
+    
+
+]
