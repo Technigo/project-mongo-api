@@ -9,13 +9,36 @@ import mongoose from 'mongoose'
 // import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
 // import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
+import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+const netflixSchema = mongoose.Schema({
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  type: String,
+  release_year: Number,
+  description: String,
+  duration: String
+})
+
+const NetflixData = mongoose.model('NetflixData', netflixSchema)
+
+if (process.env.RESET_DB) {
+  console.log('SEEDING');
+  const seedDB = async () => {
+    await NetflixData.deleteMany();
+    await netflixData.forEach(item => {
+      const newItem = new NetflixData(item).save()
+    })
+  }
+  seedDB();
+}
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
 //
@@ -25,15 +48,22 @@ const app = express()
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
+
+
 
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+app.get('/netflix', async (req, res) => {
+  const data = await NetflixData.find()
+  res.json(data)
+})
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
+  console.log(`Server running on http://localhost:${port} WOOP WOOP 🚀`)
 })
