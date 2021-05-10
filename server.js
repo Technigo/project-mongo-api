@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import avocadoSalesData from './data/avocado-sales.json'
 
@@ -48,7 +49,12 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello worlds')
+  res.send(listEndpoints(app))
+})
+
+app.get('/avocado-sales', async (req, res) => {
+  const avocadoSales = await AvocadoSale.find()
+    res.json(avocadoSales)
 })
 
 // Start the server
