@@ -11,7 +11,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// RESET_DB=true npm run dev - --- INITIALIZE THE DATABASE ** !!
+// RESET_DB=true npm run dev - --- INITIALIZE THE DATABASE *
 
 const titlesSchema = new mongoose.Schema({
   //_id: { type: String, required: true }, // Added --->  make _id to a string. if not want to deal with _id and id?
@@ -32,7 +32,6 @@ const titlesSchema = new mongoose.Schema({
   type: String
 }, { minimize: false })
 
-
 // 1st argument member 2nd argument is the Schema
 const Title = mongoose.model('Title', titlesSchema) //mongoDB takes the string 'Title' and changing the Uppercase to lowercase member + s = titles
 
@@ -40,16 +39,15 @@ const Director = mongoose.model('Director', { //Name same as variable name as a 
   name: String
 })
 
-// take all the data from technigo.json
 if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Title.deleteMany() // make sure we don't have anything in our database before starting it. 
 
     await netflixTitles.forEach(item => {
-      //new Title(item).newTitle.save() //shorthand way of writing
+      new Title(item).newTitle.save() //shorthand way of writing
       //longhand: 
-      const newTitle = new Title(item)
-      newTitle.save() 
+/*       const newTitle = new Title(item)
+      newTitle.save()  */
     })
   }
   seedDB()
