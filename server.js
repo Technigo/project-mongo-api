@@ -17,7 +17,7 @@ const titlesSchema = new mongoose.Schema({
   //_id: { type: String, required: true }, // Added --->  make _id to a string. if not want to deal with _id and id?
   show_id: Number,
   title: String,
-  director: String, /* {
+  director: {
     type: mongoose.Schema.Types.ObjectId, //upon adding a new post ---> _id: _id,
     ref: 'Director'
   }, //String, */
@@ -30,7 +30,8 @@ const titlesSchema = new mongoose.Schema({
   listed_in: String,
   description: String,
   type: String
-})
+}, { minimize: false })
+
 
 // 1st argument member 2nd argument is the Schema
 const Title = mongoose.model('Title', titlesSchema) //mongoDB takes the string 'Title' and changing the Uppercase to lowercase member + s = titles
@@ -67,7 +68,7 @@ app.get('/', (req, res) => {
 // return all titles
 app.get('/titles', async (req, res) => {
   // v 1 universal version
-  const titles = await Title.find() //.populate('director') // populate title with director object
+  const titles = await Title.find().populate('director') // populate title with director object
   res.json(titles) // or netflixTitles
 })
 
