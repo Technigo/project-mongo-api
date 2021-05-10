@@ -22,6 +22,7 @@
     }
   },
   "rules": {
+    "linebreak-style": 0,
     "quotes": "off",
     "arrow-body-style": "off",
     "class-methods-use-this": "off",
