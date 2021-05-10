@@ -17,10 +17,10 @@ const titlesSchema = new mongoose.Schema({
   //_id: { type: String, required: true }, // Added --->  make _id to a string. if not want to deal with _id and id?
   show_id: Number,
   title: String,
-  director: {
+  director: String, /* {
     type: mongoose.Schema.Types.ObjectId, //upon adding a new post ---> _id: _id,
     ref: 'Director'
-  }, //String,
+  }, //String, */
   cast: String,
   country: String,
   date_added: String,
@@ -67,12 +67,12 @@ app.get('/', (req, res) => {
 // return all titles
 app.get('/titles', async (req, res) => {
   // v 1 universal version
-  const titles = await Title.find().populate('director') // populate title with director object
+  const titles = await Title.find() //.populate('director') // populate title with director object
   res.json(titles) // or netflixTitles
 })
 
 // Return the id of one netflix title
-app.get('/titles/id', async (req, res) => {
+app.get('/titles/:id', async (req, res) => {
   console.log(mongoose.isValidObjectId(req.params.id))
   const title = await Title.findById(req.params.id)
   res.json(title)
