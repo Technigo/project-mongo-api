@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import avocadoSalesData from './data/avocado-sales.json'
+
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // 
@@ -15,10 +17,28 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+const AvocadoSale = mongoose.model('AvocadoSale', {
+    date: Date,
+    averagePrice: Number,
+    totalVolume: Number,
+    totalBagsSold: Number,
+    smallBagsSold: Number,
+    largeBagsSold: Number,
+    xLargeBagsSold: Number,
+    region: String
+})
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await AvocadoSale.deleteMany()
+    await avocadoSalesData.forEach(item => {
+      const newAvocadoSale = new AvocadoSale(item)
+      newAvocadoSale.save()
+    })
+  }
+  seedDatabase()
+}
+
 const port = process.env.PORT || 8080
 const app = express()
 
