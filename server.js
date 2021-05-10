@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 
 import exercisesData from './data/exercises.json'
 
+// Lines 9-11 connects server and database
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
@@ -19,9 +20,20 @@ const Exercise = mongoose.model('Exercise', {
   img: String
 })
 
+if (process.env.RESET_DB) {
+  const exerciseDB = async () => {
+    await Exercise.deleteMany()
+
+    await exercisesData.forEach((exercise) => {
+      const newExercises = new Exercise(exercise)
+      newExercises.save()
+    })
+  }
+  exerciseDB()
+}
+/* from Jennie's lecture, how to add a exercise to database
 Exercise.deleteMany().then(() => {
   new Exercise({
-    exerciseID: 112,
     name: 'testing',
     category: 'testing',
     muscle_group: 'testing',
@@ -29,7 +41,7 @@ Exercise.deleteMany().then(() => {
     instructions: 'testing',
     img: 'testing'
   }).save()
-})
+}) */
 
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080
@@ -39,8 +51,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
-app.get('/', (req, res) => {
+// All exercises
+app.get('/exercises', (req, res) => {
   Exercise.find().then((exercises) => {
     res.json(exercises)
   })
