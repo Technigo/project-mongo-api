@@ -1,9 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 import listEndpoints from 'express-list-endpoints'
 
 import avocadoSalesData from './data/avocado-sales.json'
+
+dotenv.config()
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
