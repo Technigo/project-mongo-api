@@ -43,7 +43,7 @@ if (process.env.RESET_DB) {
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8081
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -54,11 +54,32 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello from the other side!')
 })
 
-app.get('/netflix', async (req, res) => {
+app.get('/content', async (req, res) => {
   const data = await NetflixData.find()
+  res.json(data)
+})
+
+app.get('/content/series', async (req, res) => {
+  const data = await NetflixData.find()
+  const { type } = req.query
+  if (type) {
+    const seriesList = data.filter(serie => serie.type === 'TV Show')
+    res.json(seriesList)
+  }
+  res.json(data)
+  
+})
+
+app.get('/content/movies', async (req, res) => {
+  const data = await NetflixData.find()
+  const { movies } = req.query
+  if (movies) {
+    const movieList = data.filter(movie => movie.type === 'Movie')
+    res.json(movieList)
+  }
   res.json(data)
 })
 
