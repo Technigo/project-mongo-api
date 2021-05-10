@@ -13,7 +13,7 @@ import mongoose from 'mongoose'
 // import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: false })
 mongoose.Promise = Promise
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
