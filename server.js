@@ -1,9 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import router from './routes';
 // import data from './data/ufoSightings.json'
 // import Sighting from './models/sightingModel'
+import errorHandler from './controllers/errorController'
+
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/ufo-sightings';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -29,6 +33,6 @@ app.use(cors());
 app.use(express.json());
 // Add router module
 app.use('/', router);
-
+app.use(errorHandler)
 // Start the server
 app.listen(port, () => {});

@@ -2,6 +2,7 @@ import data from '../data/ufoSightings.json';
 import { queried } from '../utils/filters';
 import { paginate } from '../utils/pagination';
 import { validateQueries } from '../utils/restrictions';
+import AppError from '../utils/appError'
 
 export const list = (req, res) => {
   if (!validateQueries(req.query)) {
@@ -32,22 +33,27 @@ export const list = (req, res) => {
   }
 };
 
-export const view = (req, res) => {
-  const { id } = req.params;
-
-  if (Object.keys(req.query).length > 0) {
-    return res.status(403).json({
-      status: 'error',
-      message: 'Queries are not allowed for this endpoint'
-    });
+export const view = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+  
+    if (Object.keys(req.query).length > 0) {
+      return res.status(403).json({
+        status: 'error',
+        message: 'Queries are not allowed for this endpoint'
+      });
+    }
+  
+    const item = data.find((d) => d.id === +id);
+    if (!item) {
+      return next(new AppError(404, 'Not Found', 'Invaild ID'))
+      // return res.status(404).json({
+      //   status: 'error',
+      //   message: 'Could not find the requested sighting by ID'
+      // });
+    }
+    res.send(item);
+  } catch (error) {
+    next(error)
   }
-
-  const item = data.find((d) => d.id === +id);
-  if (!item) {
-    return res.status(404).json({
-      status: 'error',
-      message: 'Could not find the requested sighting by ID'
-    });
-  }
-  res.send(item);
 };
