@@ -26,7 +26,16 @@ if (process.env.RESET_DB) {
     await Book.deleteMany();
 
     await booksData.forEach((item) => {
-      new Book(item).save();
+      const newBook = new Book({
+        bookID: item.bookID,
+        title: item.title,
+        authors: item.authors,
+        average_rating: item.average_rating,
+        num_pages: item.num_pages
+      });
+      newBook.save();
+
+      // new Book(item).save();
     });
   };
 
