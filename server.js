@@ -186,9 +186,10 @@ app.listen(port, () => {
 // Search Artist 
 // Title 
 
-// Dylan hits 
+// Bob Dylan
 // The beatles hits 
-// The rolling stone
-// Elvis Presley
 // Prince
 // Aretha Franklin
+// the Supremes 
+// Tina turner
+// Bonnie Raitt
