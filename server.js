@@ -2,8 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
+import dotenv from 'dotenv';
 
 import booksData from './data/books.json';
+
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -26,16 +29,7 @@ if (process.env.RESET_DB) {
     await Book.deleteMany();
 
     await booksData.forEach((item) => {
-      const newBook = new Book({
-        bookID: item.bookID,
-        title: item.title,
-        authors: item.authors,
-        average_rating: item.average_rating,
-        num_pages: item.num_pages
-      });
-      newBook.save();
-
-      // new Book(item).save();
+      new Book(item).save();
     });
   };
 
