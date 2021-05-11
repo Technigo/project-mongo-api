@@ -6,7 +6,6 @@ import listEndpoints from 'express-list-endpoints'
 import netflixTitles from './data/netflix-titles.json'
 console.log(netflixTitles.length) // 7787 objects
 
-// Task error handling for the mongoose connection ! Good to practice ** 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
@@ -20,10 +19,7 @@ const titlesSchema = new mongoose.Schema({
   title: {
     any: mongoose.Schema.Types.Mixed
   },// can also be a number. --> earlier: String, // now:  ({ any: Schema.Types.Mixed })
-  director: {
-    type: mongoose.Schema.Types.ObjectId, //upon adding a new post ---> _id: _id, Schema.Types.Mixed
-    ref: 'Director'
-  }, //String, */
+  director: { type: mongoose.Schema.Types.ObjectId, ref: 'Director' }, // []    or possible to add: name: "" ? 
   cast: String,
   country: String,
   date_added: String,
@@ -34,37 +30,43 @@ const titlesSchema = new mongoose.Schema({
   description: String
 })
 
-// 1st argument Title, 2nd argument the Schema
-const Title = mongoose.model('Title', titlesSchema) //mongoDB takes the string 'Title' and changing the Uppercase to lowercase member + s = titles
-
-const Director = mongoose.model('Director', { //Name same as variable - a rule of thumb
+const directorsSchema = new mongoose.Schema({
   name: String
 })
 
+// 1st argument Title, 2nd argument the Schema
+const Title = mongoose.model('Title', titlesSchema) //mongoDB takes the string 'Title' and changing the Uppercase to lowercase + s = titles
+
+const Director = mongoose.model('Director', directorsSchema) //Name same as variable - a rule of thumb
+
 if (process.env.RESET_DB) {
+  console.log('Resetting database')
   const seedDB = async () => {
     await Title.deleteMany()
     await Director.deleteMany()
 
-    let directors = []
+    let directors = [] // or take away {} ?? 
 
-    // You need to have array with all of the directors inside, so we can loop over it to create document for each one of them
-    directorsData.forEach(async item => {
-      const director = new Director(item)
+    netflixTitles.slice(0,100).forEach(async item => {
+      const director = new Director({"name": item.director}) // make object according to Director schema above
       
-      directors.push(director)
-      await director.save()
+      if (item.director != "") {
+        directors.push(director)
+        await director.save()
+      } 
     })
-  
-    netflixTitles.forEach(async item => {
+
+    // how to save title with type MIXED ?? 
+    netflixTitles.slice(0,100).forEach(async item => {
       const title = new Title({
         ...item,
         director: directors.find(singleDirector => singleDirector.name === item.director)
       })
       await title.save()
-    })
-    seedDB()
+    }) 
   }
+  seedDB()
+  console.log('Seeded the database')
 }
 
 
@@ -73,6 +75,15 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+
+// check if mongoose connection is alright
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: `Service unavailable` })
+  }
+})
 
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
@@ -87,7 +98,7 @@ app.get('/titles', async (req, res) => {
 
 // Return the id of one netflix title
 app.get('/titles/:id', async (req, res) => {
-  console.log(mongoose.isValidObjectId(req.params.id)) // 
+  //console.log(mongoose.isValidObjectId(req.params.id)) // TRUE
   const title = await Title.findById(req.params.id)
   res.json(title)
 })
@@ -95,7 +106,7 @@ app.get('/titles/:id', async (req, res) => {
 //60992b36fea8157986d330be
 
 app.get('/directors/:id', async (req, res) => {
-  //console.log(mongoose.isValidObjectId(req.params.id))
+  console.log(mongoose.isValidObjectId(req.params.id))
   const director = await Director.findById(req.params.id)
 
   res.json(director)
