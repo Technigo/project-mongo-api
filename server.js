@@ -1,17 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-// const mongoosePaginate = require('mongoose-paginate-v2');
-// const { topSongsData } = require("./data/500topsongs.json");
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+// const { topSongsData } = require("./data/500topsongs.json");
 
 const { newTopSongs } = require("./data/cleanSongs")
 
@@ -31,7 +22,6 @@ const songSchema = new mongoose.Schema({
   id: Number
 });
 
-// songSchema.plugin(mongoosePaginate);
 // Mongoose = ORM - Object Relational Mapping.
 // Model consist of schemas
 const Song = mongoose.model("Song", songSchema);
@@ -127,7 +117,7 @@ app.get("/songs/song/:id", async (req, res) => {
 // The $eq is a MongoDB query operator matches documents 
 // where the value is equal the field with specified value 
 // Totallt 119 songs has been number one on billbord, 
-// Pagnation through mongoDB lets us 
+// Pagnation through mongoDB 
 
 app.get('/songs/top-rated', async (req, res) => {
   // page one 35 per page 
@@ -154,6 +144,20 @@ app.get('/songs/top-rated', async (req, res) => {
   }
 
   // res.json(topSongs)
+})
+
+// end point for search for specific artist, using params 
+app.get('/songs/artist/:artist', async (req, res) => {
+  const artistName = req.params.artist
+
+  // Added regex so that search includes non-case-sensitive strings and
+  // if the name is included in the request 
+  const artistSong = await Song.find({ artist: { $regex: new RegExp(artistName, "i") } });
+
+  if (artistSong.length === 0) {
+    res.status(404).json("Sorry, could not find any songs by that artis, check artis name")
+  } 
+  res.json(artistSong)
 })
 
 // Start the server
