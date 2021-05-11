@@ -23,7 +23,7 @@ const bookSchema = new mongoose.Schema({
 const Book = mongoose.model('Book', bookSchema);
 
 if (process.env.RESET_DB) {
-  console.log('Resetting database!'); // remove this later
+  console.log('Resetting database!'); // remove this later?
 
   const seedDB = async () => {
     await Book.deleteMany();
@@ -58,31 +58,47 @@ app.get('/', (req, res) => {
 });
 
 // All books
+// Books by author, query path: '/books?author=adams'
+// Books by title, query path: '/books?title=bill'
 app.get('/books', async (req, res) => {
-  const books = await Book.find();
-  res.json(books);
+  const { author, title } = req.query;
+  const booksToSend = await Book.find();
+
+  // if (author) {
+  //   booksToSend = booksToSend = await Book.find({ authors: { $in } });
+  // }
+
+  res.json(booksToSend);
+});
+
+// Books by top rating (4 or higher)
+app.get('/books/toprating', async (req, res) => {
+  const booksByTopRating = await Book.find({ average_rating: { $gte: 4 } })
+
+  res.json(booksByTopRating);
+});
+
+// Books by short reads (less than 500 pages)
+app.get('/books/shortread', async (req, res) => {
+  const shortRead = await Book.find({ num_pages: { $lt: 500 } });
+
+  res.json(shortRead);
 });
 
 // Books by id
 app.get('/books/:id', async (req, res) => {
   try {
-    const bookById = await Book.findById(req.params.id);
+    const singleBook = await Book.findById(req.params.id);
 
-    if (bookById) {
-      res.json(bookById);
+    if (singleBook) {
+      res.json(singleBook);
     } else {
       res.status(404).json({ error: 'Book not found' });
     }
   } catch (err) {
-    res.status(400).json({ error: 'Invalid input' });
+    res.status(400).json({ error: 'Invalid book ID' });
   }
 });
-
-// All authors
-// app.get('/books/authors', async (req, res) => {
-//   const authors = await Book.find();
-//   res.json(authors);
-// });
 
 // Books by author id
 // app.get('/authors/:id/books', async (req, res) => {
