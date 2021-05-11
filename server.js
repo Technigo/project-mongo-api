@@ -52,7 +52,7 @@ app.use(bodyParser.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send(
-    "Welcome to the Books API. Available queries: id, title, language, author. The endpoint for the queries is /books?title=harry. You can also use params to search for a single ID on this endpoint /books/id/1. You can also get all books on the endpoint /books/all"
+    "Welcome to the Books API. Available queries: id, title, language, author, isbn. The endpoint for the queries is /books?title=harry. You can also use params to search for a single ID on this endpoint /books/id/1. You can also get all books on the endpoint /books/all"
   );
 });
 
