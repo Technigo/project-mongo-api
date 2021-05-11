@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { response } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -22,6 +22,7 @@ const netflixSchema = mongoose.Schema({
   cast: String,
   country: String,
   type: String,
+  listed_in: String,
   release_year: Number,
   description: String,
   duration: String
@@ -43,7 +44,7 @@ if (process.env.RESET_DB) {
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8081
+const port = process.env.PORT || 8080
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -58,28 +59,26 @@ app.get('/', (req, res) => {
 })
 
 app.get('/content', async (req, res) => {
-  const data = await NetflixData.find()
+  let data
+  const { country } = req.query
+  const { genre } = req.query
+  if (country) {
+    data = await NetflixData.find({ country })
+  } else if (genre) {
+    data = await NetflixData.find({ listed_in: genre })
+  } else {
+    data = await NetflixData.find()
+  }
   res.json(data)
 })
 
 app.get('/content/series', async (req, res) => {
-  const data = await NetflixData.find()
-  const { type } = req.query
-  if (type) {
-    const seriesList = data.filter(serie => serie.type === 'TV Show')
-    res.json(seriesList)
-  }
+  const data = await NetflixData.find({ type: 'TV Show'})
   res.json(data)
-  
 })
 
 app.get('/content/movies', async (req, res) => {
-  const data = await NetflixData.find()
-  const { movies } = req.query
-  if (movies) {
-    const movieList = data.filter(movie => movie.type === 'Movie')
-    res.json(movieList)
-  }
+  const data = await NetflixData.find({ type: 'Movie'})
   res.json(data)
 })
 
