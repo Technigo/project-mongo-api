@@ -146,6 +146,7 @@ app.get('/songs/top-rated', async (req, res) => {
   // res.json(topSongs)
 })
 
+// http://localhost:8080/songs/artist/bob%20dylan
 // end point for search for specific artist, using params 
 app.get('/songs/artist/:artist', async (req, res) => {
   const artistName = req.params.artist
@@ -160,6 +161,20 @@ app.get('/songs/artist/:artist', async (req, res) => {
   res.json(artistSong)
 })
 
+// http://localhost:8080/songs/title/my%20generation
+// end point for search for specific song title, using params 
+app.get('/songs/title/:title', async (req, res) => {
+  const titleName = req.params.title
+
+  // Added regex so that search includes non-case-sensitive strings and
+  // if the name is included in the request 
+  const titleSong = await Song.find({ title: { $regex: new RegExp(titleName, "i") } });
+
+  if (titleSong.length === 0) {
+    res.status(404).json("Sorry, could not find any songs by that title, check title name")
+  } 
+  res.json(titleSong)
+})
 // Start the server
 
 app.listen(port, () => {
