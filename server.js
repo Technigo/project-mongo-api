@@ -17,21 +17,11 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const netflixSchema = mongoose.Schema({
-  title: {
-    type: String,
-    lowercase: true
-  },
+  title: String,
   director: String,
   cast: String,
-  country: {
-    type: String,
-    lowercase: true
-  },
-  type: String,
-  listed_in: {
-    type: String,
-    lowercase: true
-  },
+  country: String,
+  listed_in: String,
   release_year: Number,
   description: String,
   duration: String,
@@ -75,15 +65,23 @@ app.get('/content', async (req, res) => {
   const { title } = req.query
   const { director } = req.query
   if (country) {
-    data = await NetflixData.find({ country })
+    data = await NetflixData.find({ 
+      country: { $regex: country, $options: "i" } 
+    })
   } else if (genre) {
-    data = await NetflixData.find({ listed_in: genre })
+    data = await NetflixData.find({ 
+      listed_in: { $regex: genre, $options: "i" }
+    })
   } else if (releaseYear) {
     data = await NetflixData.find({ release_year: releaseYear })
   } else if (title) {
-    data = await NetflixData.find({ title })
+    data = await NetflixData.find({ 
+      title: { $regex: title, $options: "i" }
+    })
   } else if (director) {
-    data = await NetflixData.find({ director })
+    data = await NetflixData.find({ 
+      director: { $regex: director, $options: "i" }
+    })
   } else {
     data = await NetflixData.find()
   }
