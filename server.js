@@ -25,15 +25,13 @@ if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Player.deleteMany();
 
-    await players.forEach(item => {
+    await players.forEach((item) => {
       const newPlayer = new Player(item);
       newPlayer.save();
     });
   }
   seedDatabase();
 }
-
-
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -52,23 +50,34 @@ app.get('/players', async (req, res) => {
 })
 
 app.get('/players/player/:id', async (req, res) => {
-  const player = await Player.findById(req.params.id)
-  if (player) {
-    res.json(player)
+  try {
+    const player = await Player.findById(req.params.id)
+    if (player) {
+      res.json(player)
+    } else {
+      res.status(404).json({ error: 'Player not found' })
+    }
+  } catch {
+    res.status(400).json({ error: 'Invalid player id' })
   }
-  // not working now
-  // else {
-  //   res.status(404).json({ error: 'Player not found' })
-  // }
+})
+
+app.get('/countries', async (req, res) => {
+  const countries = await Player.distinct('country')
+  res.json(countries)
 })
 
 app.get('/countries/:country', async (req, res) => {
-  const country = await Player.find({ country: req.params.country })
+  // const country = await Player.find({ country: req.params.country })
+  const country = await Player.find({
+    country: {
+      $regex: new RegExp(req.params.country, "i")
+    }
+  })
   if (country) {
     res.json(country)
   }
 })
-
 
 
 // Start the server
@@ -78,6 +87,8 @@ app.listen(port, () => {
 })
 
 // id: 609a438ce7f1994478171d73
+
+// 609a438ce7f1994478171d45
 // {
 //   "Name :": "Michael van Gerwen",
 //   "Country :": "Netherlands",
