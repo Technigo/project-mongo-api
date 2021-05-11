@@ -3,6 +3,9 @@
 Replace this readme with your own information about your project. 
 
 Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+- How to model data in Mongoose
+- How to fetch items from a Mongo database using Mongoose
+- How to seed large amounts of data to a database
 
 ## The problem
 
