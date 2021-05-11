@@ -60,6 +60,18 @@ app.get("/books/all", (req, res) => {
   });
 });
 
+app.get("/books/id/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const getBookByID = await Book.findOne({ bookID: id });
+
+  if (getBookByID === null) {
+    res.status(404).json({ error: "No book with that ID." });
+  } else {
+    res.json(getBookByID);
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
