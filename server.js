@@ -2,6 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import exercisesData from './data/exercises.json'
 
@@ -21,7 +22,7 @@ const Exercise = mongoose.model('Exercise', {
 })
 
 if (process.env.RESET_DB) {
-  const exerciseDB = async () => {
+  const seedDB = async () => {
     await Exercise.deleteMany()
 
     await exercisesData.forEach((exercise) => {
@@ -29,19 +30,8 @@ if (process.env.RESET_DB) {
       newExercises.save()
     })
   }
-  exerciseDB()
+  seedDB()
 }
-/* from Jennie's lecture, how to add a exercise to database
-Exercise.deleteMany().then(() => {
-  new Exercise({
-    name: 'testing',
-    category: 'testing',
-    muscle_group: 'testing',
-    target_muscle: 'testing',
-    instructions: 'testing',
-    img: 'testing'
-  }).save()
-}) */
 
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080
@@ -51,6 +41,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+// Endpoints
+app.get('/', (req, res) => {
+  res.send(listEndpoints(app))
+})
+
 // All exercises
 app.get('/exercises', (req, res) => {
   Exercise.find().then((exercises) => {
@@ -58,6 +53,7 @@ app.get('/exercises', (req, res) => {
   })
 })
 
+// Find exercises by name
 app.get('/:name', (req, res) => {
   Exercise.findOne({ name: req.params.name }).then((exercise) => {
     if (exercise) {
