@@ -51,7 +51,9 @@ app.use(bodyParser.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send(
+    "Welcome to the Books API. Available queries: id, title, language, author. The endpoint for the queries is /books?title=harry. You can also use params to search for a single ID on this endpoint /books/id/1. You can also get all books on the endpoint /books/all"
+  );
 });
 
 app.get("/books/all", (req, res) => {
@@ -69,6 +71,41 @@ app.get("/books/id/:id", async (req, res) => {
     res.status(404).json({ error: "No book with that ID." });
   } else {
     res.json(getBookByID);
+  }
+});
+
+app.get("/books", async (req, res) => {
+  const { id, author, title, language } = req.query;
+
+  const authorRegex = new RegExp(author, "i");
+  const titleRegex = new RegExp(title, "i");
+  const languageRegex = new RegExp(language, "i");
+
+  const searchQuery = {};
+
+  if (id !== undefined) {
+    searchQuery.bookID = +id;
+  }
+  if (author !== undefined) {
+    searchQuery.authors = authorRegex;
+  }
+  if (title !== undefined) {
+    searchQuery.title = titleRegex;
+  }
+  if (language !== undefined) {
+    searchQuery.language_code = languageRegex;
+  }
+
+  const searchQueryResult = await Book.find(searchQuery);
+
+  if (searchQueryResult.length === 0) {
+    res.status(404).json({
+      error:
+        "Could't not find anything in the database that matches your search query.",
+    });
+  } else {
+    console.log("Yeeey this is the result");
+    res.json(searchQueryResult);
   }
 });
 
