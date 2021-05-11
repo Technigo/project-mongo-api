@@ -75,11 +75,12 @@ app.get("/books/id/:id", async (req, res) => {
 });
 
 app.get("/books", async (req, res) => {
-  const { id, author, title, language } = req.query;
+  const { id, author, title, language, isbn } = req.query;
 
-  const authorRegex = new RegExp(author, "i");
-  const titleRegex = new RegExp(title, "i");
-  const languageRegex = new RegExp(language, "i");
+  const authorRegexp = new RegExp(author, "i");
+  const titleRegexp = new RegExp(title, "i");
+  const languageRegexp = new RegExp(language, "i");
+  const isbnRegexp = new RegExp(isbn, "i");
 
   const searchQuery = {};
 
@@ -87,13 +88,16 @@ app.get("/books", async (req, res) => {
     searchQuery.bookID = +id;
   }
   if (author !== undefined) {
-    searchQuery.authors = authorRegex;
+    searchQuery.authors = authorRegexp;
   }
   if (title !== undefined) {
-    searchQuery.title = titleRegex;
+    searchQuery.title = titleRegexp;
   }
   if (language !== undefined) {
-    searchQuery.language_code = languageRegex;
+    searchQuery.language_code = languageRegexp;
+  }
+  if (isbn !== undefined) {
+    searchQuery.isbn = isbnRegexp;
   }
 
   const searchQueryResult = await Book.find(searchQuery);
@@ -104,7 +108,6 @@ app.get("/books", async (req, res) => {
         "Could't not find anything in the database that matches your search query.",
     });
   } else {
-    console.log("Yeeey this is the result");
     res.json(searchQueryResult);
   }
 });
