@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const { topSongsData } = require("./data/500topsongs.json");
+// const mongoosePaginate = require('mongoose-paginate-v2');
+// const { topSongsData } = require("./data/500topsongs.json");
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -26,9 +27,11 @@ const songSchema = new mongoose.Schema({
   artist: String,
   writers: String,
   producer: String,
-  position: Number
+  position: Number,
+  id: Number
 });
 
+// songSchema.plugin(mongoosePaginate);
 // Mongoose = ORM - Object Relational Mapping.
 // Model consist of schemas
 const Song = mongoose.model("Song", songSchema);
@@ -46,15 +49,6 @@ if (process.env.RESET_DB) {
   };
   SeedDB();
 }
-
-// const SeedDB = () => {
-//   topSongsData.forEach((item) => {
-//     const newSong = new Song(item)
-//     newSong.save()
-//   })
-// }
-// SeedDB()
-// inject all data to our data base
 
 // const newSong = new Song({
 //   title: "kjsnfk",
@@ -77,15 +71,105 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Top songs");
+  res.send("500 greatest songs of all time");
 });
 
+// http://localhost:8080/songs
+// http://localhost:8080/songs?page=1
+// http://localhost:8080/songs?size=35
+// http://localhost:8080/songs?page=1&size=35
+// Endpoint that returns all songs
+// async, that the function is asyncronus 
+// the variabel song gets us all songs in alignment with the Schema 
+// Why async await? - 
+
 app.get("/songs", async (req, res) => {
-  const songs = await Song.find();
-  res.json(songs);
+  try {
+    // page - 1, because
+    // const songs = await Song.find()
+    // res.json(songs);
+    // if page is not sent in as a query parameter
+    let { page, size } = req.query
+    if (!page) {
+      page = 1 
+    } if (!size) {
+      size = 100
+    }
+    const limit = parseInt(size, 100);
+    const skip = (page - 1) * size 
+
+    const songs = await Song.find().limit(limit).skip(skip)
+    res.send({ page, size, data: songs })
+  } catch (error) {
+    res.status(400).json({ error: "error not a page or size" })
+  }
 });
+
+// http://localhost:8080/songs/song/${id}
+// End point that returns one song
+app.get("/songs/song/:id", async (req, res) => {
+  try {
+    const singleSong = await Song.findOne({ id: req.params.id })
+
+    if (singleSong) {
+      res.json(singleSong)
+    } else {
+      // Error when the id format is valid, but no song is found with that id
+      res.status(400).json({ error: "no song found with that id" })
+    }
+    // Error when format id os wrong and invalid dong id entered 
+  } catch (err) {
+    res.status(404).json({ error: "Invalid song id, doubble check song id value" })
+  }
+})
+
+// Endpoint to get all songs that has been on top chart number one 
+// The $eq is a MongoDB query operator matches documents 
+// where the value is equal the field with specified value 
+// Totallt 119 songs has been number one on billbord, 
+// Pagnation through mongoDB lets us 
+
+app.get('/songs/top-rated', async (req, res) => {
+  // page one 35 per page 
+  // let topSongs = await Song.find({ position: { $eq: 1 } }).limit(35)
+  // page nex 35
+  try {
+    // page - 1, because
+    // const songs = await Song.find()
+    // res.json(songs);
+    // if page is not sent in as a query parameter
+    let { page, size } = req.query
+    if (!page) {
+      page = 1 
+    } if (!size) {
+      size = 40
+    }
+    const limit = parseInt(size, 40);
+    const skip = (page - 1) * size 
+
+    const topSongs = await Song.find({ position: { $eq: 1 } }).limit(limit).skip(skip)
+    res.send({ page, size, data: topSongs })
+  } catch (error) {
+    res.status(400).json({ error: "error not a page or size" })
+  }
+
+  // res.json(topSongs)
+})
+
 // Start the server
+
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`);
 });
+
+// End points: Top ten billbord hits
+// Search Artist 
+// Title 
+
+// Dylan hits 
+// The beatles hits 
+// The rolling stone
+// Elvis Presley
+// Prince
+// Aretha Franklin
