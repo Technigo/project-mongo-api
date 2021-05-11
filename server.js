@@ -2,17 +2,13 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
- import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import goldenGlobesData from './data/golden-globes.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Nominee = mongoose.model('Nominee', {
+const nomineeSchema = new mongoose.Schema({
   year_film: Number,
   year_award: Number,
   ceremony: Number,
@@ -20,12 +16,22 @@ const Nominee = mongoose.model('Nominee', {
   nominee: String,
   film: String,
   win: Boolean
-});
+})
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+const Nominee = mongoose.model('Nominee', nomineeSchema)
+
+if(process.env.RESET_DB) {
+  const seedDB = async () => {
+    await Nominee.deleteMany()
+
+    await goldenGlobesData.forEach(item => {
+      const newNominee = new Nominee(item)
+      newNominee.save()
+    })
+  }
+  seedDB()
+}
+
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -34,9 +40,18 @@ app.use(cors())
 app.use(express.json())
 
 // Start defining your routes here
+//Home
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello word')
 })
+
+//all nominees
+app.get('/nominees', async (req, res) => {
+  const nominees = await Nominee.find()
+  res.json(nominees)
+})
+
+
 
 // Start the server
 app.listen(port, () => {
