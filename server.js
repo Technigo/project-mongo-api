@@ -28,7 +28,7 @@ if (process.env.RESET_DB) {
         title: item.title,
         average_rating: item.average_rating,
         num_pages: item.num_pages
-      });
+      })
       newBook.save()
     })
   }
@@ -71,7 +71,7 @@ app.get('/books/:bookId', async (req, res) => {
     const singleBook = await Book.findById(bookId)
     res.json(singleBook)
   } catch (error) {
-    res.status(400).json({ error: 'Couldnt find a book with this ID', details: error })
+    res.status(404).json({ error: 'Could not find book with this ID', details: error })
   }
 })
 
