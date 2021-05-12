@@ -1,4 +1,5 @@
 import express from 'express'
+import listEndpoints from 'express-list-endpoints'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import booksdata from './data/books.json'
@@ -34,14 +35,14 @@ if (process.env.RESET_DB) {
   seedDataBase()
 }
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8081
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send(listEndpoints(app))
 })
 
 app.get('/books', async (req, res) => {
