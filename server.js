@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 const { newTopSongs } = require("./data/cleanSongs")
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = "mongodb+srv://new_user90:nMepfddUO7kJmTER@cluster0.d0pe1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
