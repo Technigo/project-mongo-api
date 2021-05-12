@@ -3,8 +3,8 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import router from './routes';
-// import data from './data/ufoSightings.json'
-// import Sighting from './models/sightingModel'
+import data from './data/ufoSightings.json'
+import Sighting from './models/sightingModel'
 import errorHandler from './controllers/errorController'
 
 dotenv.config();
@@ -13,17 +13,17 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/ufo-sightings';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// if (process.env.RESET_DB) {
-//   const seedDatabase = async () => {
-//     await Sighting.deleteMany({})
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Sighting.deleteMany({})
 
-//     data.forEach((d) => {
-//       new Sighting(d).save()
-//     })
-//   }
+    data.forEach((d) => {
+      new Sighting(d).save()
+    })
+  }
 
-//   seedDatabase()
-// }
+  seedDatabase()
+}
 
 const port = process.env.PORT || 8080;
 const app = express();

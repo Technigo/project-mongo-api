@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const Sighting = mongoose.model('Sighting', {
-  date: String,
+  date: Date,
   city: String,
   state: String,
   country: String,
