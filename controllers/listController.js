@@ -1,12 +1,11 @@
-import _ from 'lodash';
 import Sighting from '../models/sightingModel';
 import AppError from '../utils/appError';
 import APIRequest from '../utils/apiRequest';
 import { validateQueries } from '../utils/restrictions';
 
-export const getAll = async (req, res, next) => {
+export const getList = (type) => async (req, res, next) => {
   try {
-    if (!validateQueries(req.query)) {
+    if (!validateQueries(req.query, 'lists')) {
       return next(
         new AppError(
           403,
@@ -36,37 +35,6 @@ export const getAll = async (req, res, next) => {
       limit: doc.length || 0,
       page: +req.query.start || 1,
       items: doc
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const getOne = async (req, res, next) => {
-  try {
-    if (_.keys(req.query).length > 0) {
-      return next(
-        new AppError(403, 'Forbidden', 'Queries are not allowed for this endpoint')
-      );
-    }
-    const { id } = req.params;
-    // find data with api features (filter, sort, group)
-    const doc = await Sighting.findById(id);
-
-    // send error if we did not find data
-    if (!doc) {
-      return next(
-        new AppError(
-          404,
-          'Not Found',
-          'The ID you provided did not exist. Please try again'
-        )
-      );
-    }
-
-    // send data back
-    res.send({
-      item: doc
     });
   } catch (error) {
     next(error);

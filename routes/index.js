@@ -1,15 +1,14 @@
 import { Router } from 'express';
-import * as sightingController from '../controllers/sightingController'
-import * as sightings from './sightings';
-import * as lists from './lists';
+import * as sightings from '../controllers/sightingController';
+import * as lists from '../controllers/listController';
 
 const router = new Router();
 
-router.get('/sightings', sightingController.getAllSightings);
-router.get('/sightings/:id', sightings.view);
+router.get('/sightings', sightings.getAll);
+router.get('/sightings/:id', sightings.getOne);
 
-router.get('/lists/preInternet', lists.preInternet);
-router.get('/lists/postInternet', lists.postInternet);
-router.get('/lists/shapes', lists.shapes);
+router.get('/lists/preInternet', lists.getList('preInt'));
+// router.get('/lists/postInternet', lists.getList('postInt'));
+// router.get('/lists/shapes', lists.getList('shapes));
 
 export default router;

@@ -1,18 +1,13 @@
-// import moment from 'moment';
-// import _ from 'lodash';
-// import { parseDate } from './dates';
-// import AppError from './appError';
-
-export default class APIFeatures {
+export default class APIRequest {
   constructor(mongoQuery, requestQuery) {
     this.mongoQuery = mongoQuery;
     this.requestQuery = requestQuery;
   }
 
   filter() {
+    // filter by range of 2 year values
     if ('yearRange' in this.requestQuery) {
       const range = this.requestQuery.yearRange.split('-');
-      // filter by range of 2 year values
       this.mongoQuery = this.mongoQuery.where('date').gte(range[0]).lte(range[1]);
     }
     // filter by countries
@@ -30,14 +25,19 @@ export default class APIFeatures {
   }
 
   sort() {
-    return this;
-  }
-
-  group() {
+    // default sort date ascending order
+    const sortBy = this.requestQuery.sortBy || 'date';
+    const orderBy = this.requestQuery.orderBy || 'asc';
+    this.mongoQuery = this.mongoQuery.sort({ [sortBy]: orderBy });
     return this;
   }
 
   paginate() {
+    const limit = +this.requestQuery.limit || 25;
+    const start = +this.requestQuery.start || 1;
+    const page = (start - 1) * limit;
+
+    this.mongoQuery = this.mongoQuery.skip(page).limit(limit);
     return this;
   }
 }
