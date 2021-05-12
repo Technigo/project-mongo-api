@@ -1,5 +1,6 @@
 import moment from 'moment';
 import _ from 'lodash';
+
 import data from '../data/ufoSightings.json';
 import { parseDate } from '../utils/dates';
 import { paginate } from '../utils/pagination';

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import Sighting from '../models/sightingModel';
 import AppError from '../utils/appError';
 import APIRequest from '../utils/apiRequest';

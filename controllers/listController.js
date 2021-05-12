@@ -1,23 +1,19 @@
+import _ from 'lodash';
+
 import Sighting from '../models/sightingModel';
 import AppError from '../utils/appError';
-import APIRequest from '../utils/apiRequest';
-import { validateQueries } from '../utils/restrictions';
+import APIAggregate from '../utils/apiAggregate';
 
 export const getList = (type) => async (req, res, next) => {
   try {
-    if (!validateQueries(req.query, 'lists')) {
+    if (_.keys(req.query).length > 0) {
       return next(
-        new AppError(
-          403,
-          'Forbidden',
-          'The queries you provided are not allowed on this endpoint. Please provdie another query'
-        )
+        new AppError(403, 'Forbidden', 'Queries are not allowed for this endpoint')
       );
     }
-    // find data with api features (filter, sort, group)
-    const request = new APIRequest(Sighting.find(), req.query).filter().sort().paginate();
+    const request = new APIAggregate(Sighting.aggregate(), type).getList().sort();
 
-    const doc = await request.mongoQuery;
+    const doc = await request.aggregation;
 
     // send error if we did not find data
     if (!doc) {
