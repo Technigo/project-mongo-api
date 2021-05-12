@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
-import players from './data/players.json'
+import dartPlayers from './data/dartPlayers.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -25,7 +25,7 @@ if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Player.deleteMany();
 
-    await players.forEach((item) => {
+    await dartPlayers.forEach((item) => {
       const newPlayer = new Player(item);
       newPlayer.save();
     });
@@ -45,7 +45,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/players', async (req, res) => {
-  const players = await Player.find()
+  const players = await Player.aggregate(
+    [
+      { $match: { ranking: { $lte: req.query.ranking ? +req.query.ranking : 200 } } },
+      { $group: { _id: "$_id", doc: { $first: "$$ROOT" } } },
+      { $replaceRoot: { newRoot: "$doc" } },
+      { $sort: { ranking: 1 } }
+    ]
+  )
   res.json(players)
 })
 
@@ -134,17 +141,3 @@ app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
 })
-
-// id: 609a438ce7f1994478171d73
-
-// 609a438ce7f1994478171d45
-// {
-//   "Name :": "Michael van Gerwen",
-//   "Country :": "Netherlands",
-//   "Age :": 32,
-//   "Date Of Birth :": "4/25/1989",
-//   "Nickname :": "Mighty Mike",
-//   "PDC Ranking :": 1,
-//   "Tour Card :": "Yes",
-//   "careerEarnings": "£8,321,167"
-// }
