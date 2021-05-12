@@ -33,6 +33,14 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
+const turnToLowerCase = (array) => {
+  const arrayLowercase = []
+  for (const item of array) {
+    arrayLowercase.push(item.toLowerCase())
+  }
+  return arrayLowercase
+}
+
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -45,15 +53,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/players', async (req, res) => {
-  const players = await Player.aggregate(
-    [
-      { $match: { ranking: { $lte: req.query.ranking ? +req.query.ranking : 200 } } },
-      { $group: { _id: "$_id", doc: { $first: "$$ROOT" } } },
-      { $replaceRoot: { newRoot: "$doc" } },
-      { $sort: { ranking: 1 } }
-    ]
-  )
-  res.json(players)
+  try {
+    const players = await Player.aggregate(
+      [
+        { $match: { ranking: { $lte: req.query.ranking ? +req.query.ranking : 200 } } },
+        { $group: { _id: "$name", doc: { $first: "$$ROOT" } } },
+        { $replaceRoot: { newRoot: "$doc" } },
+        { $sort: { ranking: 1 } }
+      ]
+    )
+    res.json(players)
+  } catch {
+    res.status(400).json({ error: 'Something went wrong' })
+  }
 })
 
 app.get('/players/player/:id', async (req, res) => {
@@ -70,69 +82,78 @@ app.get('/players/player/:id', async (req, res) => {
 })
 
 app.get('/countries', async (req, res) => {
-  const countries = await Player.distinct('country')
-  res.json(countries)
+  try {
+    const countries = await Player.distinct('country')
+    res.json(countries)
+  } catch {
+    res.status(400).json({ error: 'Something went wrong' })
+  }
 })
 
 app.get('/countries/:country', async (req, res) => {
-  const countries = await Player.distinct('country')
-
-  const countriesLowercase = []
-
-  for (const country of countries) {
-    countriesLowercase.push(country.toLowerCase())
-  }
-
-  if (countriesLowercase.includes(req.params.country.toLowerCase())) {
-    const country = await Player.aggregate(
-      [
-        {
-          $match:
+  try {
+    const countries = await Player.distinct('country')
+    if (turnToLowerCase(countries).includes(req.params.country.toLowerCase())) {
+      const country = await Player.aggregate(
+        [
           {
-            $and: [
-              { country: { $regex: new RegExp(req.params.country, "i") } },
-              { ranking: { $lte: req.query.ranking ? +req.query.ranking : 200 } }
-            ]
-          }
-        },
-        { $group: { _id: "$_id", doc: { $first: "$$ROOT" } } },
-        { $replaceRoot: { newRoot: "$doc" } },
-        { $sort: { ranking: 1 } }
-      ]
-    )
-    if (country.length > 0) {
-      res.json(country)
+            $match:
+            {
+              $and: [
+                { country: { $regex: new RegExp(req.params.country, "i") } },
+                { ranking: { $lte: req.query.ranking ? +req.query.ranking : 200 } }
+              ]
+            }
+          },
+          { $group: { _id: "$name", doc: { $first: "$$ROOT" } } },
+          { $replaceRoot: { newRoot: "$doc" } },
+          { $sort: { ranking: 1 } }
+        ]
+      )
+      if (country.length > 0) {
+        res.json(country)
+      } else {
+        res.status(404).json({ error: 'Ranking not found' })
+      }
     } else {
-      res.status(404).json({ error: 'Ranking not found' })
+      res.status(404).json({ error: 'Country not found' })
     }
-  } else {
-    res.status(404).json({ error: 'Country not found' })
+  } catch {
+    res.status(400).json({ error: 'Something went wrong' })
   }
 })
 
 app.get('/nicknames', async (req, res) => {
-  const nicknames = await Player.distinct('nickname')
-  res.json(nicknames)
+  try {
+    const nicknames = await Player.distinct('nickname')
+    res.json(nicknames)
+  } catch {
+    res.status(400).json({ error: 'Something went wrong' })
+  }
 })
 
 app.get('/nicknames/:nickname', async (req, res) => {
-  const nicknames = await Player.distinct('nickname')
+  try {
+    const nicknames = await Player.distinct('nickname')
 
-  const nicknamesLowercase = []
+    // const nicknamesLowercase = []
 
-  for (const nickname of nicknames) {
-    nicknamesLowercase.push(nickname.toLowerCase())
-  }
+    // for (const nickname of nicknames) {
+    //   nicknamesLowercase.push(nickname.toLowerCase())
+    // }
 
-  if (nicknamesLowercase.includes(req.params.nickname.toLowerCase())) {
-    const nickname = await Player.find({
-      nickname: {
-        $regex: new RegExp(req.params.nickname, "i")
-      }
-    })
-    res.json(nickname)
-  } else {
-    res.status(404).json({ error: 'Nickname not found' })
+    if (turnToLowerCase(nicknames).includes(req.params.nickname.toLowerCase())) {
+      const nickname = await Player.find({
+        nickname: {
+          $regex: new RegExp(req.params.nickname, "i")
+        }
+      })
+      res.json(nickname)
+    } else {
+      res.status(404).json({ error: 'Nickname not found' })
+    }
+  } catch {
+    res.status(400).json({ error: 'Something went wrong' })
   }
 })
 
