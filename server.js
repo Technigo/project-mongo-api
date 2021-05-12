@@ -15,7 +15,7 @@ const bookSchema = new mongoose.Schema({
   title: String,
   authors: String,
   average_rating: Number,
-  isbn: Number,
+  isbn: String,
   isbn13: Number,
   language_code: String,
   num_pages: Number,
