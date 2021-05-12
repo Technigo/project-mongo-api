@@ -68,17 +68,66 @@ app.get('/countries', async (req, res) => {
 })
 
 app.get('/countries/:country', async (req, res) => {
-  // const country = await Player.find({ country: req.params.country })
-  const country = await Player.find({
-    country: {
-      $regex: new RegExp(req.params.country, "i")
+  const countries = await Player.distinct('country')
+
+  const countriesLowercase = []
+
+  for (const country of countries) {
+    countriesLowercase.push(country.toLowerCase())
+  }
+
+  if (countriesLowercase.includes(req.params.country.toLowerCase())) {
+    const country = await Player.aggregate(
+      [
+        {
+          $match:
+          {
+            $and: [
+              { country: { $regex: new RegExp(req.params.country, "i") } },
+              { ranking: { $lte: req.query.ranking ? +req.query.ranking : 200 } }
+            ]
+          }
+        },
+        { $group: { _id: "$_id", doc: { $first: "$$ROOT" } } },
+        { $replaceRoot: { newRoot: "$doc" } },
+        { $sort: { ranking: 1 } }
+      ]
+    )
+    if (country.length > 0) {
+      res.json(country)
+    } else {
+      res.status(404).json({ error: 'Ranking not found' })
     }
-  })
-  if (country) {
-    res.json(country)
+  } else {
+    res.status(404).json({ error: 'Country not found' })
   }
 })
 
+app.get('/nicknames', async (req, res) => {
+  const nicknames = await Player.distinct('nickname')
+  res.json(nicknames)
+})
+
+app.get('/nicknames/:nickname', async (req, res) => {
+  const nicknames = await Player.distinct('nickname')
+
+  const nicknamesLowercase = []
+
+  for (const nickname of nicknames) {
+    nicknamesLowercase.push(nickname.toLowerCase())
+  }
+
+  if (nicknamesLowercase.includes(req.params.nickname.toLowerCase())) {
+    const nickname = await Player.find({
+      nickname: {
+        $regex: new RegExp(req.params.nickname, "i")
+      }
+    })
+    res.json(nickname)
+  } else {
+    res.status(404).json({ error: 'Nickname not found' })
+  }
+})
 
 // Start the server
 app.listen(port, () => {
