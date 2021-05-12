@@ -12,7 +12,11 @@ import booksData from "./data/books.json";
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+// mongodb://localhost/project-mongo
+
+const mongoUrl =
+  process.env.MONGO_URL ||
+  "mongodb+srv://admin:oPAKUGFrTSBBV0Zg@cluster0.1imwj.mongodb.net/Database?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -65,12 +69,11 @@ app.get("/books/all", (req, res) => {
 app.get("/books/id/:id", async (req, res) => {
   const id = req.params.id;
 
-  const getBookByID = await Book.findOne({ bookID: id });
-
-  if (getBookByID === null) {
-    res.status(404).json({ error: "No book with that ID." });
-  } else {
-    res.json(getBookByID);
+  try {
+    const bookByID = await Book.findOne({ _id: id });
+    res.json(bookByID);
+  } catch {
+    res.status(404).json({ error: "No book with that ID" });
   }
 });
 
