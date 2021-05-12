@@ -67,16 +67,13 @@ app.get('/books', async (req, res) => {
 app.get('/books/:bookId', async (req, res) => {
   const { bookId } = req.params
   
-  const singleBook = await Book.findById(bookId)
-  res.json(singleBook)
+  try {
+    const singleBook = await Book.findById(bookId)
+    res.json(singleBook)
+  } catch (error) {
+    res.status(400).json({ error: 'Couldnt find a book with this ID', details: error })
+  }
 })
-
-// app.get('books/title/', async (req, res) => {
-//   const { bookTitle } = req.query
-
-//   const singleBook = await Book.find({ title: bookTitle })
-//   res.json(singleBook)
-// })
 
 // Start the server
 app.listen(port, () => {
