@@ -1,36 +1,81 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import booksdata from './data/books.json'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+const bookSchema = new mongoose.Schema({
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  num_pages: Number
+})
+
+const Book = mongoose.model('Book', bookSchema)
+
+if (process.env.RESET_DB) {
+  const seedDataBase = async () => {
+    await Book.deleteMany()
+
+    await booksdata.forEach((item) => {
+      const newBook = new Book({
+        bookID: item.bookID,
+        title: item.title,
+        average_rating: item.average_rating,
+        num_pages: item.num_pages
+      });
+      newBook.save()
+    })
+  }
+  seedDataBase()
+}
+
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
-// Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello World!')
 })
+
+app.get('/books', async (req, res) => {
+  const { bookTitle } = req.query
+
+  if (bookTitle) {
+    const books = await Book.find({
+      title: {
+        $regex: new RegExp(bookTitle, "i")
+      }
+    })
+    res.json(books)
+  } else {
+    const books = await Book.find()
+    res.json(books)
+  }
+
+  const books = await Book.find()
+  res.json(books)
+})
+
+app.get('/books/:bookId', async (req, res) => {
+  const { bookId } = req.params
+  
+  const singleBook = await Book.findById(bookId)
+  res.json(singleBook)
+})
+
+// app.get('books/title/', async (req, res) => {
+//   const { bookTitle } = req.query
+
+//   const singleBook = await Book.find({ title: bookTitle })
+//   res.json(singleBook)
+// })
 
 // Start the server
 app.listen(port, () => {

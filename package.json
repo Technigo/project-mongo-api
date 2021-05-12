@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.8.3",
+    "@babel/helper-compilation-targets": "^7.13.16",
     "@babel/node": "^7.8.3",
+    "@babel/plugin-proposal-class-static-block": "^7.13.11",
     "@babel/preset-env": "^7.8.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
