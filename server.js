@@ -53,14 +53,50 @@ app.get('/exercises', (req, res) => {
   })
 })
 
-// Find exercises by name
-app.get('/:name', (req, res) => {
-  Exercise.findOne({ name: req.params.name }).then((exercise) => {
-    if (exercise) {
-      res.json(exercise)
-    } else {
-      res.status(404).json({ error: 'Not found' })
-    }
+// Queries
+app.get('/exercises/:exerciseId', async (req, res) => {
+  const { exerciseId } = req.params
+
+  try {
+    const singleExercise = await Exercise.findById(exerciseId)
+    res.json(singleExercise)
+  } catch (error) {
+    res.status(404).json({ error: 'Not found', details: error })
+  }
+})
+
+// Filter exercises by name
+app.get('/exercise', async (req, res) => {
+  const { name } = req.query
+
+  if (name) {
+    const exercises = await Exercise.find({
+      name: {
+        $regex: new RegExp(name, 'i')
+      }
+    })
+    res.json(exercises)
+  } else {
+    const exercises = await Exercise.find()
+    res.json(exercises)
+  }
+})
+
+// Find all multi-joint exercises, classic .then()
+app.get('/category/multi-joint', (req, res) => {
+  Exercise.find({ category: 'multi-joint exercise' }).then((exercise) => {
+    res
+      .json(exercise)
+      .catch((error) => res.status(400).json({ error: 'Not found', details: error }))
+  })
+})
+
+// Find all single-joint exercises, classic .then()
+app.get('/category/single-joint', (req, res) => {
+  Exercise.find({ category: 'single-joint exercise' }).then((exercise) => {
+    res
+      .json(exercise)
+      .catch((error) => res.status(400).json({ error: 'Not found', details: error }))
   })
 })
 
