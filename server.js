@@ -56,7 +56,7 @@ app.use(bodyParser.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send(
-    "Welcome to the Books API. Available queries: id, title, language, author, isbn. The endpoint for the queries is /books?title=harry. You can also use params to search for a single ID on this endpoint /books/id/1. You can also get all books on the endpoint /books/all"
+    "Welcome to the Books API. Available queries: id, title, language, author, isbn. The endpoint for the queries is /books?title=harry. You can also use params to search for a single ID on this endpoint /books/id/609bb13d210bb03b7866dd86. You can also get all books on the endpoint /books/all"
   );
 });
 
@@ -67,13 +67,16 @@ app.get("/books/all", (req, res) => {
 });
 
 app.get("/books/id/:id", async (req, res) => {
-  const id = req.params.id;
-
+  const { id } = req.params;
   try {
-    const bookByID = await Book.findOne({ _id: id });
-    res.json(bookByID);
+    const bookByID = await Book.findById(id);
+    if (bookByID) {
+      res.json(bookByID);
+    } else {
+      res.status(404).json("No book with that ID was found");
+    }
   } catch {
-    res.status(404).json({ error: "No book with that ID" });
+    res.status(404).json("No book with that ID was found");
   }
 });
 
