@@ -64,6 +64,7 @@ app.get('/content', async (req, res) => {
   const { releaseYear } = req.query
   const { title } = req.query
   const { director } = req.query
+  const { cast } = req.query
   if (country) {
     data = await NetflixData.find({ 
       country: { $regex: country, $options: "i" } 
@@ -81,6 +82,10 @@ app.get('/content', async (req, res) => {
   } else if (director) {
     data = await NetflixData.find({ 
       director: { $regex: director, $options: "i" }
+    })
+  } else if (cast) {
+    data = await NetflixData.find({ 
+      cast: { $regex: cast, $options: "i" }
     })
   } else {
     data = await NetflixData.find()
@@ -103,17 +108,3 @@ app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port} WOOP WOOP 🚀`)
 })
-
-// app.get('/content', async (req, res) => {
-//   let data
-//   const { country } = req.query
-//   const { genre } = req.query
-//   if (country) {
-//     data = await NetflixData.filter(country => country.country.toLowerCase().includes(country.toLowerCase()))
-//   } else if (genre) {
-//     data = await NetflixData.filter(genre => genre.listed_in.toLowerCase().includes(genre.toLowerCase()))
-//   } else {
-//     data = await NetflixData.find()
-//   }
-//   res.json(data)
-// })
