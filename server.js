@@ -28,6 +28,7 @@ const bookSchema = new mongoose.Schema({
 })
 
 // Book Model (with schema added)
+// mongo creates collection and calls it with lowercase and adds s to end = books
 const Book = mongoose.model('Book', bookSchema)
 
 // Function to seed/inject data to database
@@ -70,6 +71,10 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+app.get('/books', async (req, res) => {
+  const books = await Book.find()
+  res.json({ length: books.length, data: books })
+})
 // app.get('/books', async (req, res) => {
 //   const books = await Book.find()
 //   res.json(books)
