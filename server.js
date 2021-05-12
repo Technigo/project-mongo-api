@@ -4,14 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
 import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -27,7 +20,6 @@ const Book = mongoose.model('Book', {
   num_pages: Number,
   ratings_count: Number,
   text_reviews_count: Number
-
 })
 
 if (process.env.RESET_DB) {
@@ -39,7 +31,6 @@ if (process.env.RESET_DB) {
       newBook.save()
     })
   }
-  
   seedDB()
 }
 
@@ -52,46 +43,39 @@ app.use(express.json())
 
 // Start defining your routes here
 
-
 // endpoint to get all books
-app.get('/books', async (req, res) => {
+
+app.get('/books/all', async (req, res) => {
   const books = await Book.find()
   res.json(books) 
 })
 
-// endpoint to get one book
-app.get('/books/:id', (request, response) => {
-  const { id } = request.params
-  const book = booksData.find((item) => item.bookID === +id)
-  
-  if (book) {
-    response.json({ data: book })
-  } else {
-    response.status(404).json({ error: 'Not found' })
-  }
+// endpoint to get one book by id
+app.get('/books/:bookId', async (req, res) => {
+  const { bookId } = req.params
+  const book = await Book.findById(bookId)
+  res.json(book)
 })
 
+// query by the author
 
-
-
-// query parameters, filtering data
-
-app.get('/books', (req, res) => {
+app.get('/books', async (req, res) => {
   const { authors } = req.query
-  const queriedBooks = booksData.filter((book) => {
-    return book.authors.toLowerCase().indexOf(authors.toLowerCase()) !== -1
-  }) 
-  
-  if (queriedBooks.length > 0) {
-    res.json({ data: queriedBooks })
-  } else {
-    res.status(404).json({ error: 'Not found' })
+
+  if (authors) {
+    const booksQueried = await Book.find({
+      authors: {
+        $regex: new RegExp(authors, "i")
+      }
+    })
+
+    if (booksQueried.length > 0) {
+      res.json(booksQueried)
+    } else {
+      res.status(404).json({ error: 'Not found' })
+    }
   }
 })
-
-
-
-
 
 // Start the server
 app.listen(port, () => {
