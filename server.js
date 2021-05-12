@@ -55,7 +55,7 @@ app.get('/books', async (req, res) => {
 
   if (title) {
     const booksToSend = await Book.find({
-      name: {
+      title: {
         $regex: new RegExp(title, 'i')}//i is not case sensitive
     })
     res.json(booksToSend)
