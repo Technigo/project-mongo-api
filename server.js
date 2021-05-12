@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
@@ -19,7 +20,6 @@ const bookSchema = new mongoose.Schema({
   title: String,
   authors: String,
   average_rating: Number,
-  isbn: Number,
   isbn13: Number,
   language_code: String,
   num_pages: Number,
@@ -30,18 +30,34 @@ const bookSchema = new mongoose.Schema({
 // Book Model (with schema added)
 const Book = mongoose.model('Book', bookSchema)
 
-const newBook = new Book({
-  bookdID: 1465,
-  title: 'Anna Lindgrens Path To Developer',
-  authors: 'Anna Lindgren',
-  average_rating: 5,
-  isbn: 123456,
-  isbn13: 1234567,
-  num_pages: 200,
-  ratings_count: 5,
-  text_reviews_count: 800
-})
-newBook.save()
+// Function to seed/inject data to database
+// if to run function only when we wan to
+// newBook.save is async - server to backend
+if (process.env.RESET_DB) {
+  console.log('SEEDING!')
+  const seedDB = async () => {
+    await Book.deleteMany()
+    await booksData.forEach((item) => {
+    // New Book(item).save()
+      const newBook = new Book(item)
+      newBook.save()
+    })
+  }
+  seedDB()
+}
+
+// const newBook = new Book({
+//   bookdID: 1465,
+//   title: 'Anna Lindgrens Path To Developer',
+//   authors: 'Anna Lindgren',
+//   average_rating: 5,
+//   isbn: 123456,
+//   isbn13: 1234567,
+//   num_pages: 200,
+//   ratings_count: 5,
+//   text_reviews_count: 800
+// })
+// newBook.save()
 
 const port = process.env.PORT || 8091
 const app = express()
