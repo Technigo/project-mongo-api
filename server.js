@@ -16,6 +16,7 @@ const songSchema = new mongoose.Schema({
   title: String,
   description: String,
   artist: String,
+  released: String,
   writers: String,
   producer: String,
   position: Number,

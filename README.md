@@ -14,3 +14,6 @@ Every project should be deployed somewhere. Be sure to include the link to the d
 
 https://saras-mongo-api.herokuapp.com/
 https://saras-mongo-api.herokuapp.com/songs/top-rated
+
+https://saras-mongo-api.herokuapp.com/songs/artist/${artist}
+https://saras-mongo-api.herokuapp.com/songs/title/${title}
