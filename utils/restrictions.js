@@ -1,5 +1,4 @@
 const allowedQueries = [
-  'year',
   'yearRange',
   'countries',
   'shapes',

@@ -10,7 +10,7 @@ import Sighting from './models/sightingModel';
 
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/ufo-sightings';
+const mongoUrl = process.env.MONGO_URL || 'mongodb+srv://dbAdmin:GVjqx6dZ7PLl1Hsv@cluster0.ytdmt.mongodb.net/ufo-sightings?retryWrites=true&w=majority';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
