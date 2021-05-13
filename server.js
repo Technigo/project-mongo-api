@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import trees from './data/trees.json'
 
@@ -42,7 +43,7 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello Bagheera')
+  res.send(listEndpoints(app))
 })
 
 app.get('/trees', async (req, res) => {
