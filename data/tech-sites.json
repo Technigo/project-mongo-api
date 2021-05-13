@@ -1,5 +1,6 @@
 [
     {
+        "siteId": 1,
         "name": "BitDegree",
         "language": "English",
         "type": "Learning platform",
@@ -8,9 +9,10 @@
         "url": "https://www.bitdegree.org/learn/",
         "description": "A site where you can find plenty of explained code examples in different programming languages, lot of informative articles, video guides and tutorials. If you want to increase your knowledge and learn how to code, this will be a useful resource.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 2,
         "name": "Coursera",
         "language": "English",
         "type": "Education platform",
@@ -19,9 +21,10 @@
         "url": "https://www.coursera.org/",
         "description": "A site where they have gathered plenty of courses and programs where you can study online at some of the most well recognized schools in the world. Study for free, and pay if you want to get a certificate after completing your courses.",
         "offer_training": true,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 3,
         "name": "Codecademy",
         "language": "English",
         "type": "Learning platform",
@@ -30,9 +33,10 @@
         "url": "https://www.codecademy.com/",
         "description": "A very popular website where you can learn to code in different programming languages. You can start learning for free, but can also update to a paid subscription in order to get full access. You can also download a mobile application and spend 10 minutes per day learning how to code.",
         "offer_training": true,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 4,
         "name": "edX",
         "language": "English, Spanish",
         "type": "Education platform",
@@ -41,9 +45,10 @@
         "url": "https://www.edx.org/course/subject/computer-science",
         "description": "A platform where you can find hundreds of courses and programs at well recognized universities and schools around the world. Join a program in data science or learn how to program with Python, it's all there. Some of the educations will even give you college credits, while most will give you a professional certificate.",
         "offer_training": true,
-        "free_or_paid": "paid"
+        "free_or_paid": "Paid"
     },
     {
+        "siteId": 5,
         "name": "Codewars",
         "language": "English",
         "type": "Code challenges",
@@ -52,9 +57,10 @@
         "url": "https://www.codewars.com/",
         "description": "Practice and improve your skills by accepting code challenges in the programming language of your choice. The challenges comes with different complexity, which means you can start at an easy level and build your skills until you're ready to take on the harder ones.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 6,
         "name": "Udemy",
         "language": "English, German, Polish, Italian, French, Bahasa Indonesia, Netherlands, Portuguese, Romanian, Turkish",
         "type": "Education platform",
@@ -63,9 +69,10 @@
         "url": "https://www.udemy.com/",
         "description": "Platform with hundreds of online courses within different topics. You can study for a month or for a year, depending on which goals you strive to achieve. The courses are self-paced, which means you can sign up and complete the course whenever it suits you. Whether you can spend an hour a day, or 8 hours per day, you can still sign up for these educations.",
         "offer_training": true,
-        "free_or_paid": "paid"
+        "free_or_paid": "Paid"
     },
     {
+        "siteId": 7,
         "name": "Dash General Assembly",
         "language": "English",
         "type": "Learning platform",
@@ -74,9 +81,10 @@
         "url": "https://dash.generalassemb.ly/",
         "description": "A website where you can get an intro to how to code with HTML, CSS and JavaScript. You will get a chance to create small projects where you can practice your new skills and get a better understanding for how to use your knowledge.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 8,
         "name": "Free Code Camp",
         "language": "English",
         "type": "Learning platform",
@@ -85,9 +93,10 @@
         "url": "https://www.freecodecamp.org/",
         "description": "A website where you can study and earn certificates for free. Choose among many different topics, such as creating responsive websites with CSS, HTML and JavaScript or data analysis with Python just to mention a few examples.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 9,
         "name": "Code Conquest",
         "language": "English",
         "type": "Coding guide",
@@ -96,9 +105,10 @@
         "url": "https://www.codeconquest.com/",
         "description": "A website which offer a knowledge center where you can read a lot about different programming languages and how to get started with coding. You can also find interesting blog posts, and a lot of tutorials on how to code. In case you are planning to take a course at some of all the online education platforms you might also find it interesting to go through the reviews of the options.",
         "offer_training": true,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 10,
         "name": "The Odin Project",
         "language": "English",
         "type": "Learning platform",
@@ -107,9 +117,10 @@
         "url": "https://www.theodinproject.com/",
         "description": "A website where you can take complete courses without having to pay. A huge amount of lessons in a programming language of your choice. You can choose to learn the foundation with HTML, CSS and JavaScript, but also to continue on the fullstack path where you can choose between going with the JavaScript direction with Node.js or Ruby on Rails path.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 11,
         "name": "W3 Schools",
         "language": "English",
         "type": "Learning platform",
@@ -118,9 +129,10 @@
         "url": "https://www.w3schools.com/",
         "description": "A website which offer a large amount of tutorials, exercises and online training in various programming languages. Start with the basics in HTML and CSS, just to continue with the more advanced programming languages afterwards. W3 Schools also offer paid courses, but most resources are free.",
         "offer_training": true,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 12,
         "name": "hackr.io",
         "language": "English",
         "type": "Resource collection",
@@ -129,9 +141,10 @@
         "url": "https://hackr.io/",
         "description": "A website where a large amount of programming training resources have been gathered. You can select the programming language that you would like to learn, and get a list of lots of options where you can learn and practice that specific language. You can also submit tutorials to this website, as well as find tutorials published by others.",
         "offer_training": false,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 13,
         "name": "Bento",
         "language": "English",
         "type": "Learning platform",
@@ -140,9 +153,10 @@
         "url": "https://bento.io/",
         "description": "A website where you can learn how to code with help from a large amount of collected tutorials from various resources. You can choose your direction and follow a path to learn everything within programming, such as frontend development, backend development, how to handle databases and a lot of other useful things. You don't have to pay anything to get access to this resource library and to get started with your coding practice.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 14,
         "name": "Code Avengers",
         "language": "English, German, Spanish, Portuguese, French, Netherlands, Maori",
         "type": "Learning platform",
@@ -151,9 +165,10 @@
         "url": "https://www.codeavengers.com/",
         "description": "A website where kids and teenagers at a beginner level can learn how to code, and where teachers can find useful inspiration and learn how to teach their students how to code. Available in several languages.",
         "offer_training": true,
-        "free_or_paid": "paid"
+        "free_or_paid": "Paid"
     },
     {
+        "siteId": 15,
         "name": "Solo Learn",
         "language": "English,",
         "type": "Learning platform",
@@ -162,9 +177,10 @@
         "url": "https://www.sololearn.com/home",
         "description": "A platform where you can learn how to code in the programming language of your choice. Get access to an extended amount of tutorials, take a quiz or two whenever you have time, and learn in an interactive way. There is also a forum where you can discuss things with other people and you can read plenty of blog posts on different coding topics.",
         "offer_training": true,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 16,
         "name": "Upskill",
         "language": "English",
         "type": "Learning platform",
@@ -173,9 +189,10 @@
         "url": "https://upskillcourses.com/",
         "description": "This is a free coding bootcamp which is self-paced, which means you can join and start your procedure towards learning how to code, but don't have to follow a set schedule. You will get access to the full curriculum for free, which consists of 197 lessons at the moment, within different coding languages such as JavaScript, Ruby and more.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 17,
         "name": "Edabit",
         "language": "English",
         "type": "Code challenges",
@@ -184,9 +201,10 @@
         "url": "https://edabit.com/challenges",
         "description": "A website where you can watch videos, follow tutorials and take on code challenges. You can start with very easy ones, and continue until you feel comfortable with even solving the most difficult ones.",
         "offer_training": true,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 18,
         "name": "Coderbyte",
         "language": "English",
         "type": "Code challenges",
@@ -195,9 +213,10 @@
         "url": "https://www.coderbyte.com/",
         "description": "A website where you can learn how to code and improve your coding skills by watching tutorial videos and solving code challenges. Challenges and tutorials are available for plenty of programming languages and libraries and you can go from beginner to advanced level here.",
         "offer_training": true,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 19,
         "name": "HackerRank",
         "language": "English",
         "type": "Code challenges",
@@ -206,9 +225,10 @@
         "url": "https://www.hackerrank.com/dashboard",
         "description": "A website where you can practice and improve your coding skills by taking on code challenges. You can also get advice on how to prepare for your job interview, as well as view available jobs in the job ad page. What makes this website even more interesting is that you can also find challenges related to other topics, such as artifical intelligence and mathematics.",
         "offer_training": true,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 20,
         "name": "CodeChef",
         "language": "English",
         "type": "Code challenges",
@@ -217,9 +237,10 @@
         "url": "https://www.codechef.com/",
         "description": "Website where you can go through plenty of tutorials written by members of the community, and take on code challenges. The site is filled with hundreds of challenges, which means you'll be able to practice for a long time, starting from scratch and slowly building up your skills until you can deal with more difficult tasks.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 21,
         "name": "Exercism",
         "language": "English",
         "type": "Code challenges",
@@ -228,9 +249,10 @@
         "url": "https://exercism.io/",
         "description": "A website where you can practice coding after you've made your programming language choice. There are more than 50 different coding languages and libraries to choose from, and you will get plenty of exercises and code challenges to work with. After you've completed the tasks, you'll be able to go through them with a mentor.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 22,
         "name": "Leet Code",
         "language": "English",
         "type": "Code challenges",
@@ -239,9 +261,10 @@
         "url": "https://leetcode.com/",
         "description": "A website where you can test your skills and improve them with code challenges. The purpose of the website and its challenges is to help you prepare for job interviews, where you are very likely to face a few code tests. When you submit your proposed solution, you will be able to see how fast your solution runs compared to other solutions provided. There are also discussion boards where you will be able to seek inspiration.",
         "offer_training": true,
-        "free_or_paid": "free, paid"
+        "free_or_paid": "Free, Paid"
     },
     {
+        "siteId": 23,
         "name": "Sphere Online Judge",
         "language": "English, Polish, Portuguese, Vietnamese",
         "type": "Code challenges",
@@ -250,9 +273,10 @@
         "url": "https://www.spoj.com/",
         "description": "Thousands of code challenges in different programming levels with an online judge system that decides if your solution passes or fails. You can also discuss programming matters in the discussion forum and participate in coding contests. In order to get the most out of this site, you either need to be able to debug your own code, or ask for help in the forum, since you won't get any thorough explanation if your solution fails.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 24,
         "name": "CodinGame",
         "language": "English",
         "type": "Code challenges",
@@ -261,9 +285,10 @@
         "url": "https://www.codingame.com/start",
         "description": "A website where you practice and learn while having fun. Coding challenges in a new format, where you play and compete against other developers and improve your skills in different programming languages.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 25,
         "name": "Hacker Noon",
         "language": "English",
         "type": "Tech articles",
@@ -272,9 +297,10 @@
         "url": "https://hackernoon.com/",
         "description": "Website with daily updated articles in general tech as well as in programming field. Read tutorials about how to setup unit tests in a good way, and learn all about the latest news in tech.",
         "offer_training": false,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 26,
         "name": "The Code Player",
         "language": "English",
         "type": "Learning platform",
@@ -283,9 +309,10 @@
         "url": "https://thecodeplayer.com/",
         "description": "Website where you can see short code examples in the format of video tutorials. You can follow along once they create code examples, and then try to apply it to your own code. Perfect for beginners who wants to get a smooth start with HTML, CSS and at a later point JavaScript.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 27,
         "name": "Scotch.io",
         "language": "English",
         "type": "Learning platform",
@@ -294,9 +321,10 @@
         "url": "https://scotch.io/",
         "description": "Learn how to code by joining some of the courses on this website, or read the tutorials published here. You will find courses and articles handling many different programming languages, which makes it likely for you to find something that fits your needs.",
         "offer_training": true,
-        "free_or_paid": "free"
+        "free_or_paid": "Free"
     },
     {
+        "siteId": 28,
         "name": "Classpert",
         "language": "English, Spanish, Japanese, French, Spanish, Portuguese",
         "type": "Education platform",
@@ -305,7 +333,247 @@
         "url": "https://classpert.com/",
         "description": "Platform where hundreds of online educations has been gathered. Find programs, courses and even college and university rated educations from different schools.",
         "offer_training": true,
-        "free_or_paid": "paid"
+        "free_or_paid": "Paid"
+    },
+    {
+        "siteId": 29,
+        "name": "Programming Praxis",
+        "language": "English",
+        "type": "Code challenges",
+        "programming_language": "Python, R, Clojure, Perl",
+        "topic": "Code challenges",
+        "url": "https://programmingpraxis.com/",
+        "description": "A website where you can improve your coding skills by trying new code challenges each week. You can usually choose which programming language you'd like to use for your solution, and you will see in the discussion threads connected to each challenge that users tries different languages and different solutions.",
+        "offer_training": true,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 30,
+        "name": "Smashing Magazine",
+        "language": "English",
+        "type": "Coding guide",
+        "programming_language": "CSS, Git, JavaScript, HTML, React, Vue, GraphQL, APIs, Node, jQuery",
+        "topic": "guides, articles, blog posts, community, workshops",
+        "url": "https://www.smashingmagazine.com/",
+        "description": "Smashing Magazine is a website where you can join the community and get access to a huge amount of articles on the programming topic. Read and learn about programming languages such as JavaScript and learn how to use libraries such as React. Of course this site has a lot more to offer than just articles. You can also find and enjoy great guides to Figma, UX design, JavaScript frameworks and many other topics. In addition to that, you'll also find e-books on the programming topic along with upcoming workshops.",
+        "offer_training": false,
+        "free_or_paid": "Free, Paid"
+    },
+    {
+        "siteId": 31,
+        "name": "Reddit Programming",
+        "language": "English",
+        "type": "Community",
+        "programming_language": "C, Perl, Python, API, Java, Ruby",
+        "topic": "community, blog posts, link resource",
+        "url": "https://www.reddit.com/r/programming/",
+        "description": "A programming community where developers and developers to be can discuss all kind of programming related topics. You will also be able to get plenty of good advice on which books to read and which blogs and websites you should visit in order to learn more on a specific programming language, a certain library or perhaps about coding in general.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 32,
+        "name": "The New Boston",
+        "language": "English",
+        "type": "Youtube channel",
+        "programming_language": "Python, Django, React, Redux, C, JavaScript, Node, Java, Kotlin",
+        "topic": "video tutorials",
+        "url": "https://www.youtube.com/user/thenewboston",
+        "description": "A Youtube channel with video tutorials which helps you dive deeper into programming. Learn more about how to work with React, Angular, Redux and much more.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 33,
+        "name": "Mammoth Interactive",
+        "language": "English",
+        "type": "Learning platform",
+        "programming_language": "CSS, HTML, JavaScript, Python, Node, React, React Native, Vue, Express",
+        "topic": "Online courses",
+        "url": "https://training.mammothinteractive.com/",
+        "description": "A learning platform where you can join different courses in order to learn how to code. You can try a course for free, or apply and join one of the paid courses.",
+        "offer_training": true,
+        "free_or_paid": "Free, Paid"
+    },
+    {
+        "siteId": 34,
+        "name": "LearnCode Academy",
+        "language": "English",
+        "type": "Youtube channel",
+        "programming_language": "HTML, CSS, JavaScript, React, Angular, Express, Node, MongoDB, jQuery",
+        "topic": "Video tutorials",
+        "url": "https://www.youtube.com/user/learncodeacademy",
+        "description": "A Youtube channel with plenty of video tutorials which will help you develop your skills and learn much more about different programming languages and libraries.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 35,
+        "name": "Derek Banas",
+        "language": "English",
+        "type": "Youtube channel",
+        "programming_language": "Python, Java, PHP, MySQL",
+        "topic": "Video tutorials",
+        "url": "https://www.youtube.com/user/derekbanas",
+        "description": "Youtube channel with many video tutorials which may help you learn how to code in different programming languages. The tutorials tend to be a bit longer and more thorough than on many other channels, which is good if you prefer to stick to one video while trying to learn a new programming language, instead of jumping between several shorter tutorials.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 36,
+        "name": "Programming Knowledge",
+        "language": "English",
+        "type": "Youtube channel",
+        "programming_language": "Python, Django, Flask, Node, Ruby on Rails, Java, PHP, Ruby",
+        "topic": "Video tutorials",
+        "url": "https://www.youtube.com/user/ProgrammingKnowledge",
+        "description": "Youtube channel which gives you step-by-step tutorials in many different programming languages. Go through the different steps and improve your knowledge rapidly.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 37,
+        "name": "CS Dojo",
+        "language": "English",
+        "type": "Youtube channel",
+        "programming_language": "Python, Django, JavaScript",
+        "topic": "Video tutorials",
+        "url": "https://www.youtube.com/c/CSDojo",
+        "description": "Youtube channel with plenty of video tutorials where you get step-by-step tutorials in video format. You will also get plenty of useful advice on how to approach different coding tasks in those videos.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 38,
+        "name": "DZone",
+        "language": "English",
+        "type": "Tech articles",
+        "programming_language": "Java, React, Angular, Node, Python",
+        "topic": "Tech articles, tutorials, guides, webinars",
+        "url": "https://dzone.com/",
+        "description": "Website where you can find hundreds of well written articles and guides, describing programming, cyber security, AI and many other interesting topics. You can access articles without joining the community, but can also create an account in order to get access to more resources and start writing your own articles.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 39,
+        "name": "Stack Exchange",
+        "language": "English",
+        "type": "Community resource",
+        "programming_language": "Java, JavaScript, React, Angular, Redux, Python, C, Ruby, Ruby on Rails, Node, Django, MongoDB",
+        "topic": "Community resource, coding community links",
+        "url": "https://stackexchange.com/sites#technology",
+        "description": "Website where the best coding communities has been gathered, so that you can easily find the right place to ask all your code related questions, no matter which programming language you are working with at the moment.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 40,
+        "name": "GitHub",
+        "language": "English",
+        "type": "Code repository website",
+        "programming_language": "Java, JavaScript, React, Redux, Node, Python, Git",
+        "topic": "Code repositories",
+        "url": "https://github.com/",
+        "description": "One of the world's most known website for code repositories, where you can have private as well as public projects and where you can create pull request, review code and much more.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 41,
+        "name": "Bitbucket",
+        "language": "English",
+        "type": "Code repository website",
+        "programming_language": "Java, JavaScript, Python, React, Redux, Node, Git",
+        "topic": "Code repositories",
+        "url": "https://bitbucket.org/",
+        "description": "A well known, frequently used website for code repositories, where you can have private repositories for free, but also have the possibility to upgrade for access to more features and more repository space.",
+        "offer_training": false,
+        "free_or_paid": "Free, Paid"
+    },
+    {
+        "siteId": 42,
+        "name": "TutsPlus",
+        "language": "English",
+        "type": "Learning platform",
+        "programming_language": "JavaScript, React, Redux, Vue, CSS, Node, Express, PHP",
+        "topic": "Tutorials, Guides, eBooks",
+        "url": "https://code.tutsplus.com/",
+        "description": "A website where you can find many free tutorials, guides and some online courses. You will also be able to find useful eBooks that will help you learn how to use famous programming languages like JavaScript, and well known libraries such as React.",
+        "offer_training": true,
+        "free_or_paid": "Free, Paid"
+    },
+    {
+        "siteId": 43,
+        "name": "Google Developers",
+        "language": "English",
+        "type": "Coding guide",
+        "programming_language": "Swift, Java, Kotlin, C, JavaScript",
+        "topic": "Community, events, articles, tutorials, developer experts",
+        "url": "https://developers.google.com/",
+        "description": "Google developer's guide that will help you get started with building apps, deploying them and earn money from them. All with Google and Android in mind of course. Plenty of resources, a developer community, experts for help and much more.",
+        "offer_training": true,
+        "free_or_paid": "Free, Paid"
+    },
+    {
+        "siteId": 44,
+        "name": "Stack Overflow",
+        "language": "English",
+        "type": "Community",
+        "programming_language": "Java, JavaScript, React, Redux, Node, Python, React Native, API, MongoDB, Ruby, Ruby on Rails",
+        "topic": "Community, forum",
+        "url": "https://stackoverflow.com/",
+        "description": "One of the world's biggest communities for coding related questions and answers. Ask about whatever coding related you need help with, and get answers within minutes. A great resource for everyone, whether you have just started coding or if you've been a developer for decades.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 45,
+        "name": "Hacker News",
+        "language": "English",
+        "type": "Tech articles",
+        "programming_language": "Python, Vue, JavaScript, C, API",
+        "topic": "Articles, blog posts, tech news",
+        "url": "https://news.ycombinator.com/",
+        "description": "A website that can be seen as a tech article resource. Updated every hour with new links to tech and coding related articles. If you're up for some reading and inspiration, this is the place to look.",
+        "offer_training": false,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 46,
+        "name": "Blockly",
+        "language": "English, French, Bahasa Indonesia, Danish, German, Spanish, Italian, Galego, Latvian, Lithuanian, Magyar, Polish, Slovenian",
+        "type": "Kids coding website",
+        "programming_language": "JavaScript",
+        "topic": "Kids coding guide, game",
+        "url": "https://blockly.games/",
+        "description": "Website that let kids learn the principles of coding by playing games online. Teaches the basics of JavaScript in a fun and interactive way. The website is recommended from 8 years of age.",
+        "offer_training": true,
+        "free_or_paid": "Free"
+    },
+    {
+        "siteId": 47,
+        "name": "CodeCombat",
+        "language": "English, Swedish, Spanish, Portuguese, Danish, German, Esperanto, Galego, Bahasa Indonesia, Norwegian",
+        "type": "Kids coding website",
+        "programming_language": "Python, JavaScript",
+        "topic": "Kids coding guide, game",
+        "url": "https://codecombat.com/",
+        "description": "Website that teaches kids between 5 and 17 how to code in a fun and interactive way, where they get to know Python and JavaScript while playing games. A great website for kids, parents and teachers.",
+        "offer_training": true,
+        "free_or_paid": "Free, Paid"
+    },
+    {
+        "siteId": 48,
+        "name": "Code org",
+        "language": "English, Swedish, Danish, Norwegian, Polish, Portuguese, Maori, Italian, Galego",
+        "type": "Kids coding website",
+        "programming_language": "JavaScript",
+        "topic": "Kids coding guide, tutorials, online courses",
+        "url": "https://studio.code.org/courses",
+        "description": "Website where kids from ages of 4 can learn how to code. Fun and interactive environment with suitable online courses for kids between 4 and 18.",
+        "offer_training": true,
+        "free_or_paid": "Free"
     }
     
 

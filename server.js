@@ -19,10 +19,11 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const siteSchema = new mongoose.Schema({
+  siteId: Number,
   name: String,
   language: String,
   type: String,
-  knowledge_focus: String,
+  programming_language: String,
   topic: String,
   url: String,
   description: String,
@@ -57,9 +58,41 @@ app.get("/", (req, res) => {
 });
 
 app.get("/techsites", async (req, res) => {
-  Site.find((err, data) => {
-    res.json(data);
-  })
+  const techsites = await Site.find()
+  res.json(techsites)
+});
+
+app.get('/techsites/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const singleSite = await Site.findById(id);
+    res.json(singleSite);
+  } catch(error) {
+    res.status(400).json({ error: 'Something went wrong', details: error })
+  }
+});
+
+app.get('/techsites/name/:name', async (req, res) => {
+  const { name } = req.params;
+
+  try {
+    const singleSite = await Site.findOne({ name: name });
+    res.json(singleSite);
+  } catch(error) {
+    res.status(400).json({ error: 'Something went wrong', details: error })
+  }
+});
+
+app.get('/techsites/type/:type', async (req, res) => {
+  const { type } = req.params;
+
+  try {
+    const sitesOfType = await Site.find({ type: type });
+    res.json(sitesOfType);
+  } catch(error) {
+    res.status(400).json({ error: 'Something went wrong', details: error })
+  }
 });
 
 
