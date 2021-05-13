@@ -5,7 +5,6 @@
   "scripts": {
     "start": "babel-node server.js",
     "dev": "nodemon server.js --exec babel-node",
-    "reset": "set RESET_DB=true && nodemon server.js --exec babel-node",
     "lint": "eslint . --fix"
   },
   "author": "",
