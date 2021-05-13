@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import booksData from './data/books.json'
 
@@ -72,7 +73,7 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.send(listEndpoints(app))
 })
 
 // endpoint to get all books 
