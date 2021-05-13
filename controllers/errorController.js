@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export default (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.type = err.type || 'error';

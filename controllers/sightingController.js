@@ -16,7 +16,7 @@ export const getAll = async (req, res, next) => {
         )
       );
     }
-    // find data with api features (filter, sort, group)
+    
     const request = new APIRequest(Sighting.find(), req.query).filter().sort().paginate();
 
     const doc = await request.mongoQuery;

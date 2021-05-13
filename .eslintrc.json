@@ -22,6 +22,7 @@
     }
   },
   "rules": {
+    "no-unused-vars": "off",
     "quotes": "off",
     "arrow-body-style": "off",
     "class-methods-use-this": "off",

@@ -8,7 +8,7 @@ import errorHandler from './controllers/errorController';
 
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb+srv://dbAdmin:GVjqx6dZ7PLl1Hsv@cluster0.ytdmt.mongodb.net/ufo-sightings?retryWrites=true&w=majority';
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/ufo-sightings';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
