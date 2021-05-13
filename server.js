@@ -13,10 +13,9 @@ mongoose.Promise = Promise
 // RESET_DB=true npm run dev - --- INITIALIZE THE DATABASE *
 
 const titlesSchema = new mongoose.Schema({
-  //_id: { type: String, required: true }, // Added --->  make _id to a string. if not want to deal with _id and id?
   show_id: String,
   type: String, 
-  title: String,// can also be a number. ({ any: Schema.Types.Mixed })
+  title: String,
   director: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Director',
@@ -91,7 +90,7 @@ app.get('/', (req, res) => {
 // return all titles
 app.get('/titles', async (req, res) => {
   // universal version
-  const titles = await Title.find().populate('director') // populate title with director object
+  const titles = await Title.find().populate('director')
   res.json({ length: titles.length, data: titles })
 })
 
@@ -106,7 +105,6 @@ app.get('/titles/year', async (req, res) => {
   }
 })
 
-// query titles by names in cast ---- ? doesn't work right now. * 
 app.get('/titles/cast', async (req, res) => {
   const { name } = req.query
 
@@ -128,8 +126,7 @@ app.get('/titles/:id', async (req, res) => {
 
   try {
     const singleTitle = await Title.findById(id).populate('director')
-    // const directorOfTitle = await Director.findbyId(title.director)
-    res.json({ data: singleTitle }) // , data: directorOfTitle
+    res.json({ data: singleTitle })
   } catch(error) {
     res.status(404).json({ error: 'ID not found' })
   }
@@ -147,13 +144,12 @@ app.get('/directors', async (req, res) => {
   })
   res.json({ length: directors.length, data: directors })
   } else {
-    res.status(400).json({ error: 'Director not found' })      // What would be the else case for this? 
+    res.status(400).json({ error: 'Director not found' })
   }
 })
 
 // id
 app.get('/directors/:id', async (req, res) => {
-  // console.log(mongoose.isValidObjectId(req.params.id))
   const { id } = req.params
 
   try {
