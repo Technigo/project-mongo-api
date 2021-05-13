@@ -59,7 +59,7 @@ res.json(trees)
 //TREE BY ID
 app.get('/trees/:id', async (req, res) => {
   const { id } =req.params
-  const treeById = await Tree.findOne({ _id: id })
+  const treeById = await Tree.findById(id)
   res.json(treeById)
 })
 
