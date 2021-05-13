@@ -12,13 +12,15 @@ I used data from Ticketmaster API to build my own database that can be used to d
 
 
 
-# API DOCUMENTATION
+# API documentation
 
 ## Live
 
 <a href="https://app.swaggerhub.com/apis-docs/Pauan86/Ticketmaster/1.0.1#/"> LIVE AT SWAGGER </a>
 
-
+<br>
+<hr>
+<br>
 
 ## Static 
 
