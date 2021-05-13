@@ -49,13 +49,21 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-
+//ALL TREES
 app.get('/trees', async (req, res) => {
 
 const trees = await Tree.find()
 res.json(trees)
 })
 
+//TREE BY ID
+app.get('/trees/:id', async (req, res) => {
+  const { id } =req.params
+  const treeById = await Tree.find({ _id: id })
+  res.json(treeById)
+})
+
+//ALL BIRCHES
 app.get('/trees/birches', async (req, res) => {
 
   const trees = await Tree.find()
