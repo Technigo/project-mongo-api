@@ -7,13 +7,6 @@ import goldenGlobesData from './data/golden-globes.json'
 
 import { categoriesJason } from './data/golden-globes-categories'
 
-// const allCategories = []
-// goldenGlobesData.forEach((item) => {
-//   if (allCategories.indexOf(item.category) === -1) {
-//     allCategories.push(item.category)
-//   }
-// })
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
@@ -74,27 +67,66 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-app.get('/nomenees', async (req, res) => {
-  const nomenees = await Nomenee.find();
-  res.json(nomenees);
-});
+app.get('/categories', async (req, res) => {
+  const categories = await Category.find()
+  res.json(categories)
+})
 
-app.get('/nomenees/:categoryId', async (req, res) => {
-  const { categoryId } = req.params
-  console.log(categoryId)
-  const nomeneesCategory = await Nomenee.find({ category: categoryId });
-  res.json(nomeneesCategory);
+app.get('/nomenees', async (req, res) => {
+  try {
+    const nomenees = await Nomenee.find().populate('category');
+    res.json(nomenees);
+  } catch (error) {
+    res.status(400).json({ error }) 
+  }
+})
+
+app.get('/nomenees/category/:categoryId', async (req, res) => {
+  try {
+    const { categoryId } = req.params
+    const nomeneesCategory = await Nomenee.find({ category: categoryId });
+    if (nomeneesCategory) {
+      res.json(nomeneesCategory);
+    } else {
+      res.status(404).json({ error: "Not found" })
+    }
+  } catch (error) {
+    res.status(400).json({ error }) 
+  }
 });
 
 app.get('/winners', async (req, res) => {
-  const winners = await Nomenee.find({ win: true });
-  res.json(winners);
+  try {
+    const winners = await Nomenee.find({ win: true });
+    res.json(winners);
+  } catch (error) {
+    res.status(400).json({ error })
+  }
 });
 
 app.get('/winners/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const winner = await Nomenee.findById(id)
+    if (winner) {
+      res.json(winner)
+    } else {
+      res.status(404).json({ error: "Not found" })
+    }
+  } catch (error) {
+    res.status(400).json({ error })
+  }
+})
+
+app.get('/winners/:id/category', async (req, res) => {
   const { id } = req.params
-  const winner = await Nomenee.findOne({ _id: id })
-  res.json(winner)
+  try {
+    const winner = await Nomenee.findOne({ _id: id })
+    const categoryOfWinner = await Category.findById(winner.category);
+    res.json(categoryOfWinner)
+  } catch (error) {
+    res.status(400).json(error)
+  }
 })
 
 // Start the server
