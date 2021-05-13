@@ -34,7 +34,7 @@ if (process.env.RESET_DB) {
   const seedDB = async () => {
     await NetflixData.deleteMany();
     await netflixData.forEach(item => {
-      const newItem = new NetflixData(item).save()
+      new NetflixData(item).save()
     })
   }
   seedDB();
@@ -65,33 +65,40 @@ app.get('/content', async (req, res) => {
   const { title } = req.query
   const { director } = req.query
   const { cast } = req.query
-  if (country) {
-    data = await NetflixData.find({ 
-      country: { $regex: country, $options: "i" } 
-    })
-  } else if (genre) {
-    data = await NetflixData.find({ 
-      listed_in: { $regex: genre, $options: "i" }
-    })
-  } else if (releaseYear) {
-    data = await NetflixData.find({ release_year: releaseYear })
-  } else if (title) {
-    data = await NetflixData.find({ 
-      title: { $regex: title, $options: "i" }
-    })
-  } else if (director) {
-    data = await NetflixData.find({ 
-      director: { $regex: director, $options: "i" }
-    })
-  } else if (cast) {
-    data = await NetflixData.find({ 
-      cast: { $regex: cast, $options: "i" }
-    })
-  } else {
-    data = await NetflixData.find()
+
+  try {
+    if (country) {
+      data = await NetflixData.find({ 
+        country: { $regex: country, $options: "i" } 
+      })
+    } else if (genre) {
+      data = await NetflixData.find({ 
+        listed_in: { $regex: genre, $options: "i" }
+      })
+    } else if (releaseYear) {
+      data = await NetflixData.find({ release_year: releaseYear })
+    } else if (title) {
+      data = await NetflixData.find({ 
+        title: { $regex: title, $options: "i" }
+      })
+    } else if (director) {
+      data = await NetflixData.find({ 
+        director: { $regex: director, $options: "i" }
+      })
+    } else if (cast) {
+      data = await NetflixData.find({ 
+        cast: { $regex: cast, $options: "i" }
+      })
+    } else {
+      data = await NetflixData.find()
+    }
+    res.json(data)
+  } catch (error) {
+    res.status(400).json({ error: 'Oops, no luck with that search', details: error })
   }
-  res.json(data)
 })
+
+// res.status(404).send({ error: 'Oops, no results for your search'})
 
 app.get('/content/series', async (req, res) => {
   const data = await NetflixData.find({ type: 'TV Show'})
