@@ -33,18 +33,13 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
+//ROOT WITH LIST OF ENDPOINTS
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
@@ -68,8 +63,13 @@ app.get('/trees', async (req, res) => {
 //TREE BY ID
 app.get('/trees/id/:id', async (req, res) => {
   const { id } =req.params
-  const treeById = await Tree.findById(id)
-  res.json(treeById)
+
+  try {
+    const treeById = await Tree.findById(id)
+    res.json(treeById)
+  } catch(error) {
+    res.status(400).json({error: 'Something went wrong', details: error})
+  } 
 })
 
 // Start the server
