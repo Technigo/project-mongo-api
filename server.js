@@ -2,8 +2,11 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
+import dotenv from 'dotenv'
 
 import trees from './data/trees.json'
+
+dotenv. config()
 
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/trees-of-umea"
@@ -77,3 +80,4 @@ app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
 })
+
