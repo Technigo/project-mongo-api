@@ -68,7 +68,7 @@ app.get('/trees/id/:id', async (req, res) => {
     const treeById = await Tree.findById(id)
     res.json(treeById)
   } catch(error) {
-    res.status(400).json({error: 'Something went wrong', details: error})
+    res.status(404).json({error: 'Something went wrong', details: error})
   } 
 })
 
