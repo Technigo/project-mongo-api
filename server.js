@@ -45,7 +45,7 @@ app.use(express.json())
 
 // endpoint to get all books
 
-app.get('/books/all', async (req, res) => {
+app.get('/', async (req, res) => {
   const books = await Book.find()
   res.json(books) 
 })
