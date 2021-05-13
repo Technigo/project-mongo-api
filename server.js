@@ -24,6 +24,8 @@ const songSchema = new mongoose.Schema({
 
 // Mongoose = ORM - Object Relational Mapping.
 // Model consist of schemas
+// - MONGO_URL: connection string generated in MongoDB Cloud Atlas
+// - RESET_DB: with value true so the seedDatabase function is called
 const Song = mongoose.model("Song", songSchema);
 
 if (process.env.RESET_DB) {
