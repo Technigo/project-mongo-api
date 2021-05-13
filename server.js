@@ -21,10 +21,7 @@ const titlesSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Director',
   },
-  cast: {
-    type: String,
-    lowercase: true
-  },
+  cast: String,
   country: String,
   date_added: String,
   release_year: Number,
@@ -51,7 +48,7 @@ if (process.env.RESET_DB) {
 
     let directors = []
 
-    netflixTitles.slice(0,100).forEach(async item => {  // remove slice or change to 1000 objects or similar for deployment purpose
+    netflixTitles.slice(0,100).forEach(async item => {  // remove slice or change to 800 objects or similar for deployment purpose
       const director = new Director({"name": item.director}) 
       
       if (item.director != "") {
@@ -60,7 +57,7 @@ if (process.env.RESET_DB) {
       } 
     })
 
-    netflixTitles.slice(0,100).forEach(async item => { //remove slice or change to 1000 objects or similar for deployment purpose
+    netflixTitles.slice(0,100).forEach(async item => { //remove slice or change to 800 objects or similar for deployment purpose
       const title = new Title({
         ...item,
         director: directors.find(singleDirector => singleDirector.name === item.director)
@@ -71,7 +68,6 @@ if (process.env.RESET_DB) {
   seedDB()
   console.log('Seeded the database')
 }
-
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -99,30 +95,39 @@ app.get('/titles', async (req, res) => {
   res.json({ length: titles.length, data: titles })
 })
 
+app.get('/titles/year', async (req, res) => {
+  const { year } = req.query
+
+  if (year) {
+    const queriedYear = await Title.find({release_year: year}).populate('director') // search in release_year after year
+    res.json({ length: queriedYear.length, data: queriedYear })
+  } else {
+    res.status(400).json({ error: 'No results' })
+  }
+})
+
 // query titles by names in cast ---- ? doesn't work right now. * 
 app.get('/titles/cast', async (req, res) => {
-  const { cast } = req.query
+  const { name } = req.query
 
-  if (cast) {
-    console.log(cast) // cast is undefined
-    const cast = await Title.find({
+  if (name) {
+    const queriedCast = await Title.find({
       cast: {
-        $regex: new RegExp(cast, "i") // 2 arguments: 1. the string w want to look for 2. i = check fr the string but don't care for case sensitivity
+        $regex: new RegExp(name, "i") // 2 arguments: 1. the string w want to look for 2. i = check fr the string but don't care for case sensitivity
       }
-    })
-    res.json({ length: cast.length, data: cast })
-    } else {
-      const cast = await Title.find()
-      res.json({ data: cast })           // What would be the else case for this? 
-    }
-  })
+    }).populate('director')
+    res.json({ length: queriedCast.length, data: queriedCast })
+  } else {
+    res.status(400).json({ error: 'No results' })
+  }
+})
 
 // Return the id of one netflix title
 app.get('/titles/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    const singleTitle = await Title.findById(id)
+    const singleTitle = await Title.findById(id).populate('director')
     // const directorOfTitle = await Director.findbyId(title.director)
     res.json({ data: singleTitle }) // , data: directorOfTitle
   } catch(error) {
@@ -142,8 +147,7 @@ app.get('/directors', async (req, res) => {
   })
   res.json({ length: directors.length, data: directors })
   } else {
-    const directors = await Director.find()
-    res.json({ data: directors })           // What would be the else case for this? 
+    res.status(400).json({ error: 'Director not found' })      // What would be the else case for this? 
   }
 })
 
@@ -173,20 +177,6 @@ app.get('/directors/:id/titles', async (req, res) => {
   } catch(error) {
    res.status(400).json({ error: 'Director not found'})
  } 
-})
-
-// WHEN it starts to work, destructure it as a query under titles instead
-app.get('/releaseyear', async (req, res) => {
-  const { year } = req.query
-
-  if (year) {
-    console.log(year) // year comes out as undefined ! 
-    const year = await Title.find({year})
-    res.json({ length: year.length, data: year })
-    } else {
-      const year = await Title.find()
-      res.json({ data: year }) 
-    }
 })
 
 // Start the server
