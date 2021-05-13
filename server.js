@@ -10,12 +10,15 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/trees-of-umea"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Tree = mongoose.model('Tree', {
-  geoPoint: String,
+const treeSchema = new mongoose.Schema({
+  longitude: mongoose.Decimal128,
+  latitude: mongoose.Decimal128,
   scientificName: String,
   treeType: String,
   streetOrPark: String
 })
+
+const Tree = mongoose.model('Tree', treeSchema)
 
 if (process.env.RESET_DB) {
   console.log('Resetting database!')
@@ -46,10 +49,18 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
+
 app.get('/trees', async (req, res) => {
+
+const trees = await Tree.find()
+res.json(trees)
+})
+
+app.get('/trees/birches', async (req, res) => {
+
   const trees = await Tree.find()
   res.json(trees)
-})
+  })
 
 // Start the server
 app.listen(port, () => {
