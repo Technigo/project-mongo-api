@@ -74,10 +74,18 @@ app.get('/categories', async (req, res) => {
 
 app.get('/nomenees', async (req, res) => {
   try {
-    const nomenees = await Nomenee.find().populate('category');
+    const { awardYear, nominee } = req.query
+    const query = {}
+    if (awardYear) {
+      query.year_award = awardYear
+    }
+    if (nominee) {
+      query.nominee = { $regex: new RegExp(nominee, "i") }
+    }
+    const nomenees = await Nomenee.find(query).populate('category');
     res.json(nomenees);
   } catch (error) {
-    res.status(400).json({ error }) 
+    res.status(400).json({ error })
   }
 })
 
@@ -91,7 +99,7 @@ app.get('/nomenees/category/:categoryId', async (req, res) => {
       res.status(404).json({ error: "Not found" })
     }
   } catch (error) {
-    res.status(400).json({ error }) 
+    res.status(400).json({ error })
   }
 });
 
