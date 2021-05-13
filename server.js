@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import listEndpoints from 'express-list-endpoints'
+
 
 import bootcamps from './data/bootcamps.json'
 
@@ -119,7 +119,7 @@ app.get('/bootcamps/:id', async (req, res) => {
 
 })
 // Start the server
-app.listen(port, () => {
+app.listen(8080, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
 })
