@@ -36,7 +36,7 @@ $ npm run dev
 ***
 *The following are the main features of this application:*
   
-  * Main path of api: https://ufosights.herokuapp.com/
+  * Main path of api: https://ufo-sightsmongo.herokuapp.com/
   * The API has the following endpoints:
     * `/sightings`
       * resp => a list of sightings based on queries
