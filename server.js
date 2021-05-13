@@ -26,7 +26,7 @@ if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Book.deleteMany()
 
-    await booksData.forEach((item) => {
+    booksData.forEach((item) => {
       const newBook = new Book(item)
       newBook.save()
     })
@@ -53,27 +53,34 @@ app.get('/books/all', async (req, res) => {
 // endpoint to get one book by id
 app.get('/books/:bookId', async (req, res) => {
   const { bookId } = req.params
-  const book = await Book.findById(bookId)
-  res.json(book)
+
+  try {
+    const book = await Book.findById(bookId)
+    res.json(book)
+  } catch (error) {
+    res.status(400).json({ error: 'Something went wrong', details: error })
+  }
 })
 
 // query by the author
-
 app.get('/books', async (req, res) => {
   const { authors } = req.query
-
-  if (authors) {
-    const booksQueried = await Book.find({
-      authors: {
-        $regex: new RegExp(authors, "i")
+  try {
+    if (authors) {
+      const booksQueried = await Book.find({
+        authors: {
+          $regex: new RegExp(authors, "i")
+        }
+      })
+  
+      if (booksQueried.length > 0) {
+        res.json(booksQueried)
+      } else {
+        res.status(404).json({ error: 'Not found' })
       }
-    })
-
-    if (booksQueried.length > 0) {
-      res.json(booksQueried)
-    } else {
-      res.status(404).json({ error: 'Not found' })
     }
+  } catch (error) {
+    res.status(400).json({ error: 'Something went wrong', details: error })
   }
 })
 
