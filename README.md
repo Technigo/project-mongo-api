@@ -74,11 +74,7 @@ I used data from Ticketmaster API to build my own database that can be used to d
   "path" : "/events",
   "methods" : [ "GET" ],
   "middleware" : [ "anonymous" ]
-}, {
-  "path" : "/events",
-  "methods" : [ "GET" ],
-  "middleware" : [ "anonymous" ]
-} ]</code></pre>
+}]</code></pre>
     <h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
     the media type will be conveyed by the <span class="header">Content-Type</span> response header.
@@ -111,7 +107,28 @@ I used data from Ticketmaster API to build my own database that can be used to d
       <a href="#inline_response_200_1">inline_response_200_1</a>
 </div><!--Todo: process Response Object and its headers, schema, examples --><h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>""</code></pre><h3 class="field-label">Produces</h3>
+    <pre class="example"><code> 
+{ "name" : "Alicia Keys - Gold Lounge",
+  "_id" : "609c62ddb14fe7283c71e314",
+  "type" : "event"
+}, {
+  "images" : [ {
+    "url" : "https://s1.ticketm.net/imagepath.jpg",
+    "width" : 640,
+    "height" : 320
+  } ],
+  "_embedded" : [ {
+    "venues" : [ {
+      "name" : "Rotterdam Ahoy",
+      "type" : "venue",
+      "id" : "Z598xZbpZdk7k",
+      "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
+   ],
+    "attractions" : [ {
+      "_id" : "609c62ddb14fe7283c71e315",
+      "name" : "John Legend"
+    }]
+  },</code></pre><h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
     the media type will be conveyed by the <span class="header">Content-Type</span> response header.
     <ul>
@@ -139,7 +156,26 @@ I used data from Ticketmaster API to build my own database that can be used to d
       <a href="#inline_response_200_1">inline_response_200_1</a>
 </div><!--Todo: process Response Object and its headers, schema, examples --><h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>""</code></pre><h3 class="field-label">Produces</h3>
+    <pre class="example"><code>{ "name" : "Alicia Keys - Gold Lounge",
+  "_id" : "609c62ddb14fe7283c71e314",
+  "type" : "event"
+}, {
+  "images" : [ {
+    "url" : "https://s1.ticketm.net/imagepath.jpg",
+    "width" : 640,
+    "height" : 320
+  } ],
+  "_embedded" : [ {
+    "venues" : [ {
+      "name" : "Rotterdam Ahoy",
+      "type" : "venue",
+      "id" : "Z598xZbpZdk7k",
+      "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
+   ],
+    "attractions" : [ {
+      "_id" : "609c62ddb14fe7283c71e315",
+      "name" : "John Legend"
+    }]</code></pre><h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
     the media type will be conveyed by the <span class="header">Content-Type</span> response header.
     <ul>
@@ -170,69 +206,7 @@ I used data from Ticketmaster API to build my own database that can be used to d
       <a href="#events">events</a>
 </div><!--Todo: process Response Object and its headers, schema, examples --><h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>[ {
-  "images" : [ {
-    "url" : "https://s1.ticketm.net/imagepath.jpg",
-    "width" : 640,
-    "height" : 320
-  }, {
-    "url" : "https://s1.ticketm.net/imagepath.jpg",
-    "width" : 640,
-    "height" : 320
-  } ],
-  "_embedded" : [ {
-    "venues" : [ {
-      "name" : "Rotterdam Ahoy",
-      "type" : "venue",
-      "id" : "Z598xZbpZdk7k",
-      "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
-    }, {
-      "name" : "Rotterdam Ahoy",
-      "type" : "venue",
-      "id" : "Z598xZbpZdk7k",
-      "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
-    } ],
-    "attractions" : [ {
-      "_id" : "609c62ddb14fe7283c71e315",
-      "name" : "John Legend"
-    }, {
-      "_id" : "609c62ddb14fe7283c71e315",
-      "name" : "John Legend"
-    } ]
-  }, {
-    "venues" : [ {
-      "name" : "Rotterdam Ahoy",
-      "type" : "venue",
-      "id" : "Z598xZbpZdk7k",
-      "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
-    }, {
-      "name" : "Rotterdam Ahoy",
-      "type" : "venue",
-      "id" : "Z598xZbpZdk7k",
-      "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
-    } ],
-    "attractions" : [ {
-      "_id" : "609c62ddb14fe7283c71e315",
-      "name" : "John Legend"
-    }, {
-      "_id" : "609c62ddb14fe7283c71e315",
-      "name" : "John Legend"
-    } ]
-  } ],
-  "name" : "Alicia Keys - Gold Lounge",
-  "dates" : [ {
-    "start" : [ {
-      "dateTime" : "2021-07-08T18:00:00"
-    }, {
-      "dateTime" : "2021-07-08T18:00:00"
-    } ]
-  }, {
-    "start" : [ {
-      "dateTime" : "2021-07-08T18:00:00"
-    }, {
-      "dateTime" : "2021-07-08T18:00:00"
-    } ]
-  } ],
+    <pre class="example"><code>{ "name" : "Alicia Keys - Gold Lounge",
   "_id" : "609c62ddb14fe7283c71e314",
   "type" : "event"
 }, {
@@ -240,10 +214,6 @@ I used data from Ticketmaster API to build my own database that can be used to d
     "url" : "https://s1.ticketm.net/imagepath.jpg",
     "width" : 640,
     "height" : 320
-  }, {
-    "url" : "https://s1.ticketm.net/imagepath.jpg",
-    "width" : 640,
-    "height" : 320
   } ],
   "_embedded" : [ {
     "venues" : [ {
@@ -251,56 +221,11 @@ I used data from Ticketmaster API to build my own database that can be used to d
       "type" : "venue",
       "id" : "Z598xZbpZdk7k",
       "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
-    }, {
-      "name" : "Rotterdam Ahoy",
-      "type" : "venue",
-      "id" : "Z598xZbpZdk7k",
-      "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
-    } ],
+   ],
     "attractions" : [ {
       "_id" : "609c62ddb14fe7283c71e315",
       "name" : "John Legend"
-    }, {
-      "_id" : "609c62ddb14fe7283c71e315",
-      "name" : "John Legend"
-    } ]
-  }, {
-    "venues" : [ {
-      "name" : "Rotterdam Ahoy",
-      "type" : "venue",
-      "id" : "Z598xZbpZdk7k",
-      "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
-    }, {
-      "name" : "Rotterdam Ahoy",
-      "type" : "venue",
-      "id" : "Z598xZbpZdk7k",
-      "url" : "https://www.ticketmaster.nl/venue/rotterdam-ahoy-rotterdam-tickets/ahoy/112"
-    } ],
-    "attractions" : [ {
-      "_id" : "609c62ddb14fe7283c71e315",
-      "name" : "John Legend"
-    }, {
-      "_id" : "609c62ddb14fe7283c71e315",
-      "name" : "John Legend"
-    } ]
-  } ],
-  "name" : "Alicia Keys - Gold Lounge",
-  "dates" : [ {
-    "start" : [ {
-      "dateTime" : "2021-07-08T18:00:00"
-    }, {
-      "dateTime" : "2021-07-08T18:00:00"
-    } ]
-  }, {
-    "start" : [ {
-      "dateTime" : "2021-07-08T18:00:00"
-    }, {
-      "dateTime" : "2021-07-08T18:00:00"
-    } ]
-  } ],
-  "_id" : "609c62ddb14fe7283c71e314",
-  "type" : "event"
-} ]</code></pre><h3 class="field-label">Produces</h3>
+    }]</code></pre><h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
     the media type will be conveyed by the <span class="header">Content-Type</span> response header.
     <ul>
