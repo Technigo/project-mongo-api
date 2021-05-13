@@ -1,13 +1,19 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This is an API bilding project where I am deploying MongoDB in a cloud/ Atlas. MongoDB cloud. 
+The app has several endpoints and routes and using database of books. The project was created in the framework of Technigo bootcamp for front-end development.  
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Main problem was deploying database in a cloud. It is done by setting up .env file, containing url to db with password, installing dotenv with npm and importinmg it into server.js file and starting configure that file there.
+This file shall be included in gitignore.
+
+After the first deployment the second line in config file needs to be removed otherwise the database will be reseeding all the time. (RESET_DB=true)
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+The app is alive on my Heroku repository:
+https://vlad-api-mongodb.herokuapp.com/
+
