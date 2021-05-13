@@ -6,7 +6,7 @@ import Events from '../data/ticketmaster.json'
 
 const router = express.Router();
 
-const mongoUrl = `mongodb+srv://Pauan9:${process.env.PASSWORD}@cluster0.dwbel.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-db"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
