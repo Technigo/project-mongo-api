@@ -74,7 +74,7 @@ app.get('/categories', async (req, res) => {
 
 app.get('/nomenees', async (req, res) => {
   try {
-    const { awardYear, nominee } = req.query
+    const { awardYear, nominee, page, perPage } = req.query
     const query = {}
     if (awardYear) {
       query.year_award = awardYear
@@ -82,7 +82,7 @@ app.get('/nomenees', async (req, res) => {
     if (nominee) {
       query.nominee = { $regex: new RegExp(nominee, "i") }
     }
-    const nomenees = await Nomenee.find(query).populate('category');
+    const nomenees = await Nomenee.find(query).populate('category').skip(((Number(page) - 1) * Number(perPage))).limit(Number(perPage))
     res.json(nomenees);
   } catch (error) {
     res.status(400).json({ error })
@@ -92,7 +92,7 @@ app.get('/nomenees', async (req, res) => {
 app.get('/nomenees/category/:categoryId', async (req, res) => {
   try {
     const { categoryId } = req.params
-    const nomeneesCategory = await Nomenee.find({ category: categoryId });
+    const nomeneesCategory = await Nomenee.find({ category: categoryId })
     if (nomeneesCategory) {
       res.json(nomeneesCategory);
     } else {
