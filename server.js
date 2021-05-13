@@ -14,7 +14,10 @@ mongoose.Promise = Promise
 
 const NetflixTitle = mongoose.model('NetflixTitle', {
   show_id: Number,
-  title: String,
+  title: {
+    type: String,
+    lowercase: true
+  },
   director: String,
   cast: String,
   country: String,
@@ -30,9 +33,9 @@ const NetflixTitle = mongoose.model('NetflixTitle', {
 if (process.env.RESET_DB) {
   const seedDB = async () => {
     await NetflixTitle.deleteMany()
-    await netflixData.forEach(item => {
+    netflixData.forEach(async (item) => {
       const newTitle = new NetflixTitle(item)
-      newTitle.save()
+      await newTitle.save()
     })
   }
   seedDB()
@@ -41,20 +44,53 @@ if (process.env.RESET_DB) {
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
+// Route
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello hello hello world')
 })
 
+// Route that displays one title, or all titles
 app.get('/titles', async (req, res) => {
-  const titles = await NetflixTitle.find()
-  res.json(titles)
+  const { title } = req.query
+
+  if (title) { // localhost:8080/titles?query=title 
+    const titles = await NetflixTitle.find({ title: {
+      $regex: new RegExp(title, 'i')
+    } })
+    res.json(titles)
+  } else {
+    const titles = await NetflixTitle.find()
+    res.json({ length: titles.length, data: titles })
+  }
 })
 
+app.get('/titles/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    const findTitle = await NetflixTitle.findOne({ _id: id })
+    res.json(findTitle)
+  } catch (error) {
+    res.status(400).json({ error: 'id not found' })
+  }
+})
+
+app.get('/titles/title/:title', async (req, res) => {
+  const { title } = req.params
+  try {
+    const findTitle = await NetflixTitle.findOne({ title })
+    if (findTitle) {
+      res.json(findTitle)
+    } else {
+      res.status(404).json({ error: 'title not found' }) 
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Invalid titlename' })
+  }
+})
+// $regex: new RegExp(titleName, 'i')
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
