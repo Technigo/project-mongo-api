@@ -20,7 +20,10 @@ const NetflixTitle = mongoose.model('NetflixTitle', {
   },
   director: String,
   cast: String,
-  country: String,
+  country: {
+    type: String,
+    lowercase: true
+  },
   date_added: String,
   release_year: Number,
   rating: String,
@@ -52,14 +55,13 @@ app.get('/', (req, res) => {
   res.send('Hello hello hello world')
 })
 
-// Route that displays one title, or all titles
+// Route that displays one title if queried, or all titles
 app.get('/titles', async (req, res) => {
   const { title } = req.query
 
-  if (title) { // localhost:8080/titles?query=title 
-    const titles = await NetflixTitle.find({ title: {
-      $regex: new RegExp(title, 'i')
-    } })
+  if (title) { // localhost:8080/titles?title=title
+    const titleRegex = new RegExp(title, 'i') 
+    const titles = await NetflixTitle.find({ title: titleRegex })
     res.json(titles)
   } else {
     const titles = await NetflixTitle.find()
@@ -80,7 +82,8 @@ app.get('/titles/:id', async (req, res) => {
 app.get('/titles/title/:title', async (req, res) => {
   const { title } = req.params
   try {
-    const findTitle = await NetflixTitle.findOne({ title })
+    const titleRegex = new RegExp(title, 'i')
+    const findTitle = await NetflixTitle.findOne({ title: titleRegex })
     if (findTitle) {
       res.json(findTitle)
     } else {
@@ -90,7 +93,19 @@ app.get('/titles/title/:title', async (req, res) => {
     res.status(400).json({ error: 'Invalid titlename' })
   }
 })
-// $regex: new RegExp(titleName, 'i')
+
+app.get('/titles/country/:country', async (req, res) => {
+  const { country } = req.params
+  const countryRegex = new RegExp(country, 'i')
+  const titlesFromCountry = await NetflixTitle.find({ country: countryRegex })
+  
+  if (titlesFromCountry.length === 0) {
+    res.status(404).json(`No titles from ${country}`)
+  } else {
+    res.json({ nrTitles: titlesFromCountry.length, data: titlesFromCountry })
+  }
+})
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
