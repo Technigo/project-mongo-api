@@ -6,7 +6,7 @@ import Events from '../data/ticketmaster.json'
 
 const router = express.Router();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://Pauan9:Jzb3aASk@kCnsZ4@cluster0.dwbel.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -99,10 +99,6 @@ router.get('/', async (req, res) => {
   } catch (err) {
     res.status(404).send({ error: "Not found" })
   }
-})
-
-router.get('/about', (req, res) => {
-  
 })
 
 router.get("/events", async (req, res) => {
