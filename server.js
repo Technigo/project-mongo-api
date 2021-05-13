@@ -49,26 +49,28 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-//ALL TREES
+//ALL TREES WITH QUERY BY TREE NAME
 app.get('/trees', async (req, res) => {
+  const { name } = req.query
 
-const trees = await Tree.find()
-res.json(trees)
-})
+  if (name) {
+    const trees = await Tree.find({ 
+      scientificName: {
+        $regex: new RegExp(name, "i")
+      }
+    })
+    res.json(trees)
+  } else {
+    const trees = await Tree.find() 
+    res.json(trees)
+  }})
 
 //TREE BY ID
-app.get('/trees/:id', async (req, res) => {
+app.get('/trees/id/:id', async (req, res) => {
   const { id } =req.params
   const treeById = await Tree.findById(id)
   res.json(treeById)
 })
-
-//ALL BIRCHES
-app.get('/trees/birches', async (req, res) => {
-
-  const trees = await Tree.find()
-  res.json(trees)
-  })
 
 // Start the server
 app.listen(port, () => {
