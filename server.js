@@ -2,10 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+
 import router from './routes';
-import data from './data/ufoSightings.json'
-import Sighting from './models/sightingModel'
-import errorHandler from './controllers/errorController'
+import errorHandler from './controllers/errorController';
+import data from './data/ufoSightings.json';
+import Sighting from './models/sightingModel';
 
 dotenv.config();
 
@@ -15,14 +16,14 @@ mongoose.Promise = Promise;
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Sighting.deleteMany({})
+    await Sighting.deleteMany({});
 
     data.forEach((d) => {
-      new Sighting(d).save()
-    })
-  }
+      new Sighting(d).save();
+    });
+  };
 
-  seedDatabase()
+  seedDatabase();
 }
 
 const port = process.env.PORT || 8080;
@@ -33,6 +34,6 @@ app.use(cors());
 app.use(express.json());
 // Add router module
 app.use('/', router);
-app.use(errorHandler)
+app.use(errorHandler);
 // Start the server
 app.listen(port, () => {});

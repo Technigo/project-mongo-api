@@ -10,9 +10,14 @@ const Sighting = mongoose.model('Sighting', {
   duration_description: String,
   comments: String,
   date_posted: String,
-  position: {
-    latitude: Number,
-    longitude: Number
+  location: {
+    type: {
+      type: String,
+      enum: ['Point']
+    },
+    coordinates: {
+      type: [Number]
+    }
   }
 });
 

@@ -21,6 +21,20 @@ export default class APIRequest {
       const shapes = this.requestQuery.shapes.split(',');
       this.mongoQuery = this.mongoQuery.in('shape', shapes);
     }
+
+    // filter by geospatial
+    if ('near' in this.requestQuery) {
+      const c = this.requestQuery.near.split(',');
+      const { miles } = this.requestQuery;
+      this.mongoQuery = this.mongoQuery.near('location', {
+        center: {
+          type: 'Point',
+          coordinates: [c[0], c[1]]
+        },
+        maxDistance: miles || 250 * 1609.344
+      });
+    }
+
     return this;
   }
 
