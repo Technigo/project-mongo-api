@@ -24,7 +24,7 @@ if (process.env.RESET_DB) {
   console.log('Resetting database!')
 
   const seedDatabase = async () => {
-    await Tree.deleteMany({})
+    await Tree.deleteMany()
 
     trees.forEach((treeData) => {
       new Tree(treeData).save()
@@ -59,7 +59,7 @@ res.json(trees)
 //TREE BY ID
 app.get('/trees/:id', async (req, res) => {
   const { id } =req.params
-  const treeById = await Tree.find({ _id: id })
+  const treeById = await Tree.findOne({ _id: id })
   res.json(treeById)
 })
 
