@@ -29,11 +29,11 @@ const categorySchema = new mongoose.Schema({
 })
 const Category = mongoose.model('Category', categorySchema)
 
-const Nomenee = mongoose.model('Nomenee', nomineeSchema)
+const Nominee = mongoose.model('Nominee', nomineeSchema)
 
 if (process.env.RESET_D) {
   const seedDB = async () => {
-    await Nomenee.deleteMany()
+    await Nominee.deleteMany()
     await Category.deleteMany()
 
     const categoriesArray = []
@@ -44,11 +44,11 @@ if (process.env.RESET_D) {
       await category.save()
     })
 
-    await goldenGlobesData.forEach(async (nomenee) => {
-      const newNominee = new Nomenee({
-        ...nomenee,
+    await goldenGlobesData.forEach(async (nominee) => {
+      const newNominee = new Nominee({
+        ...nominee,
         // eslint-disable-next-line max-len
-        category: categoriesArray.find((oneCategory) => oneCategory.description === nomenee.category)
+        category: categoriesArray.find((oneCategory) => oneCategory.description === nominee.category)
       })
       await newNominee.save()
     })
@@ -72,7 +72,7 @@ app.get('/categories', async (req, res) => {
   res.json(categories)
 })
 
-app.get('/nomenees', async (req, res) => {
+app.get('/nominees', async (req, res) => {
   try {
     const { awardYear, nominee, page, perPage } = req.query
     const query = {}
@@ -82,8 +82,8 @@ app.get('/nomenees', async (req, res) => {
     if (nominee) {
       query.nominee = { $regex: new RegExp(nominee, "i") }
     }
-    const nomenees = await Nomenee.find(query).populate('category').skip(((Number(page) - 1) * Number(perPage))).limit(Number(perPage))
-    res.json(nomenees);
+    const nominees = await Nominee.find(query).populate('category').skip(((Number(page) - 1) * Number(perPage))).limit(Number(perPage))
+    res.json(nominees);
   } catch (error) {
     res.status(400).json({ error })
   }
@@ -92,9 +92,9 @@ app.get('/nomenees', async (req, res) => {
 app.get('/nomenees/category/:categoryId', async (req, res) => {
   try {
     const { categoryId } = req.params
-    const nomeneesCategory = await Nomenee.find({ category: categoryId })
-    if (nomeneesCategory) {
-      res.json(nomeneesCategory);
+    const nomineesCategory = await Nominee.find({ category: categoryId })
+    if (nomineesCategory) {
+      res.json(nomineesCategory);
     } else {
       res.status(404).json({ error: "Not found" })
     }
@@ -105,7 +105,7 @@ app.get('/nomenees/category/:categoryId', async (req, res) => {
 
 app.get('/winners', async (req, res) => {
   try {
-    const winners = await Nomenee.find({ win: true });
+    const winners = await Nominee.find({ win: true });
     res.json(winners);
   } catch (error) {
     res.status(400).json({ error })
@@ -115,7 +115,7 @@ app.get('/winners', async (req, res) => {
 app.get('/winners/:id', async (req, res) => {
   try {
     const { id } = req.params
-    const winner = await Nomenee.findById(id)
+    const winner = await Nominee.findById(id)
     if (winner) {
       res.json(winner)
     } else {
@@ -129,7 +129,7 @@ app.get('/winners/:id', async (req, res) => {
 app.get('/winners/:id/category', async (req, res) => {
   const { id } = req.params
   try {
-    const winner = await Nomenee.findOne({ _id: id })
+    const winner = await Nominee.findOne({ _id: id })
     const categoryOfWinner = await Category.findById(winner.category);
     res.json(categoryOfWinner)
   } catch (error) {
