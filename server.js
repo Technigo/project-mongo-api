@@ -3,10 +3,12 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import designers from './data/designers.json'
 
+// Mongoose set up
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+// Mongoose schema to match the keys from the json 
 const Designer = mongoose.model('Designer', {
   name: {
     type: String,
@@ -20,6 +22,7 @@ const Designer = mongoose.model('Designer', {
   memberOfChambreSyndicaleDeLaHauteCouture: Boolean
 })
 
+//  Seeding the database from the json
 if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Designer.deleteMany()
@@ -39,9 +42,6 @@ app.use(cors())
 app.use(express.json())
 
 // Routes
-app.get('/', (req, res) => {
-  res.send('Hello world')
-})
 
 // Endpoint to get all the designers
 app.get('/designers', async (req, res) => {
