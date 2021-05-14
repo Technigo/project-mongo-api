@@ -1,24 +1,27 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import booksData from './data/books.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const bookSchema = new mongoose.Schema({
   bookID: Number,
-  title: String,
-  authors: String,
+  title: {
+    type: String,
+    lowercase: true
+  },
+  authors: {
+    type: String,
+    uppercase: true
+  },
   average_rating: Number,
-  isbn: Number,
-  isbn13: Number,
-  language_code: String,
   num_pages: Number,
   ratings_count: Number,
-  text_reviews_count: Number
 })
 
 const Book = mongoose.model('Book', bookSchema)
@@ -43,16 +46,16 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(listEndpoints(app))
 })
 
 // Endpoint that shows all books
 app.get('/books', async (req, res) => {
-  const books = await Book.find()
+  const books = await Book.find(req.query)
   res.json(books)
 })
 
-// Endpoint that shows a specific book
+// Endpoint that shows a book by id
 app.get('/books/:id', async (req, res) => {
   const { id } = req.params
   const singleBook = await Book.findOne({ bookID: +id })
@@ -62,9 +65,7 @@ app.get('/books/:id', async (req, res) => {
   } else {
     res.status(404).json({ error: 'Could not find this book'})
   }
-  
 })
-
 
 // Start the server
 app.listen(port, () => {
