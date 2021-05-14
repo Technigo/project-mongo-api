@@ -2,14 +2,14 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import listEndpoints from 'express-list-endpoints'
-import dotenv from 'dotenv'
+import listEndpoints from 'express-list-endpoints';
+import dotenv from 'dotenv';
 
-import movieData from './data/netflix-titles.json'
+import movieData from './data/netflix-titles.json';
 
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
+const mongoUrl = process.env.MONGO_URL || `mongodb+srv://${process.env.USER_ID}:${process.env.API_KEY}@cluster0.bvwog.mongodb.net/movieTime?retryWrites=true&w=majority`;
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
