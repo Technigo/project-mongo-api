@@ -38,7 +38,8 @@ const Show = mongoose.model('Show', showSchema);
 //TO USE THIS, TYPE: RESET_DB=true npm run dev IN TERMINAL
 
 if (process.env.RESET_DB) {
-const seedDB = async () => {
+  console.log('TippTapp working');
+  const seedDB = async () => {
   await Show.deleteMany();
 
   netflixData.forEach(item => {
