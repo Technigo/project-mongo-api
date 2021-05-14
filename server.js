@@ -109,25 +109,30 @@ app.get('/shows/show/:showname', async (req, res) =>{
     }
 })
 
-//Returning all shows with the same director
-//http://localhost:8082/shows/directors?director=Mati%20Diop
+//Returning all shows with the same director mandla dube
+//http://localhost:8080/shows/directors?director=Mati%20Diop
 // //quary params when its only one, unique. ($reqex: new RegExp(showTitle, 'i' dont care about case sensitive)
 
-app.get('/shows/directors/', async (req, res) => {
-  const { director } = req.query;
+// app.get('/shows/directors/', async (req, res) => {
+//   const { director } = req.query;
 
-  if (director) {
-    const shows = await Show.find({ 
-      director:{
-        $regex: new RegExp(director, 'i')
-      } 
-    })
-    res.json(shows);
-  } else {
-    const shows = await Show.find();
-    res.json(shows);
-  }
-})
+//   try{
+//       if (director) {
+//     const shows = await Show.find({ 
+//       director:{
+//         $regex: new RegExp(director, 'i')
+//       } 
+//     })
+//     res.json(shows);
+//   } else {
+//     const shows = await Show.find();
+//   }
+//     res.json(shows);
+//   } catch (error) {
+//     res.status(400).json({ error: 'Oops, no luck with that search', details: error })
+//   }
+
+// })
 
 //Return show by realease year or country
 //http://localhost:8080/showlist?releaseYear=2018
@@ -150,7 +155,7 @@ try{
     data = await Show.find()
   }
   res.json(data)
-  } catch (error) {
+  } catch(error) {
     res.status(400).json({ error: 'Somthing went wrong with the search', details: error })
   }
 })
