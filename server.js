@@ -22,7 +22,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const AvocadoSale = mongoose.model('AvocadoSale', {
-    date: Date,
+    date: String,
     averagePrice: Number,
     totalVolume: Number,
     totalBagsSold: Number,
@@ -35,8 +35,18 @@ const AvocadoSale = mongoose.model('AvocadoSale', {
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await AvocadoSale.deleteMany()
+    
     await avocadoSalesData.forEach(item => {
-      const newAvocadoSale = new AvocadoSale(item)
+      const newAvocadoSale = new AvocadoSale({
+        date: item.date,
+        averagePrice: item.averagePrice,
+        totalVolume: item.totalVolume,
+        totalBagsSold: item.totalBagsSold,
+        smallBagsSold: item.smallBagsSold,
+        largeBagsSold: item.largeBagsSold,
+        xLargeBagsSold: item.xLargeBagsSold,
+        region: item.region
+    })
       newAvocadoSale.save()
     })
   }
@@ -50,14 +60,21 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
+
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-app.get('/avocado-sales', async (req, res) => {
+app.get('/sales', async (req, res) => {
   const avocadoSales = await AvocadoSale.find()
     res.json(avocadoSales)
+})
+
+//example sales/609e173829871328c9af6185
+app.get('/sales/:saleId', async (req, res) => {
+  const { saleId } = req.params
+  const pointOfSale = await AvocadoSale.findById({ _id: saleId })
+  res.json(pointOfSale)
 })
 
 // Start the server
