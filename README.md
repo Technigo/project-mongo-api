@@ -16,4 +16,4 @@ Technology that I used:
 
 ## View it live
 
-<a href="https://stackoverflow.com/c/technigo/questions/2515">Link to my deployed API on Herokku</a>
+<a href="https://bootcamps-app.herokuapp.com/bootcamps">Link to my deployed API on Herokku</a>
