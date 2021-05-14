@@ -3,6 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from "dotenv"
 import listEndpoints from 'express-list-endpoints'
+
 import dartPlayers from './data/dartPlayers.json'
 
 dotenv.config()
@@ -42,6 +43,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+// This function takes an array and a param and checks if that array includes that param. 
+// Used in countries and nickname endpoint. 
 const checkParam = (array, param) => {
   for (const item of array) {
     const isIncluded = item.toLowerCase().includes(param.toLowerCase())
@@ -51,15 +54,16 @@ const checkParam = (array, param) => {
   }
 }
 
-// Start defining your routes here
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
+// Endpoint for all players.
 app.get('/players', async (req, res) => {
   try {
     const players = await Player.aggregate(
       [
+        // Filters for players with a ranking that is less than or equal as the query or 200 as default.
         { $match: { ranking: { $lte: req.query.ranking ? +req.query.ranking : 200 } } },
         { $group: { _id: "$name", doc: { $first: "$$ROOT" } } },
         { $replaceRoot: { newRoot: "$doc" } },
@@ -72,6 +76,7 @@ app.get('/players', async (req, res) => {
   }
 })
 
+// Endpoint for players by id
 app.get('/players/player/:id', async (req, res) => {
   try {
     const player = await Player.findById(req.params.id)
@@ -85,6 +90,7 @@ app.get('/players/player/:id', async (req, res) => {
   }
 })
 
+// Endpoint that lists all countries. 
 app.get('/countries', async (req, res) => {
   try {
     const countries = await Player.distinct('country')
@@ -94,6 +100,7 @@ app.get('/countries', async (req, res) => {
   }
 })
 
+// Endpoint for country by country name
 app.get('/countries/:country', async (req, res) => {
   try {
     const countries = await Player.distinct('country')
@@ -102,6 +109,7 @@ app.get('/countries/:country', async (req, res) => {
       const country = await Player.aggregate(
         [
           {
+            // Filters players where both country and ranking match
             $match:
             {
               $and: [
@@ -118,7 +126,7 @@ app.get('/countries/:country', async (req, res) => {
       if (country.length > 0) {
         res.json(country)
       } else {
-        res.status(404).json({ error: 'Ranking not found' })
+        res.status(404).json({ error: 'No player within this ranking' })
       }
     } else {
       res.status(404).json({ error: 'Country not found' })
@@ -128,6 +136,7 @@ app.get('/countries/:country', async (req, res) => {
   }
 })
 
+// Endpoint that lists all nicknames
 app.get('/nicknames', async (req, res) => {
   try {
     const nicknames = await Player.distinct('nickname')
@@ -137,6 +146,7 @@ app.get('/nicknames', async (req, res) => {
   }
 })
 
+// Endpoint for nickname by nicknames
 app.get('/nicknames/:nickname', async (req, res) => {
   try {
     const nicknames = await Player.distinct('nickname')
@@ -155,7 +165,6 @@ app.get('/nicknames/:nickname', async (req, res) => {
   }
 })
 
-// Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
