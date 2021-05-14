@@ -79,7 +79,7 @@ app.get('/books', async (req, res) => {
       if (booksQueried.length > 0) {
         res.json(booksQueried)
       } else {
-        res.status(404).json({ error: 'Not found' })
+        res.status(400).json({ error: 'Invalid request: not found' })
       }
     }
   } catch (error) {
