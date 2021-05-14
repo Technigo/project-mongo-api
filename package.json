@@ -22,6 +22,7 @@
   "devDependencies": {
     "@babel/helper-compilation-targets": "^7.13.16",
     "babel-eslint": "^10.0.3",
+    "dotenv-webpack": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-import": "^0.13.0",
