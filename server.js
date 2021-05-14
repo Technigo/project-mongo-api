@@ -12,17 +12,32 @@ const bookSchema = new mongoose.Schema({
   bookID: Number,
   title: String,
   authors: String,
-  isbn: Number
+  isbn13: Number,
+  average_rating: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number
+
 });
 
 const Book = mongoose.model('Book', bookSchema);
 
 if (process.env.RESET_DB) {
   const seedDB = async () => {
-    // await Book.deleteMany();
+    await Book.deleteMany();
 
     await booksData.forEach((item) => {
-      const newBook = new Book(item);
+      const newBook = new Book({
+        bookID: item.bookID,
+        title: item.title,
+        authors: item.authors,
+        isbn13: +item.isbn13,
+        average_rating: item.average_rating,
+        language_code: item.language_code,
+        num_pages: item.num_pages,
+        ratings_count: item.ratings_count
+
+      });
       newBook.save();
     });
   }
@@ -44,9 +59,17 @@ app.use(express.json())
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
-// app.get('/books', (req, res) => {
-//   Book.find().then((data) => res.json(data))
-// })
+app.get('/books', (req, res) => {
+  Book.find().then((data) => res.json(data))
+})
+app.get('/books/:ID', async (req, res) => {
+  const { ID } = req.params
+  // Book.find({ bookID: ID }).then((data) => res.json(data))
+  if (ID) {
+    const response = await Book.find({ bookID: ID })
+    res.json(response)
+  }
+})
 
 // Start the server
 app.listen(port, () => {
