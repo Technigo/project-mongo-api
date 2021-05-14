@@ -68,6 +68,7 @@ app.get('/shows/descriptions', async (req, res) => {
   const allDescriptions =  await Show.find()
   .then((items) => items.map(item => item.description))
   res.json({  data: allDescriptions })
+  
 });
 
 //All shows in the database
@@ -75,6 +76,7 @@ app.get('/shows/descriptions', async (req, res) => {
 app.get('/shows', async (req, res) => {
   const show = await Show.find();
   res.json(show)
+  .catch(e => console.log(e))
 });
 
 //All shows Type TV-Show
@@ -82,6 +84,7 @@ app.get('/shows', async (req, res) => {
 app.get('/shows/series', async (req, res) =>{
   const data = await Show.find({ type: 'TV Show'})
   res.json(data)
+  .catch(e => console.log(e))
 });
 
 // Returnig singular show by id
