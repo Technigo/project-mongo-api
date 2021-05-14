@@ -25,8 +25,6 @@ const Book = mongoose.model('Book', {
 })
 
 if (process.env.RESET_DB) {
-  console.log('resetting database')
-
   const seedDatabase = async () => {
     await Book.deleteMany();
     booksData.forEach((book) => new Book(book).save())
