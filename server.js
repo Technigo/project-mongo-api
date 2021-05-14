@@ -1,9 +1,13 @@
+import dotenv from 'dotenv'
+
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
 
 import booksData from './data/books.json'
+
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
