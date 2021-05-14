@@ -1,12 +1,8 @@
-import dotenv from 'dotenv'
-
 import express, { response } from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
 import netflixData from './data/netflix-titles.json'
-
-dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
