@@ -63,9 +63,9 @@ app.use(cors())
 app.use(express.json())
 
 // Start defining your routes here
-/* app.get('/', (req, res) => {
-  res.send('Hello world')
-}) */
+ app.get('/', (req, res) => {
+  res.send('Add /series to see all the data ')
+})
 
 app.get('/series', async (req, res)=>{
   const series =  await Serie.find()
