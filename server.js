@@ -8,8 +8,14 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Designer = mongoose.model('Designer', {
-  name: String,
-  surname: String,
+  name: {
+    type: String,
+    lowercase: true
+  },
+  surname: {
+    type: String,
+    lowercase: true
+  },
   wasBorn: Number,
   memberOfChambreSyndicaleDeLaHauteCouture: Boolean
 })
@@ -24,28 +30,45 @@ if (process.env.RESET_DB) {
   seedDB()
 }
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+// Defining the port the app will run on
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
+// Middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
+// Routes
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+// Endpoint to get all the designers
 app.get('/designers', async (req, res) => {
   const designers = await Designer.find()
   res.json(designers)
 })
 
-// Start the server
+// Endpoint to get designer by ID
+app.get('/designers/:designerId', async (req, res) => {
+  const { designerId } = req.params
+  const singleDesigner = await Designer.findById(designerId)
+  res.json(singleDesigner)
+})
+
+// Endpoint to get designer by name
+app.get('/designers/name/:designerName', async (req, res) => {
+  const { designerName } = req.params
+
+  try {
+    const singleDesigner = await Designer.findOne({ name: designerName})
+    res.json(singleDesigner)
+  } catch (error) {
+    res.status(400).json({ error: 'Something went wrong', details: error })
+  }
+})
+
+// Starting the server
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
