@@ -2,8 +2,11 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
+import dotenv from 'dotenv'
 
 import booksData from './data/books.json'
+
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -79,47 +82,64 @@ app.get('/', (req, res) => {
 // endpoint to get all books 
 app.get('/books', async (req, res) => {
   const books = await Book.find().populate('authors')
-  res.json(books)
+  res.json({ length: books.length, data: books })
 })
 
-//endpoint to get single book by id path param
+// endpoint to get single book by id path param
 app.get('/books/book/:bookId', async (req, res) => {
   const { bookId } = req.params
 
   try {
-    const singleBook = await Book.findById(bookId)
-
+    const singleBook = await Book.findById(bookId).populate('authors')
     if (singleBook) {
-      res.json(singleBook) 
+      res.json({ length: singleBook.length, data: singleBook }) 
     } else {
       res.status(404).json({ error: 'No book with that id was found!'})
     }
   } catch (err) {
-    res.status(400).json({ error: 'Something went wrong.'})
+    res.status(400).json({ error: 'Invalid request'})
   }
 }) 
 
-// endpoint with search path and query param for author
-app.get('/books/search', async (req, res) => {
-  const { author } = req.query
+// endpoint to get author by path param id for single book
+app.get('/books/book/:bookId/author', async (req, res) => {
+  const { bookId } = req.params
 
-  if (author) {
-    const books = await Book.find({
-      authors: {
-        $regex: new RegExp(author, 'i')
-      }
-    })
-    res.json(books)
-  } else {
-    const books = await Book.find()
-    res.json(books)
+  try {
+    const singleBook = await Book.findById(bookId).populate('authors');
+    if (singleBook) {
+      const author = await Author.findById(singleBook.authors);
+      res.json({ length: author.length, data: author });
+    } else {
+      res.status(404).json({ error: 'Not found' });
+    }
+  } catch {
+    res.status(400).json({ error: 'Invalid request' });
   }
 })
+
+// endpoint with search path and query param for title
+app.get('/books/search', async (req, res) => {
+  const { title } = req.query
+
+  if (title) {
+    const queriedBook = await Book.find({
+      title: {
+        $regex: new RegExp(title, 'i')
+      }
+    }).populate('authors')
+    res.json({ length: queriedBook.length, data: queriedBook })
+  } else {
+    const books = await Book.find().populate('authors')
+    res.json({ length: books.length, data: books })
+  }
+})
+
 
 // endpoint to get all authors 
 app.get('/authors', async (req, res) => {
   const authors = await Author.find()
-  res.json(authors)
+  res.json({ length: authors.length, data: authors })
 })
 
 // endpoint to get author based on id
@@ -129,32 +149,14 @@ app.get('/authors/:authorId', async (req, res) => {
   try {
     const author = await Author.findById(authorId)
     if (author) {
-      res.json(author)
+      res.json({ length: author.length, data: author })
     } else {
       res.status(404).json({ error: 'No author with that id was found!'})
     }
   } catch (err) {
-    res.status(400).json({ error: 'Something went wrong.'})
+    res.status(400).json({ error: 'Invalid request'})
   }
 })
-
-// endpoint to get all books based on author id - does not work 
-// app.get('/authors/:authorId/books', async (req, res) => {
-//   const { authorId } = req.params
-
-//   try {
-//     const author = await Author.findById(authorId)
-//     if (author) {
-//       const books = await Book.find({ authors: mongoose.Types.ObjectId(author.authorId)})
-//       res.json(books)
-//     } else {
-//       res.status(404).json({ error: 'No author with that id was found!'})
-//     } 
-//   } catch (err) {
-//     res.status(400).json({ error: 'Something went wrong.'})
-//   }
-// })
-
 
 // Start the server
 app.listen(port, () => {
