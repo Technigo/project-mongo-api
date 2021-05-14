@@ -1,13 +1,12 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The assignment for this week was to use a database to store and retrieve data from and use that data to produce a RESTful API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+This week i only hade time to do the blue level.
+It also took me a while to deploy the database. It was not entirely clear to me that I needed to create a .env file and put the string there. But I got really good help with it in the help channel.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://goldenglobe-express-api.herokuapp.com/nominees
