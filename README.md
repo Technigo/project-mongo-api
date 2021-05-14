@@ -6,6 +6,7 @@ Start by briefly describing the assignment in a sentence or two. Keep it short a
 
 ## The problem
 
+svårt att deploya databasen, allt givk bra fram till sista steget att se datan i mongo atlas, det var verkligen inte helt tydligt att jag var tvungen att göra en .env fil, lähgga in stringen där och gitignore osv.... men karol la upp en hjäålpsam vido i helpkanalen. det har tagit mycket tid att fixa med deploy.
 Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
 
 ## View it live

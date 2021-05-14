@@ -49,11 +49,30 @@ app.get('/', (req, res) => {
 })
 
 //all nominees
+// nominee by name, example path: /nominees?nominee=sandra
 app.get('/nominees', async (req, res) => {
-  const nominees = await Nominee.find()
-  res.json(nominees)
+  const { nominee } = req.query
+
+  if (nominee) {
+    const nominees = await Nominee.find({
+      nominee: {
+        $regex: new RegExp(nominee, "i")
+      }
+    })
+    res.json(nominees)
+  } else {
+    const nominees = await Nominee.find()
+    res.json(nominees)
+  }  
 })
 
+// nominee by id
+app.get('/nominees/:nomineeId', async (req, res) => {
+  const { nomineeId } = req.params
+
+  const nominee = await Nominee.findById(nomineeId)
+  res.json(nominee)
+})
 
 
 // Start the server
