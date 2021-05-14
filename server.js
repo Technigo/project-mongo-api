@@ -70,10 +70,10 @@ app.get('/sales', async (req, res) => {
         $regex: new RegExp(region, "i")
       }
     })
-    res.json(avocadoSales)
+    res.json({length: avocadoSales.length, data: avocadoSales})
   } else {
     const avocadoSales = await AvocadoSale.find()
-    res.json(avocadoSales)
+    res.json({length: avocadoSales.length, data: avocadoSales})
   }
 })
 //exemple querie sales?region=BaltimoreWashington
