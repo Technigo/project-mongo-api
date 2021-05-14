@@ -9,19 +9,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// const Author = mongoose.model('Author', {
-//   name: String
-// })
-
-// const bookSchema = new mongoose.Schema({
-//   authors: String,
-//   title: String,
-//   language_code: String,
-//   num_pages: Number,
-//   average_rating: Number,
-//   isbn: Number
-// })
-
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
@@ -61,32 +48,29 @@ app.get('/', (req, res) => {
 })
 
 // endpoint to get all books
-app.get('/books', async (req, res) => {
+app.get('/allBooks', async (req, res) => {
   const books = await Book.find()
   res.json(books)
 })
 
-// endpoint to get a single book by id, obs id från compass, ej id från json
-app.get('/books/:id', async (req, res) => {
+// endpoint to get a single book by id
+app.get('/id/:id', async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
-    res.status(404).json({ error: 'Invalid id' })
+    res.status(404).json({ error: 'Invalid object id syntax' })
     return;
   }
 
-  const book = await Book.findById(req.params.id)
-  if (book) {
-    res.json(book)
-  } else {
-    res.status(404).json({ error: 'Book not found' })
+  try {
+    const book = await Book.findById(req.params.id)
+    if (book) {
+      res.json(book)
+    } else {
+      res.status(404).json({ error: 'Book not found' })
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Something went wrong', details: error })
   }
 })
-
-
-// endpoint to get the 20 books with most textreviews, kommer från förra veckans kod
-// app.get('/textreviews', (req, res) => {
-//   const books = booksData.sort((a, b) => b.text_reviews_count - a.text_reviews_count);
-//   res.json(books.slice(0, 20));
-// })
 
 app.get('/textreviews', async (req, res) => {
   let books = await Book.find()
@@ -94,14 +78,11 @@ app.get('/textreviews', async (req, res) => {
   res.json(books.slice(0, 20));
 })
 
-// denna funkar inte
+// Find author using reqexpression
 app.get('/author/:author', async (req, res) => {
   const { author } = req.params
-  const queryRegex = new RegExp(author, 'i')
-  const books = await Book.find({ authors: queryRegex })
-
-  // let books = await Book.find();
-  // books = books.filter((book) => book.authors.toLowerCase().includes(author.toLowerCase()))
+  const authorRegex = new RegExp(author, 'i')
+  const books = await Book.find({ authors: authorRegex })
 
   if (books.length) {
     res.json(books)
@@ -110,11 +91,11 @@ app.get('/author/:author', async (req, res) => {
   }
 })
 
+// query to search for title and/or author
 app.get('/books', async (req, res) => {
   const { title, author } = req.query
   const titleRegex = new RegExp(title, 'i')
   const authorRegex = new RegExp(author, 'i')
-
   const books = await Book.find({
     title: titleRegex,
     authors: authorRegex
