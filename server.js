@@ -3,9 +3,12 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
 import dotenv from 'dotenv'
-//dotenv.config() 
+
 import netflixTitles from './data/netflix-titles.json'
 
+dotenv.config()
+
+//process.env.VARIALBE_NAME
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo" // here: link to deployed database - the one in Mongo Atlas
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
