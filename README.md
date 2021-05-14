@@ -2,12 +2,11 @@
 I've created a RESTful API using Express and MongoDB as part of week 18 of the Technigo bootcamp. 
 
 ## Endpoints
+The API has the following endpoints
+
 /
 Welcome page - contains a list of available routes
 https://caroline-netflix-titles.herokuapp.com/
-
-
-* The API has the following endpoints:
 
 /titles
 
