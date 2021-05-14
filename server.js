@@ -171,8 +171,8 @@ app.get('/directors/:id/titles', async (req, res) => {
     res.json({ length: titles.length, data: titles })
     }
   } catch(error) {
-   res.status(400).json({ error: 'Director not found'})
- } 
+    res.status(400).json({ error: 'Director not found'})
+  } 
 })
 
 // Start the server
