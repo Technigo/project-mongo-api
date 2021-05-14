@@ -1,22 +1,17 @@
-import express from "express";
-import cors from "cors";
-import listEndpoints from "express-list-endpoints";
-import mongoose from "mongoose";
+import express from "express"
+import dotenv from 'dotenv'
+import cors from "cors"
+import listEndpoints from "express-list-endpoints"
+import mongoose from "mongoose"
 
-import sites from "./data/tech-sites.json";
+import sites from "./data/tech-sites.json"
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.Promise = Promise
 
 const siteSchema = new mongoose.Schema({
   siteId: Number,
@@ -29,75 +24,75 @@ const siteSchema = new mongoose.Schema({
   description: String,
   offer_training: Boolean,
   free_or_paid: String
-});
+})
 
-const Site = mongoose.model('Site', siteSchema);
+const Site = mongoose.model('Site', siteSchema)
 
 if (process.env.RESET_DB) {
   const seedDB = async () => {
-    await Site.deleteMany();
+    await Site.deleteMany()
     await sites.forEach(item => {
-      const newSite = new Site(item);
+      const newSite = new Site(item)
       newSite.save();
-    });
-  };
-  seedDB();
+    })
+  }
+  seedDB()
 
 }
 
-const port = process.env.PORT || 8080;
-const app = express();
+const port = process.env.PORT || 8080
+const app = express()
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send(listEndpoints(app));
-});
+  res.send(listEndpoints(app))
+})
 
 app.get("/techsites", async (req, res) => {
   const techsites = await Site.find()
   res.json(techsites)
-});
+})
 
 app.get('/techsites/:id', async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params
 
   try {
-    const singleSite = await Site.findById(id);
-    res.json(singleSite);
+    const singleSite = await Site.findById(id)
+    res.json(singleSite)
   } catch(error) {
     res.status(400).json({ error: 'Something went wrong', details: error })
   }
-});
+})
 
 app.get('/techsites/name/:name', async (req, res) => {
-  const { name } = req.params;
+  const { name } = req.params
 
   try {
-    const singleSite = await Site.findOne({ name: name });
-    res.json(singleSite);
+    const singleSite = await Site.findOne({ name: name })
+    res.json(singleSite)
   } catch(error) {
     res.status(400).json({ error: 'Something went wrong', details: error })
   }
-});
+})
 
 app.get('/techsites/type/:type', async (req, res) => {
-  const { type } = req.params;
+  const { type } = req.params
 
   try {
-    const sitesOfType = await Site.find({ type: type });
-    res.json(sitesOfType);
+    const sitesOfType = await Site.find({ type: type })
+    res.json(sitesOfType)
   } catch(error) {
     res.status(400).json({ error: 'Something went wrong', details: error })
   }
-});
+})
 
 
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`);
-});
+  console.log(`Server running on http://localhost:${port}`)
+})
