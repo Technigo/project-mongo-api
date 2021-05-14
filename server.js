@@ -4,11 +4,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
 import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -17,11 +13,20 @@ mongoose.Promise = Promise
 // Books schema
 const bookSchema = new mongoose.Schema({
   bookID: Number,
-  title: String,
-  authors: String,
+  title: {
+    type: String,
+    lowercase: true
+  },
+  authors: {
+    type: String,
+    lowercase: true
+  },
   average_rating: Number,
   isbn13: Number,
-  language_code: String,
+  language_code: {
+    type: String,
+    lowercase: true
+  },
   num_pages: Number,
   ratings_count: Number,
   text_reviews_count: Number
@@ -46,19 +51,6 @@ if (process.env.RESET_DB) {
   }
   seedDB()
 }
-
-// const newBook = new Book({
-//   bookdID: 1465,
-//   title: 'Anna Lindgrens Path To Developer',
-//   authors: 'Anna Lindgren',
-//   average_rating: 5,
-//   isbn: 123456,
-//   isbn13: 1234567,
-//   num_pages: 200,
-//   ratings_count: 5,
-//   text_reviews_count: 800
-// })
-// newBook.save()
 
 const port = process.env.PORT || 8092
 const app = express()
