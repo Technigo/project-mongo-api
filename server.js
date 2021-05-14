@@ -163,7 +163,6 @@ app.get('/directors/:id', async (req, res) => {
   }
 })
 
-// catch block is not executed
 // return all titles of a specific director
 app.get('/directors/:id/titles', async (req, res) => {
   const { id } = req.params
@@ -171,8 +170,8 @@ app.get('/directors/:id/titles', async (req, res) => {
 
   try {
     if (director) {
-    const titles = await Title.find({ director: mongoose.Types.ObjectId(director.id) })
-    res.json({ length: titles.length, data: titles })
+      const titles = await Title.find({ director: mongoose.Types.ObjectId(director.id) })
+      res.json({ length: titles.length, data: titles })
     } else {
       res.status(404).json({ error: 'Director id not found' })
     }
