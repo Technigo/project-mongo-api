@@ -52,11 +52,11 @@ const port = process.env.PORT || 8080
 const app = express()
 
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
 
-// Set paths and queries
+
+//PATHS
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
@@ -76,17 +76,13 @@ app.get('/sales', async (req, res) => {
     res.json({length: avocadoSales.length, data: avocadoSales})
   }
 })
-//exemple querie sales?region=BaltimoreWashington
 
-
-//example sales/609e173829871328c9af6185    uses _id from MongoDB
 app.get('/sales/:saleId', async (req, res) => {
   const { saleId } = req.params
   const pointOfSale = await AvocadoSale.findById(saleId)
   res.json(pointOfSale)
 })
 
-// Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
