@@ -89,33 +89,45 @@ app.get('/', (req, res) => {
 
 // return all titles
 app.get('/titles', async (req, res) => {
-  // universal version
-  const titles = await Title.find().populate('director')
-  res.json({ length: titles.length, data: titles })
+
+  try {
+    const titles = await Title.find().populate('director')
+    res.json({ length: titles.length, data: titles })
+  } catch {
+    res.status(400).json({ error: 'No results' })
+  }
 })
 
 app.get('/titles/year', async (req, res) => {
   const { year } = req.query
 
-  if (year) {
-    const queriedYear = await Title.find({release_year: year}).populate('director') // search in release_year after year
-    res.json({ length: queriedYear.length, data: queriedYear })
-  } else {
+  try {
+    if (year) {
+      const queriedYear = await Title.find({release_year: year}).populate('director') // search in release_year after year
+      res.json({ length: queriedYear.length, data: queriedYear })
+    }
+  } catch {
     res.status(400).json({ error: 'No results' })
   }
 })
 
+// add else for misspelled use case ** 
+/* else {
+    res.status(400).json({ error: 'No results' })
+  } */
 app.get('/titles/cast', async (req, res) => {
   const { name } = req.query
 
-  if (name) {
-    const queriedCast = await Title.find({
-      cast: {
-        $regex: new RegExp(name, "i") // 2 arguments: 1. the string w want to look for 2. i = check fr the string but don't care for case sensitivity
-      }
-    }).populate('director')
-    res.json({ length: queriedCast.length, data: queriedCast })
-  } else {
+  try {
+    if (name) {
+      const queriedCast = await Title.find({
+        cast: {
+          $regex: new RegExp(name, "i") // 2 arguments: 1. the string w want to look for 2. i = check fr the string but don't care for case sensitivity
+        }
+      }).populate('director')
+      res.json({ length: queriedCast.length, data: queriedCast })
+    }
+  } catch {
     res.status(400).json({ error: 'No results' })
   }
 })
@@ -127,23 +139,29 @@ app.get('/titles/:id', async (req, res) => {
   try {
     const singleTitle = await Title.findById(id).populate('director')
     res.json({ data: singleTitle })
-  } catch(error) {
+  } catch {
     res.status(404).json({ error: 'ID not found' })
   }
 })
 
+// ADD else statement here for when name is misspelled **
 // query director by director name
 app.get('/directors', async (req, res) => {
   const { director } = req.query
 
-  if (director) {
-  const directors = await Director.find({
-    name: {
-      $regex: new RegExp(director, "i") // 2 arguments: 1. the string w want to look for 2. i = check for the string but don't care for case sensitivity
+  try {
+    if (director) {
+      const directors = await Director.find({
+        name: {
+          $regex: new RegExp(director, "i") // 2 arguments: 1. the string w want to look for 2. i = check for the string but don't care for case sensitivity
+        }
+      })
+      res.json({ length: directors.length, data: directors })
+    } else {
+      const directors = await Director.find()
+      res.json({ data: directors })
     }
-  })
-  res.json({ length: directors.length, data: directors })
-  } else {
+  } catch {
     res.status(400).json({ error: 'Director not found' })
   }
 })
@@ -154,9 +172,13 @@ app.get('/directors/:id', async (req, res) => {
 
   try {
     const oneDirector = await Director.findById(id)
-    res.json({ data: oneDirector })
-  } catch(error) {
-    res.status(404).json({ error: 'Director id not found' })
+    if (oneDirector)  {
+      res.json({ data: oneDirector })
+    } else {
+      res.status(404).json({ error: 'Not found' })
+    }
+  } catch {
+    res.status(400).json({ error: 'Invalid request' })
   }
 })
 
@@ -170,8 +192,8 @@ app.get('/directors/:id/titles', async (req, res) => {
     const titles = await Title.find({ director: mongoose.Types.ObjectId(director.id) })
     res.json({ length: titles.length, data: titles })
     }
-  } catch(error) {
-    res.status(400).json({ error: 'Director not found'})
+  } catch {
+    res.status(404).json({ error: 'Director not found'})
   } 
 })
 
