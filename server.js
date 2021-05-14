@@ -2,11 +2,13 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
 
-dotenv.config()
+import dotenv from 'dotenv'
+import listEndpoints from 'express-list-endpoints'
 
 import data from './data/golden-globes.json'
+
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || `mongodb+srv://${process.env.USER_ID}:${process.env.API_KEY}@cluster0.bvwog.mongodb.net/goldenGlobe?retryWrites=true&w=majority`
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -46,7 +48,7 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello ')
+  response.send(listEndpoints(app))
 })
 app.get('/film', async(req, res) => {
   const { film } = req.query
@@ -75,27 +77,16 @@ app.get('/goldenglobes/:id', async (req, res) => {
   const singleFilm = await GoldenGlobe.findOne({ _id: id })
   res.json(singleFilm)
   } catch(error) {
-    res.status(400).json({error: 'Something went wrong', details: error})
+    res.status(400).json({error: 'Id do not exist', details: error})
   }
 })
-// app.get('/goldenglobes/:id/film', async (re, res) => {
-//   const {id} = req.params
-
-//   try{
-//     const id = await GoldenGlobe.findById(id)
-//     if (id) {
-//       const film = await 
-//     }
-//   }
-// })
-
 
 app.get('/goldenglobes', async (req, res) => {
  try {
   const data = await GoldenGlobe.find()
  res.json(data)
 } catch(error){
-  res.status(400).json({error: 'Sorry, something went wrong'})
+  res.status(400).json({error: 'Sorry, could not find the data'})
 }
 })
 app.get('/goldenglobes/nominee/:nominee', async (req, res) => {
@@ -103,6 +94,9 @@ app.get('/goldenglobes/nominee/:nominee', async (req, res) => {
 
   const singleNominee = await GoldenGlobe.findOne({ nominee: nominee })
   res.json(singleNominee)
+})
+app.get('/mock', (req, res) => {
+  response.send('')
 })
 // Start the server
 app.listen(port, () => {
