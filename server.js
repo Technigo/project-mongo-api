@@ -1,7 +1,8 @@
+import dotenv from 'dotenv'
+
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 
 import booksData from './data/books.json'
@@ -28,14 +29,14 @@ const bookSchema = new mongoose.Schema({
 const Book = mongoose.model('Book', bookSchema)
 
 if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
+  const seedDataBase = async () => {
     await Book.deleteMany()
 
     booksData.forEach((bookData) => {
       new Book(bookData).save()
     })
   }
-  seedDatabase()
+  seedDataBase()
 }
 
 const port = process.env.PORT || 8080
