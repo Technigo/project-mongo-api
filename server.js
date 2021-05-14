@@ -5,15 +5,15 @@ import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 import dotenv from 'dotenv';
 
-import movieData from './data/netflix-titles.json';
+import netflixData from './data/netflix-titles.json';
 
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Movie = mongoose.model('Movie', {
+const NetflixData = mongoose.model('NetflixData', {
   title: String,
   director: String,
   cast: String,
@@ -29,24 +29,23 @@ const Movie = mongoose.model('Movie', {
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Movie.deleteMany();
-    await movieData.forEach((item) => {
-      const newMovie = new Movie(item);
-      newMovie.save();
+    await NetflixData.deleteMany();
+    await netflixData.forEach((item) => {
+      const newNetflixData = new NetflixData(item);
+      newNetflixData.save();
     });
   }
   seedDatabase();
 }
 
-//   PORT=9000 npm start
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// First page that shows all the endpoints
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 });
@@ -59,13 +58,13 @@ const sorting = (sort) => {
   } else if (sort === 'oldest') { 
     return { release_year: 1 }
   }
-}
+};
 
 // Function for pages, skipping 20 per page
 // Global scope to be used in all, movies and tvshows routes
 const pageResults = (page) => {
   return ((page - 1) * 20)
-}
+};
 
 // Route for all titles
 app.get('/all', async (req, res) => {
@@ -89,10 +88,10 @@ app.get('/all', async (req, res) => {
       query.country = country;
     }
     return query;
-  }
+  };
 
-  // Find results on title, genre, releaseyear, country. Sort on year, page function and limit to 20 results
-  const data = await Movie.find(queries(titleRegex, genreRegex, releaseYear, countryRegex))
+  // Find results on above queries, sort on releaseYear and limit to 20 per page.
+  const data = await NetflixData.find(queries(titleRegex, genreRegex, releaseYear, countryRegex))
     .sort(sorting(sort))
     .limit(20)
     .skip(pageResults(page))
@@ -100,7 +99,7 @@ app.get('/all', async (req, res) => {
   try {
     res.json(data);
   } catch (error) {
-    res.status(400).json({ error: 'Something went wrong and we could not find what you were looking for!', details: error })
+    res.status(400).json({ error: 'Something went wrong!', details: error })
   }
 });
 
@@ -109,7 +108,7 @@ app.get('/movies', async (req, res) => {
   const { sort, page } = req.query;
 
   try {
-    const movies = await Movie.find({ type: 'Movie' })
+    const movies = await NetflixData.find({ type: 'Movie' })
       .sort(sorting(sort))
       .limit(20)
       .skip(pageResults(page))
@@ -124,7 +123,7 @@ app.get('/tvshows', async (req, res) => {
   const { sort, page } = req.query;
 
   try {
-    const tvshows = await Movie.find({ type: 'TV Show' })
+    const tvshows = await NetflixData.find({ type: 'TV Show' })
       .sort(sorting(sort))
       .limit(20)
       .skip(pageResults(page))
@@ -137,7 +136,7 @@ app.get('/tvshows', async (req, res) => {
 // Route for id
 app.get('/all/:id', async (req, res) => {
   const { id } = req.params;
-  const singleMovie = await Movie.findById({ id });
+  const singleMovie = await NetflixData.findById({ id });
   if (singleMovie) {
     res.json(singleMovie)
   } else {
