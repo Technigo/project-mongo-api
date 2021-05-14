@@ -2,7 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
-
+import dotenv from 'dotenv'
+//dotenv.config() 
 import netflixTitles from './data/netflix-titles.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo" // here: link to deployed database - the one in Mongo Atlas
@@ -77,7 +78,7 @@ app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
   } else {
-    res.status(503).json({ error: `Service unavailable` })
+    res.status(503).json({ error: 'Service unavailable' })
   }
 })
 
