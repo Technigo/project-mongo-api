@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -11,6 +12,7 @@ dotenv.config()
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
+
 
 const bookSchema = new mongoose.Schema({
   bookID: Number,
