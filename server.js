@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 
 import movieData from './data/netflix-titles.json'
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/movieTime';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
