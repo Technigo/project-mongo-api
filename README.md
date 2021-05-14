@@ -1,13 +1,11 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+In this project we were supposed to seed and fetch data from a Mongo database by using Mongoose model.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+This week I didn't have so many error messages as I had last week so it felt a bit easier to work with this API project. I watched the lectures and tried to implement different endpoints to play araound with it to learn more. I t was a bit difficult to deploy it to Heruko and Mongo but it turned out well after help from my team and discussions on Slack.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://week18project-mongo-api.herokuapp.com/
