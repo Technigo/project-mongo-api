@@ -20,3 +20,9 @@ https://umea-trees.herokuapp.com/
 
 All trees endpoint 
 with possibility to query with ?name=betula  for example
+
+https://umea-trees.herokuapp.com/trees
+
+Tree by ID endpoint
+
+https://umea-trees.herokuapp.com/trees/id/:id

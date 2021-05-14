@@ -75,6 +75,11 @@ app.get('/trees/id/:id', async (req, res) => {
   } 
 })
 
+//ALL TREE SPECIES IN THE DATABASE
+app.get('/species', async (req, res) => {
+    const species = await Tree.distinct('scientificName')
+})
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
