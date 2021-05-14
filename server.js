@@ -1,12 +1,11 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
 import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -50,16 +49,17 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Route
+// Routes
 app.get('/', (req, res) => {
   res.send('Hello hello hello world')
 })
 
 // Route that displays one title if queried, or all titles
+// localhost:8080/titles?title='title'
 app.get('/titles', async (req, res) => {
   const { title } = req.query
 
-  if (title) { // localhost:8080/titles?title=title
+  if (title) { 
     const titleRegex = new RegExp(title, 'i') 
     const titles = await NetflixTitle.find({ title: titleRegex })
     res.json(titles)
@@ -73,9 +73,13 @@ app.get('/titles/:id', async (req, res) => {
   const { id } = req.params
   try {
     const findTitle = await NetflixTitle.findOne({ _id: id })
-    res.json(findTitle)
+    if (findTitle) {
+      res.json(findTitle)
+    } else {
+      res.status(404).json({ error: 'id not found' })
+    }
   } catch (error) {
-    res.status(400).json({ error: 'id not found' })
+    res.status(400).json({ error: 'request not valid' })
   }
 })
 
@@ -96,13 +100,17 @@ app.get('/titles/title/:title', async (req, res) => {
 
 app.get('/titles/country/:country', async (req, res) => {
   const { country } = req.params
-  const countryRegex = new RegExp(country, 'i')
-  const titlesFromCountry = await NetflixTitle.find({ country: countryRegex })
-  
-  if (titlesFromCountry.length === 0) {
-    res.status(404).json(`No titles from ${country}`)
-  } else {
-    res.json({ nrTitles: titlesFromCountry.length, data: titlesFromCountry })
+  try {
+    const countryRegex = new RegExp(country, 'i')
+    const titlesFromCountry = await NetflixTitle.find({ country: countryRegex })
+    
+    if (titlesFromCountry.length === 0) {
+      res.status(404).json({ error: `No titles from ${country}` })
+    } else {
+      res.json({ nrTitles: titlesFromCountry.length, data: titlesFromCountry })
+    } 
+  } catch {
+    res.status(400).json({ error: 'Invalid country' })
   }
 })
 
