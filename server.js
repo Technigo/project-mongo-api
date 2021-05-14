@@ -60,7 +60,7 @@ if (process.env.RESET_DB) {
 // })
 // newBook.save()
 
-const port = process.env.PORT || 8091
+const port = process.env.PORT || 8092
 const app = express()
 
 app.use(cors())
@@ -75,10 +75,18 @@ app.get('/books', async (req, res) => {
   const books = await Book.find()
   res.json({ length: books.length, data: books })
 })
-// app.get('/books', async (req, res) => {
-//   const books = await Book.find()
-//   res.json(books)
-// })
+
+app.get('/books/:bookId', async (req, res) => {
+  const { bookId } = req.params
+  const singleBook = await Book.findOne({ _id: bookId })
+  res.json(singleBook)
+})
+
+app.get('/books/title/:bookTitle', async (req, res) => {
+  const { bookTitle } = req.params
+  const singleBook = await Book.findOne({ title: bookTitle })
+  res.json(singleBook)
+})
 
 // Start the server
 app.listen(port, () => {
