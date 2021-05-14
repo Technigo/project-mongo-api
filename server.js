@@ -1,6 +1,9 @@
+import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+
+dotenv.config()
 
 
 import bootcamps from './data/bootcamps.json'
