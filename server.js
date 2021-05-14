@@ -78,7 +78,7 @@ app.get('/books', async (req, res) => {
 
 app.get('/books/:bookId', async (req, res) => {
   const { bookId } = req.params
-  const singleBook = await Book.findOne({ _id: bookId })
+  const singleBook = await Book.findById(bookId)
   res.json(singleBook)
 })
 
