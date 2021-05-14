@@ -15,6 +15,17 @@ I've created a RESTful API using Express and MongoDB as part of week 18 of the T
 * /directors/:id
 * /directors/:id/titles --> find all titles of a specific director
 
+## Tech
+
+- MongoDB
+- Mongoose
+- Node
+- Express
+- JavaScript
+- Heroku
+- MongoDB Atlas & Compass
+- Postman
+
 ### Reflections
 I enjoyed working on bettering my code from last week and applying it to the model structure of MongoDB. 
 
