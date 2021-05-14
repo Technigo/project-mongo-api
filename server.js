@@ -88,7 +88,7 @@ let myAPI
 // #1 Find books
 app.get('/books', async (req,res) => { // Har lagt till limit som vi kan lägga en variabel på och sedan ändra när vi trycker på load i frontend
   //const find = req.params
-  myAPI = await Book.find().limit(20) // Här är våran collection vi skapar
+  myAPI = await Book.find() // Här är våran collection vi skapar .limit(20)
 
   res.json({length: myAPI.length, data: myAPI})
 })
