@@ -34,7 +34,6 @@ const showSchema = new mongoose.Schema({
 
 const Show = mongoose.model('Show', showSchema);
 
-
 //TO USE THIS, TYPE: RESET_DB=true npm run dev IN TERMINAL
 
 if (process.env.RESET_DB) {
@@ -59,8 +58,9 @@ app.use(express.json())
 app.get('/', (req, res) => {
   Show.find().then(show => {
     res.json('Show most go on!')
-  })
+  }).catch(e => console.log(e))
 })
+
 
 // All descriptions 
 
