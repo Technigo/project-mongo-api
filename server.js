@@ -3,14 +3,7 @@ import cors from "cors";
 import mongoose, { mongo } from "mongoose";
 import listEndpoints from "express-list-endpoints";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
 import booksData from "./data/books.json";
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -84,18 +77,19 @@ app.get("/books/book/:bookID", async (req, res) => {
   }
 });
 
-app.get("/books/rating", async (req, res) => {
-  let { rating } = req.query;
+app.get("/authors", async (res, req) => {
+  const { author } = req.query;
 
-  rating = Number(rating);
-  console.log(rating);
-
-  if (rating) {
-    const books = await Book.find({ average_rating: rating });
-    res.json(books);
+  if (author) {
+    const allTitlesByAuthor = await Book.find({
+      authors: {
+        $regex: new RegExp(author, "i"),
+      },
+    });
+    res.json(allTitlesByAuthor);
   } else {
-    const books = await Book.find();
-    res.json(books);
+    const allTitlesByAuthor = await Book.find();
+    res.json(allTitlesByAuthor);
   }
 });
 
