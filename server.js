@@ -91,8 +91,12 @@ app.get('/goldenglobes/:id', async (req, res) => {
 
 
 app.get('/goldenglobes', async (req, res) => {
- const data = await GoldenGlobe.find()
+ try {
+  const data = await GoldenGlobe.find()
  res.json(data)
+} catch(error){
+  res.status(400).json({error: 'Sorry, something went wrong'})
+}
 })
 app.get('/goldenglobes/nominee/:nominee', async (req, res) => {
   const { nominee } = req.params
