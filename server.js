@@ -28,23 +28,15 @@ if(process.env.RESET_DB) {
   console.log('SEEDING')
   const seedDB = async () => {
     await GoldenGlobe.deleteMany()
-    await data.forEach(item => {
-      
+
+    await data.forEach(item => {  
       const newGoldenGlobe = new GoldenGlobe(item)
       newGoldenGlobe.save() 
     })
   }
   seedDB()
 }
-const newGoldenGlobe = new GoldenGlobe ({
-  year_film: 2020,
-  year_award: 2021,
-  ceremony: 2021,
-  category: "Best actresses",
-  nominee: "Mary Jane",
-  film: "Mary Jane",
-  win: true
-})
+
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -58,20 +50,36 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 app.get('/film', async(req, res) => {
-  const film = await GoldenGlobe.find()
-  res.json(film)
+  const { film } = req.query
+if (film) {
+  const goldenglobes = await GoldenGlobe.find({ 
+    film: {
+      $regex: new RegExp(film, "i") 
+    }
+  })
+  res.json(goldenglobes)
+} else {
+  const goldenglobes = await GoldenGlobe.find()
+  res.json(goldenglobes)
+}
+  // const film = await GoldenGlobe.find()
+  // res.json(film)
 })
-app.get('/goldenglobes/:film', async (req, res) => {
-  const { film } = req.params
+app.get('/goldenglobes/:id', async (req, res) => {
+  const { id } = req.params
 
-  const singleFilm = await GoldenGlobe.findOne({ _id: film })
+  try {
+  const singleFilm = await GoldenGlobe.findOne({ _id: id })
   res.json(singleFilm)
+  } catch(error) {
+    res.status(400).json({error: 'Something went wrong', details: error})
+  }
 })
-// app.get('/goldenglobes', async (req, res) => {
-//  const goldenglobes = await GoldenGlobe.find()
-//  res.json(data)
-// })
-app.get('/goldenglobes/film/:nominee', async (req, res) => {
+app.get('/goldenglobes', async (req, res) => {
+ const data = await GoldenGlobe.find()
+ res.json(data)
+})
+app.get('/goldenglobes/nominee/:nominee', async (req, res) => {
   const { nominee } = req.params
 
   const singleNominee = await GoldenGlobe.findOne({ nominee: nominee })
