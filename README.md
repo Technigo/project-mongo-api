@@ -7,13 +7,13 @@ I've created a RESTful API using Express and MongoDB as part of week 18 of the T
 * The API has the following endpoints:
 
 * /titles
-** /titles/year --> query by year
-** titles/cast --> query by cast name
-** titles/:id
+* /titles/year --> query by year
+* /titles/cast --> query by cast name
+* /titles/:id
 
-* directors --> query by director name
-** directors/:id
-** directors/:id/titles --> find all titles of a specific director
+* /directors --> query by director name
+* /directors/:id
+* /directors/:id/titles --> find all titles of a specific director
 
 ### Reflections
 I enjoyed working on bettering my code from last week and applying it to the model structure of MongoDB. 
