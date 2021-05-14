@@ -1,16 +1,16 @@
 # Mongo API Project
-
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-- How to model data in Mongoose
-- How to fetch items from a Mongo database using Mongoose
-- How to seed large amounts of data to a database
+This project was made during week 18 of the Technigo boot camp. 
+The project was to use Mongo DB and mongoose to construct, retrieve, seed and query data using mongoose. We also used secrets such as database passwotds.
 
 ## The problem
 
 Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started by setting up my account at Mongo, and connecting it to Heroku and GitHub, making sure that everything was deployed and connected as it should on Heroku and Mongo Cloud. 
+
+After that I constructed some routes and endpoints to be able to filter and query the data. 
+
+If I had more time I would have filtered the data even more, and also I would have implemented pages with the methods skip & limit. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://a-lenksjo-project-mongo.herokuapp.com/
