@@ -49,7 +49,7 @@ const seedDB = async () => {
 seedDB();
 }
 
-const port = process.env.PORT || 8082
+const port = process.env.PORT || 8080
 const app = express()
 
 app.use(cors()) 
@@ -61,7 +61,7 @@ app.get('/', (req, res) => {
   })
 })
 
-// All descriptions http://localhost:8082/descriptions
+// All descriptions /shows/descriptions
 
 app.get('/shows/descriptions', async (req, res) => {
   const allDescriptions =  await Show.find()
@@ -76,7 +76,7 @@ app.get('/shows', async (req, res) => {
   res.json(show)
 });
 
-http://localhost:8082/shows/series
+//http://localhost:8082/shows/series
 app.get('/shows/series', async (req, res) =>{
   const data = await Show.find({ type: 'TV Show'})
   res.json(data)
