@@ -159,7 +159,4 @@ app.get('/authors/:authorId', async (req, res) => {
 })
 
 // Start the server
-app.listen(port, () => {
-  // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
-})
+app.listen(port, () => {})
