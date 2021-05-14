@@ -16,10 +16,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-//mongodb+srv://myUser:myuserpassword@cluster0.prpaq.mongodb.net/ProjectMongo?retryWrites=true&w=majority
-
-//mongodb+srv://myUser:<password>@cluster0.prpaq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-
 const bookSchema = new mongoose.Schema({ // #1
   bookID: Number,
   title: String,
@@ -112,13 +108,23 @@ app.get('/books/:memberId', async (req, res) => {
 });
 
 // #3 Find author name 
-app.get('/books/name/:authorName', async (req,res) => { // Behövs ingen error handling här, verkar som inte det behövs error alls på find utan endast på typ findid dvs när det är koncentrerad
+app.get('/books/name/:authorName', async (req,res) => {
   const { authorName } = req.params;
 
-  
+  try {
+    myAPI = await Book.findById(memberId);
+    if(myAPI) {
+      res.json({length: myAPI.length, data: myAPI})
+    } else {
+      res.status(404).json({ error: 'Not found'});
+    }
+  } catch {
+    res.status(400).json({ error: 'Invalid request'})
+  }
 
-  myAPI = await Book.find(
-     {authors: {$regex: authorName}});
+
+
+  myAPI = await Book.find({authors: {$regex: authorName}});
 
   res.json({length: myAPI.length, data: myAPI})
 })
@@ -156,21 +162,9 @@ app.get('/books/minrating/:rating', async (req,res) => {
 app.get('/books/isbn/:isbn', async (req,res) => {
   const { isbn } = req.params;
 
-  try {
-    myAPI = await Book.findOne({ isbn: isbn});
-    if(myAPI) {
-      res.json({length: myAPI.length, data: myAPI})
-    } else {
-      res.status(404).json({ error: 'Not found'});
-    }
-  } catch {
-    res.status(400).json({ error: 'Invalid request'})
-  }
-  res.json({length: myAPI.length, data: myAPI});
+  myAPI = await Book.findOne({ isbn: isbn});
 
-
-  
-
+  res.json({length: myAPI.length, data: myAPI})
 })
 
 // Gör en öppen input fält där man kan skriva vad som helst

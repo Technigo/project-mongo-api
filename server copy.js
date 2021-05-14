@@ -16,10 +16,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-//mongodb+srv://myUser:myuserpassword@cluster0.prpaq.mongodb.net/ProjectMongo?retryWrites=true&w=majority
-
-//mongodb+srv://myUser:<password>@cluster0.prpaq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-
 const bookSchema = new mongoose.Schema({ // #1
   bookID: Number,
   title: String,
@@ -88,9 +84,9 @@ let myAPI
 // #1 Find books
 app.get('/books', async (req,res) => { // Har lagt till limit som vi kan lägga en variabel på och sedan ändra när vi trycker på load i frontend
   //const find = req.params
-  myAPI = await Book.find().limit(20) // Här är våran collection vi skapar
+  const books = await Book.find().limit(20) // Här är våran collection vi skapar
 
-  res.json({length: myAPI.length, data: myAPI})
+  res.json({length: books.length, data: books})
 })
 
 
@@ -98,29 +94,18 @@ app.get('/books', async (req,res) => { // Har lagt till limit som vi kan lägga 
 app.get('/books/:memberId', async (req, res) => {
   const { memberId } = req.params;
 
-  try {
-    myAPI = await Book.findById(memberId);
-    if(myAPI) {
-      res.json({length: myAPI.length, data: myAPI})
-    } else {
-      res.status(404).json({ error: 'Not found'});
-    }
-  } catch {
-    res.status(400).json({ error: 'Invalid request'})
-  }
-  res.json({length: myAPI.length, data: myAPI});
+  const singleID = await Book.findById(memberId);
+
+  res.json(singleID);
 });
 
 // #3 Find author name 
-app.get('/books/name/:authorName', async (req,res) => { // Behövs ingen error handling här, verkar som inte det behövs error alls på find utan endast på typ findid dvs när det är koncentrerad
+app.get('/books/name/:authorName', async (req,res) => {
   const { authorName } = req.params;
 
-  
+  const singleAuthor = await Book.find( {authors: {$regex: authorName}});
 
-  myAPI = await Book.find(
-     {authors: {$regex: authorName}});
-
-  res.json({length: myAPI.length, data: myAPI})
+  res.json(singleAuthor)
 })
 
 
@@ -129,48 +114,36 @@ app.get('/books/name/:authorName', async (req,res) => { // Behövs ingen error h
 app.get('/books/minpage/:pages', async (req,res) => {
   const { pages } = req.params;
 
-  myAPI = await Book.find({ num_pages: { $gte: pages}});
+  const minPages = await Book.find({ num_pages: { $gte: pages}});
 
-  res.json({length: myAPI.length, data: myAPI})
+  res.json({length: minPages.length, data: minPages})
 })
 
 // #5 Max Page filter
 app.get('/books/maxpage/:pages', async (req,res) => {
   const { pages } = req.params;
 
-  myAPI = await Book.find({ num_pages: { $lte: pages}});
+  const maxPages = await Book.find({ num_pages: { $lte: pages}});
 
-  res.json({length: myAPI.length, data: myAPI})
+  res.json({length: maxPages.length, data: maxPages})
 })
 
 // #6 Ratings filter (GÖR en select)
 app.get('/books/minrating/:rating', async (req,res) => {
   const { rating } = req.params;
 
-  myAPI = await Book.find({ average_rating: { $gte: rating}});
+  const minRating = await Book.find({ average_rating: { $gte: rating}});
 
-  res.json({length: myAPI.length, data: myAPI})
+  res.json({length: minRating.length, data: minRating})
 })
 
 // #7 Find ISBN name
 app.get('/books/isbn/:isbn', async (req,res) => {
   const { isbn } = req.params;
 
-  try {
-    myAPI = await Book.findOne({ isbn: isbn});
-    if(myAPI) {
-      res.json({length: myAPI.length, data: myAPI})
-    } else {
-      res.status(404).json({ error: 'Not found'});
-    }
-  } catch {
-    res.status(400).json({ error: 'Invalid request'})
-  }
-  res.json({length: myAPI.length, data: myAPI});
+  const findIsbn = await Book.findOne({ isbn: isbn});
 
-
-  
-
+  res.json(findIsbn)
 })
 
 // Gör en öppen input fält där man kan skriva vad som helst
