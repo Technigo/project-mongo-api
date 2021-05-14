@@ -8,7 +8,7 @@ import netflixTitles from './data/netflix-titles.json'
 
 dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo" // here: link to deployed database - the one in Mongo Atlas ?
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -39,7 +39,6 @@ const Title = mongoose.model('Title', titlesSchema)
 const Director = mongoose.model('Director', directorsSchema)
 
 if (process.env.RESET_DB) {
-  console.log('Resetting database')
   const seedDB = async () => {
     await Title.deleteMany()
     await Director.deleteMany()
@@ -66,7 +65,6 @@ if (process.env.RESET_DB) {
     }) 
   }
   seedDB()
-  console.log('Seeded the database')
 }
 
 const port = process.env.PORT || 8080
@@ -118,7 +116,7 @@ app.get('/titles/cast', async (req, res) => {
     }
 })
 
-// Return the id of one netflix title
+// return the id of one netflix title
 app.get('/titles/:id', async (req, res) => {
   const { id } = req.params
 
