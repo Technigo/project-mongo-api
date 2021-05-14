@@ -61,7 +61,7 @@ app.get('/', (req, res) => {
   })
 })
 
-// All descriptions /shows/descriptions
+// All descriptions 
 
 app.get('/shows/descriptions', async (req, res) => {
   const allDescriptions =  await Show.find()
@@ -69,20 +69,21 @@ app.get('/shows/descriptions', async (req, res) => {
   res.json({  data: allDescriptions })
 });
 
-//http://localhost:8082/shows
+//All shows in the database
 
 app.get('/shows', async (req, res) => {
   const show = await Show.find();
   res.json(show)
 });
 
-//http://localhost:8082/shows/series
+//All shows Type TV-Show
+
 app.get('/shows/series', async (req, res) =>{
   const data = await Show.find({ type: 'TV Show'})
   res.json(data)
 });
 
-// //return one show by id
+// Returnig singular show by id
 
 app.get('/shows/:showid', async (req, res) =>{
   const { showid } = req.params;
@@ -95,7 +96,7 @@ app.get('/shows/:showid', async (req, res) =>{
   }
 });
 
-//return one show by title. Use this way to write async/await code with the catch error
+//Returning singular show by title. Use this way to write async/await code with the catch error
 
 app.get('/shows/show/:showname', async (req, res) =>{
   const { showname } = req.params;
@@ -108,6 +109,7 @@ app.get('/shows/show/:showname', async (req, res) =>{
     }
 })
 
+//Returning all shows with the same director
 //http://localhost:8082/shows/directors?director=Mati%20Diop
 // //quary params when its only one, unique. ($reqex: new RegExp(showTitle, 'i' dont care about case sensitive)
 
@@ -127,14 +129,16 @@ app.get('/shows/directors/', async (req, res) => {
   }
 })
 
-//http://localhost:8082/showlist?releaseYear=2018
+//Return show by realease year or country
+//http://localhost:8080/showlist?releaseYear=2018
 
 app.get('/showlist', async (req, res) => {
   let data
   const { releaseYear } = req.query;
   const { country } = req.query;
 
-  if (releaseYear) {
+try{
+    if (releaseYear) {
     data = await Show.find({release_year: +releaseYear })
   } else if (country) {
     data = await Show.find({
@@ -146,25 +150,11 @@ app.get('/showlist', async (req, res) => {
     data = await Show.find()
   }
   res.json(data)
-})
-
-//http://localhost:8082/shows/countries?country=india
-
-app.get('/shows/countries', async (req, res) => {
-  const { country } = req.query;
-
-  if (country) {
-    const shows = await Show.find({
-      country: {
-        $regex: new RegExp(country, "i")
-      }
-    })
-    res.json(shows);
-  } else {
-    const shows = await Show.find();
-    res.json(shows);
+  } catch (error) {
+    res.status(400).json({ error: 'Somthing went wrong with the search', details: error })
   }
 })
+
 
 app.listen(port, () => {
 
