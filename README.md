@@ -15,5 +15,3 @@ Describe how you approached to problem, and what tools and techniques you used t
 ## View it live
 
 Link to my deployed API: https://project-mongo-api-isabellam5.herokuapp.com/
-
-Link to my deployed frontend: 

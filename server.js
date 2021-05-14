@@ -17,7 +17,11 @@ const bookSchema = new mongoose.Schema({
   title: String,
   authors: String,
   average_rating: Number,
-  num_pages: Number
+  isbn: String,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
 });
 
 const Book = mongoose.model('Book', bookSchema);
@@ -28,8 +32,19 @@ if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Book.deleteMany();
 
-    await booksData.forEach((item) => {
-      new Book(item).save();
+    booksData.forEach(async (item) => {
+      const newBook = new Book({
+        bookID: item.bookID,
+        title: item.title,
+        authors: item.authors,
+        average_rating: item.average_rating,
+        isbn: item.isbn,
+        language_code: item.language_code,
+        num_pages: item.num_pages,
+        ratings_count: item.ratings_count,
+        text_reviews_count: item.text_reviews_count
+      });
+      await newBook.save();
     });
   };
 
@@ -54,64 +69,80 @@ app.use((req, res, next) => {
 // ROUTES
 // Home
 app.get('/', (req, res) => {
-  res.send(listEndpoints(app));
+  try {
+    res.send(listEndpoints(app));
+  } catch (err) {
+    res.status(404).send({ error: "Page not found" });
+  }
 });
 
 // All books
 // Books by author, query path: '/books?author=adams'
-// Books by title, query path: '/books?title=bill'
+// Books by title, query path: '/books?title=chamber'
+// Books by language, query path: '/books?language=eng' //check this query, it doesn't work properly
+// Books by isbn, query path: '/books?isbn=439785960'
 app.get('/books', async (req, res) => {
-  const { author, title } = req.query;
-  const booksToSend = await Book.find();
+  const { author, title, language, isbn } = req.query;
+  let booksToSend = await Book.find();
 
-  // if (author) {
-  //   booksToSend = booksToSend = await Book.find({ authors: { $in } });
-  // }
-
-  res.json(booksToSend);
+  try {
+    if (author) {
+      booksToSend = await Book.find({ authors: new RegExp(author, "i") })
+    } 
+    if (title) {
+      booksToSend = await Book.find({ title: new RegExp(title, "i") })
+    }
+    if (language) {
+      booksToSend = await Book.find({ language_code: new RegExp(language, "i") })
+    }
+    if (isbn) {
+      booksToSend = await Book.find({ isbn: new RegExp(isbn, "i") })
+    }
+    if (booksToSend.length === 0) {
+      res.status(404).send(`Sorry, could not find any books!`);
+    }
+  
+    res.json(booksToSend);
+  } catch (err) {
+    res.status(404).send({ error: "Page not found" })
+  }
 });
 
 // Books by top rating (4 or higher)
 app.get('/books/toprating', async (req, res) => {
-  const booksByTopRating = await Book.find({ average_rating: { $gte: 4 } })
-
-  res.json(booksByTopRating);
+  try {
+    const booksByTopRating = await Book.find({ average_rating: { $gte: 4 } })
+    res.json(booksByTopRating);
+  } catch (err) {
+    res.status(404).send({ error: "Page not found" });
+  }
 });
 
 // Books by short reads (less than 500 pages)
 app.get('/books/shortread', async (req, res) => {
-  const shortRead = await Book.find({ num_pages: { $lt: 500 } });
-
-  res.json(shortRead);
+  try {
+    const booksByShortRead = await Book.find({ num_pages: { $lt: 500 } });
+    res.json(booksByShortRead);
+  } catch (err) {
+    res.status(404).send({ error: "Page not found" });
+  }
 });
 
 // Books by id
-app.get('/books/:id', async (req, res) => {
-  try {
-    const singleBook = await Book.findById(req.params.id);
+app.get('/books/:bookId', async (req, res) => {
+  const { bookId } = req.params;
 
+  try {
+    const singleBook = await Book.findById(bookId);
     if (singleBook) {
       res.json(singleBook);
     } else {
       res.status(404).json({ error: 'Book not found' });
     }
   } catch (err) {
-    res.status(400).json({ error: 'Invalid book ID' });
+    res.status(400).json({ error: 'Invalid book ID' }); // Bad request
   }
 });
-
-// Books by author id
-// app.get('/authors/:id/books', async (req, res) => {
-//   const author = await Author.findById(req.params.id);
-
-//   if (author) {
-//     const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) });
-//     res.json(books);
-//   } else {
-//     res.status(404).json({ error: 'Author not found' });
-//   }
-// }); 
-
 
 // Start the server
 app.listen(port, () => {
