@@ -1,13 +1,19 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+For this week I've created a RESTful API using Express and MongoDB. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I couldn't advance too much in this project. I only got blue requirements following the same structure that we used the last week.
+
+I hope that for the next week I can learn more about Mongo and the best way to do it. 
+
+The API has the following endpoints:
+
+/showId ---- To filter a specific ID
+/title/ShowTitle ----- to search by titles
+/type/type ---- to filter by type (movies - Tv Show)
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+
