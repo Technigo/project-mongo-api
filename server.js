@@ -104,8 +104,20 @@ app.get('/nomenees/category/:categoryId', async (req, res) => {
 });
 
 app.get('/winners', async (req, res) => {
+  const { nominee, year } = req.query
   try {
-    const winners = await Nominee.find({ win: true });
+    const winners = await Nominee.aggregate([
+      {
+        $match: {
+          win: true,
+          nominee: {
+            $regex: new RegExp(nominee || "", "i")
+          },
+          year_award: +year || /\d+/
+        }
+      }
+
+    ]);
     res.json(winners);
   } catch (error) {
     res.status(400).json({ error })
