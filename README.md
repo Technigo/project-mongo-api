@@ -28,5 +28,5 @@ This project's goal is to look at how to use Mongodb to store data, and how to q
 
 # View it live ✨
 
-Heroku:
-Mongo Atlas:
+Heroku: https://books-mongodb-api.herokuapp.com/
+
