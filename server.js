@@ -2,12 +2,12 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
+// import dotenv from 'dotenv'
 import listEndpoints from 'express-list-endpoints'
 
 import btc from './data/btc.json'
 
-dotenv.config()
+// dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/btc"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
