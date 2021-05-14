@@ -15,5 +15,5 @@ The API has the following endpoints:
 /type/type ---- to filter by type (movies - Tv Show)
 
 ## View it live
-
+https://netflix-data-mongo.herokuapp.com/
 
