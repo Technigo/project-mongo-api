@@ -4,7 +4,6 @@ import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
 
 import netflixTitles from './data/netflix-titles.json'
-console.log(netflixTitles.length) // 7787 objects
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -34,10 +33,9 @@ const directorsSchema = new mongoose.Schema({
   name: String
 })
 
-// 1st argument Title, 2nd argument the Schema
-const Title = mongoose.model('Title', titlesSchema) //mongoDB takes the string 'Title' and changing the Uppercase to lowercase + s = titles
+const Title = mongoose.model('Title', titlesSchema)
 
-const Director = mongoose.model('Director', directorsSchema) //Name same as variable - a rule of thumb
+const Director = mongoose.model('Director', directorsSchema)
 
 if (process.env.RESET_DB) {
   console.log('Resetting database')
@@ -47,7 +45,8 @@ if (process.env.RESET_DB) {
 
     let directors = []
 
-    netflixTitles.slice(0,100).forEach(async item => {  // remove slice or change to 800 objects or similar for deployment purpose
+    // slice 800 objects for deployment purpose
+    netflixTitles.slice(0,800).forEach(async item => {  
       const director = new Director({"name": item.director}) 
       
       if (item.director != "") {
@@ -56,7 +55,8 @@ if (process.env.RESET_DB) {
       } 
     })
 
-    netflixTitles.slice(0,100).forEach(async item => { //remove slice or change to 800 objects or similar for deployment purpose
+    // slice 800 objects for deployment purpose
+    netflixTitles.slice(0,800).forEach(async item => { 
       const title = new Title({
         ...item,
         director: directors.find(singleDirector => singleDirector.name === item.director)
@@ -98,12 +98,13 @@ app.get('/titles', async (req, res) => {
   }
 })
 
+// query by year
 app.get('/titles/year', async (req, res) => {
   const { year } = req.query
 
   try {
     if (year) {
-      const queriedYear = await Title.find({release_year: year}).populate('director') // search in release_year after year
+      const queriedYear = await Title.find({release_year: year}).populate('director')
       res.json({ length: queriedYear.length, data: queriedYear })
     }
   } catch {
@@ -115,6 +116,7 @@ app.get('/titles/year', async (req, res) => {
 /* else {
     res.status(400).json({ error: 'No results' })
   } */
+// query by cast name
 app.get('/titles/cast', async (req, res) => {
   const { name } = req.query
 
@@ -122,7 +124,7 @@ app.get('/titles/cast', async (req, res) => {
     if (name) {
       const queriedCast = await Title.find({
         cast: {
-          $regex: new RegExp(name, "i") // 2 arguments: 1. the string w want to look for 2. i = check fr the string but don't care for case sensitivity
+          $regex: new RegExp(name, "i")
         }
       }).populate('director')
       res.json({ length: queriedCast.length, data: queriedCast })
@@ -153,7 +155,7 @@ app.get('/directors', async (req, res) => {
     if (director) {
       const directors = await Director.find({
         name: {
-          $regex: new RegExp(director, "i") // 2 arguments: 1. the string w want to look for 2. i = check for the string but don't care for case sensitivity
+          $regex: new RegExp(director, "i")
         }
       })
       res.json({ length: directors.length, data: directors })
@@ -166,7 +168,7 @@ app.get('/directors', async (req, res) => {
   }
 })
 
-// id
+// id of director
 app.get('/directors/:id', async (req, res) => {
   const { id } = req.params
 
