@@ -9,6 +9,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+// Mongoose model. No showSchema because it's only going to be used here 
 const Show = mongoose.model("Show", {
   show_id: Number,
   title: String,
@@ -24,6 +25,7 @@ const Show = mongoose.model("Show", {
   type: String
 })
 
+// Seed the data
 if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Show.deleteMany()
@@ -35,23 +37,6 @@ if (process.env.RESET_DB) {
   seedDB()
 }
 
-// const newShow = new Show({
-//   show_id: 81172543,
-//   title: "Pirates of the Caribbean: The Curse of the Black Pearl",
-//   director: "Gore Verbinski",
-//   cast: "Johnny Depp, Geoffrey Rush, Orlando Bloom, Keira Knightley",
-//   country: "United States",
-//   date_added: "",
-//   release_year: 2003,
-//   rating: "PG-13",
-//   duration: "143 min",
-//   listed_in: "Action, Adventure, Fantasy",
-//   description: "Blacksmith Will Turner teams up with eccentric pirate 'Captain' Jack Sparrow to  
-//   save his love, the governor's daughter, from Jack's former pirate allies, who are now undead.",
-//   type: "Movie"
-// })
-// newShow.save()
-
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
 //
@@ -59,44 +44,64 @@ if (process.env.RESET_DB) {
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
+// Add middlewares to enable cors, json body parsing and a status error if the database is down
 app.use(cors())
 app.use(express.json())
+app.use((_, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: "Service unavailable" })
+  }
+})
 
-// Start defining your routes here
+// == Routes ==
+
+// List all the endpoints
 app.get('/', (_, res) => {
   res.send(listEndpoints(app))
 })
 
+// List all shows (all data)
 app.get("/shows", async (_, res) => {
-  // v1 - async await
+  // async/await version
   const shows = await Show.find()
   res.json(shows)
-
-  // v2 - promise (classic)
-  // Show.find().then(data => {
-  //   res.json(data)
-  // })
-
-  // v3 - mongoose
-  // Show.find((err, data) => {
-  //   res.json(data)
-  // })
 })
 
+// Look for a specific show by using ID 
 app.get("/shows/id/:showId", async (req, res) => {
-  const { showId } = req.params
-  const singleShow = await Show.findOne({ _id: showId })
-  res.json(singleShow)
+  try {
+    const { showId } = req.params
+    const singleShow = await Show.findById(showId)
+    if (singleShow) {
+      res.json(singleShow)
+    } else {
+      res.status(404).json({ error: "ID not found" })
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Invalid ID" })
+  }
 })
 
+// Look for a specific show using the title
 app.get("/shows/title/:showTitle", async (req, res) => {
   const { showTitle } = req.params
-  const titleForShow = await Show.findOne({ title: showTitle })
-  res.json(titleForShow)
+  if (showTitle) {
+    const titleForShow = await Show.findOne({ 
+      title: {
+        $regex: new RegExp(showTitle, "i")
+      }
+    })
+    res.json(titleForShow)
+  } else {
+    // const titleForShow = await Show.findOne()
+    // res.json(titleForShow)
+    res.status(404).json({ error: "Title not found" })
+  } 
 })
 
-// Start the server
+// == Start the server ==
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
