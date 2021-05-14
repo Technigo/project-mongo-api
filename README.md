@@ -1,13 +1,32 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week is about using a database to store and retrieve data from and use that data to produce a RESTful API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+- How to model data in Mongoose
+Imported mongoose and established a connection to DB by specifiing a url and schema for structure
+
+- How to fetch items from a Mongo database using Mongoose
+Set up of a couple of paths and query options one of them making use of mongoose operator regex to enable case insensitive searches.
+
+- How to seed large amounts of data to a database
+Set up of the variable seedDatabase which by running both update and if neccessary re-writes database (RESET_DB).
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://th-project-mongodb.herokuapp.com/
+
+EXAMPLES
+
+ALL SALES: /sales
+QUERY: sales?region=BaltimoreWashington
+SINGLE ENTRY: sales/_id
+
+
+- If I had more time
+With more time I would have liked looking into how to specify a query or path or perhaps a frontend solotion to:
+ - Average price over time
+ - Top ten total volume
+ - highest notation (combination of avg price and volume)
+ - graphical representation
