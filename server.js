@@ -76,10 +76,14 @@ app.get('/nominees/:nomineeId', async (req, res) => {
 
   try {
     const nominee = await Nominee.findById(nomineeId)
-    res.json(nominee)
+    if (nominee) {
+      res.json(nominee)
+    } else {
+      res.status(404).json({ error: 'Not found' })
+    }
   } catch (error) {
-    res.status(400).json({error: 'Invalid Id' })
-  } 
+    res.status(400).json({ error: 'Invalid ID' })
+  }
 })
 
 
