@@ -5,11 +5,9 @@ import listEndpoints from 'express-list-endpoints'
 
 import netflixTitles from './data/netflix-titles.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo" // here: link to deployed database - the one in Mongo Atlas
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
-
-// RESET_DB=true npm run dev - --- INITIALIZE THE DATABASE *
 
 const titlesSchema = new mongoose.Schema({
   show_id: String,
@@ -45,7 +43,7 @@ if (process.env.RESET_DB) {
 
     let directors = []
 
-    // slice 800 objects for deployment purpose
+    // 800 objects for deployment purpose
     netflixTitles.slice(0,800).forEach(async item => {  
       const director = new Director({"name": item.director}) 
       
@@ -55,7 +53,7 @@ if (process.env.RESET_DB) {
       } 
     })
 
-    // slice 800 objects for deployment purpose
+    // 800 objects for deployment purpose
     netflixTitles.slice(0,800).forEach(async item => { 
       const title = new Title({
         ...item,
@@ -89,38 +87,24 @@ app.get('/', (req, res) => {
 
 // return all titles
 app.get('/titles', async (req, res) => {
-
-  try {
     const titles = await Title.find().populate('director')
     res.json({ length: titles.length, data: titles })
-  } catch {
-    res.status(400).json({ error: 'No results' })
-  }
 })
 
 // query by year
 app.get('/titles/year', async (req, res) => {
   const { year } = req.query
 
-  try {
     if (year) {
       const queriedYear = await Title.find({release_year: year}).populate('director')
       res.json({ length: queriedYear.length, data: queriedYear })
     }
-  } catch {
-    res.status(400).json({ error: 'No results' })
-  }
 })
 
-// add else for misspelled use case ** 
-/* else {
-    res.status(400).json({ error: 'No results' })
-  } */
 // query by cast name
 app.get('/titles/cast', async (req, res) => {
   const { name } = req.query
 
-  try {
     if (name) {
       const queriedCast = await Title.find({
         cast: {
@@ -129,9 +113,6 @@ app.get('/titles/cast', async (req, res) => {
       }).populate('director')
       res.json({ length: queriedCast.length, data: queriedCast })
     }
-  } catch {
-    res.status(400).json({ error: 'No results' })
-  }
 })
 
 // Return the id of one netflix title
@@ -139,19 +120,19 @@ app.get('/titles/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    const singleTitle = await Title.findById(id).populate('director')
-    res.json({ data: singleTitle })
+    if (id) {
+      const singleTitle = await Title.findById(id).populate('director')
+      res.json({ data: singleTitle })
+    } 
   } catch {
-    res.status(404).json({ error: 'ID not found' })
-  }
+    res.status(404).json({ error: 'Title id not found' })
+}
 })
 
-// ADD else statement here for when name is misspelled **
 // query director by director name
 app.get('/directors', async (req, res) => {
   const { director } = req.query
 
-  try {
     if (director) {
       const directors = await Director.find({
         name: {
@@ -160,18 +141,15 @@ app.get('/directors', async (req, res) => {
       })
       res.json({ length: directors.length, data: directors })
     } else {
-      const directors = await Director.find()
-      res.json({ data: directors })
+       const directors = await Director.find()
+      res.json({ length: directors.length, data: directors })
     }
-  } catch {
-    res.status(400).json({ error: 'Director not found' })
-  }
 })
 
 // id of director
 app.get('/directors/:id', async (req, res) => {
   const { id } = req.params
-
+  
   try {
     const oneDirector = await Director.findById(id)
     if (oneDirector)  {
@@ -184,6 +162,7 @@ app.get('/directors/:id', async (req, res) => {
   }
 })
 
+// catch block is not executed
 // return all titles of a specific director
 app.get('/directors/:id/titles', async (req, res) => {
   const { id } = req.params
@@ -193,10 +172,12 @@ app.get('/directors/:id/titles', async (req, res) => {
     if (director) {
     const titles = await Title.find({ director: mongoose.Types.ObjectId(director.id) })
     res.json({ length: titles.length, data: titles })
+    } else {
+      res.status(404).json({ error: 'Director id not found' })
     }
   } catch {
-    res.status(404).json({ error: 'Director not found'})
-  } 
+    res.status(400).json({ error: 'Invalid request' })
+  }
 })
 
 // Start the server
