@@ -35,7 +35,6 @@ const Bootcamp = mongoose.model('Bootcamp', bootcampSchema)
 //Seeding the database. Will only run if
 // RESET_DB environment variable is present and is true
 if (process.env.RESET_DB) {
-  console.log('SEEDING!')
   const seedDatabase = async () => {
    await Bootcamp.deleteMany()
 
