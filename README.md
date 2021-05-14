@@ -4,27 +4,17 @@ I've created a RESTful API using Express and MongoDB as part of week 18 of the T
 ## Endpoints
 The API has the following endpoints
 
-/
-Welcome page - contains a list of available routes
-https://caroline-netflix-titles.herokuapp.com/
-
-/titles
-
-/titles/year
-* query by year
-
-/titles/cast 
-* query by cast name
-
-/titles/:id
-
-/directors 
-* query by director name
-
-/directors/:id
-
-/directors/:id/titles 
-* find all titles of a specific director
+| Path                                          |      Description                                   |
+| :------------------------------------------- | :------------------------------------------------ | 
+| /                                             |                                                    | 
+| https://caroline-netflix-titles.herokuapp.com/|  Welcome page - contains a list of available routes|
+| /titles                                       |  all titles                                        |
+| /titles/year                                  |  query titles by year                              |
+| /titles/cast                                  |  query titles by cast name                         |
+| /titles/:id                                   |  lookup title by id                                |
+| /directors                                    |  all directors / query director by name            |
+| /directors/:id                                |  lookup director by id                             |
+| /directors/:id/titles                         |  all titles by a specific director                 |
 
 ## Tech
 
