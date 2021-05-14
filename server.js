@@ -78,6 +78,7 @@ app.get('/trees/id/:id', async (req, res) => {
 //ALL TREE SPECIES IN THE DATABASE
 app.get('trees/species', async (req, res) => {
     const species = await Tree.distinct('scientificName')
+    res.json(species)
 })
 
 // Start the server
