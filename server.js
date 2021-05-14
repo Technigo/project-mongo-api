@@ -33,19 +33,20 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-const turnToLowerCase = (array) => {
-  const arrayLowercase = []
-  for (const item of array) {
-    arrayLowercase.push(item.toLowerCase())
-  }
-  return arrayLowercase
-}
-
 const port = process.env.PORT || 8080
 const app = express()
 
 app.use(cors())
 app.use(express.json())
+
+const checkParam = (array, param) => {
+  for (const item of array) {
+    const isIncluded = item.toLowerCase().includes(param.toLowerCase())
+    if (isIncluded) {
+      return true
+    }
+  }
+}
 
 // Start defining your routes here
 app.get('/', (req, res) => {
@@ -93,7 +94,8 @@ app.get('/countries', async (req, res) => {
 app.get('/countries/:country', async (req, res) => {
   try {
     const countries = await Player.distinct('country')
-    if (turnToLowerCase(countries).includes(req.params.country.toLowerCase())) {
+
+    if (checkParam(countries, req.params.country)) {
       const country = await Player.aggregate(
         [
           {
@@ -136,18 +138,11 @@ app.get('/nicknames/:nickname', async (req, res) => {
   try {
     const nicknames = await Player.distinct('nickname')
 
-    // const nicknamesLowercase = []
-
-    // for (const nickname of nicknames) {
-    //   nicknamesLowercase.push(nickname.toLowerCase())
-    // }
-
-    if (turnToLowerCase(nicknames).includes(req.params.nickname.toLowerCase())) {
-      const nickname = await Player.find({
-        nickname: {
-          $regex: new RegExp(req.params.nickname, "i")
-        }
-      })
+    if (checkParam(nicknames, req.params.nickname)) {
+      const nickname = await Player.aggregate([
+        { $match: { nickname: { $regex: new RegExp(req.params.nickname, "i") } } },
+        { $group: { _id: "$name", doc: { $first: "$$ROOT" } } }
+      ])
       res.json(nickname)
     } else {
       res.status(404).json({ error: 'Nickname not found' })
