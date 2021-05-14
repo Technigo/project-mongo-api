@@ -37,7 +37,6 @@ if(process.env.RESET_DB) {
   seedDB()
 }
 
-
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -47,11 +46,12 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello ')
 })
 app.get('/film', async(req, res) => {
   const { film } = req.query
-if (film) {
+try {
+  if (film) {
   const goldenglobes = await GoldenGlobe.find({ 
     film: {
       $regex: new RegExp(film, "i") 
@@ -62,9 +62,12 @@ if (film) {
   const goldenglobes = await GoldenGlobe.find()
   res.json(goldenglobes)
 }
-  // const film = await GoldenGlobe.find()
-  // res.json(film)
+}
+catch {
+  res.status(400).json({error: 'An error occurred'})
+}
 })
+
 app.get('/goldenglobes/:id', async (req, res) => {
   const { id } = req.params
 
@@ -75,6 +78,18 @@ app.get('/goldenglobes/:id', async (req, res) => {
     res.status(400).json({error: 'Something went wrong', details: error})
   }
 })
+// app.get('/goldenglobes/:id/film', async (re, res) => {
+//   const {id} = req.params
+
+//   try{
+//     const id = await GoldenGlobe.findById(id)
+//     if (id) {
+//       const film = await 
+//     }
+//   }
+// })
+
+
 app.get('/goldenglobes', async (req, res) => {
  const data = await GoldenGlobe.find()
  res.json(data)
