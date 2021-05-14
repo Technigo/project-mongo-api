@@ -2,8 +2,12 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import listEndpoints from 'express-list-endpoints'
+import dotenv from 'dotenv'
 
 import movieData from './data/netflix-titles.json'
+
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -44,7 +48,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(listEndpoints(app))
 });
 
 // Function to sort on newest and oldest movies
@@ -131,7 +135,7 @@ app.get('/tvshows', async (req, res) => {
 });
 
 // Route for id
-app.get('/movies/:id', async (req, res) => {
+app.get('/all/:id', async (req, res) => {
   const { id } = req.params;
   const singleMovie = await Movie.findById({ id });
   if (singleMovie) {
