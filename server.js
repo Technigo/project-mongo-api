@@ -14,9 +14,12 @@ import booksData from "./data/books.json";
 
 // mongodb://localhost/project-mongo
 
+const dbpass = process.env.DB_PASS;
+const dbuser = process.env.DB_USER;
+
 const mongoUrl =
   process.env.MONGO_URL ||
-  "mongodb+srv://admin:oPAKUGFrTSBBV0Zg@cluster0.1imwj.mongodb.net/Database?retryWrites=true&w=majority";
+  `mongodb+srv://${dbuser}:${dbpass}@cluster0.1imwj.mongodb.net/Database?retryWrites=true&w=majority`;
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
