@@ -1,9 +1,9 @@
-import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose'
-import listEndpoints from 'express-list-endpoints'
+import express from "express"
+import cors from "cors"
+import mongoose from "mongoose"
+import listEndpoints from "express-list-endpoints"
 
-import netflixData from './data/netflix-titles.json'
+import netflixData from "./data/netflix-titles.json"
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -58,7 +58,7 @@ app.use((_, res, next) => {
 // == Routes ==
 
 // List all the endpoints
-app.get('/', (_, res) => {
+app.get("/", (_, res) => {
   res.send(listEndpoints(app))
 })
 
