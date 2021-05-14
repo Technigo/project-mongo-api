@@ -83,7 +83,7 @@ app.get('/techsites/type/:type', async (req, res) => {
   const { type } = req.params
 
   try {
-    const sitesOfType = await Site.find({ type: type })
+    const sitesOfType = await Site.find({ type: { $regex: ("\\b" + type + "\\b"), $options: "i" } })
     res.json(sitesOfType)
   } catch(error) {
     res.status(400).json({ error: 'Something went wrong', details: error })
