@@ -1,13 +1,11 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The goal of this project was to create a RESTful API using MongoDB for the database.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+We chose to work with a dataset that we got from Kaggle. We built several endpoints using Mongoose methods and even aggregation. We also added several error messages depending on where the error occurs.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://dartplayers-project-mongo-api.herokuapp.com/players
