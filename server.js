@@ -55,9 +55,9 @@ const app = express()
 app.use(cors()) 
 app.use(express.json())
 
-
 app.get('/', (req, res) => {
   res.send('Show most go on!')
+  .catch(e => console.log(e))
 })
 
 
