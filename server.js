@@ -48,12 +48,13 @@ app.get('/', (req, res) => {
   res.send('Hello word')
 })
 
-//all nominees
+//all nominees, path: /nominees
 // nominee by name, example path: /nominees?nominee=sandra
 app.get('/nominees', async (req, res) => {
   const { nominee } = req.query
 
-  if (nominee) {
+  try {
+    if (nominee) {
     const nominees = await Nominee.find({
       nominee: {
         $regex: new RegExp(nominee, "i")
@@ -64,14 +65,21 @@ app.get('/nominees', async (req, res) => {
     const nominees = await Nominee.find()
     res.json(nominees)
   }  
+  } catch (error) {
+    res.status(404).send({ error: "Not found" })
+  } 
 })
 
-// nominee by id
+// nominee by id, example path: /nominees/609d2a5876d3cc10b914b304
 app.get('/nominees/:nomineeId', async (req, res) => {
   const { nomineeId } = req.params
 
-  const nominee = await Nominee.findById(nomineeId)
-  res.json(nominee)
+  try {
+    const nominee = await Nominee.findById(nomineeId)
+    res.json(nominee)
+  } catch (error) {
+    res.status(400).json({error: 'Invalid Id' })
+  } 
 })
 
 
@@ -80,9 +88,4 @@ app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
 })
-
-
-
-
-
 
