@@ -1,7 +1,10 @@
 import express from 'express'
 import cors from 'cors'
+import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import designers from './data/designers.json'
+
+dotenv.config()
 
 // Mongoose set up
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
@@ -61,7 +64,7 @@ app.get('/designers/name/:designerName', async (req, res) => {
   const { designerName } = req.params
 
   try {
-    const singleDesigner = await Designer.findOne({ name: designerName})
+    const singleDesigner = await Designer.findOne({ name: designerName })
     res.json(singleDesigner)
   } catch (error) {
     res.status(400).json({ error: 'Something went wrong', details: error })
