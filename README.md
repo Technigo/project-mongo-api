@@ -4,12 +4,8 @@ The project was to use Mongo DB and mongoose to construct, retrieve, seed and qu
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
-I started by setting up my account at Mongo, and connecting it to Heroku and GitHub, making sure that everything was deployed and connected as it should on Heroku and Mongo Cloud. 
-
-After that I constructed some routes and endpoints to be able to filter and query the data. 
-
-If I had more time I would have filtered the data even more, and also I would have implemented pages with the methods skip & limit. 
+I started by setting up my account at Mongo, and connecting it to Heroku and GitHub, making sure that everything was deployed and connected as it should on Heroku and Mongo Cloud.
+After that I constructed some routes and endpoints to be able to filter and query the data. If I had more time I would have filtered the data even more, using mongoose models and also I would have implemented pages with the methods skip & limit. 
 
 ## View it live
 

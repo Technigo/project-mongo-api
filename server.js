@@ -1,11 +1,10 @@
-import express from 'express'
+import express, { response } from 'express'
 import listEndpoints from 'express-list-endpoints'
-// import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
-import topMusicData from './data/top-music.json'
+import tracks from './data/top-music.json'
 
 dotenv.config()
 
@@ -13,10 +12,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-//specify the model from dataset. The object is called schema
-//make all fields lowercase
-// try to exclude some of the keys
-//implement try/catch on all. Implement some mongo queries
 const trackSchema = new mongoose.Schema({
   id: Number,
   trackName: { 
@@ -34,130 +29,93 @@ const trackSchema = new mongoose.Schema({
   bpm: Number,
   energy: Number,
   danceability: Number,
-  loudness: Number,
-  liveness: Number,
-  valence: Number,
-  length: Number,
-  acousticness: Number,
-  speechiness: Number,
   popularity: Number
 })
 
 const Track = mongoose.model('Track', trackSchema)
 
-// const roleSchema = new mongoose.Schema({
-//   description: String
-// })
-
-// const Role = mongoose.model('Role', roleSchema) {
-
-// }
-
-//write in terminal RESET_DB=true npm run dev // to run
 if (process.env.RESET_DB) {
-  console.log('seeding!')
   const seedDB = async () => {
-    //to be sure the DB is empty to avoid duplicates
     await Track.deleteMany()
-
-    await topMusicData.forEach(track => {
-      new Track(track).save()
+    tracks.forEach(async track => {
+      const newTrack = new Track(track)
+      await newTrack.save()
     })
-  }
-  
+  }  
   seedDB()
 }
 
-const newTrack = new Track({
-  id: 433,
-  trackName: "a new song",
-  artistName: "a new artist",
-  genre: "basic",
-  bpm: 44,
-  energy: 1,
-  danceability: 56,
-  loudness: 3,
-  liveness: 67,
-  valence: 1,
-  length: 89,
-  acousticness: 78,
-  speechiness: 8,
-  popularity: 7
-})
-newTrack.save()
-
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
-// app.use(bodyParser.json())
+app.use(express.json())
 
-// Start defining your routes here
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).send({ error : 'Something went wrong'})
+  }
+}) 
+
+// ROUTES
 app.get('/', (req, res) => {
   res.send({ 
-    Queries: { }, 
+    Queries: { 'trackName' : 'String', 'artistName' : 'String' }, 
     Endpoints: listEndpoints(app) })
 })
 
 app.get('/tracks', async (req, res) => {
-  const { name } = req.query
+  const { trackName, artistName } = req.query
 
-  if (name) {
-    const tracks = await Track.find({
-      name: {
-        $regex: new RegExp(name, "i") //first waht to look for second options. g looks for occurencies."i" dont care about case upper or lower
+  try {
+    const tracks = await Track.aggregate([
+      {
+        $match: {
+          trackName: {
+            $regex: new RegExp(trackName || "", "i")
+          },
+          artistName: {
+            $regex: new RegExp(artistName || "", "i")
+          }
+        }
+      }])
+  
+      if (tracks.length === 0) {
+        res.send('Not found')
+      } else {
+        res.json({ Length: tracks.length, Data: tracks})
+  
+  }} catch(error) {
+      res.status(400).send({ error : 'Something went wrong'})
+  }
+})
+
+app.get('/tracks/:id', async(req, res) => {   
+  const { id } = req.params
+ 
+  try {
+    const singleTrack = await Track.findById(id) 
+      if (singleTrack) {
+        res.json({'Data': singleTrack})
+      } else {  
+        res.send({ error: 'Not found' })
       }
-    })
-    res.json({'length': tracks.length, 'data': tracks })
-  } else {
-    const tracks = await Track.find()
-    res.json({'data': tracks })
-  }
-
-})
-
-//build an endpoint to look for one specific member(track item)
-
-app.get('/tracks/:trackId', async(res, req) => { 
-  //destruct queries & params (always do)
-  const { trackId } = req.params //old version const id = req.params.id. can add multiple in new version
- 
-  try {
-    const singleTrack = await Track.findById(trackId) //the field we will check in document has name "_id" in mongoose. Use the ones from mongo because we know that they are unique
-    if (singleTrack) {
-      res.json({'data': singleTrack})
-    } else { // if its not found it is still successful from backend side. 
-      res.status(404).json ({ error: 'Not found' })
+    } catch(error) {
+        res.json(400).send({ error: 'Invalid request'})
     }
-  } catch {
-      response.json(400).json({ error: 'Invalid request'})
-  }
- 
-  res.json({'data': singleTrack}) //returning array of one object because of find method (and not just object) use 'findOne' mongo metod gives only the object and not in array
-
 })
 
-app.get('/tracks/name/:trackName', async (req, res) => {
-
-  const { trackName } = req.params
+app.get('/tracks/popular/mostpopular', async(req, res) => {
 
   try {
-    const singleTrack = await Track.findOne({ name: trackName })
-    res.json(singleTrack) //gives object and not array of object not case sensitive at the moment
+    const popularTracks = await Track.find({popularity:{$gte:90}})
+    res.json({ Length: popularTracks.length, Data: popularTracks })
   } catch(error) {
-    res.status(400).json({ error: 'Something went wrong', details: error })
+    res.status(400).send({ error: 'Something went wrong'})
   }
-
 })
-//query for filtering params for unique. query is optional
 
-// Start the server
 app.listen(port, () => {
-  // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
 })
