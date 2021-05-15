@@ -16,14 +16,14 @@ I made my own database consisting of international fashion designers – their f
 
 This project also included being deployed Heroku (or similar hosting service), as well as deploying the database using Mongo Cloud (or similar). I found it quite exiting to create the .env file, importing it and using the configuration – and then adding it to the .gitignore file. It was my first experience ever modifying the .gitignore and prevent sensitive data from being published. I also got my head around how to use express-list-endpoint to create the initial page of the API with all possible endpoints.
 
-\_\*To earn the right to call itself a couture house and to use the term haute couture in its advertising and any other way, members of the Chambre Syndicale de la Haute Couture must follow specific rules:
+\*To earn the right to call itself a couture house and to use the term haute couture in its advertising and any other way, members of the Chambre Syndicale de la Haute Couture must follow specific rules:
 
 - design made-to-order for private clients, with one or more fittings;
 - have a atelier in Paris that employs at least fifteen staff members full-time;
 - have at least twenty full-time technical people, in at least one workshop (atelier); and
-- present a collection of at least fifty original designs to the public every fashion season (twice, in January and July of each year, of both day and evening garments.
+- present a collection of at least fifty original designs to the public every fashion season (twice, in January and July of each year, of both day and evening garments.\*
 
-Source: https://en.wikipedia.org/wiki/Haute_couture_
+Source: https://en.wikipedia.org/wiki/Haute_couture
 
 ## View it live
 
