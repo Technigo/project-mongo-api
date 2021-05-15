@@ -62,7 +62,6 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
@@ -73,8 +72,8 @@ app.get('/categories', async (req, res) => {
 })
 
 app.get('/nominees', async (req, res) => {
+  const { awardYear, nominee, page, perPage } = req.query
   try {
-    const { awardYear, nominee, page, perPage } = req.query
     const query = {}
     if (awardYear) {
       query.year_award = awardYear
@@ -89,7 +88,7 @@ app.get('/nominees', async (req, res) => {
   }
 })
 
-app.get('/nomenees/category/:categoryId', async (req, res) => {
+app.get('/categories/:categoryId/nominees', async (req, res) => {
   try {
     const { categoryId } = req.params
     const nomineesCategory = await Nominee.find({ category: categoryId })
@@ -104,7 +103,7 @@ app.get('/nomenees/category/:categoryId', async (req, res) => {
 });
 
 app.get('/winners', async (req, res) => {
-  const { nominee, year } = req.query
+  const { nominee, film, page, perPage } = req.query
   try {
     const winners = await Nominee.aggregate([
       {
@@ -113,10 +112,26 @@ app.get('/winners', async (req, res) => {
           nominee: {
             $regex: new RegExp(nominee || "", "i")
           },
-          year_award: +year || /\d+/
+          film: {
+            $regex: new RegExp(film || "", "i")
+          }
         }
+      },
+      {
+        $project: {
+          _id: 0,
+          nominee: 1,
+          film: 1,
+          year_award: 1,
+          category: 1
+        }
+      },
+      {
+        $skip: Number((page - 1) * perPage + 1)
+      },
+      {
+        $limit: Number(perPage)
       }
-
     ]);
     res.json(winners);
   } catch (error) {
@@ -125,8 +140,8 @@ app.get('/winners', async (req, res) => {
 });
 
 app.get('/winners/:id', async (req, res) => {
-  try {
-    const { id } = req.params
+  const { id } = req.params
+  try {  
     const winner = await Nominee.findById(id)
     if (winner) {
       res.json(winner)
