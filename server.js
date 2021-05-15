@@ -1,9 +1,12 @@
 import express from "express";
 import cors from "cors";
 import mongoose, { mongo } from "mongoose";
+import dotenv from "dotenv";
 import listEndpoints from "express-list-endpoints";
 
 import booksData from "./data/books.json";
+
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,6 +27,7 @@ const bookSchema = new mongoose.Schema({
 
 const Book = mongoose.model("Book", bookSchema);
 
+// RESET_DB=true npm run dev
 if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Book.deleteMany();
@@ -51,18 +55,18 @@ app.get("/", (req, res) => {
 });
 
 app.get("/books", async (req, res) => {
-  const { title } = req.query;
+  const { author, title } = req.query;
+  const authorRegex = new RegExp(author, "i");
+  const titleRegex = new RegExp(title, "i");
 
-  if (title) {
+  try {
     const books = await Book.find({
-      title: {
-        $regex: new RegExp(title, "i"),
-      },
+      authors: authorRegex,
+      title: titleRegex,
     });
-    res.json(books);
-  } else {
-    const books = await Book.find();
-    res.json(books);
+    res.status(200).json(books);
+  } catch (error) {
+    res.status(400).json({ error: "Something went wrong", details: error });
   }
 });
 
@@ -71,25 +75,37 @@ app.get("/books/book/:bookID", async (req, res) => {
 
   try {
     const singleBook = await Book.findById(bookID);
-    res.json(singleBook);
+    if (singleBook) {
+      res.status(200).json(singleBook);
+    } else {
+      res.status(404).json({ error: "No books with this ID" });
+    }
   } catch (error) {
     res.status(400).json({ error: "Something went wrong", details: error });
   }
 });
 
-app.get("/authors", async (res, req) => {
-  const { author } = req.query;
+app.get("/books/isbn/:ISBN", async (req, res) => {
+  const { ISBN } = req.params;
 
-  if (author) {
-    const allTitlesByAuthor = await Book.find({
-      authors: {
-        $regex: new RegExp(author, "i"),
-      },
-    });
-    res.json(allTitlesByAuthor);
-  } else {
-    const allTitlesByAuthor = await Book.find();
-    res.json(allTitlesByAuthor);
+  try {
+    const singleBook = await Book.findOne(ISBN);
+    if (singleBook) {
+      res.status(200).json(singleBook);
+    } else {
+      res.status(404).json({ error: "No books with this ISBN number" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: "Something went wrong", details: error });
+  }
+});
+
+app.get("/books/topten", async (req, res) => {
+  try {
+    const Books = await Book.find().sort({ average_rating: -1 }).limit(10);
+    res.status(200).json(Books);
+  } catch (error) {
+    res.status(400).json({ error: "Something went wrong", details: error });
   }
 });
 
