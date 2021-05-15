@@ -51,20 +51,37 @@ app.get("/", (req, res) => {
 });
 
 app.get("/techsites", async (req, res) => {
-  const { topic } = req.query;
+  const { topic, free_or_paid, sort, page, per_page } = req.query;
 
-  if (topic) {
-    const techsites = await Site.find({
-      topic: {
-        $regex: new RegExp(topic, "i"),
-      },
-    });
-    res.json(techsites);
-  } else {
-    const techsites = await Site.find();
-    res.json(techsites);
+  const techsites = await Site.aggregate([
+    {
+      $match: {
+        topic: {
+          $regex: new RegExp(topic || "", "i")
+        },
+        free_or_paid: {
+          $regex: new RegExp(free_or_paid || "", "i")
+        }
+      }
+  },
+  {
+    $sort: {
+      name: 1
+    }
+  },
+  {
+    $skip: Number((page -1) * per_page +1)
+
+  },
+  {
+    $limit: Number(per_page)
   }
-});
+
+  ])
+;
+res.json(techsites)
+})
+  
 
 app.get("/techsites/:id", async (req, res) => {
   const { id } = req.params;
