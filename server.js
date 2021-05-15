@@ -24,8 +24,6 @@ const bookSchema = new mongoose.Schema({
 const Book = mongoose.model('Book', bookSchema);
 
 if (process.env.RESET_DB) {
-  console.log('Resetting database!');
-
   const seedDB = async () => {
     await Book.deleteMany();
 
@@ -136,5 +134,4 @@ app.get('/books/:bookId', async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
 });
