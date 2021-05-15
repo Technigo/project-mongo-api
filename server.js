@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import songs from "./data/top-music.json";
+import genres from "./data/music-genres.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -13,7 +14,10 @@ const songSchema = new mongoose.Schema({
   id: Number,
   trackName: String,
   artistName: String,
-  genre: String,
+  genre: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Genre",
+  },
   bpm: Number,
   energy: Number,
   danceability: Number,
@@ -28,13 +32,33 @@ const songSchema = new mongoose.Schema({
 
 const Song = mongoose.model("Song", songSchema);
 
+const genreSchema = new mongoose.Schema({
+  description: String,
+});
+
+const Genre = mongoose.model("Genre", genreSchema);
+
 if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Song.deleteMany();
+    await Genre.deleteMany();
 
-    songs.forEach((item) => {
-      const newSong = new Song(item);
-      newSong.save();
+    const genresArray = [];
+
+    genres.forEach(async (item) => {
+      const genre = new Genre(item);
+      genresArray.push(genre);
+      await genre.save();
+    });
+
+    songs.forEach(async (item) => {
+      const newSong = new Song({
+        ...item,
+        genre: genresArray.find(
+          (singleGenre) => singleGenre.description === item.genre
+        ),
+      });
+      await newSong.save();
     });
   };
 
@@ -78,8 +102,12 @@ app.get("/songs/:songId", async (req, res) => {
 app.get("/songs/artist_name/:artistName", async (req, res) => {
   const { artistName } = req.params;
 
-  const singleSong = await Song.findOne({ artistName: artistName });
-  res.json(singleSong);
+  try {
+    const singleSong = await Song.findOne({ artistName: artistName });
+    res.json(singleSong);
+  } catch (error) {
+    res.status(400).json({ error: "Something went wrong", details: error });
+  }
 });
 
 // Start the server
