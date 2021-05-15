@@ -7,50 +7,79 @@ import netflixData from './data/netflix-titles.json';
 
 dotenv.config();
 
-const port = process.env.PORT || 8080;
-const app = express();
+// app.use((req, res, next) => {
+//   if (mongoose.connection.readyState === 1) {
+//     next();
+//   } else {
+//     res.status(503).json({ error: 'Service unavailable' });
+//   }
+// });
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
-
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next();
-  } else {
-    res.status(503).json({ error: 'Service unavailable' });
-  }
-});
-
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/animals';
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Animal = mongoose.model('Animal', {
-  name: String,
-  age: Number,
-  isFurry: Boolean,
+const ReleaseYear = mongoose.model('ReleaseYear', {
+  release_year: Number,
 });
 
-Animal.deleteMany().then(() => {
-  new Animal({ name: 'Alfons', age: 2, isFurry: true }).save();
-  new Animal({ name: 'Lucy ', age: 5, isFurry: true }).save();
-  new Animal({ name: 'Goldy the Goldfish', age: 1, isFurry: false }).save();
+const Movie = mongoose.model('Movie', {
+  title: String,
+  director: String,
+  release_year: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ReleaseYear',
+  },
 });
+
+if (process.env.RESET_DB) {
+  const seedDB = async () => {
+    await Movie.deleteMany();
+    await ReleaseYear.deleteMany();
+
+    await netflixData.forEach((item) => {
+      const newYear = new ReleaseYear(item);
+      newYear.save();
+      const newMovie = new Movie({ ...item, release_year: newYear });
+      newMovie.save();
+    });
+  };
+
+  seedDB();
+}
+
+const port = process.env.PORT || 8080;
+const app = express();
+
+app.use(cors());
+app.use(express.json());
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  console.log(process.env.MY_SECRET);
-  Animal.find().then((animals) => {
-    res.json(animals);
-  });
+app.get('/movies', async (req, res) => {
+  const movies = await Movie.find().populate('release_year');
+  res.json(movies);
 });
 
-app.get('/:name', (req, res) => {
+app.get('/movies/:id', async (req, res) => {
+  const movies = await await Movie.findById(req.params.id);
+  console.log(movies);
+  if (movies) {
+    res.json(movies);
+  } else {
+    res.status(404).json({ error: 'Movie Not Found' });
+  }
+});
+
+app.get('/years', async (req, res) => {
+  const years = await ReleaseYear.find();
+  res.json(years);
+});
+
+app.get('/:title', (req, res) => {
   try {
-    Animal.findOne({ name: req.params.name }).then((animal) => {
-      if (animal) {
-        res.json(animal);
+    Movie.findOne({ title: req.params.title }).then((movie) => {
+      if (movie) {
+        res.json(movie);
       } else {
         res.status(404).json({ error: 'Not Found' });
       }
