@@ -70,23 +70,6 @@ app.get('/categories', async (req, res) => {
   res.json(categories)
 })
 
-app.get('/nominees', async (req, res) => {
-  const { awardYear, nominee, page, perPage } = req.query
-  try {
-    const query = {}
-    if (awardYear) {
-      query.year_award = awardYear
-    }
-    if (nominee) {
-      query.nominee = { $regex: new RegExp(nominee, "i") }
-    }
-    const nominees = await Nominee.find(query).populate('category').skip(((Number(page) - 1) * Number(perPage))).limit(Number(perPage))
-    res.json(nominees);
-  } catch (error) {
-    res.status(400).json({ error })
-  }
-})
-
 app.get('/categories/:categoryId/nominees', async (req, res) => {
   const { categoryId } = req.params
   const { awardYear, nominee, film, win } = req.query
@@ -117,6 +100,37 @@ app.get('/categories/:categoryId/nominees', async (req, res) => {
     res.status(400).json({ error })
   }
 });
+
+app.get('/nominees', async (req, res) => {
+  const { awardYear, nominee, page, perPage } = req.query
+  try {
+    const query = {}
+    if (awardYear) {
+      query.year_award = awardYear
+    }
+    if (nominee) {
+      query.nominee = { $regex: new RegExp(nominee, "i") }
+    }
+    const nominees = await Nominee.find(query).populate('category').skip(((Number(page) - 1) * Number(perPage))).limit(Number(perPage))
+    res.json(nominees);
+  } catch (error) {
+    res.status(400).json({ error })
+  }
+})
+
+app.get('/nominees/:id', async (req, res) => {
+  const { id } = req.params
+  try {  
+    const nominee = await Nominee.findById(id)
+    if (nominee) {
+      res.json(nominee)
+    } else {
+      res.status(404).json({ error: "Not found" })
+    }
+  } catch (error) {
+    res.status(400).json({ error })
+  }
+})
 
 app.get('/winners', async (req, res) => {
   const { nominee, film, page, perPage } = req.query

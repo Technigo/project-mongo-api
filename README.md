@@ -1,13 +1,37 @@
 # Mongo API Project
+In this project I used a database to store and retrieve data from and use that data to produce a RESTful API.
 
-Replace this readme with your own information about your project. 
+## Tasks
+- API should have two or more endpoints;
+- A minimum of one endpoint to return a **collection** of results (array of elements);
+- A minimum of one endpoint to return a **single** result (single element);
+- API should make use of Mongoose models to model the data and use these models to fetch data from the database.
+- API should be RESTful.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Stretch goals
+- use mongoose to filter the data
+- implement 'pages' using .skip() and .limit()
+- create endpoind using mongoose aggregate function
 
-## The problem
+## Tech
+- MongoDB
+- mongoose
+- REST API
+- Express
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+
+## Endpoints
+
+- GET '/': returns the list of all endpoints;
+- GET '/categories': returns a list of all; 
+- GET '/categories/:categoryId/nominees': returns the list of nominees in this category;
+- GET '/nominees': returns the list of all Golden Globe nominees;
+- GET '/nominees/:id': returns information about a nominee;
+- GET '/winners': returns the list of all winners;
+- GET '/winners/:id': returns the information about the winner;
+- GET '/winners/:id/category': returns the category of nomination of particular winner
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Heroku: https://project-mongo-klimenko.herokuapp.com/
+
