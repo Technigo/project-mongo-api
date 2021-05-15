@@ -34,10 +34,6 @@ const showSchema = new mongoose.Schema({
 
 const Show = mongoose.model('Show', showSchema);
 
-//TO USE THIS, TYPE: RESET_DB=true npm run dev IN TERMINAL
-
-if (process.env.RESET_DB) {
-  console.log('TippTapp working');
   const seedDB = async () => {
   await Show.deleteMany();
 
@@ -47,7 +43,7 @@ if (process.env.RESET_DB) {
   });
 }
 seedDB();
-}
+
 
 const port = process.env.PORT || 8080
 const app = express()
