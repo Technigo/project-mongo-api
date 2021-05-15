@@ -1,10 +1,9 @@
-/* eslint-disable no-console */
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import goldenGlobesData from './data/golden-globes.json'
-
 import { categoriesJason } from './data/golden-globes-categories'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
@@ -63,7 +62,7 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(listEndpoints(app));
 })
 
 app.get('/categories', async (req, res) => {
@@ -89,9 +88,26 @@ app.get('/nominees', async (req, res) => {
 })
 
 app.get('/categories/:categoryId/nominees', async (req, res) => {
+  const { categoryId } = req.params
+  const { awardYear, nominee, film, win } = req.query
+  
   try {
-    const { categoryId } = req.params
-    const nomineesCategory = await Nominee.find({ category: categoryId })
+    const query = {}
+    query.category = categoryId
+    if (awardYear) {
+      query.year_award = awardYear
+    }
+    if (nominee) {
+      query.nominee = { $regex: new RegExp(nominee, "i") }
+    }
+    if (film) {
+      query.film = { $regex: new RegExp(film, "i") }
+    }
+    if (win) {
+      query.win = win
+    }
+    
+    const nomineesCategory = await Nominee.find(query).populate('category')
     if (nomineesCategory) {
       res.json(nomineesCategory);
     } else {
@@ -156,7 +172,7 @@ app.get('/winners/:id', async (req, res) => {
 app.get('/winners/:id/category', async (req, res) => {
   const { id } = req.params
   try {
-    const winner = await Nominee.findOne({ _id: id })
+    const winner = await Nominee.findById({ id })
     const categoryOfWinner = await Category.findById(winner.category);
     res.json(categoryOfWinner)
   } catch (error) {
