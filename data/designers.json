@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Alexander",
+    "surname": "McQueen",
+    "wasBorn": 1969,
+    "memberOfChambreSyndicaleDeLaHauteCouture": false
+  },
+  {
+    "name": "Christian",
+    "surname": "Dior",
+    "wasBorn": 1905,
+    "memberOfChambreSyndicaleDeLaHauteCouture": true
+  },
+  {
+    "name": "Donatella'",
+    "surname": "Versace",
+    "wasBorn": 1955,
+    "memberOfChambreSyndicaleDeLaHauteCouture": true
+  },
+  {
+    "name": "Diane'",
+    "surname": "Von Furstenberg",
+    "wasBorn": 1946,
+    "memberOfChambreSyndicaleDeLaHauteCouture": false
+  },
+  {
+    "name": "Elsa",
+    "surname": "Schiaparelli",
+    "wasBorn": 1890,
+    "memberOfChambreSyndicaleDeLaHauteCouture": true
+  },
+  {
+    "name": "Gabrielle 'Coco'",
+    "surname": "Chanel",
+    "wasBorn": 1883,
+    "memberOfChambreSyndicaleDeLaHauteCouture": true
+  },
+  {
+    "name": "Giambattista",
+    "surname": "Valli",
+    "wasBorn": 1966,
+    "memberOfChambreSyndicaleDeLaHauteCouture": true
+  },
+  {
+    "name": "Jean-Paul",
+    "surname": "Gaultier",
+    "wasBorn": 1952,
+    "memberOfChambreSyndicaleDeLaHauteCouture": true
+  },
+  {
+    "name": "Miuccia",
+    "surname": "Prada",
+    "wasBorn": 1949,
+    "memberOfChambreSyndicaleDeLaHauteCouture": false
+  },
+  {
+    "name": "Vivienne",
+    "surname": "Westwood",
+    "wasBorn": 1941,
+    "memberOfChambreSyndicaleDeLaHauteCouture": false
+  },
+  {
+  "name": "Yves",
+  "surname": "Saint Laurent",
+  "wasBorn": 1936,
+  "memberOfChambreSyndicaleDeLaHauteCouture": true
+}
+]
