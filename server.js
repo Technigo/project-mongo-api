@@ -3,8 +3,11 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 
 import booksData from './data/books.json'
+
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -99,14 +102,14 @@ app.get('/books/title/:bookTitle', async (req, res) => {
   const { bookTitle } = req.params
 
   try {
-    const singleBook = await Book.findOne({ 
+    const singleBook = await Book.findOne({
       title: {
         $regex: new RegExp(bookTitle, "i")
       }
     })
     res.json(singleBook)
   } catch (error) {
-    res.status(400).json({ error: 'Something went wrong', details: 'error' })
+    res.status(400).json({ error: `'Something went wrong'`, details: 'error' })
   }
 })
 
