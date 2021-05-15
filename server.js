@@ -50,9 +50,28 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 });
 
+// Function for different queries
+// Global scope to be used in all, movies and tvshows routes
+const queries = (title, genre, releaseYear, country) => {
+  const query = {};
+  if (title) {
+    query.title = title;
+  }
+  if (genre) {
+    query.listed_in = genre;
+  }
+  if (releaseYear) {
+    query.release_year = releaseYear;
+  }
+  if (country) {
+    query.country = country;
+  }
+  return query;
+};
+
 // Function to sort on newest and oldest movies
 // Global scope to be used in all, movies and tvshows routes
-const sorting = (sort) => {
+const sortOnYear = (sort) => {
   if (sort === 'newest') { 
     return { release_year: -1 } 
   } else if (sort === 'oldest') { 
@@ -73,31 +92,17 @@ app.get('/all', async (req, res) => {
   const genreRegex = new RegExp(genre, 'i');
   const countryRegex = new RegExp(country, 'i');
 
-  const queries = (title, genre, releaseYear, country) => {
-    const query = {};
-    if (title) {
-      query.title = title;
-    }
-    if (genre) {
-      query.listed_in = genre;
-    }
-    if (releaseYear) {
-      query.release_year = releaseYear;
-    }
-    if (country) {
-      query.country = country;
-    }
-    return query;
-  };
-
-  // Find results on above queries, sort on releaseYear and limit to 20 per page.
+  // Find results on all titles
+  // Search by queries, sort on releaseYear and limit to 20 per page.
   const data = await NetflixData.find(queries(titleRegex, genreRegex, releaseYear, countryRegex))
-    .sort(sorting(sort))
+    .sort(sortOnYear(sort))
     .limit(20)
     .skip(pageResults(page))
 
   try {
-    res.json(data);
+    return data.length > 0 
+      ? res.json(data) 
+      : res.json({ result: "Nothing found on that query, try again!" });
   } catch (error) {
     res.status(400).json({ error: 'Something went wrong!', details: error })
   }
@@ -105,14 +110,23 @@ app.get('/all', async (req, res) => {
 
 // Route for movies
 app.get('/movies', async (req, res) => {
-  const { sort, page } = req.query;
+  const { title, genre, releaseYear, country, page, sort } = req.query;
+  const titleRegex = new RegExp(title, 'i');
+  const genreRegex = new RegExp(genre, 'i');
+  const countryRegex = new RegExp(country, 'i');
+
+  // Find results on all movies
+  // Search by queries, sort on releaseYear and limit to 20 per page.
+  const movies = await NetflixData.find({ type: 'Movie' })
+    .find(queries(titleRegex, genreRegex, releaseYear, countryRegex))
+    .sort(sortOnYear(sort))
+    .limit(20)
+    .skip(pageResults(page))
 
   try {
-    const movies = await NetflixData.find({ type: 'Movie' })
-      .sort(sorting(sort))
-      .limit(20)
-      .skip(pageResults(page))
-    res.json(movies);
+    return movies.length > 0 
+      ? res.json(movies) 
+      : res.json({ result: "Nothing found on that query, try again!" });
   } catch (error) {
     res.status(400).json({ error: 'Something went wrong!', details: error })
   }
@@ -120,27 +134,37 @@ app.get('/movies', async (req, res) => {
 
 // Route for TV shows
 app.get('/tvshows', async (req, res) => {
-  const { sort, page } = req.query;
+  const { title, genre, releaseYear, country, page, sort } = req.query;
+  const titleRegex = new RegExp(title, 'i');
+  const genreRegex = new RegExp(genre, 'i');
+  const countryRegex = new RegExp(country, 'i');
+
+  // Find results on all tvshows
+  // Search by queries, sort on releaseYear and limit to 20 per page.
+  const tvshows = await NetflixData.find({ type: 'TV Show' })
+    .find(queries(titleRegex, genreRegex, releaseYear, countryRegex))
+    .sort(sortOnYear(sort))
+    .limit(20)
+    .skip(pageResults(page))
 
   try {
-    const tvshows = await NetflixData.find({ type: 'TV Show' })
-      .sort(sorting(sort))
-      .limit(20)
-      .skip(pageResults(page))
-    res.json(tvshows);
+    return tvshows.length > 0 
+      ? res.json(tvshows) 
+      : res.json({ result: "Nothing found on that query, try again!" });
   } catch (error) {
-    res.status(400).json({ error: 'Something went wrong!', details: error })
+    res.status(400).json({ error: 'Something went wrong!', details: error });
   }
 });
 
 // Route for id
 app.get('/all/:id', async (req, res) => {
   const { id } = req.params;
-  const singleMovie = await NetflixData.findById({ id });
-  if (singleMovie) {
+
+  try {
+    const singleMovie = await NetflixData.findById({ _id: id });
     res.json(singleMovie)
-  } else {
-    res.status(404).json({ error: 'Could not find a title with that id.' })
+  } catch (error) {
+    res.status(404).json({ error: 'Could not find a title with that id.', details: error })
   }
 });
 
