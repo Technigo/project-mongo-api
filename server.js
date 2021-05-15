@@ -167,10 +167,19 @@ app.get('/books/isbn/:isbn', async (req,res) => {
     res.status(400).json({ error: 'Invalid request'})
   }
   res.json({length: myAPI.length, data: myAPI});
+})
 
 
+// #8 20 Highest rated books LÄGG TILL /BOOKS/HIGHEST.....
+app.get('/highestrated', async (req,res) => { // Har lagt till limit som vi kan lägga en variabel på och sedan ändra när vi trycker på load i frontend
+  myAPI = await Book.aggregate([
+    {$sort: {average_rating:-1}},
+    {$limit:20},
+    {$unset: ["isbn","isbn13", "__v","_id","ratings_count","text_reviews_count","language_code","bookID"]}
   
+  ]) // Här är våran collection vi skapar .limit(20)
 
+  res.json({length: myAPI.length, data: myAPI})
 })
 
 // Gör en öppen input fält där man kan skriva vad som helst
