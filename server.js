@@ -74,18 +74,28 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
+// Middleware - since it is mounted before the route, this middlewear will execute first. 
+// It checks if the database is in a good state or not. If so, invoke next() and continue on to show our data, if not show error message.
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
+})
+
+// Route to APIs first page listing all possible endpoints
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-// endpoint to get all books 
+// Endpoint to get all books 
 app.get('/books', async (req, res) => {
   const books = await Book.find().populate('authors')
   res.json({ length: books.length, data: books })
 })
 
-// endpoint to get single book by id path param
+// Endpoint to get single book by id path param
 app.get('/books/book/:bookId', async (req, res) => {
   const { bookId } = req.params
 
@@ -101,7 +111,7 @@ app.get('/books/book/:bookId', async (req, res) => {
   }
 }) 
 
-// endpoint to get author by path param id for single book
+// Endpoint to get author by path param id for single book
 app.get('/books/book/:bookId/author', async (req, res) => {
   const { bookId } = req.params
 
@@ -118,7 +128,7 @@ app.get('/books/book/:bookId/author', async (req, res) => {
   }
 })
 
-// endpoint with search path and query param for title
+// Endpoint with search path and query param for title
 app.get('/books/search', async (req, res) => {
   const { title } = req.query
 
@@ -136,13 +146,13 @@ app.get('/books/search', async (req, res) => {
 })
 
 
-// endpoint to get all authors 
+// Endpoint to get all authors 
 app.get('/authors', async (req, res) => {
   const authors = await Author.find()
   res.json({ length: authors.length, data: authors })
 })
 
-// endpoint to get author based on id
+// Endpoint to get author based on id
 app.get('/authors/:authorId', async (req, res) => {
   const { authorId } = req.params
 
