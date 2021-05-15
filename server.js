@@ -52,7 +52,7 @@ if (process.env.RESET_DB) {
   seedDB()
 }
 
-const port = process.env.PORT || 8092
+const port = process.env.PORT || 8093
 const app = express()
 
 app.use(cors())
@@ -60,42 +60,54 @@ app.use(bodyParser.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello Books')
 })
 
 app.get('/books', async (req, res) => {
   const { author } = req.query
 
-  if (author) {
-    const books = await Book.find({ 
-      authors: {
-        $regex: new RegExp(author, "i")
-      }
-    })
-    res.json(books)
-  } else {
-    const books = await Book.find()
-    res.json(books)
+  try {
+    if (author) {
+      const books = await Book.find({ 
+        authors: {
+          $regex: new RegExp(author, "i")
+        }
+      })
+      res.json(books)
+    } else {
+      const books = await Book.find()
+      res.json(books)
+    }
+  } catch (error) {
+    res.status(404).json({ error: 'Something went wrong', details: 'error' })
   }
-
-  // const books = await Book.find()
-  // res.json({ length: books.length, data: books })
 })
 
 app.get('/books/:bookId', async (req, res) => {
   const { bookId } = req.params
-  const singleBook = await Book.findById(bookId)
-  res.json(singleBook)
+
+  try {
+    const singleBook = await Book.findById(bookId)
+
+    res.json(singleBook)
+  } catch (error) {
+    res.status(404).json({ error: `Book with id number ${bookId} does not excist`, details: 'error' })
+  }
 })
 
 app.get('/books/title/:bookTitle', async (req, res) => {
   const { bookTitle } = req.params
-  const singleBook = await Book.findOne({ 
-    title: {
-      $regex: new RegExp(bookTitle, "i")
-    }
-  })
-  res.json(singleBook)
+
+  try {
+    const singleBook = await Book.findOne({ 
+      title: {
+        $regex: new RegExp(bookTitle, "i")
+      }
+    })
+    res.json(singleBook)
+  } catch (error) {
+    res.status(400).json({ error: 'Something went wrong', details: 'error' })
+  }
 })
 
 // Start the server
