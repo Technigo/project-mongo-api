@@ -52,6 +52,7 @@ app.get("/", (req, res) => {
 
 app.get("/techsites", async (req, res) => {
   const { topic, free_or_paid, sort, page, per_page } = req.query;
+  try {
 
   const techsites = await Site.aggregate([
     {
@@ -80,6 +81,10 @@ app.get("/techsites", async (req, res) => {
   ])
 ;
 res.json(techsites)
+
+} catch (error) {
+  res.status(400).json({ error: "Something went wrong", details: error })
+}
 })
   
 
