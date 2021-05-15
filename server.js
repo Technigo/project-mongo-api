@@ -51,8 +51,6 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-// OK 
-// QA: Where do we add await? 
 app.get('/movies', async (req, res) => {
   const { country, cast, show, page, per_page } = req.query
 
@@ -87,7 +85,6 @@ app.get('/movies', async (req, res) => {
   res.json({ length: movies.length, data: movies })
 })
 
-// OK 
 app.get('/movies/titles', async (req, res) => {
   const title = await Movie.aggregate([
     { $sort: { title: 1 } },
@@ -96,8 +93,6 @@ app.get('/movies/titles', async (req, res) => {
   res.json({ length: title.length, data: title })
 })
 
-// OK 
-// How can I split for each word and then push in to the new array? 
 app.get('/movies/genres', async (req, res) => {
   const genre = await Movie.find()
   const filterGenres = genre
@@ -117,7 +112,6 @@ app.get('/movies/genres', async (req, res) => {
   res.json({ length: genresUnique.length, data: genresUnique })
 })
 
-// OK 
 app.get('/movies/years', async (req, res) => {
   const year = await Movie.find()
   const filterYear = year.map((item) => item.release_year)
@@ -133,7 +127,6 @@ app.get('/movies/years', async (req, res) => {
   res.json({ length: yearUnique.length, data: yearUnique })
 })
 
-// OK
 app.get('/movies/years/latest', async (req, res) => {
   const genre = await Movie.find(
     { release_year: 
@@ -148,7 +141,6 @@ app.get('/movies/years/latest', async (req, res) => {
   res.json({ length: genre.length, data: genre })
 })
 
-// OK
 app.get('/movies/:movieId', async (req, res) => {  
   const { movieId } = req.params
 
