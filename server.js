@@ -13,7 +13,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-
 const bookSchema = new mongoose.Schema({
   bookID: Number,
   title: {
@@ -35,7 +34,7 @@ if (process.env.RESET_DB) {
   const seedDataBase = async () => {
     await Book.deleteMany()
 
-    await booksData.forEach(item => {
+    booksData.forEach(item => {
       const newBook = new Book(item)
       newBook.save()
     })
@@ -60,7 +59,24 @@ app.get('/books', async (req, res) => {
   res.json(books)
 })
 
-// Endpoint that shows a book by id
+// Endpoint that shows books from a specific author (ex: /books?authors=douglas adams)
+app.get('/books', async (req, res) => {
+  const { author } = req.query
+
+  if (author) {
+    const books = await Books.find({
+      author: {
+        $regex: new RegExp(author, "i")
+      }
+    })
+    res.json(books)
+  } else {
+    const books = await Books.find()
+    res.json(books)
+  }
+})
+
+// Endpoint that shows books by id (ex: books/9)
 app.get('/books/:id', async (req, res) => {
   const { id } = req.params
   const singleBook = await Book.findOne({ bookID: +id })

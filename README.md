@@ -4,7 +4,7 @@ In this project we were supposed to seed and fetch data from a Mongo database by
 
 ## The problem
 
-This week I didn't have so many error messages as I had last week so it felt a bit easier to work with this API project. I watched the lectures and tried to implement different endpoints to play araound with it to learn more. I t was a bit difficult to deploy it to Heruko and Mongo but it turned out well after help from my team and discussions on Slack.
+This week I didn't have so many error messages as I had last week so it felt a bit easier to work with this API project. I watched the lectures and tried to implement different endpoints and play around with it to learn more. It was a bit difficult to deploy it to Heruko and Mongo but it turned out well after help from my team and discussions on Slack.
 
 ## View it live
 
