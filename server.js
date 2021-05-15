@@ -1,39 +1,172 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
+import dotenv from 'dotenv'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import booksData from './data/books.json'
+
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+// Defining models 
+const bookSchema = new mongoose.Schema({
+  bookId: Number,
+  title: {
+    type: String,
+    lowercase: true
+  },
+  authors: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author',
+    lowercase: true
+  },
+  average_rating: Number,
+  isbn: String,
+  language_code: {
+    type: String,
+    lowercase: true
+  },
+  num_pages: Number,
+  ratings_count: Number
+})
+
+const Book = mongoose.model('Book', bookSchema)
+
+const Author = mongoose.model('Author', {
+  authors: String
+})
+
+// The seedDB is going to re-run everytime we start the server, if we don't want that
+// to happen and want to be able to choose when that should happen, we can wrap it
+// in an environment variable
+if (process.env.RESET_DATABASE) {
+  const seedDB = async () => {
+    await Book.deleteMany()
+    await Author.deleteMany()
+
+    const authorsArray = []
+
+    booksData.forEach(async (item) => {
+      const author = new Author(item)
+      authorsArray.push(author)
+      await author.save()
+    })
+
+    booksData.forEach(async (item) => {
+      const newBook = new Book({
+        ...item,
+        authors: authorsArray.find(singleAuthor => singleAuthor.authors === item.authors)
+      })
+      await newBook.save()
+    })
+  }
+  seedDB()
+}
+
 const port = process.env.PORT || 8080
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
-// Start defining your routes here
+// Middleware - since it is mounted before the route, this middlewear will execute first. 
+// It checks if the database is in a good state or not. If so, invoke next() and continue on to show our data, if not show error message.
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
+})
+
+// Route to APIs first page listing all possible endpoints
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(listEndpoints(app))
+})
+
+// Endpoint to get all books 
+app.get('/books', async (req, res) => {
+  const books = await Book.find().populate('authors')
+  res.json({ length: books.length, data: books })
+})
+
+// Endpoint to get single book by id path param
+app.get('/books/book/:bookId', async (req, res) => {
+  const { bookId } = req.params
+
+  try {
+    const singleBook = await Book.findById(bookId).populate('authors')
+    if (singleBook) {
+      res.json({ length: singleBook.length, data: singleBook }) 
+    } else {
+      res.status(404).json({ error: 'No book with that id was found!'})
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid request'})
+  }
+}) 
+
+// Endpoint to get author by path param id for single book
+app.get('/books/book/:bookId/author', async (req, res) => {
+  const { bookId } = req.params
+
+  try {
+    const singleBook = await Book.findById(bookId).populate('authors');
+    if (singleBook) {
+      const author = await Author.findById(singleBook.authors);
+      res.json({ length: author.length, data: author });
+    } else {
+      res.status(404).json({ error: 'Not found' });
+    }
+  } catch {
+    res.status(400).json({ error: 'Invalid request' });
+  }
+})
+
+// Endpoint with search path and query param for title
+app.get('/books/search', async (req, res) => {
+  const { title } = req.query
+
+  if (title) {
+    const queriedBook = await Book.find({
+      title: {
+        $regex: new RegExp(title, 'i')
+      }
+    }).populate('authors')
+    res.json({ length: queriedBook.length, data: queriedBook })
+  } else {
+    const books = await Book.find().populate('authors')
+    res.json({ length: books.length, data: books })
+  }
+})
+
+
+// Endpoint to get all authors 
+app.get('/authors', async (req, res) => {
+  const authors = await Author.find()
+  res.json({ length: authors.length, data: authors })
+})
+
+// Endpoint to get author based on id
+app.get('/authors/:authorId', async (req, res) => {
+  const { authorId } = req.params
+
+  try {
+    const author = await Author.findById(authorId)
+    if (author) {
+      res.json({ length: author.length, data: author })
+    } else {
+      res.status(404).json({ error: 'No author with that id was found!'})
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid request'})
+  }
 })
 
 // Start the server
-app.listen(port, () => {
-  // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
-})
+app.listen(port, () => {})
