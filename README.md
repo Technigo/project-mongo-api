@@ -16,7 +16,7 @@ I made my own database consisting of international fashion designers – their f
 
 This project also included being deployed Heroku (or similar hosting service), as well as deploying the database using Mongo Cloud (or similar). I found it quite exiting to create the .env file, importing it and using the configuration – and then adding it to the .gitignore file. It was my first experience ever modifying the .gitignore and prevent sensitive data from being published. I also got my head around how to use express-list-endpoint to create the initial page of the API with all possible endpoints.
 
-### \*Definition Chambre Syndicale de la Haute Couture
+#### \*Definition Chambre Syndicale de la Haute Couture
 
 To earn the right to call itself a couture house and to use the term haute couture in its advertising and any other way, members of the Chambre Syndicale de la Haute Couture must follow specific rules:
 
