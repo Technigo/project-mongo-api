@@ -53,78 +53,72 @@ app.get('/', (req, res) => {
 
 // OK 
 // QA: Where do we add await? 
-// Routes only /movies and endpont the logic? 
-// Is this a good way to do more query params? 
-// How to add more in the same search? 
 app.get('/movies', async (req, res) => {
-  const { country, year, show } = req.query 
+  const { country, cast, show, page, per_page } = req.query
 
-  // delete all the id's from json and only show mongooose id
   await Movie.updateMany(
     { }, 
     { 
       $unset: { show_id: "" }
     }
   )
-
-  if (country) {
-    const movies = await Movie.find({ 
-      country: {
-        $regex: new RegExp(country, "i")
+  const movies = await Movie.aggregate([
+    { 
+      $match: {
+        country: {
+          $regex: new RegExp(country, "i")
+        }, 
+        cast: {
+          $regex: new RegExp(cast, "i")
+        },
+        type: {
+          $regex: new RegExp(show, "i")
+        }
       }
-    }) 
-    res.json({ length: movies.length, data: movies })
-  } else if (year) {
-    const movies = await Movie.find({ release_year: year })  
-    res.json({ length: movies.length, data: movies })
-  } else if (show) { // fix it so it also shows tv
-    const movies = await Movie.find({ $or: [{ type: "Movie" }, { type: "TV-show" }] })
-    res.json({ length: movies.length, data: movies })
-  } else {
-    const movies = await Movie.find()
-    res.json({ length: movies.length, data: movies })
-  }
+    }, 
+    {
+      $skip: Number((page + 1) * per_page + 1)
+    }, 
+    {
+      $limit: Number(per_page)
+    }
+  ]) 
+
+  res.json({ length: movies.length, data: movies })
 })
 
 // OK 
-// Is this good way to do routes or should I do /movies/titles? 
-app.get('/titles', async (req, res) => {
+app.get('/movies/titles', async (req, res) => {
   const title = await Movie.aggregate([
     { $sort: { title: 1 } },
     { $unset: ["_id", "director", "cast", "country", "date_added", "release_year", "rating", "duration", "listed_in", "description", "type", "__v"] }
   ])
   res.json({ length: title.length, data: title })
-
-  /* 
-   ****** Filtering and could only find titles but not sort. Solved it with aggregate ******
-    const title = await Movie.find({}, { title: 1, _id: 0 })
-    res.json({ length: title.length, data: title })
-
-    ****** Without map and all the titles apply ******
-    const filterTitles = title.map((item) => item.title)
-    res.json({ length: filterTitles.length, data: filterTitles.sort() })  
-  */
 })
 
 // OK 
 // How can I split for each word and then push in to the new array? 
-app.get('/genres', async (req, res) => {
+app.get('/movies/genres', async (req, res) => {
   const genre = await Movie.find()
-  const filterGenres = genre.map((item) => item.listed_in)
-  const test = filterGenres.toString().split(" ")
-  console.log(test) 
+  const filterGenres = genre
+    .map((item) => item.listed_in)
+    .map((item) => item.split(", "))
+  
   let genresUnique = []
   
-  filterGenres.forEach((item) => {
-    if (!genresUnique.includes(item)) {
-      genresUnique.push(item)
-    }  
+  filterGenres.forEach((outerItem) => {
+    // eslint-disable-next-line no-irregular-whitespace
+    outerItem.forEach((innerItem) => {
+      if (!genresUnique.includes(innerItem)) {
+        genresUnique.push(innerItem)
+      }  
+    })
   })
   res.json({ length: genresUnique.length, data: genresUnique })
 })
 
 // OK 
-app.get('/years', async (req, res) => {
+app.get('/movies/years', async (req, res) => {
   const year = await Movie.find()
   const filterYear = year.map((item) => item.release_year)
   let yearUnique = []
@@ -140,8 +134,7 @@ app.get('/years', async (req, res) => {
 })
 
 // OK
-// Shows from only 2018 and up with operator and projection on what to show 
-app.get('/movies/latest', async (req, res) => {
+app.get('/movies/years/latest', async (req, res) => {
   const genre = await Movie.find(
     { release_year: 
       { 
@@ -155,15 +148,19 @@ app.get('/movies/latest', async (req, res) => {
   res.json({ length: genre.length, data: genre })
 })
 
-// Is 404 ok for ID because it is uniq and not found? Or should this also be 400? 
+// OK
 app.get('/movies/:movieId', async (req, res) => {  
   const { movieId } = req.params
 
   try {
     const movie = await Movie.findById(movieId)
-    res.json({ data: movie })
+    if (movie) {
+      res.json({ data: movie })
+    } else {
+      res.status(404).json({ error: 'Not found!' })
+    }
   } catch (error) {
-    res.status(404).json({ error: 'Not found!', details: error })
+    res.status(400).json({ error: 'Invalid request', details: error })
   }
 })
 
