@@ -1,13 +1,11 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+ The goal was to build a RESTful API using sample data and start using a database to store and retrieve the data.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The solution was to use mongoDB and mongoose, practicing mongoose methods and seeding the cloud database with the data. I used a sample data set of historical prices for bitcoin from 2013 to show prices and market cap in each year until 2021. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+[Bitcoin Historical Prices](https://btc-historicals.herokuapp.com/)
