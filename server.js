@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 import designers from './data/designers.json'
 
 dotenv.config()
@@ -46,13 +47,20 @@ app.use(express.json())
 
 // Routes
 
+// First page API page with possible endpoints
+app.get('/', (req, res) => {
+  res.send(listEndpoints(app))
+})  
+
 // Endpoint to get all the designers
+// https://designers-api.herokuapp.com/designers
 app.get('/designers', async (req, res) => {
   const designers = await Designer.find()
   res.json(designers)
 })
 
 // Endpoint to get designer by ID
+// E.g https://designers-api.herokuapp.com/designers/609fa52d1dafed06ad8dda19
 app.get('/designers/:designerId', async (req, res) => {
   const { designerId } = req.params
   const singleDesigner = await Designer.findById(designerId)
@@ -60,6 +68,7 @@ app.get('/designers/:designerId', async (req, res) => {
 })
 
 // Endpoint to get designer by name
+// E.g https://designers-api.herokuapp.com/designers/name/vivienne
 app.get('/designers/name/:designerName', async (req, res) => {
   const { designerName } = req.params
 
