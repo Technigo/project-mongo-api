@@ -3,8 +3,11 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
+import dotenv from 'dotenv'
 
 import exercisesData from './data/exercises.json'
+
+dotenv.config()
 
 // Lines 9-11 connects server and database
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
@@ -25,7 +28,7 @@ if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Exercise.deleteMany()
 
-    await exercisesData.forEach((exercise) => {
+    exercisesData.forEach((exercise) => {
       const newExercises = new Exercise(exercise)
       newExercises.save()
     })
