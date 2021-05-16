@@ -49,6 +49,24 @@ app.get("/books", (req, res) => {
   });
 });
 
+app.get("/books/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    if (Number.isNaN(Number(id))) {
+      throw new Error("id should be number");
+    }
+    Book.find({ bookID: id })
+      .then((book) => {
+        res.json({ book });
+      })
+      .catch(() => {
+        throw new Error("something went wrong");
+      });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.get("/books/min-rate/:rate", async (req, res) => {
   try {
     const { rate } = req.params;
