@@ -1,13 +1,17 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
+The assigment for this week was to creat an API using mongoDB, Express, Atlas and Heroku.
+I decided to use the Netflix data.
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I ended up doing very few paths and instead adding search paths with .find in the main path.
+The reasoning was to avoid needing to fetch for each different search parameter and hence slow down the (potential) website. The data I chose wasn't huge but still substantial with over a 1000 entries, so I thought it was good practice to take that into consideration.
+
+Deploying to Heroku is pretty straight forward but setting up the connection to Atlas was a bit more tricky.
+
+My main problem was that due to circumstances I didn't have time to make a frontend for this project or to dive that deep. I would have loved to make a frontend but also to have added more to the API and just to play around with it in general for the sake of learning.
+I plan on doing that as soon as I have the time for it though.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://malins-wk18-api.herokuapp.com
