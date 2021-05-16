@@ -1,35 +1,124 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import booksData from './data/books.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+//Book collection
+const bookSchema = new mongoose.Schema({
+  title: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author'  
+  },
+  average_rating: Number,
+  isbn: String,
+  num_pages: Number
+})
+
+const Book = mongoose.model('Book', bookSchema)
+
+//Author collection
+const authorSchema = new mongoose.Schema({
+  name: String
+})
+
+const Author = mongoose.model('Author', authorSchema)
+
+//Seed the database
+if (process.env.RESET_DB) { 
+  const seedDB = async () => {
+    await Book.deleteMany()
+    await Author.deleteMany()
+
+    let authorsNames = []
+
+    booksData.forEach(book => {
+      book.authors.split('-').forEach(author => {
+        authorsNames.push(author)
+      })
+    })
+
+    authorsNames = [...new Set(authorsNames)]
+
+    let authorList = []
+
+    authorsNames.forEach(async authorName => {
+      const newAuthor = new Author({ name: authorName })
+      authorList.push(newAuthor)
+      await newAuthor.save()
+    })
+
+    booksData.forEach(async book => {
+      const newBook = new Book({
+        ...book,
+        author: authorList.find(singleAuthor => book.authors.includes(singleAuthor.name))
+      })
+      await newBook.save()
+    })
+   
+  }
+seedDB()
+}
+
+// Port where the app runs.
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
+// Middleware to enable cors
 app.use(cors())
-app.use(bodyParser.json())
 
-// Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
+// Routes
+app.get('/books', async (req, res) => {
+  const books = await Book.find()
+  res.json(books)
+})
+
+app.get('/books/title', async (req, res) => {
+  const { title } = req.query
+  
+  if (title) {
+    const bookTitle = await Book.find({
+      title: {
+        $regex: new RegExp(title, "i")
+      }
+    })
+    res.json(bookTitle)
+  } else {
+    const bookTitle = await Book.find()
+    res.json(bookTitle)
+  }
+})
+
+app.get('/books/:bookId', async (req, res) => {
+  const { bookId } = req.params
+  const singleBook = await Book.findById(bookId)
+
+  if (singleBook) {
+    res.json(singleBook)
+  } else {
+    res.status(404).json({ error: 'Book not found' })
+  }
+})
+
+app.get('/authors', async (req, res) => {
+  const authors = await Author.find()
+  res.json(authors)
+})
+
+app.get('/authors/:id/books', async (req, res) => {
+  const { id } = req.params
+  const author = await Author.findById(id)
+
+  if (author) {
+    const books = await Book.find({ author: mongoose.Types.ObjectId(author.id)})
+    res.json(books)
+  } else {
+    res.status(404).json({ error: 'Author not found' })
+  }
 })
 
 // Start the server
