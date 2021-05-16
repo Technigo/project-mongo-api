@@ -9,7 +9,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const bookSchema = new mongoose.Schema({ // #1
+const bookSchema = new mongoose.Schema({ 
   bookID: Number,
   title: String,
   authors: String,
@@ -22,19 +22,18 @@ const bookSchema = new mongoose.Schema({ // #1
   text_reviews_count: Number 
 })
 
-const Book = mongoose.model('Book', bookSchema); // #2
+const Book = mongoose.model('Book', bookSchema); 
 
 
 if(process.env.RESET_DB) {
   const BookDB = async () => {
-    await Book.deleteMany(); // Delete all the documents from our collection so that it is clean before we load our data and we dont get duplicate
-    await booksData.forEach(item => { // Här skapar 
+    await Book.deleteMany(); 
+    await booksData.forEach(item => { 
       const newBook = new Book(item);
       newBook.save()
     })
   }
   BookDB()
- 
 }
 
 const port = process.env.PORT || 8080
@@ -74,7 +73,7 @@ app.get('/books/:memberId', async (req, res) => {
 });
 
 // #3 Find author by name 
-app.get('/books/name/:authorName', async (req,res) => { // Behövs ingen error handling här, verkar som inte det behövs error alls på find utan endast på typ findid dvs när det är koncentrerad
+app.get('/books/name/:authorName', async (req,res) => { 
   const { authorName } = req.params;
   myAPI = await Book.find(
      {authors: {$regex: authorName}});
