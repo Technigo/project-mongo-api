@@ -48,24 +48,30 @@ app.get('/', (req, res) => {
 app.get('/books', async (req, res) => {
   const { title, authors } = req.query;
 
-  if (title) {
-    const books = await Book.find({
-      title: {
-        $regex: new RegExp(title, 'i'),
-      },
-    });
-    res.json(books);
-  } else if (authors) {
-    const books = await Book.find({
-      authors: {
-        $regex: new RegExp(authors, 'i'),
-      },
-    });
-    res.json(books);
-  } else {
-    const books = await Book.find();
-    res.json(books);
-  }
+  const books = await Book.aggregate([
+    {
+      $match: {
+        title: {
+          $regex: new RegExp(title || '', 'i')
+        },
+        authors: {
+          $regex: new RegExp(authors || '', 'i')
+        }
+      }
+    }
+    // {
+    //   $sort: {
+    //     average_rating: +sort,
+    //   },
+    // }
+    // {
+    //   $skip: Number((page - 1) * per_page + 1)
+    // },
+    // {
+    //   $limit: Number(per_page)
+    // }
+  ]);
+  res.json(books);
 });
 
 // Path parameter a single book by its id
@@ -87,7 +93,7 @@ app.get('/books/:id', async (req, res) => {
 // Path parameter to get book by ISBN13
 app.get('/books/isbn/:isbn', async (req, res) => {
   const { isbn } = req.params;
-  
+
   try {
     const singleBook = await Book.findOne({ isbn13: isbn });
     if (singleBook) {
