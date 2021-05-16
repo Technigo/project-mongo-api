@@ -54,11 +54,29 @@ app.get('/tracks', async (req, res) => {
   res.json(tracks)
 })
 
-app.get('/tracks/:id', async (req, res) => {
-  const { id } = req.params;
-  const oneTrack = await Music.findOne({ _id: id })
+app.get('/tracks/:trackId', async (req, res) => {
+  const { trackId } = req.params;
+  const oneTrack = await Music.findOne({ _id: trackId })
   res.json(oneTrack)
 })
+
+// app.get('/avocados', (request, response) => {
+//   const { region } = request.query
+//   if( region ) {
+//     const regionList = avocadoSalesData.filter(avocado => avocado.region.includes(region))
+//     response.json(regionList)
+//   }
+//   response.json(avocadoSalesData)
+// })
+
+// app.get('/avocados/:id', (request, response) => {
+//   const { id } = request.params
+//   const avocado = avocadoSalesData.find(avocado => avocado.id === +id)
+//   if (avocado) {
+//     response.json(avocado)
+//     } 
+//     response.status(404).send(`The requested resource could not be found`)
+// })
 
 
 
