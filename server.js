@@ -1,10 +1,14 @@
+import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import members from './data/technigo-members.json'
 import roles from './data/technigo-roles.json'
+import { userName, password } from './keys'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+dotenv.config()
+
+const mongoUrl = process.env.MONGO_URL || `mongodb+srv://${userName}:${password}@cluster0.kerro.mongodb.net/projectMongoApi?retryWrites=true&w=majority`
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
