@@ -76,10 +76,10 @@ app.get('/movies', async (req, res) => {
     }, 
     {
       $skip: Number((page + 1) * per_page + 1)
-    }, 
+    }/* , 
     {
       $limit: Number(per_page)
-    }
+    } */
   ]) 
 
   res.json({ length: movies.length, data: movies })
