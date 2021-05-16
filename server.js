@@ -49,24 +49,30 @@ app.get('/', (req, res) => {
 
 //Reaching for all the books
 app.get('/books', async (req, res) => {
-  const { title } = req.query
+  const { title, authors } = req.query
 
   if (title) {
     const books = await Book.find({ 
       title: {
-        $regex: new RegExp(title, "i") 
-      }
-    })  
-    res.json(books)
-  } else {
+        $regex: new RegExp(title, "i")}
+      })
+      res.json(books)
+    } 
+  
+  if (authors) {
+    const books = await Book.find({ 
+      authors: {
+        $regex: new RegExp(authors, "i")}
+      })    
+      res.json(books)
+    }
+    
     const books = await Book.find()
-    res.json(books)
-  }
-
+    res.json(books)  
 })
 
 //Reaching one single book
-app.get('/books/id/:bookId', async (req, res) => {
+app.get('/books/:bookId', async (req, res) => {
   const { bookId } = req.params
 
   try {
