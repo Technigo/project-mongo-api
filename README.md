@@ -1,13 +1,10 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+The assignment this week is to create a mongodb database that stores data, and API endpoints that can retrieve data. I struggled a bit with setting up my database locally, something was not right with my mongodb-installation. Once i got that working, it was actually surprisingly easy to deploy the database to Atlas. I think this has been a really interesting week where i have learned a lot, aand had a few aha-moments where things have fallen into place in terms of my mental model of how a database and an API interact. Unfortunately that is not really reflected in my project this week which is very basic. I hope to aim for more features in next weeks project!
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+lars-mongo-project.herokuapp.com/books
+returns all books
 
-## The problem
+lars-mongo-project.herokuapp.com/books/{id}
+returns book by id
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
-
-## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
