@@ -51,7 +51,7 @@ app.use(express.json())
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Hello hello hello world')
+  res.send('Hello world')
 })
 
 // Route that displays one title if queried, or all titles
