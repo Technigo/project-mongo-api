@@ -1,39 +1,112 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import booksData from './data/books.json';
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.Promise = Promise
+dotenv.config();
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
-const port = process.env.PORT || 8080
-const app = express()
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(bodyParser.json())
+const bookSchema = new mongoose.Schema({
+  title: String,
+  authors: String,
+  average_rating: Number,
+  language_code: String,
+  num_pages: Number,
+  isbn13: Number,
+});
 
-// Start defining your routes here
+const Book = mongoose.model('Book', bookSchema);
+
+if (process.env.RESET_DB) {
+  const seedDB = async () => {
+    await Book.deleteMany();
+
+    booksData.forEach((item) => {
+      new Book(item).save();
+    });
+  };
+  seedDB();
+}
+const port = process.env.PORT || 8080;
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// Routes
+
 app.get('/', (req, res) => {
-  res.send('Hello world')
-})
+  res.send('Welcome to the Book API');
+});
 
-// Start the server
+// Query parameter to get all the books unless a title or author was specified
+app.get('/books', async (req, res) => {
+  const { title, authors } = req.query;
+
+  const books = await Book.aggregate([
+    {
+      $match: {
+        title: {
+          $regex: new RegExp(title || '', 'i')
+        },
+        authors: {
+          $regex: new RegExp(authors || '', 'i')
+        }
+      }
+    }
+    // {
+    //   $sort: {
+    //     average_rating: +sort,
+    //   },
+    // }
+    // {
+    //   $skip: Number((page - 1) * per_page + 1)
+    // },
+    // {
+    //   $limit: Number(per_page)
+    // }
+  ]);
+  res.json(books);
+});
+
+// Path parameter a single book by its id
+app.get('/books/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const singleBook = await Book.findById(id);
+    if (singleBook) {
+      res.json(singleBook);
+    } else {
+      res.status(404).json({ error: 'Not found' });
+    }
+  } catch {
+    res.status(400).json({ error: 'Invalid request' });
+  }
+});
+
+// Path parameter to get book by ISBN13
+app.get('/books/isbn/:isbn', async (req, res) => {
+  const { isbn } = req.params;
+
+  try {
+    const singleBook = await Book.findOne({ isbn13: isbn });
+    if (singleBook) {
+      res.json(singleBook);
+    } else {
+      res.status(404).json({ error: 'Not found' });
+    }
+  } catch {
+    res.status(400).json({ error: 'Invalid request' });
+  }
+});
+
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
-})
+  console.log(`Server running on http://localhost:${port}`);
+});
