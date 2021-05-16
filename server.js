@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 // All exercises
 app.get('/exercises', (req, res) => {
   Exercise.find().then((exercises) => {
-    res.json(exercises)
+    res.json({ data: exercises })
   })
 })
 
