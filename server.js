@@ -72,6 +72,10 @@ const app = express()
 app.use(cors())
 
 // Routes
+app.get('/', (req, res) => {
+  res.send('Welcome to your bookFinder API')
+})
+
 app.get('/books', async (req, res) => {
   const books = await Book.find()
   res.json(books)
