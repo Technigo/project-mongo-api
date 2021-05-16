@@ -1,12 +1,10 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project was about how to model data in Mongo using Mongoose and how to query that data from an API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I created this project by coding along with Technigo bootcamps recorded lectures on how to work with data in Mongo using Mongoose. I had some erros in my terminal when I first started the project but got help with that after I asked about it in a help channel in Slack. I ended up with one error message at one of my endpoints but I tried to do them on all the endpoints from the beginning. When it didn't work I just went with the working one and deleted the rest of them. If I had more time I would have tried harder to get the error messages to work and also made som more endpoits just to practice that.
 
 ## View it live
 
