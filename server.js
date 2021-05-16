@@ -65,7 +65,7 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Welcome to my mongoDB API!')
 })
 
 app.get('/members', async (req, res) => {
