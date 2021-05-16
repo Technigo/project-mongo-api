@@ -7,7 +7,7 @@ import listEndpoints from 'express-list-endpoints'
 
 import booksData from './data/books.json'
 
-dotenv.config()
+dotenv.config() //what does this do?
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -56,13 +56,14 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
+//returning all books in array
 app.get('/books', async (req, res) => {
   Book.find().then(data => {
     res.json(data)
   })
 })
 
-//endpoints returning single elements
+//endpoint returning single element by ID
 app.get('/books/:bookId', async (req, res) => {
   const { bookId } = req.params
 
@@ -78,6 +79,7 @@ app.get('/books/:bookId', async (req, res) => {
   }
 })
 
+//endpoint returning single element by isbn
 app.get('/books/book/:bookIsbn', async (req, res) => {
   const { isbn } = req.params
 
@@ -93,7 +95,7 @@ app.get('/books/book/:bookIsbn', async (req, res) => {
   }
 })
 
-//endpoint returning array of elements
+//endpoint returning array of elements (by language code, author, title)
 app.get('/books/', async (req, res) => {
   const { language_code, authors, title } = req.query
 
@@ -103,6 +105,8 @@ if (language_code)  {
       $regex: new RegExp(language_code, 'i')}
   })
   res.json(booksArray)
+} else {
+  res.status(400).json({ error: 'something went wrong - sorry about that', details: error })
 }
 
 if (authors)  {
@@ -111,6 +115,8 @@ if (authors)  {
       $regex: new RegExp(authors, 'i')}
   })
   res.json(booksArray)
+} else {
+  res.status(400).json({ error: 'something went wrong - sorry about that', details: error })
 }
 
 if (title)  {
@@ -119,6 +125,8 @@ if (title)  {
       $regex: new RegExp(title, 'i')}
   })
   res.json(booksArray)
+} else {
+  res.status(400).json({ error: 'something went wrong - sorry about that', details: error })
 }
 
   const booksArray = await Book.find()
