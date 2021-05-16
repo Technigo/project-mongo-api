@@ -36,9 +36,6 @@ const Book = mongoose.model("Book", {
 });
 
 if (process.env.RESET_DB) {
-  // eslint-disable-next-line
-  console.log("DB RESET...");
-
   const seedDB = async () => {
     await Book.deleteMany();
     booksData.forEach((book) => new Book(book).save());
