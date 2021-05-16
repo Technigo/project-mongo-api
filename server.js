@@ -1,9 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 import listEndpoints from 'express-list-endpoints'
 
 import booksData from './data/books.json'
+
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -35,7 +38,8 @@ const Book = mongoose.model('Book', bookSchema)
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany()
-    await booksData.forEach(item => {
+
+    booksData.forEach(item => {
       const newBook = new Book(item)
       newBook.save()
     })
@@ -62,7 +66,7 @@ app.get('/books', async (req, res) => {
   res.json(books)
 })
 
-//Endpoint to get a uniqe book id from one book
+//Endpoint to get a uniqe book id from MongoDB Compass 
 app.get('/books/:bookId', async (req, res) => {
   try {
     const { bookId } = req.params
