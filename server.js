@@ -36,7 +36,7 @@ if (process.env.RESET_DB) {
   seedDB()
 }
 
-//   PORT=9000 npm start
+// PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
