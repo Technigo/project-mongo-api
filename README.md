@@ -1,12 +1,13 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+A simple project to create a RESTful API using Express and MongoDB
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Endpoints
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+'/books': returns the list of all books;
+'/seed': initials books data into database;
+'/books/:id': returns a single book ;
+'/books/min-rate/:rate': returns books with minimum given rate;
 
 ## View it live
 
