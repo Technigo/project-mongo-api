@@ -53,6 +53,69 @@ app.get('/books', async (req, res) => {
   })
 })
 
+//endpoints returning single elements
+app.get('/books/:bookId', async (req, res) => {
+  const { bookId } = req.params
+
+  try {
+    const singleBook = await Book.findOne({ _id: bookId })
+    if (singleBook){
+      res.json(singleBook)
+    } else {
+      res.status(404).json({ error: 'Book not found' })
+    }
+  } catch(error) {
+    res.status(400).json({ error: 'something went wrong - sorry about that', details: error })
+  }
+})
+
+app.get('/books/book/:bookIsbn', async (req, res) => {
+  const { isbn } = req.params
+
+  try {
+    const singleBook = await Book.findOne({ bookIsbn: isbn })
+    if (singleBook) {
+      res.json(singleBook)
+    } else {
+      res.status(404).json({ error: 'Book not found' })
+    }
+  } catch(error) {
+    res.status(400).json({ error: 'something went wrong - sorry about that', details: error })
+  }
+})
+
+//endpoint returning array of elements
+app.get('/books', async (req, res) => {
+  const{ language_code, authors, title } = req.query
+
+if (language_code)  {
+  const booksArray = await Book.find({
+    language_code: {
+      $regex: new RegExp(language_code, 'i')}
+  })
+  res.json(booksArray)
+}
+
+if (authors)  {
+  const booksArray = await Book.find({
+    authors: {
+      $regex: new RegExp(authors, 'i')}
+  })
+  res.json(booksArray)
+}
+
+if (title)  {
+  const booksArray = await Book.find({
+    title: {
+      $regex: new RegExp(title, 'i')}
+  })
+  res.json(booksArray)
+}
+
+  const booksArray = await Book.find()
+  res.json(booksArray)
+})
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
