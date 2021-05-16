@@ -46,9 +46,14 @@ app.use(cors());
 app.use(express.json());
 
 // Start defining your routes here
+
+//displays all endpoints in the startpage
+
 app.get("/", (req, res) => {
   res.send(listEndpoints(app));
 });
+
+//endpoint to display all techsites, with use of aggregate that sorts by name, and let you query for topic and/or free or paid
 
 app.get("/techsites", async (req, res) => {
   const { topic, free_or_paid, sort, page, per_page } = req.query;
@@ -77,6 +82,8 @@ app.get("/techsites", async (req, res) => {
     res.status(400).json({ error: "Something went wrong", details: error })
   }
   });
+
+  //endpoint to display one techsite with a specified id, id is the mongoose one
   
 
 app.get("/techsites/:id", async (req, res) => {
@@ -90,6 +97,7 @@ app.get("/techsites/:id", async (req, res) => {
   }
 });
 
+//endpoint to display one techsite with the specified name, case insensitive and allow to only use one word in a string.
 app.get("/techsites/name/:name", async (req, res) => {
   const { name } = req.params;
 
@@ -103,6 +111,8 @@ app.get("/techsites/name/:name", async (req, res) => {
   }
 });
 
+//endpoint to display all techsites of a specific type, case insensitive and allow to only use one word in a string
+
 app.get("/techsites/type/:type", async (req, res) => {
   const { type } = req.params;
 
@@ -115,6 +125,8 @@ app.get("/techsites/type/:type", async (req, res) => {
     res.status(400).json({ error: "Something went wrong", details: error });
   }
 });
+
+//endpoint to display techsites in a specific language, case insensitive and allow to only use one word in a string
 
 app.get("/techsites/language/:language", async (req, res) => {
   const { language } = req.params;
@@ -131,6 +143,4 @@ app.get("/techsites/language/:language", async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`);
 });
