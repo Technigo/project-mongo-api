@@ -3,7 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import booksData from './data/books.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://tuttibalutti:pOSlRc4H7PATpf2n@cluster0.c3qao.mongodb.net/bookFinder?retryWrites=true&w=majority"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
