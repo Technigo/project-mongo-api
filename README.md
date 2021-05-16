@@ -1,13 +1,12 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project is an API project using a MongoDb database to seed and retrieve the data from and to use that data to produce RESTful API. As a data I used book data that contains 500 book reviews. The data is modelled and fetched by using framework Mongoose.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Heroku: https://project-mongo-sarianne.herokuapp.com/
+
+
