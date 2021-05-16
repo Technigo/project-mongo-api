@@ -50,6 +50,7 @@
         "SwitchCase": 1
       }
     ],
+    "linebreak-style": ["error", "windows"],
     "no-alert": "error",
     "no-console": "error",
     "no-debugger": "error",
