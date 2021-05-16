@@ -40,7 +40,34 @@ app.get("/seed", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.json({ name: "salam" });
+  res.send("Books API");
+});
+
+app.get("/books", (req, res) => {
+  Book.find().then((data) => {
+    res.json(data);
+  });
+});
+
+app.get("/books/min-rate/:rate", async (req, res) => {
+  try {
+    const { rate } = req.params;
+    if (Number.isNaN(Number(rate))) {
+      throw new Error("rate should be number");
+    }
+    if (rate < 0 || rate > 5) {
+      throw new Error("rate should be between 0 to 5");
+    }
+    Book.find({ average_rating: { $gte: rate } })
+      .then((books) => {
+        res.json({ books });
+      })
+      .catch(() => {
+        throw new Error("something went wrong");
+      });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 // Start the server
