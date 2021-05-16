@@ -2,12 +2,15 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import listEndpoints from 'express-list-endpoints'
+
 import booksData from './data/books.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+//creating schema with data types
 const bookSchema = new mongoose.Schema({
   bookID: Number,
   title: String,
@@ -21,13 +24,16 @@ const bookSchema = new mongoose.Schema({
   text_reviews_count: Number
 })
 
+//creating model
 const Book = mongoose.model('Book', bookSchema)
 
+//seeding database
 if (process.env.Reset_DB) {
   const seedDB = async () => {
+    //deleting previous data
     await Book.deleteMany()
-
-    await books.forEach(item => {
+    //creating new entry for each book
+    booksData.forEach(item => {
       const newBook = new Book(item)
       newBook.save()
     })
@@ -42,9 +48,9 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
+// ROUTES
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(listEndpoints(app))
 })
 
 app.get('/books', async (req, res) => {
@@ -85,8 +91,8 @@ app.get('/books/book/:bookIsbn', async (req, res) => {
 })
 
 //endpoint returning array of elements
-app.get('/books', async (req, res) => {
-  const{ language_code, authors, title } = req.query
+app.get('/books/', async (req, res) => {
+  const { language_code, authors, title } = req.query
 
 if (language_code)  {
   const booksArray = await Book.find({
