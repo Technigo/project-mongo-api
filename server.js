@@ -14,9 +14,6 @@ const bookSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Author'  
   },
-  average_rating: Number,
-  isbn: String,
-  num_pages: Number
 })
 
 const Book = mongoose.model('Book', bookSchema)
