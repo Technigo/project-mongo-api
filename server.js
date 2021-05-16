@@ -49,15 +49,32 @@ app.get('/', (req, res) => {
 
 //Reaching for all the books
 app.get('/books', async (req, res) => {
-  const books = await Book.find();
-  res.json(books)
+  const { title } = req.query
+
+  if (title) {
+    const books = await Book.find({ 
+      title: {
+        $regex: new RegExp(title, "i") 
+      }
+    })  
+    res.json(books)
+  } else {
+    const books = await Book.find()
+    res.json(books)
+  }
+
 })
 
 //Reaching one single book
-app.get('/books/:bookId', async (req, res) => {
+app.get('/books/id/:bookId', async (req, res) => {
   const { bookId } = req.params
-  const singleBook = await Book.findById(bookId)
-  res.json(singleBook)
+
+  try {
+    const singleBook = await Book.findById(bookId)
+    res.json(singleBook)
+  } catch(error) {
+    res.status(404).json({ error: "Ooop! Something went wrong.", details: error })
+  }
 })
 
 // Start the server
