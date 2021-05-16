@@ -52,40 +52,31 @@ app.get("/", (req, res) => {
 
 app.get("/techsites", async (req, res) => {
   const { topic, free_or_paid, sort, page, per_page } = req.query;
+
   try {
-
-  const techsites = await Site.aggregate([
-    {
-      $match: {
-        topic: {
-          $regex: new RegExp(topic || "", "i")
+ 
+    const techsites = await Site.aggregate([
+      {
+        $match: {
+          topic: {
+            $regex: new RegExp(topic || "", "i"),
+          },
+          free_or_paid: {
+            $regex: new RegExp(free_or_paid || "", "i"),
+          },
         },
-        free_or_paid: {
-          $regex: new RegExp(free_or_paid || "", "i")
-        }
+      },
+      {
+        $sort: {
+          name: 1,
+        },
       }
-  },
-  {
-    $sort: {
-      name: 1
-    }
-  },
-  {
-    $skip: Number((page -1) * per_page +1)
-
-  },
-  {
-    $limit: Number(per_page)
+    ]);
+    res.json(techsites);
+  } catch (error) {
+    res.status(400).json({ error: "Something went wrong", details: error })
   }
-
-  ])
-;
-res.json(techsites)
-
-} catch (error) {
-  res.status(400).json({ error: "Something went wrong", details: error })
-}
-})
+  });
   
 
 app.get("/techsites/:id", async (req, res) => {
@@ -103,7 +94,9 @@ app.get("/techsites/name/:name", async (req, res) => {
   const { name } = req.params;
 
   try {
-    const singleSite = await Site.findOne({ name: { $regex: "\\b" + name + "\\b", $options: "i" } });
+    const singleSite = await Site.findOne({
+      name: { $regex: "\\b" + name + "\\b", $options: "i" },
+    });
     res.json(singleSite);
   } catch (error) {
     res.status(400).json({ error: "Something went wrong", details: error });
