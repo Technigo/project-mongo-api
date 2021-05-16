@@ -1,13 +1,11 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project was about seed and fetch data from a Mongo database by using Mongoose model.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I created this project by coding along with Technigo bootcamps recorded lectures on how to work with data in Mongo using Mongoose. I had some erros in my terminal when I first started the project but got help with that after I asked about it in a help channel in Slack. I created one error message at one of my endpoints.  I tried to do erros messages on all of my endpoints but I didn't get it to work. So when it didn't work I just kept the one that worked and deleted the rest of them. If I had more time I would have tried harder to get the error messages to work and also made some more endpoints just to practice that.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://mongo-api-book-deployment.herokuapp.com/
