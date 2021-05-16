@@ -1,5 +1,4 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import books from './data/mybooks.json'
@@ -10,7 +9,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 //Fields of our model
-const booksSchema = new mongoose.Schema ({
+const bookSchema = new mongoose.Schema ({
   bookID: Number,
   title: String,
   authors: String,
@@ -20,7 +19,7 @@ const booksSchema = new mongoose.Schema ({
 })
 
 //Model from booksSchema
-const Book = mongoose.model('Book', booksSchema)
+const Book = mongoose.model('Book', bookSchema)
 
 //Seeding of our database
 if (process.env.RESET_DB) {
@@ -41,7 +40,7 @@ const app = express()
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
@@ -50,8 +49,15 @@ app.get('/', (req, res) => {
 
 //Reaching for all the books
 app.get('/books', async (req, res) => {
-  const books = await Ceremony.find();
+  const books = await Book.find();
   res.json(books)
+})
+
+//Reaching one single book
+app.get('/books/:bookId', async (req, res) => {
+  const { bookId } = req.params
+  const singleBook = await Book.findById(bookId)
+  res.json(singleBook)
 })
 
 // Start the server

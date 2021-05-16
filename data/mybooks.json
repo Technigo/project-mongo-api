@@ -1,6 +1,6 @@
 [
     {
-      "bookID": 1,
+      "mybookID": 1,
       "title": "El lobo estepario",
       "authors": "Herman Hesse",
       "num_pages": 652,
@@ -8,7 +8,7 @@
       "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
     },
     {
-      "bookID": 2,
+      "mybookID": 2,
       "title": "Momo",
       "authors": "Michael Ende",
       "num_pages": 652,
@@ -16,7 +16,7 @@
       "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
     },
     {
-      "bookID": 3,
+      "mybookID": 3,
       "title": "The Complete Stories and Poems",
       "authors": "Edga Allan Poe",
       "num_pages": 652,
@@ -24,7 +24,7 @@
       "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
     },
     {
-      "bookID": 4,
+      "mybookID": 4,
       "title": "Kärleken",
       "authors": "Theodor Kallifatides",
       "num_pages": 652,
@@ -32,7 +32,7 @@
       "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
     },
     {
-      "bookID": 5,
+      "mybookID": 5,
       "title": "El mundo Alucinante",
       "authors": "Reinaldo Arenas",
       "num_pages": 652,
@@ -40,7 +40,7 @@
       "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
     },
     {
-      "bookID": 6,
+      "mybookID": 6,
       "title": "Corazon tan blanco",
       "authors": "Michael Ende",
       "num_pages": 652,
@@ -48,7 +48,7 @@
       "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
     },
     {
-      "bookID": 7,
+      "mybookID": 7,
       "title": "The Master and Margarita",
       "authors": "Mikhail Bulgakov",
       "num_pages": 652,
@@ -56,7 +56,7 @@
       "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
     },
     {
-      "bookID": 8,
+      "mybookID": 8,
       "title": "El Dios de las pequeñas cosas",
       "authors": "Arundhati Roy",
       "num_pages": 652,
@@ -72,7 +72,7 @@
       "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
     },
     {
-      "bookID": 10,
+      "mybookID": 10,
       "title": "Elogio de la Locura",
       "authors": "Erasmus de Rotterdam",
       "num_pages": 652,
