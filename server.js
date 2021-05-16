@@ -29,7 +29,7 @@ const Show = mongoose.model("Show", {
 if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Show.deleteMany()
-    await netflixData.forEach((item) => {
+    netflixData.forEach((item) => {
       const newShow = new Show(item)
       newShow.save()
     })
@@ -44,7 +44,7 @@ if (process.env.RESET_DB) {
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors, json body parsing and a status error if the database is down
+// Add middlewares to enable cors, json body parsing and a error status if the database is down
 app.use(cors())
 app.use(express.json())
 app.use((_, res, next) => {
@@ -69,8 +69,8 @@ app.get("/shows", async (_, res) => {
   res.json(shows)
 })
 
-// Look for a specific show by using ID 
-app.get("/shows/id/:showId", async (req, res) => {
+// Look for a specific show by using Mongo-ID 
+app.get("/shows/:showId", async (req, res) => {
   try {
     const { showId } = req.params
     const singleShow = await Show.findById(showId)
@@ -84,20 +84,20 @@ app.get("/shows/id/:showId", async (req, res) => {
   }
 })
 
-// Look for a specific show using the title
+// Look for a specific show by using the title
 app.get("/shows/title/:showTitle", async (req, res) => {
   const { showTitle } = req.params
   if (showTitle) {
     const titleForShow = await Show.findOne({ 
       title: {
-        $regex: new RegExp(showTitle, "i")
+        // Regex to ignore if the letters are capitalized or not in the param 
+        $regex: showTitle, $options: "i" 
       }
     })
     res.json(titleForShow)
   } else {
-    // const titleForShow = await Show.findOne()
-    // res.json(titleForShow)
-    res.status(404).json({ error: "Title not found" })
+    const titleForShow = await Show.findOne()
+    res.json(titleForShow)
   } 
 })
 
