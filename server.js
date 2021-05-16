@@ -36,6 +36,7 @@ const Book = mongoose.model("Book", {
 });
 
 if (process.env.RESET_DB) {
+  // eslint-disable-next-line
   console.log("DB RESET...");
 
   const seedDB = async () => {
