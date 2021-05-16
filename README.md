@@ -1,13 +1,15 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Week 18 of Technigos bootcamp and week 2 with backend. 
+- What Mongodb is
+- How to model data in Mongo using Mongoose
+- How to store secret information such as database passwords
+- How to return useful error messages from your API endpoints
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+My biggest issue was to deploy it and still haven't managed to. So the routes are not working.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://goethe-mongodb-api.herokuapp.com/
