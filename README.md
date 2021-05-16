@@ -1,13 +1,12 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week's assignment was to build a RESTful API using MongoDB
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I used Mongo Compass and Atlas for the database. I used and async and await approach rather than a .then for asynchronous parts. The dataset was my own, an only slightly modified version of last week's. I didn't have a lot of time this week, so I went very basic. If I had more time I would have added more queries and more endpoints, as well as create another collection in the database.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Heroku build:
+
