@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
 import booksData from './data/books.json';
 
-dotenv.config()
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -15,7 +15,9 @@ const bookSchema = new mongoose.Schema({
   title: String,
   authors: String,
   average_rating: Number,
-  language_code: String
+  language_code: String,
+  num_pages: Number,
+  isbn13: Number,
 });
 
 const Book = mongoose.model('Book', bookSchema);
@@ -36,7 +38,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes 
+// Routes
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Book API');
@@ -49,16 +51,16 @@ app.get('/books', async (req, res) => {
   if (title) {
     const books = await Book.find({
       title: {
-        $regex: new RegExp(title, 'i')
-      }
+        $regex: new RegExp(title, 'i'),
+      },
     });
     res.json(books);
   } else if (authors) {
     const books = await Book.find({
       authors: {
-        $regex: new RegExp(authors, 'i')
-      }
-    })
+        $regex: new RegExp(authors, 'i'),
+      },
+    });
     res.json(books);
   } else {
     const books = await Book.find();
@@ -80,20 +82,23 @@ app.get('/books/:id', async (req, res) => {
   } catch {
     res.status(400).json({ error: 'Invalid request' });
   }
-  res.json(singleBook);
 });
 
-// Path parameter to get books by author
-app.get('/books/author/:author', async (req, res) => {
-  const { author } = req.params;
-
+// Path parameter to get book by ISBN13
+app.get('/books/isbn/:isbn', async (req, res) => {
+  const { isbn } = req.params;
+  
   try {
-    const singleBook = await Book.find({ authors: author });
-    res.json(singleBook);
-  } catch (error) {
-    res.status(400).json({ error: 'Something went wrong', details: error });
+    const singleBook = await Book.findOne({ isbn13: isbn });
+    if (singleBook) {
+      res.json(singleBook);
+    } else {
+      res.status(404).json({ error: 'Not found' });
+    }
+  } catch {
+    res.status(400).json({ error: 'Invalid request' });
   }
-}); 
+});
 
 app.listen(port, () => {
   // eslint-disable-next-line
