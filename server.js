@@ -3,22 +3,11 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
 import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
-
-//mongodb+srv://myUser:myuserpassword@cluster0.prpaq.mongodb.net/ProjectMongo?retryWrites=true&w=majority
-
-//mongodb+srv://myUser:<password>@cluster0.prpaq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 const bookSchema = new mongoose.Schema({ // #1
   bookID: Number,
@@ -33,23 +22,8 @@ const bookSchema = new mongoose.Schema({ // #1
   text_reviews_count: Number 
 })
 
-
-
 const Book = mongoose.model('Book', bookSchema); // #2
-/*
-const newAuthor = new Book({
-  bookID: 50888,
-  title: "Bowmaking",
-  authors: "Fethullah Dincer",
-  average_rating: 10,
-  isbn: 102030,
-  isbn13: 405060,
-  language_code: "SE",
-  num_pages: 500,
-  ratings_count: 5050566060,
-  text_reviews_count: 87820206 
-})
-newAuthor.save() */ 
+
 
 if(process.env.RESET_DB) {
   const BookDB = async () => {
@@ -59,18 +33,10 @@ if(process.env.RESET_DB) {
       newBook.save()
     })
   }
-  
   BookDB()
-  
+ 
 }
 
-
-
-
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -85,19 +51,15 @@ app.get('/', (req, res) => {
 
 let myAPI
 
-// #1 Find books
-app.get('/books', async (req,res) => { // Har lagt till limit som vi kan lägga en variabel på och sedan ändra när vi trycker på load i frontend
-  //const find = req.params
-  myAPI = await Book.find() // Här är våran collection vi skapar .limit(20)
-
+// #1 Find books collection
+app.get('/books', async (req,res) => { 
+  myAPI = await Book.find() 
   res.json({length: myAPI.length, data: myAPI})
 })
 
-
-// #2 Find member id
+// #2 Find member by id
 app.get('/books/:memberId', async (req, res) => {
   const { memberId } = req.params;
-
   try {
     myAPI = await Book.findById(memberId);
     if(myAPI) {
@@ -111,51 +73,38 @@ app.get('/books/:memberId', async (req, res) => {
   res.json({length: myAPI.length, data: myAPI});
 });
 
-// #3 Find author name 
+// #3 Find author by name 
 app.get('/books/name/:authorName', async (req,res) => { // Behövs ingen error handling här, verkar som inte det behövs error alls på find utan endast på typ findid dvs när det är koncentrerad
   const { authorName } = req.params;
-
-  
-
   myAPI = await Book.find(
      {authors: {$regex: authorName}});
-
   res.json({length: myAPI.length, data: myAPI})
 })
 
-
-
-// #4 Min page filter
+// #4 Minimum page filter
 app.get('/books/minpage/:pages', async (req,res) => {
   const { pages } = req.params;
-
   myAPI = await Book.find({ num_pages: { $gte: pages}});
-
   res.json({length: myAPI.length, data: myAPI})
 })
 
 // #5 Max Page filter
 app.get('/books/maxpage/:pages', async (req,res) => {
   const { pages } = req.params;
-
   myAPI = await Book.find({ num_pages: { $lte: pages}});
-
   res.json({length: myAPI.length, data: myAPI})
 })
 
-// #6 Ratings filter (GÖR en select)
+// #6 Ratings filter 
 app.get('/books/minrating/:rating', async (req,res) => {
   const { rating } = req.params;
-
   myAPI = await Book.find({ average_rating: { $gte: rating}});
-
   res.json({length: myAPI.length, data: myAPI})
 })
 
-// #7 Find ISBN name
+// #7 Find book by ISBN number
 app.get('/books/isbn/:isbn', async (req,res) => {
   const { isbn } = req.params;
-
   try {
     myAPI = await Book.findOne({ isbn: isbn});
     if(myAPI) {
@@ -169,21 +118,16 @@ app.get('/books/isbn/:isbn', async (req,res) => {
   res.json({length: myAPI.length, data: myAPI});
 })
 
-
-// #8 20 Highest rated books LÄGG TILL /BOOKS/HIGHEST.....
-app.get('/highestrated', async (req,res) => { // Har lagt till limit som vi kan lägga en variabel på och sedan ändra när vi trycker på load i frontend
+// #8 20 Highest rated books 
+app.get('/highestrated', async (req,res) => { 
   myAPI = await Book.aggregate([
     {$sort: {average_rating:-1}},
     {$limit:20},
     {$unset: ["isbn","isbn13", "__v","_id","ratings_count","text_reviews_count","language_code","bookID"]}
-  
-  ]) // Här är våran collection vi skapar .limit(20)
+  ]) 
 
   res.json({length: myAPI.length, data: myAPI})
 })
-
-// Gör en öppen input fält där man kan skriva vad som helst
-
 
 // Start the server
 app.listen(port, () => {
