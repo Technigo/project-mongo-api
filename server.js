@@ -1,9 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-
-// const { topSongsData } = require("./data/500topsongs.json");
-
+const bodyParser = require('body-parser')
 const { newTopSongs } = require("./data/cleanSongs")
 
 const mongoUrl = "mongodb+srv://new_user90:nMepfddUO7kJmTER@cluster0.d0pe1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -32,8 +30,6 @@ const Song = mongoose.model("Song", songSchema);
 if (process.env.RESET_DB) {
   const SeedDB = async () => {
     await Song.deleteMany();
-
-    // asyncronys code
     // operation we do in backend, save this in the data base 
     await newTopSongs.forEach((item) => {
       const newSong = new Song(item);
@@ -43,17 +39,6 @@ if (process.env.RESET_DB) {
   SeedDB();
 }
 
-// const newSong = new Song({
-//   title: "kjsnfk",
-//   description: "flksnkfn",
-//   appears_on: "flksnkfn",
-//   artist: "flksnkfn",
-//   writers: "flksnkfn",
-//   producer: "flksnkfn",
-//   position: "flksnkfn"
-// })
-// newSong.save()
-
 // Defines the port the app will run on. Defaults to 8080
 const port = process.env.PORT || 8080;
 const app = express();
@@ -62,6 +47,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("500 greatest songs of all time");
@@ -118,19 +108,12 @@ app.get("/songs/song/:id", async (req, res) => {
 
 // Endpoint to get all songs that has been on top chart number one 
 // The $eq is a MongoDB query operator matches documents 
-// where the value is equal the field with specified value 
+// where the value is equal the field with specified value
 // Totallt 119 songs has been number one on billbord, 
 // Pagnation through mongoDB 
 
 app.get('/songs/top-rated', async (req, res) => {
-  // page one 35 per page 
-  // let topSongs = await Song.find({ position: { $eq: 1 } }).limit(35)
-  // page nex 35
   try {
-    // page - 1, because
-    // const songs = await Song.find()
-    // res.json(songs);
-    // if page is not sent in as a query parameter
     let { page, size } = req.query
     if (!page) {
       page = 1 
@@ -145,8 +128,6 @@ app.get('/songs/top-rated', async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: "error not a page or size" })
   }
-
-  // res.json(topSongs)
 })
 
 // http://localhost:8080/songs/artist/bob%20dylan
@@ -178,21 +159,9 @@ app.get('/songs/title/:title', async (req, res) => {
   } 
   res.json(titleSong)
 })
-// Start the server
 
+// Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`);
 });
-
-// End points: Top ten billbord hits
-// Search Artist 
-// Title 
-
-// Bob Dylan
-// The beatles hits 
-// Prince
-// Aretha Franklin
-// the Supremes 
-// Tina turner
-// Bonnie Raitt
