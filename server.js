@@ -4,20 +4,12 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import ceremonies from './data/golden-globes.json'
 
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-
-// import avocadoSalesData from './data/avocado-sales.json'
-/* import booksData from './data/books.json' */
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
+//setup to connect to our database
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+//Fields of our model
 const ceremonySchema = new mongoose.Schema ({
   year_film: Number,
   year_award: Number,
@@ -27,18 +19,23 @@ const ceremonySchema = new mongoose.Schema ({
   film: String,
   win: Boolean
 })
-
+//Model from the ceremonySchema
 const Ceremony = mongoose.model('Ceremony', ceremonySchema)
 
-const seedDB = () => {
-  ceremonies.forEach(item => {
-    const newCeremony = new Ceremony(item)
-    newCeremony.save()
-  })
-}
+//Seeding of our database
+if (process.env.RESET_DB) {
+  console.log('SEEDING')
+  const seedDB = async () => {
+    await Ceremony.deleteMany()
+
+    await ceremonies.forEach(item => {
+      const newCeremony = new Ceremony(item)
+      newCeremony.save()
+    })
+  }    
   seedDB()
-
-
+}
+  
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -50,6 +47,13 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.send('Hola world')
 })
+
+//Reaching for all the ceremonies
+app.get('/ceremonies', async (req, res) => {
+  const ceremonies = await Ceremony.find();
+  res.json(ceremonies)
+})
+//looking for one specific ceremony
 
 // Start the server
 app.listen(port, () => {

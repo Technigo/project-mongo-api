@@ -1,0 +1,82 @@
+[
+    {
+      "bookID": 1,
+      "title": "El lobo estepario",
+      "authors": "Herman Hesse",
+      "num_pages": 652,
+      "language":"Spanish",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    },
+    {
+      "bookID": 2,
+      "title": "Momo",
+      "authors": "Michael Ende",
+      "num_pages": 652,
+      "language":"English",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    },
+    {
+      "bookID": 3,
+      "title": "The Complete Stories and Poems",
+      "authors": "Edga Allan Poe",
+      "num_pages": 652,
+      "language":"English",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    },
+    {
+      "bookID": 4,
+      "title": "Kärleken",
+      "authors": "Theodor Kallifatides",
+      "num_pages": 652,
+      "language":"Swedish",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    },
+    {
+      "bookID": 5,
+      "title": "El mundo Alucinante",
+      "authors": "Reinaldo Arenas",
+      "num_pages": 652,
+      "language":"English",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    },
+    {
+      "bookID": 6,
+      "title": "Corazon tan blanco",
+      "authors": "Michael Ende",
+      "num_pages": 652,
+      "language":"Spanish",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    },
+    {
+      "bookID": 7,
+      "title": "The Master and Margarita",
+      "authors": "Mikhail Bulgakov",
+      "num_pages": 652,
+      "language":"English",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    },
+    {
+      "bookID": 8,
+      "title": "El Dios de las pequeñas cosas",
+      "authors": "Arundhati Roy",
+      "num_pages": 652,
+      "language":"Spanish",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    },
+    {
+      "bookID": 9,
+      "title": "Middlesex",
+      "authors": "Jeffrey Eugenides",
+      "num_pages": 652,
+      "language":"English",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    },
+    {
+      "bookID": 10,
+      "title": "Elogio de la Locura",
+      "authors": "Erasmus de Rotterdam",
+      "num_pages": 652,
+      "language":"Spanish",
+      "sinopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet massa a nisl imperdiet molestie id et massa. Nunc vitae congue nibh, eget sodales nisi."    
+    }
+]
