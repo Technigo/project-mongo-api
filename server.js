@@ -33,9 +33,7 @@ if (process.env.RESET_DB) {
     await Book.deleteMany();
 
     booksData.forEach(async (item) => {
-      const newBook = new Book({
-        ...item,
-      });
+      const newBook = new Book(item);
       await newBook.save();
     });
   };
@@ -55,7 +53,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/books", async (req, res) => {
-  const { author, title } = req.query;
+  const { author, title, page = 0 } = req.query;
   const authorRegex = new RegExp(author, "i");
   const titleRegex = new RegExp(title, "i");
 
@@ -63,7 +61,10 @@ app.get("/books", async (req, res) => {
     const books = await Book.find({
       authors: authorRegex,
       title: titleRegex,
-    });
+    })
+      .skip(page * 10)
+      .limit(10);
+
     res.status(200).json(books);
   } catch (error) {
     res.status(400).json({ error: "Something went wrong", details: error });
@@ -110,7 +111,4 @@ app.get("/books/topten", async (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
-  // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`);
-});
+app.listen(port, () => {});
