@@ -45,15 +45,22 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.get('/', (_, res) => {
+  res.send('Hello, welcome to Top Music backend')
+})
+
 app.get('/tracks', async (req, res) => {
   const tracks = await Music.find();
   res.json(tracks)
 })
 
-// app.get('/artists', async (req, res) => {
-//   const artists = await Music.find();
-//   res.json(tracks)
-// })
+app.get('/tracks/:id', async (req, res) => {
+  const { id } = req.params;
+  const oneTrack = await Music.findOne({ _id: id })
+  res.json(oneTrack)
+})
+
+
 
 // Start the server
 app.listen(port, () => {
