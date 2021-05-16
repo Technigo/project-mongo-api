@@ -36,7 +36,6 @@ if (process.env.RESET_DB) {
         language_code: item.language_code,
         num_pages: item.num_pages,
         ratings_count: item.ratings_count
-
       });
       newBook.save();
     });
@@ -64,7 +63,6 @@ app.get('/books', (req, res) => {
 })
 app.get('/books/:ID', async (req, res) => {
   const { ID } = req.params
-  // Book.find({ bookID: ID }).then((data) => res.json(data))
   if (ID) {
     const response = await Book.find({ bookID: ID })
     res.json(response)
