@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import listEndpoints from 'express-list-endpoints'
 
 import booksData from './data/books.json'
 
@@ -74,8 +75,16 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
+})
+
 app.get('/', (req, res) => {
-  res.send('Hello Books')
+  res.send(listEndpoints(app))
 })
 
 // Endpoint to get all books and search for title by query param
