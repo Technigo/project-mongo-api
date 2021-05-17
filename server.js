@@ -9,12 +9,11 @@ import exercisesData from './data/exercises.json'
 
 dotenv.config()
 
-// Lines 9-11 connects server and database
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Exercise = mongoose.model('Exercise', {
+const exerciseSchema = new mongoose.Schema({
   exerciseID: Number,
   name: String,
   category: String,
@@ -23,6 +22,8 @@ const Exercise = mongoose.model('Exercise', {
   instructions: String,
   img: String
 })
+
+const Exercise = mongoose.model('Exercise', exerciseSchema)
 
 if (process.env.RESET_DB) {
   const seedDB = async () => {
@@ -36,11 +37,9 @@ if (process.env.RESET_DB) {
   seedDB()
 }
 
-// PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
 
@@ -56,7 +55,7 @@ app.get('/exercises', (req, res) => {
   })
 })
 
-// Queries
+// Find exercise by id
 app.get('/exercises/:exerciseId', async (req, res) => {
   const { exerciseId } = req.params
 
@@ -68,21 +67,23 @@ app.get('/exercises/:exerciseId', async (req, res) => {
   }
 })
 
-// Filter exercises by name
+// Search exercises by name and target muscle
 app.get('/exercise', async (req, res) => {
-  const { name } = req.query
+  const { name, targetMuscle } = req.query
 
-  if (name) {
-    const exercises = await Exercise.find({
-      name: {
-        $regex: new RegExp(name, 'i')
+  const exercise = await Exercise.aggregate([
+    {
+      $match: {
+        name: {
+          $regex: new RegExp(name || "", "i")
+        },
+        target_muscle: {
+          $regex: new RegExp(targetMuscle || "", "i")
+        }
       }
-    })
-    res.json(exercises)
-  } else {
-    const exercises = await Exercise.find()
-    res.json(exercises)
-  }
+    }
+  ])
+  res.json(exercise)
 })
 
 // Find all multi-joint exercises, classic .then()
