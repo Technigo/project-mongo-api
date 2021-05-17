@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 
 import netflixData from './data/netflix-titles.json'
 
-const mongoUrl = "mongodb+srv://myUser:<Ncn4THxFL8RP97b>@cluster0.mxq7d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const mongoUrl = "mongodb+srv://myUser:Ncn4THxFL8RP97b@cluster0.mxq7d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
