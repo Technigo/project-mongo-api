@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 
 import netflixData from './data/netflix-titles.json'
 
-const mongoUrl = "mongodb+srv://myUser:Ncn4THxFL8RP97b@cluster0.mxq7d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -26,19 +26,19 @@ const Serie= mongoose.model('Series', {
   type: String
 })
 
-const seedDB = async ()=>{
-    await Serie.deleteMany()
 
-    netflixData.forEach(async (item)=>{
-    const newSerie = new Serie(item)
-    await newSerie.save()
-    })
+if(process.env.RESET_DB){
+
+  const seedDB = async ()=>{
+      await Serie.deleteMany()
+
+      netflixData.forEach(async (item)=>{
+      const newSerie = new Serie(item)
+      await newSerie.save()
+      })
+  }
+  seedDB();
 }
-seedDB();
-
-
-//if(process.env.RESET_DB){
-
 
 const port = process.env.PORT || 8080
 const app = express()
