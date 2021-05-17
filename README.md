@@ -1,4 +1,27 @@
-# Mongo API Project
+# Mongo API Project  
+This API can be used e.g. to create exercise programs.
+
+## Available endpoints and queries
+
+### All exercises  
+/exercises
+
+### Find exercise by id  
+/exercises/exerciseId
+
+### Search exercises by name and target muscle  
+* examples
+how to find all deadlift variations:  
+/exercise?name=deadlift  
+
+how to find all exercises with target muscle gluteus maximus:  
+/exercise?targetMuscle=gluteus 
+
+### All multi-joint exercises  
+/category/multi-joint
+
+### All single-joint exercises  
+/category/single-joint
 
 ## Learning goals
 
