@@ -21,7 +21,8 @@ const bookSchema = new mongoose.Schema({
     lowercase: true
   },
   authors: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author',
     lowercase: true
   },
   average_rating: Number,
@@ -39,6 +40,12 @@ const bookSchema = new mongoose.Schema({
 // mongo creates collection and calls it with lowercase and adds s to end = books
 const Book = mongoose.model('Book', bookSchema)
 
+const authorSchema = mongoose.Schema({
+  authors: String
+})
+
+const Author = mongoose.model('Author', authorSchema)
+
 // Function to seed/inject data to database
 // if to run function only when we wan to
 // newBook.save is async - server to backend
@@ -46,10 +53,23 @@ if (process.env.RESET_DB) {
   console.log('SEEDING!')
   const seedDB = async () => {
     await Book.deleteMany()
-    await booksData.forEach((item) => {
+    await Author.deleteMany()
+
+    const authorArray = []
+
+    booksData.forEach(async (item) => {
+      const newAuthor = new Author(item)
+      authorArray.push(newAuthor)
+      await newAuthor.save()
+    })
+
+    booksData.forEach(async (item) => {
     // New Book(item).save()
-      const newBook = new Book(item)
-      newBook.save()
+      const newBook = new Book({
+        ...item,
+        authors: authorArray.find((singleAuthor) => singleAuthor.authors === item.authors)
+      })
+      await newBook.save()
     })
   }
   seedDB()
@@ -107,9 +127,13 @@ app.get('/books/title/:bookTitle', async (req, res) => {
         $regex: new RegExp(bookTitle, "i")
       }
     })
-    res.json(singleBook)
+    if (singleBook) {
+      res.json(singleBook)
+    } else {
+      res.status(404).json({ error: `Book with title ${bookTitle} does not exist`, details: 'error' })
+    }
   } catch (error) {
-    res.status(400).json({ error: `'Something went wrong'`, details: 'error' })
+    res.status(400).json({ error: 'Something went wrong', details: 'error' })
   }
 })
 
