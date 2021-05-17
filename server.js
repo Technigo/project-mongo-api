@@ -10,7 +10,10 @@ mongoose.Promise = Promise
 
 const MusicSchema = new mongoose.Schema({
   "id": Number,
-  "trackName": String,
+  "trackName": {
+    type: String,
+    lowercase: true
+  },
   "artistName": String,
   "genre": String,
   "bpm": Number,
@@ -49,14 +52,14 @@ app.get('/', (_, res) => {
   res.send('Hello, welcome to Top Music backend')
 })
 
-app.get('/tracks', async (req, res) => {
+app.get('/tracks', async (_, res) => {
   const tracks = await Music.find();
   res.json(tracks)
 })
 
 app.get('/tracks/:trackId', async (req, res) => {
   const { trackId } = req.params;
-  const oneTrack = await Music.findOne({ _id: trackId })
+  const oneTrack = await Music.findById(trackId)
   res.json(oneTrack)
 })
 
