@@ -8,7 +8,7 @@ Week 18 of Technigos bootcamp and week 2 with backend.
 
 ## The problem
 
-My biggest issue was to deploy it and still haven't managed to. So the routes are not working.
+My biggest issue was to deploy it but got help from a classmate who recommended an .env file.
 
 ## View it live
 
