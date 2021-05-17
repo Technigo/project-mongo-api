@@ -13,7 +13,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Books schema
 const bookSchema = new mongoose.Schema({
   bookID: Number,
   title: {
@@ -36,8 +35,6 @@ const bookSchema = new mongoose.Schema({
   text_reviews_count: Number
 })
 
-// Book Model (with schema added)
-// mongo creates collection and calls it with lowercase and adds s to end = books
 const Book = mongoose.model('Book', bookSchema)
 
 const authorSchema = mongoose.Schema({
@@ -46,9 +43,6 @@ const authorSchema = mongoose.Schema({
 
 const Author = mongoose.model('Author', authorSchema)
 
-// Function to seed/inject data to database
-// if to run function only when we wan to
-// newBook.save is async - server to backend
 if (process.env.RESET_DB) {
   console.log('SEEDING!')
   const seedDB = async () => {
@@ -64,7 +58,6 @@ if (process.env.RESET_DB) {
     })
 
     booksData.forEach(async (item) => {
-    // New Book(item).save()
       const newBook = new Book({
         ...item,
         authors: authorArray.find((singleAuthor) => singleAuthor.authors === item.authors)
@@ -81,24 +74,24 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello Books')
 })
 
+// Endpoint to get all books and search for title by query param
 app.get('/books', async (req, res) => {
-  const { author } = req.query
+  const { title } = req.query
 
   try {
-    if (author) {
+    if (title) {
       const books = await Book.find({ 
-        authors: {
-          $regex: new RegExp(author, "i")
+        title: {
+          $regex: new RegExp(title, 'i')
         }
-      })
+      }).populate('authors')
       res.json(books)
     } else {
-      const books = await Book.find()
+      const books = await Book.find().populate('authors')
       res.json(books)
     }
   } catch (error) {
@@ -106,38 +99,73 @@ app.get('/books', async (req, res) => {
   }
 })
 
+// Endpoint to get bookID by path param
 app.get('/books/:bookId', async (req, res) => {
   const { bookId } = req.params
 
   try {
-    const singleBook = await Book.findById(bookId)
+    const singleBook = await Book.findById(bookId).populate('authors')
 
-    res.json(singleBook)
-  } catch (error) {
-    res.status(404).json({ error: `Book with id number ${bookId} does not excist`, details: 'error' })
-  }
-})
-
-app.get('/books/title/:bookTitle', async (req, res) => {
-  const { bookTitle } = req.params
-
-  try {
-    const singleBook = await Book.findOne({
-      title: {
-        $regex: new RegExp(bookTitle, "i")
-      }
-    })
     if (singleBook) {
       res.json(singleBook)
     } else {
-      res.status(404).json({ error: `Book with title ${bookTitle} does not exist`, details: 'error' })
+      res.status(404).json({ error: `Book with id number ${bookId} does not excist`, details: 'error' })
     }
   } catch (error) {
-    res.status(400).json({ error: 'Something went wrong', details: 'error' })
+    res.status(400).json({ error: 'Invalid request', details: 'error' })
   }
 })
 
-// Start the server
+// Enpoint to get author by path param for boook id
+app.get('/books/:bookId/author', async (req, res) => {
+  const { bookId } = req.params
+
+  try {
+    const singleBook = await (await Book.findById(bookId)).populate('authors')
+    if (singleBook) {
+      const author = await Author.findById(singleBook.authors)
+      res.json(author)
+    } else {
+      res.status(404).json({ error: 'Author not found', details: 'error' })
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Invalid request', details: 'error' })
+  }
+})
+
+// Endpoint to get author id by path param
+app.get('/authors/:authorID', async (req, res) => {
+  const { authorID } = req.params
+
+  try {
+    const author = await Author.findById(authorID)
+    if (author) {
+      res.json(author)
+    } else {
+      res.status(404).json({ error: `Author with ${authorID} not found`, details: 'error' })
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Invalid request' })
+  }
+})
+
+// Endpoint to get all books from author id by path param
+app.get('/author/:authorID/books', async (req, res) => {
+  const { authorID } = req.params
+
+  try {
+    const author = await Author.findById(authorID)
+    if (author) {
+      const books = await Book.find({ authors: mongoose.Types.ObjectId(author.id) })
+      res.json(books)
+    } else {
+      res.status(404).json({ error: 'Author id not found', details: 'error' })
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Invalid request' })
+  }
+})
+
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
