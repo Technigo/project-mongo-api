@@ -1,6 +1,8 @@
 # Mongo API Project  
 This API can be used e.g. to create exercise programs.
 
+---
+
 ## Available endpoints and queries
 
 ### All exercises  
@@ -23,6 +25,8 @@ This API can be used e.g. to create exercise programs.
 ### All single-joint exercises  
 /category/single-joint
 
+---
+
 ## Learning goals
 
 How to:
@@ -36,6 +40,8 @@ Techniques used:
 * Node.js
 * MongoDB and Mongoose
 * NoSQL
+
+---
 
 ## View it live
 
