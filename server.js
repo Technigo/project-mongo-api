@@ -125,7 +125,7 @@ app.get('/books/:bookId', async (req, res) => {
   }
 })
 
-// Enpoint to get author by path param for boook id
+// Endpoint to get author by path param for book id
 app.get('/books/:bookId/author', async (req, res) => {
   const { bookId } = req.params
 
