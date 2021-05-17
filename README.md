@@ -21,3 +21,34 @@ If I had more time, I would implement a frontend to by API where I display the d
 ## View it live
 
 Link to my deployed API: https://project-mongo-api-isabellam5.herokuapp.com/
+
+
+## Documentation
+
+### ENDPOINTS
+- ```GET /```
+
+Displays all endpoints for this API using npm package express-list-endpoints.
+
+#### BOOKS
+- ```GET /books```
+- ```GET /books/toprating```
+- ```GET /books/shortread```
+
+Endpoints for the API.
+
+#### SINGLE BOOK
+- ```GET /books/:bookId```
+
+Endpoint for a single book by id.
+
+
+### QUERIES
+
+Use endpoint ```GET /books```
+
+Filter by either author or title (optional). Case insensitive.
+
+* Example query for author: ```GET /books?author=adams```
+* Example query for title: ```GET /books?title=bill```
+* Example query for isbn: ```GET /books?isbn=439785960```
