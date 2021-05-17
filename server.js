@@ -26,30 +26,15 @@ const Serie= mongoose.model('Series', {
   type: String
 })
 
-/* const newSerie = new Serie({
-  show_id: 80000001,
-  title: 'Learning how to code',
-  director: 'Technigo',
-  cast: 'Maidelin Rubio',
-  country:'Sweden',
-  date_added: 'January 11 2021',
-  release_year: 2021,
-  rating:' 5 / 5',
-  duration:' 1 season',
-  listed_in:'english',
-  description: 'journal abour how to code',
-  type: 'TV Show'
-
-})
-newSerie.save() */
 
 if(process.env.RESET_DB){
 
   const seedDB = async ()=>{
       await Serie.deleteMany()
 
-      await netflixData.forEach( item=>{
-      const newSerie = new Serie(item).save()
+      netflixData.forEach(async (item)=>{
+      const newSerie = new Serie(item)
+      await newSerie.save()
       })
   }
   seedDB();
