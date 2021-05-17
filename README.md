@@ -1,13 +1,54 @@
-# Mongo API Project
+# Mongo API Project 🐙
 
-Replace this readme with your own information about your project. 
+I've built a RESTful API using a database to store and retrieve data. 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+I used MongoDB for the database, mongoose for the modelling of data and Express.js (Node.js framework).
+
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The main task was to build a RESTful API and to use a database to store and retrieve data.
+
+I started with setting up the database using MongoDB and built a model for the data that I chose (books data) using mongoose. After that I set up an async function to seed the database using the aforementioned mongoose model with an if statement around it to ensure that the database is only being reseeded when I want it to. With the database in place I began thinking about what kind of endpoints I would like to have for the data. I then started to create the endpoints home, all books, books by top rating (4 or higher), short read and id. I also implemented filters via query parameters to filter, via mongoose, the data returned from endpoints which then return an array of data.
+
+I've also implemented error handling throughout the project. For instance, when searching for a book by id, I've set up an if statement to handle when the specific id doesn't exist and return some useful data in the response instead. I've also implemented try and catch blocks.
+
+I chose to use the npm package express-list-endpoints to list the endpoints in the home endpoint. I continuously tested my API using Postman and checked out my database using MongoDB Compass. 
+
+If I had more time, I would implement a frontend to by API where I display the documentation for my API. I would also like to implement pages to return only a selection of results from the array and to use mongoose's aggregate function.
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Link to my deployed API: https://project-mongo-api-isabellam5.herokuapp.com/
+
+
+## Documentation
+
+### ENDPOINTS
+- ```GET /```
+
+Displays all endpoints for this API using npm package express-list-endpoints.
+
+#### BOOKS
+- ```GET /books```
+- ```GET /books/toprating```
+- ```GET /books/shortread```
+
+Endpoints for the API.
+
+#### SINGLE BOOK
+- ```GET /books/:bookId```
+
+Endpoint for a single book by id.
+
+
+### QUERIES
+
+Use endpoint ```GET /books```
+
+Filter by either author or title (optional). Case insensitive.
+
+* Example query for author: ```GET /books?author=adams```
+* Example query for title: ```GET /books?title=bill```
+* Example query for isbn: ```GET /books?isbn=439785960```
