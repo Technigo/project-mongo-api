@@ -8,7 +8,7 @@ import { userName, password } from './keys'
 
 dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || `mongodb+srv://${userName}:${password}@cluster0.kerro.mongodb.net/projectMongoApi?retryWrites=true&w=majority`
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongoApi"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
