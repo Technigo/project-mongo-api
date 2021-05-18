@@ -50,7 +50,7 @@ app.use(express.json())
 app.get('/', (req, res) => {
   response.send(listEndpoints(app))
 })
-app.get('/film', async(req, res) => {
+app.get('/goldenglobes/film', async(req, res) => {
   const { film } = req.query
 try {
   if (film) {
@@ -69,7 +69,6 @@ catch {
   res.status(400).json({error: 'An error occurred'})
 }
 })
-
 app.get('/goldenglobes/:id', async (req, res) => {
   const { id } = req.params
 
@@ -80,7 +79,6 @@ app.get('/goldenglobes/:id', async (req, res) => {
     res.status(400).json({error: 'Id do not exist', details: error})
   }
 })
-
 app.get('/goldenglobes', async (req, res) => {
  try {
   const data = await GoldenGlobe.find()
