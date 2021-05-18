@@ -1,13 +1,11 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+The purpose of this project was to learn about using Mongo database and connecting to it
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## The project
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I had some problems with deploying the database. Just setting the env key on Heroku didn't connect my app to the Mongo Atlas database. I followed a video guide provided by Karol to try to set up the env variable as a file in the project but for some reason the app always overlooked this variable and went with the string provided as an else. So I had to put the database url in the string, I put the sensitive data in a seperate file that I included in the gitignore to protect the data, but the app crashed in Heroku when the variables were excluded from the deploy due to them being in the gitignore. So for now my sensitive data are visible for the world, unfortunately. Hopefully I will get som clearity to why my env variable wasn't working in next week.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://sandra-project-mongo-api.herokuapp.com/
