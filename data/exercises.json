@@ -4,7 +4,7 @@
         "name": "back squat",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles",
-        "target_muscle": "gluteus maximus, rectus femoris",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "pidä keskivartalo tiukkana, kantapäät pysyvät maassa, linjaa polvet kakkosvarpaan päälle, liike lähtee lonkan koukistuksella, kyykkää jalkojen väliin",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -13,7 +13,7 @@
         "name": "front squat",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles",
-        "target_muscle": "gluteus maximus, rectus femoris",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -31,7 +31,7 @@
         "name": "pistol squat",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles",
-        "target_muscle": "gluteus maximus, rectus femoris",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -40,7 +40,7 @@
         "name": "lunge",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles",
-        "target_muscle": "gluteus maximus, rectus femoris",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -49,7 +49,7 @@
         "name": "walking lunge",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles",
-        "target_muscle": "gluteus maximus, rectus femoris",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -58,7 +58,7 @@
         "name": "jumping jacks",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles",
-        "target_muscle": "gluteus maximus, rectus femoris",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -94,7 +94,7 @@
         "name": "air squat",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles",
-        "target_muscle": "gluteus maximus, rectus femoris",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -103,7 +103,7 @@
         "name": "leg press",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles",
-        "target_muscle": "gluteus maximus, rectus femoris",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -112,7 +112,7 @@
         "name": "single-leg press",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles",
-        "target_muscle": "gluteus maximus, rectus femoris",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -175,7 +175,7 @@
         "name": "pull-up",
         "category": "multi-joint exercise",
         "muscle_group": "upper body pulling muscles",
-        "target_muscle": "",
+        "target_muscle": "latissimus dorsi, biceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -184,7 +184,7 @@
         "name": "weighted pull-up",
         "category": "multi-joint exercise",
         "muscle_group": "upper body pulling muscles",
-        "target_muscle": "",
+        "target_muscle": "latissimus dorsi, biceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -193,7 +193,7 @@
         "name": "ring row",
         "category": "multi-joint exercise",
         "muscle_group": "upper body pulling muscles",
-        "target_muscle": "",
+        "target_muscle": "latissimus dorsi, biceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -202,7 +202,7 @@
         "name": "row",
         "category": "multi-joint exercise",
         "muscle_group": "upper body pulling muscles",
-        "target_muscle": "",
+        "target_muscle": "latissimus dorsi, biceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -229,7 +229,7 @@
         "name": "good morning",
         "category": "single-joint exercise",
         "muscle_group": "lower body pulling muscles, middle body",
-        "target_muscle": "",
+        "target_muscle": "gluteus maximus, erector spinae",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -238,7 +238,7 @@
         "name": "muscle up",
         "category": "multi-joint exercise",
         "muscle_group": "upper body pulling muscles, upper body pushing muscles",
-        "target_muscle": "",
+        "target_muscle": "latissimus dorsi, biceps, pectoralis major, triceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -247,7 +247,7 @@
         "name": "box jump",
         "category": "multi-joint exercise",
         "muscle_group": "lower body",
-        "target_muscle": "",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -256,7 +256,7 @@
         "name": "wall walk",
         "category": "multi-joint exercise",
         "muscle_group": "upper body",
-        "target_muscle": "",
+        "target_muscle": "latissimus dorsi, deltoideus, trapezius, abdominals, obliques, triceps, gluteus maximus",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -283,7 +283,7 @@
         "name": "rope climb",
         "category": "multi-joint exercise",
         "muscle_group": "whole body",
-        "target_muscle": "",
+        "target_muscle": "latissimus dorsi, biceps, abdominals",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -292,7 +292,7 @@
         "name": "slam ball",
         "category": "multi-joint exercise",
         "muscle_group": "whole body",
-        "target_muscle": "",
+        "target_muscle": "gluteus maximus, quadriceps femoris, abdominals, biceps, latissimus dorsi, deltoideus, biceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -301,7 +301,7 @@
         "name": "burpee",
         "category": "multi-joint exercise",
         "muscle_group": "whole body",
-        "target_muscle": "",
+        "target_muscle": "gluteus maximus, quadriceps femoris, abdominals, deltoideus, pectoralis major, triceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -355,7 +355,7 @@
         "name": "clean",
         "category": "multi-joint exercise",
         "muscle_group": "whole body",
-        "target_muscle": "gluteus maximus, hamstrings, quadriceps",
+        "target_muscle": "gluteus maximus, hamstrings, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -379,10 +379,10 @@
     },
     {
         "exerciseID": 43,
-        "name": "clean&jerk",
+        "name": "arnold press",
         "category": "multi-joint exercise",
-        "muscle_group": "whole body",
-        "target_muscle": "",
+        "muscle_group": "upper body",
+        "target_muscle": "deltoideus, triceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
@@ -418,58 +418,58 @@
         "name": "goblet squat",
         "category": "multi-joint exercise",
         "muscle_group": "lower body pushing muscles, middle body",
-        "target_muscle": "",
+        "target_muscle": "gluteus maximus, quadriceps femoris, abdominals",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
     {
         "exerciseID": 48,
-        "name": "",
-        "category": "multi-joint exercise",
-        "muscle_group": "whole body",
-        "target_muscle": "",
+        "name": "barbell bicep curl",
+        "category": "sigle-joint exercise",
+        "muscle_group": "upper body, arms",
+        "target_muscle": "biceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
     {
         "exerciseID": 49,
-        "name": "clean&jerk",
-        "category": "multi-joint exercise",
-        "muscle_group": "whole body",
-        "target_muscle": "",
+        "name": "hammer curls",
+        "category": "sigle-joint exercise",
+        "muscle_group": "upper body, arms",
+        "target_muscle": "biceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
     {
         "exerciseID": 50,
-        "name": "clean&jerk",
+        "name": "hack squat",
         "category": "multi-joint exercise",
-        "muscle_group": "whole body",
-        "target_muscle": "",
+        "muscle_group": "lower body",
+        "target_muscle": "gluteus maximus, quadriceps femoris",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
     {
         "exerciseID": 51,
-        "name": "clean&jerk",
+        "name": "T-bar row",
         "category": "multi-joint exercise",
-        "muscle_group": "whole body",
-        "target_muscle": "",
+        "muscle_group": "upper body",
+        "target_muscle": "latissimus dorsi, biceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
     {
         "exerciseID": 52,
-        "name": "clean&jerk",
+        "name": "close grip bench press",
         "category": "multi-joint exercise",
-        "muscle_group": "whole body",
-        "target_muscle": "",
+        "muscle_group": "upper body",
+        "target_muscle": "pectoralis major, triceps",
         "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut nisl non nisi mollis mollis. Ut ut aliquam sapien. Duis commodo, mauris sit amet lobortis facilisis, lectus lacus vulputate mi, quis ullamcorper urna augue sed dui.",
         "img": "Lorem ipsum dolor sit amet."
     },
     {
         "exerciseID": 53,
-        "name": "clean&jerk",
+        "name": "kettlebell clean",
         "category": "multi-joint exercise",
         "muscle_group": "whole body",
         "target_muscle": "",
@@ -478,7 +478,7 @@
     },
     {
         "exerciseID": 54,
-        "name": "clean&jerk",
+        "name": "kettlebell clean and press",
         "category": "multi-joint exercise",
         "muscle_group": "whole body",
         "target_muscle": "",
@@ -487,7 +487,7 @@
     },
     {
         "exerciseID": 55,
-        "name": "clean&jerk",
+        "name": "kettlebell windmill",
         "category": "multi-joint exercise",
         "muscle_group": "whole body",
         "target_muscle": "",
@@ -496,7 +496,7 @@
     },
     {
         "exerciseID": 56,
-        "name": "clean&jerk",
+        "name": "kettlebell thruster",
         "category": "multi-joint exercise",
         "muscle_group": "whole body",
         "target_muscle": "",
@@ -505,7 +505,7 @@
     },
     {
         "exerciseID": 57,
-        "name": "clean&jerk",
+        "name": "russian twist",
         "category": "multi-joint exercise",
         "muscle_group": "whole body",
         "target_muscle": "",
