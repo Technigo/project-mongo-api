@@ -50,6 +50,14 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.use((req, res, next) => {
+  if(mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service not available' })
+  }
+})
+
 app.get('/', (_, res) => {
   res.send('Hello, welcome to Top Music backend')
 })
