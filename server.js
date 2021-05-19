@@ -7,14 +7,6 @@ import netflixData from './data/netflix-titles.json';
 
 dotenv.config();
 
-// app.use((req, res, next) => {
-//   if (mongoose.connection.readyState === 1) {
-//     next();
-//   } else {
-//     res.status(503).json({ error: 'Service unavailable' });
-//   }
-// });
-
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
