@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import topmusic from "./data/top-music.json";
+import topmusics from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -16,14 +16,17 @@ const topMusicSchema = new mongoose.Schema({
 
 const TopMusic = mongoose.model("TopMusic", topMusicSchema);
 
-const seedDB = () => {
-  topmusic.forEach((item) => {
-    const newTopMusic = new TopMusic(item);
-    newTopMusic.save();
-  });
-};
+if (process.env.RESET_DB) {
+  const seedDB = async () => {
+    await TopMusic.deleteMany();
 
+    await topmusics.forEach((item) => {
+      const newTopMusic = new TopMusic(item);
+      newTopMusic.save();
+  });
+}
 seedDB();
+}
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -34,6 +37,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
+
+app.get('/topmusics', async (req, res) => {
+  const topmusics = await TopMusic.find();
+  res.json(topmusics)
+})
 
 app.listen(port, () => {
   // eslint-disable-next-line
