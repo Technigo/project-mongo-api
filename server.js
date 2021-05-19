@@ -56,13 +56,26 @@ app.get('/', (_, res) => {
 
 app.get('/tracks', async (_, res) => {
   const tracks = await Music.find();
-  res.json(tracks)
+  if (tracks) {
+    res.json(tracks)
+  } else {
+    res.status(404).json({ error: 'Tracks not found' })
+  }
+  
 })
 
 app.get('/tracks/:trackId', async (req, res) => {
-  const { trackId } = req.params;
-  const oneTrack = await Music.findById(trackId)
-  res.json(oneTrack)
+  try {
+    const { trackId } = req.params;
+    const oneTrack = await Music.findById(trackId)
+    if (oneTrack) {
+      res.json(oneTrack)
+    } else {
+      res.status(404).send({ error: 'Tracks not found' })
+    }
+  } catch (err) {
+    res.status(400).send({ error: 'Invalid track ID'})
+  }
 })
 
 // app.get('/avocados', (request, response) => {
