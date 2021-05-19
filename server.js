@@ -7,7 +7,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Character = mongoose.model('Character', {
+const characterSchema = new mongoose.Schema({
   name: String,
   kind: String,
   age: String,
@@ -20,34 +20,38 @@ const Character = mongoose.model('Character', {
   maneSix: Boolean
 });
 
-const newCharacter = new Character({
-  name: "Big McIntosh",
-  kind: "Earth Pony",
-  age: "Adult Pony",
-  residence: "Ponyville",
-  cutieMark: "Half a green apple",
-  coatColor: "Red",
-  eyeColor: "Green",
-  maneColor: "Orange",
-  skills: "Farming, Repairs, Singing, Strength, and saying Yup",
-  maneSix: false
-});
-newCharacter.save();
+// const newCharacter = new Character({
+//   name: "Big McIntosh",
+//   kind: "Earth Pony",
+//   age: "Adult Pony",
+//   residence: "Ponyville",
+//   cutieMark: "Half a green apple",
+//   coatColor: "Red",
+//   eyeColor: "Green",
+//   maneColor: "Orange",
+//   skills: "Farming, Repairs, Singing, Strength, and saying Yup",
+//   maneSix: false
+// });
+const Character = mongoose.model('Character', characterSchema);
 
-const seedDB = () => {
-  mlpCharacters.forEach(item => {
-    const newCharacter = new Character(item);
-    newCharacter.save();
-  });
+if (process.env.RESET_DB) {
+  const seedDB = async () => {
+    await Character.deleteMany();
+
+    await mlpCharacters.forEach(item => {
+      const newCharacter = new Character(item);
+      newCharacter.save();
+    });
+  }  
+  seedDB();
 }
-
-seedDB();
 
 const port = process.env.PORT || 8000
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
+app.use(express.json())
 
 const mongoURL = process.env.MONGO_URL || 'mongodb://localhost/my-little-pony'
 
