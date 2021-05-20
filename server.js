@@ -69,7 +69,6 @@ app.get('/tracks', async (_, res) => {
   } else {
     res.status(404).json({ error: 'Tracks not found' })
   }
-  
 })
 
 app.get('/tracks/:trackId', async (req, res) => {
@@ -86,27 +85,7 @@ app.get('/tracks/:trackId', async (req, res) => {
   }
 })
 
-// app.get('/avocados', (request, response) => {
-//   const { region } = request.query
-//   if( region ) {
-//     const regionList = avocadoSalesData.filter(avocado => avocado.region.includes(region))
-//     response.json(regionList)
-//   }
-//   response.json(avocadoSalesData)
-// })
 
-// app.get('/avocados/:id', (request, response) => {
-//   const { id } = request.params
-//   const avocado = avocadoSalesData.find(avocado => avocado.id === +id)
-//   if (avocado) {
-//     response.json(avocado)
-//     } 
-//     response.status(404).send(`The requested resource could not be found`)
-// })
-
-
-
-// Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
