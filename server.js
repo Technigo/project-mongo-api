@@ -24,8 +24,6 @@ const treeSchema = new mongoose.Schema({
 const Tree = mongoose.model('Tree', treeSchema)
 
 if (process.env.RESET_DB) {
-  console.log('Resetting database!')
-
   const seedDatabase = async () => {
     await Tree.deleteMany()
 
@@ -84,6 +82,6 @@ app.get('/trees/species', async (req, res) => {
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
+  
 })
 
