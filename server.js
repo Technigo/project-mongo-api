@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import mlpCharacters from './data/my-little-ponies.json';
+import kinds from './data/my-little-ponies-kind.json';
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -9,7 +10,10 @@ mongoose.Promise = Promise
 
 const characterSchema = new mongoose.Schema({
   name: String,
-  kind: String,
+  kind: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Kind'
+  },
   age: String,
   residence: String,
   cutieMark: String,
@@ -22,13 +26,31 @@ const characterSchema = new mongoose.Schema({
 
 const Character = mongoose.model('Character', characterSchema);
 
+const kindSchema = new mongoose.Schema({
+  description: String
+});
+
+const Kind = mongoose.model('Kind', kindSchema)
+
 if (process.env.RESET_DB) {
   const seedDB = async () => {
     await Character.deleteMany();
+    await Kind.deleteMany();
 
-    await mlpCharacters.forEach(item => {
-      const newCharacter = new Character(item);
-      newCharacter.save();
+    const kindsArray = [];
+
+    kinds.forEach(async item => {
+      const kind = new Kind(item);
+      kindsArray.push(kind);
+      await kind.save();
+    })
+
+    mlpCharacters.forEach(async item => {
+      const newCharacter = new Character({
+        ...item,
+        kind: kindsArray.find(singleKind => singleKind.description === item.kind)
+      });
+      await newCharacter.save();
     });
   }  
   seedDB();
@@ -45,9 +67,11 @@ const mongoURL = process.env.MONGO_URL || 'mongodb://localhost/my-little-pony'
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Hello Ponies!🦄')
+  res.send('Hello EveryPony!🦄')
 });
 
+
+//Route to all character Data
 app.get('/characters', async (req, res) => {
   const { name } = req.query;
 
@@ -61,10 +85,16 @@ app.get('/characters', async (req, res) => {
   }
 });
 
+//Route to charactersID path
 app.get('/characters/:characterId', async (req, res) => {
   const { characterId } = req.params;
-  const singleCharacter = await Character.find({ _id: characterId });
-  res.json(singleCharacter);
+
+  try {
+    const singleCharacter = await Character.find({ _id: characterId });
+    res.json(singleCharacter);
+  } catch (error) {
+    res.status(404).json({ error: '404 Discord has worked his chaos magic it seems!', details: error })
+  }
 });
 
 app.get('/characters/name/:characterName', async (req, res) => {
