@@ -8,8 +8,14 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const topMusicSchema = new mongoose.Schema({
-  trackName: String,
-  artistName: String,
+  trackName: {
+    type: String,
+    lowercase: true
+  },
+  artistName: {
+    type: String,
+    lowercase: true
+  },
   genre: String,
   popularity: Number,
 });
@@ -34,14 +40,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
-
+// endpoint - top music
 app.get('/topmusics', async (req, res) => {
   const topmusics = await TopMusic.find();
   res.json(topmusics)
-})
+});
+
+// params - find a specific element like id
+// query - filtering our colection to catch elements
+
+// Endpoint to find music by id using params
+app.get('/topmusics/:musicId', async (req,res) => {
+  const { musicId } = req.params;
+  const singleMusic = await TopMusic.findById(musicId);
+  res.json(singleMusic)
+});
+
+// Edpoint to filter music by track name using query
+app.get('/topmusics/track/:trackName', async (req,res) => {
+  const { trackName } = req.params;
+  const singleTrack = await TopMusic.findOne({ trackName });
+  res.json(singleTrack)
+});
+
 
 app.listen(port, () => {
   // eslint-disable-next-line
