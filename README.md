@@ -1,13 +1,11 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The goal of this project is to build an API using Node.js and Express, store the data on MongoDB and query that data from the API. The database is modelled and manipulated using mongoose.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The biggest challenge for this project was to get my database to work on MongoDB Atlas and to connect it to Heroku server app. I followed all the steps provided, but it was not working until I added environment variables into Config Vars on Heroku. I once again StackOverflow halped me to solve this.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+You can find this API live on Heroku: https://books-base.herokuapp.com/
