@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import booksData from './data/books.json'
 
@@ -48,6 +49,10 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
+
+app.get('/', (req, res) => {
+  res.send(listEndpoints(app))
+})
 
 // An endpoint to get all books in the list or filter by title, author or language
 app.get('/books', async (req, res) => {
