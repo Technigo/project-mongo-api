@@ -20,18 +20,6 @@ const characterSchema = new mongoose.Schema({
   maneSix: Boolean
 });
 
-// const newCharacter = new Character({
-//   name: "Big McIntosh",
-//   kind: "Earth Pony",
-//   age: "Adult Pony",
-//   residence: "Ponyville",
-//   cutieMark: "Half a green apple",
-//   coatColor: "Red",
-//   eyeColor: "Green",
-//   maneColor: "Orange",
-//   skills: "Farming, Repairs, Singing, Strength, and saying Yup",
-//   maneSix: false
-// });
 const Character = mongoose.model('Character', characterSchema);
 
 if (process.env.RESET_DB) {
@@ -49,19 +37,51 @@ if (process.env.RESET_DB) {
 const port = process.env.PORT || 8000
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
+//middlewares
 app.use(cors())
 app.use(express.json())
 
 const mongoURL = process.env.MONGO_URL || 'mongodb://localhost/my-little-pony'
 
-// Start defining your routes here
+// Routes
 app.get('/', (req, res) => {
-  res.send('hello ponies')
+  res.send('Hello Ponies!🦄')
 });
+
+app.get('/characters', async (req, res) => {
+  const { name } = req.query;
+
+  if (name) {
+    const characters = await Character.find({
+      name: {
+        $regex: new RegExp(name, "i") //this operator tells mongo to not care about case sensitivity when searching
+      }
+    });
+    res.json(characters);
+  }
+});
+
+app.get('/characters/:characterId', async (req, res) => {
+  const { characterId } = req.params;
+  const singleCharacter = await Character.find({ _id: characterId });
+  res.json(singleCharacter);
+});
+
+app.get('/characters/name/:characterName', async (req, res) => {
+  const { characterName } = req.params;
+
+  try {
+    const singleCharacter = await Character.findOne({ name: characterName });
+    res.json(singleCharacter);
+  } catch(error) {
+    res.status(400).json({ error: 'Sorry everypony looks like something went wrong!', details: error })
+    }
+});
+
+
 
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running 🦄 on http://localhost:${port}`)
-})
+});

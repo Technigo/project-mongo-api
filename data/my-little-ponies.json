@@ -36,7 +36,7 @@
       "maneSix": true
     },
     {
-      "name": "Flutteryshy",
+      "name": "Fluttershy",
       "kind": "Pegasus", 
       "age": "Adult Pony",
       "residence": "Ponyville",
@@ -166,5 +166,17 @@
       "maneColor": "Dark Blue, Transparent Purple",
       "skills": "Raising the Moon, Dream Walking, Revenge Plots",
       "maneSix": false
-    }
+    },
+    {
+      "name": "Big McIntosh",
+      "kind": "Earth Pony",
+      "age": "Adult Pony",
+      "residence": "Ponyville",
+      "cutieMark": "Half a green apple",
+      "coatColor": "Red",
+      "eyeColor": "Green",
+      "maneColor": "Orange",
+      "skills": "Farming, Repairs, Singing, Strength, and saying Yup",
+      "maneSix": false
+  }
 ]
