@@ -1,8 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
 import mlpCharacters from './data/my-little-ponies.json';
 import kinds from './data/my-little-ponies-kind.json';
+
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -63,7 +67,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const mongoURL = process.env.MONGO_URL || 'mongodb://localhost/my-little-pony'
+const mongoURL = process.env.MONGO_URL || 'mongodb://localhost/myLittlePonyDatabase'
 
 // Routes
 app.get('/', (req, res) => {
