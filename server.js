@@ -78,13 +78,16 @@ app.get('/', (req, res) => {
 //Route to all character Data
 app.get('/characters', async (req, res) => {
   const { name } = req.query;
-
+  
   if (name) {
     const characters = await Character.find({
       name: {
         $regex: new RegExp(name, "i") //this operator tells mongo to not care about case sensitivity when searching
       }
     });
+    res.json(characters);
+  } else {
+    const characters = await Character.find();
     res.json(characters);
   }
 });
@@ -102,7 +105,6 @@ app.get('/characters/:characterId', async (req, res) => {
 });
 
 app.get('/characters/name/:characterName', async (req, res) => {
-  const { characterName } = req.params;
 
   try {
     const singleCharacter = await Character.findOne({ name: characterName });
