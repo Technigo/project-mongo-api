@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+
 import books from './data/mybooks.json'
 
 //Setup to connect to our database
@@ -23,7 +24,7 @@ const Book = mongoose.model('Book', bookSchema)
 
 //Seeding of our database
 if (process.env.RESET_DB) {
-  console.log('SEEDING')
+  
   const seedDB = async () => {
     await Book.deleteMany()
 
@@ -36,7 +37,7 @@ if (process.env.RESET_DB) {
 }
   
 const port = process.env.PORT || 8080
-const app = express()
+const app = express() 
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
@@ -50,25 +51,21 @@ app.get('/', (req, res) => {
 //Reaching for all the books
 app.get('/books', async (req, res) => {
   const { title, authors } = req.query
-
-  if (title) {
+ 
+  try { 
     const books = await Book.find({ 
-      title: {
-        $regex: new RegExp(title, "i")}
-      })
-      res.json(books)
-    } 
-  
-  if (authors) {
-    const books = await Book.find({ 
+      title: { 
+        $regex: new RegExp(title || "", "i")
+      }, 
       authors: {
-        $regex: new RegExp(authors, "i")}
-      })    
-      res.json(books)
-    }
-    
-    const books = await Book.find()
-    res.json(books)  
+        $regex: new RegExp(authors || "", "i")
+      }
+    })
+    res.json(books)    
+  }
+  catch (error) {
+        res.status(404).json({ error:'error'})
+      }
 })
 
 //Reaching one single book
@@ -79,7 +76,7 @@ app.get('/books/:bookId', async (req, res) => {
     const singleBook = await Book.findById(bookId)
     res.json(singleBook)
   } catch(error) {
-    res.status(404).json({ error: "Ooop! Something went wrong.", details: error })
+    res.status(404).json({ error: "Ooops! Something went wrong.", details: error })
   }
 })
 
