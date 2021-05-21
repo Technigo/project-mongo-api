@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import netflixData from './data/netflix-titles.json'
 
@@ -39,13 +40,20 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(listEndpoints(app))
 })
 
 app.get('/netflixData', async (req, res) => {
   const netflixData = await NetflixData.find()
   res.json(netflixData)
 })
+
+app.get('/netflixData/:showId', async (req, res) => {
+  const { showId } = req.params
+  const singleShow = await NetflixData.findById(showId)
+  res.json(singleShow)
+})
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
