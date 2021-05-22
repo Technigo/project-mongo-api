@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 
 import Events from '../data/ticketmaster.json'
 
-const Event = require('./models/Event');
+const Event = require('../models/Event');
 const router = express.Router();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-db"
