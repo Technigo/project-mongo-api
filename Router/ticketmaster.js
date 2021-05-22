@@ -4,82 +4,13 @@ import mongoose from 'mongoose'
 
 import Events from '../data/ticketmaster.json'
 
+const Event = require('./models/Event');
 const router = express.Router();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-db"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const DatesSchema = mongoose.Schema([
-  {
-    _id: false,
-    start: {
-      type: [
-        {
-          _id: false,
-          dateTime: String
-        }
-      ]
-    }
-  }
-])
-
-const VenuesSchema = mongoose.Schema([
-  {
-    _id: false,
-    name: String,
-    id: String,
-    url: String,
-    type: {
-      type: String
-    },
-    country: Object
-  }
-]);
-
-const EventSchema = mongoose.Schema({
-  name: {
-    type: String,
-    require: true
-  },
-  type: {
-    type: String,
-    require: true
-  },
-  images: {
-    type: [
-      { 
-        _id: false, 
-        url: String, 
-        width: Number, 
-        height: Number 
-      }
-    ]
-  },
-  dates: {
-    type: DatesSchema
-  },
-  _embedded: {
-    type: [
-      {
-        _id: false,
-        venues: {
-          type: [
-
-            VenuesSchema
-          ]
-        },
-        attractions: {
-          type: [{
-            name: String
-          }]
-        }
-      }
-    ]
-  }
-});
-
-const Event = mongoose.model("Event", EventSchema);
 
 if (process.env.RESET_DB) {
   const seedDB = async () => {
@@ -142,7 +73,7 @@ router.get('/events/summer21', async (req, res) => {
   }
 })
 
-router.get('/events/id/:id', async (req, res) => {
+router.get('/events/:id', async (req, res) => {
   const { id } = req.params;
   try {
     await Event.findById(id)
