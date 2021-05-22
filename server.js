@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
   res.send('Hola world')
 })
 
-//Reaching for all the books
+//Reaching for all the books, by title and author
 app.get('/books', async (req, res) => {
   const { title, authors } = req.query
  
