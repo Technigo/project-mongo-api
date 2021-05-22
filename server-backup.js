@@ -73,7 +73,7 @@ if (process.env.RESET_DB) {
       const newCharacter = new Character({
         ...item,
         kind: kindsArray.find(singleKind => singleKind.description === item.kind),
-        residence: residencesArray.find(singleResidence => singleResidence.place === item.residence)
+        residence: residencesArray.find(singleResidence => singleResidence.description === item.residence)
       });
       await newCharacter.save();
     });
@@ -107,27 +107,25 @@ app.get('/characters', async (req, res) => {
       name: {
         $regex: new RegExp(name, "i") //this operator tells mongo to not care about case sensitivity when searching
       }
-    })
+    }).populate('kind').populate('residence') //populates the type of pony
     res.json(characters);
 
-  } if (kind){
-    const characters = await Character.find({
+  } else if (kind){
+    const characters = await Character.find().populate('kind');
       kind: {
         $regex: new RegExp(kind, "i") 
       }
-    });
     res.json(characters);
 
   } else if (residence){
-    const characters = await Character.find({
+    const characters = await Character.find().populate('residence');
       residence: {
         $regex: new RegExp(residence, "i") 
       }
-    });
     res.json(characters);
 
   } else {
-    const characters = await Character.find().populate('kind').populate('residence');
+    const characters = await Character.find().populate('kind')
     res.json(characters);
   }
 });
