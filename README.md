@@ -1,13 +1,24 @@
 # Mongo API Project
+This was a project made during the Technigo bootcamp. The aim was to use a database to store and retrieve data from, and use that data to produce a RESTful API. 
 
-Replace this readme with your own information about your project. 
+## My project
+I used a dataset about bookreviews. My API contains queries for filtering on author, title and language, and if neither is queried all books/objects will be shown. If the query doesn't return a result the API will show an empty array. I made params to find ID and ISBN. If nothing is found an error message is shown. There's also an endpoint to get a top-10 list of books with highest average rating in reviews. 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Techs/tools used
+* Node.js
+* Express
+* JavaScript
+* MongoDB
+* Mongoose
+* Postman
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+## Endpoints
+* '/' - See a list of endpoints
+* '/book' - See all books
+* '/books?author=[...]&title=[...] - Search for authors and/or title
+* '/books/[id] - Search for book by ID
+* '/books/isbn/[isbn] - Search for book by ISBN
+* '/books/top10' - Get a list of the 10 books with the highest rating
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://books-mongodb.herokuapp.com/
