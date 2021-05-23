@@ -41,9 +41,9 @@ const kindSchema = new mongoose.Schema({
 
 const Kind = mongoose.model('Kind', kindSchema)
 
-//Schema for Residences collection
+//Schema for Residences collection (not working at moment)
 const residenceSchema = new mongoose.Schema({
-  description: String
+  place: String
 });
 
 const Residence = mongoose.model('Residence', residenceSchema)
@@ -54,14 +54,14 @@ if (process.env.RESET_DB) {
     await Kind.deleteMany();
     await Residence.deleteMany();
 
-    const kindsArray = [];
+    const kindsArray = [];  
     const residencesArray = [];
 
     kinds.forEach(async item => {
       const kind = new Kind(item);
       kindsArray.push(kind);
       await kind.save();
-    });
+    });   
 
     residences.forEach(async item => {
       const residence = new Residence(item);
@@ -100,7 +100,7 @@ app.get('/', (req, res) => {
 app.get('/characters', async (req, res) => {
   const { name } = req.query;
   const { kind } = req.query;
-  const { residence } = req.query;
+  // const { residence } = req.query;
   
   if (name) {
     const characters = await Character.find({
@@ -109,23 +109,21 @@ app.get('/characters', async (req, res) => {
       }
     })
     res.json(characters);
-
-  } if (kind){
+    //CURRENTLY NOT WORKING FIX LATER
+  } else if (kind){
     const characters = await Character.find({
       kind: {
         $regex: new RegExp(kind, "i") 
       }
     });
     res.json(characters);
-
-  } else if (residence){
-    const characters = await Character.find({
-      residence: {
-        $regex: new RegExp(residence, "i") 
-      }
-    });
-    res.json(characters);
-
+  // } else if (residence){
+  //   const characters = await Character.find({
+  //     residence: {
+  //       $regex: new RegExp(residence, "i") 
+  //     }
+  //   });
+  //   res.json(characters);
   } else {
     const characters = await Character.find().populate('kind').populate('residence');
     res.json(characters);
@@ -140,17 +138,23 @@ app.get('/characters/:characterId', async (req, res) => {
     const singleCharacter = await Character.find({ _id: characterId });
     res.json(singleCharacter);
   } catch (error) {
-    res.status(404).json({ error: '404 Discord has worked his chaos magic it seems!', details: error })
+    res.status(404).json({ error: '404 Discord has worked his chaos magic and suddenly this page can not be found!', details: error })
   }
 });
 
-app.get('/characters/name/:characterName', async (req, res) => {
-//wanted tos ee the difference between a name query and a route/endpoint
+app.get('/name/:characterName', async (req, res) => {
+//wanted to see the difference between a name query and a route/endpoint
+  const { characterName } = req.params;
+
   try {
-    const singleCharacter = await Character.findOne({ name: characterName });
+    const singleCharacter = await Character.findOne({ 
+      name: {
+        $regex: new RegExp(characterName, "i") 
+      } 
+    });
     res.json(singleCharacter);
   } catch(error) {
-    res.status(400).json({ error: 'Sorry everypony looks like something went wrong!', details: error })
+    res.status(400).json({ error: '400 Sorry everypony looks like something went wrong!', details: error })
     }
 });
 // Start the server
