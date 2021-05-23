@@ -1,39 +1,87 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import netflixData from './data/netflix-titles.json';
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.Promise = Promise
+dotenv.config();
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
-const port = process.env.PORT || 8080
-const app = express()
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(bodyParser.json())
+const ReleaseYear = mongoose.model('ReleaseYear', {
+  release_year: Number,
+});
+
+const Movie = mongoose.model('Movie', {
+  title: String,
+  director: String,
+  release_year: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ReleaseYear',
+  },
+});
+
+if (process.env.RESET_DB) {
+  const seedDB = async () => {
+    await Movie.deleteMany();
+    await ReleaseYear.deleteMany();
+
+    await netflixData.forEach((item) => {
+      const newYear = new ReleaseYear(item);
+      newYear.save();
+      const newMovie = new Movie({ ...item, release_year: newYear });
+      newMovie.save();
+    });
+  };
+
+  seedDB();
+}
+
+const port = process.env.PORT || 8080;
+const app = express();
+
+app.use(cors());
+app.use(express.json());
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
-})
+app.get('/movies', async (req, res) => {
+  const movies = await Movie.find().populate('release_year');
+  res.json(movies);
+});
+
+app.get('/movies/:id', async (req, res) => {
+  const movies = await await Movie.findById(req.params.id);
+  if (movies) {
+    res.json(movies);
+  } else {
+    res.status(404).json({ error: 'Movie Not Found' });
+  }
+});
+
+app.get('/years', async (req, res) => {
+  const years = await ReleaseYear.find();
+  res.json(years);
+});
+
+app.get('/:title', (req, res) => {
+  try {
+    Movie.findOne({ title: req.params.title }).then((movie) => {
+      if (movie) {
+        res.json(movie);
+      } else {
+        res.status(404).json({ error: 'Not Found' });
+      }
+    });
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid user ID' });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
-})
+  console.log(`Server running on http://localhost:${port}`);
+});
