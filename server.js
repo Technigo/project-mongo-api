@@ -73,7 +73,7 @@ app.get('/categories', async (req, res) => {
 app.get('/categories/:categoryId/nominees', async (req, res) => {
   const { categoryId } = req.params
   const { awardYear, nominee, film, win } = req.query
-  
+
   try {
     const query = {}
     query.category = categoryId
@@ -89,7 +89,7 @@ app.get('/categories/:categoryId/nominees', async (req, res) => {
     if (win) {
       query.win = win
     }
-    
+
     const nomineesCategory = await Nominee.find(query).populate('category')
     if (nomineesCategory) {
       res.json(nomineesCategory);
@@ -120,7 +120,7 @@ app.get('/nominees', async (req, res) => {
 
 app.get('/nominees/:id', async (req, res) => {
   const { id } = req.params
-  try {  
+  try {
     const nominee = await Nominee.findById(id)
     if (nominee) {
       res.json(nominee)
@@ -133,19 +133,22 @@ app.get('/nominees/:id', async (req, res) => {
 })
 
 app.get('/winners', async (req, res) => {
-  const { nominee, film, page, perPage } = req.query
+  const { nominee, film, page, perPage, year } = req.query
+
+  const query = {
+    win: true,
+    nominee: {
+      $regex: new RegExp(nominee || "", "i")
+    },
+    film: {
+      $regex: new RegExp(film || "", "i")
+    }
+  }
+  if (year) query.year_award = +year
   try {
     const winners = await Nominee.aggregate([
       {
-        $match: {
-          win: true,
-          nominee: {
-            $regex: new RegExp(nominee || "", "i")
-          },
-          film: {
-            $regex: new RegExp(film || "", "i")
-          }
-        }
+        $match: query
       },
       {
         $project: {
@@ -157,10 +160,10 @@ app.get('/winners', async (req, res) => {
         }
       },
       {
-        $skip: Number((page - 1) * perPage + 1)
+        $skip: Number((page || 1 - 1) * perPage || 10 + 1)
       },
       {
-        $limit: Number(perPage)
+        $limit: Number(perPage || 10)
       }
     ]);
     res.json(winners);
@@ -171,7 +174,7 @@ app.get('/winners', async (req, res) => {
 
 app.get('/winners/:id', async (req, res) => {
   const { id } = req.params
-  try {  
+  try {
     const winner = await Nominee.findById(id)
     if (winner) {
       res.json(winner)
