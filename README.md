@@ -20,11 +20,11 @@ This project's goal is to look at how to use Mongodb to store data, and how to q
 # List of endpoints
 
 * '/' - You see a list of endpoints
-* '/allBooks' - You get a list of all books
-* '/id/:id' - Find a book by it's id.
-* '/textreviews' -List the 20 books with most textreviews
-* '/author/:author' - Find author
-* '/books' - query on author &/or title
+* '/books' - get all books and you can add query to filter on author &/or title
+* '/books/:id' - Find a book by it's id.
+* '/top20' -List the 20 books with most textreviews
+* '/books/author/:author' - Find author
+
 
 # View it live ✨
 

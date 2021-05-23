@@ -13,7 +13,6 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const Book = mongoose.model('Book', {
-  bookID: Number,
   title: String,
   authors: String,
   average_rating: Number,
@@ -32,30 +31,34 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// Defines the port the app will run on. Defaults to 8080, but can be
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json());
 
-// Start defining your routes here
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-// endpoint to get all books
-app.get('/allBooks', async (req, res) => {
-  const books = await Book.find()
-  res.json(books)
+app.get('/books', async (req, res) => {
+  const { title, author } = req.query
+  const titleRegex = new RegExp(title, 'i')
+  const authorRegex = new RegExp(author, 'i')
+
+  try {
+    const books = await Book.find({
+      title: titleRegex,
+      authors: authorRegex
+    })
+    res.json(books)
+  } catch (error) {
+    res.status(400).json({ message: 'something went wrong', error })
+  }
 })
 
 // endpoint to get a single book by id
-app.get('/id/:id', async (req, res) => {
+app.get('/books/:id', async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
     res.status(404).json({ error: 'Invalid object id syntax' })
     return;
@@ -73,14 +76,14 @@ app.get('/id/:id', async (req, res) => {
   }
 })
 
-app.get('/textreviews', async (req, res) => {
+app.get('/top20', async (req, res) => {
   let books = await Book.find()
   books = books.sort((a, b) => b.text_reviews_count - a.text_reviews_count);
   res.json(books.slice(0, 20));
 })
 
 // Find author using reqexpression
-app.get('/author/:author', async (req, res) => {
+app.get('/books/author/:author', async (req, res) => {
   const { author } = req.params
   const authorRegex = new RegExp(author, 'i')
   const books = await Book.find({ authors: authorRegex })
@@ -92,17 +95,6 @@ app.get('/author/:author', async (req, res) => {
   }
 })
 
-// query to search for title and/or author
-app.get('/books', async (req, res) => {
-  const { title, author } = req.query
-  const titleRegex = new RegExp(title, 'i')
-  const authorRegex = new RegExp(author, 'i')
-  const books = await Book.find({
-    title: titleRegex,
-    authors: authorRegex
-  })
-  res.json(books)
-})
 
 // Start the server
 app.listen(port, () => {
