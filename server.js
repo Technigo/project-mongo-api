@@ -160,10 +160,10 @@ app.get('/winners', async (req, res) => {
         }
       },
       {
-        $skip: Number((page || 1 - 1) * perPage || 10 + 1)
+        $skip: ((+page - 1) * perPage) || 0
       },
       {
-        $limit: Number(perPage || 10)
+        $limit: +perPage || 10
       }
     ]);
     res.json(winners);
