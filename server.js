@@ -61,7 +61,7 @@ app.get('/books/:bookId', async (req, res) => {
     const book = await Book.findById(bookId)
     res.json(book)
   } catch (error) {
-    res.status(400).json({ error: 'Something went wrong', details: error })
+    res.status(404).json({ error: 'Something went wrong', details: error })
   }
 })
 
@@ -79,7 +79,7 @@ app.get('/books', async (req, res) => {
       if (booksQueried.length > 0) {
         res.json(booksQueried)
       } else {
-        res.status(400).json({ error: 'Invalid request: not found' })
+        res.status(404).json({ error: 'Invalid request: not found' })
       }
     }
   } catch (error) {
