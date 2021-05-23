@@ -54,7 +54,6 @@ app.get('/movies', async (req, res) => {
 
 app.get('/movies/:id', async (req, res) => {
   const movies = await await Movie.findById(req.params.id);
-  console.log(movies);
   if (movies) {
     res.json(movies);
   } else {
