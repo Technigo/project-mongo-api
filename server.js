@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import listEndpoints from 'express-list-endpoints';
 
 import mlpCharacters from './data/my-little-ponies.json';
 import kinds from './data/my-little-ponies-kind.json';
@@ -92,7 +93,7 @@ const mongoURL = process.env.MONGO_URL || 'mongodb://localhost/myLittlePonyDatab
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Hello EveryPony!🦄')
+  res.send(listEndpoints(app))
 });
 
 

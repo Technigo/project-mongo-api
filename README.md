@@ -25,6 +25,7 @@ Currently my { kind } query does not properly filter and my { residence } query 
 
 How will I solve this? I am going to speak with my mentors who specialize in back end development as well as hit the googling. I have already begun reading more about the differences between params and queries to hopefully better understand the issue.
 
+
 ## View it live
 
 https://mlp-mongo.herokuapp.com/
