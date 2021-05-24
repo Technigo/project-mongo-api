@@ -21,7 +21,6 @@ const netflixSchema = mongoose.Schema({
 const NetflixData = mongoose.model('NetflixData', netflixSchema)
 
 if (process.env.RESET_DB) {
-  console.log('SEEDING');
   const seedDB = async () => {
     await NetflixData.deleteMany();
     await netflixData.forEach(item => {
