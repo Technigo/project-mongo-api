@@ -99,26 +99,6 @@ app.get('/', (req, res) => {
 //Route to all character Data
 app.get('/characters', async (req, res) => {
   const { name, kind, residence } = req.query; 
-  // const characters = await Character.aggregate([
-  //   {
-  //     $lookup: {
-  //       from: "kinds",
-  //       localField: "kind",
-  //       foreignField: "description",
-  //       as: "kinds"
-  //     }
-  //   },
-  //   {
-  //     $match: {
-  //       name: {
-  //         $regex: new RegExp(name || "", "i") //this operator tells mongo to not care about case sensitivity when searching
-  //       },
-  //       kind: {
-  //         $regex: new RegExp(kind || "", "i") 
-  //       }
-  //     }
-  //   }
-  // ])
 
   if (name) {
     const characters = await Character.find({
