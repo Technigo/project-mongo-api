@@ -10,7 +10,7 @@ import residences from './data/my-little-ponies-residence.json';
 
 dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/myLittlePonyDatabase"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -70,7 +70,7 @@ if (process.env.RESET_DB) {
       await residence.save();
     });
 
-    mlpCharacters.forEach(async item => {
+    mlpCharacters.forEach(async (item) => {
       const newCharacter = new Character({
         ...item,
         kind: kindsArray.find(singleKind => singleKind.description === item.kind),
@@ -89,7 +89,6 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const mongoURL = process.env.MONGO_URL || 'mongodb://localhost/myLittlePonyDatabase'
 
 // Routes
 app.get('/', (req, res) => {
@@ -99,32 +98,50 @@ app.get('/', (req, res) => {
 
 //Route to all character Data
 app.get('/characters', async (req, res) => {
-  const { name } = req.query;
-  const { kind } = req.query;
-  // const { residence } = req.query;
-  
+  const { name, kind, residence } = req.query; 
+  // const characters = await Character.aggregate([
+  //   {
+  //     $lookup: {
+  //       from: "kinds",
+  //       localField: "kind",
+  //       foreignField: "description",
+  //       as: "kinds"
+  //     }
+  //   },
+  //   {
+  //     $match: {
+  //       name: {
+  //         $regex: new RegExp(name || "", "i") //this operator tells mongo to not care about case sensitivity when searching
+  //       },
+  //       kind: {
+  //         $regex: new RegExp(kind || "", "i") 
+  //       }
+  //     }
+  //   }
+  // ])
+
   if (name) {
     const characters = await Character.find({
       name: {
         $regex: new RegExp(name, "i") //this operator tells mongo to not care about case sensitivity when searching
       }
-    })
+    }).populate('kind').populate('residence');
     res.json(characters);
-    //CURRENTLY NOT WORKING FIX LATER
+   
   } else if (kind){
     const characters = await Character.find({
       kind: {
         $regex: new RegExp(kind, "i") 
       }
-    });
+    }).populate('kind').populate('residence');
     res.json(characters);
-  // } else if (residence){
-  //   const characters = await Character.find({
-  //     residence: {
-  //       $regex: new RegExp(residence, "i") 
-  //     }
-  //   });
-  //   res.json(characters);
+  } else if (residence){
+    const characters = await Character.find({
+      residence: {
+        $regex: new RegExp(residence, "i") 
+      }
+    }).populate('residence').populate('kind');
+    res.json(characters);
   } else {
     const characters = await Character.find().populate('kind').populate('residence');
     res.json(characters);
@@ -136,12 +153,19 @@ app.get('/characters/:characterId', async (req, res) => {
   const { characterId } = req.params;
 
   try {
-    const singleCharacter = await Character.find({ _id: characterId });
-    res.json(singleCharacter);
-  } catch (error) {
-    res.status(404).json({ error: '404 Discord has worked his chaos magic and suddenly this page can not be found!', details: error })
-  }
-});
+    const singleCharacter = await Character.find({ _id: characterId }).populate('kind').populate('residence');
+
+      if (singleCharacter) {
+        res.json(singleCharacter)
+        } else {
+    res.status(404).json({ error: '404 Discord has worked his chaos magic and suddenly this page can not be found!' })
+    res.status(404).json('')
+        }
+        } catch (error) {
+        res.status(400).json({ error: 'Invalid request'})
+        }
+      res.json(singleCharacter);
+    });
 
 app.get('/name/:characterName', async (req, res) => {
 //wanted to see the difference between a name query and a route/endpoint
@@ -152,7 +176,7 @@ app.get('/name/:characterName', async (req, res) => {
       name: {
         $regex: new RegExp(characterName, "i") 
       } 
-    });
+    }).populate('kind').populate('residence');
     res.json(singleCharacter);
   } catch(error) {
     res.status(400).json({ error: '400 Sorry everypony looks like something went wrong!', details: error })
