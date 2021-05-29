@@ -10,9 +10,9 @@ I hope that for the next week I can learn more about Mongo and the best way to d
 
 The API has the following endpoints:
 
-/showId ---- To filter a specific ID
-/title/ShowTitle ----- to search by titles
-/type/type ---- to filter by type (movies - Tv Show)
+series/showId ---- To filter a specific ID
+series/title/ShowTitle ----- to search by titles
+series/type/type ---- to filter by type (movies - Tv Show)
 
 ## View it live
 https://netflix-data-mongo.herokuapp.com/
