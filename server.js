@@ -7,7 +7,7 @@ import listEndpoints from 'express-list-endpoints'
 
 import booksData from './data/books.json'
 
-dotenv.config() //what does this do?
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
