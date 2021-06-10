@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
 
 //returning all books in array
 app.get('/books', async (req, res) => {
-  Book.find().then(data => {
+    Book.find().then(data => {
     res.json(data)
   })
 })
