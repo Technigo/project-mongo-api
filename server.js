@@ -2,24 +2,16 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import booksData from './data/books.json'
+
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -27,13 +19,84 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
+
+app.use((req, res, next) => {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      next()
+    } else {
+      res.status(503).json({ error: 'Service is Unavailable' });
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Error! Could NOT access the server.' });
+  }
 })
 
-// Start the server
+const Book = new mongoose.model('Book', {
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
+})
+
+if (process.env.RESET_DATABASE) {
+  const populateDatabase = async () => {
+    await Book.deleteMany();
+
+    booksData.forEach(item => {
+      const newBook = new Book(item);
+      newBook.save();
+    })
+  }
+  populateDatabase();
+}
+
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the Book API')
+})
+
+app.get('/books', async (req, res) => {
+  const alltheBooks = await Book.find(req.query)
+  res.json(alltheBooks)
+})
+
+app.get('/books/:id', async (req, res) => {
+  try {
+    const oneBook = await Book.findOne({ bookID: req.params.id })
+
+    if (oneBook) {
+      res.json(oneBook)
+    } else {
+      res.status(404).json({ Error: ' The book is not found' })
+    }
+  } catch (error) {
+    res.status(400).json({ Error: 'Invalid Book ID' })
+  }
+})
+
+app.get('/authors/:author', async (req, res) => {
+  const byAuthor = await Book.find({ authors: req.params.author })
+  if (byAuthor.length > 0) {
+    res.json(byAuthor)
+  } else {
+    res.status(404).json({ error: 'Invalid Author' })
+  }
+})
+
+app.get('/titles/:title', async (req, res) => {
+  const bookTitle = await Book.findOne({ title: req.params.title })
+  if (bookTitle) {
+    res.json(bookTitle)
+  } else {
+    res.status(404).json({ error: 'Invalid Title' })
+  }
+})
+
 app.listen(port, () => {
-  // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`)
 })
