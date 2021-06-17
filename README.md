@@ -1,13 +1,65 @@
+Project week 18 of Technigo bootcamp
+
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The project was to use a database to store and retrieve data from and use that data to produce RESTful endpoints.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+In my project I used the top-music.json.
+
+Endpoints:
+
+'/tracks'
+
+Displays all items in the json.
+
+Possible to use the following queries:
+
+?trackname - track name, no need to type entire name to show hits
+
+?artist - artist, no need to type entire name to show hits
+
+---
+
+'/tracks/popularity'
+
+Shows all tracks sorted by popularity
+
+---
+
+'/tracks/:trackId'
+
+Id param to return a single track
+
+---
+
+'/artists'
+
+Displays a dictionary with all artists
+
+---
+
+'/artists/artist/:artist'
+
+Artist param to show all tracks from one artist - no need to type entire name to show hits
+
+---
+
+'/genres'
+
+Displays a dictionary with all genres
+
+---
+
+'/genres/:genre/artists'
+
+Displays all artists in a genre.
+
+Genre param with no need to type entire genre to show hits.
+
+Possible to type for example 'pop' to show artists that has different kinds of pop genres.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://popular-music-api.herokuapp.com/
