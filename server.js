@@ -21,7 +21,9 @@ const TopMusic = mongoose.model('TopMusic', {
   },
   artistName: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Artist'
+    ref: 'Artist',
+    lowercase: true
+
   },
   genre: String,
   bpm: Number,
@@ -38,10 +40,7 @@ const TopMusic = mongoose.model('TopMusic', {
 
 // Artist model
 const Artist = mongoose.model('Artist', {
-  artistName: {
-    type: String,
-    lowercase: true 
-  }
+  artistName: String
 });
 
 // seed DB
