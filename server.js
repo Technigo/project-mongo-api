@@ -3,7 +3,8 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import data from './data/netflix-titles.json'
-
+/// 
+// mongodb+srv://shows:gU79Agqe5ABXnlNL@cluster0.oqrrd.mongodb.net/shows?retryWrites=true&w=majority
 // setup connection to mongodb
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/shows"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
