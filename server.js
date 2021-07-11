@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/movies', async (req, res) => {
-  const { country, cast, show, page, per_page=20 } = req.query
+  const { country, cast, show, page, per_page = 20 } = req.query
   
   await Movie.updateMany(
     { }, 
@@ -128,7 +128,7 @@ app.get('/movies/years', async (req, res) => {
 })
 
 app.get('/movies/years/latest', async (req, res) => {
-  const genre = await Movie.find(
+  const movieLatest = await Movie.find(
     { release_year: 
       { 
         $gte: 2018 
@@ -138,7 +138,7 @@ app.get('/movies/years/latest', async (req, res) => {
     }
   )
  
-  res.json({ length: genre.length, data: genre })
+  res.json({ length: movieLatest.length, data: movieLatest })
 })
 
 app.get('/movies/:movieId', async (req, res) => {  
