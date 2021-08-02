@@ -12,7 +12,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8000
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -20,17 +20,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 
-app.use((req, res, next) => {
-  try {
-    if (mongoose.connection.readyState === 1) {
-      next()
-    } else {
-      res.status(503).json({ error: 'Service is Unavailable' });
-    }
-  } catch (error) {
-    res.status(400).json({ error: 'Error! Could NOT access the server.' });
-  }
-})
+
 
 const Book = new mongoose.model('Book', {
   bookID: Number,
@@ -55,14 +45,13 @@ if (process.env.RESET_DATABASE) {
   populateDatabase();
 }
 
-
 app.get('/', (req, res) => {
   res.send('Welcome to the Book API')
 })
 
 app.get('/books', async (req, res) => {
-  const alltheBooks = await Book.find(req.query)
-  res.json(alltheBooks)
+  const allBooks = await Book.find(req.query)
+  res.json(allBooks)
 })
 
 app.get('/books/:id', async (req, res) => {
