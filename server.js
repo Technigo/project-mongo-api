@@ -82,7 +82,7 @@ app.get('/titles/:title', async (req, res) => {
   if (bookTitle) {
     res.json(bookTitle)
   } else {
-    res.status(404).json({ error: 'Invalid Title' })
+    res.status(404).json({ error: 'Invalid title' })
   }
 })
 
