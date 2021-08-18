@@ -1,8 +1,8 @@
 # Mongo  API Project
-This week's project is the first introduction to Mondo db🥇. I was inspired by last weeks project An API created using express.The RESTful endpoints created returns data from a hard coded data set about books, such as authors, title, number of pages and books id.
+This week's project is the first introduction to Mondo db🥇. I was inspired by last weeks project An API created using express.The RESTful endpoints created returns data from a hard coded data set about song, such as authors, title, number of pages and song id.
 
 ## The built and challanges
-Usig a hard-coded set of data, stored as a JSON file "songs.json", which I research and found on external source  which includes 500 top rated songs accoridng to the rolling stones magazine. I downloaded the cvs file and exterted it into a JSON.file Then I created API endpoints in server.js file
+Usig a hard-coded set of data, stored as a JSON file "songs.json", which I research and found on external source  which includes 500 top rated songs according to the rolling stones magazine. I downloaded the cvs file and exterted it into a JSON.file Then I created API endpoints in server.js file
 My Schema included the following: 
 const songSchema = new mongoose.Schema({
   title: String,
