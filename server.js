@@ -4,17 +4,12 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 require('dotenv').config();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-database" // name of the database
 
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }).then((mongooseObject) => {
-  console.log(`connected ${mongooseObject}`)
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+  console.log(`database connected`)
 }, (onreject) => {
   console.log(onreject);
 })
@@ -30,7 +25,7 @@ app.get('/', (req, res) => {
   res.json(listEndpoints(app));
 })
 
-const books = require('./controller');
+const books = require('./bookscontroller');
 
 app.use('/books', books);
 
