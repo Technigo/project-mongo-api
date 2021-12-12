@@ -30,11 +30,40 @@ authorRouter.param('id', async (req, res, next, id) => {
 
 authorRouter.get('/', async (req, res) => {
   try {
-    const books = await Books.find();
+    const { limit } = req.query;
+    const books = await Books.find().limit(+limit);
     if (books) {
       res.status(200).json({ books, success: "true" });
     } else {
-      res.status(404).json({ message: 'no authors', success: "false" });
+      res.status(404).json({ message: 'no books', success: "false" });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+})
+
+authorRouter.get('/authors', async (req, res) => {
+  try {
+    const { authors } = req.query;
+    const bookByAuthor = await Books.find({ authors: { $regex: `.*${authors}.*` } });
+    if (bookByAuthor.length > 0) {
+      res.status(200).json({ author: bookByAuthor, success: "true" });
+    } else {
+      res.status(404).json({ message: 'no author', success: "false" });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+})
+
+authorRouter.get('/title', async (req, res) => {
+  try {
+    const { title } = req.query;
+    const bookByTitle = await Books.find({ title: { $regex: `.*${title}.*` } });
+    if (bookByTitle.length > 0) {
+      res.status(200).json({ author: bookByTitle, success: "true" });
+    } else {
+      res.status(404).json({ message: 'no title', success: "false" });
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });

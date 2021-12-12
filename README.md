@@ -13,7 +13,7 @@ Once you have the data stored, you will need to write appropriate RESTful endpoi
 
 ## The problem
 
-Once the database was configured and conected, I started building basic endpoints. 
+Once the database was configured and conected, I started building basic endpoints. I create a middleware to catch the search by id at hte beginning and then I create the basic operations:  get/ put/patch/post/delete. I used postman to made the requests and the compass to see the database locally.
 
 ## View it live
 
