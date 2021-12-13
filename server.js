@@ -24,12 +24,6 @@ const app = express() //intiating the express app
 app.use(cors())
 app.use(express.json())
 
-const users = [
-  { id: 1, name: 'Rosanna', age: 35 },
-  { id: 2, name: 'Anton', age: 36 },
-  { id: 3, name: 'Freyja', age: 4 },
-  { id: 4, name: 'Albin', age: 2 },
-]
 
 // This is our first endpoint //if remove this we get "Cannot GET response in browser" it's built in by express. The server is running but there aren't any information.
 app.get('/', (req, res) => { //This app.get method takes two arguments: path and maybe users or movies. //The second argument is a call back function that communicates with the front end. 
@@ -37,10 +31,34 @@ app.get('/', (req, res) => { //This app.get method takes two arguments: path and
   res.send('Hello from Rosanna to you!')
 })
 
-// get a list of users
-app.get('/users', (req, res) => {
-  res.json(users)
+// new mongoose model: Title
+const Book = mongoose.model('Book', { //First it takes 2 arguments, users and an object. 'Title' is the name of the model.
+  //Here we set up how the user should be stored  // here you type the data. You can type mongoose.Type.String.
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
 })
+
+
+
+if (process.env.RESET_DB) { //is the environment variable is true then we want to save the books
+  const seedDatabase = async () => { //this is a syncrounus function
+    await Book.deleteMany({}) //first it does this part
+
+    booksData.forEach(item => { //for each loop the array of books
+      const newBook = new Book(item) //the item is the new information 
+      newBook.save()
+    })
+  }
+  seedDatabase()
+}
 
 // get a list of the books (from json file)
 app.get('/books', (req, res) => {
