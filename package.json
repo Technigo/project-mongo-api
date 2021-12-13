@@ -19,6 +19,8 @@
     "nodemon": "^2.0.2"
   },
   "devDependencies": {
+    "@babel/helper-compilation-targets": "^7.16.3",
+    "@babel/plugin-proposal-class-static-block": "^7.16.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
