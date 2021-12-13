@@ -1,15 +1,9 @@
+/* eslint-disable max-len */
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import netflixData from './data/netflix-titles.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -25,6 +19,33 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
+
+// Making a model of the Netflix-Data for the DB
+const NetflixEntry = mongoose.model('NetflixEntry', {
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
+})
+
+// seeding the DB only when typing this RESET_DB-variable in the Terminal. Should only be used, when you are setting a project up. Otherwise alll Userdata is gone!!!
+// $ RESET_DB=true npm run dev
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await NetflixEntry.deleteMany() // deletes all content from the DB
+
+    netflixData.forEach((item) => new NetflixEntry(item).save())
+  }
+  seedDatabase()
+}
 
 // Start defining your routes here
 app.get('/', (req, res) => {
