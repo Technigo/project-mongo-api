@@ -3,6 +3,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 import booksData from './data/books.json';
 
