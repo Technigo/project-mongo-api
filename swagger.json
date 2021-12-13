@@ -1,0 +1,285 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Netflix-titles API",
+    "description": "Netflix-titles API with movies and tv-shows"
+  },
+  "host": "netflix-titles-technigo.herokuapp.com",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Netflix-titles",
+      "description": "API for titles in the system"
+    },
+    {
+      "name": "Movies",
+      "description": "Movies in the system"
+    },
+    {
+      "name": "TV-shows",
+      "description": "TV-shows in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/netflix-titles": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "format": "integer"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "format": "integer"
+          },
+          {
+            "in": "query",
+            "name": "year",
+            "required": false,
+            "format": "integer"
+          },
+          {
+            "in": "query",
+            "name": "country",
+            "required": false,
+            "format": "string"
+          }
+        ],
+        "tags": ["Netflix-titles"],
+        "summary": "Get all titles in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Titles"
+            }
+          }
+        }
+      }
+    },
+    "/netflix-titles/movies": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "format": "integer"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "format": "integer"
+          }
+        ],
+        "tags": ["Movies"],
+        "summary": "Get all movies in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Titles"
+            }
+          }
+        }
+      }
+    },
+    "/netflix-titles/movies/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "format": "integer"
+          }
+        ],
+        "tags": ["Movies"],
+        "summary": "Get a movie with a specific id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Titles"
+            }
+          }
+        }
+      }
+    },
+    "/netflix-titles/movies/year/{year}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "format": "integer"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "format": "integer"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "format": "integer"
+          }
+        ],
+        "tags": ["Movies"],
+        "summary": "Get all movies from a specific year",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Titles"
+            }
+          }
+        }
+      }
+    },
+    "/netflix-titles/tv-shows": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "format": "integer"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "format": "integer"
+          }
+        ],
+        "tags": ["TV-shows"],
+        "summary": "Get all tv-shows in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Titles"
+            }
+          }
+        }
+      }
+    },
+    "/netflix-titles/tv-shows/year/{year}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "format": "integer"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "format": "integer"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "format": "integer"
+          }
+        ],
+        "tags": ["TV-shows"],
+        "summary": "Get all TV-shows from a specific year",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Titles"
+            }
+          }
+        }
+      }
+    },
+    "/netflix-titles/tv-shows/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "format": "integer"
+          }
+        ],
+        "tags": ["TV-shows"],
+        "summary": "Get a tv-show with a specific id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Titles"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Title": {
+      "required": [],
+      "properties": {
+        "show_id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "title": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "cast": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "date_added": {
+          "type": "string"
+        },
+        "release_year": {
+          "type": "integer"
+        },
+        "rating": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "string"
+        },
+        "listed_in": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "Titles": {
+      "type": "array",
+      "$ref": "#/definitions/Title"
+    }
+  }
+}
