@@ -31,9 +31,9 @@ app.get('/', (req, res) => { //This app.get method takes two arguments: path and
   res.send('Hello from Rosanna to you!')
 })
 
-// new mongoose model: Title
-const Book = mongoose.model('Book', { //First it takes 2 arguments, users and an object. 'Title' is the name of the model.
-  //Here we set up how the user should be stored  // here you type the data. You can type mongoose.Type.String.
+// new mongoose model: Book
+const Book = mongoose.model('Book', { //First it takes 2 arguments, users and an object. 'Book' is the name of the model.
+  //Here we set up how the books should be stored  // here you type the data. You can type mongoose.Type.String.
   bookID: Number,
   title: String,
   authors: String,
@@ -45,8 +45,6 @@ const Book = mongoose.model('Book', { //First it takes 2 arguments, users and an
   ratings_count: Number,
   text_reviews_count: Number,
 })
-
-
 
 if (process.env.RESET_DB) { //is the environment variable is true then we want to save the books
   const seedDatabase = async () => { //this is a syncrounus function
@@ -61,29 +59,26 @@ if (process.env.RESET_DB) { //is the environment variable is true then we want t
 }
 
 // get a list of the books (from json file)
-app.get('/books', (req, res) => {
-  res.json(booksData)
+app.get('/books', async (req, res) => {
+  const titles = await Book.find()
+  res.json(titles)
 })
 
 // get a specific book based on its id, using param
-app.get('/books/:bookid', (req, res) => { //this endpoint is about finding the book with the specific Id
-  const { bookid } = req.params
+app.get('/books/:id/', async (req, res) => {
+  const book = await Book.findOne({ bookID: req.params.id })
 
-  const book = booksData.find(book => book.bookID == bookid)
-
-  if (!book) {
-    res.status(404).send('No book found with that id')
-  } else {
-    res.json(book)
-  }
+if (book) {
+  res.json(book)
+}
+else {
+  res.status(404).send('No book with that id was found')
+}
 })
 
-
-// get a specific rating on book higher then route parameter
-app.get('/books3/:rating', (req, res) => {
-  const { rating } = req.params
-
-  const books = booksData.filter(book => book.average_rating >= rating)
+// get a specific rating on book 
+app.get('/books-rating/:rating', async (req, res) => {
+  const books = await Book.find({ average_rating: {$gte : req.params.rating } }) //average rating is an object //gte=greater than or equal.
 
   if (books.length === 0) {
     res.status(404).send('No books with that rating was found')
@@ -91,6 +86,7 @@ app.get('/books3/:rating', (req, res) => {
     res.json(books)
   }
 })
+
 
 
 // Start the server 
