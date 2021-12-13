@@ -95,28 +95,28 @@ const checkPathParam = (
   let titlesWithParam = {};
   let errorResponse = "";
   if (typeOfParam === "id") {
-    if (typeOfTitle === "Movie") {
+    if (typeOfTitle === "movie") {
       titlesWithParam = titles.find(
-        (item) => item.show_id === +param && item.type === "Movie"
+        (item) => item.show_id === +param && item.type === "movie"
       );
       errorResponse = `there is no movie with the id ${param}`;
     } else {
       titlesWithParam = titles.find(
-        (item) => item.show_id === +param && item.type === "TV show"
+        (item) => item.show_id === +param && item.type === "tv-show"
       );
       errorResponse = `there is no tv-show with the id ${param}`;
     }
   } else if (typeOfParam === "year") {
-    if (typeOfTitle === "Movie") {
+    if (typeOfTitle === "movie") {
       titlesWithParam = titles.filter(
         (item) =>
-          item.release_year === +param && item.type === "Movie"
+          item.release_year === +param && item.type === "movie"
       );
       errorResponse = `there are no movies from ${param}`;
     } else {
       titlesWithParam = titles.filter(
         (item) =>
-          item.release_year === +param && item.type === "TV Show"
+          item.release_year === +param && item.type === "tv-show"
       );
       errorResponse = `there are no tv-shows from ${param}`;
     }
@@ -138,10 +138,9 @@ const checkPathParam = (
   }
 };
 
-app.get("/netflix-titles", (req, res) => {
+app.get("/netflix-titles", async (req, res) => {
   const { year, country, page, limit } = req.query;
-
-  let titlesToSend = titles;
+  let titlesToSend = await Title.find({});
 
   if (year) {
     titlesToSend = titlesToSend.filter(
@@ -167,7 +166,7 @@ app.get("/netflix-titles", (req, res) => {
 
 app.get("/netflix-titles/movies", (req, res) => {
   const { page, limit } = req.query;
-  let titlesToSend = titles.filter((title) => title.type === "Movie");
+  let titlesToSend = titles.filter((title) => title.type === "movie");
   if (page && limit) {
     paginate(res, page, limit, titlesToSend);
   } else {
@@ -192,7 +191,7 @@ app.get("/netflix-titles/movies/year/:year", (req, res) => {
 app.get("/netflix-titles/tv-shows", (req, res) => {
   const { page, limit } = req.query;
   let titlesToSend = titles.filter(
-    (title) => title.type === "TV Show"
+    (title) => title.type === "tv-show"
   );
   if (page && limit) {
     paginate(res, page, limit, titlesToSend);
