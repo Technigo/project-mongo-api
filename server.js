@@ -66,8 +66,34 @@ app.get('/', (req, res) => {
   res.send('Hello world! Welcome my documentation!')
 })
 
-app.get('/shows', (req, res) => {
-  res.json(netflixData)
+// path for all shows, both movies and tv shows 
+app.get('/shows/', async (req, res) => {
+  const shows = await Show.find()
+  res.json(shows)
+})
+
+app.get('/shows/:id', (req, res) => {
+  Show.findOne({ show_id: req.params.id }).then((show) => {
+    if (show) {
+      res.json(show)
+    } else {
+      res.status(404).json({ error: "Not Found" })
+    }
+  })
+})
+
+// movies path 
+app.get('/movies', async (req, res) => {
+  // finding all item with type Movie
+  const findByType = await Show.find({ type: "Movie" })
+  res.json(findByType)
+})
+
+// tv shows path 
+app.get('/tvshows', async (req, res) => {
+  // finding all items with type TV Show 
+  const findByType = await Show.find({ type: "TV Show" })
+  res.json(findByType)
 })
 
 // Start the server
@@ -81,5 +107,5 @@ app.listen(port, () => {
 // _id:61b762abb355c91b662c3f7c
 // name:"Bob"
 // age:36
-// version, not important 
+// v is for version, not important 
 // __v:0
