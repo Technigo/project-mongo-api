@@ -74,9 +74,9 @@ app.get('/endpoints', (req, res) => {
 })
 
 // route provides a sorted list of all countries that are in netflixData
-app.get('/countries', (req, res) => {
+app.get('/countries', async (req, res) => {
   // a list of all countries in the Netflix-Data without any duplicates. Therefore I am creating a Set (object with unique items). I convert the set into an array afterwards and sort it alphabetically
-  const countries = Array.from(new Set(netflixData.map((item) => item.country))).sort()
+  const countries = await Array.from(new Set(netflixData.map((item) => item.country))).sort()
 
   res.json({
     response: countries,
@@ -89,6 +89,7 @@ app.get('/countries/:country', async (req, res) => {
   // req is an object with properties such as query and params, 
   // both query and params are empty objects from the beginning 
   // every query parameter consists of key and value
+  // Try/catch will handle invalid search terms(error 400). If the search term is valid, but doesn't give a result, you get error 404
   try {
     const { country } = req.params
     const contentByCountry = await netflixData.filter((item) => item.country.toLowerCase() === country)
@@ -149,9 +150,7 @@ app.get('/movies', (req, res) => {
 // route provides one movie by ID
 app.get('/movies/id/:id', async (req, res) => {
   try {
-    const { id } = req.params
-
-    const movie = movies.find((item) => item.show_id === +id)
+    const movie = await NetflixEntry.findOne({ type: "Movie", show_id: req.params.id })
   
     if (!movie) {
       res.status(404).json({
@@ -170,11 +169,14 @@ app.get('/movies/id/:id', async (req, res) => {
 })
 
 // route provides movies by name (can return more than one movie, if the provided parts of the title match with several movies)
-app.get('/movies/title/:title', (req, res) => {
+app.get('/movies/title/:title', async (req, res) => {
   try {
-    const { title } = req.params
+   /*  const { title } = req.params
 
-    const movie = movies.filter((item) => item.title.toLowerCase().includes(title.toLowerCase()))
+    const movie = movies.filter((item) => item.title.toLowerCase().includes(title.toLowerCase())) */
+
+    //Error: BY now this only works, if I type the exact title in the URL (how to make it case insensitive and includes?)
+    const movie = await NetflixEntry.find({ type: "Movie", title: req.params.title })
 
     if (movie.length === 0) {
       res.status(404).json({

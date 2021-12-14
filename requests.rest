@@ -1,3 +1,4 @@
-GET http://localhost:8080/movies/title/ghost
+GET http://localhost:8080/movies/title/Atlantics
+
 
 
