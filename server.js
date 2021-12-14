@@ -56,6 +56,7 @@ app.use(express.json());
 // Start defining your routes here
 app.get('/tracks', async (req, res) => {
   const tracks = await Track.find();
+
   res.json(tracks);
 });
 
