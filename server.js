@@ -57,8 +57,7 @@ const paginate = (res, page, limit, titlesToSend) => {
   const previous = pageInt - 1;
   const startIndex = (pageInt - 1) * limitInt;
   const endIndex = pageInt * limitInt;
-  let nrPages = titlesToSend.length / limitInt;
-  nrPages = Math.ceil(nrPages);
+  const nrPages = Math.ceil(titlesToSend.length / limitInt);
   const titlesToSendPage = titlesToSend.slice(startIndex, endIndex);
 
   if (previous === 0) {
@@ -84,7 +83,7 @@ const paginate = (res, page, limit, titlesToSend) => {
 };
 
 // function that takes in path-param, checks if it can find it and returns a proper status and response. If there is a page and limit set, the function pagination is called. The plus-sign before a variable says to convert it from string to number
-const checkPathParam = (
+const checkPathParam = async (
   param,
   typeOfTitle,
   res,
@@ -95,31 +94,17 @@ const checkPathParam = (
   let titlesWithParam = {};
   let errorResponse = "";
   if (typeOfParam === "id") {
-    if (typeOfTitle === "movie") {
-      titlesWithParam = titles.find(
-        (item) => item.show_id === +param && item.type === "movie"
-      );
-      errorResponse = `there is no movie with the id ${param}`;
-    } else {
-      titlesWithParam = titles.find(
-        (item) => item.show_id === +param && item.type === "tv-show"
-      );
-      errorResponse = `there is no tv-show with the id ${param}`;
-    }
+    titlesWithParam = await Title.findOne({
+      type: typeOfTitle,
+      show_id: param,
+    });
+    errorResponse = `there is no ${typeOfTitle} with the id ${param}`;
   } else if (typeOfParam === "year") {
-    if (typeOfTitle === "movie") {
-      titlesWithParam = titles.filter(
-        (item) =>
-          item.release_year === +param && item.type === "movie"
-      );
-      errorResponse = `there are no movies from ${param}`;
-    } else {
-      titlesWithParam = titles.filter(
-        (item) =>
-          item.release_year === +param && item.type === "tv-show"
-      );
-      errorResponse = `there are no tv-shows from ${param}`;
-    }
+    titlesWithParam = await Title.find({
+      type: typeOfTitle,
+      release_year: +param,
+    });
+    errorResponse = `there are no ${typeOfTitle} from ${param}`;
   }
 
   // if there is no result, return 404. If page and limit exists, paginate the result.
@@ -140,19 +125,29 @@ const checkPathParam = (
 
 app.get("/netflix-titles", async (req, res) => {
   const { year, country, page, limit } = req.query;
-  let titlesToSend = await Title.find({});
+  let titlesToSend = {};
 
-  if (year) {
-    titlesToSend = titlesToSend.filter(
-      (item) => item.release_year === +year
-    );
-  }
-  if (country) {
-    titlesToSend = titlesToSend.filter(
-      (item) =>
-        item.country.toLowerCase().indexOf(country.toLowerCase()) !==
-        -1
-    );
+  // titlesToSend = await Title.find({
+  //   release_year: year,
+  //   country: country,
+  // });
+
+  if (year && !country) {
+    console.log("year is active");
+    titlesToSend = await Title.find({
+      release_year: year,
+    });
+  } else if (year && country) {
+    titlesToSend = await Title.find({
+      release_year: year,
+      country: country,
+    });
+  } else if (!year && country) {
+    titlesToSend = await Title.find({
+      country: country,
+    });
+  } else {
+    titlesToSend = await Title.find({});
   }
   if (page && limit) {
     paginate(res, page, limit, titlesToSend);
@@ -164,9 +159,11 @@ app.get("/netflix-titles", async (req, res) => {
   }
 });
 
-app.get("/netflix-titles/movies", (req, res) => {
+app.get("/netflix-titles/movies", async (req, res) => {
   const { page, limit } = req.query;
-  let titlesToSend = titles.filter((title) => title.type === "movie");
+  let titlesToSend = await Title.find({
+    type: "movie",
+  });
   if (page && limit) {
     paginate(res, page, limit, titlesToSend);
   } else {
@@ -179,20 +176,20 @@ app.get("/netflix-titles/movies", (req, res) => {
 
 app.get("/netflix-titles/movies/:id", (req, res) => {
   const { id } = req.params;
-  checkPathParam(id, "Movie", res, "id");
+  checkPathParam(id, "movie", res, "id");
 });
 
 app.get("/netflix-titles/movies/year/:year", (req, res) => {
   const { page, limit } = req.query;
   const year = req.params.year;
-  checkPathParam(year, "Movie", res, "year", page, limit);
+  checkPathParam(year, "movie", res, "year", page, limit);
 });
 
-app.get("/netflix-titles/tv-shows", (req, res) => {
+app.get("/netflix-titles/tv-shows", async (req, res) => {
   const { page, limit } = req.query;
-  let titlesToSend = titles.filter(
-    (title) => title.type === "tv-show"
-  );
+  let titlesToSend = await Title.find({
+    type: "tv-show",
+  });
   if (page && limit) {
     paginate(res, page, limit, titlesToSend);
   } else {
