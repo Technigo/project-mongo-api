@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import listEndpoints from 'express-list-endpoints';
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -26,18 +27,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// const bookSchema = new mongoose.Schema({
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
   authors: String,
   average_rating: Number,
-  isbn: Number,
   isbn13: Number,
   language_code: String,
   num_pages: Number,
   ratings_count: Number,
   text_reviews_count: Number,
 });
+
+// const Book = mongoose.model('Book', bookSchema);
 
 if (process.env.RESET_DB) {
   console.log();
@@ -47,23 +50,34 @@ if (process.env.RESET_DB) {
     booksData.forEach((item) => {
       new Book(item).save();
     });
-
-    // const potter = new Book({ title: 'Harry Potter' });
-    // await potter.save();
   };
   seedDatabase();
 }
 
-// Endpoint to get all books
+// Lists all endpoints
+app.get('/', (req, res) => {
+  res.send(listEndpoints(app));
+});
+
+// Endpoint to get all books, and when you add queries you can get the objects that includes a specific title, author or both.
 app.get('/books', async (req, res) => {
-  const books = await Book.find();
-  res.json(books);
+  const { title, authors } = req.query;
+
+  const allBooks = await Book.find({
+    title: new RegExp(title, 'i'),
+    authors: new RegExp(authors, 'i'),
+  });
+
+  if (!allBooks) {
+    res.status(404).json('Could not find books');
+  } else {
+    res.json(allBooks);
+  }
 });
 
 // Endpoint to get a single book by its id
 app.get('/books/id/:id', async (req, res) => {
   const { id } = req.params;
-  // const singleBook = booksData.find((item) => item.bookID === +id);
   const singleBook = await Book.findOne({ bookID: id });
 
   if (!singleBook) {
@@ -75,6 +89,41 @@ app.get('/books/id/:id', async (req, res) => {
     });
   }
 });
+
+// app.get('/books', async (req, res) => {
+//   const { author, title, language, isbn } = req.query;
+
+//   const authorRegexp = new RegExp(author, 'i');
+//   const titleRegexp = new RegExp(title, 'i');
+//   const languageRegexp = new RegExp(language, 'i');
+//   const isbnRegexp = new RegExp(isbn, 'i');
+
+//   const searchQuery = {};
+
+//   if (author !== undefined) {
+//     searchQuery.authors = authorRegexp;
+//   }
+//   if (title !== undefined) {
+//     searchQuery.title = titleRegexp;
+//   }
+//   if (language !== undefined) {
+//     searchQuery.language_code = languageRegexp;
+//   }
+//   if (isbn !== undefined) {
+//     searchQuery.isbn = isbnRegexp;
+//   }
+
+//   const searchQueryResult = await Book.find(searchQuery);
+
+//   if (searchQueryResult.length === 0) {
+//     res.status(404).json({
+//       error:
+//         "Could't not find anything in the database that matches your search query.",
+//     });
+//   } else {
+//     res.json(searchQueryResult);
+//   }
+// });
 
 // Start the server
 app.listen(port, () => {
