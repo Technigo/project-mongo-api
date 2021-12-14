@@ -46,6 +46,7 @@ const Winner = mongoose.model('Winner', {
   ageGetPrize: Number
 })
 
+//Fills database with data from my API
 if (process.env.RESET_DB === 'true') {
   // need to use an async function so that the users are deleted before 
    const seedDatabase = async() => {
@@ -62,9 +63,6 @@ if (process.env.RESET_DB === 'true') {
   seedDatabase()
 }
 
-
-
-
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello all, add / in browser to view all endpoints')
@@ -78,6 +76,11 @@ app.get('/winners', async (req, res) => {
 
 app.get('/endpoints', (req,res )=> 
 res.send(listEndpoints(app)))
+
+app.get('/winners/:category', async (req, res) =>{
+  const category = await Winner.find({category:req.params.category})
+  res.json(category)
+})
 
 // Start the server
 app.listen(port, () => {
