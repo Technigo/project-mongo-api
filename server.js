@@ -1,14 +1,6 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl =
@@ -27,7 +19,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/* Här är en templat för vad som ska finnas för varje objekt   */
+/* templat för vad som finns i ett objekt   */
 
 const MusicData = mongoose.model("MusicData", {
   id: Number,
@@ -46,7 +38,7 @@ const MusicData = mongoose.model("MusicData", {
   popularity: Number
 });
 
-/* spara ny data... .then kollar bara om save fungerar 'newUserData.save().then(() => console.log('user saved')) */
+/* spara ny data */
 /* if  för att undvika att datasetet dubbliseras */
 if (process.env.RESET_DB) {
   const seedData = async () => {
@@ -60,9 +52,60 @@ if (process.env.RESET_DB) {
 
   seedData();
 }
-// Start defining your routes here
+// get full dataset
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send(topMusicData);
+});
+
+app.get("/artist/:artist", (req, res) => {
+  const { artist } = req.params;
+  const { track } = req.query;
+
+  let artistData = topMusicData.filter(
+    (item) => item.artistName.toLowerCase() === artist.toLowerCase()
+  );
+
+  if (track) {
+    /* filter artists tracks to find one specific song*/
+    let nameArtistTrack = artistData.find(
+      (item) => item.trackName.toLowerCase() === track.toLowerCase()
+    );
+
+    /* if track not exist in the dataset */
+
+    if (!nameArtistTrack) {
+      res.status(400).json({
+        response: "no track",
+        success: false
+      });
+    } else {
+      /* 200 - success to get data, gives back searched track(one object due to find filtration of nameArtist) from an artists tracklist*/
+      res.status(200).json({
+        response: nameArtistTrack,
+        success: true
+      });
+    }
+  } else if (artist) {
+    if (artistData.length === 0) {
+      /* if artist not exist in the dataset */
+      res.status(400).json({
+        response: "Artist not found",
+        success: false
+      });
+    } else {
+      /* 200 - success to get data, gives back searched track(one object due to find filtration of nameArtist) from an artists tracklist*/
+      res.status(200).json({
+        response: artistData,
+        success: true
+      });
+    }
+  } else {
+    /* server cant send data */
+    res.status(404).json({
+      response: "404 Not Found",
+      success: false
+    });
+  }
 });
 
 // Start the server
