@@ -51,6 +51,24 @@ app.get('/', (req, res) => {
   res.send('Hello server')
 })
 
+app.get('/titles', async (req, res) => {
+  const movies = await NetflixData.find()
+  res.json(movies)
+})
+
+app.get('/titles/:id', async (req, res) => {
+  try {
+    const choosenMovie = await NetflixData.findById(req.params.id)
+    if (choosenMovie) {
+      res.json(choosenMovie)
+    } else {
+      res.status(404).json({ error: `Movie with this id ${req.params.id} is not found` })
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Invalid movie id" })
+  }
+})
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
