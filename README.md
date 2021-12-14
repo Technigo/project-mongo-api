@@ -1,13 +1,14 @@
-# Mongo API Project
+# Mongo API Books Project
 
-Replace this readme with your own information about your project. 
+## Tech Stack: Node.js, Express, Mongo DB & Mongoose
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Description:
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+- Get the list of all books and specify your request with query params: author, title, pagination (page, limit).
+  Example: http://localhost:8080/books?author={smth}&title={smth}&page={number}&limit={number}
+- Get a single book by ID
+  Example: http://localhost:8080/books/{id}
+- Get a list of most popular books (rating >= 4.4) and specify a language code with query params if needed.
+  Example: http://localhost:8080/popular?lang={smth}
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
