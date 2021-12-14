@@ -26,6 +26,30 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+const User = mongoose.model('User', {
+  name: String,
+  age: Number
+})
+
+const newUser = new User({
+  name: 'Maria', 
+  age: 44
+})
+
+// save to the db
+
+if (process.env.RESET_DB) {
+
+  const seedDatabase = async () => {
+    await User.deleteMany({})
+
+    newUser.save()
+  }
+  
+  seedDatabase()
+  
+}
+
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world')
