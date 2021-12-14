@@ -22,24 +22,18 @@ const Book = mongoose.model("Book", {
   ratings_count: Number,
   text_reviews_count: Number,
 });
+if (process.env.CLEAR_DB) {
+  console.log("Seeding the db with all the files");
+  const seedDB = async () => {
+    await Book.deleteMany({});
+    booksData.forEach((oneBook) => {
+      new Book(oneBook).save();
+    });
+  };
 
-const seedDB = async () => {
-  const firstEntry = new Book({
-    bookID: 1,
-    title: "Test",
-    authors: "Test",
-    average_rating: 5,
-    isbn: 15,
-    isbn13: 25,
-    language_code: "Test",
-    num_pages: 35,
-    ratings_count: 45,
-    text_reviews_count: 55,
-  });
-  await firstEntry.save();
-};
+  seedDB();
+}
 
-seedDB();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
