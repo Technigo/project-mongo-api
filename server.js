@@ -45,7 +45,7 @@ const Winner = mongoose.model('Winner', {
   ageGetPrize: Number
 })
 
-if (process.env.RESET_DB) {
+if (process.env.RESET_DB === 'true') {
   // need to use an async function so that the users are deleted before 
    const seedDatabase = async() => {
    await Winner.deleteMany({})
