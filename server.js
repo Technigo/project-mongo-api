@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -52,6 +53,12 @@ if (process.env.RESET_DB) {
 }
 
 // Start defining your routes here
+
+// Lists all endpoints
+app.get('/', (req, res) => {
+  res.send(listEndpoints(app))
+})
+
 //Query param to get book by title: /books?title=enter the title
 //Query param to get book by author: /books?authors=enter the author
 app.get('/books', async (req, res) => {
