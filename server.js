@@ -90,40 +90,66 @@ app.get('/books/id/:id', async (req, res) => {
   }
 });
 
-// app.get('/books', async (req, res) => {
-//   const { author, title, language, isbn } = req.query;
+// app.get('/books/pages', async (req, res) => {
+//   const { short, medium, long } = req.query;
 
-//   const authorRegexp = new RegExp(author, 'i');
-//   const titleRegexp = new RegExp(title, 'i');
-//   const languageRegexp = new RegExp(language, 'i');
-//   const isbnRegexp = new RegExp(isbn, 'i');
-
-//   const searchQuery = {};
-
-//   if (author !== undefined) {
-//     searchQuery.authors = authorRegexp;
-//   }
-//   if (title !== undefined) {
-//     searchQuery.title = titleRegexp;
-//   }
-//   if (language !== undefined) {
-//     searchQuery.language_code = languageRegexp;
-//   }
-//   if (isbn !== undefined) {
-//     searchQuery.isbn = isbnRegexp;
-//   }
-
-//   const searchQueryResult = await Book.find(searchQuery);
-
-//   if (searchQueryResult.length === 0) {
-//     res.status(404).json({
-//       error:
-//         "Could't not find anything in the database that matches your search query.",
+//   try {
+//     const shortBooks = await Book.find({ num_pages: short({ $lt: 351 }) });
+//     res.json(shortBooks);
+//   } try {
+//       const mediumBooks = await Book.find({ num_pages: short({ $lt: 351 }) });
+//       res.json(shortBooks);
+//   } catch (error) {
+//     res.status(400).json({
+//       error: 'Cannot find',
 //     });
-//   } else {
-//     res.json(searchQueryResult);
+//     console.log('error');
 //   }
 // });
+
+//Endpoint to get books shorter than 351 pages
+app.get('/books/pages/shortbooks', async (req, res) => {
+  try {
+    const shortBooks = await Book.find({ num_pages: { $lt: 351 } });
+    res.json(shortBooks);
+  } catch (error) {
+    res.status(400).json({
+      error: 'Cannot find',
+    });
+    console.log('error');
+  }
+});
+
+//Endpoint to get books with 351-799 pages
+app.get('/books/pages/mediumbooks', async (req, res) => {
+  try {
+    const mediumBooks = await Book.find(
+      {
+        $and: [{ num_pages: { $gt: 350 } }, { num_pages: { $lt: 800 } }],
+      },
+      { num_pages: 1, _id: 0 }
+    ).sort({ num_pages: 1 });
+    res.json(mediumBooks);
+  } catch (error) {
+    res.status(400).json({
+      error: 'Cannot find',
+    });
+    console.log('error');
+  }
+});
+
+//Endpoint to get books longer than 799 pages
+app.get('/books/pages/longbooks', async (req, res) => {
+  try {
+    const longBooks = await Book.find({ num_pages: { $gt: 799 } });
+    res.json(longBooks);
+  } catch (error) {
+    res.status(400).json({
+      error: 'Cannot find',
+    });
+    console.log('error');
+  }
+});
 
 // Start the server
 app.listen(port, () => {
