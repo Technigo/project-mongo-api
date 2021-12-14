@@ -1,4 +1,4 @@
-# Mongo API Books Project
+# Mongo Books API Project
 
 ## Tech Stack: Node.js, Express, Mongo DB & Mongoose
 
