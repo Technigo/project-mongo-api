@@ -60,10 +60,10 @@ app.get('/', (req, res) => {
 });
 
 // Endpoint to get all books, and when you add queries you can get the objects that includes a specific title, author or both.
-app.get('/books', (req, res) => {
+app.get('/books', async (req, res) => {
   const { title, authors } = req.query;
 
-  const allBooks = Book.find({
+  const allBooks = await Book.find({
     title: new RegExp(title, 'i'),
     authors: new RegExp(authors, 'i'),
   });
@@ -76,9 +76,9 @@ app.get('/books', (req, res) => {
 });
 
 // Endpoint to get a single book by its id
-app.get('/books/id/:id', (req, res) => {
+app.get('/books/id/:id', async (req, res) => {
   const { id } = req.params;
-  const singleBook = Book.findOne({ bookID: id });
+  const singleBook = await Book.findOne({ bookID: id });
 
   if (!singleBook) {
     res.status(404).send(`No book found with id number ${id} :(`);
@@ -106,12 +106,12 @@ app.get('/books/pages/shortbooks', async (req, res) => {
 //Endpoint to get books with 351-799 pages
 app.get('/books/pages/mediumbooks', async (req, res) => {
   try {
-    const mediumBooks = await Book.find(
-      {
-        $and: [{ num_pages: { $gt: 350 } }, { num_pages: { $lt: 800 } }],
-      },
-      { num_pages: 1, _id: 0 }
-    ).sort({ num_pages: 1 });
+    const mediumBooks = await Book.find({
+      $and: [{ num_pages: { $gt: 350 } }, { num_pages: { $lt: 800 } }],
+    });
+    // trying to sort depending on number of pages
+    //  , { num_pages: 1, _id: 0 }
+    // ).sort({ $and: [{ num_pages: 1 }, { title: title }] });
     res.json(mediumBooks);
   } catch (error) {
     res.status(400).json({
