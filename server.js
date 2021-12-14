@@ -4,13 +4,6 @@ import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
 
 import nobelPrizeData from './data/nobel-prize.json'
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
 
 //This is set-up code, can be copy and pasted. The localhost name should be unique.
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo1312kara"
@@ -67,21 +60,42 @@ if (process.env.RESET_DB === 'true') {
 app.get('/', (req, res) => {
   res.send('Hello all, add / in browser to view all endpoints')
 })
-/*here is my winners endpoint, viewable in browser or postman. Have to use Mongoose
-mehtods rather than just normal JS we could use with express*/
-app.get('/winners', async (req, res) => {
-  const winners = await Winner.find()
-  res.json(winners)
-})
-
+// to view all endpoints
 app.get('/endpoints', (req,res )=> 
 res.send(listEndpoints(app)))
 
+/*here is my winners endpoint, viewable in browser or postman. Have to use Mongoose
+mehtods rather than just normal JS we could use with express*/
+app.get('/winners', async (req, res) => {
+  const allWinners = await Winner.find()
+  res.json(allWinners)
+})
+// end point to find all winners in given category
 app.get('/winners/:category', async (req, res) =>{
-  const category = await Winner.find({category:req.params.category})
-  res.json(category)
+  const categoryWinners = await Winner.find({category:req.params.category})
+  res.json(categoryWinners)
 })
 
+// endpoint to find all winners in any give year
+app.get('/winners/year/:year', async (req, res) =>{
+  const yearWinners = await Winner.find({year:req.params.year})
+  res.json(yearWinners)
+})
+
+app.get('/winners/surname/:surname', async (req,res) =>{
+  const surname =req.params.surname
+  const surnameWinner = await Winner.find({surname})
+  res.json(surnameWinner)
+})
+/*endpoint to find any category winner in any given year
+
+app.get ('/winners/category/:category/year/:year', async (req, res) =>{
+  const { year } = req.params
+  const { category } = req.params
+  const categoryYearWinners = await Winner.find({category}&& {year})
+  res.json(categoryYearWinners)
+})
+*/
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
