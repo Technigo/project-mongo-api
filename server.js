@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import nobelPrizeData from './data/nobel-prize.json'
 // 
@@ -66,7 +67,7 @@ if (process.env.RESET_DB === 'true') {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello all')
+  res.send('Hello all, add / in browser to view all endpoints')
 })
 /*here is my winners endpoint, viewable in browser or postman. Have to use Mongoose
 mehtods rather than just normal JS we could use with express*/
@@ -75,7 +76,8 @@ app.get('/winners', async (req, res) => {
   res.json(winners)
 })
 
-app.get('/')
+app.get('/endpoints', (req,res )=> 
+res.send(listEndpoints(app)))
 
 // Start the server
 app.listen(port, () => {
