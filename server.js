@@ -40,6 +40,7 @@ const Book = mongoose.model('Book', {
 });
 
 if (process.env.RESET_DB) {
+  console.log();
   const seedDatabase = async () => {
     await Book.deleteMany();
 
@@ -53,10 +54,26 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-// Start defining your routes here
+// Endpoint to get all books
 app.get('/books', async (req, res) => {
   const books = await Book.find();
   res.json(books);
+});
+
+// Endpoint to get a single book by its id
+app.get('/books/id/:id', async (req, res) => {
+  const { id } = req.params;
+  // const singleBook = booksData.find((item) => item.bookID === +id);
+  const singleBook = await Book.findOne({ bookID: id });
+
+  if (!singleBook) {
+    res.status(404).send(`No book found with id number ${id} :(`);
+  } else {
+    res.json({
+      response: singleBook,
+      success: true,
+    });
+  }
 });
 
 // Start the server
