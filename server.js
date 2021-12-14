@@ -60,7 +60,7 @@ app.get('/', (req, res) => {
 });
 
 // Endpoint to get all books, and when you add queries you can get the objects that includes a specific title, author or both.
-app.get('/books', async (req, res) => {
+app.get('/books', (req, res) => {
   const { title, authors } = req.query;
 
   const allBooks = await Book.find({
@@ -76,7 +76,7 @@ app.get('/books', async (req, res) => {
 });
 
 // Endpoint to get a single book by its id
-app.get('/books/id/:id', async (req, res) => {
+app.get('/books/id/:id', (req, res) => {
   const { id } = req.params;
   const singleBook = await Book.findOne({ bookID: id });
 
@@ -89,23 +89,6 @@ app.get('/books/id/:id', async (req, res) => {
     });
   }
 });
-
-// app.get('/books/pages', async (req, res) => {
-//   const { short, medium, long } = req.query;
-
-//   try {
-//     const shortBooks = await Book.find({ num_pages: short({ $lt: 351 }) });
-//     res.json(shortBooks);
-//   } try {
-//       const mediumBooks = await Book.find({ num_pages: short({ $lt: 351 }) });
-//       res.json(shortBooks);
-//   } catch (error) {
-//     res.status(400).json({
-//       error: 'Cannot find',
-//     });
-//     console.log('error');
-//   }
-// });
 
 //Endpoint to get books shorter than 351 pages
 app.get('/books/pages/shortbooks', async (req, res) => {
