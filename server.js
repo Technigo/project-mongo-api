@@ -3,7 +3,6 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
 
-// import booksData from './data/books.json'
 import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/jakob-mongo'
@@ -22,10 +21,6 @@ app.get('/', (req, res) => {
   // res.send('Welcome to my first backend')
   res.send(listEndpoints(app))
 })
-
-// app.get('/endpoints', (req, res) => {
-//   res.send(listEndpoints(app))
-// })
 
 app.get('/top', (req, res) => {
   res.json(topMusicData)
