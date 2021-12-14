@@ -26,6 +26,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+// Add model for the db
 const User = mongoose.model('User', {
   name: String,
   age: Number
@@ -36,7 +37,7 @@ const newUser = new User({
   age: 44
 })
 
-// save to the db
+// Seed and save to the db
 
 if (process.env.RESET_DB) {
 
@@ -47,7 +48,7 @@ if (process.env.RESET_DB) {
   }
   
   seedDatabase()
-  
+
 }
 
 // Start defining your routes here
