@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import netflixData from './data/netflix-titles.json'
+
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // 
@@ -27,28 +29,33 @@ app.use(cors())
 app.use(express.json())
 
 // Add model for the db
-const User = mongoose.model('User', {
-  name: String,
-  age: Number
+const NetflixTitle = mongoose.model('NetflixTitle', {
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: String,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
 })
 
-const newUser = new User({
-  name: 'Maria', 
-  age: 44
-})
-
-// Seed and save to the db
-
+// Seed and save json data to the db
 if (process.env.RESET_DB) {
 
-  const seedDatabase = async () => {
-    await User.deleteMany({})
+  const seedDatabase = () => {
 
-    newUser.save()
+    netflixData.forEach(item => {
+      const newNetflixTitle = new NetflixTitle(item)
+      newNetflixTitle.save()
+    })
   }
   
   seedDatabase()
-
 }
 
 // Start defining your routes here
