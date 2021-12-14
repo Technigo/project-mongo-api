@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
 app.get('/books', (req, res) => {
   const { title, authors } = req.query;
 
-  const allBooks = await Book.find({
+  const allBooks = Book.find({
     title: new RegExp(title, 'i'),
     authors: new RegExp(authors, 'i'),
   });
@@ -78,7 +78,7 @@ app.get('/books', (req, res) => {
 // Endpoint to get a single book by its id
 app.get('/books/id/:id', (req, res) => {
   const { id } = req.params;
-  const singleBook = await Book.findOne({ bookID: id });
+  const singleBook = Book.findOne({ bookID: id });
 
   if (!singleBook) {
     res.status(404).send(`No book found with id number ${id} :(`);
