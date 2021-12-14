@@ -31,13 +31,13 @@
           {
             "in": "query",
             "name": "page",
-            "required": true,
+            "required": false,
             "format": "integer"
           },
           {
             "in": "query",
             "name": "limit",
-            "required": true,
+            "required": false,
             "format": "integer"
           },
           {
@@ -71,13 +71,13 @@
           {
             "in": "query",
             "name": "page",
-            "required": true,
+            "required": false,
             "format": "integer"
           },
           {
             "in": "query",
             "name": "limit",
-            "required": true,
+            "required": false,
             "format": "integer"
           }
         ],
@@ -155,13 +155,13 @@
           {
             "in": "query",
             "name": "page",
-            "required": true,
+            "required": false,
             "format": "integer"
           },
           {
             "in": "query",
             "name": "limit",
-            "required": true,
+            "required": false,
             "format": "integer"
           }
         ],

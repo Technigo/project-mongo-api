@@ -143,8 +143,9 @@ app.get("/netflix-titles", async (req, res) => {
       country: country,
     });
   } else if (!year && country) {
+    console.log("country is here");
     titlesToSend = await Title.find({
-      country: country,
+      country: { $regex: country },
     });
   } else {
     titlesToSend = await Title.find({});
