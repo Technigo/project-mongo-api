@@ -68,6 +68,14 @@ if (process.env.RESET_DB) {
 app.get('/', (req, res) => {
   res.send('Hello all')
 })
+/*here is my winners endpoint, viewable in browser or postman. Have to use Mongoose
+mehtods rather than just normal JS we could use with express*/
+app.get('/winners', async (req, res) => {
+  const winners = await Winner.find()
+  res.json(winners)
+})
+
+app.get('/')
 
 // Start the server
 app.listen(port, () => {
