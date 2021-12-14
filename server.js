@@ -11,7 +11,7 @@ import booksData from './data/books.json';
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/books';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -29,33 +29,34 @@ app.use(express.json());
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
 });
 
-Book.deleteMany().then(() => {
-  // data.forEach((Book) => {
-  new Book(booksData).save();
-  // });
-});
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Book.deleteMany();
 
-// if (process.env.RESET_DB) {
-//   const seedDatabase = async () => {
-//     await booksData.deleteMany({});
+    booksData.forEach((item) => {
+      new Book(item).save();
+    });
 
-//     data.forEach((bookData) => {
-//       new Book(bookData).save();
-//     });
-//   };
-
-//   seedDatabase();
-// }
+    // const potter = new Book({ title: 'Harry Potter' });
+    // await potter.save();
+  };
+  seedDatabase();
+}
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  Book.find().then((books) => {
-    res.json(books);
-  });
-  // res.send('Hello world');
-  // res.json(booksData);
+app.get('/books', async (req, res) => {
+  const books = await Book.find();
+  res.json(books);
 });
 
 // Start the server
