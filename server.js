@@ -64,15 +64,28 @@ app.get('/', (req, res) => {
 app.get('/books', async (req, res) => {
   const { title, authors } = req.query
 
-  const allBooks = await Book.find({
-    title: new RegExp(title, 'i'),
-    authors: new RegExp(authors, 'i'),
-  })
+  // const allBooks = await Book.find({
+  //   title: new RegExp(title, 'i'),
+  //   authors: new RegExp(authors, 'i'),
+  // })
 
-  if (!allBooks) {
-    res.status(404).json('Could not find any books..')
-  } else {
+  // if (!allBooks) {
+  //   res.status(404).json('Could not find any books..')
+  // } else {
+  //   res.json(allBooks)
+  // }
+
+  try {
+    const allBooks = await Book.find({
+      title: new RegExp(title, 'i'),
+      authors: new RegExp(authors, 'i'),
+    })
     res.json(allBooks)
+  } catch (error) {
+    res.status(400).json({
+      error: 'Cannot find',
+    })
+    console.log('error')
   }
 })
 
