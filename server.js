@@ -105,6 +105,12 @@ app.get("/tvshows", async (req, res) => {
   res.json(tvShows);
 });
 
+app.get("/id/:id", async (req, res) => {
+  const { id } = req.params;
+  const media = await Media.findOne({ id: id });
+  res.json(media);
+});
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
