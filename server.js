@@ -43,6 +43,10 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
+app.get("/books", (req, res) => {
+  Book.find().then((books) => res.json(books));
+});
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
