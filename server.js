@@ -2,6 +2,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import listEndpoints from "express-list-endpoints";
 import swiftData from "./data/swift-data.json";
 
 // import booksData from './data/books.json'
@@ -52,9 +53,9 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-// Startingpoint
+// Startingpoint with all endpoints
 app.get("/", (req, res) => {
-  res.send("This is the Taylor Swift song database");
+  res.send(listEndpoints(app));
 });
 
 // Displays all songs
@@ -63,28 +64,45 @@ app.get("/songs", async (req, res) => {
   res.json(songs);
 });
 
-// displays all songs based on an album
-app.get("/album", async (req, res) => {
-  const songs = await Song.find(req.query);
-  res.json(songs);
-});
 // displays a song index
 app.get("/songs/index/:index", async (req, res) => {
-  const song = await Song.find(req.params);
-  res.json(song);
-});
-
-// displays one single song
-app.get("/songs/id/:id", async (req, res) => {
   try {
-    const songById = await Song.findById(req.params.id);
-    if (songById) {
-      res.json(songById);
+    const song = await Song.find(req.params);
+    if (song) {
+      res.json(song);
     } else {
-      res.status(404).json({ error: "Cannot get song by that id" });
+      res.status(404).json({ error: "Cannot get song by that index" });
     }
   } catch (error) {
-    res.status(400).json({ error: "invalid id" });
+    res.status(400).json({ error: "Invalid index" });
+  }
+});
+
+// Get a song by it's title
+app.get("/songs/name/:name", async (req, res) => {
+  try {
+    const name = await Song.find(req.params);
+    if (name) {
+      res.json(name);
+    } else {
+      res.status(404).json({ error: "Cannot get the song by that title" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: "Invalid title" });
+  }
+});
+
+// Get an album by it's title
+app.get("/songs/album/:album", async (req, res) => {
+  try {
+    const album = await Song.find(req.params);
+    if (album) {
+      res.json(album);
+    } else {
+      res.status(404).json({ error: "Cannot get the album by that title" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: "Invalid album name" });
   }
 });
 
