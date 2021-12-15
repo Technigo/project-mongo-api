@@ -44,7 +44,7 @@ const Book = mongoose.model('Book', { //First it takes 2 arguments, users and an
 })
 
 if (process.env.RESET_DB) { //is the environment variable is true then we want to save the books
-  const seedDatabase = async () => { //this is a syncrounus function
+  const seedDatabase = async () => { //this is an asyncrounus function
     await Book.deleteMany({}) //first it does this part
 
     booksData.forEach(item => { //for each loop the array of books
