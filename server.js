@@ -49,6 +49,10 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
+app.get('/', (req, res) => {
+  res.send('HELLO WORLD');
+});
+
 app.get('/episodes', async (req, res) => {
   const seasons = await Episode.find(req.query);
   res.json(seasons);
