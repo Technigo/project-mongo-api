@@ -4,15 +4,6 @@ import mongoose from "mongoose";
 import books from "./data/books.json";
 import listEndpoints from "express-list-endpoints";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -60,25 +51,23 @@ app.get("/", (req, res) => {
 });
 
 app.get("/books", async (req, res) => {
-	const { author, title, language } = req.query;
-	console.log(req.query);
 	let filteredBooks = await Book.find(req.query);
-	console.log("test", req.query);
 
 	try {
 		if (req.query.author) {
-			filteredBooks = await filteredBooks.find({
+			filteredBooks = await Book.find({
 				authors: new RegExp(req.query.author, "i"),
 			});
 		}
 		if (req.query.title) {
-			filteredBooks = await filteredBooks.find({ title: req.query.title });
+			filteredBooks = await Book.find({
+				title: new RegExp(req.query.title, "i"),
+			});
 		}
 		if (req.query.language) {
-			filteredBooks = await filteredBooks.find({
-				language_code: req.query.language,
+			filteredBooks = await Book.find({
+				language_code: new RegExp(req.query.language, "i"),
 			});
-			console.log(filteredBooks);
 		}
 		res.json(filteredBooks);
 	} catch (err) {
@@ -89,32 +78,68 @@ app.get("/books", async (req, res) => {
 	}
 });
 
+// //endpoint with random book
+// app.get("/randomBook", (req, res) => {
+// 	let randomBook = booksData[Math.floor(Math.random() * booksData.length)];
+
+// 	if (!randomBook) {
+// 		res.status(404).json({
+// 			response: "Something went wrong, try again!",
+// 			success: false,
+// 		});
+// 	} else {
+// 		res.status(200).json({
+// 			response: randomBook,
+// 			success: true,
+// 		});
+// 	}
+// });
+
+// // search by isbn or isbn13 number
+// app.get("/books/isbn/:isbn", (req, res) => {
+// 	const isbn = req.params.isbn;
+// 	const book = data.find(
+// 		(item) => item.isbn === +isbn || item.isbn13 === +isbn
+// 	);
+// 	if (!book) {
+// 		res.status(404).json({
+// 			response: "No book with that ISBN or ISBN13 number",
+// 			success: false,
+// 		});
+// 	} else {
+// 		res.status(200).json({
+// 			response: book,
+// 			success: true,
+// 		});
+// 	}
+// });
+
 //gt is greater than lt is lower than
 app.get("/books/rating/:rating", async (req, res) => {
-	let books = await Book.find(req.query);
+	let ratedBooks = await Book.find(req.query);
 
-	if (req.query.average_rating) {
-		const booksOnRating = await books
-			.find()
-			.gt("average_rating", req.query.average_rating);
-		books = booksOnRating;
+	if (req.query.rating) {
+		ratedBooks = await Book.find().gt({
+			average_rating: req.query.rating,
+		});
 	}
-	res.json(books);
+	res.json(ratedBooks);
 });
 
+//works
 app.get("/books/id/:id", async (req, res) => {
 	const id = req.params.id;
-	const bookById = await Book.findById(id);
+	const bookById = await Book.find({ bookID: id });
 	try {
-		if (bookById) {
-			res.json({
-				response: bookById,
-				success: true,
-			});
-		} else {
+		if (!bookById) {
 			res.status(404).json({
 				response: "Error: book not found",
 				success: false,
+			});
+		} else {
+			res.json({
+				response: bookById,
+				success: true,
 			});
 		}
 	} catch (err) {
