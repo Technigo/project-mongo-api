@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import mongoose from 'mongoose'; 
+import mongoose from 'mongoose';
 import listEndPoints from 'express-list-endpoints'; // for listing all routes
 
 //----------------* for database connection *--------------------//
@@ -50,15 +50,15 @@ app.use(express.json());
 
 // default route
 app.get('/', async (req, res) => {
-  
-  res.send('welcome to the top music tracks information API. For detailed documentation visit: ');
+  res.send(
+    'welcome to the top music tracks information API. For detailed documentation visit: '
+  );
 });
 
 // this will list all routes
 app.get('/endpoints', async (req, res) => {
   res.send(listEndPoints(app));
 });
-
 
 app.get('/tracks', async (req, res) => {
   const tracks = await Track.find();
@@ -70,5 +70,3 @@ app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`);
 });
-
-ech:<password>@cluster0.tu22h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
