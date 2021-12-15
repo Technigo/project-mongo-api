@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import netflixData from "./data/netflix-titles.json";
+import { resolveShowConfigPath } from "@babel/core/lib/config/files";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -30,12 +31,6 @@ const Movie = mongoose.model("Movie", {
   type: String,
 });
 
-// const newMovie = new Movie({
-//   title: "The Zoya Factor",
-//   release_year: 2019,
-//   director: "Abhishek Sharma",
-// });
-
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Movie.deleteMany({});
@@ -54,8 +49,27 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
+// Get all the movies
+app.get("/movies", async (req, res) => {
+  const movies = await Movie.find({});
+  res.json(movies);
+});
+
+// Get one movie with filter
+app.get("/movies/title/:title", async (req, res) => {
+  try {
+    const movieByTitle = await Movie.findOne(req.params.title);
+    if (movieByTitle) {
+      res.json(movieByTitle);
+    } else {
+      res.status(404).json({ error: "Couln't find a movie with that title.." });
+    }
+  } catch (err) {
+    res.status(404).json({ error: "ERROR!!" });
+  }
+});
+
 // Start the server
 app.listen(port, () => {
-  // eslint-disable-next-line
   console.log(`Server running on http://localhost:${port}`);
 });
