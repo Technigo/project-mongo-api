@@ -31,6 +31,7 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 })
 
+// Populate the database and make it run
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany({}) //async await method to make sure that the data doesn't get duplicated
@@ -48,41 +49,48 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
+  res.send('Hello world! This is an API with book data')
+})
+
+// Endpoint listing all data - booksData
+app.get('/books', (req, res) => {
   Book.find().then(books => {
     res.json(books)
   })
-  /* res.send('Hello world') */
 })
 
-app.get('/:title', (req, res) => {
+// Endpoint for when searching on a specific book title
+app.get('/books-title/:title', (req, res) => {
   Book.findOne({ title: req.params.title }).then(book => {
     if (book) {
       res.json(book)
     } else {
-      res.status(404).json({ error: 'Page not found' })
+      res.status(404).json({ error: 'No book with that title was found' })
     }
   })
 })
 
-/* app.get('/:authors', (req, res) => {
-  Book.findOne({ authors: req.params.authors }).then(book => {
-    if (book) {
-      res.json(book)
-    } else {
-      res.status(404).json({ error: 'Page not found' })
-    }
-  })
+// Endpoint for a specific book searching on the bookID
+app.get('/books-id/:id', async (req, res) => {
+  const book = await Book.findOne({ bookID: req.params.id })
+  if (book) {
+    res.json(book)
+  } else {
+    res.status(404).json({ error: 'No book with that ID was found' })
+  }
 })
 
-app.get('/:bookID', (req, res) => {
-  Book.findOne({ bookID: req.params.bookID }).then(book => {
-    if (book) {
-      res.json(book)
-    } else {
-      res.status(404).json({ error: 'Page not found' })
-    }
-  })
-}) */
+// Endpoint for when searching on a specific author
+app.get('/books-authors/:authors', async (req, res) => {
+  const book = await Book.findOne({ authors: req.params.authors })
+  if (book) {
+    res.json(book)
+  } else {
+    res.status(404).json({ error: 'No book by that author was found' })
+  }
+})
+
+
 
 // Start the server
 app.listen(port, () => {
