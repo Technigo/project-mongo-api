@@ -82,7 +82,7 @@ app.get("/tracks/index/:index", async (req, res) => {
       res.status(404).json({ error: "no track found with that index number" })
     }
   } catch (err) {
-    res.status(400).json({ error: "ERROR" })
+    res.status(400).json({ error: "index number is invalid" })
   }
 })
 
@@ -100,40 +100,55 @@ app.get("/tracks/title/:title", async (req, res) => {
 })
 
 app.get("/tracks/artists/:artist", async (req, res) => {
-  const artist = await Tracks.find({ artist: req.params.artist })
-  if (artist) {
-    res.json(artist)
-  } else {
-    res.status(404).json({ error: "No artist found" })
+  try {
+    const artist = await Tracks.find({ artist: req.params.artist })
+    if (artist) {
+      res.json(artist)
+    } else {
+      res.status(404).json({ error: "No artist found" })
+    }
+  } catch (err) {
+    res.status(400).json({ error: "artist is invalid" })
   }
 })
 
 app.get("/tracks/year/:year", async (req, res) => {
-  const year = await Tracks.find({ year: req.params.year })
-  if (year) {
-    res.json(year)
-  } else {
-    res.status(404).json({ error: "No titles found on this year" })
+  try {
+    const year = await Tracks.find({ year: req.params.year })
+    if (year) {
+      res.json(year)
+    } else {
+      res.status(404).json({ error: "No titles found on this year" })
+    }
+  } catch (err) {
+    res.status(400).json({ error: "year is invalid" })
   }
 })
 
 app.get("/tracks/genre/:genre", async (req, res) => {
-  const genre = await Tracks.find({ genre: req.params.genre })
-  if (genre) {
-    res.json(genre)
-  } else {
-    res.status(404).json({ error: "Genre not found" })
+  try {
+    const genre = await Tracks.find({ genre: req.params.genre })
+    if (genre) {
+      res.json(genre)
+    } else {
+      res.status(404).json({ error: "Genre not found" })
+    }
+  } catch (err) {
+    res.status(400).json({ error: "genre is invalid" })
   }
 })
 
-app.get("/tracks/bpm/:bpm", (req, res) => {
-  Tracks.find({ bpm: req.params.bpm }).then((bpm) => {
+app.get("/tracks/bpm/:bpm", async (req, res) => {
+  try {
+    const bpm = await Tracks.find({ bpm: req.params.bpm })
     if (bpm) {
       res.json(bpm)
     } else {
       res.status(404).json({ error: "no track with that bpm found" })
     }
-  })
+  } catch (err) {
+    res.status(400).json({ error: "bpm is invalid" })
+  }
 })
 
 // Start the server
