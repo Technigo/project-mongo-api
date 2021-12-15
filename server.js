@@ -45,6 +45,7 @@ const Show = mongoose.model("Show", {
   type: String
 })
 
+// if reset_db true, it will seed the data 
 if (process.env.RESET_DB) {
   // async awaut is just another method to do .then()
   const seedDatabase = async () => {
@@ -61,7 +62,8 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// Start defining your routes here
+// ENDPOINTS 
+// welcome page
 app.get('/', (req, res) => {
   res.send('Hello world! Type /shows to get all the shows!')
 })
@@ -82,13 +84,12 @@ app.get('/shows', async (req, res) => {
       title: new RegExp(title, 'i'), 
       country: new RegExp(country, 'i'),
       type: new RegExp(type, 'i')
-
     })
     // if array is empty return error 
     if (shows.length === 0) {
-      res.status(404).json({
+      res.json({
         response: "This array is empty",
-        success: false
+        success: true
       })
     }
 
