@@ -9,7 +9,7 @@ Build a project using a database to store and retrieve data from, then use that 
 - How to fetch items from a Mongo database using Mongoose
 - How to seed large amounts of data to a database
 
-# Documentation 
+## Documentation 
 
 GET /
 Welcome page
