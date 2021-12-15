@@ -17,4 +17,4 @@ Once the database was configured and conected, I started building basic endpoint
 
 ## View it live
 
-See:
+See: https://project-mong-api.herokuapp.com/
