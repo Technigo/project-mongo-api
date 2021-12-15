@@ -45,17 +45,17 @@ const Title = mongoose.model("Title", {
   type: String,
 });
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Title.deleteMany({});
+// if (process.env.RESET_DB) {
+const seedDatabase = async () => {
+  await Title.deleteMany({});
 
-    netflixData.forEach((item) => {
-      const newTitle = new Title(item);
-      newTitle.save();
-    });
-  };
-  seedDatabase();
-}
+  netflixData.forEach((item) => {
+    const newTitle = new Title(item);
+    newTitle.save();
+  });
+};
+seedDatabase();
+// }
 
 // Start defining your routes here
 app.get("/", (req, res) => {
