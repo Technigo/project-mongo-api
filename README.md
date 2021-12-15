@@ -1,12 +1,16 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This is a backend project, modelling a database using Mongoose models, persisting data in a database and uses that data to produce a RESTful API. The API has a bunch of routes to get to endpoints. The data has been manipulated, using mongoose operations, params and queries so that different data is displayed depending on the endpoint.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started the project by downloading homebrew, MongoDB and Mongo Compass to get the app running and connected to Mongo Compass. I chose a JSON file to work with (books) and created a mongoose model that includes the properties from the objects in the JSON. I installed express list endpoints to create a first route that will display all endpoints.
+To get the data into the database, I seeded it from the JSON by loading and iterating over the objects in it.
+I then started building different endpoints to get all books and a single book by its ID. I used Mongoose operators to create more endpoints, so that the user can find books depending on tha title, author, amount of pages and rating.
+If there is a problem getting data in an endpoint, an error message appears.
+Once having a bunch of endpoints, I deployed the database and connected it to the heroku by adding a secret config var.
+
+If I had more time I would create a frontend webpage to fetch and display the data from the API.
 
 ## View it live
 

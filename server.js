@@ -20,6 +20,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Listens to whether the database is up running (if yes moves on in the code)
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: 'Services unavailable' });
+  }
+});
+
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
@@ -33,7 +42,6 @@ const Book = mongoose.model('Book', {
 });
 
 if (process.env.RESET_DB) {
-  console.log();
   const seedDatabase = async () => {
     await Book.deleteMany();
 
@@ -63,22 +71,27 @@ app.get('/books', async (req, res) => {
     res.status(400).json({
       error: 'Cannot find any books',
     });
-    console.log('error');
   }
 });
 
 // Endpoint to get a single book by its id
 app.get('/books/id/:id', async (req, res) => {
   const { id } = req.params;
-  const singleBook = await Book.findOne({ bookID: id });
+  try {
+    const singleBook = await Book.findById(id);
 
-  if (!singleBook) {
-    res.status(404).send(`No book found with id number ${id} :(`);
-  } else {
-    res.json({
-      response: singleBook,
-      success: true,
-    });
+    if (!singleBook) {
+      res.status(404).json({
+        error: 'No book found',
+      });
+    } else {
+      res.json({
+        response: singleBook,
+        success: true,
+      });
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid user ID' });
   }
 });
 
