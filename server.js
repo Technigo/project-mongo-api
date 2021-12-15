@@ -1,15 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import netflixData from './data/netflix-titles.json'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -25,6 +18,49 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
+
+const User = mongoose.model("User", {
+  name: String
+})
+
+const User1 = new User({
+  name: "Elin"
+})
+
+const User2 = new User({
+  name: "Tobias"
+})
+
+const Title = mongoose.model("Title", {
+    show_id: Number,
+    title : String,
+    director: String,
+    cast: String,
+    country: String,
+    date_added: String,
+    release_year: Number,
+    rating: String,
+    duration: String,
+    listed_in: String,
+    description: String,
+    type: String,
+  })
+
+  if (process.env.RESET_DB){
+    const seeDatabase = async () => {
+      await Title.deleteMany({})
+
+ 
+      console.log("hello")
+      netflixData.forEach((data)=> {
+        const newTitle = new Title(data)
+        newTitle.save()
+      })
+    }
+    seeDatabase()
+  }
+
+
 
 // Start defining your routes here
 app.get('/', (req, res) => {
