@@ -48,7 +48,7 @@ app.get("/books", async (req, res) => {
   res.json(books);
 });
 
-app.get("books/:id", async (req, res) => {
+app.get("/book/:id", async (req, res) => {
   const book = await Book.findOne({ bookID: req.params.id });
   if (book) {
     res.json(book);
