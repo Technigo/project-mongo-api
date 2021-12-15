@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import listEndpoints from 'express-list-endpoints'
 import netflixData from './data/netflix-titles.json'
 
 
@@ -45,16 +46,32 @@ const app = express()
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
+// if mongodb-community is stopped
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: "Service unavailable" })
+  }
+})
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello server')
+  res.send(listEndpoints(app))
 })
 
+
 app.get('/titles', async (req, res) => {
-  const movies = await NetflixData.find()
-  res.json(movies)
+
+  let titles = await NetflixData.find(req.query)
+  // filter by query release_year, greater than or equal
+  if (req.query.release_year) {
+    const titlesByYear = await NetflixData.find().gte('release_year', req.query.release_year)
+    titles = titlesByYear
+  }
+  res.json(titles)
 })
+
 
 app.get('/titles/:id', async (req, res) => {
   try {
