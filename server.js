@@ -5,16 +5,10 @@ import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
 import swiftData from "./data/swift-data.json";
 
-// import booksData from './data/books.json'
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -41,6 +35,7 @@ const Song = mongoose.model("Song", {
   tempo: Number,
 });
 
+// Sets the database
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Song.deleteMany({});
@@ -64,7 +59,7 @@ app.get("/songs", async (req, res) => {
   res.json(songs);
 });
 
-// displays a song index
+// displays a song based on index
 app.get("/songs/index/:index", async (req, res) => {
   try {
     const song = await Song.find(req.params);
@@ -81,7 +76,10 @@ app.get("/songs/index/:index", async (req, res) => {
 // Get a song by it's title
 app.get("/songs/name/:name", async (req, res) => {
   try {
-    const name = await Song.find(req.params);
+    const name = await Song.find(req.params).collation({
+      locale: "en",
+      strength: 2,
+    });
     if (name) {
       res.json(name);
     } else {
@@ -95,7 +93,10 @@ app.get("/songs/name/:name", async (req, res) => {
 // Get an album by it's title
 app.get("/songs/album/:album", async (req, res) => {
   try {
-    const album = await Song.find(req.params);
+    const album = await Song.find(req.params).collation({
+      locale: "en",
+      strength: 2,
+    });
     if (album) {
       res.json(album);
     } else {
@@ -104,6 +105,17 @@ app.get("/songs/album/:album", async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: "Invalid album name" });
   }
+});
+
+// Get songs that have the length greater than what is written in the bar
+app.get("/songs/length", async (req, res) => {
+  let songs = await Song.find(req.query);
+  if (req.query.length) {
+    const songsByLength = await Song.find().gt("length", req.query.length);
+    songs = songsByLength;
+  }
+
+  res.json(songs);
 });
 
 // Start the server
