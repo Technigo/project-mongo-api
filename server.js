@@ -1,15 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
 import musicData from './data/top-music.json';
+import listEndpoints from 'express-list-endpoints';
 
 // set up mongoose and connect to the database
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
@@ -43,7 +36,7 @@ const Single = mongoose.model('Single', {
   popularity: Number
 });
 
-// using environment variable in seedData
+// using environment variable in seedData when seting up the database (only do once)
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Single.deleteMany({});
@@ -59,6 +52,11 @@ if (process.env.RESET_DB) {
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Hello world');
+});
+
+// get the endpoints
+app.get('endpoints', (req, res) => {
+  res.send(listEndpoints(app));
 });
 
 // Start the server
