@@ -67,6 +67,11 @@ app.get("/titles", async (req, res) => {
   res.json(titles);
 });
 
+app.get("/titles/id/:id", async (req, res) => {
+  const titleById = await Title.findById(req.params.id);
+  res.json(titleById);
+});
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
