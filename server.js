@@ -51,12 +51,82 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.send('Woop woop');
 });
 
 // get the endpoints
 app.get('endpoints', (req, res) => {
   res.send(listEndpoints(app));
+});
+
+// getting all singles and added query params
+app.get('/singles', (req, res) => {
+  const { musicGenre, artist, title } = req.query;
+  let musicDataToSort = musicData;
+
+  if (musicGenre) {
+    musicDataToSort = musicDataToSort.filter(
+      (item) =>
+        item.genre.toLowerCase().indexOf(musicGenre.toLowerCase()) !== -1
+    );
+  }
+
+  if (artist) {
+    musicDataToSort = musicDataToSort.filter(
+      (item) =>
+        item.artistName.toLowerCase().indexOf(artist.toLowerCase()) !== -1
+    );
+  }
+
+  if (title) {
+    musicDataToSort = musicDataToSort.filter(
+      (item) => item.trackName.toLowerCase().indexOf(title.toLowerCase()) !== -1
+    );
+  }
+
+  res.status(200).json({
+    response: musicDataToSort,
+    success: true
+  });
+});
+
+// get data by artist
+app.get('/singles/artist/:artist', (req, res) => {
+  const { artist } = req.params;
+
+  const singleArtistName = musicData.find(
+    (item) => item.artistName.toLowerCase().indexOf(artist.toLowerCase()) !== -1
+  );
+
+  if (!singleArtistName) {
+    res.status(404).json({
+      response: 'No artist found with that name!',
+      success: false
+    });
+  } else {
+    res.status(200).json({
+      response: singleArtistName,
+      success: true
+    });
+  }
+});
+
+// GET data by id
+app.get('/singles/id/:id', (req, res) => {
+  const { id } = req.params;
+  const singleId = musicData.find((item) => item.id === +id);
+
+  if (!singleId) {
+    res.status(404).json({
+      response: 'Incorrect ID',
+      sucess: false
+    });
+  } else {
+    res.status(200).json({
+      response: singleId,
+      success: true
+    });
+  }
 });
 
 // Start the server
