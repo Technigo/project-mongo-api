@@ -54,7 +54,7 @@ if (process.env.RESET_DB) {
 
 // Startingpoint
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send("This is the Taylor Swift song database");
 });
 
 // Displays all songs
@@ -67,6 +67,11 @@ app.get("/songs", async (req, res) => {
 app.get("/album", async (req, res) => {
   const songs = await Song.find(req.query);
   res.json(songs);
+});
+// displays a song index
+app.get("/songs/index/:index", async (req, res) => {
+  const song = await Song.find(req.params.index);
+  res.json(song);
 });
 
 // displays one single song
