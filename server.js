@@ -53,7 +53,7 @@ app.get("/book/:id", async (req, res) => {
   if (book) {
     res.json(book);
   } else {
-    res.status(404).res({ error: "A book with such a ID does not exist" });
+    res.status(404).json({ error: "A book with such a ID does not exist" });
   }
 });
 
