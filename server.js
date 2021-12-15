@@ -104,7 +104,7 @@ app.get("/music/popular", async (req, res) => {
 });
 
 app.get("/music/unpopular", async (req, res) => {
-  const unPopular = await MusicList.find().lt("popularity", 50);
+  const unPopular = await MusicList.find().lt("popularity", 80);
   res.json(unPopular);
 });
 
