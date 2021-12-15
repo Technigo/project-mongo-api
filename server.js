@@ -93,32 +93,39 @@ const checkPathParam = async (
 ) => {
   let titlesWithParam = {};
   let errorResponse = "";
-  if (typeOfParam === "id") {
-    titlesWithParam = await Title.findOne({
-      type: typeOfTitle,
-      show_id: param,
-    });
-    errorResponse = `there is no ${typeOfTitle} with the id ${param}`;
-  } else if (typeOfParam === "year") {
-    titlesWithParam = await Title.find({
-      type: typeOfTitle,
-      release_year: +param,
-    });
-    errorResponse = `there are no ${typeOfTitle} from ${param}`;
-  }
+  try {
+    if (typeOfParam === "id") {
+      titlesWithParam = await Title.findOne({
+        type: typeOfTitle,
+        show_id: param,
+      });
+      errorResponse = `there is no ${typeOfTitle} with the id ${param}`;
+    } else if (typeOfParam === "year") {
+      titlesWithParam = await Title.find({
+        type: typeOfTitle,
+        release_year: +param,
+      });
+      errorResponse = `there are no ${typeOfTitle} from ${param}`;
+    }
 
-  // if there is no result, return 404. If page and limit exists, paginate the result.
-  if (!titlesWithParam || titlesWithParam.length === 0) {
+    // if there is no result, return 404. If page and limit exists, paginate the result.
+    if (!titlesWithParam || titlesWithParam.length === 0) {
+      res.status(404).json({
+        response: errorResponse,
+        success: false,
+      });
+    } else if (page && limit) {
+      paginate(res, page, limit, titlesWithParam);
+    } else {
+      res.status(200).json({
+        response: titlesWithParam,
+        success: true,
+      });
+    }
+  } catch (error) {
     res.status(404).json({
-      response: errorResponse,
+      response: "There is no such page",
       success: false,
-    });
-  } else if (page && limit) {
-    paginate(res, page, limit, titlesWithParam);
-  } else {
-    res.status(200).json({
-      response: titlesWithParam,
-      success: true,
     });
   }
 };
@@ -127,35 +134,35 @@ app.get("/netflix-titles", async (req, res) => {
   const { year, country, page, limit } = req.query;
   let titlesToSend = {};
 
-  // titlesToSend = await Title.find({
-  //   release_year: year,
-  //   country: country,
-  // });
-
-  if (year && !country) {
-    console.log("year is active");
-    titlesToSend = await Title.find({
-      release_year: year,
-    });
-  } else if (year && country) {
-    titlesToSend = await Title.find({
-      release_year: year,
-      country: country,
-    });
-  } else if (!year && country) {
-    console.log("country is here");
-    titlesToSend = await Title.find({
-      country: { $regex: country },
-    });
-  } else {
-    titlesToSend = await Title.find({});
-  }
-  if (page && limit) {
-    paginate(res, page, limit, titlesToSend);
-  } else {
-    res.status(200).json({
-      response: titlesToSend,
-      success: true,
+  try {
+    if (year && !country) {
+      titlesToSend = await Title.find({
+        release_year: year,
+      });
+    } else if (year && country) {
+      titlesToSend = await Title.find({
+        release_year: year,
+        country: new RegExp(country, "i"),
+      });
+    } else if (!year && country) {
+      titlesToSend = await Title.find({
+        country: new RegExp(country, "i"),
+      });
+    } else {
+      titlesToSend = await Title.find({});
+    }
+    if (page && limit) {
+      paginate(res, page, limit, titlesToSend);
+    } else {
+      res.status(200).json({
+        response: titlesToSend,
+        success: true,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({
+      response: "There is no such page",
+      success: false,
     });
   }
 });
@@ -165,12 +172,19 @@ app.get("/netflix-titles/movies", async (req, res) => {
   let titlesToSend = await Title.find({
     type: "movie",
   });
-  if (page && limit) {
-    paginate(res, page, limit, titlesToSend);
-  } else {
-    res.status(200).json({
-      response: titlesToSend,
-      success: true,
+  try {
+    if (page && limit) {
+      paginate(res, page, limit, titlesToSend);
+    } else {
+      res.status(200).json({
+        response: titlesToSend,
+        success: true,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({
+      response: "There is no such page",
+      success: false,
     });
   }
 });
@@ -191,12 +205,19 @@ app.get("/netflix-titles/tv-shows", async (req, res) => {
   let titlesToSend = await Title.find({
     type: "tv-show",
   });
-  if (page && limit) {
-    paginate(res, page, limit, titlesToSend);
-  } else {
-    res.status(200).json({
-      response: titlesToSend,
-      success: true,
+  try {
+    if (page && limit) {
+      paginate(res, page, limit, titlesToSend);
+    } else {
+      res.status(200).json({
+        response: titlesToSend,
+        success: true,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({
+      response: "There is no such page",
+      success: false,
     });
   }
 });
