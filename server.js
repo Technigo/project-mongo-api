@@ -61,6 +61,32 @@ app.get('/', (req, res) => {
   res.send('Hello from us!')
 })
 
+// Get all the sales
+// Filter based on queries to get the sales for a specific region, date etc
+app.get('/sales', async (req, res) => {
+  const sales = await Sale.find(req.query)
+  if (sales.length > 0) {
+  res.json(sales)
+  }
+  else {
+    res.status(404).json({ error: 'Sorry, cannot be found' })
+  }
+})
+
+// Get one sale based on id
+app.get('/sales/id/:id', async (req, res) => {
+  try {
+    const saleById = await Sale.findById(req.params.id)
+    if (saleById) {
+      res.json(saleById)
+    } else {
+      res.status(404).json({ error: 'Sale not found' })
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Id is invalid' })
+  }
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port} YAY YAY`)
