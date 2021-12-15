@@ -70,7 +70,7 @@ app.get("/album", async (req, res) => {
 });
 // displays a song index
 app.get("/songs/index/:index", async (req, res) => {
-  const song = await Song.find(req.params.index);
+  const song = await Song.find(req.params);
   res.json(song);
 });
 
