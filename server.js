@@ -51,7 +51,6 @@ app.get('/', (req, res) => {
   // res.send('Welcome to my first backend')
   res.send(listEndpoints(app))
 })
-
 app.get('/top', async (req, res) => {
   const { trackName, artistName, genre } = req.params
 
@@ -81,19 +80,6 @@ app.get('/top/:id', async (req, res) => {
     res.json(trackId)
   }
 })
-
-// app.get('/top', (req, res) => {
-//   const { trackName, artistName, genre } = req.params
-
-//   // const trackId = topMusicData.find((trackName) => trackName.id === +id)
-//   const trackId = await Music.findOne({ id: id })
-
-//   if (!trackId) {
-//     res.status(404).send('No artist found')
-//   } else {
-//     res.json(trackId)
-//   }
-// })
 
 // Start the server
 app.listen(port, () => {
