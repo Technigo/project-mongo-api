@@ -20,7 +20,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// define model
+// define model using a Schema for each Winner
 
 const Winner = mongoose.model('Winner', {
   firstname: String,
@@ -96,6 +96,16 @@ app.get ('/winners/category/:category/year/:year', async (req, res) =>{
   res.json(categoryYearWinners)
 })
 */
+
+// get one winner based on id
+app.get ('/winners/id/:id', async (req, res)=> {
+  const id = req.params.id
+  const winnerById = await Winner.findById(id)
+  res.json(winnerById)
+})
+
+
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
