@@ -18,6 +18,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Use middleware readyState for errorhandling if database isn't in a good state
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({
+      response: 'Service unavailable',
+      success: false
+    });
+  }
+});
+
 // specify a model
 const Single = mongoose.model('Single', {
   id: Number,
@@ -51,7 +63,7 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Woop woop');
+  res.send(listEndpoints(app));
 });
 
 // get the endpoints
@@ -60,71 +72,78 @@ app.get('endpoints', (req, res) => {
 });
 
 // getting all singles and added query params
-app.get('/singles', (req, res) => {
-  const { musicGenre, artist, title } = req.query;
-  let musicDataToSort = musicData;
+app.get('/singles', async (req, res) => {
+  let singles = await Single.find(req.query);
 
-  if (musicGenre) {
-    musicDataToSort = musicDataToSort.filter(
-      (item) =>
-        item.genre.toLowerCase().indexOf(musicGenre.toLowerCase()) !== -1
+  // this let you find several with the value grather than...
+  if (req.query.danceability) {
+    const singlesByDanceability = await Single.find().gt(
+      'danceability',
+      req.query.danceability
     );
+    singles = singlesByDanceability;
   }
 
-  if (artist) {
-    musicDataToSort = musicDataToSort.filter(
-      (item) =>
-        item.artistName.toLowerCase().indexOf(artist.toLowerCase()) !== -1
+  if (req.query.popularity) {
+    const singlesByPopularity = await Single.find().gt(
+      'popularity',
+      req.query.popularity
     );
-  }
-
-  if (title) {
-    musicDataToSort = musicDataToSort.filter(
-      (item) => item.trackName.toLowerCase().indexOf(title.toLowerCase()) !== -1
-    );
+    singles = singlesByPopularity;
   }
 
   res.status(200).json({
-    response: musicDataToSort,
+    response: singles,
     success: true
   });
 });
 
-// get data by artist
-app.get('/singles/artist/:artist', (req, res) => {
+// get data by artist, using RegExp the Mongoose-way
+app.get('/singles/artist/:artist', async (req, res) => {
   const { artist } = req.params;
-
-  const singleArtistName = musicData.find(
-    (item) => item.artistName.toLowerCase().indexOf(artist.toLowerCase()) !== -1
-  );
-
-  if (!singleArtistName) {
-    res.status(404).json({
-      response: 'No artist found with that name!',
-      success: false
+  try {
+    const singleByArtist = await Single.find({
+      artistName: { $regex: '\\b' + artist + '\\b', $options: 'i' }
     });
-  } else {
-    res.status(200).json({
-      response: singleArtistName,
-      success: true
+    if (singleByArtist) {
+      res.status(200).json({
+        response: singleByArtist,
+        success: true
+      });
+    } else {
+      res.status(404).json({
+        response: 'Incorrect Artist',
+        sucess: false
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      response: 'Invalid Artist',
+      sucess: false
     });
   }
 });
 
-// GET data by id
-app.get('/singles/id/:id', (req, res) => {
-  const { id } = req.params;
-  const singleId = musicData.find((item) => item.id === +id);
-
-  if (!singleId) {
-    res.status(404).json({
-      response: 'Incorrect ID',
+// Get data by id, with Mongoose we cant use findById instead of find
+app.get('/singles/id/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const singleById = await Single.findById(id);
+    if (singleById) {
+      res.status(200).json({
+        response: singleById,
+        success: true
+      });
+    } else {
+      res.status(404).json({
+        response: 'Incorrect ID',
+        sucess: false
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      response: 'Invalid id',
       sucess: false
-    });
-  } else {
-    res.status(200).json({
-      response: singleId,
-      success: true
     });
   }
 });

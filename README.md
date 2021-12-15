@@ -1,18 +1,65 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project.
+Create an API backend using Express.
+Using a database to store and retrieve data from and use that data to produce a RESTful API.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Features
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+- model data in Mongo using Mongoose
+- fetch items from a Mongo database using Mongoose
+- store secret information using enviroment variables
+- return error messages from your API endpoints
+- seed large amounts of data to a database
 
 ## View it live
 
 https://express-api-music.herokuapp.com/
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
 
-Add endpoints
-RESTful
-Deploy Heroku
+Description of paths:
+[
+{
+"path": "/",
+"methods": [
+"GET"
+],
+"middlewares": [
+"anonymous"
+]
+},
+{
+"path": "endpoints",
+"methods": [
+"GET"
+],
+"middlewares": [
+"anonymous"
+]
+},
+{
+"path": "/singles",
+"methods": [
+"GET"
+],
+"middlewares": [
+"anonymous"
+]
+},
+{
+"path": "/singles/artist/:artist",
+"methods": [
+"GET"
+],
+"middlewares": [
+"anonymous"
+]
+},
+{
+"path": "/singles/id/:id",
+"methods": [
+"GET"
+],
+"middlewares": [
+"anonymous"
+]
+}
+]
