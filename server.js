@@ -24,10 +24,6 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
-
 // Schema
 const Book = mongoose.model("Book", {
 	bookID: Number,
@@ -44,7 +40,7 @@ const Book = mongoose.model("Book", {
 
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
-		await Book.deleteMany({});
+		await Book.deleteMany();
 
 		books.forEach((item) => {
 			const newBook = new Book(item);
@@ -53,6 +49,10 @@ if (process.env.RESET_DB) {
 	};
 	seedDatabase();
 }
+
+// Add middlewares to enable cors and json body parsing
+app.use(cors());
+app.use(express.json());
 
 // // Available routes/endpoints below
 // app.get("/", (req, res) => {
