@@ -63,37 +63,63 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world! Welcome my documentation!')
+  res.send('Hello world! Type /shows to get all the shows!')
 })
 
 // path for all shows, both movies and tv shows 
-app.get('/shows/', async (req, res) => {
-  const shows = await Show.find()
-  res.json(shows)
-})
+app.get('/shows', async (req, res) => {
+  const { title, country, type } = req.query
 
-app.get('/shows/:id', (req, res) => {
-  Show.findOne({ show_id: req.params.id }).then((show) => {
-    if (show) {
-      res.json(show)
-    } else {
-      res.status(404).json({ error: "Not Found" })
+  // try = bloxk of code to try, try and catch come in pairs 
+  try {
+    const shows = await Show.find({
+      // Regex or RegExp = regural expression is a pattern of characters 
+      // RegExp is an object used for matching text with a pattern
+      // give possibility to add query params without building a specific endpoint 
+      // it is works as include and toLowerCase 
+      // The "i" modifier specifies a case-insenitive match.
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+      title: new RegExp(title, 'i'), 
+      country: new RegExp(country, 'i'),
+      type: new RegExp(type, 'i')
+
+    })
+    // if array is empty return error 
+    if (shows.length === 0) {
+      res.status(404).json({
+        response: "This array is empty",
+        success: false
+      })
     }
-  })
+
+    res.json(shows)
+  // catch statement define a block of code to be executed, if an error occurs in the try block
+  } catch (error) {
+    res.status(404).json({
+      response: "Not found!",
+      success: false
+    })
+  }
 })
 
-// movies path 
-app.get('/movies', async (req, res) => {
-  // finding all item with type Movie
-  const findByType = await Show.find({ type: "Movie" })
-  res.json(findByType)
-})
-
-// tv shows path 
-app.get('/tvshows', async (req, res) => {
-  // finding all items with type TV Show 
-  const findByType = await Show.find({ type: "TV Show" })
-  res.json(findByType)
+// endpoint that returns only one single item 
+app.get('/shows/:id', async (req, res) => {
+  try {
+    const findShowById = await Show.findOne({ show_id: req.params.id })
+    if (findShowById) {
+      res.json(findShowById)
+    } else {
+      res.status(404).json({
+        response: "Not found!",
+        success: false
+      })
+    }
+  } catch (error) {
+    res.status(404).json({
+      response: "ERROR!",
+      success: false
+    })
+  }
 })
 
 // Start the server
