@@ -40,11 +40,21 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send("Hello this is the API: go to endpoint /books to start");
 });
 
-app.get("/books", (req, res) => {
-  Book.find().then((books) => res.json(books));
+app.get("/books", async (req, res) => {
+  const books = await Book.find();
+  res.json(books);
+});
+
+app.get("books/:id", async (req, res) => {
+  const book = await Book.findOne({ bookID: req.params.id });
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).res({ error: "A book with such a ID does not exist" });
+  }
 });
 
 // Start the server
