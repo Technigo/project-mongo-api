@@ -1,0 +1,5 @@
+- Your API should have at least 2 routes. Try to push yourself to do more, though!
+- A minimum of one endpoint to return a **collection** of results (array of elements)
+- A minimum of one endpoint to return a **single** result (single element).
+- Your API should make use of Mongoose models to model your data and use these models to fetch data from the database.
+- Your API should be [RESTful](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/)

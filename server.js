@@ -52,9 +52,35 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-// Start defining your routes here
+// Startingpoint
 app.get("/", (req, res) => {
   res.send("Hello world");
+});
+
+// Displays all songs
+app.get("/songs", async (req, res) => {
+  const songs = await Song.find({});
+  res.json(songs);
+});
+
+// displays all songs based on an album
+app.get("/album", async (req, res) => {
+  const songs = await Song.find(req.query);
+  res.json(songs);
+});
+
+// displays one single song
+app.get("/songs/id/:id", async (req, res) => {
+  try {
+    const songById = await Song.findById(req.params.id);
+    if (songById) {
+      res.json(songById);
+    } else {
+      res.status(404).json({ error: "Cannot get song by that id" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: "invalid id" });
+  }
 });
 
 // Start the server
