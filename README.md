@@ -11,8 +11,10 @@ The aim of this project was to learn how to use Mongodb; storing data, fetching 
 
  --Query Params--
 
- The query params are based on the /winners endpoint. Using 'let allWinners = await Winner.find(req.query)' in the code, means the user can find a lot of information with queries
-Examples:       
+ The query params are based on the /winners endpoint. Using 'let allWinners = await Winner.find(req.query)' in the code, means the user can find a lot of information with queries.
+
+Examples:
+       
 GET /winners/?gender=female
 will display all female winners
 
