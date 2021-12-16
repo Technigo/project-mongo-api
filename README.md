@@ -1,12 +1,13 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+Build a project using a database to store and retrieve data from, then use that data to produce a RESTful API.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## What I learned
 
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+- How to model data in Mongo using Mongoose
+- How to return useful error messages from your API endpoints
+- How to fetch items from a Mongo database using Mongoose
+- How to seed large amounts of data to a database
 
 ## View it live
 
