@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import data from "./data/netflix-titles.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/movies";
-await mongoose.connect(mongoUrl, {
+mongoose.connect(mongoUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -28,7 +28,11 @@ const Media = mongoose.model("Media", {
 if (process.env.RESET_DATABASE) {
   console.log("Resetting database!");
   const seedDatabase = async () => {
-    await Media.deleteMany();
+    try {
+      await Media.deleteMany();
+    } catch (error) {
+      console.log(error);
+    }
 
     // adapting the information so that it match the mongoose model I set up.
     const netflixList = data.map((media) => {
