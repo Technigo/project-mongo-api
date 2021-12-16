@@ -1,9 +1,10 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import listEndpoints from "express-list-endpoints";
 
 import booksData from "./data/books.json";
-
+// mongodb://localhost:27017/patrik-books
 const mongoUrl = process.env.MONGO_URL || "MONGO_URL";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -56,7 +57,12 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Cowabunga");
+  res.send("Type /endpoints in the URL bar to start.");
+});
+
+// Send list of all endpoints
+app.get("/endpoints", (req, res) => {
+  res.send(listEndpoints(app));
 });
 
 // Get all the books
@@ -92,12 +98,19 @@ app.get("/books/:id", async (req, res) => {
   }
 });
 
-// get all books from Author
-// app.get("/books/authors/:author", async (req, res) => {
-//   try {
-//     const booksByAuthor = await Book.find({authors: ''})
-//   }
-// })
+// Get all books by J.R.R Tolkien
+app.get("/books/authors/Tolkien", (req, res) => {
+  Book.find({ authors: "J.R.R. Tolkien" }, (error, data) => {
+    if (error) {
+      res.status(404).json({
+        response: "Author not found",
+        succes: false,
+      });
+    } else {
+      res.send(data);
+    }
+  });
+});
 
 // Start the server
 app.listen(port, () => {
