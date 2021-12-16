@@ -15,7 +15,6 @@ mongoose.Promise = Promise
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
-const movies = netflixData.filter((item) => item.type === "Movie")
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
@@ -38,7 +37,7 @@ const NetflixEntry = mongoose.model('NetflixEntry', {
   cast: String,
   country: String,
   date_added: String,
-  release_year: Number,
+  releaseYear: Number,
   rating: String,
   duration: String,
   listed_in: String,
@@ -74,6 +73,7 @@ app.get('/endpoints', (req, res) => {
 })
 
 // route provides a sorted list of all countries that are in netflixData
+// How to do this with MongoDB?
 app.get('/countries', async (req, res) => {
   // a list of all countries in the Netflix-Data without any duplicates. Therefore I am creating a Set (object with unique items). I convert the set into an array afterwards and sort it alphabetically
   const countries = await Array.from(new Set(netflixData.map((item) => item.country))).sort()
@@ -91,8 +91,7 @@ app.get('/countries/:country', async (req, res) => {
   // every query parameter consists of key and value
   // Try/catch will handle invalid search terms(error 400). If the search term is valid, but doesn't give a result, you get error 404
   try {
-    const { country } = req.params
-    const contentByCountry = await netflixData.filter((item) => item.country.toLowerCase() === country)
+    const contentByCountry = await NetflixEntry.find({ country: req.params.country })
   
     if (contentByCountry.length === 0) {
       res.status(404).json({
@@ -110,47 +109,46 @@ app.get('/countries/:country', async (req, res) => {
   }
 })
 
-// route provides all movies and has the possibility to query for director, year and actor. You can also do pagination by setting page & limit as query parameters
-app.get('/movies', (req, res) => {
-  const { director, year, actor, page, limit } = req.query
+// route provides all Netflix-shows and has the possibility to query for director and cast, type and releaseYear in the database. The RegExp for director and cast makes the filtering caseinsensitive and provides the possibility to just search for parts of the word.You can also do pagination by setting skip & limit as query parameters
+app.get('/people', async (req, res) => {
+  const { director, cast, skip, limit } = req.query
+  const people = await NetflixEntry.find({
+    director: new RegExp(director, 'i'),
+    cast: new RegExp(cast, 'i')
+  }).skip(+skip).limit(+limit)
 
-  let filteredMovies = movies
-
-  if (director) {
-    filteredMovies = filteredMovies.filter((item) => item.director.toLowerCase().includes(director.toLowerCase()))
+  if (people.length === 0) {
+    res.send({ response: "Sorry, but we couldn't find any shows that fit your search" })
+  } else {
+    res.json({
+      response: people,
+      success: true
+    }) 
   }
+})
 
-  if (year) {
-    filteredMovies = filteredMovies.filter((item) => item.release_year === +year)
+// route provides all Netflix-shows and has the possibility to query for every Entry in the database. SearchTerms have to be precise.You can also do pagination by setting skip & limit as query parameters
+app.get('/shows', async (req, res) => {
+  const shows = await NetflixEntry.find(req.query)
+
+/*   if (req.query.skip || req.query.limit) {
+    shows.skip(+req.query.skip).limit(+req.query.limit)
+  } */
+
+  if (shows.length === 0) {
+    res.send({ response: "Sorry, but we couldn't find any shows that fit your search" })
+  } else {
+    res.json({
+      response: shows,
+      success: true
+    }) 
   }
-
-  if (actor) {
-    filteredMovies = filteredMovies.filter((item) => item.cast.toLowerCase().includes(actor.toLowerCase()))
-  }
-
-  // PAGINATION
-  // limit = no. of items to show per page 
-  if (page && limit) {
-    // first index-no of item from filteredMovies we want to display
-    const startIndex = (page - 1) * limit
-    // last index-no of item from filteredMovies we want to display
-    const endIndex = page * limit 
-    // slice gives us what is in between startIndex and endIndex
-    const paginationArray = filteredMovies.slice(startIndex, endIndex)
-   
-    res.json(paginationArray)
-  }  
-
-  res.json({
-    response: filteredMovies,
-    success: true
-  })
 })
 
 // route provides one movie by ID
-app.get('/movies/id/:id', async (req, res) => {
+app.get('/shows/:id', async (req, res) => {
   try {
-    const movie = await NetflixEntry.findOne({ type: "Movie", show_id: req.params.id })
+    const movie = await NetflixEntry.findById(req.params.id)
   
     if (!movie) {
       res.status(404).json({
@@ -168,15 +166,10 @@ app.get('/movies/id/:id', async (req, res) => {
   }
 })
 
-// route provides movies by name (can return more than one movie, if the provided parts of the title match with several movies)
+// route provides one movie by title 
 app.get('/movies/title/:title', async (req, res) => {
   try {
-   /*  const { title } = req.params
-
-    const movie = movies.filter((item) => item.title.toLowerCase().includes(title.toLowerCase())) */
-
-    //Error: BY now this only works, if I type the exact title in the URL (how to make it case insensitive and includes?)
-    const movie = await NetflixEntry.find({ type: "Movie", title: req.params.title })
+    const movie = await NetflixEntry.findOne({ type: "Movie", title: req.params.title })
 
     if (movie.length === 0) {
       res.status(404).json({
