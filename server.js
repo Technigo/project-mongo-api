@@ -27,6 +27,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "unavailable" });
+  }
+});
+
 const MusicList = mongoose.model("MusicList", {
   id: Number,
   trackName: String,
@@ -62,8 +70,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/music", async (req, res) => {
-  let music = await MusicList.find(req.query);
-  res.json(music);
+  try {
+    let music = await MusicList.find(req.query);
+    if (music) {
+      res.json(music);
+    } else {
+      res.status(404).json("music not found");
+    }
+  } catch (err) {
+    res.status(404).json({ error: "Invalid id" });
+  }
 });
 
 app.get("/music/id/:id", (req, res) => {
@@ -94,17 +110,37 @@ app.get("/music/slowdance", async (req, res) => {
 });
 
 app.get("/music/discodance", async (req, res) => {
-  const discoDance = await MusicList.find().gt("danceability", 50);
-  res.json(discoDance);
+  try {
+    const discoDance = await MusicList.find().gt("danceability", 50);
+    if (discoDance) {
+      res.json(discoDance);
+    } else {
+      res.status(404).json("there wasn't such a disco track");
+    }
+  } catch (err) {
+    res.status(404).json({ error: "there wasn't such a slow song" });
+  }
 });
 
 app.get("/music/popular", async (req, res) => {
-  const popular = await MusicList.find().gt("popularity", 50);
-  res.json(popular);
+  try {
+    const { page = 1, limit = 20 } = req.query;
+    const popular = await MusicList.find()
+      .gt("popularity", 50)
+      .limit(limit * 1)
+      .skip((page - 1) * limit);
+    if (popular) {
+      res.json({ total: popular.length, popular });
+    } else {
+      res.status(404).json("could not found that popular track");
+    }
+  } catch (err) {
+    res.status(404).json({ error: "could not found that popular track" });
+  }
 });
 
 app.get("/music/unpopular", async (req, res) => {
-  const unPopular = await MusicList.find().lt("popularity", 80);
+  const unPopular = await MusicList.find().limit(1).lt("popularity", 80);
   res.json(unPopular);
 });
 
