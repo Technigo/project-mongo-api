@@ -7,8 +7,8 @@ import booksData from "./data/books.json";
 const port = process.env.PORT || 8080;
 const app = express();
 
-//mongoURL is the address of my database in my local machine
-const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo";
+//mongoURL is the address of my database in my local machine 
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://FatimaGR:9DGqFaBL84dEPsb@cluster0.jdjjo.mongodb.net/bookApi?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -159,30 +159,8 @@ app.get("/allBooks", async (req, res) => {
   }
 });
 
-// app.get("/allbooks", async (req, res) => {
-//   const { authors, title, language } = req.query;
-//   let booksToSend = await Book.find(req.query);
 
-//   if (authors) {
-//     const bookByAuthor = await Book.find({ authors });
-//     booksToSend = bookByAuthor;
-//   }
 
-//   if (title) {
-//     const bookByTitle = await Book.find({ title });
-//     booksToSend = bookByTitle;
-//   }
-
-//   if (language) {
-//     const bookByLanguage = await Book.find({ title });
-//     booksToSend = bookByLanguage;
-//   }
-
-//   res.json({
-//     response: booksToSend,
-//     success: true,
-//   });
-// });
 
 // Start the server
 app.listen(port, () => {
