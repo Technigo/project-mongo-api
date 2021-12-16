@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import listEndpoints from "express-list-endpoints";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -57,19 +58,27 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Camilla och Lottas MongoApi");
+  res.send(listEndpoints(app));
 });
-app.get("/music", async (req, res) => {
-  let music = await MusicList.find(req.query);
-  if (req.query.danceability) {
-    const musicSlowDance = await MusicList.find().lt(
-      "danceability",
-      req.query.danceability
-    );
-    music = musicSlowDance;
-  }
 
-  res.json(music);
+app.get("/music", async (req, res) => {
+  try {
+    let music = await MusicList.find(req.query).limit(10);
+    if (req.query.danceability) {
+      const musicSlowDance = await MusicList.find().lt(
+        "danceability",
+        req.query.danceability
+      );
+      music = musicSlowDance;
+    }
+    if (music) {
+      res.json(music);
+    } else {
+      res.status(402).json("Music list not find");
+    }
+  } catch (err) {
+    res.status(404).json({ error: "Invalid id" });
+  }
 });
 
 app.get("/music/slowdance", async (req, res) => {
@@ -83,12 +92,16 @@ app.get("/music/speeddance", async (req, res) => {
 });
 
 app.get("/music/popular", async (req, res) => {
-  const popular = await MusicList.find().gt("popularity", 50);
-  res.json(popular);
+  const { page = 1, limit = 20 } = req.query;
+  const popular = await MusicList.find()
+    .gt("popularity", 50)
+    .limit(limit * 1)
+    .skip((page - 1) * limit);
+  res.json({ total: popular.length, popular });
 });
 
 app.get("/music/unpopular", async (req, res) => {
-  const unpopular = await MusicList.find().lt("popularity", 50);
+  const unpopular = await MusicList.find().lt("popularity", 80);
   res.json(unpopular);
 });
 
@@ -98,11 +111,18 @@ app.get("/music/id/:id", (req, res) => {
       if (id) {
         res.json(id);
       } else {
-        res.status(404).json("artist not found");
+        res.status(402).json("artist not found");
       }
     });
   } catch (err) {
     res.status(404).json({ error: "Invalid id" });
+  }
+});
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "unavailable" });
   }
 });
 
