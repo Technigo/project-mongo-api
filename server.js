@@ -37,7 +37,7 @@ const Winner = mongoose.model("Winner", {
 if (process.env.RESET_DB === "true") {
   // need to use an async function so that the users are deleted before
   const seedDatabase = async () => {
-    //await Winner.deleteMany({});
+    await Winner.deleteMany({});
 
     // going to loop through all companies and add to database
 
