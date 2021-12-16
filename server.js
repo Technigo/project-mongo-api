@@ -75,8 +75,8 @@ app.get("/endpoints", (req, res) => res.send(listEndpoints(app)));
 methods rather than just normal JS we could use with express*/
 app.get("/winners", async (req, res) => {
   let allWinners = await Winner.find(req.query);
-// here, an age query will return winners with an ageGetPrize lower than the input, for example /winners/?ageGetPrize=35
-// will return winners who were 35 years old and younger when they were awarded the Prize
+  // here, an age query will return winners with an ageGetPrize lower than the input, for example /winners/?ageGetPrize=35
+  // will return winners who were 35 years old and younger when they were awarded the Prize
   if (req.query.ageGetPrize) {
     const winnersByAge = await Winner.find().lt(
       "ageGetPrize",
@@ -97,26 +97,27 @@ app.get("/winners/category/:category", async (req, res) => {
 app.get("/winners/year/:year", async (req, res) => {
   try {
     const yearWinners = await Winner.find({ year: req.params.year });
-  if (yearWinners) {
-    res.json(yearWinners);
-  } else {
-    res.status(404).json({error: 'There were no Nobel Prizes awarded in this year'});
- }}
- catch (err){
-  res.status(400).json({ error: "Invalid year" });
- }
+    // this conditional has to be written differently because we are returning an empty array, therefore need to check length
+    if (yearWinners.length === 0) {
+      res
+        .status(404)
+        .json({ error: "There were no Nobel Prizes awarded in this year" });
+    } else {
+      res.json(yearWinners);
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Invalid year" });
+  }
 });
-
 
 // endopoint to return a winner with a given surname (surname must be capitalised)
 app.get("/winners/surname/:surname", async (req, res) => {
-    
-    const surnameWinner = await Winner.findOne({surname: req.params.surname});
+  const surnameWinner = await Winner.findOne({ surname: req.params.surname });
   if (surnameWinner) {
     res.json(surnameWinner);
   } else {
-     res.status(404).json({error: 'No winner corresponds to this surname'});
-  }  
+    res.status(404).json({ error: "No winner corresponds to this surname" });
+  }
 });
 
 // return one winner based on id, with error codes.
