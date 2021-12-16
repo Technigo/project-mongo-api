@@ -93,17 +93,20 @@ app.get("/winners/category/:category", async (req, res) => {
   res.json(categoryWinners);
 });
 
-// endpoint to find all winners in any give year
+//endpoint to find all winners in any give year
 app.get("/winners/year/:year", async (req, res) => {
-  const yearWinners = await Winner.find({ year: req.params.year });
+  try {
+    const yearWinners = await Winner.find({ year: req.params.year });
   if (yearWinners) {
     res.json(yearWinners);
   } else {
     res.status(404).json({error: 'There were no Nobel Prizes awarded in this year'});
- }  
-  
- 
+ }}
+ catch (err){
+  res.status(400).json({ error: "Invalid year" });
+ }
 });
+
 
 // endopoint to return a winner with a given surname (surname must be capitalised)
 app.get("/winners/surname/:surname", async (req, res) => {
