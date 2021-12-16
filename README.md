@@ -1,24 +1,27 @@
 # Mongo API Project
 
-Amazon Top 50 Bestselling Books 2009 - 2019 API.
+API with movies on Netflix, Prime Video, Hulu and Disney+
 
 Database:
-https://www.kaggle.com/sootersaalu/amazon-top-50-bestselling-books-2009-2019/version/1
+https://www.kaggle.com/ruchi798/movies-on-netflix-prime-video-hulu-and-disney
 
 ## Features
 
+- Routes using Mongoose methods
+- Endpoint for multiple and single results
 - Endpoint documentation
-- Endpoints using params and query
-- Empty endpoint for future use
+- Error handling response
 
 ## Production Process
 
-I started by choosing a database on Kaggle to create the API. After analysing the response, I planned and structured possible endpoints and their structure.
+- I started by choosing a database on Kaggle to create the API. After analysing the response, I planned and structured possible endpoints and their structure.
 
-Both query and params were used to filter through the data for the different endpoints.
+- I created routes for the collections, like year and genre. Then, used a filter to provide collections for the specific streaming services.
 
-I used map to create an index info, so I could search for a specific id.
+- Created a route to display the endpoints.
+
+- Implemented error handling to the routes.
 
 ## View it live
 
-https://express-api-amazon-bestsellers.herokuapp.com/
+https://movies-by-streaming-platform.herokuapp.com/
