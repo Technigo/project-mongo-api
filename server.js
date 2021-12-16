@@ -55,9 +55,9 @@ app.use((req, res, next) => {
 })
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('50 popular SpotifyTracks')
-})
+// app.get('/', (req, res) => {
+//   res.send('50 popular SpotifyTracks')
+// })
 
 // List of endpoints
 app.get('/endpoints', (req, res) => {
