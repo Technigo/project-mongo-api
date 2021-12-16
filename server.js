@@ -69,13 +69,7 @@ if (process.env.RESET_DATABASE) {
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next();
-  } else {
-    res.status(503).json({ error: "Service unavailable" });
-  }
-});
+
 // Shows all of the data at / and enables a querie param filter for the releaseYear and country
 // The query param filter is made so that you easily can implement new filters based on the data from the json.
 app.get("/", async (req, res) => {
