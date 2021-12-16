@@ -26,9 +26,9 @@ const Track = mongoose.model('Track', {
 });
 
 // -----------------* seeding data from json file to database (one time action) *---------------------//
-if (process.env.Reset_DB) {
+if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Track.deleteMany({});
+    //await Track.deleteMany({});
 
     topMusicData.forEach((musicTrack) => {
       new Track(musicTrack).save();
@@ -63,6 +63,19 @@ app.get('/endpoints', async (req, res) => {
 app.get('/tracks', async (req, res) => {
   const tracks = await Track.find();
   res.json(tracks);
+});
+
+app.get('/tracks/id/:id', async (req, res) => {
+  try {
+    const trackById = await Track.findById(req.params.id);
+    if (trackById) {
+      res.json(trackById);
+    } else {
+      res.status(404).json({ error: 'Track not found' });
+    }
+  } catch (err) {
+    res.status(400).json({ error: 'Id is invalid' });
+  }
 });
 
 // Start the server
