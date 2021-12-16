@@ -68,19 +68,21 @@ app.get("/year/:year", async (req, res) => {
     const findYear = await Content.find({
       release_year: searchYear,
     });
-    if (searchYear) {
+    if (searchYear && findYear.length > 0) {
       res.status(200).json({
         message: findYear,
         response: true,
       });
     } else {
       res.status(404).json({
-        response: "Data not found",
+        message: "Data not found",
+        response: false,
       });
     }
   } catch (err) {
     res.status(400).json({
-      response: "Invalid request",
+      message: "Invalid request",
+      response: false,
     });
   }
 });
@@ -89,18 +91,21 @@ app.get("/type/:type", async (req, res) => {
   try {
     const searchType = req.params.type;
     const findType = await Content.find({ type: searchType });
-    if (searchType) {
+    if (searchType && findType.length > 0) {
       res.status(200).json({
-        response: findType,
+        message: findType,
+        response: true,
       });
     } else {
       res.status(404).json({
-        response: "Data not found",
+        message: "Data not found",
+        response: false,
       });
     }
   } catch (err) {
     res.status(400).json({
-      response: "Invalid request",
+      message: "Invalid request",
+      response: false,
     });
   }
 });
@@ -109,15 +114,20 @@ app.get("/titles/:id", async (req, res) => {
   try {
     const title = await Content.findById(req.params.id);
     if (title) {
-      res.json(title);
+      res.status(200).json({
+        message: title,
+        response: true,
+      });
     } else {
       res.status(404).json({
-        error: "Title not found",
+        message: "Title not found",
+        response: false,
       });
     }
   } catch (err) {
     res.status(400).json({
-      response: "Invalid request",
+      message: "Invalid request",
+      response: false,
     });
   }
 });
