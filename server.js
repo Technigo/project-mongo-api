@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import data from "./data/netflix-titles.json";
+import listEndpoints from "express-list-endpoints";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/movies";
 mongoose
@@ -68,7 +69,13 @@ if (process.env.RESET_DATABASE) {
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
-
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
+});
 // Shows all of the data at / and enables a querie param filter for the releaseYear and country
 // The query param filter is made so that you easily can implement new filters based on the data from the json.
 app.get("/", async (req, res) => {
@@ -83,6 +90,11 @@ app.get("/", async (req, res) => {
   }
   const media = await Media.find(filter);
   res.json(media);
+});
+
+// This gets all the endpoints of the app
+app.get("/endpoints", (req, res) => {
+  res.send(listEndpoints(app));
 });
 
 // Finds all types that are movies at /movie
