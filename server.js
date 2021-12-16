@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 app.get('/top', async (req, res) => {
-  const { trackName, artistName, genre } = req.params
+  const { trackName, artistName, genre } = req.query
 
   try {
     const allMusic = await Music.find({
@@ -69,7 +69,7 @@ app.get('/top', async (req, res) => {
 })
 
 app.get('/top/:id', async (req, res) => {
-  const { id } = req.params
+  const { id } = req.query
 
   // const trackId = topMusicData.find((trackName) => trackName.id === +id)
   const trackId = await Music.findOne({ id: id })
