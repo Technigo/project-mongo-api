@@ -3,16 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import data from "./data/netflix-titles.json";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/movies";
+console.log(mongoUrl);
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -31,24 +23,13 @@ const Media = mongoose.model("Media", {
   type: String,
 });
 
-// "show_id": 81094391,
-// "title": "Sugar Rush Christmas",
-// "director": "",
-// "cast": "Hunter March, Candace Nelson, Adriano Zumbo",
-// "country": "United States",
-// "date_added": "November 29, 2019",
-// "release_year": 2019,
-// "rating": "TV-PG",
-// "duration": "1 Season",
-// "listed_in": "Reality TV",
-// "description": "It's everything you love about \"Sugar Rush\" – with a holly jolly holiday twist – in this Christmas-themed spin on competitive baking.",
-// "type": "TV Show"
-
+console.log("Hej hej");
 if (process.env.RESET_DATABASE) {
   console.log("Resetting database!");
   const seedDatabase = async () => {
     await Media.deleteMany();
 
+    // adapting the information so that it match the mongoose model I set up.
     const netflixList = data.map((media) => {
       return {
         id: media.show_id,
