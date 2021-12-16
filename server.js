@@ -4,8 +4,10 @@ import mongoose from "mongoose";
 import data from "./data/netflix-titles.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/movies";
-console.log(mongoUrl);
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+await mongoose.connect(mongoUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 mongoose.Promise = Promise;
 
 const Media = mongoose.model("Media", {
@@ -23,7 +25,6 @@ const Media = mongoose.model("Media", {
   type: String,
 });
 
-console.log("Hej hej");
 if (process.env.RESET_DATABASE) {
   console.log("Resetting database!");
   const seedDatabase = async () => {
