@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors"
+import listEndpoints from "express-list-endpoints"
 import mongoose from "mongoose"
 
 import spotifyTopTracks from "./data/top-tracks.json"
@@ -52,7 +53,6 @@ if (process.env.RESET_DB) {
   seedDataBase()
 }
 
-// Start defining your routes here
 // Our own middleware that checks if the database is connected before going forward to our endpoints
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
@@ -67,12 +67,18 @@ app.get("/", (req, res) => {
     "This is my spotify top tracks from the billboard between 2010 - 2019. Type the endpoint /tracks to get the total data to get started!"
   )
 })
+//See all possible endpoints
+app.get("/endpoints", (req, res) => {
+  res.send(listEndpoints(app))
+})
 
+//Get all 603 song objects from the data array
 app.get("/tracks", async (req, res) => {
   const tracks = await Tracks.find(req.query)
   res.json(tracks)
 })
 
+//get a specific song by index between 1-603
 app.get("/tracks/index/:index", async (req, res) => {
   try {
     const index = await Tracks.findOne({ index: req.params.index })
@@ -82,10 +88,11 @@ app.get("/tracks/index/:index", async (req, res) => {
       res.status(404).json({ error: "no track found with that index number" })
     }
   } catch (err) {
-    res.status(400).json({ error: "index number is invalid" })
+    res.status(400).json({ error: "index number is not valid" })
   }
 })
 
+//Get a song by title of the song must be written with 20% instead of spaces
 app.get("/tracks/title/:title", async (req, res) => {
   try {
     const title = await Tracks.findOne({ title: req.params.title })
@@ -95,10 +102,11 @@ app.get("/tracks/title/:title", async (req, res) => {
       res.status(404).json({ error: "title not found" })
     }
   } catch (err) {
-    res.status(400).json({ error: "title is invalid" })
+    res.status(400).json({ error: "title is not valid" })
   }
 })
 
+// Gets a specific artist's song/s from the array
 app.get("/tracks/artists/:artist", async (req, res) => {
   try {
     const artist = await Tracks.find({ artist: req.params.artist })
@@ -108,10 +116,11 @@ app.get("/tracks/artists/:artist", async (req, res) => {
       res.status(404).json({ error: "No artist found" })
     }
   } catch (err) {
-    res.status(400).json({ error: "artist is invalid" })
+    res.status(400).json({ error: "artist is not valid" })
   }
 })
 
+// Gets all songs from a given year between 2010 - 2019
 app.get("/tracks/year/:year", async (req, res) => {
   try {
     const year = await Tracks.find({ year: req.params.year })
@@ -121,23 +130,25 @@ app.get("/tracks/year/:year", async (req, res) => {
       res.status(404).json({ error: "No titles found on this year" })
     }
   } catch (err) {
-    res.status(400).json({ error: "year is invalid" })
+    res.status(400).json({ error: "year is not valid" })
   }
 })
 
+// Gets all songs from a specific genre
 app.get("/tracks/genre/:genre", async (req, res) => {
   try {
     const genre = await Tracks.find({ genre: req.params.genre })
     if (genre) {
       res.json(genre)
     } else {
-      res.status(404).json({ error: "Genre not found" })
+      res.status(404).json({ error: "Genre is not found" })
     }
   } catch (err) {
-    res.status(400).json({ error: "genre is invalid" })
+    res.status(400).json({ error: "genre is not valid" })
   }
 })
 
+//Gets songs by specific bpm
 app.get("/tracks/bpm/:bpm", async (req, res) => {
   try {
     const bpm = await Tracks.find({ bpm: req.params.bpm })
@@ -147,7 +158,7 @@ app.get("/tracks/bpm/:bpm", async (req, res) => {
       res.status(404).json({ error: "no track with that bpm found" })
     }
   } catch (err) {
-    res.status(400).json({ error: "bpm is invalid" })
+    res.status(400).json({ error: "bpm is not valid" })
   }
 })
 
