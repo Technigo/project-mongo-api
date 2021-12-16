@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import listEndpoints from "express-list-endpoints";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -11,7 +12,8 @@ import booksData from "./data/books.json";
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://localhost/project-book-api";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -56,36 +58,40 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send(listEndpoints(app));
   //list of endpoints
 });
-// .find() - all of the objects in your data
-// endpoint for all books
+
+// endpoint for all books with query options for number of pages and rating
+
 app.get("/books", async (req, res) => {
-  console.log(req.query);
   let books = await Book.find(req.query);
 
   if (req.query.num_pages) {
-    const booksByPages = await Book.find().lt("num_pages", req.query.num_pages);
+    const booksByPages = await Book.find()
+      .lt("num_pages", req.query.num_pages)
+      .sort({ num_pages: 1 });
     books = booksByPages;
   }
 
   if (req.query.average_rating) {
-    const booksByRating = await Book.find().gt(
-      "average_rating",
-      req.query.average_rating
-    );
-
+    const booksByRating = await Book.find()
+      .gt("average_rating", req.query.average_rating)
+      .sort({ average_rating: -1 });
     books = booksByRating;
   }
 
-  // gt = greater than
-  // lt = less than
-  // .skip - how many to skip in the list .skip(3) will skip the 3 first and give you the rest
-  // .limit() = limit(10) returns only 10
-
   res.json(books);
 });
+
+// .find() - you need this in mongodb till access all the objects in your data
+// .sort({ field : 1}) sorting in ascending order /({ field : -1}) in descending order
+// gt = greater than
+// lt = less than
+// .skip - how many to skip in the list .skip(3) will skip the 3 first and give you the rest
+// .limit() = limit(10) returns only 10
+
+// endpoint to get a specific book
 
 app.get("/books/:id", async (req, res) => {
   try {
@@ -104,9 +110,11 @@ app.get("/books/:id", async (req, res) => {
   //where you can get the title, author, rating, language for each book in your frontend
 });
 
-app.get("/books/authors/:authors", async (req, res) => {
-  const authors = await Book.find({ authors });
-  res.send(authors); //need to map
+// endpoint to get all the authors
+app.get("/authors/:authors", async (req, res) => {
+  const { authors } = req.params;
+  const allAuthors = await Book.find(authors);
+  res.json(allAuthors);
 });
 
 // app.post("/books", {req, res} => {
