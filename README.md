@@ -1,6 +1,6 @@
 # Mongo API Project
 
-The aim of this project was to learn how to use Mongodb; storing data, fetching data, finding data and returning error messages when the data could not be found etc. The project was based on an express-API, however this time I used Mongoose methods to interact with the data. The dataset
+The aim of this project was to learn how to use Mongodb; storing data, fetching data, finding data and returning error messages when the data could not be found etc. The project was based on an express-API, however this time I used Mongoose methods to interact with the data. I downloaded a dataset from Kaggle and then converted the CSV into JSON format, which I added to my database.
 
 ## Documentation
  GET /
@@ -9,11 +9,10 @@ The aim of this project was to learn how to use Mongodb; storing data, fetching 
  GET/winners
  Displays all recipients of the Nobel Prize
 
- ----Query Params----
+ --Query Params--
 
- The query params are based on the /winners endpoint. Using 'let allWinners = await Winner.find(req.query)' in the code, means the
- user
-
+ The query params are based on the /winners endpoint. Using 'let allWinners = await Winner.find(req.query)' in the code, means the user can find a lot of information with queries
+Examples:       
 GET /winners/?gender=female
 will display all female winners
 
@@ -23,7 +22,7 @@ will display all recipients born in May and so on.....
 GET /winners/?ageGetPrize=35
 will display all recipients who were aged less than 35 years when they won the award
 
-----Path Params----
+--Path Params--
 
 GET /winners/category/:category
 displays all winners in any specified category
