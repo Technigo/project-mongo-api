@@ -131,10 +131,6 @@ app.get('/people', async (req, res) => {
 app.get('/shows', async (req, res) => {
   const shows = await NetflixEntry.find(req.query)
 
-/*   if (req.query.skip || req.query.limit) {
-    shows.skip(+req.query.skip).limit(+req.query.limit)
-  } */
-
   if (shows.length === 0) {
     res.send({ response: "Sorry, but we couldn't find any shows that fit your search" })
   } else {
@@ -144,6 +140,11 @@ app.get('/shows', async (req, res) => {
     }) 
   }
 })
+
+app.get('/test', paginatedResults(() => NetflixEntry.find(req.query)), (req, res) => {
+  res.json(res.paginatedResults)
+})
+
 
 // route provides one movie by ID
 app.get('/shows/:id', async (req, res) => {
@@ -186,6 +187,39 @@ app.get('/movies/title/:title', async (req, res) => {
     res.status(400).json({ error: 'Invalid movie title' })
   }
 })
+
+function paginatedResults(model) {
+  return async (req, res, next) => {
+    const page = +req.query.page
+    const limit = +req.query.limit
+
+    const startIndex = (page - 1) * limit
+    const endIndex = page * limit
+
+    const results = {}
+
+    if (endIndex < await model.countDocuments().exec()) {
+      results.next = {
+        page: page + 1,
+        limit
+      }
+    }
+    
+    if (startIndex > 0) {
+      results.previous = {
+        page: page - 1,
+        limit
+      }
+    }
+    try {
+      results.results = await model.find().limit(limit).skip(startIndex).exec()
+      res.paginatedResults = results
+      next()
+    } catch (e) {
+      res.status(500).json({ message: e.message })
+    }
+  }
+}
 
 // Start the server
 app.listen(port, () => {

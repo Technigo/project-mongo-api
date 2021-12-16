@@ -1,4 +1,4 @@
-GET http://localhost:8080/shows?skip=0&limit=2
+GET http://localhost:8080/test?releaseYear=2019&page=1&limit=2
 
 
 
