@@ -56,8 +56,8 @@ app.get('/top', async (req, res) => {
 
   try {
     const allMusic = await Music.find({
-      trackName: new RegExp(trackName, 'i'),
-      artistName: new RegExp(artistName, 'i'),
+      trackname: new RegExp(trackName, 'i'),
+      artistname: new RegExp(artistName, 'i'),
       genre: new RegExp(genre, 'i'),
     })
     res.json(allMusic)
