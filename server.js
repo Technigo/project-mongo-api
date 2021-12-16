@@ -1,11 +1,10 @@
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
 import booksData from "./data/books.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/patrik-books";
+const mongoUrl = process.env.MONGO_URL || "MONGO_URL";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -44,16 +43,16 @@ if (process.env.RESET_DATABASE) {
 }
 
 // Our own middleware that checks if the database is connected before going to our endpoints
-// app.use((req, res, next) => {
-//   if (mongoose.connection.readystate === 1) {
-//     next();
-//   } else {
-//     res.status(503).json({
-//       response: "Service unavailable",
-//       succes: false,
-//     });
-//   }
-// });
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({
+      response: "Service unavailable",
+      succes: false,
+    });
+  }
+});
 
 // Start defining your routes here
 app.get("/", (req, res) => {
@@ -63,6 +62,7 @@ app.get("/", (req, res) => {
 // Get all the books
 app.get("/books", async (req, res) => {
   let books = await Book.find(req.query);
+
   if (req.query.numPages) {
     const booksByPages = await Book.find().gt("numPages", req.query.numPages);
     books = booksByPages;
@@ -85,12 +85,19 @@ app.get("/books/:id", async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(404).json({
+    res.status(400).json({
       response: "Invalid id",
       success: false,
     });
   }
 });
+
+// get all books from Author
+// app.get("/books/authors/:author", async (req, res) => {
+//   try {
+//     const booksByAuthor = await Book.find({authors: ''})
+//   }
+// })
 
 // Start the server
 app.listen(port, () => {
