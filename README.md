@@ -1,16 +1,42 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+The aim of this project was to learn how to use Mongodb; storing data, fetching data, finding data and returning error messages when the data could not be found etc. The project was based on an express-API, however this time I used Mongoose methods to interact with the data. The dataset
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Documentation
+ GET /
+ Welcome page
 
-## The problem
+ GET/winners
+ Displays all recipients of the Nobel Prize
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+ ----Query Params----
+
+ The query params are based on the /winners endpoint. Using 'let allWinners = await Winner.find(req.query)' in the code, means the
+ user
+
+GET /winners/?gender=female
+will display all female winners
+
+GET /winners/?bornMonth=May
+will display all recipients born in May and so on.....
+
+GET /winners/?ageGetPrize=35
+will display all recipients who were aged less than 35 years when they won the award
+
+----Path Params----
+
+GET /winners/category/:category
+displays all winners in any specified category
+
+GET /winners/year/:year
+displays all winners in any specified year
+
+GET /winners/surname/:surname
+displays winner(s) with a given surname (surname must be given capitalised)
+
+GET /winners/id/:id
+returns one winner with inputted id (the unique id assigned by Mongodb)
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
-
 
 https://nobel-prize-mongo.herokuapp.com/
