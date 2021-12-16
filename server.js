@@ -57,7 +57,8 @@ app.get("/", async (req, res) => {
 
 app.get("/music", async (req, res) => {
   try {
-    let music = await Music.find(req.query).limit(10);
+    let music = await Music.find(req.query);
+
     if (req.query.danceability) {
       const slowDance = await Music.find().lt(
         "danceability",
@@ -99,7 +100,7 @@ app.get("/music/speedance", async (req, res) => {
 app.get("/music/popular", async (req, res) => {
   try {
     const { page = 1, limit = 20 } = req.query;
-    const popular = await Music.find(req.query)
+    const popular = await Music.find()
       .gt("popularity", 50)
       .limit(limit * 1)
       .skip((page - 1) * limit);
