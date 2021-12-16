@@ -1,7 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import netflixData from './data/netflix-titles.json'
+import { param } from 'express/lib/request'
+import dotenv from "dotenv"
+
+dotenv.config()
+
+//import netflixData from './data/netflix-titles.json'
 
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
@@ -19,17 +24,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const User = mongoose.model("User", {
-  name: String
-})
 
-const User1 = new User({
-  name: "Elin"
-})
-
-const User2 = new User({
-  name: "Tobias"
-})
 
 const Title = mongoose.model("Title", {
     show_id: Number,
@@ -63,9 +58,61 @@ const Title = mongoose.model("Title", {
 
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
+app.get('/', async (req, res) => {
+  // const netflixTitles = await Title.find()
+
+  // res.json(netflixTitles)
+  res.send(process.env.API_KEY)
 })
+
+// Start defining your routes here
+
+// all titles
+app.get('/titles', async (req, res) => {
+ // Title.find({name: "spaceex"})
+ console.log(req.query)
+//  req.query is an empty object, can but it inside fun
+const netflixOnlyTitles = await Title.find().title
+res.json(netflixOnlyTitles)
+ //async function and can take long time = använd async o await, se process.env function
+})
+
+// app.get('/titles', async (req, res) => {
+//   // Title.find({name: "spaceex"})
+//   console.log(req.query)
+//  //  req.query is an empty object, can but it inside fun
+//  const netflixTitles = await Title.find(req.query)
+//  res.json(netflixTitles)
+//   //async function and can take long time = använd async o await, se process.env function
+//  })
+
+//one title
+app.get('/titles/id/:id', async (req, res) => {
+  const { id }= req.params
+  //restructure it it with {}
+  // netflixTitles.find(())
+ 
+
+
+ try{
+
+  const titleId = await Title.findById(id)
+  if (titleId){
+    res.json(titleId)
+   } else {
+     res.status(404).json("title not found")
+   }
+
+ } catch(err) {
+   res.status(400).json("error: id is invalid")
+ }
+
+
+  //async function and can take long time = använd async o await, se process.env function
+ })
+
+
+
 
 // Start the server
 app.listen(port, () => {
