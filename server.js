@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-
+import listEndpoints from 'express-list-endpoints';
 import avocadoSales from './data/avocado-sales.json'
 
 
@@ -56,22 +56,67 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// This is our first endpoint
+// This is my first endpoint
 app.get('/', (req, res) => {
-  res.send('Hello from us!')
+  res.send('Go to /endpoints to see all routes')
 })
 
+// Get a list of all endpoints
+app.get('/endpoints', (req, res) => {
+  res.send(listEndpoints(app));
+});
+
 // Get all the sales
-// Filter based on queries to get the sales for a specific region, date etc
+// Filter based on queries to get the sales for a specific region and/or date etc
+// Example: /sales/?region=Atlanta, /sales/?date=2015-12-20
+
 app.get('/sales', async (req, res) => {
-  const sales = await Sale.find(req.query)
+  let sales = await Sale.find(req.query)
+  
   if (sales.length > 0) {
-  res.json(sales)
+    res.json(sales)
+    }
+  else {
+    res.status(404).json({ error: 'Sorry, not found' })
+    }
+  })
+
+//Filter sales by total volume using gte (greater than/equal to)
+app.get('/sales/totalvolume/:totalvolume', async (req, res) => {
+  let totalVolume =  await Sale.find({ totalVolume: {$gte : req.params.totalvolume } })
+
+  if (totalVolume.length > 0) {
+    res.json(totalVolume)
   }
   else {
-    res.status(404).json({ error: 'Sorry, cannot be found' })
+    res.status(404).json({ error: 'Sorry, not found' })
+    }
+  })
+
+// Get the ten sales with lowest average price using sort() and limit()
+app.get('/sales/lowestprice', async (req, res) => {
+    let lowestPrice = await Sale.find().sort({averagePrice:1}).limit(10);
+
+    if (lowestPrice) {
+      res.json(lowestPrice)
+    }
+    else {
+      res.status(404).json({ error: 'Sorry, not found' })
+      }
+    })
+
+// Get the ten sales with highest average price using sort() and limit()
+app.get('/sales/highestprice', async (req, res) => {
+  let highestPrice = await Sale.find().sort({averagePrice:-1}).limit(10);
+
+  if (highestPrice) {
+    res.json(highestPrice)
   }
-})
+  else {
+    res.status(404).json({ error: 'Sorry, not found' })
+    }
+  })
+
 
 // Get one sale based on id
 app.get('/sales/id/:id', async (req, res) => {
