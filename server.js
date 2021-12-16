@@ -59,6 +59,18 @@ app.use((req, res, next) => {
 //   res.send('50 popular SpotifyTracks')
 // })
 
+app.get('/', (req, res) => {
+  const apiGuide = {
+    Endpoints: [
+      {
+        '/books------------------------->': 'Get all books',
+        '/books/id/--------------------->': 'Get book by Id',
+      },
+    ],
+  };
+  res.send(apiGuide)
+});
+
 // List of endpoints
 app.get('/endpoints', (req, res) => {
   res.send(listEndpoints(app))
