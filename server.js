@@ -1,38 +1,149 @@
-import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import topMusic from "./data/top-music.json";
+import listEndpoints from "express-list-endpoints";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.Promise = Promise
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://localhost/project-mongoose";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
+// Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8080
-const app = express()
+const port = process.env.PORT || 8080;
+const app = express();
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
+
+const Music = mongoose.model("Music", {
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number,
+});
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Music.deleteMany({});
+
+    topMusic.forEach((music) => {
+      const newMusic = new Music(music);
+      newMusic.save();
+    });
+  };
+  seedDatabase();
+}
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
-})
+app.get("/", async (req, res) => {
+  res.send(listEndpoints(app));
+});
+
+app.get("/music", async (req, res) => {
+  try {
+    let music = await Music.find(req.query).limit(10);
+    if (req.query.danceability) {
+      const slowDance = await Music.find().lt(
+        "danceability",
+        req.query.danceability
+      );
+      music = slowDance;
+    }
+
+    if (music) {
+      res.json(music);
+    } else {
+      res.status(404).json("No music");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ err: "no music!" });
+  }
+});
+
+app.get("/music/slowdance", async (req, res) => {
+  const slowDance = await Music.find().lt("danceability", 50);
+  res.json(slowDance);
+});
+
+app.get("/music/speedance", async (req, res) => {
+  const speedance = await Music.find().gt("danceability", 50);
+  res.json(speedance);
+});
+
+app.get("/music/popular", async (req, res) => {
+  const popular = await Music.find().gt("popularity", 50);
+  res.json(popular);
+});
+
+app.get("/music/id/:id", (req, res) => {
+  try {
+    Music.findOne({ id: req.params.id }).then((id) => {
+      if (id) {
+        res.json(id);
+      } else {
+        res.status(404).json("artist not found");
+      }
+    });
+  } catch (err) {
+    res.status(402).json({ error: "Invalid id" });
+  }
+});
+
+app.get("/music/genre/:genre", (req, res) => {
+  try {
+    Music.findOne({ genre: req.params.genre }).then((genre) => {
+      if (genre) {
+        res.json(genre);
+      } else {
+        res.status(404).json("genre not found");
+      }
+    });
+  } catch (err) {
+    res.status(404).json({ error: "Invalid gengre" });
+  }
+});
+
+app.get("/artist/:artistName", (req, res) => {
+  try {
+    Music.findOne({ artistName: req.params.artistName }).then((artist) => {
+      if (artist) {
+        res.json(artist);
+      } else {
+        res.status(404).json("artist not found");
+      }
+    });
+  } catch (err) {
+    res.status(404).json({ error: "Invalid id" });
+  }
+});
+
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "unavailable" });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
-})
+  console.log(`Server running on http://localhost:${port}`);
+});
