@@ -6,7 +6,7 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-//import netflixData from './data/netflix-titles.json'
+import netflixData from './data/netflix-titles.json'
 
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
@@ -59,9 +59,9 @@ const Title = mongoose.model("Title", {
 
 // Start defining your routes here
 app.get('/', async (req, res) => {
-  // const netflixTitles = await Title.find()
+  const netflixTitles = await Title.find()
 
-  // res.json(netflixTitles)
+  res.json(netflixTitles)
   //res.send(process.env.API_KEY)
 })
 
@@ -72,7 +72,7 @@ app.get('/titles', async (req, res) => {
  // Title.find({name: "spaceex"})
  console.log(req.query)
 //  req.query is an empty object, can but it inside fun
-const netflixOnlyTitles = await Title.find().title
+const netflixOnlyTitles = await Title.find()
 res.json(netflixOnlyTitles)
  //async function and can take long time = använd async o await, se process.env function
 })
