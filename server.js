@@ -75,7 +75,8 @@ app.get("/endpoints", (req, res) => res.send(listEndpoints(app)));
 methods rather than just normal JS we could use with express*/
 app.get("/winners", async (req, res) => {
   let allWinners = await Winner.find(req.query);
-
+// here, an age query will return winners with an ageGetPrize lower than the input, for example /winners/?ageGetPrize=35
+// will return winners who were 35 years old and younger when they were awarded the Prize
   if (req.query.ageGetPrize) {
     const winnersByAge = await Winner.find().lt(
       "ageGetPrize",
@@ -86,7 +87,7 @@ app.get("/winners", async (req, res) => {
   res.json(allWinners);
 });
 
-// end point to find all winners in given category
+// end point to find all winners in given category.
 app.get("/winners/category/:category", async (req, res) => {
   const categoryWinners = await Winner.find({ category: req.params.category });
   res.json(categoryWinners);
@@ -94,7 +95,7 @@ app.get("/winners/category/:category", async (req, res) => {
 
 // endpoint to find all winners in any give year
 app.get("/winners/year/:year", async (req, res) => {
-  const yearWinners = await Winner.findOne({ year: req.params.year });
+  const yearWinners = await Winner.find({ year: req.params.year });
   if (yearWinners) {
     res.json(yearWinners);
   } else {
