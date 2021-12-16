@@ -1,13 +1,15 @@
-# Mongo API Project
+# Netflix Database API Project
 
-Replace this readme with your own information about your project. 
+# API DOCUMENTATION
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+GET "/" - Shows all the data and also enables the possibility to use a query parameter to find the movies and shows from a certain releaseYear and country.
 
-## The problem
+GET "/movies" - finds the movies based on the type.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+GET "/tvshows" - finds the tv shows based on the type.
 
-## View it live
+GET "id/:id" - finds the id that matches what the user puts in and shows only that object. If the id written by the user doesnt exist the API will return a error message (404).
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+# View it live
+
+https://zancotti-mongodb.herokuapp.com/
