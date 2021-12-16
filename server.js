@@ -91,9 +91,21 @@ app.get('/endpoints', (req, res) => {
 app.get('/boardgames', async (req, res) => {
   // with query
   // console.log(req.query)
+  // https://boardgames-katie.herokuapp.com/boardgames?year=2010
   try {
+    // pagination - page = 0 and limit = 20 or we can change the value based on the query params
+    const pagination = {
+      page: parseInt(req.query.page, 10) || 0,
+      limit: parseInt(req.query.limit, 10) || 20,
+    }
+
     let boardGames = await BoardGame.find(req.query)
-    // http://localhost:8080/boardgames/?index=90
+      .skip(pagination.page * pagination.limit)
+      .limit(pagination.limit)
+
+    // console.log(boardGames.length)
+
+    // http://localhost:8080/boardgames?index=90
     // if the array is not empty -> success
     // if the array is empty -> success false
     if (boardGames.length > 0) {
@@ -117,21 +129,41 @@ app.get('/boardgames', async (req, res) => {
 
 // list one board game by id
 app.get('/boardgames/:id', async (req, res) => {
+  const { id } = req.params
   try {
-    const { id } = req.params
-    const boardGameById = await BoardGame.findById(id)
-    // const companyById = await Company.findById(req.params.id)
+    console.log('id: ', id)
+    console.log('data type id: ', typeof id)
+    // const boardGameById = await BoardGame.findById(id)
 
-    if (boardGameById) {
+    // randomize a board game
+    if (id === 'random') {
+      const totalBoardGames = await BoardGame.find()
+      console.log(totalBoardGames.length) // 18801
+      const randomBoardGame = await BoardGame.find({
+        index: parseInt(
+          Math.random() * (totalBoardGames.length - 1 - 0) + 0,
+          10
+        ),
+      })
+
       res.status(200).json({
-        response: boardGameById,
+        response: randomBoardGame,
         success: true,
       })
     } else {
-      res.status(404).json({
-        error: `Board game by id '${id}' not found`, // response:
-        success: false,
-      })
+      const boardGameById = await BoardGame.findById(id)
+
+      if (boardGameById) {
+        res.status(200).json({
+          response: boardGameById,
+          success: true,
+        })
+      } else {
+        res.status(404).json({
+          error: `Board game by id '${id}' not found`, // response:
+          success: false,
+        })
+      }
     }
   } catch (err) {
     res.status(404).json({
@@ -141,12 +173,23 @@ app.get('/boardgames/:id', async (req, res) => {
   }
 })
 
+// randomize a board game
+// app.get('/boardgames/random', async (req, res) => {
+//   const totalBoardGames = await BoardGame.find()
+//   console.log(totalBoardGames.length) // 18801
+//   const randomBoardGame = await BoardGame.find({
+//     index: parseInt(Math.random() * (totalBoardGames.length - 1 - 0) + 0, 10),
+//   })
+
+//   res.json(randomBoardGame)
+// })
+
 // list the board games by year
 app.get('/boardgames/year/:year', async (req, res) => {
   try {
     const { year } = req.params
     const boardGameByYear = await BoardGame.find({ year })
-
+    // console.log(boardGameByYear.length)
     if (boardGameByYear.length > 0) {
       res.status(200).json({
         response: boardGameByYear,
@@ -183,6 +226,8 @@ app.get('/ranks', async (req, res) => {
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
 
+    console.log(boardGameRanks.length)
+
     if (boardGameRanks.length > 0) {
       res.status(200).json({
         response: boardGameRanks,
@@ -201,6 +246,8 @@ app.get('/ranks', async (req, res) => {
     })
   }
 })
+
+// use query for sorting instead? /boardgames?order=
 
 // list top 20 ranked board games (according to Bayesian average)
 app.get('/top_20', async (req, res) => {
