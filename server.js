@@ -45,17 +45,17 @@ const Title = mongoose.model("Title", {
   type: String,
 });
 
-// if (process.env.RESET_DB) {
-const seedDatabase = async () => {
-  await Title.deleteMany({});
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Title.deleteMany({});
 
-  netflixData.forEach((item) => {
-    const newTitle = new Title(item);
-    newTitle.save();
-  });
-};
-seedDatabase();
-// }
+    netflixData.forEach((item) => {
+      const newTitle = new Title(item);
+      newTitle.save();
+    });
+  };
+  seedDatabase();
+}
 
 // Start defining your routes here
 app.get("/", (req, res) => {
@@ -63,8 +63,21 @@ app.get("/", (req, res) => {
 });
 
 app.get("/titles", async (req, res) => {
-  const titles = await Title.find();
-  res.json(titles);
+  const { cast, director, genre, type, country, title } = req.query;
+
+  try {
+    const titles = await Title.find({
+      cast: new RegExp(cast, "i"),
+      director: new RegExp(director, "i"),
+      listed_in: new RegExp(genre, "i"),
+      type: new RegExp(type, "i"),
+      country: new RegExp(country, "i"),
+      title: new RegExp(title, "i"),
+    });
+    res.json(titles);
+  } catch (err) {
+    res.status(400).json({ error: "Invalid title" });
+  }
 });
 
 app.get("/titles/id/:id", async (req, res) => {
