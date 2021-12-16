@@ -61,7 +61,7 @@ app.get("/", (req, res) => {
 
 // Get all the books
 app.get("/books", async (req, res) => {
-  let books = (await Book.find(req.query).MongooseArray(req.query)) === -1;
+  let books = await Book.find(req.query);
 
   if (req.query.numPages) {
     const booksByPages = await Book.find().gt("numPages", req.query.numPages);
