@@ -137,13 +137,10 @@ app.get('/boardgames/:id', async (req, res) => {
 
     // randomize a board game
     if (id === 'random') {
-      const totalBoardGames = await BoardGame.find()
-      console.log(totalBoardGames.length) // 18801
+      const totalBoardGames = await BoardGame.count()
+      console.log(totalBoardGames) // 18801 (actual count is 19329)
       const randomBoardGame = await BoardGame.find({
-        index: parseInt(
-          Math.random() * (totalBoardGames.length - 1 - 0) + 0,
-          10
-        ),
+        index: parseInt(Math.random() * (totalBoardGames - 0) + 0, 10),
       })
 
       res.status(200).json({
