@@ -62,20 +62,64 @@ app.get("/", (req, res) => {
 });
 
 app.get("/year/:year", async (req, res) => {
-  const search_year = req.params.year;
-  const findYear = await Content.find({ release_year: search_year });
-  res.json(findYear);
+  try {
+    const searchYear = req.params.year;
+
+    const findYear = await Content.find({
+      release_year: searchYear,
+    });
+    if (searchYear) {
+      res.status(200).json({
+        message: findYear,
+        response: true,
+      });
+    } else {
+      res.status(404).json({
+        response: "Data not found",
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      response: "Invalid request",
+    });
+  }
 });
 
 app.get("/type/:type", async (req, res) => {
-  const search_type = req.params.type;
-  const findType = await Content.find({ type: search_type });
-  res.json(findType);
+  try {
+    const searchType = req.params.type;
+    const findType = await Content.find({ type: searchType });
+    if (searchType) {
+      res.status(200).json({
+        response: findType,
+      });
+    } else {
+      res.status(404).json({
+        response: "Data not found",
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      response: "Invalid request",
+    });
+  }
 });
 
 app.get("/titles/:id", async (req, res) => {
-  const title = await Content.findById(req.params.id);
-  res.json(title);
+  try {
+    const title = await Content.findById(req.params.id);
+    if (title) {
+      res.json(title);
+    } else {
+      res.status(404).json({
+        error: "Title not found",
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      response: "Invalid request",
+    });
+  }
 });
 
 // Start the server
