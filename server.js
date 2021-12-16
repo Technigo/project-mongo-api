@@ -83,13 +83,34 @@ app.get("/music/slowdance", async (req, res) => {
 });
 
 app.get("/music/speedance", async (req, res) => {
-  const speedance = await Music.find().gt("danceability", 50);
-  res.json(speedance);
+  try {
+    const speedance = await Music.find().gt("danceability", 50);
+
+    if (speedance) {
+      res.json(speedance);
+    } else {
+      res.status(404).json("no speed here");
+    }
+  } catch (err) {
+    res.status(402).json({ error: "Invalid id" });
+  }
 });
 
 app.get("/music/popular", async (req, res) => {
-  const popular = await Music.find().gt("popularity", 50);
-  res.json(popular);
+  try {
+    const { page = 1, limit = 20 } = req.query;
+    const popular = await Music.find()
+      .gt("popularity", 50)
+      .limit(limit * 1)
+      .skip((page - 1) * limit);
+    if (popular) {
+      res.json({ total: popular.length, popular });
+    } else {
+      res.status(404).json("not top popular");
+    }
+  } catch (err) {
+    res.status(402).json({ error: "Invalid id" });
+  }
 });
 
 app.get("/music/id/:id", (req, res) => {
