@@ -1,35 +1,129 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/topmusicdata-week18"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 9090
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
 
+const Track = mongoose.model('Track', {
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number
+})
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Track.deleteMany({})
+
+    topMusicData.forEach(track => {
+      const newTrack = new Track(track)
+      newTrack.save()
+    })
+  }
+  seedDatabase()
+}
+
+// Middleware
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable'})
+  }
+})
+
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('50 popular SpotifyTracks')
 })
+
+// List of endpoints
+app.get('/endpoints', (req, res) => {
+  res.send(listEndpoints(app))
+})
+
+// Get all tracks (and by query)
+app.get('/tracks', async (req, res) => {
+  console.log(req.query)
+  let tracks = await Track.find(req.query)
+
+
+  if (req.query.popularity) {
+    const trackByPopularity = await Track.find().gt('popularity', req.query.popularity)
+    tracks = trackByPopularity
+  }
+
+  res.json(tracks)
+})
+
+
+
+// Track by id
+app.get('/tracks/:id', async (req, res) => {
+  try {
+    const trackById = await Track.findById(req.params.id)
+  if(trackById) {
+    res.json({
+      response: trackById,
+      success: true
+    })
+  } else {
+    res.status(404).json({ 
+      response: 'Track not found',
+      success: false
+    })
+  }
+  } catch(error) {
+    res.status(400).json({ 
+      response: 'Id is invalid',
+      success: false
+    })
+  }
+})  
+
+app.get('/tracks/genre/:genre', async (req, res) => {
+  try {
+    const trackByGenre = await Track.find(req.res.genre)
+  if(trackByGenre) {
+    res.json({
+      response: trackByGenre,
+      success: true
+    })
+  } else {
+    res.status(404).json({ 
+      response: 'Track not found',
+      success: false
+    })
+  }
+  } catch(error) {
+    res.status(400).json({ 
+      response: 'Id is invalid',
+      success: false
+    })
+  }
+}) 
 
 // Start the server
 app.listen(port, () => {
