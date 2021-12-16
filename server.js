@@ -78,13 +78,13 @@ app.get("/music", async (req, res) => {
 });
 
 app.get("/music/slowdance", async (req, res) => {
-  const slowDance = await Music.find().lt("danceability", 50);
+  const slowDance = await Music.find().lt("danceability", 50).find(req.query);
   res.json(slowDance);
 });
 
 app.get("/music/speedance", async (req, res) => {
   try {
-    const speedance = await Music.find().gt("danceability", 50);
+    const speedance = await Music.find().gt("danceability", 50).find(req.query);
 
     if (speedance) {
       res.json(speedance);
@@ -99,7 +99,7 @@ app.get("/music/speedance", async (req, res) => {
 app.get("/music/popular", async (req, res) => {
   try {
     const { page = 1, limit = 20 } = req.query;
-    const popular = await Music.find()
+    const popular = await Music.find(req.query)
       .gt("popularity", 50)
       .limit(limit * 1)
       .skip((page - 1) * limit);
