@@ -4,10 +4,13 @@ import mongoose from "mongoose";
 import data from "./data/netflix-titles.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/movies";
-mongoose.connect(mongoUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect(mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((res) => console.log("Connected to DB", res))
+  .catch((err) => console.log("Oh shit", err));
 mongoose.Promise = Promise;
 
 // Defines the port the app will run on. Defaults to 8080, but can be
