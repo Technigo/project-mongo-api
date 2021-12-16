@@ -62,7 +62,7 @@ app.get('/', async (req, res) => {
   // const netflixTitles = await Title.find()
 
   // res.json(netflixTitles)
-  res.send(process.env.API_KEY)
+  //res.send(process.env.API_KEY)
 })
 
 // Start defining your routes here
