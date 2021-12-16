@@ -10,6 +10,13 @@ mongoose.connect(mongoUrl, {
 });
 mongoose.Promise = Promise;
 
+// Defines the port the app will run on. Defaults to 8080, but can be
+// overridden when starting the server. For example:
+//
+//   PORT=9000 npm start
+const port = process.env.PORT || 8080;
+const app = express();
+
 const Media = mongoose.model("Media", {
   id: Number,
   title: String,
@@ -28,11 +35,7 @@ const Media = mongoose.model("Media", {
 if (process.env.RESET_DATABASE) {
   console.log("Resetting database!");
   const seedDatabase = async () => {
-    try {
-      await Media.deleteMany();
-    } catch (error) {
-      console.log(error);
-    }
+    await Media.deleteMany({});
 
     // adapting the information so that it match the mongoose model I set up.
     const netflixList = data.map((media) => {
@@ -59,13 +62,6 @@ if (process.env.RESET_DATABASE) {
   };
   seedDatabase();
 }
-
-// Defines the port the app will run on. Defaults to 8080, but can be
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
