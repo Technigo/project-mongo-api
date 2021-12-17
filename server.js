@@ -84,6 +84,7 @@ app.get("/books", async (req, res) => {
   if (req.query.title) {
     const bookByTitle = await Book.find({
       title: new RegExp(title, "i"),
+      books = bookByTitle
     });
   }
 
