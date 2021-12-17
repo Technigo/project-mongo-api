@@ -1,13 +1,19 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+A project that consists of a Mongo-backed API. The goal for this project was to learn what Mongodb is and how to model data in Mongo using Mongoose. I used a set of avocado sales data to set up the database. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started by seeding the database from the json file. After storing the data I created the RESTful endpoints written below using Mongoose queries. I also made sure to provide error messages from the endpoints.
+
+"/" = Main page
+"/endpoints" = Shows all the endpoints
+"/sales" = Shows all the avocado sales in the data set
+"/sales/totalvolume/:totalvolume" = Filters sales by total volume (greater than/equal to the value that the user chooses)
+"/sales/lowestprice" = Filters the ten sales with lowest average price
+"/sales/highestprice" = Filters the ten sales with highest average price
+"/sales/id/:id" = Finds one specific sale based on id
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+
