@@ -11,7 +11,7 @@ import listEndpoints from "express-list-endpoints";
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-// THE DATA I USED --> import booksData from "./data/books.json";
+import booksData from "./data/books.json";
 
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost/project-book-api";
