@@ -16,8 +16,8 @@ Database made in MongoDB using Mongoose. I started from last projects with endpo
 
 https://ajliin-database.herokuapp.com/
 
-Methods Urls Actions
-GET / get all netflixt titles
-GET /movie Get all movies
-GET /titles/:title&/:type Search for a title and type
-GET /titles/id/:id Get title with an id
+Methods Urls 										Actions
+GET  		/ 											get all netflixt titles
+GET 		/movie					 				Get all movies
+GET /titles/:title&/:type 			Search for a title and type
+GET /titles/id/:id 							Get title with an id
