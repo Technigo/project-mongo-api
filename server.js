@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 	res.send(listEndpoints(app));
 });
 
-app.get("/books", async (req, res) => {
+app.get("/books/search", async (req, res) => {
 	const { author, title, language } = req.query;
 	let filteredBooks = await Book.find(req.query);
 
@@ -81,7 +81,7 @@ app.get("/books", async (req, res) => {
 
 app.get("books/authors", async (req, res) => {
 	try {
-		const allAuthors = await Book.distinct("authors");
+		const allAuthors = await Book.distinct({ authors: authors });
 		res.json(allAuthors);
 	} catch (err) {
 		res.status(400).json({
