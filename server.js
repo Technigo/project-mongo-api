@@ -51,28 +51,41 @@ app.get("/", (req, res) => {
 });
 
 app.get("/books", async (req, res) => {
+	const { author, title, language } = req.query;
 	let filteredBooks = await Book.find(req.query);
 
 	try {
-		if (req.query.author) {
+		if (author) {
 			filteredBooks = await Book.find({
-				authors: new RegExp(req.query.author, "i"),
+				authors: new RegExp(author, "i"),
 			});
 		}
-		if (req.query.title) {
+		if (title) {
 			filteredBooks = await Book.find({
-				title: new RegExp(req.query.title, "i"),
+				title: new RegExp(title, "i"),
 			});
 		}
-		if (req.query.language) {
+		if (language) {
 			filteredBooks = await Book.find({
-				language_code: new RegExp(req.query.language, "i"),
+				language_code: new RegExp(language, "i"),
 			});
 		}
 		res.json(filteredBooks);
 	} catch (err) {
 		res.status(400).json({
 			response: "Search is invalid",
+			success: false,
+		});
+	}
+});
+
+app.get("books/authors", async (req, res) => {
+	try {
+		const allAuthors = await Book.distinct("authors");
+		res.json(allAuthors);
+	} catch (err) {
+		res.status(400).json({
+			response: "No authors found",
 			success: false,
 		});
 	}
@@ -115,16 +128,16 @@ app.get("/books", async (req, res) => {
 // });
 
 //gt is greater than lt is lower than
-app.get("/books/rating/:rating", async (req, res) => {
-	let ratedBooks = await Book.find(req.query);
+// app.get("/books/rating/:rating", async (req, res) => {
+// 	let ratedBooks = await Book.find(req.query);
 
-	if (req.query.rating) {
-		ratedBooks = await Book.find().gt({
-			average_rating: req.query.rating,
-		});
-	}
-	res.json(ratedBooks);
-});
+// 	if (req.query.rating) {
+// 		ratedBooks = await Book.find().gt({
+// 			average_rating: req.query.rating,
+// 		});
+// 	}
+// 	res.json(ratedBooks);
+// });
 
 //works
 app.get("/books/id/:id", async (req, res) => {
