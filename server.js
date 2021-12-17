@@ -73,7 +73,7 @@ app.get("/music/id/:id", async (req, res) => {
       if (id) {
         res.json(id);
       } else {
-        res.status(404).json("artist not found");
+        res.status(404).json("music id not found");
       }
     });
   } catch (err) {
