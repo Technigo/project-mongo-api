@@ -33,4 +33,4 @@ Displays a netflix title based on the title parameter from the request URL.
 Displays a netflix title based on the unique id parameter. An error message will show if no titles are found by that id
 
 ## View it live
- https://madeleneapi.herokuapp.com/
+https://mtdotse-netflix-mongo-api.herokuapp.com/shows
