@@ -1,12 +1,9 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
 ## The problem
 
-This is my second API project. I learned to modifie Express queries from a previous project to Mongoose. I used the same set of data for both projects, a database of populaar songs from spotify.
+This is my second API project. I learned to modifie Express queries from a previous project to Mongoose. I used the same set of data for both projects, a database of popular songs from spotify.
+This week I started using enviornment variables as well.
 
 - Mongoose methods such as gt, find, findById, findOne
 - RESTful endpoints
@@ -40,4 +37,4 @@ songs/?bpm=110
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://topmusic-mongodb-maria.herokuapp.com/endpoints
