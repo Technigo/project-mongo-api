@@ -59,8 +59,7 @@ if (process.env.RESET_DB) {
 // Start defining routes here
 app.get('/', (req, res) => {
   res.send({
-    Welcome: "Welcome to my Netflix API",
-    documentation: "https://documenter.getpostman.com/view/18068162/UVR4PW9m"
+    Welcome: "Welcome to my Netflix API"
   })
 })
 
@@ -73,7 +72,6 @@ app.get('/endpoints', (req, res) => {
 })
 
 // route provides a sorted list of all countries that are in netflixData
-// How to do this with MongoDB?
 app.get('/countries', async (req, res) => {
   // a list of all countries in the Netflix-Data without any duplicates. Therefore I am creating a Set (object with unique items). I convert the set into an array afterwards and sort it alphabetically
   const countries = await Array.from(new Set(netflixData.map((item) => item.country))).sort()
@@ -84,7 +82,7 @@ app.get('/countries', async (req, res) => {
   })
 })
 
-// route with all shows (both movies and other) from the provided country
+// route with all shows (both movies and other) from the provided country. spelling needs to be precise
 app.get('/countries/:country', async (req, res) => {
   // req is an object with properties such as query and params, 
   // both query and params are empty objects from the beginning 
@@ -109,13 +107,13 @@ app.get('/countries/:country', async (req, res) => {
   }
 })
 
-// route provides all Netflix-shows and has the possibility to query for director and cast, type and releaseYear in the database. The RegExp for director and cast makes the filtering caseinsensitive and provides the possibility to just search for parts of the word.You can also do pagination by setting skip & limit as query parameters
+// route provides all Netflix-shows and has the possibility to query for director and cast in the database. The RegExp for makes the filtering caseinsensitive and provides the possibility to just search for parts of the word.You can also do pagination by setting skip & limit as query parameters
 app.get('/people', async (req, res) => {
-  const { director, cast, skip, limit } = req.query
+  const { director, cast, page, limit } = req.query
   const people = await NetflixEntry.find({
     director: new RegExp(director, 'i'),
     cast: new RegExp(cast, 'i')
-  }).skip(+skip).limit(+limit)
+  }).skip(+page).limit(+limit)
 
   if (people.length === 0) {
     res.send({ response: "Sorry, but we couldn't find any shows that fit your search" })
@@ -127,7 +125,7 @@ app.get('/people', async (req, res) => {
   }
 })
 
-// route provides all Netflix-shows and has the possibility to query for every Entry in the database. SearchTerms have to be precise.You can also do pagination by setting skip & limit as query parameters
+// route provides all Netflix-shows and has the possibility to query for every Entry in the database. SearchTerms have to be precise.
 app.get('/shows', async (req, res) => {
   const shows = await NetflixEntry.find(req.query)
 
@@ -140,11 +138,6 @@ app.get('/shows', async (req, res) => {
     }) 
   }
 })
-
-app.get('/test', paginatedResults(() => NetflixEntry.find(req.query)), (req, res) => {
-  res.json(res.paginatedResults)
-})
-
 
 // route provides one movie by ID
 app.get('/shows/:id', async (req, res) => {
@@ -187,39 +180,6 @@ app.get('/movies/title/:title', async (req, res) => {
     res.status(400).json({ error: 'Invalid movie title' })
   }
 })
-
-function paginatedResults(model) {
-  return async (req, res, next) => {
-    const page = +req.query.page
-    const limit = +req.query.limit
-
-    const startIndex = (page - 1) * limit
-    const endIndex = page * limit
-
-    const results = {}
-
-    if (endIndex < await model.countDocuments().exec()) {
-      results.next = {
-        page: page + 1,
-        limit
-      }
-    }
-    
-    if (startIndex > 0) {
-      results.previous = {
-        page: page - 1,
-        limit
-      }
-    }
-    try {
-      results.results = await model.find().limit(limit).skip(startIndex).exec()
-      res.paginatedResults = results
-      next()
-    } catch (e) {
-      res.status(500).json({ message: e.message })
-    }
-  }
-}
 
 // Start the server
 app.listen(port, () => {
