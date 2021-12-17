@@ -99,7 +99,7 @@ app.get('/boardgames', async (req, res) => {
       limit: parseInt(req.query.limit, 10) || 20,
     }
 
-    let boardGames = await BoardGame.find(req.query)
+    const boardGames = await BoardGame.find(req.query)
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
 
@@ -139,9 +139,16 @@ app.get('/boardgames/:id', async (req, res) => {
     if (id === 'random') {
       const totalBoardGames = await BoardGame.count()
       console.log(totalBoardGames) // 18801 (actual count is 19329)
-      const randomBoardGame = await BoardGame.find({
-        index: parseInt(Math.random() * (totalBoardGames - 0) + 0, 10),
-      })
+      // console.log('total board games type: ', typeof totalBoardGames) // number
+
+      // const randomBoardGame = await BoardGame.find({
+      //   index: parseInt(Math.random() * (totalBoardGames - 0) + 0, 10),
+      // })
+
+      // Math.random() * (max - min) + min;
+      const randomBoardGame = await BoardGame.find()
+        .skip(Math.random() * (totalBoardGames - 0) + 0)
+        .limit(1)
 
       res.status(200).json({
         response: randomBoardGame,
