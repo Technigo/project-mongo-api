@@ -54,11 +54,13 @@ app.use((req, res, next) => {
 	}
 });
 
-// Available routes/endpoints below
+// Endpoint with all endpoints
 app.get("/", (req, res) => {
 	res.send(listEndpoints(app));
 });
 
+// Available routes/endpoints below, gt for greater than so that it only shows input rating and up
+// RegExp makes it possible to enter part of eg. title or author
 app.get("/books/search", async (req, res) => {
 	const { author, title, language, rating } = req.query;
 	let filteredBooks = await Book.find(req.query);
@@ -91,50 +93,6 @@ app.get("/books/search", async (req, res) => {
 	}
 });
 
-app.get("/books/authors", async (req, res) => {
-	try {
-		const allAuthors = await Book.distinct("authors");
-		res.json(allAuthors);
-	} catch (err) {
-		res.status(400).json({
-			response: "No authors found",
-			success: false,
-		});
-	}
-});
-
-//gt is greater than lt is lower than, -1 fallande 1 stigande
-app.get("/books/rating", async (req, res) => {
-	try {
-		const ratedBooks = await Book.find().sort({
-			average_rating: -1,
-		});
-		res.json(ratedBooks);
-	} catch (err) {
-		res.status(400).json({
-			response: "No rated books found",
-			success: false,
-		});
-	}
-});
-
-// //endpoint with random book
-// app.get("/randomBook", (req, res) => {
-// 	let randomBook = booksData[Math.floor(Math.random() * booksData.length)];
-
-// 	if (!randomBook) {
-// 		res.status(404).json({
-// 			response: "Something went wrong, try again!",
-// 			success: false,
-// 		});
-// 	} else {
-// 		res.status(200).json({
-// 			response: randomBook,
-// 			success: true,
-// 		});
-// 	}
-// });
-
 // // search by isbn or isbn13 number to find a specific book
 app.get("/books/isbn", async (req, res) => {
 	const { isbn, isbn13 } = req.query;
@@ -158,16 +116,55 @@ app.get("/books/isbn", async (req, res) => {
 	}
 });
 
-//, isbn13: isbn if (!book) {
-// 	res.status(404).json({
-// 		response: "No book with that ISBN or ISBN13 number",
-// 		success: false,
-// 	});
-// } else {
-// 	res.status(200).json({
-// 		response: book,
-// 		success: true,
-// 	});
+// endpoint for all authors, unsorted
+app.get("/books/authors", async (req, res) => {
+	try {
+		const allAuthors = await Book.distinct("authors");
+		res.json(allAuthors);
+	} catch (err) {
+		res.status(400).json({
+			response: "No authors found",
+			success: false,
+		});
+	}
+});
+
+// endpoint with all books sorted highest to lowest rating (-1 = decreasing)
+app.get("/books/rating", async (req, res) => {
+	try {
+		const ratedBooks = await Book.find().sort({
+			average_rating: -1,
+		});
+		res.status(200).json({
+			response: ratedBooks,
+			success: true,
+		});
+	} catch (err) {
+		res.status(400).json({
+			response: "No rated books found",
+			success: false,
+		});
+	}
+});
+
+//endpoint with random book
+app.get("/randombook", async (req, res) => {
+	const count = await Book.estimatedDocumentCount();
+	const random = Math.floor(Math.random() * count);
+	const randomBook = await Book.findOne().skip(random);
+
+	if (!randomBook) {
+		res.status(404).json({
+			response: "Something went wrong, try again!",
+			success: false,
+		});
+	} else {
+		res.status(200).json({
+			response: randomBook,
+			success: true,
+		});
+	}
+});
 
 //finds book info based on id
 app.get("/books/id/:id", async (req, res) => {
