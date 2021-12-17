@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndPoints from 'express-list-endpoints'; // for listing all routes
-import topMusicData from './data/top-music.json';
+//import topMusicData from './data/top-music.json';
 
 //----------------* for database connection *--------------------//
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/musicTrack';
@@ -62,8 +62,50 @@ app.get('/endpoints', async (req, res) => {
 });
 
 app.get('/tracks', async (req, res) => {
-  const tracks = await Track.find();
-  res.json(tracks);
+  const queryObj = { ...req.query };
+  const page = req.query.page;
+  const limit = req.query.limit;
+  const sortOrder = req.query.sort;
+
+  //------- filtering req.query object-----------------//
+  const excludedFields = ['page', 'limit', 'sort']; // fields need to be deleted from req.query object
+
+  excludedFields.forEach((item) => delete queryObj[item]);
+
+  try {
+    let result = Track.find(queryObj);
+
+    if (sortOrder) {
+      result = result.sort(sortOrder);
+    }
+
+    if (page) {
+      const tracks = await result
+        .find({})
+        .limit(limit * 1)
+        .skip((page - 1) * limit)
+        .exec();
+      const count = await result.countDocuments();
+      console.log(count);
+
+      res.status(200).json({
+        status: 'success',
+        data: { tracks },
+        totalPages: Math.ceil(count / limit),
+        currentPage: page,
+      });
+    } else {
+      const tracks = await result;
+
+      res.status(200).json({
+        status: 'success',
+        results: tracks.length,
+        data: { tracks },
+      });
+    }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
 app.get('/tracks/id/:id', async (req, res) => {
@@ -71,9 +113,7 @@ app.get('/tracks/id/:id', async (req, res) => {
     const trackById = await Track.findById(req.params.id);
     if (trackById) {
       res.json(trackById);
-    } else {
-      res.status(404).json({ error: 'Track not found' });
-    }
+    } else res.status(404).json({ error: 'Track not found' });
   } catch (err) {
     res.status(400).json({ error: 'Id is invalid' });
   }
