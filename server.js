@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import listEndpoints from 'express-list-endpoints';
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -12,7 +13,7 @@ import mongoose from 'mongoose';
 // import topMusicData from './data/top-music.json'
 import theOfficeData from './data/the-office.json';
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
+const mongoUrl = process.env.MONGO_URL || 'MONGO_URL';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -49,8 +50,26 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
+// middleware that checks if the database is connected before going to our endpoints
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({
+      response: 'Service unavailable',
+      succes: false,
+    });
+  }
+});
+
 app.get('/', (req, res) => {
-  res.send('HELLO WORLD');
+  res.send(
+    'type /endpoints in the URL to start. Endpoints are case sensitive.'
+  );
+});
+
+app.get('/endpoints', (req, res) => {
+  res.send(listEndpoints(app));
 });
 
 app.get('/episodes', async (req, res) => {
@@ -60,9 +79,8 @@ app.get('/episodes', async (req, res) => {
 
 // get one episode based on iD
 app.get('/episodes/id/:id', async (req, res) => {
-  // this will only be triggered IF we have an ID, otherwise we'll just see the companies
+  // this will only be triggered IF we have an ID, otherwise we'll just see the episodes
   const { id } = req.params;
-
   try {
     const episodeById = await Episode.findById(id);
     if (episodeById) {
@@ -75,21 +93,18 @@ app.get('/episodes/id/:id', async (req, res) => {
   }
 });
 
-// Start defining your routes here
-// app.get('/seasons', (req, res) => {
-//   res.json(theOfficeData);
-// });
-
-//  app.get('/seasons/:season', (req, res) => {
-//    const { season } = req.params;
-
-//    const seasonsData = Episode.find({season: 2})
-
-//   let theOfficeDataToSend = theOfficeData;
-
-//   await Episode.find({ season: req.params.season });
-// });
-// }
+app.get('episodes/:title', (req, res) => {
+  Episode.findOne({ title: 'Pilot' }, (err, data) => {
+    if (err) {
+      res.status(404).json({
+        response: 'Title not found',
+        succes: false,
+      });
+    } else {
+      res.send(data);
+    }
+  });
+});
 
 // Start the server
 app.listen(port, () => {
