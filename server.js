@@ -56,7 +56,7 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.json(topMusicData)
+  res.send(topMusicData)
 })
 
 // app.get('/', (req, res) => {
