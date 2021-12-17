@@ -63,7 +63,9 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send(listEndpoints(app));
+  res.send(
+    'This is the home of "not-that-great-but still-called-top-Music" by Ida. Please see documentation 👉'
+  );
 });
 
 // get the endpoints
