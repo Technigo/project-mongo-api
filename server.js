@@ -5,6 +5,7 @@ import { param } from 'express/lib/request'
 import dotenv from 'dotenv'
 import listEndpoints from 'express-list-endpoints'
 
+// for password file
 dotenv.config()
 
 import netflixData from './data/netflix-titles.json'
@@ -54,38 +55,29 @@ app.get('/', async (req, res) => {
   res.send(listEndpoints(app))
 })
 
-//all netflix titles here
+//all netflix titles here, be able to searc for a title and type
 app.get('/titles', async (req, res) => {
   const title = req.query.title?.toLowerCase()
-  console.log(title)
+  const type = req.query.type?.toLowerCase()
 
   const findFilter = {}
-  console.log(findFilter)
 
   if (title) {
-    console.log('inside if')
     findFilter.title = { $regex: new RegExp(title, 'i') }
-    console.log(findFilter)
+  }
+
+  if (type) {
+    findFilter.type = { $regex: new RegExp(type, 'i') }
   }
 
   const allTitles = Title.find(findFilter)
-  const netflixTitles = await allTitles.limit(5)
+  const netflixTitles = await allTitles.limit(50)
 
-  res.json(netflixTitles)
-})
-
-// app.get('/titles/:title', async (req, res) => {
-//   // Title.find({name: "spaceex"})
-//   console.log(req.params.title)
-//   //  req.query is an empty object, can but it inside fun
-//   const netflixOnlyTitles = await Title.find({})
-//   res.json(netflixOnlyTitles)
-//   //async function and can take long time = använd async o await, se process.env function
-// })
-
-app.get('/movies', async (req, res) => {
-  const netflixOnlyMovies = await Title.find({ type: 'Movie' }).limit(5)
-  res.json(netflixOnlyMovies)
+  if (netflixTitles.length !== 0) {
+    res.json(netflixTitles)
+  } else {
+    res.status(404).json('title not found')
+  }
 })
 
 //one title
@@ -106,6 +98,11 @@ app.get('/titles/id/:id', async (req, res) => {
   }
 
   //async function and can take long time = använd async o await, se process.env function
+})
+
+app.get('/movies', async (req, res) => {
+  const netflixOnlyMovies = await Title.find({ type: 'Movie' }).limit(5)
+  res.json(netflixOnlyMovies)
 })
 
 // Start the server
