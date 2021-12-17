@@ -8,9 +8,10 @@ import listEndpoints from "express-list-endpoints";
 //
 // import goldenGlobesData from './data/golden-globes.json'
 // import avocadoSalesData from './data/avocado-sales.json'
-import booksData from "./data/books.json";
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
+
+// THE DATA I USED --> import booksData from "./data/books.json";
 
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost/project-book-api";
@@ -41,7 +42,7 @@ const Book = mongoose.model("Book", {
   text_reviews_count: Number,
 });
 
-// you need the async and await cause JavaScript doesn't wait for fetches and methods that take longer time.
+// You need the async and await cause JavaScript doesn't wait for fetches and methods that take longer time.
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
@@ -56,47 +57,58 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-// Start defining your routes here
+//
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
+});
+
+// Start defining your routes here, list of all the endpoints
 app.get("/", (req, res) => {
   res.send(listEndpoints(app));
-  //list of endpoints
 });
 
 // endpoint for all books with query options for number of pages and rating
-
 app.get("/books", async (req, res) => {
-  const { title, authors } = req.query;
-  let books = await Book.find(req.query);
+  try {
+    const { title, authors } = req.query;
+    let books = await Book.find(req.query);
 
-  if (req.query.num_pages) {
-    const booksByPages = await Book.find()
-      .lt("num_pages", req.query.num_pages)
-      .sort({ num_pages: 1 });
-    books = booksByPages;
+    if (req.query.num_pages) {
+      const booksByPages = await Book.find()
+        .lt("num_pages", req.query.num_pages)
+        .sort({ num_pages: 1 });
+      books = booksByPages;
+    }
+
+    if (req.query.average_rating) {
+      const booksByRating = await Book.find()
+        .gt("average_rating", req.query.average_rating)
+        .sort({ average_rating: -1 });
+      books = booksByRating;
+    }
+
+    if (req.query.title) {
+      const bookByTitle = await Book.find({
+        title: new RegExp(title, "i"),
+      });
+      books = bookByTitle;
+    }
+
+    if (req.query.authors) {
+      const bookByAuthor = await Book.find({
+        authors: new RegExp(authors, "i"),
+      });
+      books = bookByAuthor;
+    }
+
+    res.json(books);
+  } catch (err) {
+    res.json({ error: err });
   }
-
-  if (req.query.average_rating) {
-    const booksByRating = await Book.find()
-      .gt("average_rating", req.query.average_rating)
-      .sort({ average_rating: -1 });
-    books = booksByRating;
-  }
-
-  if (req.query.title) {
-    const bookByTitle = await Book.find({
-      title: new RegExp(title, "i"),
-    });
-    books = bookByTitle;
-  }
-
-  if (req.query.authors) {
-    const bookByAuthor = await Book.find({
-      authors: new RegExp(authors, "i"),
-    });
-    books = bookByAuthor;
-  }
-
-  res.json(books);
 });
 
 // .find() - you need this in mongodb till access all the objects in your data
@@ -107,7 +119,6 @@ app.get("/books", async (req, res) => {
 // .limit() = limit(10) returns only 10
 
 // endpoint to get a specific book
-
 app.get("/books/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -127,14 +138,16 @@ app.get("/books/:id", async (req, res) => {
 
 // endpoint to get all the authors
 app.get("/authors", async (req, res) => {
-  // const { authors } = req.params;
-  const allAuthors = await Book.distinct("authors");
-  res.json(allAuthors);
+  try {
+    const allAuthors = await Book.distinct("authors");
+    res.json(allAuthors);
+  } catch (err) {
+    res.status(400).json({
+      response: "No authors found",
+      success: false,
+    });
+  }
 });
-
-// app.post("/books", {req, res} => {
-
-// })
 
 // Start the server
 app.listen(port, () => {
