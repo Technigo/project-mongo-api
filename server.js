@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 import dotenv from 'dotenv'
 
 const swaggerUi = require('swagger-ui-express')
@@ -54,7 +54,7 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/books' //'mongodb
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const Book = mongoose.model('Book', {
+const bookSchema = new Schema({
   bookID: Number,
   title: String,
   authors: String,
@@ -67,23 +67,23 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number,
 })
 
-// clear db
+bookSchema.index({ title: 'text' })
+
+const Book = mongoose.model('Book', bookSchema)
 
 // insert data to db
-Book.deleteMany().then(() => {
-  new Book({
-    bookID: 36,
-    title: 'The Lord of the Rings: Weapons and Warfare',
-    authors: 'Chris   Smith-Christopher  Lee-Richard Taylor',
-    average_rating: 4.53,
-    isbn: 618391002,
-    isbn13: 9780618391004,
-    language_code: 'eng',
-    num_pages: 218,
-    ratings_count: 18934,
-    text_reviews_count: 43,
-  }).save()
-})
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Book.deleteMany({})
+
+    data.forEach(item => {
+      const newBook = new Book(item)
+      newBook.save()
+    })
+  }
+
+  seedDatabase()
+}
 
 /**
  * @swagger
@@ -95,7 +95,7 @@ Book.deleteMany().then(() => {
  *         description: OK.
  */
 app.get('/authors', async (req, res) => {
-  const authors = await Book.find()
+  const authors = await Book.distinct('authors')
   res.json(authors)
 })
 
@@ -146,41 +146,52 @@ app.get('/key', (req, res) => {
  *       200:
  *         description: OK.
  */
-app.get('/books/search', (req, res) => {
-  const { title, rating, sortRating, pageCountHigh, pageCountLow, sortPageCount } = req.query
+app.get('/books/search', async (req, res) => {
+  const { title, rating, sortRating, pageCountHigh, pageCountLow } = req.query
 
-  let resultsToSend = data
   let pageCountUpperLimit = Infinity
   let pageCountLowerLimit = 0
   let ratingLowerLimit = 0
+  let titleSearch = ''
 
-  if (pageCountHigh) {
-    pageCountUpperLimit = pageCountHigh
-  }
-  if (pageCountLow) {
-    pageCountLowerLimit = pageCountLow
-  }
-  if (rating) {
-    ratingLowerLimit = rating
-  }
-  if (sortRating) {
-    resultsToSend.sort((a, b) => b.average_rating - a.average_rating)
-  }
-  if (sortPageCount) {
-    resultsToSend.sort((a, b) => b.num_pages - a.num_pages)
-  }
-  if (title) {
-    resultsToSend = resultsToSend.filter(
-      item => item.title.toLowerCase().indexOf(title.toLowerCase()) !== -1
-    )
-  }
+  try {
+    if (pageCountHigh) {
+      pageCountUpperLimit = pageCountHigh
+    }
+    if (pageCountLow) {
+      pageCountLowerLimit = pageCountLow
+    }
+    if (rating) {
+      if (rating.includes(',')) {
+        throw 'rating must be number formatted with . as decimal separator'
+      } else {
+        ratingLowerLimit = rating
+      }
+    }
+    if (title) {
+      titleSearch = title
+    }
+    const filteredData = await Book.find({
+      average_rating: { $gte: ratingLowerLimit },
+      num_pages: { $lte: pageCountUpperLimit },
+      num_pages: { $gte: pageCountLowerLimit },
+      title: { $regex: titleSearch, $options: 'i' },
+    }).sort({ average_rating: sortRating })
 
-  const filteredData = resultsToSend
-    .filter(item => item.average_rating >= ratingLowerLimit)
-    .filter(item => item.num_pages <= pageCountUpperLimit)
-    .filter(item => item.num_pages >= pageCountLowerLimit)
-
-  res.json({ filteredData, success: true })
+    res.json({
+      response: filteredData,
+      success: true,
+      parameters: {
+        title: titleSearch,
+        rating: ratingLowerLimit,
+        sortRating: sortRating,
+        pageCountHigh: pageCountUpperLimit,
+        pageCountLow: pageCountLowerLimit,
+      },
+    })
+  } catch (err) {
+    res.json({ error: err })
+  }
 })
 
 /**
@@ -200,7 +211,7 @@ app.get('/books/search', (req, res) => {
 app.get('/book/isbn/:isbn', async (req, res) => {
   const { isbn } = req.params
   try {
-    const book = await Book.findOne({ isbn: +isbn })
+    const book = await Book.findOne({ $or: [{ isbn: +isbn }, { isbn13: +isbn }] })
     if (!book) {
       res.status(404).send('No data found')
     } else {
@@ -240,13 +251,14 @@ app.get('/books/all', (req, res) => {
  *       200:
  *         description: OK.
  */
-app.get('/lang/:lang', (req, res) => {
+app.get('/lang/:lang', async (req, res) => {
   const { lang } = req.params
+
   let filteredData
   if (lang === 'list') {
-    filteredData = data.map(item => item.language_code).filter((v, i, a) => a.indexOf(v) === i)
+    filteredData = await Book.distinct('language_code')
   } else {
-    filteredData = data.filter(item => item.language_code === lang)
+    filteredData = await Book.find({ language_code: lang })
   }
   if (!filteredData) {
     res.status(404).send('No data found')
