@@ -29,7 +29,7 @@ app.get('/', (req, res) => { //This app.get method takes two arguments: path and
 })
 
 // new mongoose model: Book
-const Book = mongoose.model('Book', { //First it takes 2 arguments, users and an object. 'Book' is the name of the model.
+const Book = mongoose.model('Book', { //First it takes 2 arguments, books for instance and an object. 'Book' is the name of the model.
   //Here we set up how the books should be stored  // here you type the data. You can type mongoose.Type.String.
   bookID: Number,
   title: String,
@@ -83,8 +83,6 @@ app.get('/books-rating/:rating', async (req, res) => {
     res.json(books)
   }
 })
-
-
 
 // Start the server 
 app.listen(port, () => {
