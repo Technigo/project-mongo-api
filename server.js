@@ -56,7 +56,10 @@ app.use((req, res, next) => {
 
 // Endpoint with all endpoints
 app.get("/", (req, res) => {
-	res.send(listEndpoints(app));
+	res.send({
+		"Welcome to 450 bookreviews - by Linnéa. Full documentation 👉 ":
+			listEndpoints(app),
+	});
 });
 
 // Available routes/endpoints below, gt for greater than so that it only shows input rating and up
@@ -84,7 +87,10 @@ app.get("/books/search", async (req, res) => {
 		if (rating) {
 			filteredBooks = await Book.find().gt("average_rating", rating);
 		}
-		res.json(filteredBooks);
+		res.status(200).json({
+			response: filteredBooks,
+			success: true,
+		});
 	} catch (err) {
 		res.status(400).json({
 			response: "Search is invalid",
@@ -104,7 +110,7 @@ app.get("/books/isbn", async (req, res) => {
 		if (isbn13) {
 			book = await Book.find({ isbn13: isbn13 });
 		}
-		res.json({
+		res.status(200).json({
 			response: book,
 			success: true,
 		});
@@ -120,8 +126,11 @@ app.get("/books/isbn", async (req, res) => {
 app.get("/books/authors", async (req, res) => {
 	try {
 		const allAuthors = await Book.distinct("authors");
-		res.json(allAuthors);
-	} catch (err) {
+		res.status(200).json({
+			response: allAuthors,
+			success: true,
+		});
+	} catch {
 		res.status(400).json({
 			response: "No authors found",
 			success: false,
@@ -139,7 +148,7 @@ app.get("/books/rating", async (req, res) => {
 			response: ratedBooks,
 			success: true,
 		});
-	} catch (err) {
+	} catch {
 		res.status(400).json({
 			response: "No rated books found",
 			success: false,
@@ -152,16 +161,22 @@ app.get("/randombook", async (req, res) => {
 	const count = await Book.estimatedDocumentCount();
 	const random = Math.floor(Math.random() * count);
 	const randomBook = await Book.findOne().skip(random);
-
-	if (!randomBook) {
-		res.status(404).json({
-			response: "Something went wrong, try again!",
+	try {
+		if (!randomBook) {
+			res.status(404).json({
+				response: "Something went wrong, try again!",
+				success: false,
+			});
+		} else {
+			res.status(200).json({
+				response: randomBook,
+				success: true,
+			});
+		}
+	} catch {
+		res.status(400).json({
+			response: "Id is invalid",
 			success: false,
-		});
-	} else {
-		res.status(200).json({
-			response: randomBook,
-			success: true,
 		});
 	}
 });
@@ -182,7 +197,7 @@ app.get("/books/id/:id", async (req, res) => {
 				success: true,
 			});
 		}
-	} catch (err) {
+	} catch {
 		res.status(400).json({
 			response: "Id is invalid",
 			success: false,

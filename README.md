@@ -5,11 +5,11 @@ fetch data from the database.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used
-to solve it. How did you plan? What technologies did you use? If you had more
-time, what would be next?
+I used MongoDB for the database and mongoose in building the api endpoints.
 
 ## The endpoints
+
+Documentation of endpoints can be found in file _Documentation.md_
 
 ## View it live
 
