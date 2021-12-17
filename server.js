@@ -93,19 +93,6 @@ app.get('/episodes/id/:id', async (req, res) => {
   }
 });
 
-app.get('episodes/:title', (req, res) => {
-  Episode.findOne({ title: 'Pilot' }, (err, data) => {
-    if (err) {
-      res.status(404).json({
-        response: 'Title not found',
-        succes: false,
-      });
-    } else {
-      res.send(data);
-    }
-  });
-});
-
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
