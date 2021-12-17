@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import listEndpoints from 'express-list-endpoints';
+import listEndpoints from 'express-list-endpoints'
 import avocadoSales from './data/avocado-sales.json'
 
 
@@ -14,7 +14,7 @@ import avocadoSales from './data/avocado-sales.json'
 // import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-avocado-sales"
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-avocado-sales'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
