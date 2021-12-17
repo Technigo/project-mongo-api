@@ -56,41 +56,37 @@ app.get('/', async (req, res) => {
 
 //all netflix titles here
 app.get('/titles', async (req, res) => {
-  const netflixTitles = await Title.find().limit(3)
+  const title = req.query.title?.toLowerCase()
+  console.log(title)
+
+  const findFilter = {}
+  console.log(findFilter)
+
+  if (title) {
+    console.log('inside if')
+    findFilter.title = { $regex: new RegExp(title, 'i') }
+    console.log(findFilter)
+  }
+
+  const allTitles = Title.find(findFilter)
+  const netflixTitles = await allTitles.limit(5)
 
   res.json(netflixTitles)
 })
 
-// Start defining your routes here
-
-// all titles
-app.get('/titles/:title', async (req, res) => {
-  // Title.find({name: "spaceex"})
-  console.log(req.params.title)
-  //  req.query is an empty object, can but it inside fun
-  const netflixOnlyTitles = await Title.find({})
-  res.json(netflixOnlyTitles)
-  //async function and can take long time = använd async o await, se process.env function
-})
+// app.get('/titles/:title', async (req, res) => {
+//   // Title.find({name: "spaceex"})
+//   console.log(req.params.title)
+//   //  req.query is an empty object, can but it inside fun
+//   const netflixOnlyTitles = await Title.find({})
+//   res.json(netflixOnlyTitles)
+//   //async function and can take long time = använd async o await, se process.env function
+// })
 
 app.get('/movies', async (req, res) => {
   const netflixOnlyMovies = await Title.find({ type: 'Movie' }).limit(5)
   res.json(netflixOnlyMovies)
 })
-
-// app.get('/titles/titles', async (req, res) => {
-//   const netflixOnlyMovies = await Title.find().limit(5)
-//   res.json(netflixOnlyMovies)
-// })
-
-// app.get('/titles', async (req, res) => {
-//   // Title.find({name: "spaceex"})
-//   console.log(req.query)
-//  //  req.query is an empty object, can but it inside fun
-//  const netflixTitles = await Title.find(req.query)
-//  res.json(netflixTitles)
-//   //async function and can take long time = använd async o await, se process.env function
-//  })
 
 //one title
 app.get('/titles/id/:id', async (req, res) => {
