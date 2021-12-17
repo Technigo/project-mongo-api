@@ -3,11 +3,10 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import { param } from 'express/lib/request'
 import dotenv from 'dotenv'
-import listEndpoints from 'express-list-endpoints'
 
 dotenv.config()
 
-//import netflixData from './data/netflix-titles.json'
+import netflixData from './data/netflix-titles.json'
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -17,14 +16,8 @@ mongoose.Promise = Promise
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-
-//const listEndpoints = require('express-list-endpoints')
-
-let app = require('express')()
-console.log(listEndpoints(app))
-
 const port = process.env.PORT || 8080
-//const app = express()
+const app = express()
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
@@ -59,10 +52,6 @@ if (process.env.RESET_DB) {
 }
 
 // Start defining your routes here
-app.get('/endpoints', (req, res) => {
-  res.send(listEndpoints(app))
-})
-
 app.get('/', async (req, res) => {
   const netflixTitles = await Title.find().limit(30)
 
@@ -78,7 +67,7 @@ app.get('/titles/:title', async (req, res) => {
   // Title.find({name: "spaceex"})
   console.log(req.params.title)
   //  req.query is an empty object, can but it inside fun
-  const netflixOnlyTitles = await Title.find({}).limit(25)
+  const netflixOnlyTitles = await Title.find({})
   res.json(netflixOnlyTitles)
   //async function and can take long time = använd async o await, se process.env function
 })
@@ -87,6 +76,11 @@ app.get('/movies', async (req, res) => {
   const netflixOnlyMovies = await Title.find({ type: 'Movie' }).limit(5)
   res.json(netflixOnlyMovies)
 })
+
+// app.get('/titles/titles', async (req, res) => {
+//   const netflixOnlyMovies = await Title.find().limit(5)
+//   res.json(netflixOnlyMovies)
+// })
 
 // app.get('/titles', async (req, res) => {
 //   // Title.find({name: "spaceex"})
