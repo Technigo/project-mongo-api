@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import booksData from "./data/books.json";
 
+const listEndpoints = require("express-list-endpoints");
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -44,9 +45,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send(
-    "Welcome to Books API! 1. Get the list of all books and specify your request with query params: author, title, pagination (page, limit). 2. Get a single book by ID. 3. Get a list of most popular books and specify a language code with query params if needed."
-  );
+  res.send(listEndpoints(app));
 });
 
 //all books data
