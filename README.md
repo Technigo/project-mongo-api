@@ -1,19 +1,23 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Project about how to use Mongodb to store data, and how to query that data from API. - How to store secret information such as database passwords and how to return useful error messages from your API endpoints
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Tech Stack:
+Model data in Mongo DB using Mongoose
+Express
+Node.js
+API
+
+Database made in MongoDB using Mongoose. I started from last projects with endpoints. I spend some time zooming out and trying to understand how everything belongs.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
-
 https://ajliin-database.herokuapp.com/
 
-
-
-
+Methods Urls Actions
+GET / get all netflixt titles
+GET /movie Get all movies
+GET /titles/:title&/:type Search for a title and type
+GET /titles/id/:id Get title with an id
