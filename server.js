@@ -10,7 +10,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 // Defines the port the app will run on.
-const port = process.env.PORT || 8088;
+const port = process.env.PORT || 8080;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
@@ -60,7 +60,9 @@ if (process.env.RESET_DB) {
 
 // Defining routes starts here
 app.get('/', (req, res) => {
-  res.send('Hello musiclover');
+  res.send(
+    'Hello and welcome musiclover! Go to /endpoints to see the possible endpoints.'
+  );
 });
 // See all possible endpoints
 app.get('/endpoints', (req, res) => {
