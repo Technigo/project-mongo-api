@@ -64,7 +64,7 @@ if (process.env.RESET_DB) {
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send(
-    'This is the home of "not-that-great-but still-called-top-Music" by Ida. Please see documentation 👉'
+    'This is the home of "not-that-great-but-still-called-top-Music" by Ida. Please see <a href="https://github.com/IdaAspen/project-mongo-api/blob/master/Documentation.md">documentation</a>'
   );
 });
 

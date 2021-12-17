@@ -1,4 +1,4 @@
-# Documentation for "not-that-great-but still-called-top-Music" by Ida
+# Documentation for "not-that-great-but-still-called-top-Music" by Ida
 
 ## Base URL
 
@@ -25,3 +25,5 @@ Get a specific single by id.
 ### Endpoints
 
 `https://express-api-music.herokuapp.com/endpoints/`
+
+Get all the endpoints.
