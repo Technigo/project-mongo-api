@@ -81,7 +81,7 @@ app.get("/books/search", async (req, res) => {
 
 app.get("books/authors", async (req, res) => {
 	try {
-		const allAuthors = await Book.distinct({ authors: authors });
+		const allAuthors = await Book.distinct("authors");
 		res.json(allAuthors);
 	} catch (err) {
 		res.status(400).json({
