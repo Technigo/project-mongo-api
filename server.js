@@ -65,6 +65,7 @@ app.get("/", (req, res) => {
 // endpoint for all books with query options for number of pages and rating
 
 app.get("/books", async (req, res) => {
+  const { title, authors } = req.query;
   let books = await Book.find(req.query);
 
   if (req.query.num_pages) {
@@ -84,8 +85,15 @@ app.get("/books", async (req, res) => {
   if (req.query.title) {
     const bookByTitle = await Book.find({
       title: new RegExp(title, "i"),
-      books = bookByTitle
     });
+    books = bookByTitle;
+  }
+
+  if (req.query.authors) {
+    const bookByAuthor = await Book.find({
+      authors: new RegExp(authors, "i"),
+    });
+    books = bookByAuthor;
   }
 
   res.json(books);
