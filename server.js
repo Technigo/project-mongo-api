@@ -45,13 +45,22 @@ if (process.env.RESET_DB) {
 app.use(cors());
 app.use(express.json());
 
+// Our own middleware that checks if the database is connected before going forward to our endpoints
+app.use((req, res, next) => {
+	if (mongoose.connection.readyState === 1) {
+		next();
+	} else {
+		res.status(503).json({ error: "Service unavailable" });
+	}
+});
+
 // Available routes/endpoints below
 app.get("/", (req, res) => {
 	res.send(listEndpoints(app));
 });
 
 app.get("/books/search", async (req, res) => {
-	const { author, title, language } = req.query;
+	const { author, title, language, rating } = req.query;
 	let filteredBooks = await Book.find(req.query);
 
 	try {
@@ -69,6 +78,9 @@ app.get("/books/search", async (req, res) => {
 			filteredBooks = await Book.find({
 				language_code: new RegExp(language, "i"),
 			});
+		}
+		if (rating) {
+			filteredBooks = await Book.find().gt("average_rating", rating);
 		}
 		res.json(filteredBooks);
 	} catch (err) {
@@ -91,6 +103,21 @@ app.get("/books/authors", async (req, res) => {
 	}
 });
 
+//gt is greater than lt is lower than, -1 fallande 1 stigande
+app.get("/books/rating", async (req, res) => {
+	try {
+		const ratedBooks = await Book.find().sort({
+			average_rating: -1,
+		});
+		res.json(ratedBooks);
+	} catch (err) {
+		res.status(400).json({
+			response: "No rated books found",
+			success: false,
+		});
+	}
+});
+
 // //endpoint with random book
 // app.get("/randomBook", (req, res) => {
 // 	let randomBook = booksData[Math.floor(Math.random() * booksData.length)];
@@ -108,45 +135,48 @@ app.get("/books/authors", async (req, res) => {
 // 	}
 // });
 
-// // search by isbn or isbn13 number
-// app.get("/books/isbn/:isbn", (req, res) => {
-// 	const isbn = req.params.isbn;
-// 	const book = data.find(
-// 		(item) => item.isbn === +isbn || item.isbn13 === +isbn
-// 	);
-// 	if (!book) {
-// 		res.status(404).json({
-// 			response: "No book with that ISBN or ISBN13 number",
-// 			success: false,
-// 		});
-// 	} else {
-// 		res.status(200).json({
-// 			response: book,
-// 			success: true,
-// 		});
-// 	}
-// });
+// // search by isbn or isbn13 number to find a specific book
+app.get("/books/isbn", async (req, res) => {
+	const { isbn, isbn13 } = req.query;
+	let book = await Book.find(req.query);
+	try {
+		if (isbn) {
+			book = await Book.find({ isbn: isbn });
+		}
+		if (isbn13) {
+			book = await Book.find({ isbn13: isbn13 });
+		}
+		res.json({
+			response: book,
+			success: true,
+		});
+	} catch {
+		res.status(400).json({
+			response: "Isbn or Isbn13 is invalid",
+			success: false,
+		});
+	}
+});
 
-//gt is greater than lt is lower than
-// app.get("/books/rating/:rating", async (req, res) => {
-// 	let ratedBooks = await Book.find(req.query);
+//, isbn13: isbn if (!book) {
+// 	res.status(404).json({
+// 		response: "No book with that ISBN or ISBN13 number",
+// 		success: false,
+// 	});
+// } else {
+// 	res.status(200).json({
+// 		response: book,
+// 		success: true,
+// 	});
 
-// 	if (req.query.rating) {
-// 		ratedBooks = await Book.find().gt({
-// 			average_rating: req.query.rating,
-// 		});
-// 	}
-// 	res.json(ratedBooks);
-// });
-
-//works
+//finds book info based on id
 app.get("/books/id/:id", async (req, res) => {
 	const id = req.params.id;
 	const bookById = await Book.find({ bookID: id });
 	try {
 		if (!bookById) {
 			res.status(404).json({
-				response: "Error: book not found",
+				response: "Book not found",
 				success: false,
 			});
 		} else {
