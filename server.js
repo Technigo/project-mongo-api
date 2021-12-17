@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
 
 import booksData from "./data/books.json";
-// mongodb://localhost:27017/patrik-books
+//
 const mongoUrl = process.env.MONGO_URL || "MONGO_URL";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -97,6 +97,20 @@ app.get("/books/:id", async (req, res) => {
     });
   }
 });
+
+// Get authors
+// app.get("/books/authors/:author", (req, res) => {
+//   Book.findOne({authors: authors}, (error, data) => {
+//     if (error) {
+//       res.status(404).json({
+//         response: "Author not found",
+//         succes: false,
+//       });
+//     } else {
+//       res.send(data);
+//     }
+//   });
+// });
 
 // Get all books by J.R.R Tolkien
 app.get("/books/authors/Tolkien", (req, res) => {
