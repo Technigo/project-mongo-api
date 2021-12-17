@@ -81,6 +81,12 @@ app.get("/books", async (req, res) => {
     books = booksByRating;
   }
 
+  if (req.query.title) {
+    const bookByTitle = await Book.find({
+      title: new RegExp(title, "i"),
+    });
+  }
+
   res.json(books);
 });
 
@@ -113,7 +119,7 @@ app.get("/books/:id", async (req, res) => {
 // endpoint to get all the authors
 app.get("/authors/:authors", async (req, res) => {
   const { authors } = req.params;
-  const allAuthors = await Book.find(authors);
+  const allAuthors = await Book.filter(authors);
   res.json(allAuthors);
 });
 
