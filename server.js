@@ -10,10 +10,6 @@ const mongoUrl =
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -50,14 +46,17 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-// Start defining your routes here
+// My endpoints
 app.get("/", async (req, res) => {
   res.send(listEndpoints(app));
 });
-
-app.get("/music", async (req, res) => {
+// you can search with any query params in this rout
+app.get("/music/:page", async (req, res) => {
   try {
-    let music = await Music.find(req.query);
+    let { page = 1, limit = 20 } = req.params;
+    let music = await Music.find(req.query)
+      .limit(20)
+      .skip((page - 1) * limit);
 
     if (req.query.danceability) {
       const slowDance = await Music.find().lt(
@@ -68,7 +67,7 @@ app.get("/music", async (req, res) => {
     }
 
     if (music) {
-      res.json(music);
+      res.json({ page: page, total: music.length, music });
     } else {
       res.status(404).json("No music");
     }
@@ -77,12 +76,12 @@ app.get("/music", async (req, res) => {
     res.status(404).json({ err: "no music!" });
   }
 });
-
+//Showing all objects with a danceability bellow 50
 app.get("/music/slowdance", async (req, res) => {
   const slowDance = await Music.find().lt("danceability", 50).find(req.query);
   res.json(slowDance);
 });
-
+//showing all object with a danceability over 50
 app.get("/music/speedance", async (req, res) => {
   try {
     const speedance = await Music.find().gt("danceability", 50).find(req.query);
@@ -96,12 +95,12 @@ app.get("/music/speedance", async (req, res) => {
     res.status(402).json({ error: "Invalid id" });
   }
 });
-
+//showing the most popular songs and you can shange page and limit with queries
 app.get("/music/popular", async (req, res) => {
   try {
     const { page = 1, limit = 20 } = req.query;
     const popular = await Music.find()
-      .gt("popularity", 50)
+      .gt("popularity", 90)
       .limit(limit * 1)
       .skip((page - 1) * limit);
     if (popular) {
@@ -113,7 +112,7 @@ app.get("/music/popular", async (req, res) => {
     res.status(402).json({ error: "Invalid id" });
   }
 });
-
+// finding a uniq id
 app.get("/music/id/:id", (req, res) => {
   try {
     Music.findOne({ id: req.params.id }).then((id) => {
@@ -127,30 +126,35 @@ app.get("/music/id/:id", (req, res) => {
     res.status(402).json({ error: "Invalid id" });
   }
 });
-
-app.get("/music/genre/:genre", (req, res) => {
+//search with query params for genre
+app.get("/music/genre", async (req, res) => {
   try {
-    Music.findOne({ genre: req.params.genre }).then((genre) => {
-      if (genre) {
-        res.json(genre);
-      } else {
-        res.status(404).json("genre not found");
-      }
+    const { genre } = req.query;
+    const findGenre = await Music.find({
+      genre: { $regex: `.*${genre}*.` },
     });
+    if (findGenre.length > 0) {
+      res.json(findGenre);
+    } else {
+      res.status(404).json("genre not found");
+    }
   } catch (err) {
-    res.status(404).json({ error: "Invalid gengre" });
+    res.status(404).json({ error: "Invalid genre" });
   }
 });
-
-app.get("/artist/:artistName", (req, res) => {
+//search with query params for artist
+app.get("/artist", async (req, res) => {
   try {
-    Music.findOne({ artistName: req.params.artistName }).then((artist) => {
-      if (artist) {
-        res.json(artist);
-      } else {
-        res.status(404).json("artist not found");
-      }
+    const { artistName } = req.query;
+    const artist = await Music.find({
+      artistName: { $regex: `.*${artistName}*.` },
     });
+
+    if (artist.length > 0) {
+      res.json(artist);
+    } else {
+      res.status(404).json("artist not found");
+    }
   } catch (err) {
     res.status(404).json({ error: "Invalid id" });
   }
@@ -160,7 +164,7 @@ app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next();
   } else {
-    res.status(503).json({ error: "unavailable" });
+    res.status(503).json({ error: "No internet" });
   }
 });
 
