@@ -10,7 +10,7 @@ I have created the following endpoints:
 - '/endpoints' - provides all endpoints
 - '/countries' - provides a sorted list of all countries that are in netflixData
 - '/countries/:country' - route with all shows (both movies and other) from the provided country
-- '/people' - route provides all Netflix-shows and has the possibility to query for director and cast in the database. The RegExp for makes the filtering caseinsensitive and provides the possibility to just search for parts of the word.You can also do pagination by setting skip & limit as query parameters
+- '/people' - route provides all Netflix-shows and has the possibility to query for director and cast in the database. The RegExp for makes the filtering caseinsensitive and provides the possibility to just search for parts of the word.You can also do pagination by setting page & limit as query parameters
 - '/shows' - route provides all Netflix-shows and has the possibility to query for every Entry in the database. SearchTerms have to be precise.
 '/shows/:id' - provides one movie by ID
 '/movies/title/:title' - provides one movie by title
@@ -28,3 +28,4 @@ If I would have more time, I'd build a frontend.
 ## View it live
 
 Visit my project: https://nehrwein-mongo-api.herokuapp.com/
+Documentation: https://documenter.getpostman.com/view/18068162/UVRAGmWA

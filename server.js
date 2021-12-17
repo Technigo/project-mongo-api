@@ -59,7 +59,8 @@ if (process.env.RESET_DB) {
 // Start defining routes here
 app.get('/', (req, res) => {
   res.send({
-    Welcome: "Welcome to my Netflix API"
+    Welcome: "Welcome to my Netflix API",
+    Documentation: "https://documenter.getpostman.com/view/18068162/UVRAGmWA"
   })
 })
 
