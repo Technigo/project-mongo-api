@@ -46,7 +46,7 @@ if (process.env.RESET_DB) {
 
 		//Creates a new show
 		netflixData.forEach((item) => {
-			const newShow = newShow(item);
+			const newShow = new Show(item);
 			newShow.save();
 		});
 	};
