@@ -1,6 +1,8 @@
-import express from "express";
+import express, { query } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import listEndpoints from "express-list-endpoints";
+
 import netflixData from "./data/netflix-titles.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -11,7 +13,7 @@ mongoose.Promise = Promise;
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 const app = express();
 
 const Content = mongoose.model("Content", {
@@ -55,10 +57,40 @@ if (process.env.RESET_DB) {
 }
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  Content.find().then((item) => {
-    res.json(item);
-  });
+app.get("/", async (req, res) => {
+  const content = await Content.find();
+  res.json(content);
+});
+
+app.get("/endpoints", (req, res) => {
+  res.send(listEndpoints(app));
+});
+
+app.get("/search", async (req, res) => {
+  const { country, director } = req.query;
+
+  try {
+    const searchContent = await Content.find({
+      country: new RegExp(country, "i"),
+      director: new RegExp(director, "i"),
+    });
+    if (searchContent.length > 0) {
+      res.status(200).json({
+        message: searchContent,
+        success: true,
+      });
+    } else {
+      res.status(404).json({
+        message: "Data not found",
+        success: false,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "Invalid request",
+      success: false,
+    });
+  }
 });
 
 app.get("/year/:year", async (req, res) => {
@@ -68,21 +100,22 @@ app.get("/year/:year", async (req, res) => {
     const findYear = await Content.find({
       release_year: searchYear,
     });
+
     if (searchYear && findYear.length > 0) {
       res.status(200).json({
         message: findYear,
-        response: true,
+        success: true,
       });
     } else {
       res.status(404).json({
         message: "Data not found",
-        response: false,
+        success: false,
       });
     }
   } catch (err) {
     res.status(400).json({
       message: "Invalid request",
-      response: false,
+      success: false,
     });
   }
 });
@@ -94,18 +127,18 @@ app.get("/type/:type", async (req, res) => {
     if (searchType && findType.length > 0) {
       res.status(200).json({
         message: findType,
-        response: true,
+        success: true,
       });
     } else {
       res.status(404).json({
         message: "Data not found",
-        response: false,
+        success: false,
       });
     }
   } catch (err) {
     res.status(400).json({
       message: "Invalid request",
-      response: false,
+      success: false,
     });
   }
 });
@@ -116,18 +149,18 @@ app.get("/titles/:id", async (req, res) => {
     if (title) {
       res.status(200).json({
         message: title,
-        response: true,
+        success: true,
       });
     } else {
       res.status(404).json({
         message: "Title not found",
-        response: false,
+        success: false,
       });
     }
   } catch (err) {
     res.status(400).json({
       message: "Invalid request",
-      response: false,
+      success: false,
     });
   }
 });
