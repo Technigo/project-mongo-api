@@ -1,13 +1,31 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Using Mongodb to store data, to then query that data to return data from created API endpoints.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+GET /
+Welcome page
+
+GET /titles
+Displays all titles in the database.
+
+GET /titles/id/:id
+Displays a single title based on the id parameter from the request URL. An error message will show when the id is invalid or no title is found with the provided id.
+
+GET /titles?type=tv
+Will show titles that have type movies or tv shows, an error will show up if no type is found.
+
+More queries:
+GET /titles?cast=winslet&Leo
+Get titles by cast members
+
+GET /titles?title=crime
+Get all titles that include the word crime
+
+GET /titles?country=sweden&genre=Drama
+Get titles from a specific country and genre
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://amandatilly-project-mongo-api.herokuapp.com/
