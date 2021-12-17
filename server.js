@@ -67,7 +67,7 @@ app.get("/music/:page", async (req, res) => {
     }
 
     if (music) {
-      res.json({ page: page, total: music.length, music });
+      res.json({ page: +page, total: music.length, music });
     } else {
       res.status(404).json("No music");
     }
