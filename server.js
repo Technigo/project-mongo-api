@@ -117,7 +117,7 @@ app.get("/books/:id", async (req, res) => {
 });
 
 // endpoint to get all the authors
-app.get("/books/authors", async (req, res) => {
+app.get("/authors", async (req, res) => {
   // const { authors } = req.params;
   const allAuthors = await Book.distinct("authors");
   res.json(allAuthors);
