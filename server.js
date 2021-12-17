@@ -137,7 +137,7 @@ app.get('/books/pages/longbooks', async (req, res) => {
 });
 
 //Endpoint for all books with a rating less than 2.5
-app.get('/books/ratings/low', async (req, res) => {
+app.get('/books/ratings/lowratings', async (req, res) => {
   try {
     const lowRating = await Book.find({ average_rating: { $lt: 2.5 } });
     res.json(lowRating);
@@ -149,7 +149,7 @@ app.get('/books/ratings/low', async (req, res) => {
 });
 
 //Endpoint for all books with a rating between 2.5 and 3.8
-app.get('/books/ratings/medium', async (req, res) => {
+app.get('/books/ratings/mediumratings', async (req, res) => {
   try {
     const mediumRating = await Book.find({
       $and: [
@@ -166,7 +166,7 @@ app.get('/books/ratings/medium', async (req, res) => {
 });
 
 //Endpoint for all books with a rating greater than 3.8
-app.get('/books/ratings/high', async (req, res) => {
+app.get('/books/ratings/highratings', async (req, res) => {
   try {
     const highRating = await Book.find({ average_rating: { $gte: 3.8 } });
     res.json(highRating);
