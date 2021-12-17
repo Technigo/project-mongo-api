@@ -79,7 +79,7 @@ app.get("/books/search", async (req, res) => {
 	}
 });
 
-app.get("books/authors", async (req, res) => {
+app.get("/books/authors", async (req, res) => {
 	try {
 		const allAuthors = await Book.distinct("authors");
 		res.json(allAuthors);
