@@ -6,11 +6,37 @@ Start by briefly describing the assignment in a sentence or two. Keep it short a
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+This is my second API project. I learned to modifie Express queries from a previous project to Mongoose. I used the same set of data for both projects, a database of populaar songs from spotify.
 
-## Provide good documentation.
+- Mongoose methods such as gt, find, findById, findOne
+- RESTful endpoints
+- Endpoints returning a single result and endpoints returning a collection of data.
+- Error handling on all endpoints
 
-Always provide a list of endpoints in the documentation (for example, in the `README`). Don't force users to read your code just to learn how to use the final product.
+It was a challange using Mongdb for the forst time, getting the whole setup and later the deplyment to work. It made me analyze my code alot in order to find possible errors.
+
+## Documentation
+
+Show all endpoints:
+/endpoints
+
+Show all songs in the database
+/songs
+
+Filter songs by id
+/songs/id/:id
+
+Filter songs by title
+/songs/title/:title
+
+Show all songs by a specific artist
+/songs/artist/:artist
+
+Show all songs in a specific genre
+/songs/genre/:genre
+
+Filter by a minimum of bpm by this form (change 110 to your chosen bpm):
+songs/?bpm=110
 
 ## View it live
 

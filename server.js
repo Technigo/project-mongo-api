@@ -105,7 +105,7 @@ app.get('/songs/title/:title', async (req, res) => {
   if (songByTitle) {
     res.json(songByTitle);
   } else {
-    res.status(404).json({ error: 'title not found' });
+    res.status(404).json({ error: 'The title is not found' });
   }
 });
 
@@ -115,7 +115,7 @@ app.get('/songs/artist/:artist', async (req, res) => {
   if (artist) {
     res.json(artist);
   } else {
-    res.status(404).json({ error: 'Artist not found' });
+    res.status(404).json({ error: 'The artist is not found' });
   }
 });
 
@@ -125,7 +125,7 @@ app.get('/songs/genre/:genre', async (req, res) => {
   if (songByGenre) {
     res.json(songByGenre);
   } else {
-    res.status(404).json({ error: 'Genre not found' });
+    res.status(404).json({ error: 'The genre is not found' });
   }
 });
 
