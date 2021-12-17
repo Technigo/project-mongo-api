@@ -29,7 +29,7 @@ const Track = mongoose.model('Track', {
 // -----------------* seeding data from json file to database (one time action) *---------------------//
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    //await Track.deleteMany({});
+    await Track.deleteMany({});
 
     topMusicData.forEach((musicTrack) => {
       new Track(musicTrack).save();
