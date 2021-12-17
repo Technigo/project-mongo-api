@@ -1,8 +1,12 @@
 ## The endpoints
 
-Base url https://mongo-api-technigo.herokuapp.com/
+### Base url
 
-Books https://mongo-api-technigo.herokuapp.com/books/search
+https://mongo-api-technigo.herokuapp.com/
+
+### Books
+
+https://mongo-api-technigo.herokuapp.com/books/search
 
 Listing all books.
 
@@ -14,22 +18,32 @@ The rating will show the rating you type in and higher. The query for author,
 title and language will look for books containing part of the word you've typed
 with RegEx.
 
-ISBN or ISBN13 https://mongo-api-technigo.herokuapp.com/books/isbn
-
-Search for either isbn or isbn13 and get the correct book.
+### Authors
 
 https://mongo-api-technigo.herokuapp.com/books/authors
 
 Lists all authors in undefined order.
 
+### Rating
+
 https://mongo-api-technigo.herokuapp.com/books/rating
 
 All books sorted highest to lowest based on rating.
 
-https://mongo-api-technigo.herokuapp.com/books/randombook
+### Isbn or Isbn13
 
-Shows a random book from the database.
+https://mongo-api-technigo.herokuapp.com/books/isbn
+
+Search for either isbn or isbn13 and get the correct book.
+
+### Id
 
 https://mongo-api-technigo.herokuapp.com/books/id/{id}
 
 To list a single book, add the individual id in the endpoint.
+
+### Random
+
+https://mongo-api-technigo.herokuapp.com/books/randombook
+
+Shows a random book from the database.

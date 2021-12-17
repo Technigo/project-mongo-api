@@ -57,7 +57,7 @@ app.use((req, res, next) => {
 // Endpoint with all endpoints
 app.get("/", (req, res) => {
 	res.send({
-		"Welcome to 450 bookreviews - by Linnéa. Full documentation 👉 ":
+		"Welcome to 450 bookreviews - by Linnéa. Full documentation on GitHub 👉  https://github.com/Skrosen/project-mongo-api/blob/master/Documentation.md":
 			listEndpoints(app),
 	});
 });
