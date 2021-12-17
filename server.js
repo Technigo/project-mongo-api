@@ -2,15 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
 import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/books'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -52,8 +44,6 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// Start defining your routes here
-
 // Lists all endpoints
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
@@ -63,17 +53,6 @@ app.get('/', (req, res) => {
 //Query param to get book by author: /books?authors=enter the author
 app.get('/books', async (req, res) => {
   const { title, authors } = req.query
-
-  // const allBooks = await Book.find({
-  //   title: new RegExp(title, 'i'),
-  //   authors: new RegExp(authors, 'i'),
-  // })
-
-  // if (!allBooks) {
-  //   res.status(404).json('Could not find any books..')
-  // } else {
-  //   res.json(allBooks)
-  // }
 
   try {
     const allBooks = await Book.find({
@@ -85,12 +64,11 @@ app.get('/books', async (req, res) => {
     res.status(400).json({
       error: 'Cannot find',
     })
-    console.log('error')
   }
 })
 
 //Endpoint to get a single book by id
-app.get('/books/id/:id', async (req, res) => {
+app.get('/books/:id', async (req, res) => {
   const { id } = req.params
 
   const bookById = await Book.findOne({ bookID: id })
@@ -111,7 +89,6 @@ app.get('/books/pages/shortbooks', async (req, res) => {
     res.status(400).json({
       error: 'Cannot find',
     })
-    console.log('error')
   }
 })
 
@@ -126,7 +103,6 @@ app.get('/books/pages/mediumbooks', async (req, res) => {
     res.status(400).json({
       error: 'Cannot find',
     })
-    console.log('error')
   }
 })
 
@@ -139,7 +115,6 @@ app.get('/books/pages/longbooks', async (req, res) => {
     res.status(400).json({
       error: 'Cannot find',
     })
-    console.log('error')
   }
 })
 
@@ -175,7 +150,7 @@ app.get('/books/ratings/mediumrating', async (req, res) => {
 //Endpoint for all books with a rating greater than 3.8
 app.get('/books/ratings/highrating', async (req, res) => {
   try {
-    const highRating = await Book.find({ average_rating: { $gte: 3.8 } })
+    const highRating = await Book.find({ average_rating: { $gte: 3.7 } })
     res.json(highRating)
   } catch (error) {
     res.status(400).json({
