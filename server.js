@@ -108,7 +108,7 @@ app.get('/countries/:country', async (req, res) => {
   }
 })
 
-// route provides all Netflix-shows and has the possibility to query for director and cast in the database. The RegExp for makes the filtering caseinsensitive and provides the possibility to just search for parts of the word.You can also do pagination by setting skip & limit as query parameters
+// route provides all Netflix-shows and has the possibility to query for director and cast in the database. The RegExp for makes the filtering caseinsensitive and provides the possibility to just search for parts of the word.You can also do pagination by setting page & limit as query parameters
 app.get('/people', async (req, res) => {
   const { director, cast, page, limit } = req.query
   const people = await NetflixEntry.find({

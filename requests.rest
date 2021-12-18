@@ -1,4 +1,4 @@
-GET http://localhost:8080/shows?releaseYear=2017&country=Nigeria
+GET http://localhost:8080/movies/title/The Accidental Spy
 
 
 
