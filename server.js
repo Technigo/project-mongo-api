@@ -72,17 +72,66 @@ app.get('/titles', async (req, res) => {
   res.json(titles)
 })
 
+app.get("/titles/:year", async (req, res) => {
+  try {
+    const titlesByYear = req.params.year
+
+    const findTitlesByYear = await NetflixData.find({
+      release_year: titlesByYear
+    })
+
+    if (findTitlesByYear && findTitlesByYear.length > 0) {
+      res.status(200).json({
+        message: findTitlesByYear,
+        success: true,
+      })
+    } else {
+      res.status(404).json({
+        message: "Data not found",
+        success: false,
+      })
+    }
+  } catch (err) {
+    res.status(400).json({
+      message: "Invalid request",
+      success: false,
+    })
+  }
+})
+
+app.get("/search", async (req, res) => {
+  try {
+    const { country, type } = req.query
+    const titleByFilter = await NetflixData.find({ country: { $regex: `.*${country}.*` }, type: { $regex: `.*${type}.*` } })
+    if (titleByFilter.length > 0) {
+      res.status(200).json({ message: titleByFilter, success: true })
+    } else {
+      res.status(404).json({ message: 'Data not found', success: false })
+    }
+  } catch (error) {
+    return res.status(400).json({ message: "Invalid request", success: false })
+  }
+})
 
 app.get('/titles/:id', async (req, res) => {
   try {
     const choosenMovie = await NetflixData.findById(req.params.id)
     if (choosenMovie) {
-      res.json(choosenMovie)
+      res.status(200).json({
+        message: choosenMovie,
+        success: true
+      })
     } else {
-      res.status(404).json({ error: `Movie with this id ${req.params.id} is not found` })
+      res.status(404).json({
+        error: `Movie with this id ${req.params.id} is not found`,
+        success: false
+      })
     }
   } catch (err) {
-    res.status(400).json({ error: "Invalid movie id" })
+    res.status(400).json({
+      error: "Invalid movie id",
+      success: false
+    })
   }
 })
 
