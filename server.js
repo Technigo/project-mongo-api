@@ -8,7 +8,7 @@ dotenv.config()
 
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/topmusicdata-week18"
+const mongoUrl = process.env.MONGO_URL || 'MONGO_URL'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -108,6 +108,7 @@ app.get('/tracks/:id', async (req, res) => {
   }
 })  
 
+// Track by genre
 app.get('/tracks/genre/:genre', async (req, res) => {
   try {
     const trackByGenre = await Track.find(req.res.genre)
