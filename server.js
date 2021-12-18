@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
 
 import booksData from "./data/books.json";
-//
+
 const mongoUrl = process.env.MONGO_URL || "MONGO_URL";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -55,13 +55,8 @@ app.use((req, res, next) => {
   }
 });
 
-// Start defining your routes here
+// Gives you a list of all the endpoints
 app.get("/", (req, res) => {
-  res.send("Type /endpoints in the URL bar to start.");
-});
-
-// Send list of all endpoints
-app.get("/endpoints", (req, res) => {
   res.send(listEndpoints(app));
 });
 
@@ -99,22 +94,24 @@ app.get("/books/:id", async (req, res) => {
 });
 
 // Get authors
-// app.get("/books/authors/:author", (req, res) => {
-//   Book.findOne({authors: authors}, (error, data) => {
-//     if (error) {
-//       res.status(404).json({
-//         response: "Author not found",
-//         succes: false,
-//       });
-//     } else {
-//       res.send(data);
-//     }
-//   });
+// app.get("/books/authors/:author", async (req, res) => {
+//   const bookByAuthor = await Book.find({ authors: req.params.authors });
+//   if (bookByAuthor) {
+//     res.status(404).json({
+//       response: "Author not found",
+//       succes: false,
+//     });
+//   } else {
+//     res.json({
+//       response: bookByAuthor,
+//       succes: true,
+//     });
+//   }
 // });
 
 // Get all books by J.R.R Tolkien
-app.get("/books/authors/Tolkien", (req, res) => {
-  Book.find({ authors: "J.R.R. Tolkien" }, (error, data) => {
+app.get("/books/authors/Tolkien", async (req, res) => {
+  await Book.find({ authors: "J.R.R. Tolkien" }, (error, data) => {
     if (error) {
       res.status(404).json({
         response: "Author not found",
