@@ -94,7 +94,7 @@ app.get('/songs/id/:id', async (req, res) => {
     if (songById) {
       res.json(songById);
     } else {
-      res.status(404).json({ error: 'Sorry, the song is not found' });
+      res.status(404).json({ error: 'Sorry, a song by that id is not found' });
     }
   } catch (err) {
     res.status(400).json({ error: 'The id is invalid' });
@@ -102,21 +102,23 @@ app.get('/songs/id/:id', async (req, res) => {
 });
 
 // get song by title.
-app.get('/tracks/title/:title', async (req, res) => {
+app.get('/songs/title/:trackName', async (req, res) => {
   try {
-    const trackName = await Track.findOne({ trackName: req.params.trackName });
-    if (trackName) {
-      res.json(trackName);
+    const songByTitle = await Track.findOne({
+      trackName: req.params.trackName,
+    });
+    if (songByTitle) {
+      res.json(songByTitle);
     } else {
-      res.status(404).json({ error: 'Title not found' });
+      res.status(404).json({ error: 'Song title not found' });
     }
   } catch (err) {
-    res.status(400).json({ error: 'Title is not valid' });
+    res.status(400).json({ error: 'Song title is not valid' });
   }
 });
 
 // Get artist.
-app.get('/songs/genre/:artist', async (req, res) => {
+app.get('/songs/artist/:artistName', async (req, res) => {
   const songByArtist = await Track.find({ artistName: req.params.artistName });
   if (songByArtist) {
     res.json(songByArtist);
