@@ -6,9 +6,9 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-// import topMusicData from './data/top-music.json'
+import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || 'MONGO_URL'
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/topmusicdata-week18"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
