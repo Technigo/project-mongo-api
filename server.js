@@ -104,7 +104,7 @@ app.get('/songs/id/:id', async (req, res) => {
 // get song by title. Write %20 instead of spaces.
 app.get('/songs/title/:title', async (req, res) => {
   try {
-    const songByTitle = await Track.find({ title: req.params.trackName });
+    const songByTitle = await Track.find({ trackName: req.params.trackName });
     if (songByTitle) {
       res.json(songByTitle);
     } else {
@@ -116,8 +116,8 @@ app.get('/songs/title/:title', async (req, res) => {
 });
 
 // Get artist.
-app.get('/songs/artist/:artist', async (req, res) => {
-  const songByArtist = await Track.find({ artist: req.params.artistName });
+app.get('/songs/genre/:artist', async (req, res) => {
+  const songByArtist = await Track.find({ artistName: req.params.artistName });
   if (songByArtist) {
     res.json(songByArtist);
   } else {
