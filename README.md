@@ -24,10 +24,10 @@ Filter songs by id
 /songs/id/:id
 
 Filter songs by title
-/songs/title/:title
+/songs/title/:trackName
 
 Show all songs by a specific artist
-/songs/artist/:artist
+/songs/artist/:artistName
 
 Show all songs in a specific genre
 /songs/genre/:genre

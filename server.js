@@ -61,7 +61,7 @@ if (process.env.RESET_DB) {
 // Defining routes starts here
 app.get('/', (req, res) => {
   res.send(
-    'Hello and welcome musiclover! Go to /endpoints to see the possible endpoints.'
+    'Hello music lover! Go to /endpoints to see the possible endpoints. Remember that the endpoints are case sensitive.'
   );
 });
 // See all possible endpoints
