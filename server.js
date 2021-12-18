@@ -2,8 +2,11 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
+import dotenv from 'dotenv'
 
-import topMusicData from './data/top-music.json'
+dotenv.config()
+
+// import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/topmusicdata-week18"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -56,32 +59,22 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send(topMusicData)
+  res.send('50 popular Spotify tracks, use /endpoints to see them all')
 })
 
-// app.get('/', (req, res) => {
-//   const apiGuide = {
-//     Endpoints: [
-//       {
-//         '/books------------------------->': 'Get all books',
-//         '/books/id/--------------------->': 'Get book by Id',
-//       },
-//     ],
-//   };
-//   res.send(apiGuide)
-// });
 
 // List of endpoints
 app.get('/endpoints', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-// Get all tracks (and by query)
+// Get all tracks (and all queries)
 app.get('/tracks', async (req, res) => {
   console.log(req.query)
   let tracks = await Track.find(req.query)
 
 
+  // Track by popularity greater than xx
   if (req.query.popularity) {
     const trackByPopularity = await Track.find().gt('popularity', req.query.popularity)
     tracks = trackByPopularity
