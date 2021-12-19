@@ -1,14 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json';
+import listEndpoints from 'express-list-endpoints';
 import topMusicData from './data/top-music.json';
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/music-hedvig';
@@ -35,9 +28,8 @@ const Track = mongoose.model('Track', {
   popularity: Number,
 });
 
-// This resets the database.
-// Deletes the things in the database
-// and just plants the data i wrote in it.
+// This resets the database, deletes first the things that are in it and
+// and just plants the data from the json file in it.
 // RESET_DB run dev is the command in the terminal.
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
@@ -51,45 +43,44 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
+// checks if the database is good to go. If not there is an error message.
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next();
   } else {
-    res.status(503).json({ error: 'Service unavilable' });
+    res.status(503).json({ error: 'Service unavailable' });
   }
 });
 
-// Start defining your routes here
+// A guide for the user.
 app.get('/', (req, res) => {
-  res.send('Hello ✨ 🥑 🌲');
+  res.send('Type /endpoints to se all the endpoints.');
 });
 
-// get all the tracks
-// also you can use different queries here
-// also sort by dancebility (you get the results greater the number you have putted in)
+// lists all the endpoints
+app.get('/endpoints', (req, res) => {
+  res.send(listEndpoints(app));
+});
+
+// get all the tracks, sort by queries or by danceability.
+// You can use multiple filters at the same time.
 app.get('/tracks', async (req, res) => {
-  // res.json(topMusicData); - this uses the json file.
-
-  // find gets all the items, we can use it as a filter.
-  // It is asyncronous function.
-  // you can filter on what do you want with this
-  // function. You can also have multipple things to filter on.
-
   let tracks = await Track.find(req.query);
-
-  if (req.query.danceability) {
-    const tracksByDanceability = await Track.find().gt(
-      'danceability',
-      req.query.danceability
-    );
-    tracks = tracksByDanceability;
+  if (tracks) {
+    if (req.query.danceability) {
+      const tracksByDanceability = await Track.find().gt(
+        'danceability',
+        req.query.danceability
+      );
+      tracks = tracksByDanceability;
+    }
+    res.json(tracks);
+  } else {
+    res.status(400).json({ error: 'Not found' });
   }
-
-  res.json(tracks);
 });
 
 // get one track based on id
