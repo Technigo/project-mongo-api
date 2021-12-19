@@ -8,15 +8,7 @@ const swaggerJsdoc = require('swagger-jsdoc')
 
 dotenv.config()
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import data from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
 import data from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-// import data from './data/volcanos.json'
 
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
@@ -126,22 +118,22 @@ app.get('/key', (req, res) => {
  *        in: query
  *        required: false
  *        format: integer
+ *        description: Numeric with "." as decimal separator
  *      - name: sortRating
  *        in: query
  *        required: false
- *        format: boolean
+ *        format: string
+ *        description: ascending or descending
  *      - name: pageCountLow
  *        in: query
  *        required: false
  *        format: integer
+ *        description: Filter books with page count higher than
  *      - name: pageCountHigh
  *        in: query
  *        required: false
  *        format: integer
- *      - name: sortPageCount
- *        in: query
- *        required: false
- *        format: boolean
+ *        description: Filter books with page count lower than
  *     responses:
  *       200:
  *         description: OK.
