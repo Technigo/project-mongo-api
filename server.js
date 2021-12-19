@@ -63,11 +63,10 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// Middlewares ---------------------------
+// MIDDLEWARE ---------------------------
 app.use(cors())
 app.use(express.json())
-
-// Error handling if connection to db is anything but connected (1) ---------------
+// Error handling if database is anything but connected (1)
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
@@ -76,12 +75,60 @@ app.use((req, res, next) => {
   }
 })
 
-// Main (displays all endpoints) ---------------------------
+// MAIN ---------------------------
 app.get('/', (req, res) => {
-  res.send(listEndpoints(app))
+  res.json({
+    documentation: `https://github.com/elsisco/project-mongo-api/blob/master/Documentation.md`,
+    endpoints: listEndpoints(app),
+  })
 })
 
-// Authors ---------------------------
+// BOOKS ---------------------------
+app.get('/books', async (req, res) => {
+  const { title, averageRating } = req.query
+  let books = await Book.find(req.query).populate('authors')
+
+  books.sort((a, b) => (a.title > b.title ? 1 : -1))
+
+  if (title) {
+    books = await Book.find({
+      title: { $regex: `.*${title}.*`, $options: 'i' },
+    }).populate('authors')
+  } else if (averageRating) {
+    const bookRatings = await Book.find().gt(
+      'averageRating',
+      req.query.averageRating,
+    )
+    books = bookRatings
+    books.sort((a, b) => b.averageRating - a.averageRating)
+  }
+
+  res.json(books)
+})
+
+app.get('/books/ratings', async (req, res) => {
+  let books = await Book.find()
+  const { averageRating } = req.params
+  const sortByRating = books.sort((a, b) => b.averageRating - a.averageRating)
+  res.json(sortByRating)
+})
+
+app.get('/books/id/:id', async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id)
+    if (book) {
+      res.json(book)
+    } else {
+      res
+        .status(404)
+        .json({ error: 'No book with id ${req.params.id} was found' })
+    }
+  } catch {
+    res.status(400).json({ error: 'Invalid book id format' })
+  }
+})
+
+// AUTHORS ---------------------------
 app.get('/authors', async (req, res) => {
   const { name } = req.query
   let authors = await Author.find({
@@ -90,7 +137,7 @@ app.get('/authors', async (req, res) => {
   if (!name) {
     authors = await Author.find()
   }
-  authors.sort((a, b) => (a.name > b.name ? 1 : -1)) // Sorting for string values
+  authors.sort((a, b) => (a.name > b.name ? 1 : -1))
   res.json(authors)
 })
 
@@ -116,53 +163,6 @@ app.get('/authors/:id/books', async (req, res) => {
     })
   } else {
     res.status(404).json({ error: 'Author not found.' })
-  }
-})
-
-// Books ---------------------------
-app.get('/books', async (req, res) => {
-  const { title, averageRating } = req.query
-  let books = await Book.find(req.query).populate('authors')
-
-  books.sort((a, b) => (a.title > b.title ? 1 : -1)) // Sorting for string values
-
-  if (title) {
-    books = await Book.find({
-      title: { $regex: `.*${title}.*`, $options: 'i' },
-    }).populate('authors')
-  } else if (averageRating) {
-    // gt = greater than
-    const bookRatings = await Book.find().gt(
-      'averageRating',
-      req.query.averageRating,
-    )
-    books = bookRatings
-    // Sorting books by rating
-    books.sort((a, b) => b.averageRating - a.averageRating) // Standard sorting (numbers)
-  }
-
-  res.json(books)
-})
-
-app.get('/books/ratings', async (req, res) => {
-  let books = await Book.find()
-  const { averageRating } = req.params
-  const sortByRating = books.sort((a, b) => b.averageRating - a.averageRating) // Standard sorting (numbers)
-  res.json(sortByRating)
-})
-
-app.get('/books/id/:id', async (req, res) => {
-  try {
-    const book = await Book.findById(req.params.id)
-    if (book) {
-      res.json(book)
-    } else {
-      res
-        .status(404)
-        .json({ error: 'No book with id ${req.params.id} was found' })
-    }
-  } catch {
-    res.status(400).json({ error: 'Invalid book id format' })
   }
 })
 

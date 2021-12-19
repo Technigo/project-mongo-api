@@ -45,4 +45,4 @@ Displays one author based on the author id.
 
 `https://book-reviews-by-elsisco.herokuapp.com/authors/:id/books`
 
-Displays all books connected to one author id.
+Displays the author name, the number of books and all books connected to one author id.
