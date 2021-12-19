@@ -1,12 +1,16 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This is my second api project. I used music data to make some endpoints using mongoose.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Features
+
+- 4 different endpoints using mongoose methods like find, findById and gt.
+- Endpoints that return a collection of results: endpoints, tracks and danceability.
+- error handling by returning 404 and 400 status and a error message.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+If i had more time i would get another data set to work with and make a front to my backend.
 
 ## View it live
 
