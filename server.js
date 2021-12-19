@@ -34,6 +34,12 @@ const BoardGame = mongoose.model('BoardGame', {
   thumbnail: String,
 })
 
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min) + min) // The maximum is exclusive and the minimum is inclusive
+}
+
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await BoardGame.deleteMany({})
@@ -131,23 +137,14 @@ app.get('/boardgames', async (req, res) => {
 app.get('/boardgames/:id', async (req, res) => {
   const { id } = req.params
   try {
-    console.log('id: ', id)
-    console.log('data type id: ', typeof id)
-    // const boardGameById = await BoardGame.findById(id)
-
-    // randomize a board game
+    // randomize a board game review
     if (id === 'random') {
       const totalBoardGames = await BoardGame.count()
-      console.log(totalBoardGames) // 18801 (actual count is 19329)
-      // console.log('total board games type: ', typeof totalBoardGames) // number
 
-      // const randomBoardGame = await BoardGame.find({
-      //   index: parseInt(Math.random() * (totalBoardGames - 0) + 0, 10),
-      // })
-
-      // Math.random() * (max - min) + min;
+      // get a random integer between 0 and amount of board game reviews by invoking getRandomInt.
+      // use that random integer to skip and limit to one single review.
       const randomBoardGame = await BoardGame.find()
-        .skip(Math.random() * (totalBoardGames - 0) + 0)
+        .skip(getRandomInt(0, totalBoardGames))
         .limit(1)
 
       res.status(200).json({
