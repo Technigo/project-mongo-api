@@ -71,6 +71,7 @@
       }
     ],
     "prefer-template": "error",
-    "semi": "off"
+    "semi": "off",
+    "dot-notation": "off"
   }
 }

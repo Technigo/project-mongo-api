@@ -1,0 +1,14 @@
+[
+  {
+    "Routes": [
+      {
+        "/endpoints________________________________": "GET endpoints",
+        "/boardgames?page=${page}&limit=${limit}___": "GET all reviews with pagination",
+        "/boardgames/:id___________________________": "GET one review with a specific id",
+        "/boardgames/random________________________": "GET one review randomly",
+        "/boardgames/year/:year____________________": "GET list of reviews by year",
+        "/ranked___________________________________": "GET ranked reviews sort from top to bottom"
+      }
+    ]
+  }
+]

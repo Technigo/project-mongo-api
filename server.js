@@ -3,16 +3,8 @@ import cors from 'cors'
 import listEndpoints from 'express-list-endpoints'
 import mongoose from 'mongoose'
 
+import documentation from './data/documentation.json'
 import data from './data/boardgames.json'
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-//
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
-
 // https://www.kaggle.com/jvanelteren/boardgamegeek-reviews?select=2020-08-19.csv
 // BoardGameGeek Reviews, dataset by Jesse van Elteren
 
@@ -21,7 +13,6 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const BoardGame = mongoose.model('BoardGame', {
-  // Properties defined here match the keys from the people.json file
   index: Number,
   id: Number,
   name: String,
@@ -37,7 +28,8 @@ const BoardGame = mongoose.model('BoardGame', {
 const getRandomInt = (min, max) => {
   min = Math.ceil(min)
   max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min) + min) // The maximum is exclusive and the minimum is inclusive
+  // The maximum is exclusive and the minimum is inclusive
+  return Math.floor(Math.random() * (max - min) + min)
 }
 
 if (process.env.RESET_DB) {
@@ -85,7 +77,7 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.json(documentation)
 })
 
 // list of endpoints
@@ -93,11 +85,8 @@ app.get('/endpoints', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-// list all the board games with query params
+// list all the board game reviews with pagination
 app.get('/boardgames', async (req, res) => {
-  // with query
-  // console.log(req.query)
-  // https://boardgames-katie.herokuapp.com/boardgames?year=2010
   try {
     // pagination: page = 0 and limit = 20, or we can change the value based on the query params
     const pagination = {
@@ -109,11 +98,8 @@ app.get('/boardgames', async (req, res) => {
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
 
-    // console.log(boardGames.length)
-
-    // http://localhost:8080/boardgames?index=90
-    // if the array is not empty -> success
-    // if the array is empty -> success false
+    // if the array is not empty -> success: true
+    // if the array is empty -> success: false
     if (boardGames.length > 0) {
       res.status(200).json({
         response: boardGames,
@@ -121,7 +107,7 @@ app.get('/boardgames', async (req, res) => {
       })
     } else {
       res.status(404).json({
-        error: 'No board game(s) found', // response:
+        error: 'No board game(s) found',
         success: false,
       })
     }
@@ -133,15 +119,16 @@ app.get('/boardgames', async (req, res) => {
   }
 })
 
-// list one board game by id
+// list one board game review by id
 app.get('/boardgames/:id', async (req, res) => {
   const { id } = req.params
+
   try {
-    // randomize a board game review
+    // randomly pick a board game review - '/boardgames/random'
     if (id === 'random') {
       const totalBoardGames = await BoardGame.count()
 
-      // get a random integer between 0 and amount of board game reviews by invoking getRandomInt.
+      // get a random integer between 0 and amount of board game reviews by invoking getRandomInt().
       // use that random integer to skip and limit to one single review.
       const randomBoardGame = await BoardGame.find()
         .skip(getRandomInt(0, totalBoardGames))
@@ -161,7 +148,7 @@ app.get('/boardgames/:id', async (req, res) => {
         })
       } else {
         res.status(404).json({
-          error: `Board game by id '${id}' not found`, // response:
+          error: `Board game by id '${id}' not found`,
           success: false,
         })
       }
@@ -174,18 +161,7 @@ app.get('/boardgames/:id', async (req, res) => {
   }
 })
 
-// randomize a board game
-// app.get('/boardgames/random', async (req, res) => {
-//   const totalBoardGames = await BoardGame.find()
-//   console.log(totalBoardGames.length) // 18801
-//   const randomBoardGame = await BoardGame.find({
-//     index: parseInt(Math.random() * (totalBoardGames.length - 1 - 0) + 0, 10),
-//   })
-
-//   res.json(randomBoardGame)
-// })
-
-// list the board games by year
+// list the board game reviews by year
 app.get('/boardgames/year/:year', async (req, res) => {
   try {
     const { year } = req.params
@@ -196,13 +172,13 @@ app.get('/boardgames/year/:year', async (req, res) => {
       limit: parseInt(req.query.limit, 10) || 20,
     }
 
-    const boardGameByYear = await BoardGame.find({ year })
+    const boardGamesByYear = await BoardGame.find({ year })
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
-    // console.log(boardGameByYear.length)
-    if (boardGameByYear.length > 0) {
+
+    if (boardGamesByYear.length > 0) {
       res.status(200).json({
-        response: boardGameByYear,
+        response: boardGamesByYear,
         success: true,
       })
     } else {
@@ -219,10 +195,7 @@ app.get('/boardgames/year/:year', async (req, res) => {
   }
 })
 
-// sort the board games by rank, from top to bottom
-// http://localhost:8080/ranked
-// http://localhost:8080/ranked?page=1
-// http://localhost:8080/ranked?page=0&limit=5
+// sort the board game reviews by rank, from top to bottom
 app.get('/ranked', async (req, res) => {
   try {
     // pagination - page = 0 and limit = 20 or we can change the value based on the query params
@@ -231,14 +204,14 @@ app.get('/ranked', async (req, res) => {
       limit: parseInt(req.query.limit, 10) || 20,
     }
 
-    const boardGameRanks = await BoardGame.find()
+    const boardGamesRanked = await BoardGame.find()
       .sort({ rank: 1 })
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
 
-    if (boardGameRanks.length > 0) {
+    if (boardGamesRanked.length > 0) {
       res.status(200).json({
-        response: boardGameRanks,
+        response: boardGamesRanked,
         success: true,
       })
     } else {
