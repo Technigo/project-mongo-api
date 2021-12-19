@@ -56,7 +56,12 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('50 popular Spotify tracks, use */endpoints* to see them all, */tracks* for all tracks or use queries, */tracks/id/:id* for track by id')
+  res.send({
+    Title: '50 popular Spotify tracks',
+    Endpoints: '/endpoints', 
+    AllTracks: '/tracks (or use queries)',
+    TrackById: '/tracks/id/:id'
+  })
 })
 
 
