@@ -3,7 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
 
-// import topMusicData from './data/top-music.json'
+import topMusicData from './data/top-music.json'
 
 const mongoUrl = process.env.MONGO_URL || 'MONGO_URL'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -56,7 +56,7 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('50 popular Spotify tracks, use /endpoints to see them all')
+  res.send('50 popular Spotify tracks, use */endpoints* to see them all, */tracks* for all tracks or use queries, */tracks/id/:id* for track by id')
 })
 
 
