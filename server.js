@@ -36,6 +36,7 @@ if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await BoardGame.deleteMany({})
 
+    // instead of having the same keys as the JSON, I renamed it
     data.forEach((gameData) => {
       new BoardGame({
         index: gameData.Index,
@@ -176,9 +177,12 @@ app.get('/boardgames/year/:year', async (req, res) => {
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
 
+    const totalBoardGames = await BoardGame.count({ year })
+
     if (boardGamesByYear.length > 0) {
       res.status(200).json({
         response: boardGamesByYear,
+        totalPages: Math.ceil(totalBoardGames / pagination.limit),
         success: true,
       })
     } else {
