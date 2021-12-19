@@ -214,7 +214,7 @@ app.get('/boardgames/year/:year', async (req, res) => {
 // http://localhost:8080/ranks
 // http://localhost:8080/ranks?page=1
 // http://localhost:8080/ranks?page=0&limit=5
-app.get('/ranks', async (req, res) => {
+app.get('/ranked', async (req, res) => {
   try {
     // pagination - page = 0 and limit = 20 or we can change the value based on the query params
     const pagination = {
