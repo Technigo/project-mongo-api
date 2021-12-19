@@ -99,11 +99,16 @@ app.get('/boardgames', async (req, res) => {
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
 
+    // count amount of reviews
+    const totalBoardGames = await BoardGame.count()
+
     // if the array is not empty -> success: true
     // if the array is empty -> success: false
     if (boardGames.length > 0) {
       res.status(200).json({
         response: boardGames,
+        // total pages: (amount of reviews / limit) and round up the result
+        totalPages: Math.ceil(totalBoardGames / pagination.limit),
         success: true,
       })
     } else {
@@ -213,9 +218,12 @@ app.get('/ranked', async (req, res) => {
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
 
+    const totalBoardGames = await BoardGame.count()
+
     if (boardGamesRanked.length > 0) {
       res.status(200).json({
         response: boardGamesRanked,
+        totalPages: Math.ceil(totalBoardGames / pagination.limit),
         success: true,
       })
     } else {
