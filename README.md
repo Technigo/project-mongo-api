@@ -18,7 +18,7 @@ We can:
 - GET list of reviews by year,
 - GET ranked reviews sort from top to bottom
 
-To practice if the endpoints are useful I build a frontend to show the data.
+To practice if the endpoints are useful I've built a frontend to show the data.
 
 ## View it live
 
