@@ -13,25 +13,24 @@ mongoose.Promise = Promise
 const port = process.env.PORT || 8080
 const app = express()
 
-// const Author = mongoose.model('Author', {
-//   name: String
-// })
+const Author = mongoose.model('Author', {
+  name: String,
+})
 
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
-  authors: String,
-  // author: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Author'
-  // },
+  authors: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author',
+  },
   averageRating: Number,
   isbn: Number,
   isbn13: Number,
   languageCode: String,
   numPages: Number,
   ratingsCount: Number,
-  textReviewsCount: Number
+  textReviewsCount: Number,
 })
 
 if (process.env.RESET_DB) {
@@ -39,18 +38,36 @@ if (process.env.RESET_DB) {
     await Author.deleteMany()
     await Book.deleteMany()
 
-    booksData.forEach((book) => {
-      new Book(book).save()
+    let authors = [{}]
+    let authorList = []
+
+    booksData.forEach((item) => {
+      const newAuthor = new Author({
+        name: item.authors,
+      })
+      if (!authorList.includes(item.authors)) {
+        newAuthor.save()
+        authors.push(newAuthor)
+        authorList.push(item.authors)
+      }
+    })
+
+    booksData.forEach((item) => {
+      const newBook = new Book({
+        ...item,
+        authors: authors.find((author) => author.name === item.authors),
+      })
+      newBook.save()
     })
   }
-
   seedDatabase()
 }
 
-// Add middlewares to enable cors and json body parsing
+// Middlewares ---------------------------
 app.use(cors())
 app.use(express.json())
 
+// Error handling if connection to db is anything but connected (1) ---------------
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
@@ -59,130 +76,90 @@ app.use((req, res, next) => {
   }
 })
 
-// Start defining your routes here
+// Main (displays all endpoints) ---------------------------
 app.get('/', (req, res) => {
-  res.send(listEndpoints(app)) // All endpoints listed on start page '/'
+  res.send(listEndpoints(app))
 })
 
+// Authors ---------------------------
 app.get('/authors', async (req, res) => {
-  const authors = await Author.find()
+  const { name } = req.query
+  let authors = await Author.find({
+    name: { $regex: `.*${name}.*`, $options: 'i' },
+  })
+  if (!name) {
+    authors = await Author.find()
+  }
+  authors.sort((a, b) => (a.name > b.name ? 1 : -1)) // Sorting for string values
   res.json(authors)
 })
 
+app.get('/authors/:id', async (req, res) => {
+  const author = await Author.findById(req.params.id)
+  if (author) {
+    res.json(author)
+  } else {
+    res.status(404).json({ error: 'Author not found.' })
+  }
+})
+
+app.get('/authors/:id/books', async (req, res) => {
+  const author = await Author.findById(req.params.id)
+  if (author) {
+    const books = await Book.find({
+      authors: mongoose.Types.ObjectId(author.id),
+    })
+    res.json({
+      Author: author.name,
+      'Number of books: ': books.length,
+      Books: books,
+    })
+  } else {
+    res.status(404).json({ error: 'Author not found.' })
+  }
+})
+
+// Books ---------------------------
 app.get('/books', async (req, res) => {
-  const books = await Book.find()
-  // const books = await Book.find().populate('author')
-  // res.json(books)
-  const page = parseInt(req.query.page) || 1
-  const limit = parseInt(req.query.limit) || 20
+  const { title, averageRating } = req.query
+  let books = await Book.find(req.query).populate('authors')
 
-  const startIndex = (page - 1) * limit
-  const endIndex = page * limit
-
-  const results = {}
-
-  if (endIndex < booksData.length) {
-    results.next = {
-      page: page + 1,
-      limit: limit
-    }
-  }
-
-  if (startIndex > 0) {
-    results.previous = {
-      page: page - 1,
-      limit: limit
-    }
-  }
-
-  // Sorting books by title
-  const { title } = req.params
   books.sort((a, b) => (a.title > b.title ? 1 : -1)) // Sorting for string values
 
-  results.results = books.slice(startIndex, endIndex)
+  if (title) {
+    books = await Book.find({
+      title: { $regex: `.*${title}.*`, $options: 'i' },
+    }).populate('authors')
+  } else if (averageRating) {
+    // gt = greater than
+    const bookRatings = await Book.find().gt(
+      'averageRating',
+      req.query.averageRating,
+    )
+    books = bookRatings
+    // Sorting books by rating
+    books.sort((a, b) => b.averageRating - a.averageRating) // Standard sorting (numbers)
+  }
 
-  res.json(results)
+  res.json(books)
 })
 
 app.get('/books/ratings', async (req, res) => {
-  const books = await Book.find()
-
-  const page = parseInt(req.query.page) || 1
-  const limit = parseInt(req.query.limit) || 20
-
-  const startIndex = (page - 1) * limit
-  const endIndex = page * limit
-
-  const results = {}
-
-  if (endIndex < booksData.length) {
-    results.next = {
-      page: page + 1,
-      limit: limit
-    }
-  }
-
-  if (startIndex > 0) {
-    results.previous = {
-      page: page - 1,
-      limit: limit
-    }
-  }
-
-  // Sorting books by rating
+  let books = await Book.find()
   const { averageRating } = req.params
-  const sortByRating = books.sort((a, b) => b.averageRating - a.averageRating)
-
-  results.results = sortByRating.slice(startIndex, endIndex)
-  res.json(results)
+  const sortByRating = books.sort((a, b) => b.averageRating - a.averageRating) // Standard sorting (numbers)
+  res.json(sortByRating)
 })
 
-app.get('/books/search', (req, res) => {
-  const { title, authors, isbn } = req.query
-
-  let filteredBooksData = booksData
-
-  if (title) {
-    filteredBooksData = filteredBooksData.filter(
-      (item) => item.title.toLowerCase().indexOf(title.toLowerCase()) !== -1
-    )
-  } else if (authors) {
-    filteredBooksData = filteredBooksData.filter(
-      (item) => item.authors.toLowerCase().indexOf(authors.toLowerCase()) !== -1
-    )
-  } else if (isbn) {
-    filteredBooksData = filteredBooksData.filter(
-      (item) => item.isbn.indexOf(isbn) !== -1
-    )
-  }
-
-  console.log(filteredBooksData)
-
-  res.json({
-    response: filteredBooksData,
-    success: true
-  })
-
-  //   if (filteredBooksData !== []) {
-  //     res.json({
-  //       response: filteredBooksData,
-  //       success: true
-  //     })
-  //   } else if (filteredBooksData === []) {
-  //     res
-  //       .status(404)
-  //       .json({ error: 'No book by that title, author or ISBN was found' })
-  //   }
-})
-
-app.get('/books/:id', async (req, res) => {
+app.get('/books/id/:id', async (req, res) => {
   try {
     const book = await Book.findById(req.params.id)
-
     if (book) {
       res.json(book)
     } else {
-      res.status(404).json({ error: 'Book was not found' })
+      res
+        .status(404)
+        .json({ error: 'No book with id ${req.params.id} was found' })
     }
   } catch {
     res.status(400).json({ error: 'Invalid book id format' })
