@@ -10,7 +10,7 @@ This is my second api project. I used music data to make some endpoints using mo
 
 ## The problem
 
-If i had more time i would get another data set to work with and make a front to my backend.
+If i had more time i would get another data set to work with and make a front to my backend. I would love to to pagination, but thats for next project.
 
 ## View it live
 
