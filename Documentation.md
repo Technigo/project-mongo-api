@@ -1,8 +1,8 @@
-#BOOK REVIEWS by Elsa Carlström
+# BOOK REVIEWS 📚 by Elsa Carlström
 
 ---
 
-##BASE URL
+## BASE URL##
 
 (/)
 
@@ -10,7 +10,7 @@ Displays all end available end points.
 
 ---
 
-##BOOKS
+## BOOKS
 
 (/books)
 Displays all books sorted alphabetically according to title.
@@ -27,7 +27,7 @@ Displays one book based on the book id.
 
 ---
 
-##AUTHORS
+## AUTHORS
 
 (/authors)
 Listing all authors.
