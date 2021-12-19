@@ -47,13 +47,13 @@ app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
   } else {
-    res.status(503).json({ error: 'Service unavailable dude' })
+    res.status(503).json({ error: 'Service unavailable' })
   }
 })
 
 // First endpoint
 app.get('/', (req, res) => {
-  res.send('Merry Christmas!')
+  res.send('Yay, a database!')
 })
 
 // get all companies
@@ -79,7 +79,7 @@ app.get('/companies/id/:id', async (req, res) => {
       res.status(404).json({error:"This didn't work"})
     }
   } catch(err) {
-    res.status(404).json({error: 'ERROR!!!'})
+    res.status(404).json({error: 'ERROR!'})
   }
 })
 
