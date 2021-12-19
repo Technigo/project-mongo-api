@@ -25,6 +25,7 @@ const BoardGame = mongoose.model('BoardGame', {
   thumbnail: String,
 })
 
+// getRandomInt function: to randomly skip() to a board game review
 const getRandomInt = (min, max) => {
   min = Math.ceil(min)
   max = Math.floor(max)
@@ -58,7 +59,6 @@ if (process.env.RESET_DB) {
 
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
-//
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080
 const app = express()
@@ -134,7 +134,7 @@ app.get('/boardgames/:id', async (req, res) => {
     if (id === 'random') {
       const totalBoardGames = await BoardGame.count()
 
-      // get a random integer between 0 and amount of board game reviews by invoking getRandomInt().
+      // get a random integer between 0 and total amount of reviews by invoking getRandomInt().
       // use that random integer to skip and limit to one single review.
       const randomBoardGame = await BoardGame.find()
         .skip(getRandomInt(0, totalBoardGames))

@@ -1,13 +1,26 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Get familiar with MongoDB and use it to store data and query that data from our API.
+The requirements are a couple of RESTful endpoints, and to use Mongoose models to model the data and use these models to fetch data from the database.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I found a dataset from Kaggle (BoardGameGeek Reviews) and started with seeding the data to the database. We basically iterate over the JSON file to generate entries in to the database.
+
+We used Mongoose to model data in Mongo. Practice how to store secret information such as database passwords, and error handling which return useful error messages from the API endpoints. I also added pagination with Mongoose queries (skip() and limit()).
+
+We can:
+
+- GET endpoints,
+- GET all reviews with pagination,
+- GET one review with a specific id,
+- GET one review randomly,
+- GET list of reviews by year,
+- GET ranked reviews sort from top to bottom
+
+To practice if the endpoints are useful I build a frontend to show the data.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Heroku (API): https://boardgames-katie.herokuapp.com/ \
+Netlify (frontend): https://bgg-reviews.netlify.app/
