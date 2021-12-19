@@ -1,12 +1,12 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Project making a Book API 2.0. This time database deployed with MongoDB.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Another project where I used books data for an API that used mongoose methods and deployed with mongoDB. Had a lot of trouble in the beginning with this project when I couldn't get the local DB to work with my computer, had to deploy the DB online to be able to work with it.
+
+If I had more time I would've wanted to focus more on the different mongoose methods.
 
 ## View it live
 
