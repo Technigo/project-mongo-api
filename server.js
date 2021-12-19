@@ -172,7 +172,6 @@ app.get('/boardgames/year/:year', async (req, res) => {
   try {
     const { year } = req.params
 
-    // pagination: page = 0 and limit = 20, or we can change the value based on the query params
     const pagination = {
       page: parseInt(req.query.page, 10) || 0,
       limit: parseInt(req.query.limit, 10) || 20,
@@ -207,7 +206,6 @@ app.get('/boardgames/year/:year', async (req, res) => {
 // sort the board game reviews by rank, from top to bottom
 app.get('/ranked', async (req, res) => {
   try {
-    // pagination - page = 0 and limit = 20 or we can change the value based on the query params
     const pagination = {
       page: parseInt(req.query.page, 10) || 0,
       limit: parseInt(req.query.limit, 10) || 20,
