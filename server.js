@@ -23,7 +23,6 @@ const Book = mongoose.model("Book", {
   text_reviews_count: Number,
 });
 if (process.env.CLEAR_DB) {
-  console.log("Seeding the db with all the files");
   const seedDB = async () => {
     await Book.deleteMany({});
     booksData.forEach((oneBook) => {
