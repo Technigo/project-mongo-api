@@ -99,13 +99,13 @@ app.get('/boardgames', async (req, res) => {
   // console.log(req.query)
   // https://boardgames-katie.herokuapp.com/boardgames?year=2010
   try {
-    // pagination - page = 0 and limit = 20 or we can change the value based on the query params
+    // pagination: page = 0 and limit = 20, or we can change the value based on the query params
     const pagination = {
       page: parseInt(req.query.page, 10) || 0,
       limit: parseInt(req.query.limit, 10) || 20,
     }
 
-    const boardGames = await BoardGame.find(req.query)
+    const boardGames = await BoardGame.find()
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
 
@@ -227,7 +227,7 @@ app.get('/ranks', async (req, res) => {
       .skip(pagination.page * pagination.limit)
       .limit(pagination.limit)
 
-    console.log(boardGameRanks.length)
+    // console.log(boardGameRanks.length)
 
     if (boardGameRanks.length > 0) {
       res.status(200).json({
