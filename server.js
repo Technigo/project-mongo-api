@@ -70,6 +70,17 @@ app.get("/shows", async (req, res) => {
   res.json(titles)
 })
 
+//... find({ type: "Movie" }).limit(10) shows only 10 of the results
+app.get("/shows/movies", async (req, res) => {
+  const showMovies = await Movie.find({ type: "Movie" })
+  res.json(showMovies)
+})
+
+app.get("/shows/tvshows", async (req, res) => {
+  const showTvshows = await Movie.find({ type: "TV Show" })
+  res.json(showTvshows)
+})
+
 //
 // Single result
 // get a specific show based on its title/name --  using param
@@ -81,17 +92,6 @@ app.get("/shows/title/:title", async (req, res) => {
   } else {
     res.status(404).json("Sorry, nothing to show with that name!")
   }
-})
-
-//... find({ type: "Movie" }).limit(10) shows only 10 of the results
-app.get("/shows/movies", async (req, res) => {
-  const showMovies = await Movie.find({ type: "Movie" })
-  res.json(showMovies)
-})
-
-app.get("/shows/tvshows", async (req, res) => {
-  const showTvshows = await Movie.find({ type: "TV Show" })
-  res.json(showTvshows)
 })
 
 // Start the server
