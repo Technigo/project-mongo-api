@@ -59,7 +59,7 @@ if (process.env.RESET_DB) {
 // if we remove this we see "Cannot GET response in browser" it's built in by express.
 //The request (req) is what the frontend sends to the backend. The response (res) is what the backend send to the frontend.
 app.get("/", (req, res) => {
-  res.send("Hello from the dark side!")
+  res.send(listEndpoints(app))
 })
 
 //
@@ -83,9 +83,15 @@ app.get("/shows/title/:title", async (req, res) => {
   }
 })
 
-//shows all the possible enpoints in the app
-app.get("/endpoints", (req, res) => {
-  res.send(listEndpoints(app))
+//... find({ type: "Movie" }).limit(10) shows only 10 of the results
+app.get("/shows/movies", async (req, res) => {
+  const showMovies = await Movie.find({ type: "Movie" })
+  res.json(showMovies)
+})
+
+app.get("/shows/tvshows", async (req, res) => {
+  const showTvshows = await Movie.find({ type: "TV Show" })
+  res.json(showTvshows)
 })
 
 // Start the server
