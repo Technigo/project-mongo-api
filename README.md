@@ -14,4 +14,4 @@ If i had more time i would get another data set to work with and make a front to
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://hedvigs-second-api.herokuapp.com
