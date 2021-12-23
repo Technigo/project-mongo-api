@@ -1,13 +1,28 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+The assigment was to create an API using mongoDB, Express, Atlas and Heroku. I used ‘Netflix titles’ database to store and retrieve data from and use that data to produce a RESTful API.  
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Deploying to Heroku was straight forward but setting up the connection to Mongo Atlas was tricky. 
 
-## The problem
+## Requirements
+•	API should have two or more endpoints.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+•	A minimum of one endpoint to return a collection of results (array of elements).
+
+•	A minimum of one endpoint to return a single result (single element).
+
+•	API should make use of Mongoose models to model the data and use these models to fetch data from the database.
+
+•	API should be RESTful.
+
+
+## Tech
+•	MongoDB
+•	Mongoose
+•	RESTful API
+•	Express
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://netflix-movies-mongo-pde.herokuapp.com/
