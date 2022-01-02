@@ -1,34 +1,131 @@
 import express from 'express'
 import cors from 'cors'
+import listEndpoints from 'express-list-endpoints'
 import mongoose from 'mongoose'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import goldenGlobesData from './data/golden-globes.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+const data = goldenGlobesData
+
+const mongoUrl = process.envMONGO_URL || 'mongodb://localhost/mongodb-gg-project'
+mongoose.connect(mongoUrl, {useNewUrlParser:true, useUnifiedTopology:true})
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be 
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
-const port = process.env.PORT || 8080
+// Defines the port the app will run on. Defaults to 8080
+const port = process.env.PORT || 8090 
 const app = express()
+
+//An award database model to start populating the database with all existing data
+const Award = mongoose.model('Award', {
+  year_film: Number,
+  year_award: Number,
+  ceremony: Number,
+  category: String,
+  nominee: String,
+  film: String,
+  win: Boolean
+})
+
+//Function to start seeding the database & it runs only when variable is present & true
+if (process.env.RESET_DB) {
+  const seedDataBase = async () => {
+  //Deletes pre-existing awards to prevent duplicates
+  await Award.deleteMany({});
+
+  //Creates a new award array
+  goldenGlobesData.forEach((item) => {
+    const newAward = new Award(item);
+    newAward.save();
+  });
+};
+seedDataBase();
+}
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
+// Middleware that checks if the database is connected before going to our endpoints
+app.use((req, res, next) => {
+	if (mongoose.connection.readyState === 1) {
+		next();
+	} else {
+		res.status(503).json({ error: 'Service unavailable' });
+	}
+});
+
+//RESTful routes/endpoints
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Welcome to the Golden-Globes API. Enter /endpoints to see which endpoints there are available.')
+})
+
+app.get('/endpoints', (req, res) => {//this endpoint is going to tell us all possible endpoint we have
+  res.send(listEndpoints(app))
+})
+
+app.get('/nominations', (req, res) => { 
+  res.json(data)
+})
+
+app.get('/nominations/nominee/:nominee', (req, res) => {
+  try {
+    const { nominee } = req.params
+    const nomineeId = goldenGlobesData.find(item => item.nominee.toLowerCase() === nominee.toLowerCase())
+
+    if(!nomineeId) {
+      console.log('No nominee')
+      res.status(404).json({
+        response: 'No nominee found with that name.',
+        success: false
+      })
+    }  else { 
+      res.json(nomineeId)
+    }  
+  } catch (err) {
+		res.status(400).json({ 
+      error: 'Invalid nominee, please try again' 
+    });
+	}
+})
+
+app.get('/nominations/category/:category', (req, res) => {
+  try {
+    const { category } = req.params
+    const categoryId = goldenGlobesData.find(item => item.category.toLowerCase() === category.toLowerCase())
+  
+    if(!categoryId) {
+      res.status(404).json({
+        response: 'No category found with that name.',
+        success: false    
+      })
+    }  else { 
+    res.json(categoryId)
+    }
+  } catch (err) {
+		res.status(400).json({ 
+      error: 'Invalid category, please try again' 
+    });
+	}
+});
+
+app.get('/year/:year', (req, res) => {
+  try {
+    const year = req.params.year
+    const showWin = req.query.win
+    let nominationsFromYear = data.filter((item) => item.year_award === +year)
+  
+    if (!showWin) {
+      res.status(404).json({
+        response: 'No award found in given year',
+        success: false
+    })
+    } else { 
+    nominationsFromYear =  nominationsFromYear.filter((item) => item.win)
+    }  
+    res.json(nominationsFromYear)
+  } catch (err) {
+		res.status(400).json({ error: 'Year is invalid, please try again!' });
+	}
 })
 
 // Start the server
