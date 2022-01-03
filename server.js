@@ -17,8 +17,8 @@ const app = express()
 
 //An award database model to start populating the database with all existing data
 const Award = mongoose.model('Award', {
-  year_film: Number,
-  year_award: Number,
+  filmYear: Number,
+  awardYear: Number,
   ceremony: Number,
   category: String,
   nominee: String,
@@ -32,8 +32,8 @@ if (process.env.RESET_DB) {
   //Deletes pre-existing awards to prevent duplicates
   await Award.deleteMany({});
 
-  //Creates a new award array
-  goldenGlobesData.forEach((item) => {
+  //Creates a new Award 
+  data.forEach(item => {
     const newAward = new Award(item);
     newAward.save();
   });
@@ -131,5 +131,5 @@ app.get('/year/:year', (req, res) => {
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on https://localhost:${port}`)
+  console.log(`Server running on http://localhost:${port}`)
 })
