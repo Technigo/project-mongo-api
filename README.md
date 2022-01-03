@@ -28,4 +28,6 @@ Combine all of three queries for more specific results :)
 
 ## View it live
 
+FOR LIMITED STORAGE REASONS, HAD TO TAKE THE SERVER DOWN FROM HEROKU (So it's not currently deployed anywhere)
+
 https://dls-mongo-api.herokuapp.com/
