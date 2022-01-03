@@ -95,10 +95,12 @@ app.get('/books/id/:id', async (req, res) => {
   }
 });
 
-//Endpoint to get books shorter than 351 pages
+//Endpoint to get books shorter than 351 pages, sorted in ascending order
 app.get('/books/pages/shortbooks', async (req, res) => {
   try {
-    const shortBooks = await Book.find({ num_pages: { $lt: 351 } });
+    const shortBooks = await Book.find({ num_pages: { $lt: 351 } }).sort({
+      num_pages: 'asc',
+    });
     res.json(shortBooks);
   } catch (error) {
     res.status(400).json({
@@ -108,11 +110,13 @@ app.get('/books/pages/shortbooks', async (req, res) => {
   }
 });
 
-//Endpoint to get books with 351-799 pages
+//Endpoint to get books with 351-799 pages, sorted in ascending order
 app.get('/books/pages/mediumbooks', async (req, res) => {
   try {
     const mediumBooks = await Book.find({
       $and: [{ num_pages: { $gt: 350 } }, { num_pages: { $lt: 800 } }],
+    }).sort({
+      num_pages: 'asc',
     });
     res.json(mediumBooks);
   } catch (error) {
@@ -123,10 +127,12 @@ app.get('/books/pages/mediumbooks', async (req, res) => {
   }
 });
 
-//Endpoint to get books longer than 799 pages
+//Endpoint to get books longer than 799 pages, sorted in descending order
 app.get('/books/pages/longbooks', async (req, res) => {
   try {
-    const longBooks = await Book.find({ num_pages: { $gt: 799 } });
+    const longBooks = await Book.find({ num_pages: { $gt: 799 } }).sort({
+      num_pages: 'desc',
+    });
     res.json(longBooks);
   } catch (error) {
     res.status(400).json({
