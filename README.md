@@ -1,13 +1,25 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+A project that consists of a Mongo-backed API. The goal for this project was to learn about MongoDB, using a database to store and retrieve data and to produce a RESTful API.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+# API documentation
+GET "/" - main endpoint
+GET "/endpoints" - lists all the endpoints
+GET "/books" - list all the books
+GET "/books/:id" - shows a specific book based on id
+GET "/books/title/:title" - shows a specific book based on title
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started by seeding the database from the json file. After storing the data I created the RESTful endpoints written below using Mongoose queries. I also made sure to provide error messages from the endpoints.
 
+## Tech
+- MongoDB
+- Mongoose
+- Node.js
+- Express
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-books.herokuapp.com/
+
+

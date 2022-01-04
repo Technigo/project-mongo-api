@@ -51,7 +51,7 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// this is my first endpoint
+// main endpoint
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
@@ -61,8 +61,7 @@ app.get('/endpoints', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-// endpoint that get all the books
-
+// endpoint to get all the books
 app.get('/books', async (req, res) => {
   const books = await Book.find()
   res.json(books)
@@ -86,7 +85,7 @@ app.get('/books/:id', async (req, res) => {
       })
     }
   } catch (err) {
-    res.status(400).json({ error: 'Id is invalid'})
+    res.status(400).json({ error: `Id is invalid ${id}`})
   }
 })
 
