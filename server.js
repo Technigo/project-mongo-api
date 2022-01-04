@@ -25,18 +25,16 @@ app.use((req, res, next) => {
 })
 
 const Book = mongoose.model('Book', {
-  id: Number,
+  bookID: Number,
   title: String,
-  author: String,
-  rating: Number,
-  language: String,
+  authors: String,
+  average_rating: Number,
   isbn: Number,
-  pages: Number,
-})
-
-const newBook = new Book({
-  id: 1,
-  title: 'Hatchet',
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
 })
 
 // seed the database with data of books
@@ -44,10 +42,9 @@ if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany({})
 
-      newBook.save()
-    // booksData.forEach(book => {
-    //   new Book(book).save()
-    // })
+    booksData.forEach(book => {
+      new Book(book).save()
+    })
   }
 
   seedDatabase()
@@ -87,7 +84,7 @@ app.get('/books/title/:title', async (req, res) => {
 })
 
 // get a specific book based on id
-app.get('/books/:id', async (req, res) => {
+app.get('/books/id/:id', async (req, res) => {
   try {
     const bookId = await Book.findById(req.params.id)
 
