@@ -1,38 +1,56 @@
-import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
-// import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+import f1Data from "./data/f1-2020-data.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.Promise = Promise
-
-// Defines the port the app will run on. Defaults to 8080, but can be 
+// Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
 //
 //   PORT=9000 npm start
-const port = process.env.PORT || 8080
-const app = express()
+const port = process.env.PORT || 8080;
+const app = express();
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
+
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
+
+const User = mongoose.model("User", {
+    name: String,
+    age: Number,
+});
+
+if (process.env.RESET_DB) {
+    const newUser = new User({ name: "Sarah", age: 37 });
+    const newUser2 = new User({ name: "Steve", age: 38 });
+
+    newUser.save();
+    newUser2.save();
+}
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello world')
-})
+app.get("/", (req, res) => {
+    User.find().then((users) => {
+        res.json(users);
+    });
+});
+
+app.get("/:name", (req, res) => {
+    User.findOne({ name: req.params.name }).then((user) => {
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(404).json({ error: "not found" });
+        }
+    });
+});
 
 // Start the server
 app.listen(port, () => {
-  // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
-})
+    // eslint-disable-next-line
+    console.log(`Server running on http://localhost:${port}`);
+});
