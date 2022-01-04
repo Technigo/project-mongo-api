@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import booksData from './data/books.json'
+import listEndpoints from 'express-list-endpoints'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -55,6 +56,11 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+// list of endpoints
+app.get('/endpoints', (req, res) => {
+  res.send(listEndpoints(app))
+})
+
 // endpoint that get all the books
 
 app.get('/books', async (req, res) => {
@@ -65,7 +71,8 @@ app.get('/books', async (req, res) => {
 // endpoint to get a specific book based on id
 app.get('/books/:id', async (req, res) => {
   try {
-    const bookId = await Book.findById(req.params.bookID)
+    const { id } = req.params
+    const bookId = await Book.findById(id)
 
     if (!bookId) {
       res.status(404).json({
@@ -86,7 +93,8 @@ app.get('/books/:id', async (req, res) => {
 // endpoint to get a specific book based on title
 app.get('/books/title/:title', async (req, res) => {
   try {
-    const bookTitle = await Book.find(req.params.title)
+    const { title } = req.params
+    const bookTitle = await Book.find(title)
   
     if (!bookTitle) {
       res.status(404).json({
