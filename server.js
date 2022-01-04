@@ -69,8 +69,9 @@ app.get('/books', async (req, res) => {
 
 // endpoint to get a specific book based on id
 app.get('/books/:id', async (req, res) => {
+  const { id } = req.params
+
   try {
-    const { id } = req.params
     const bookId = await Book.findById(id)
 
     if (!bookId) {
@@ -85,14 +86,15 @@ app.get('/books/:id', async (req, res) => {
       })
     }
   } catch (err) {
-    res.status(400).json({ error: `Id is invalid ${id}`})
+    res.status(400).json({ error: 'Id is invalid'})
   }
 })
 
 // endpoint to get a specific book based on title
 app.get('/books/title/:title', async (req, res) => {
+  const { title } = req.params
+  
   try {
-    const { title } = req.params
     const bookTitle = await Book.find(title)
   
     if (!bookTitle) {
