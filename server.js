@@ -1,11 +1,11 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import listEndpoints from 'express-list-endpoints';
 
-import netflixData from "./data/netflix-titles.json";
-import { resolveShowConfigPath } from "@babel/core/lib/config/files";
+import netflixData from './data/netflix-titles.json';
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -16,7 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const Movie = mongoose.model("Movie", {
+const Movie = mongoose.model('Movie', {
   show_id: Number,
   title: String,
   director: String,
@@ -45,27 +45,39 @@ if (process.env.RESET_DB) {
 }
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello world");
+app.get('/', (req, res) => {
+  res.send(listEndpoints(app));
 });
 
 // Get all the movies
-app.get("/movies", async (req, res) => {
-  const movies = await Movie.find({});
-  res.json(movies);
+//Query param to get movie by title: /movies?title=enter the title
+//Query param to get movie by director: /movies?director=enter the director
+//Query param to get movie by country: /movies?country=enter the country
+app.get('/movies', async (req, res) => {
+  const { title, director, country } = req.query;
+
+  try {
+    const allMovies = await Movie.find({
+      title: new RegExp(title, 'i'),
+      director: new RegExp(director, 'i'),
+      country: new RegExp(country, 'i'),
+    });
+    res.json(allMovies);
+  } catch (error) {
+    res.status(400).json({
+      error: `Can't find what you're looking for..`,
+    });
+  }
 });
 
-// Get one movie with filter
-app.get("/movies/title/:title", async (req, res) => {
+app.get('/movies/:id', async (req, res) => {
+  const { id } = req.params;
+
   try {
-    const movieByTitle = await Movie.findOne(req.params.title);
-    if (movieByTitle) {
-      res.json(movieByTitle);
-    } else {
-      res.status(404).json({ error: "Couln't find a movie with that title.." });
-    }
-  } catch (err) {
-    res.status(404).json({ error: "ERROR!!" });
+    const movieById = await Movie.findOne({ show_id: id });
+    res.json(movieById);
+  } catch (error) {
+    res.status(400).json('No movie with that ID was found..');
   }
 });
 
