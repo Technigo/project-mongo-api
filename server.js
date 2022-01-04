@@ -72,16 +72,16 @@ app.get('/books/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    const bookId = await Book.findById(id)
+    const bookById = await Book.findById(id)
 
-    if (!bookId) {
+    if (!bookById) {
       res.status(404).json({
         response: 'No book found with that id',
         success: false
       })
     } else {
       res.status(200).json({
-        response: bookId,
+        response: bookById,
         success: true
       })
     }
@@ -93,7 +93,7 @@ app.get('/books/:id', async (req, res) => {
 // endpoint to get a specific book based on title
 app.get('/books/title/:title', async (req, res) => {
   const { title } = req.params
-  
+
   try {
     const bookTitle = await Book.find(title)
   
