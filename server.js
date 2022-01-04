@@ -72,7 +72,7 @@ app.get('/books/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    const bookById = await Book.findOne(id)
+    const bookById = await Book.findById(id)
 
     if (!bookById) {
       res.status(404).json({
