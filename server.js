@@ -62,31 +62,10 @@ app.get('/books', async (req, res) => {
   res.json(books)
 })
 
-// endpoint to get a specific book based on title
-app.get('/books/title/:title', async (req, res) => {
+// endpoint to get a specific book based on id
+app.get('/books/:id', async (req, res) => {
   try {
-    const bookTitle = await Book.find()
-  
-    if (!bookTitle) {
-      res.status(404).json({
-        response: 'No book found with that title',
-        success: false
-      })
-    } else {
-      res.status(200).json({
-        response: bookTitle,
-        success: true
-      })
-    }
-  } catch {
-    res.status(400).json({ error: 'Title is invalid'})
-  }
-})
-
-// get a specific book based on id
-app.get('/books/id/:id', async (req, res) => {
-  try {
-    const bookId = await Book.findById(req.params.id)
+    const bookId = await Book.findById(req.params.bookID)
 
     if (!bookId) {
       res.status(404).json({
@@ -101,6 +80,27 @@ app.get('/books/id/:id', async (req, res) => {
     }
   } catch (err) {
     res.status(400).json({ error: 'Id is invalid'})
+  }
+})
+
+// endpoint to get a specific book based on title
+app.get('/books/title/:title', async (req, res) => {
+  try {
+    const bookTitle = await Book.find(req.params.title)
+  
+    if (!bookTitle) {
+      res.status(404).json({
+        response: 'No book found with that title',
+        success: false
+      })
+    } else {
+      res.status(200).json({
+        response: bookTitle,
+        success: true
+      })
+    }
+  } catch {
+    res.status(400).json({ error: 'Title is invalid'})
   }
 })
 
