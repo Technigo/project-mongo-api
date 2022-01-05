@@ -5,7 +5,7 @@ import listEndpoints from 'express-list-endpoints';
 
 import netflixData from './data/netflix-titles.json';
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/movies';
+const mongoUrl = process.env.MONGO_URL || 'MONGO_URL';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
