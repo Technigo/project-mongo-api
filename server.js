@@ -27,7 +27,6 @@ const Music = mongoose.model('Music', {
   acousticness: Number,
   speechiness: Number,
   popularity: Number,
-  // Properties defined here match the keys
 })
 
 if (process.env.RESET_DB) {
@@ -46,9 +45,8 @@ if (process.env.RESET_DB) {
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
+// Defining my routes here
 app.get('/', (req, res) => {
-  // res.send('Welcome to my first backend')
   res.send(listEndpoints(app))
 })
 app.get('/top', async (req, res) => {
@@ -71,7 +69,6 @@ app.get('/top', async (req, res) => {
 app.get('/top/:id', async (req, res) => {
   const { id } = req.query
 
-  // const trackId = topMusicData.find((trackName) => trackName.id === +id)
   const trackId = await Music.findOne({ id: id })
 
   if (!trackId) {
