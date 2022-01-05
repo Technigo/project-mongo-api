@@ -1,13 +1,6 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+I builded a database with Mongo db. I played with it in Mongo db Compass and deployed it with Atlas. I used the mongoose framework in the server page. Did restfull API endpoints and deployed the server with Heroku. And conected it to my db. 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
-
-## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Look at it!
+https://helenas-databas.herokuapp.com/
