@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 import f1Data from "./data/f1-2020-data.json";
 
@@ -22,6 +22,40 @@ mongoose.Promise = Promise;
 const User = mongoose.model("User", {
     name: String,
     age: Number,
+});
+
+const DriverSchema = new Schema({
+    number: String,
+    code: String,
+    givenName: String,
+    familyName: String,
+    dateOfBirth: String,
+    nationality: String,
+});
+
+const ConstructorSchema = new Schema({
+    name: String,
+    nationality: String,
+});
+
+const ResultSchema = new Schema({
+    number: String,
+    position: String,
+    points: String,
+    driver: DriverSchema,
+    constructor: ConstructorSchema,
+    grid: String,
+    laps: String,
+});
+
+const Race = mongoose.model("Race", {
+    season: String,
+    round: String,
+    url: String,
+    raceName: String,
+
+    date: String,
+    results: [ResultSchema],
 });
 
 if (process.env.RESET_DB) {
