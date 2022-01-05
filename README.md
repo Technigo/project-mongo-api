@@ -1,6 +1,6 @@
 # Mongo API Project 
 
-The aim of the project was to learn how to use Mongodb to store data, model data, return error messages and fetch items from a Mongo database using Mongoose. The API is built with Node on Express and the aim of the enpoints is to follow RESTful standards. A dataset of Netflix titles was used for this project 🎥.
+The aim of the project was to learn how to use Mongodb to store data, model data, return error messages and fetch items from a Mongo database using Mongoose. The API is built with Node js on Express and the aim of the enpoints is to follow RESTful standards. A dataset of Netflix titles was used for this project 🎥.
 
 ## Documentation
 
