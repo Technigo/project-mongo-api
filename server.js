@@ -53,10 +53,11 @@ app.get("/", async (req, res) => {
 // you can search with any query params in this rout
 app.get("/music/:page", async (req, res) => {
   try {
-    let { page = 1, limit = 20 } = req.params;
+    let { page = 1 } = req.params;
+    let limit = 20;
     let music = await Music.find(req.query)
-      .limit(20)
-      .skip((page - 1) * limit);
+      .skip((page - 1) * limit)
+      .limit(limit);
 
     if (req.query.danceability) {
       const slowDance = await Music.find().lt(
