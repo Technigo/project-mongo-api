@@ -24,6 +24,22 @@ To insert/update all data in database:
 1. npm install
 2. npm run seedDb
 
+## Route examples:
+Get all books 
+https://project-mong-api.herokuapp.com/books
+
+GET books with limit: 
+https://project-mong-api.herokuapp.com/books?limit=3
+
+GET by author
+https://project-mong-api.herokuapp.com/books/authors?authors=Fre
+
+GET by title
+https://project-mong-api.herokuapp.com/books/title/?title=Chan
+
+GET by id
+https://project-mong-api.herokuapp.com/books/61d6f1fd5845c70e407179e2
+
 ## View it live
 
 See: https://project-mong-api.herokuapp.com/
