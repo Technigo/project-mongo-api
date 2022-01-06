@@ -15,6 +15,15 @@ Once you have the data stored, you will need to write appropriate RESTful endpoi
 
 Once the database was configured and conected, I started building basic endpoints. I create a middleware to catch the search by id at hte beginning and then I create the basic operations:  get/ put/patch/post/delete. I used postman to made the requests and the compass to see the database locally.
 
+## Seed Database with data
+
+In the seed-db folder you will find the import script and a folder named `data`, with all the folders related with locations, movies, screenings and seat availability that will be saved in db. Every time you run this file, this specific collections of data will be drop and created again.
+
+To insert/update all data in database:
+
+1. npm install
+2. npm run seedDb
+
 ## View it live
 
 See: https://project-mong-api.herokuapp.com/
