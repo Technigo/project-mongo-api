@@ -10,4 +10,4 @@ For continuation, when the data is displayed on a local server, the races are no
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://mongo-f1-2020.herokuapp.com/
