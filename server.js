@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose, { Schema } from "mongoose";
+import listEndpoints from "express-list-endpoints";
 
 import f1Data from "./data/f1-2020-data.json";
 
@@ -19,13 +20,8 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const User = mongoose.model("User", {
-    name: String,
-    age: Number,
-});
-
 const DriverSchema = new Schema({
-    number: String,
+    permanentNumber: String,
     code: String,
     givenName: String,
     familyName: String,
@@ -34,7 +30,7 @@ const DriverSchema = new Schema({
 });
 
 const ConstructorSchema = new Schema({
-    name: String,
+    constructorId: String,
     nationality: String,
 });
 
@@ -42,8 +38,8 @@ const ResultSchema = new Schema({
     number: String,
     position: String,
     points: String,
-    driver: DriverSchema,
-    constructor: ConstructorSchema,
+    Driver: DriverSchema,
+    Constructor: ConstructorSchema,
     grid: String,
     laps: String,
 });
@@ -53,32 +49,43 @@ const Race = mongoose.model("Race", {
     round: String,
     url: String,
     raceName: String,
-
     date: String,
     results: [ResultSchema],
 });
 
 if (process.env.RESET_DB) {
-    const newUser = new User({ name: "Sarah", age: 37 });
-    const newUser2 = new User({ name: "Steve", age: 38 });
-
-    newUser.save();
-    newUser2.save();
+    Race.deleteMany().then(
+        f1Data.MRData.RaceTable.Races.forEach((race) => {
+            new Race({
+                season: race.season,
+                round: race.round,
+                url: race.url,
+                raceName: race.raceName,
+                date: race.date,
+                results: race.Results,
+            }).save();
+        })
+    );
 }
 
 // Start defining your routes here
+
 app.get("/", (req, res) => {
-    User.find().then((users) => {
-        res.json(users);
+    res.send(listEndpoints(app))
+});
+
+app.get("/races", (req, res) => {
+    Race.find().then((races) => {
+        res.json(races);
     });
 });
 
-app.get("/:name", (req, res) => {
-    User.findOne({ name: req.params.name }).then((user) => {
-        if (user) {
-            res.json(user);
+app.get("/races/:round", (req, res) => {
+    Race.findOne({ round: req.params.round }).then((race) => {
+        if (race) {
+            res.json(race);
         } else {
-            res.status(404).json({ error: "not found" });
+            res.status(404).json({ error: "race not found, try rounds between 1-17" });
         }
     });
 });

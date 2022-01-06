@@ -1,18 +1,13 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+I took data from a formula 1 API and then reformated it and added it to a MONGO database using the mongoose library. I then created three GET endpoints for the data and deployed the API to heroku.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I used the MONGOdb cloud service and the mongo db compass tool to view the database. I took data from a local json and used mongoose models and schemas to add the data from the json into the database for the  first time.
+
+For continuation, when the data is displayed on a local server, the races are not necessarily displayed in any particular order. I'd like to look into sorting the data in the first endpoint, and creating some more endpoints.
 
 ## View it live
 
 Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
-
-
-npm install @babel/helper-compilation-targets -dev
-npm i -g eslint
-npm install @babel/node -g
