@@ -63,11 +63,11 @@ app.get('/endpoints', (req, res) => {//this endpoint is going to tell us all pos
   res.send(listEndpoints(app))
 })
 
-app.get('/nominations', (req, res) => { 
+app.get('/nominations', (req, res) => { //this route will display all nominations
   res.json(data)
 })
 
-app.get('/nominations/nominee/:nominee', (req, res) => {
+app.get('/nominations/nominee/:nominee', (req, res) => { //nominations per nominee will be shown, if response is given, if not an error is catched
   try {
     const { nominee } = req.params
     const nomineeId = goldenGlobesData.find(item => item.nominee.toLowerCase() === nominee.toLowerCase())
@@ -108,7 +108,7 @@ app.get('/nominations/category/:category', (req, res) => {
 	}
 });
 
-app.get('/year/:year', (req, res) => {
+app.get('/nominations/year/:year', (req, res) => {
   try {
     const year = req.params.year
     const showWin = req.query.win
