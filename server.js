@@ -67,14 +67,15 @@ app.get('/top', async (req, res) => {
 })
 
 app.get('/top/:id', async (req, res) => {
-  const { id } = req.query
-
-  const trackId = await Music.findOne({ id: id })
-
-  if (!trackId) {
-    res.status(404).send('No artist found')
-  } else {
-    res.json(trackId)
+  try {
+    const song = await Music.find(req.params)
+    if (song) {
+      res.json(song)
+    } else {
+      res.status(404).json({ error: 'Cannot get song by that index' })
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Invalid index' })
   }
 })
 
