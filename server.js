@@ -12,6 +12,14 @@ mongoose.Promise = Promise
 const port = process.env.PORT || 8080
 const app = express()
 
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service is currently unavailable.' })
+  }
+})
+
 app.use(cors())
 app.use(express.json())
 
