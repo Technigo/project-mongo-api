@@ -2,7 +2,7 @@
 
 Using MongoDB to store data, to then query that data to return data from created API endpoints.
 
-## The problem
+## Endpoints
 
 GET /
 Welcome page
