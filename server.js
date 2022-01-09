@@ -5,12 +5,15 @@ import listEndpoints from 'express-list-endpoints'
 
 import netflixData from './data/netflix-titles.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api"
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/netflix-catalogue'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 const port = process.env.PORT || 8080
 const app = express()
+
+app.use(cors())
+app.use(express.json())
 
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
@@ -20,7 +23,7 @@ app.use((req, res, next) => {
   }
 })
 
-const NetflixCatalogue = mongoose.model('Netflix Catalogue', {
+const Catalogue = mongoose.model('Catalogue', {
   show_id: Number,
   title: String,
   director: String,
@@ -35,18 +38,53 @@ const NetflixCatalogue = mongoose.model('Netflix Catalogue', {
   type: String,
 })
 
+if (process.env.RESET_DB) {
+  const netflixDb = async () => {
+    await Catalogue.deleteMany({})
+    netflixData.forEach((item) => {
+      new Catalogue(item).save()
+    })
+  }
+  netflixDb()
+}
+
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
+app.get('/catalogue', async (req, res) => {
+  console.log(req.query)
+  // const { netflixTitle, netflixYear } = req.query
+  let catalogueTitles = await Catalogue.find()
+  // let catalogueTitles = netflixData
+
+  // if (netflixTitle) {
+  //   catalogueTitles = catalogueTitles.filter(
+  //     (item) => item.title.toLowerCase().indexOf(netflixTitle.toLowerCase()) !== -1
+  //   )
+  // }
+
+  // if (netflixYear) {
+  //   catalogueTitles = catalogueTitles.filter(
+  //     (item) => item.release_year === +netflixYear
+  //   )
+  // }
+
+  res.json(catalogueTitles)
+    
+})
+
 app.get('/catalogue/id/:netflixId', async (req, res) => {
+  // const { netflixId } = req.params.show_id
   try {
-    const { netflixId } = req.params
-    const titleId = await NetflixCatalogue.findById(netflixId)
+    const titleById = await Catalogue.findById(req.params)
+    // const titleById = await netflixData.find(
+    //   (item) => item.show_id === +netflixId
+    // )
   
-    if (titleId) {
-      res.json({
-        response: titleId,
+    if (titleById) {
+      res.status(200).json({
+        response: titleById,
         success: true,
       })
     } else {
@@ -58,13 +96,6 @@ app.get('/catalogue/id/:netflixId', async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: 'Invalid title ID' })
   }
-})
-
-app.use(cors())
-app.use(express.json())
-
-app.get('/', (req, res) => {
-  res.send('Hello world')
 })
 
 app.listen(port, () => {
