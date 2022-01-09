@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   }
 })
 
-const NetflixTitles = mongoose.model('Netflix Titles', {
+const NetflixCatalogue = mongoose.model('Netflix Catalogue', {
   show_id: Number,
   title: String,
   director: String,
@@ -37,6 +37,27 @@ const NetflixTitles = mongoose.model('Netflix Titles', {
 
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
+})
+
+app.get('/catalogue/id/:netflixId', async (req, res) => {
+  try {
+    const { netflixId } = req.params
+    const titleId = await NetflixCatalogue.findById(netflixId)
+  
+    if (titleId) {
+      res.json({
+        response: titleId,
+        success: true,
+      })
+    } else {
+      res.status(404).json({
+        response: 'No title by that ID was found.',
+        success: false,
+      })
+    } 
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid title ID' })
+  }
 })
 
 app.use(cors())
