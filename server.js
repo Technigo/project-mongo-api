@@ -5,7 +5,7 @@ import listEndpoints from 'express-list-endpoints'
 
 import netflixData from './data/netflix-titles.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -18,6 +18,25 @@ app.use((req, res, next) => {
   } else {
     res.status(503).json({ error: 'Service is currently unavailable.' })
   }
+})
+
+const NetflixTitles = mongoose.model('Netflix Titles', {
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String,
+})
+
+app.get('/', (req, res) => {
+  res.send(listEndpoints(app))
 })
 
 app.use(cors())
