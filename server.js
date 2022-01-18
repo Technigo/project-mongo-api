@@ -1,4 +1,4 @@
-
+/* eslint-disable max-len */
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
 
 // new mongoose model: Book
 const Book = mongoose.model('Book', { 
-  
   bookID: Number,
   title: String,
   authors: String,
@@ -39,17 +38,25 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 })
 
+// seeding the DB only when typing this RESET_DB-variable in the Terminal. Should only be used, when you are setting a project up. Otherwise alll Userdata is gone!!!
+// $ RESET_DB=true npm run dev
 if (process.env.RESET_DB) { 
   const seedDatabase = async () => { 
-    await Book.deleteMany({}) 
+    await Book.deleteMany({}) // deletes all content from the DB
 
-    booksData.forEach((item) => { 
+    // eslint-disable-next-line arrow-parens
+    booksData.forEach(item => { 
       const newBook = new Book(item) 
       newBook.save()
     })
   }
   seedDatabase()
 }
+
+app.get('/endpoints', (req, res) => {
+  // eslint-disable-next-line no-undef
+  res.send(listEndpoints(app));
+})
 
 // get a list of the books (from json file)
 app.get('/books', async (req, res) => {
@@ -81,6 +88,6 @@ app.get('/books-rating/:rating', async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
+  // eslint-disable-next-line no-console
+  console.log(`Server running on http://localhost:${port} TEST`)
 })
