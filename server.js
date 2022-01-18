@@ -1,48 +1,13 @@
+/*eslint-disable*/
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// 
-// import goldenGlobesData from './data/golden-globes.json'
-// import avocadoSalesData from './data/avocado-sales.json'
 import booksData from './data/books.json'
-// import netflixData from './data/netflix-titles.json'
-// import topMusicData from './data/top-music.json'
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
-
-const bookSchema = new mongoose.Schema({
-  bookID: Number,
-  title: {
-    type: String,
-    lowercase: true
-  },
-  authors: {
-    type: String,
-    uppercase: true
-  },
-  average_rating: Number,
-  num_pages: Number,
-  ratings_count: Number
-})
-
-const Book = mongoose.model('Book', bookSchema)
-
-if (process.env.RESET_DB) {
-  const seedDataBase = async () => {
-    await Book.deleteMany()
-
-    booksData.forEach((item) => {
-      const newBook = new Book(item)
-      newBook.save()
-    })
-  }
-  seedDataBase()
-}
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
@@ -60,8 +25,65 @@ app.get('/', (req, res) => {
   res.send('Here are all your books')
 })
 
+// new mongoose model: Book
+const Book = mongoose.model('Book', { 
+  
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
+})
+
+if (process.env.RESET_DB) { 
+  const seedDatabase = async () => { 
+    await Book.deleteMany({}) 
+
+    booksData.forEach(item => { 
+      const newBook = new Book(item) 
+      newBook.save()
+    })
+  }
+  seedDatabase()
+}
+
+// get a list of the books (from json file)
+app.get('/books', async (req, res) => {
+  const titles = await Book.find()
+  res.json(titles)
+})
+
+// get a specific book based on its id, using param
+app.get('/books/:id/', async (req, res) => {
+  const book = await Book.findOne({ bookID: req.params.id })
+
+if (book) {
+  res.json(book)
+}
+else {
+  res.status(404).send('No book with that id was found')
+}
+})
+
+// get a specific rating on book 
+app.get('/books-rating/:rating', async (req, res) => {
+  const books = await Book.find({ average_rating: {$gte : req.params.rating } })
+
+  if (books.length === 0) {
+    res.status(404).send('No books with that rating was found')
+  } else {
+    res.json(books)
+  }
+})
+
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
+  console.log(`Server running on http://localhost:${port} TEST TEST`)
 })
