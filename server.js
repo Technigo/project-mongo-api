@@ -71,7 +71,7 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-	res.send('Hello world, welcome to netflix titles API by Madelene Trang');
+	res.send('Hello world, welcome to Netflix titles API by Madelene Trang 🎬⭐');
 });
 
 //showing all the possible enpoints in the app
