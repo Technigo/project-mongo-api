@@ -1,9 +1,8 @@
-/*eslint-disable*/
+
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import booksData from './data/books.json'
-
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -37,14 +36,14 @@ const Book = mongoose.model('Book', {
   language_code: String,
   num_pages: Number,
   ratings_count: Number,
-  text_reviews_count: Number,
+  text_reviews_count: Number
 })
 
 if (process.env.RESET_DB) { 
   const seedDatabase = async () => { 
     await Book.deleteMany({}) 
 
-    booksData.forEach(item => { 
+    booksData.forEach((item) => { 
       const newBook = new Book(item) 
       newBook.save()
     })
@@ -62,17 +61,16 @@ app.get('/books', async (req, res) => {
 app.get('/books/:id/', async (req, res) => {
   const book = await Book.findOne({ bookID: req.params.id })
 
-if (book) {
-  res.json(book)
-}
-else {
-  res.status(404).send('No book with that id was found')
-}
+  if (book) {
+    res.json(book)
+  } else {
+    res.status(404).send('No book with that id was found')
+  }
 })
 
 // get a specific rating on book 
 app.get('/books-rating/:rating', async (req, res) => {
-  const books = await Book.find({ average_rating: {$gte : req.params.rating } })
+  const books = await Book.find({ average_rating: { $gte: req.params.rating } })
 
   if (books.length === 0) {
     res.status(404).send('No books with that rating was found')
@@ -80,7 +78,6 @@ app.get('/books-rating/:rating', async (req, res) => {
     res.json(books)
   }
 })
-
 
 // Start the server
 app.listen(port, () => {
