@@ -50,7 +50,6 @@ if (process.env.RESET_DB) {
 			newShow.save();
 		});
 	};
-
 	seedDataBase();
 }
 
