@@ -7,12 +7,12 @@ import goldenGlobesData from './data/golden-globes.json'
 
 const data = goldenGlobesData
 
-const mongoUrl = process.envMONGO_URL || 'mongodb://localhost/mongodb-gg-project'
-mongoose.connect(mongoUrl, {useNewUrlParser:true, useUnifiedTopology:true})
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/golden-project-api"
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
 // Defines the port the app will run on. Defaults to 8080
-const port = process.env.PORT || 8090 
+const port = process.env.PORT || 8070 
 const app = express()
 
 //An award database model to start populating the database with all existing data
