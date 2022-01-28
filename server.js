@@ -11,7 +11,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/golden-project-ap
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080
+// Defines the port the app will run on. Defaults to 8080express-list-endpoints
 const port = process.env.PORT || 8070 
 const app = express()
 
