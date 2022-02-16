@@ -15,6 +15,7 @@
     "@babel/node": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.13.13",
     "nodemon": "^2.0.2"
@@ -28,5 +29,15 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.3.0"
-  }
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jsfrulle/project-mongo-api.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Jsfrulle/project-mongo-api/issues"
+  },
+  "homepage": "https://github.com/Jsfrulle/project-mongo-api#readme"
 }

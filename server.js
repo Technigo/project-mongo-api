@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import topMusicData from "./data/top-music.json";
+import musicData from "./data/top-music.json";
+
 
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost/project-mongo-api";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
 //
@@ -21,10 +21,10 @@ app.use(express.json());
 
 /* templat för vad som finns i ett objekt   */
 
-const MusicData = mongoose.model("MusicData", {
+const Music = mongoose.model("Music", {
   id: Number,
-  trackName: String,
-  artistName: String,
+  track: String,
+  artist: String,
   genre: String,
   bpm: Number,
   energy: Number,
@@ -40,71 +40,55 @@ const MusicData = mongoose.model("MusicData", {
 
 /* spara ny data */
 /* if  för att undvika att datasetet dubbliseras */
-if (process.env.RESET_DB) {
-  const seedData = async () => {
-    await MusicData.deleteMany({});
 
-    topMusicData.forEach((item) => {
-      const newMusicData = new MusicData(item);
-      newMusicData.save();
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Music.deleteMany({})
+
+    musicData.forEach((item) => {
+      const newMusic = new Music(item);
+      newMusic.save();
     });
   };
 
-  seedData();
+  seedDatabase();
 }
+
 // get full dataset
-app.get("/", (req, res) => {
-  res.send(topMusicData);
+app.get("/", async (req, res) => {
+  
+  res.json('hello')
 });
 
-app.get("/artist/:artist", (req, res) => {
-  const { artist } = req.params;
-  const { track } = req.query;
 
-  let artistData = topMusicData.filter(
-    (item) => item.artistName.toLowerCase() === artist.toLowerCase()
-  );
 
-  if (track) {
-    /* filter artists tracks to find one specific song*/
-    let nameArtistTrack = artistData.find(
-      (item) => item.trackName.toLowerCase() === track.toLowerCase()
-    );
+app.get("/artists/:artist", async (req, res) => {
+  try {
+    const artist = await Music.find({ artist: req.params.artist })
+    if (artist) {
+      res.json(artist)
+    } else {
+      res.status(404).json({ error: "No artist found" })
+    }
+  } catch (err) {
+    res.status(400).json({ error: "artist is not valid" })
+  }
+})
 
-    /* if track not exist in the dataset */
+app.get("/id/:id", async (req, res) => {
+  try {
+    const songId = await Music.findById({ id: req.params.id });
 
-    if (!nameArtistTrack) {
-      res.status(400).json({
-        response: "no track",
+    if (songId) {
+      res.json(songId);
+    } else {
+      res.status(404).json({
+        response: "No song found, with this ID",
         success: false
       });
-    } else {
-      /* 200 - success to get data, gives back searched track(one object due to find filtration of nameArtist) from an artists tracklist*/
-      res.status(200).json({
-        response: nameArtistTrack,
-        success: true
-      });
     }
-  } else if (artist) {
-    if (artistData.length === 0) {
-      /* if artist not exist in the dataset */
-      res.status(400).json({
-        response: "Artist not found",
-        success: false
-      });
-    } else {
-      /* 200 - success to get data, gives back searched track(one object due to find filtration of nameArtist) from an artists tracklist*/
-      res.status(200).json({
-        response: artistData,
-        success: true
-      });
-    }
-  } else {
-    /* server cant send data */
-    res.status(404).json({
-      response: "404 Not Found",
-      success: false
-    });
+  } catch (err) {
+    res.status(400).json({ error: "error" });
   }
 });
 
