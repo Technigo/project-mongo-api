@@ -28,7 +28,6 @@ const Music = mongoose.model("Music", {
   popularity: Number
 });
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
@@ -54,9 +53,8 @@ app.get("/allTracks", async (req, res) => {
 });
 
 app.get("/genre/:genre", async (req, res) => {
-  const searchGenre = req.params.genre;
-
   try {
+    const searchGenre = req.params.genre;
     const findGenre = await Music.find({ genre: searchGenre });
 
     if (findGenre) {
@@ -70,10 +68,8 @@ app.get("/genre/:genre", async (req, res) => {
 });
 
 app.get("/artist/:id", async (req, res) => {
-  const searchId = req.params.id;
-
   try {
-    const songId = await Music.findOne({ id: searchId });
+    const songId = await Music.findById(req.params.id);
 
     if (songId) {
       res.json(songId);
@@ -88,8 +84,8 @@ app.get("/artist/:id", async (req, res) => {
   }
 });
 
-// Start the server
+
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`);
-});
+  console.log(`Server running on http://localhost:${port}`)
+})
