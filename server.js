@@ -48,19 +48,19 @@ app.get("/", async (req, res) => {
   res.json("hello");
 });
 
-app.get("/tracks", async (req, res) => {
+app.get("/allTracks", async (req, res) => {
   const allTracks = await Music.find();
   res.json(allTracks);
 });
 
-app.get("/artist/:artist", async (req, res) => {
+app.get("/genre/:genre", async (req, res) => {
+  const searchGenre = req.params.genre;
+
   try {
-    const searchArtist = req.params.artist;
+    const findGenre = await Music.find({ genre: searchGenre });
 
-    const findArtist = await Music.find({ artistName: searchArtist });
-
-    if (findArtist) {
-      res.json(findArtist);
+    if (findGenre) {
+      res.json(findGenre);
     } else {
       res.status(404).json({ error: "No artist found" });
     }
@@ -69,9 +69,10 @@ app.get("/artist/:artist", async (req, res) => {
   }
 });
 
-app.get("/artists/:id", async (req, res) => {
+app.get("/artist/:id", async (req, res) => {
+  const searchId = req.params.id;
+
   try {
-    const searchId = req.params.id;
     const songId = await Music.findOne({ id: searchId });
 
     if (songId) {
