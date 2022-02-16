@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import musicData from "./data/top-music.json";
+import musicData from "./data/music.json";
 
 
 const mongoUrl =
