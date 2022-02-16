@@ -3,14 +3,10 @@ import cors from "cors";
 import mongoose from "mongoose";
 import musicData from "./data/music.json";
 
-const mongoUrl =
-  process.env.MONGO_URL || "mongodb://localhost/project-mongo-api";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-// Defines the port the app will run on. Defaults to 8080, but can be
-// overridden when starting the server. For example:
-//
-//   PORT=9000 npm start
+
 const port = process.env.PORT || 8080;
 const app = express();
 
