@@ -16,12 +16,11 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
-
+app.use(cors())
+app.use(express.json())
 /* templat för vad som finns i ett objekt   */
 
-const Music = mongoose.model("Music", {
+const Music = mongoose.model('Music', {
   id: Number,
   track: String,
   artist: String,
@@ -38,27 +37,33 @@ const Music = mongoose.model("Music", {
   popularity: Number
 });
 
-/* spara ny data */
-/* if  för att undvika att datasetet dubbliseras */
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Music.deleteMany({})
 
-    musicData.forEach((item) => {
-      const newMusic = new Music(item);
-      newMusic.save();
-    });
-  };
 
-  seedDatabase();
+if (process.env.RESET_DB) { 
+  const seedDatabase = async () => { 
+    await Music.deleteMany({}) 
+
+    musicData.forEach(item => { 
+      const newMusic = new Music(item) 
+      newMusic.save()
+    })
+  }
+  seedDatabase()
 }
 
-// get full dataset
+
+
 app.get("/", async (req, res) => {
-  
   res.json('hello')
 });
+
+
+app.get("/tracks", async (req, res) => {
+  const allTracks = await Music.find()
+  res.json(allTracks)
+})
+
 
 
 
@@ -75,7 +80,7 @@ app.get("/artists/:artist", async (req, res) => {
   }
 })
 
-app.get("/id/:id", async (req, res) => {
+app.get("/artists/:id", async (req, res) => {
   try {
     const songId = await Music.findById({ id: req.params.id });
 
