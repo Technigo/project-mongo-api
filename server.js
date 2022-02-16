@@ -56,7 +56,7 @@ app.get("/bpm", async (req, res) => {
   const searchBmp = req.query;
 
   try {
-    const findBpm = await Song.find({ bpm: searchBmp });
+    const findBpm = await Music.find({ bpm: searchBmp });
 
     if (findBpm) {
       res.json(findBpm);
