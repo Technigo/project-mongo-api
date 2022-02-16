@@ -48,8 +48,24 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/allTracks", async (req, res) => {
-  const allTracks = await Music.find();
+  const allTracks = await Music.find({});
   res.json(allTracks);
+});
+
+app.get("/bpm", async (req, res) => {
+  const searchBmp = req.query;
+
+  try {
+    const findBpm = await Song.find({ bpm: searchBmp });
+
+    if (findBpm) {
+      res.json(findBpm);
+    } else {
+      res.status(404).json({ error: "No track have that bpm" });
+    }
+  } catch (err) {
+    res.status(400).json({ error: "error" });
+  }
 });
 
 app.get("/genre/:genre", async (req, res) => {
@@ -84,8 +100,7 @@ app.get("/artist/:id", async (req, res) => {
   }
 });
 
-
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log(`Server running on http://localhost:${port}`)
-})
+  console.log(`Server running on http://localhost:${port}`);
+});
