@@ -6,8 +6,7 @@ import listEndpoints from "express-list-endpoints";
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl =
-  process.env.MONGO_URL ||
-  "mongodb+srv://nini:xtOdkZULCSOCks7Y@cluster0.6qmgj.mongodb.net/projectMongo?retryWrites=true&w=majority";
+  process.env.MONGO_URL || "mongodb://localhost/marpet-project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
