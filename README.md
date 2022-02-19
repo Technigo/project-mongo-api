@@ -1,13 +1,23 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+This project sets up and stores data in mongoDB, and queries that data from an API that I built containing a dataset from spotify with the top songs on the billboard.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Documentation
 
-## The problem
+Show all endpoints: /endpoints
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Show all songs in the database /songs
+
+Filter songs by id /songs/id/:id
+
+Filter songs by title /songs/title/:trackName
+
+Show all songs by a specific artist /songs/artist/:artistName
+
+Show all songs in a specific genre /songs/genre/:genre
+
+Filter by a minimum of bpm by this form (change 110 to your chosen bpm): songs/?bpm=110
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://mongo-api-nina.herokuapp.com/
