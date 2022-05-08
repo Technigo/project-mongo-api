@@ -8,8 +8,8 @@ import listEndpoints from "express-list-endpoints"
 
 import netflixData from "./data/netflix-titles.json";
 
-
-require('dotenv/config')
+import dotenv from 'dotenv'
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/world-streaming-entertainment";
 
