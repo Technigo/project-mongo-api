@@ -38,7 +38,7 @@ app.use(bodyParser.json())
 app.use(express.json());
 
 const netflixItemsRoute = require('./routes/netflixItems')
-app.use('/api', netflixItemsRoute)
+app.use('/api/netflixshows', netflixItemsRoute)
 
 app.get("/", async (req, res) => {
   res.send(listEndpoints(app));

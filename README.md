@@ -1,13 +1,15 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+Hello! Welcome to the Netflix title API. The data is stored in Mongo DB and is being pulled from there.
+Here users can use the following endpoints to find relevant titles they want:
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+**/api/netflixshows/allshows** is the base endpoint. Users can get all the shows that exist in the database.
 
-## The problem
+**/api/netflixshows/titles/:title** will bring users to a specific title they want.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+**"/api/netflixshows/country/:country** will bring users to all shows from a specific country.
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+

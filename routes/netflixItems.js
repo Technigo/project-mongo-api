@@ -3,20 +3,23 @@ import NetflixItem from "../models/NetflixItem"
 
 const router = express.Router()
 
-router.get('/all', async (req, res) => {
+router.get('/allshows', async (req, res) => {
     const allNetflixItems = await NetflixItem.find()
     res.json(allNetflixItems)
 })
 
 router.get('/titles/:title', async (req, res) => {
     try {
-        const findByTitle =  await NetflixItem.findOne({ title: req.params.title})
+        const titleInput = req.params.title
+        const findByTitle =  await NetflixItem.findOne({ 
+            title: new RegExp(titleInput, 'i')
+        })
         res.status(200).json({
             data: findByTitle,
             success: true
         })
     } catch (err) {
-        res.status(200).json({
+        res.status(400).json({
             data: "Not found",
             success: false
         })
@@ -41,25 +44,6 @@ router.get('/country/:country', async (req, res) => {
     }
 })
 
-//trying to convert string to number.
-
-// router.get('/year/:year', async (req, res) => {
-//     try {
-//         console.log(yearInput)
-//         const findByYear =  await NetflixItem.find({ 
-//             country: +req.params.release_year
-//         })
-//         res.status(200).json({
-//             data: findByYear,
-//             success: true
-//         })
-//     } catch (err) {
-//         res.status(200).json({
-//             data: "Not found",
-//             success: false
-//         })
-//     }
-// })
-
+//trying to convert string to number if time allows
 
 module.exports = router
