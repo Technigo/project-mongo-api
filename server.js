@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -19,6 +19,48 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+
+
+// const User = mongoose.model("User", {
+//   name: String,
+//   age: Number,
+//   deceased: Boolean
+// });
+
+const Song = mongoose.model("song", {
+    id: Number,
+    trackName: String,
+    artistName: String,
+    genre: String,
+    bpm: Number,
+    energy: Number,
+    danceability: Number,
+    loudness: Number,
+    liveness: Number,
+    valence: Number,
+    length: Number,
+    acousticness: Number,
+    speechiness: Number,
+    popularity: Number
+});
+
+if(process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Song.deleteMany();
+    topMusicData.forEach( singleSong => {
+      const newSong = new Song(singleSong);
+      newSong.save();
+    })
+  }
+  seedDatabase();
+}
+
+// const testUser = new User({
+//   name: "Maksy",
+//   age: 28,
+//   deceased: false
+// });
+// testUser.save();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
