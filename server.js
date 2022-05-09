@@ -8,12 +8,10 @@ import listEndpoints from "express-list-endpoints"
 
 import netflixData from "./data/netflix-titles.json";
 
-// import dotenv from 'dotenv'
-// dotenv.config()
+import dotenv from 'dotenv'
+dotenv.config()
 
-require('dotenv/config')
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "https://netflix-titles-mongodb-project.herokuapp.com/";
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
   console.log('connected to Mongo DB')
