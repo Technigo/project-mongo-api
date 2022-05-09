@@ -3,6 +3,7 @@ import cors from "cors";
 import bodyParser from 'body-parser'
 import mongoose from "mongoose";
 import NetflixItem from "./models/NetflixItem"
+import netflixItems from "./routes/netflixItems"
 
 import listEndpoints from "express-list-endpoints"
 
@@ -16,6 +17,8 @@ const mongoUrl = process.env.MONGO_URL || "https://netflix-titles-mongodb-projec
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
   console.log('connected to Mongo DB')
 });
+
+console.log("MONGO_URL", process.env.MONGO_URL)
 
 mongoose.Promise = Promise;
 
@@ -36,9 +39,7 @@ if (process.env.RESET_DB) {
 app.use(cors());
 app.use(bodyParser.json())
 app.use(express.json());
-
-const netflixItemsRoute = require('./routes/netflixItems')
-app.use('/api/netflixshows', netflixItemsRoute)
+app.use('/api/netflixshows', netflixItems)
 
 app.get("/", async (req, res) => {
   res.send(listEndpoints(app));
