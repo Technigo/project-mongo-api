@@ -7,8 +7,8 @@ import mongoose from "mongoose";
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-import topMusicData from "./data/top-music.json";
+import netflixData from "./data/netflix-titles.json";
+// import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -26,22 +26,37 @@ const app = express();
 //   deceased: Boolean
 // })
 
-const Song = mongoose.model("Song", {
-  id: Number,
-  trackName: String,
-  artistName: String,
-  genre: String,
-  bpm: Number,
-  energy: Number,
-  danceability: Number,
-  loudness: Number,
-  liveness: Number,
-  valence: Number,
-  length: Number,
-  acousticness: Number,
-  speechiness: Number,
-  popularity: Number
+const Stream = mongoose.model("Stream", {
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
 })
+
+// const Song = mongoose.model("Song", {
+//   id: Number,
+//   trackName: String,
+//   artistName: String,
+//   genre: String,
+//   bpm: Number,
+//   energy: Number,
+//   danceability: Number,
+//   loudness: Number,
+//   liveness: Number,
+//   valence: Number,
+//   length: Number,
+//   acousticness: Number,
+//   speechiness: Number,
+//   popularity: Number
+// })
   
 
 
@@ -51,9 +66,9 @@ const Song = mongoose.model("Song", {
 if(process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Song.deleteMany()
-    topMusicData.forEach( singleSong => {
-      const NewSong = new Song(singleSong)
-      NewSong.save()
+    netflixData.forEach( singleStream => {
+      const NewStream = new Stream(singleStream)
+      NewStream.save()
     })
   }
   seedDatabase()
