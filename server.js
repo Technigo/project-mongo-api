@@ -62,6 +62,7 @@ if (process.env.RESET_DB) {
     await Book.deleteMany();
 		bookData.forEach(book => {
       const newAuthor = new Author({ name: book.authors });
+      newAuthor.save();
       book.authors = newAuthor;
       const newBook = new Book(book);
 			newBook.save();
@@ -89,7 +90,6 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
-
 app.get("/books/:id", async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
@@ -101,7 +101,6 @@ app.get("/books/:id", async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: "Invalid book id" })
   }
-  
 });
 
 app.get("/authors", async (req, res) => {
@@ -116,8 +115,7 @@ app.get("/authors/:id", async (req, res) => {
   } else {
     res.status(404).json({ error: "Author not found" })
   }
-  
-})
+});
 
 app.get("/authors/:id/books", async (req, res) => {
   const author = await Author.findById(req.params.id);
@@ -126,19 +124,14 @@ app.get("/authors/:id/books", async (req, res) => {
     const books = await Book.find({authors: mongoose.Types.ObjectId(author.id)})
     res.json(books)
   } else {
-    
+    res.status(404).json({ error: "Author not found" })
   }
-  
-
-  
-
-})
+});
 
 app.get("/books", async (req, res) => {
   const books = await Book.find().populate("authors");
-  console.log(books)
   res.json(books);
-})
+});
 
 // Start the server
 app.listen(port, () => {
