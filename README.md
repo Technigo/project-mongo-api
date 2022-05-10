@@ -4,7 +4,7 @@ This was my second backend project and the first using Mongo DB and Mongoose.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I used the basecode from my previous project https://github.com/MarianneArdin/project-express-api
 
 ## View it live
 
