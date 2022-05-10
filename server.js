@@ -7,21 +7,10 @@ import bookData from "./data/books.json";
 
 dotenv.config();
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -41,24 +30,12 @@ const Book = mongoose.model("Book", {
   text_reviews_count: Number
 });
 
-// const User = mongoose.model("User", {
-//   name: String,
-//   age: Number,
-//   deceased: Boolean
-// });
-
 const Author = mongoose.model("Author", {
   name: String
-})
-
-
-// const testUser = new User({name: "Amanda", age: 28, deceased: false});
-
-// testUser.save();
+});
 
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
-    // await User.deleteMany();
     await Book.deleteMany();
 		bookData.forEach(book => {
       const newAuthor = new Author({ name: book.authors });
@@ -70,54 +47,62 @@ if (process.env.RESET_DB) {
   };
 
   seedDatabase();
-}
+};
 
-
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
-// app.use((req, res, next) => {
-//   if (mongoose.connection.readyState === 1) {
-//     next();
-//   } else {
-//     res.status(503).json({ error: "Service unavailable" });
-//   }
-// })
-
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
 });
 
-app.get("/books/:id", async (req, res) => {
-  try {
-    const book = await Book.findById(req.params.id);
-    if (book) {
-      res.json(book);
-    } else {
-      res.status(404).json({ error: "Book not found" })
-    } 
-  } catch (error) {
-    res.status(400).json({ error: "Invalid book id" })
-  }
+app.get("/", (req, res) => {
+  res.send({
+    Welcome: "Hello book lovers! These are the available routes!",
+    Routes: ["/authors  get all authors", "/authors/id/:id  get one author by id", "/authors/id/:id/books  get all books by one author", "/books  get all books", "/books/id/:id   get one book by id "],
+    Queries: ["/authors?name='name'  get authors whose names contain the string provided", "/authors?id='id'  get one author by id"]
+  });
 });
 
 app.get("/authors", async (req, res) => {
-  const authors = await Author.find();
-  res.json(authors);
+  const { id, name } = req.query;
+  let authors = await Author.find();
+
+  if (id) {
+		authors = authors.filter(item => item._id.toString() === id);
+	};
+
+  if (name) {
+    authors = authors.filter(
+      (author) => author.name.toLowerCase().includes(name.toLowerCase())
+    )
+  };
+
+  if (authors.length > 0) {
+    res.json(authors);
+  } else {
+    res.status(404).json({ error: "Authors not found" })
+  } 
 });
 
-app.get("/authors/:id", async (req, res) => {
-  const author = await Author.findById(req.params.id);
-  if (author) {
-    res.json(author)
-  } else {
-    res.status(404).json({ error: "Author not found" })
+app.get("/authors/id/:id", async (req, res) => {
+  try {
+    const author = await Author.findById(req.params.id);
+    if (author) {
+      res.json(author)
+    } else {
+      res.status(404).json({ error: "Author not found" })
+    }
+  } catch (error) {
+    res.status(400).json({ error: "Invalid author id" })
   }
 });
 
-app.get("/authors/:id/books", async (req, res) => {
+app.get("/authors/id/:id/books", async (req, res) => {
   const author = await Author.findById(req.params.id);
 
   if (author) {
@@ -133,7 +118,19 @@ app.get("/books", async (req, res) => {
   res.json(books);
 });
 
-// Start the server
+app.get("/books/id/:id", async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).json({ error: "Book not found" })
+    } 
+  } catch (error) {
+    res.status(400).json({ error: "Invalid book id" })
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
