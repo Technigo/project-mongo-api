@@ -9,10 +9,27 @@ import mongoose from "mongoose";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
+import healthyLifestyles from "./data/healthy-lifestyle-cities-2021.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://localhost/project-mongo-week18";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
+
+const Capital = mongoose.model("Capital", {
+  city: String,
+});
+
+const amsterdam = new Capital({ city: "Amsterdam" });
+amsterdam.save();
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Capital.deleteMany();
+
+    seedDatabase();
+  };
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -28,6 +45,65 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
+
+// All the cities
+app.get("/healthyLifestyles", (req, res) => {
+  res.status(200).json({
+    data: healthyLifestyles,
+    success: true,
+  });
+});
+
+// Return only the city you have typed in
+app.get("/healthyLifestyles/:city", (req, res) => {
+  const { city } = req.params;
+
+  const cityByName = healthyLifestyles.filter(
+    (capital) => capital.city.toLowerCase() === city.toLowerCase()
+  );
+
+  if (!cityByName) {
+    res.status(404).json({
+      data: "not found",
+      success: false,
+    });
+  } else {
+    res.status(200).json({
+      data: cityByName,
+      success: true,
+    });
+  }
+});
+
+//Return the city by the rank number you have typed in
+app.get("/healthyLifestyles/rank/:rank", (req, res) => {
+  const { rank } = req.params;
+
+  const rankNumber = healthyLifestyles.find((number) => number.rank === +rank);
+
+  if (!rankNumber) {
+    res.status(404).json({
+      data: "not found",
+      success: false,
+    });
+  } else {
+    res.status(200).json({
+      data: rankNumber,
+      success: true,
+    });
+  }
+});
+
+//Return the top contester's
+// app.get("/healthyLifestyles/top/sunshineHours", (req, res) => {
+//   const sunshineHours = healthyLifestyles.filter(
+//     (hours) => hours.sunshine_hours_city > 2500
+//   );
+//   if (sunshineHours.length === 0) {
+//     res.status(404).json("sorry no sunshine here");
+//   }
+//   res.json(sunshineHours);
+// });
 
 // Start the server
 app.listen(port, () => {
