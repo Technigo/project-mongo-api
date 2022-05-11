@@ -72,6 +72,13 @@ app.get("/streams/title/:title", async (req, res) => {
 
 })
 
+app.get("/streams/year/:release_year", async (req, res) => {
+  
+  const releaseYear = await Stream.find({release_year: req.params.release_year})
+  res.send(releaseYear)
+
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
