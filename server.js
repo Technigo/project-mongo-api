@@ -1,10 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+//FIX NEDAN//
+//import listEndpoints from 'express-list-endpoints';
 
-// If you're using one of our datasets, uncomment the appropriate import below
 import goldenGlobesData from './data/golden-globes.json';
 
+const data = goldenGlobesData;
 //NOT SURE WHERE THIS GOES FROM GUIDE DEPLOYING ON NOTION//
 //mongodb+srv://Spazza76:<Gotland2022>@cluster0.8w8rr.mongodb.net/goldenGlobes?retryWrites=true&w=majority
 
@@ -18,38 +20,80 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8090;
 const app = express();
 
-// FRÅN CODELONG DANIEL 9/5//
+// Starts populating the database
+const Award = mongoose.model('Award', {
+	year_film: Number,
+	year_award: Number,
+	ceremony: Number,
+	category: String,
+	nominee: String,
+	film: String,
+	win: Boolean,
+});
+
+//Starts seeding the database
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
-		await Film.deleteMany();
-		goldenGlobesData.forEach((singleFilm) => {
-			const newFilm = new Film(singleFilm);
-			newFilm.save();
+		await Award.deleteMany();
+		data.forEach((item) => {
+			const newAward = new Award(item);
+			newAward.save();
 		});
 	};
 	seedDatabase();
 }
-// FRÅN CODELONG DANIEL 9/5 SOMETHING IN LINE 33-41 CAUSES CRASH//
-// const Film = mongoose.model('Film', {
-// 	year_film: Number,
-// 	year_award: Number,
-// 	ceremony: Number,
-// 	category: String,
-// 	nominee: String,
-// 	film: String,
-// 	win: Boolean,
-// });
-// const User = mongoose.model('User', {
-// 	name: String,
-// 	age: Number,
-// 	deceased: Boolean,
-// });
 
-// const testUser = new User({ name: 'Maksy', age: 28, deceased: false });
-// testUser.save();
+// Add middlewares to enable cors and json body parsing
+app.use(cors());
+app.use(express.json());
 
-// const secondTestUser = new User({ name: 'Daniel', age: 27, deceased: false });
-// secondTestUser.save();
+// Middleware that checks if the database is connected before going to endpoints
+app.use((req, res, next) => {
+	if (mongoose.connection.readyState === 1) {
+		next();
+	} else {
+		res.status(503).json({ error: 'Service unavailable' });
+	}
+});
+
+//RESTful routes/endpoints
+app.get('/', (req, res) => {
+	res.send(
+		'Welcome to the Golden-Globes API. Enter /endpoints to see available endpoints.'
+	);
+});
+
+//THIS DOES NOT WORK
+app.get('/endpoints', (req, res) => {
+	//this endpoint is going to tell us all possible endpoint we have
+	res.send(listEndpoints(app));
+});
+
+//THIS WORKS
+app.get('/nominations', (req, res) => {
+	//this route will display all nominations
+	res.json(data);
+});
+
+app.get('/goldenGlobes/nominee', async (res, req) => {
+	const nominee = await nominee.find().populate('nominee');
+	res.json(nominee);
+	if (!data) {
+		res.status(404).json('Not found');
+	} else {
+		res.status(200).json({ data: nominee, success: true });
+	}
+});
+
+app.get('/goldenGlobes/category', async (res, req) => {
+	const category = await category.find().populate('catagory');
+	res.json(category);
+	if (!data) {
+		res.status(404).json('Not found');
+	} else {
+		res.status(200).json({ data: category, success: true });
+	}
+});
 
 //FRÅN DAMIEN CODE ALONG similar to above by Daniel?//
 const ceremony = mongoose.model('ceremony', {
@@ -64,20 +108,17 @@ const film = mongoose.model('Film', {
 	},
 });
 
-if (process.env.RESET_DATABASE) {
-	console.log('Resetting database!');
-	const seedDatabase = async () => {
-		await film.deleteMany();
-		const TheDanishGirl = new film({ name: 'The Danish Girl' });
-		await TheDanishGirl.save();
-	};
+//TA BORT?
+// if (process.env.RESET_DATABASE) {
+// 	console.log('Resetting database!');
+// 	const seedDatabase = async () => {
+// 		await film.deleteMany();
+// 		const TheDanishGirl = new film({ name: 'The Danish Girl' });
+// 		await TheDanishGirl.save();
+// 	};
 
-	seedDatabase();
-}
-
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+// 	seedDatabase();
+// }
 
 // Start defining your routes here
 app.get('/', (req, res) => {
@@ -86,14 +127,15 @@ app.get('/', (req, res) => {
 
 //Fetches data from the API FRÅN FÖRRA VECKAN //
 app.get('/goldenGlobes', (req, res) => {
-	res.status(200).json(goldenGlobesData);
+	res.status(200).json(data);
 });
 
+//THIS DOES NOT WORK
 app.get('/goldenGlobes/year_award/:year_award', (req, res) => {
-	const filmByYear = goldenGlobesData.find(
+	const filmByYear = data.find(
 		(goldenGlobes) => goldenGlobes.year_award === req.params.year_award
 	);
-	if (!goldenGlobesData) {
+	if (!data) {
 		res.status(404).json('Not found');
 	} else {
 		res.status(200).json({ data: filmByYear, success: true });
@@ -104,9 +146,7 @@ app.get('/goldenGlobes/year_award/:year_award', (req, res) => {
 app.get('/goldenGlobes/win/:showName', (req, res) => {
 	const showName = req.params.showName;
 
-	let goldenGlobesWinners = goldenGlobesData.find(
-		(item) => item.nominee === showName
-	);
+	let goldenGlobesWinners = data.find((item) => item.nominee === showName);
 	res.status(200).json({ data: goldenGlobesWinners.win, success: true });
 });
 //här slutar API FRÅN FÖRRA VECKAN //
@@ -115,21 +155,6 @@ app.get('/goldenGlobes/win/:showName', (req, res) => {
 app.get('/goldenGlobes/film', async (res, req) => {
 	const film = await film.find();
 	res.json(film);
-});
-
-app.get('/goldenGlobes/nominee', async (res, req) => {
-	const nominee = await nominee.find().populate('nominee');
-	res.json(nominee);
-	if (!goldenGlobesData) {
-		res.status(404).json('Not found');
-	} else {
-		res.status(200).json({ data: nominee, success: true });
-	}
-});
-
-app.get('/goldenGlobes/category', async (res, req) => {
-	const category = await category.find().populate('catagory');
-	res.json(category);
 });
 
 app.get('/goldenGlobes/film/:id/film', async (res, req) => {
