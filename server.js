@@ -71,6 +71,30 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
+//Path params
+app.get("/songs/song/:artistName", async (req, res) => {
+  //find() will retrieve array of songs with given criteria
+  //findOne() will retrieve first object with given criteria
+  const singleSong = await Song.find({artistName: req.params.artistName})
+  res.send(singleSong)
+})
+
+//Query 
+app.get("/songs/song", async (req, res) => {
+  const {artistName, trackName, energy} = req.query
+
+//costn myRegex = /.*/gm
+//const singleSong = await Song.find({artistName ? artistName: myRegex, trackName: trackName})
+
+  if (trackName) {
+    const singleSong = await Song.find({trackName: trackName})
+    res.send(singleSong)
+  } else {
+      const singleSong = await Song.find({artistName: artistName})
+      res.send(singleSong)
+    }
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
