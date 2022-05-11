@@ -34,27 +34,13 @@ const GoldenGlobes = mongoose.model("GoldenGlobes", {
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await GoldenGlobes.deleteMany()
-    goldenGlobesData.forEach(items => {
-      const newItem = new GoldenGlobes(items)
+    goldenGlobesData.forEach(item => {
+      const newItem = new GoldenGlobes(item)
       newItem.save()
     })
   }
   seedDatabase()
 }
-
-const Animal = mongoose.model("Animal", {
-  name: String, 
-  age: Number, 
-  isFurry: Boolean
-})
-
-Animal.deleteMany().then(() => {
-  new Animal({ name: "Alfons", age: 2, isFurry: true}).save()
-  new Animal({ name: "Selma", age: 5, isFurry: true}).save()
-  new Animal({ name: "Nemo", age: 1, isFurry: false}).save()
-})
-
-
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -62,19 +48,30 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  Animal.find().then(animals => {
-    res.json(animals);
-  })
+  res.send("Hello, welcome to this GoldenGlobe API")
 });
 
-app.get("/:name", (req, res) => {
-  Animal.findOne({name: req.params.name}).then(animal => {
-    if(animal) {
-      res.json(animal)
-    } else {
-      res.status(404).json({error: "No animal by that name found"})
-    }
-  })
+app.get("/goldenglobes", async (req, res) => {
+  const allGoldenGlobes = await GoldenGlobes.find()
+  res.json(allGoldenGlobes)
+})
+
+//Gives back an array with a specific year
+app.get("/goldenglobes/years/:year_award", async (req,res) => {
+  const yearAward = await GoldenGlobes.find({year_award: req.params.year_award})
+  res.send(yearAward)
+})
+
+//Gives back one item of nominee
+app.get("/goldenglobes/nominees/:nominee", async (req,res) => {
+  const nominee = await GoldenGlobes.find({nominee: req.params.nominee})
+  res.send(nominee)
+})
+
+app.get("/goldenglobes/winners/:win", async (req, res) => {
+  
+  const winners = await GoldenGlobes.find({win: req.params.win})
+  res.send(winners)
 })
 
 // Start the server
