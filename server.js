@@ -2,12 +2,6 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -31,7 +25,6 @@ const Song = mongoose.model("Song", {
   popularity: Number,
 });
 
-//If the database is resetting this will happen
 if (process.env.RESET_DB) {
   const SeedDatabase = async () => {
     await Song.deleteMany();
@@ -55,59 +48,36 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello!");
+  const Landing = {
+    Welcome: "Hi! This is an open API for Top Music!",
+    Routes: [
+      {
+        "/artists": "Get the Top Music",
+        "/songs/song/:artistName": "Get songs by artistname",
+        "/songs/genre/:genre": "Get songs by genre",
+      },
+    ],
+  };
+  res.send(Landing);
 });
 
 app.get("/artists", async (req, res) => {
+  //Will show the list of Top Music
   const artists = await Song.find();
   res.json(artists);
 });
 
-app.get("/tracks", async (req, res) => {
-  const tracks = await Song.find();
-  res.json(tracks);
-});
-
-// app.get("/songs/song", async (req, res) => {
-// //   //this will retrive only the first found song
-// //   const { artistName, trackName, energy } = req.query;
-
-// //   const artistNameRegex = new RegExp(artistName, "i");
-// //   const trackNameRegex = new RegExp(trackName, "i");
-// //   const energyRegex = new RegExp(energy, "i");
-
-// //   const singleSong = await Song.find({
-// //     artistName: artistName,
-// //     trackName: trackName,
-// //     energy: energy,
-// //   });
-// //   res.send(singleSong);
-// // });
-
 app.get("/songs/song/:artistName", async (req, res) => {
-  //this will retrive only the first found song
+  //Will retrive only the first found song
   const singleSong = await Song.findOne({ artistName: req.params.artistName });
   res.send(singleSong);
 });
 
 app.get("/songs/genre/:genre", async (req, res) => {
-  //this will retrive only the first found song
+  //Will retrive the songs that belongs to the genre
   const singleGenre = await Song.find({ genre: req.params.genre });
   res.send(singleGenre);
 });
-
-//  try {
-//    const artist = await Song.findById(req.params.id);
-//  if (artist) {
-//   res.json(artist)
-// } else {
-// }
-//   res.status(404).json({error: 'User not find!'})
-// } catch (err) {
-//   res.status(400).json({error: 'Invalid user Id'})
-// }
-
-// })
 
 // Start the server
 app.listen(port, () => {
