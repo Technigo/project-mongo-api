@@ -23,14 +23,6 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
-// app.use((req, res, next) => {
-//   if (mongoose.connection.readyState === 1) {
-//     next();
-//   } else {
-//     res.status(503).json({ error: "Service unavailable" });
-//   }
-// });
-
 const HealthyCities = mongoose.model("HealthyCities", {
   city: String,
   rank: Number,
@@ -46,16 +38,8 @@ const HealthyCities = mongoose.model("HealthyCities", {
   cost_of_a_monthly_gym_membership_city: Number,
 });
 
-// const Capital = mongoose.model("Capital", {
-//   city: String,
-// });
-
-// const amsterdam = new Capital({ city: "Amsterdam" });
-// amsterdam.save();
-
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    // await Capital.deleteMany();
     await HealthyCities.deleteMany();
 
     healthyLifestyles.forEach((item) => {
@@ -68,6 +52,13 @@ if (process.env.RESET_DB) {
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
+});
 
 // Start defining your routes here
 app.get("/", (req, res) => {
@@ -103,7 +94,7 @@ app.get("/healthyLifestyles/:city", (req, res) => {
   }
 });
 
-//Return the city by the rank number you have typed in
+// Return the city by the rank number you have typed in
 app.get("/healthyLifestyles/rank/:rank", (req, res) => {
   const { rank } = req.params;
 
