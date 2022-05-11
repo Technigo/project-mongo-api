@@ -1,14 +1,9 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
+import listEndpoints from "express-list-endpoints"
 import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -19,12 +14,6 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
-
-// const User = mongoose.model("User", {
-//   name: String,
-//   age: Number,
-//   deceased: Boolean
-// })
 
 const Stream = mongoose.model("Stream", {
   show_id: Number,
@@ -41,31 +30,10 @@ const Stream = mongoose.model("Stream", {
   type: String
 })
 
-// const Song = mongoose.model("Song", {
-//   id: Number,
-//   trackName: String,
-//   artistName: String,
-//   genre: String,
-//   bpm: Number,
-//   energy: Number,
-//   danceability: Number,
-//   loudness: Number,
-//   liveness: Number,
-//   valence: Number,
-//   length: Number,
-//   acousticness: Number,
-//   speechiness: Number,
-//   popularity: Number
-// })
-  
-
-
-// const secondTestUser = new User({name: "Daniel", age: 28, deceased: false})
-// secondTestUser.save()
 
 if(process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Song.deleteMany()
+    await Stream.deleteMany()
     netflixData.forEach( singleStream => {
       const NewStream = new Stream(singleStream)
       NewStream.save()
@@ -74,17 +42,35 @@ if(process.env.RESET_DB) {
   seedDatabase()
  }
 
-// const testUser = new User({name: "Maksy", age: 28, deceased: false})
-// testUser.save()
-
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
+// When mongoDB is not active
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: "Service unavailable" })
+  }
+})
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send(listEndpoints(app));
 });
+
+app.get("/streams", async (req, res) => {
+  const allStreams = await Stream.find({})
+  res.send(allStreams)
+})
+
+app.get("/streams/title/:title", async (req, res) => {
+  
+  const netflixTitle = await Stream.find({title: req.params.title})
+  res.send(netflixTitle)
+
+})
 
 // Start the server
 app.listen(port, () => {
