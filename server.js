@@ -7,7 +7,8 @@ import mongoose from "mongoose"
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json"
-import netflixData from "./data/netflix-titles.json"
+import netflixShows from "./data/netflix-titles.json"
+//import { all } from "express/lib/application"
 // import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
@@ -38,7 +39,7 @@ const Netflixshow = mongoose.model("Netflixshow", {
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Netflixshow.deleteMany()
-    netflixData.forEach((singleshow) => {
+    netflixShows.forEach((singleshow) => {
       const newShow = new Netflixshow(singleshow)
       newShow.save()
     })
@@ -50,9 +51,47 @@ if (process.env.RESET_DB) {
 app.use(cors())
 app.use(express.json())
 
-// Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!")
+  res.send("Hello! This is the API for week 18!")
+})
+
+app.get("/netflixshows/netflixshow/:director", async (req, res) => {
+  const singleDirector = await Netflixshow.findOne({
+    director: req.params.director,
+  })
+  res.send(singleDirector)
+})
+
+app.get("/netflixshows/netfixshow/:title", async (req, res) => {
+  const netflixTitle = await Netflixshow.find({
+    title: req.params.title,
+  })
+  res.send(netflixTitle)
+})
+
+app.get("/netflixshows/netflixshow/:type", async (req, res) => {
+  const showtype = await Netflixshow.filter({
+    type: req.params.type,
+  })
+  res.send(showtype)
+})
+
+app.get("/netflixshows/netflixshow", async (req, res) => {
+  const { director, title, country } = req.query
+
+  if (director) {
+    const allNetflixShows = await Netflixshow.find({
+      director: director,
+      title: title,
+      country: country,
+    })
+    res.send(allNetflixShows)
+  } else {
+    const allNetflixShows = await Netflixshow.find({
+      country: country,
+    })
+    res.send(allNetflixShows)
+  }
 })
 
 // Start the server
