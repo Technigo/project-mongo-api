@@ -7,7 +7,9 @@ Here users can use the following endpoints to find relevant titles they want:
 
 **/api/netflixshows/titles/:title** will bring users to a specific title they want.
 
-**"/api/netflixshows/country/:country** will bring users to all shows from a specific country.
+**/api/netflixshows/country/:country** will bring users to all shows from a specific country.
+
+**/api/netflixshows/year/:year** will bring users to all shows from a specific year.
 
 
 ## View it live

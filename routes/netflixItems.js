@@ -50,7 +50,6 @@ router.get('/country/:country', async (req, res) => {
     }
 })
 
-//trying to convert string to number if time allows
 router.get('/year/:year', async (req, res) => {
     try {
         const yearInput = req.params.year
