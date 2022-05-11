@@ -86,8 +86,14 @@ app.get("/tracks", async (req, res) => {
 
 app.get("/songs/song/:artistName", async (req, res) => {
   //this will retrive only the first found song
-  const singleSong = await Song.find({ artistName: req.params.artistName });
+  const singleSong = await Song.findOne({ artistName: req.params.artistName });
   res.send(singleSong);
+});
+
+app.get("/songs/genre/:genre", async (req, res) => {
+  //this will retrive only the first found song
+  const singleGenre = await Song.find({ genre: req.params.genre });
+  res.send(singleGenre);
 });
 
 //  try {
