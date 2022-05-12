@@ -11,6 +11,8 @@ import mongoose from "mongoose";
 // import topMusicData from "./data/top-music.json";
 import listEndpoints from "express-list-endpoints";
 import healthyLifestyles from "./data/healthy-lifestyle-cities-2021.json";
+import { request } from "express";
+import res from "express/lib/response";
 
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost/project-mongo-week18";
@@ -112,6 +114,35 @@ app.get("/healthyLifestyles/rank/:rank", (req, res) => {
     });
   }
 });
+
+//////////////////////////////////
+
+// app.get("/healthyLifestyles/rank/:rank", async (req, res) => {
+//   const { rank } = req.params;
+
+//   try {
+//     const rankNumber = await healthyLifestyles.findById(rank);
+
+//     if (!rankNumber) {
+//       res.status(404).json({
+//         data: "not found",
+//         success: false,
+//       });
+//     } else {
+//       res.status(200).json({
+//         data: rankNumber,
+//         success: true,
+//       });
+//     }
+//   } catch (error) {
+//     res.status(400).json({
+//       data: "bad request",
+//       success: false,
+//     });
+//   }
+// });
+
+//////////////////////////////////
 
 //Return the top contester's
 app.get("/healthyLifestyles/top/sunshineHours", (req, res) => {
