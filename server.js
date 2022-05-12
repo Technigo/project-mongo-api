@@ -32,19 +32,16 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 })
 
-// Populate the database and make it run
+// POPULATE DATABASE & START
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Book.deleteMany({}) //async await method to make sure that the data doesn't get duplicated
-
-    // Looping through the array of booksData and
-    // for each object (item), a new book is created with the data that is inside of each object 
+    await Book.deleteMany({}) //ASYNC AWAIT TO PREVENT DUPLICATION
+    //LOOP THROUGH THE BOOKS DATA, CREATES A NEW OBJECT
     booksData.forEach(item => {
       const newBook = new Book(item)
       newBook.save()
     })
   }
-
   seedDatabase()
 }
 
@@ -53,14 +50,14 @@ app.get('/', (req, res) => {
   res.send('Hello world! This is an API with book data')
 })
 
-// Endpoint listing all data - booksData
+// ALL ENDPOINTS
 app.get('/books', (req, res) => {
   Book.find().then(books => {
     res.json(books)
   })
 })
 
-// Endpoint for when searching on a specific book title
+// ENDPOINT FOR SPECIFIC TITLE
 app.get('/books-title/:title', (req, res) => {
   Book.findOne({ title: req.params.title }).then(book => {
     if (book) {
@@ -71,7 +68,7 @@ app.get('/books-title/:title', (req, res) => {
   })
 })
 
-// Endpoint for a specific book searching on the bookID
+// ENDPOINT FOR SPECIFIC BOOK 
 app.get('/books-id/:id', async (req, res) => {
   const book = await Book.findOne({ bookID: req.params.id })
   if (book) {
@@ -81,10 +78,10 @@ app.get('/books-id/:id', async (req, res) => {
   }
 })
 
-// Endpoint for when searching on a specific author
+// ENDPOINT FOR SPECIFIC AUTHOR
 app.get('/books-authors/:authors', async (req, res) => {
   const book = await Book.findOne({ authors: req.params.authors })
-  if (book) {
+  if (book) { 
     res.json(book)
   } else {
     res.status(404).json({ error: 'No book by that author was found' })
