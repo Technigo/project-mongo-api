@@ -67,88 +67,64 @@ app.get("/", (req, res) => {
   res.send(listEndpoints(app));
 });
 
-// All the cities
-app.get("/healthyLifestyles", (req, res) => {
-  res.status(200).json({
-    data: healthyLifestyles,
-    success: true,
-  });
+app.get("/healthyLifestyles", async (req, res) => {
+  const allCities = await HealthyCities.find();
+  res.json(allCities);
 });
 
 // Return only the city you have typed in
-app.get("/healthyLifestyles/:city", (req, res) => {
+app.get("/healthyLifestyles/:city", async (req, res) => {
   const { city } = req.params;
 
-  const cityByName = healthyLifestyles.filter(
-    (capital) => capital.city.toLowerCase() === city.toLowerCase()
-  );
-
-  if (!cityByName) {
-    res.status(404).json({
-      data: "not found",
-      success: false,
+  try {
+    const cityByName = await HealthyCities.findOne({
+      city: new RegExp(city, "i"),
     });
-  } else {
-    res.status(200).json({
-      data: cityByName,
-      success: true,
+
+    if (!cityByName) {
+      res.status(404).json({
+        error: "not found",
+        success: false,
+      });
+    } else {
+      res.status(200).json(cityByName);
+    }
+  } catch (error) {
+    res.status(400).json({
+      error: "bad request",
+      success: false,
     });
   }
 });
 
 // Return the city by the rank number you have typed in
-app.get("/healthyLifestyles/rank/:rank", (req, res) => {
+app.get("/healthyLifestyles/rank/:rank", async (req, res) => {
   const { rank } = req.params;
 
-  const rankNumber = healthyLifestyles.find((number) => number.rank === +rank);
+  try {
+    const rankNumber = await HealthyCities.findOne({ rank: +rank });
 
-  if (!rankNumber) {
-    res.status(404).json({
-      data: "not found",
+    if (!rankNumber) {
+      res.status(404).json({
+        error: "not found",
+        success: false,
+      });
+    } else {
+      res.status(200).json(rankNumber);
+    }
+  } catch (error) {
+    res.status(400).json({
+      error: "bad request",
       success: false,
-    });
-  } else {
-    res.status(200).json({
-      data: rankNumber,
-      success: true,
     });
   }
 });
 
-//////////////////////////////////
-
-// app.get("/healthyLifestyles/rank/:rank", async (req, res) => {
-//   const { rank } = req.params;
-
-//   try {
-//     const rankNumber = await healthyLifestyles.findById(rank);
-
-//     if (!rankNumber) {
-//       res.status(404).json({
-//         data: "not found",
-//         success: false,
-//       });
-//     } else {
-//       res.status(200).json({
-//         data: rankNumber,
-//         success: true,
-//       });
-//     }
-//   } catch (error) {
-//     res.status(400).json({
-//       data: "bad request",
-//       success: false,
-//     });
-//   }
-// });
-
-//////////////////////////////////
-
 //Return the top contester's
-app.get("/healthyLifestyles/top/sunshineHours", (req, res) => {
-  const sunshineHours = healthyLifestyles.filter(
-    (hours) => hours.sunshine_hours_city > 2500
-  );
+app.get("/healthyLifestyles/top/sunshineHours", async (req, res) => {
+  const sunshineHours = await HealthyCities.find({
+    sunshine_hours_city: { $gte: 2600 },
+  });
   if (sunshineHours.length === 0) {
     res.status(404).json("sorry no sunshine here");
   }
