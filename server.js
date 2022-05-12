@@ -122,13 +122,20 @@ app.get("/healthyLifestyles/rank/:rank", async (req, res) => {
 
 //Return the top contester's
 app.get("/healthyLifestyles/top/sunshineHours", async (req, res) => {
-  const sunshineHours = await HealthyCities.find({
-    sunshine_hours_city: { $gte: 2600 },
-  });
-  if (sunshineHours.length === 0) {
-    res.status(404).json("sorry no sunshine here");
+  try {
+    const sunshineHours = await HealthyCities.find({
+      sunshine_hours_city: { $gte: 2600 },
+    });
+    if (sunshineHours.length === 0) {
+      res.status(404).json("sorry no sunshine here");
+    }
+    res.json(sunshineHours);
+  } catch (error) {
+    res.status(400).json({
+      error: "bad request",
+      success: false,
+    });
   }
-  res.json(sunshineHours);
 });
 
 // Start the server
