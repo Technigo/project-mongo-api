@@ -28,7 +28,7 @@ const Player = mongoose.model('Player', {
   done_goal: String
 })
 
-if (process.env.RESET_DB) {
+if (process.env.RESET_DB === 'true') {
   const seedDatabase = async () => {
     await Player.deleteMany({})
 
