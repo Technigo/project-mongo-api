@@ -1,31 +1,16 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
+import listEndpoints from "express-list-endpoints";
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise;
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const port = process.env.PORT || 8080;
-const app = express();
-
-
-// const User = mongoose.model("User", {
-//   name: String,
-//   age: Number,
-//   deceased: Boolean
-// });
+const app = express()
 
 const Song = mongoose.model("song", {
     id: Number,
@@ -42,53 +27,86 @@ const Song = mongoose.model("song", {
     acousticness: Number,
     speechiness: Number,
     popularity: Number
-});
+})
 
 if(process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Song.deleteMany();
-    topMusicData.forEach( singleSong => {
-      const newSong = new Song(singleSong);
-      newSong.save();
+    await Song.deleteMany()
+    topMusicData.forEach(singleSong => {
+      const newSong = new Song(singleSong)
+      newSong.save()
     })
   }
-  seedDatabase();
+  seedDatabase()
 }
 
-// const testUser = new User({
-//   name: "Maksy",
-//   age: 28,
-//   deceased: false
-// });
-// testUser.save();
-
 // Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
-// Start defining your routes here
+// Routes
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
-
-//Path params
-app.get("/songs/song/:artistName", async (req, res) => {
-  //find() will retrieve array of songs with given criteria
-  //findOne() will retrieve first object with given criteria
-  const singleSong = await Song.find({artistName: req.params.artistName})
-  res.send(singleSong)
+  const landingPage = {
+    Welcome: "Welcome! This is an open API for Top Music!",
+    Routes: [
+      {
+        "/endpoints": "List of endpoints",
+        "/songs": "Get the Top Music List",
+        "/songs/id/:id": "Get a unique song by id",
+        "/songs/song/:artistName": "Get songs by artistname",
+        "/songs/song?trackName='title of track'": "Get song by trackname",
+        "/songs/song?artistName='name of artist'": "GET songs by artistname",
+      },
+    ],
+  }
+  res.send(landingPage);
 })
 
-//Query 
+app.get("/endpoints", (req, res) => {
+  res.send(listEndpoints(app));
+})
+
+app.get("/songs", async (req, res) => {
+  const allSongs = await Song.find()
+  res.json(allSongs)
+})
+
+//Path params
+app.get("/songs/id/:id", async (req, res) => {
+  //findOne() will retrieve first object with given criteria
+     const songById = await Song.findOne({id: req.params.id})
+  
+     if (songById) {
+       res.status(200).json ({
+         data: songById,
+         success: true,
+       })
+     } else {
+       res.status(404).json({
+         data: "Song not found",
+         success: false,
+       })
+     }
+   })
+
+app.get("/songs/artist/:artistName", async (req, res) => {
+//find() will retrieve array of songs with given criteria
+   const songByArtist = await Song.find({artistName: req.params.artistName})
+
+   if (songByArtist) {
+     res.status(200).json ({
+       data: songByArtist,
+       success: true,
+     })
+   }
+ })
+
+//Path with query 
 app.get("/songs/song", async (req, res) => {
-  const {artistName, trackName, energy} = req.query
-
-//costn myRegex = /.*/gm
-//const singleSong = await Song.find({artistName ? artistName: myRegex, trackName: trackName})
-
+  const { artistName, trackName}  = req.query
   if (trackName) {
-    const singleSong = await Song.find({trackName: trackName})
-    res.send(singleSong)
+    const songByTrack = await Song.find({trackName: trackName})
+    res.send(songByTrack)
   } else {
       const singleSong = await Song.find({artistName: artistName})
       res.send(singleSong)
@@ -98,4 +116,4 @@ app.get("/songs/song", async (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
-});
+})
