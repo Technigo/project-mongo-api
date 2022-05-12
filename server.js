@@ -28,12 +28,12 @@ const Book = mongoose.model("Book", {
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany();
-    booksData.forEach( singleBook => {
+    booksData.forEach((singleBook) => {
       const newBook = new Book(singleBook);
       newBook.save();
-    })
+    });
   };
-  seedDatabase()
+  seedDatabase();
 }
 
 app.use(cors());
@@ -45,70 +45,22 @@ app.get("/", (req, res) => {
 });
 
 //1. endpoint that returns the whole array of book ratings.
-app.get("/bookratings", (req, res) => {
-  res.status(200).json({
-    data: booksData,
-    success: true,
-  });
+app.get("/bookratings", async (req, res) => {
+  const books = await Book.find(req.query);
+  res.send(books);
 });
 
 // 2. endpoint that returns one rated book by its title.
-app.get("/bookratings/booktitle/:title", (req, res) => {
-  const { title } = req.params;
-
-  const bookByTitle = booksData.find(
-    (book) => book.title.toLowerCase() === title.toLowerCase()
-  );
-
-  if (!bookByTitle) {
-    res.status(404).json({
-      data: "Not found",
-      success: false,
-    });
-  } else {
-    res.status(200).json({
-      data: bookByTitle,
-      success: true,
-    });
-  }
+app.get("/bookratings/booktitle/:title", async (req, res) => {
+  const bookByTitle = await Book.findOne({ title: req.params.title });
+  res.send(bookByTitle);
 });
 
-// 3. endpoint that returns all rated books written by a specific author..
-app.get("/bookratings/author/:authors", (req, res) => {
-  const { authors } = req.params;
-
-  const bookByAuthor = booksData.filter(
-    (book) => book.authors.toLowerCase() === authors.toLowerCase()
-  );
-
-  if (!bookByAuthor) {
-    res.status(404).json({
-      data: "Not found",
-      success: false,
-    });
-  } else {
-    res.status(200).json({
-      data: bookByAuthor,
-      success: true,
-    });
-  }
+// // 3. endpoint that returns all rated books written by a specific author..
+app.get("/bookratings/author/:authors", async (req, res) => {
+  const bookByAuthor = await Book.find({ authors: req.params.authors });
+  res.send(bookByAuthor);
 });
-
-// 3. endpoint that returns all rated books based on their average rating.
-app.get("/bookratings/rating/:average_rating", (req, res) => {
-  const { average_rating } = req.params;
-
-  const bookByRating = booksData.filter(
-    (book) => book.average_rating === +average_rating
-  );
-  res.status(200).json({
-    data: bookByRating,
-    success: true,
-  });
-});
-
-
-
 
 // Start the server
 app.listen(port, () => {
