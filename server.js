@@ -67,13 +67,13 @@ app.get('/tracks', async (req, res) => {
 })
 
 app.get('/songs/song/:artistName', async (req, res) => {
-  //Will retrive only the first found song
+  //Retrives only the first found song
   const singleSong = await Song.findOne({ artistName: req.params.artistName })
   res.send(singleSong)
 })
 
 app.get('/songs/genre/:genre', async (req, res) => {
-  //Will retrive the songs that belongs to the genre
+  //Retrives the songs that belongs to the genre
   const singleGenre = await Song.find({ genre: req.params.genre })
   res.send(singleGenre)
 })
@@ -82,3 +82,6 @@ app.get('/songs/genre/:genre', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
+
+// const myRegex = /.*/gm
+// artistName: artistName ? artistName : myRegex,
