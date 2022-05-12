@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { getGoals, setGoals, updateGoals, deleteGoal } from "../controllers/goalController";
+import { getGoals, setGoal, updateGoal, deleteGoal } from "../controllers/goalController";
 
 const router = Router();
-// ALT 1
-// router.get("/", getGoals);
-// router.post("/", setGoals);
-// router.put("/:id", updateGoals);
-// router.delete("/:id", deleteGoal);
+
+router.get("/", getGoals);
+router.post("/", setGoal);
+router.put("/:id", updateGoal);
+router.delete("/:id", deleteGoal);
 
 // ALT 2 - cleaner
-router.route("/").get(getGoals).post(setGoals);
-router.route("/").delete(deleteGoal).put(updateGoals);
+// router.route("/").get(getGoals).post(setGoal);
+// router.route("/:id").delete(deleteGoal).put(updateGoal);
 
 export default router;
