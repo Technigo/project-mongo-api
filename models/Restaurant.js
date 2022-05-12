@@ -1,11 +1,20 @@
 import mongoose from "mongoose";
 
-export const Restaurant = mongoose.model("User", {
-  id: Number,
-  name: String,
-  star: Number,
-  stars_count: Number,
+const restaurantSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Please add a text value"],
+  },
+  city: {
+    type: String,
+    required: [true, "Please add a text value"],
+  },
+  area: {
+    type: String,
+    required: [true, "Please add a text value"],
+  },
   price: String,
-  area: String,
-  Category: Array,
+  category: Array,
 });
+
+module.exports = mongoose.model("Restaurant", restaurantSchema);

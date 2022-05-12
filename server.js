@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/goals", require("./routes/goalRoutes").default);
+app.use("/api/restaurants", require("./routes/restaurantRoutes").default);
 
 app.use(errorHandler);
 
