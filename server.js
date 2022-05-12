@@ -12,12 +12,6 @@ mongoose.Promise = Promise
 const port = process.env.PORT || 8080
 const app = express()
 
-const User = mongoose.model('User', {
-  name: String,
-  age: Number,
-  deceased: Boolean,
-})
-
 const Song = mongoose.model('Song', {
   id: Number,
   trackName: String,
