@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -19,6 +19,50 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+
+const User = mongoose.model("User", {
+//value types, do not go to the database but allows us to create objects that do
+name: String,
+age: Number,
+deceased: Boolean
+})
+
+const Song = mongoose.model("Song", {
+  "id": Number,
+    "trackName": String,
+    "artistName": String,
+    "genre": String,
+    "bpm": Number,
+    "energy": Number,
+    "danceability": Number,
+    "loudness": Number,
+    "liveness": Number,
+    "valence": Number,
+    "length": Number,
+    "acousticness": Number,
+    "speechiness": Number,
+    "popularity": Number 
+  })
+
+  //the await delateMany means wait for the deletion to begin
+  //and the populate the database anew
+  //for every song put in new record in the database
+if(process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Song.deleteMany({})
+    topMusicData.forEach(singleSong => {
+      const newSong = new Song(singleSong)
+      newSong.save()
+    })
+  }
+  seedDatabase()
+}
+
+// const testUser = new User({name: "Maksy", age: 28, deceased: false})
+// testUser.save()
+
+// const testUser2 = new User({name: "Daniel", age: 27, deceased: false})
+// testUser2.save()
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -31,5 +75,6 @@ app.get("/", (req, res) => {
 
 // Start the server
 app.listen(port, () => {
+  console.log(`Hello world`)
   console.log(`Server running on http://localhost:${port}`);
 });
