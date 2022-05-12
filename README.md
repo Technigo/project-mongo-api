@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This weeks project is about how to use Mongodb to store data, and how to query that data from your API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+In this weeks project it was time to level-up your APIs and start using a database to store and retrieve data from and use that data to produce a RESTful API.That meant to start to understand how mongoDB worked and connect last weeks project and knowledge with this weeks knowledge.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://mongodb-project-2022.herokuapp.com/
