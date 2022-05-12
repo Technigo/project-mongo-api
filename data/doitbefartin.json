@@ -1,0 +1,842 @@
+[
+  {
+    "name": "African wild dogs",
+    "scientificName": "Lycaon pictus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Any self-respecting canine does",
+    "paperLink": "",
+    "verifiedBy": "@DaniRabaiotti"
+  },
+  {
+    "name": "Aliens",
+    "scientificName": "",
+    "doesItFart": false,
+    "doesItMaybeFart": true,
+    "descriptionExists": true,
+    "descriptionNotes": "More data needed",
+    "paperLink": "",
+    "verifiedBy": "@chrislintott"
+  },
+  {
+    "name": "American Badger",
+    "scientificName": "Taxidea taxus",
+    "doesItFart": false,
+    "doesItMaybeFart": true,
+    "descriptionExists": true,
+    "descriptionNotes": "Elbroch (2003) describes badger scat as rancorous (can confirm); assume fart",
+    "paperLink": "",
+    "verifiedBy": "@biologistimo"
+  },
+  {
+    "name": "Ammonite",
+    "scientificName": "Ammonoidea",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "molluscs don't fart- would like to question inking as farting in extant cephs",
+    "paperLink": "",
+    "verifiedBy": "@NadWGab"
+  },
+  {
+    "name": "Arachnids",
+    "scientificName": "Arachnida",
+    "doesItFart": false,
+    "doesItMaybeFart": true,
+    "descriptionExists": true,
+    "descriptionNotes": "Assumed as yes, but never really been proven",
+    "paperLink": "",
+    "verifiedBy": "@SS_Henriques"
+  },
+  {
+    "name": "Baboons",
+    "scientificName": "Papio",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@Cassie_Raby"
+  },
+  {
+    "name": "Bats",
+    "scientificName": "Chiroptera",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@hammerheadbat"
+  },
+  {
+    "name": "Bearded Dragon",
+    "scientificName": "Pogona vitticeps",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@lizardschwartz"
+  },
+  {
+    "name": "Birds",
+    "scientificName": "Aves",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "But they could if they wanted to",
+    "paperLink": "http://www.popsci.com/environment/article/2009-05/it-true-birds-cant-fart",
+    "verifiedBy": "@thelabandfield"
+  },
+  {
+    "name": "Black Spinytail Iguana",
+    "scientificName": "Ctenosaura similis",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Seems to occur more frequently when less insect/animal protein is consumed and higher quantities of fruit/fiber are eaten",
+    "paperLink": "personal observations",
+    "verifiedBy": "@squamatasci"
+  },
+  {
+    "name": "Blue mussels",
+    "scientificName": "Mytilus edulis",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@CarinaDSLR"
+  },
+  {
+    "name": "Bobcats",
+    "scientificName": "Lynx rufus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Squirrel-based farts are THE WORST.",
+    "paperLink": "",
+    "verifiedBy": "@NatickBobCat, @biologistimo"
+  },
+  {
+    "name": "Bristle worms",
+    "scientificName": "Polychaetes",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@_glitterworm"
+  },
+  {
+    "name": "Burchell's zebra",
+    "scientificName": "Equus quagga burchellii",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "That's what they do best!",
+    "paperLink": "",
+    "verifiedBy": "@FattebertJ"
+  },
+  {
+    "name": "Burmese python",
+    "scientificName": "Python molurus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Often silent but deadly. Thick, and...meaty? If it were a color it would be brownish-yellow.",
+    "paperLink": "anecdotal & personal observations",
+    "verifiedBy": "@SssnakeySci"
+  },
+  {
+    "name": "Camel",
+    "scientificName": "Camelus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@cat_murray"
+  },
+  {
+    "name": "Cheetah",
+    "scientificName": "Acinonyx jubatus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@hmk_oneill"
+  },
+  {
+    "name": "Chimpanzees",
+    "scientificName": "Pan troglodytes",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@Adriana_lowe"
+  },
+  {
+    "name": "Cockroaches",
+    "scientificName": "Periplaneta americana",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "http://aem.asm.org/content/57/9/2628.short; http://www.pnas.org/content/91/12/5441.full.pdf",
+    "paperLink": "",
+    "verifiedBy": "@HereBeSpiders11"
+  },
+  {
+    "name": "Colobine monkeys",
+    "scientificName": "Trachypithecus, Colobus etc.",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@pakasuchus"
+  },
+  {
+    "name": "Common whelks",
+    "scientificName": "Buccinum undatum",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@CarinaDSLR"
+  },
+  {
+    "name": "Copperhead",
+    "scientificName": "Agkistrodon contortrix",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Elicits a small squeak, so small that you think you may be mistaken...until it hits you. Very dry and feral, with a slight hint of stale Copperhead musk.",
+    "paperLink": "anecdotal & personal observations",
+    "verifiedBy": "@SssnakeySci"
+  },
+  {
+    "name": "Domestic cat",
+    "scientificName": "Felis catus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Seems to worsen in vicinity of human face. Silent but deadly",
+    "paperLink": "",
+    "verifiedBy": "@Captain_Herder @Scare"
+  },
+  {
+    "name": "Domestic goat",
+    "scientificName": "Capra aegagrus hircus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "but burps are worse",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Domestic hedgehogs",
+    "scientificName": "Atelerix albiventris",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Fish makes it so much worse",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Domestic pigs",
+    "scientificName": "Sus domesticus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Domestic sheep",
+    "scientificName": "Ovis aries",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Domesticated Dogs",
+    "scientificName": "Canis lupus familiaris",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "but often takes blame from nearby hominid, Boston Terriers are famous for their farting; known to scare selves with their farts",
+    "paperLink": "",
+    "verifiedBy": "@brianwolven, @CarinaDSLR et al"
+  },
+  {
+    "name": "Elephants",
+    "scientificName": "Loxodonta",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@AdityaGangadh"
+  },
+  {
+    "name": "European oysters",
+    "scientificName": "Ostrea edulis",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@CarinaDSLR"
+  },
+  {
+    "name": "Fancy goldfish",
+    "scientificName": "Carassius auratus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@indik"
+  },
+  {
+    "name": "Freshwater mussels",
+    "scientificName": "Unionidae",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "They do enjoy expelling pseudofeces",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Frogs",
+    "scientificName": "Anura",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Pyxicephalus adspersus and Ceratophrys sp frogs both can and do fart quite often and rather pungently. (Frogs have weak sphincters, unconfimed if audible)",
+    "paperLink": "",
+    "verifiedBy": "@MarkScherz"
+  },
+  {
+    "name": "Crested Geckos",
+    "scientificName": "Corellophus ciliatus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Individual named Tangerine farted before defecating.",
+    "paperLink": "",
+    "verifiedBy": "@MarkScherz"
+  },
+  {
+    "name": "Giraffe",
+    "scientificName": "Giraffa",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "At face height of the average man",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Gorillas",
+    "scientificName": "Gorilla gorilla",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "See orangutans",
+    "paperLink": "",
+    "verifiedBy": "@mjcreid, @diana_monkey"
+  },
+  {
+    "name": "Gray Fox",
+    "scientificName": "Urocyon cinereoargenteus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Heard under general anesthesia, assume possible while awake",
+    "paperLink": "",
+    "verifiedBy": "@biologistimo"
+  },
+  {
+    "name": "Green Iguana",
+    "scientificName": "Iguana iguana",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "personal observations of captive Green Iguana",
+    "verifiedBy": "@squamatasci"
+  },
+  {
+    "name": "Grizzly bear",
+    "scientificName": "Ursus arctos",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Guinea Pigs",
+    "scientificName": "Cavia porcellus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Several examples heard every day, very audible and stinks to high heaven",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Herring",
+    "scientificName": "Clupea spp.",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Entire bays are filled with their farts. Used for communication",
+    "paperLink": "http://news.nationalgeographic.com/news/2003/11/1110_031110_herringfarts.html, http://rspb.royalsocietypublishing.org/content/271/Suppl_3/S95",
+    "verifiedBy": "@CarolineHFox, @gkalinkat"
+  },
+  {
+    "name": "Horse",
+    "scientificName": "Equus caballus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@tecklen"
+  },
+  {
+    "name": "Humans",
+    "scientificName": "Homo sapiens",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Self-observed",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Isopods (marine and terrestrial)",
+    "scientificName": "Cirolana harfordi,Porcellio scaber and Idotea resecata",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Excrete ammonia",
+    "paperLink": "Kirby P.K. & Harbaugh R.D. (1974) Diurnal patterns of ammonia release in marine and terrestrial isopods. Comparative Biochemistry and Physiology Part A: Physiology 47, 1313-1322.",
+    "verifiedBy": "Kim Kennedy, MSc."
+  },
+  {
+    "name": "Lagomorphs",
+    "scientificName": "Lagomorpha spp.",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "fav joke here: what's invisible, floats through the air, and smells like bunnies?",
+    "paperLink": "",
+    "verifiedBy": "@thonoir"
+  },
+  {
+    "name": "Lemurs",
+    "scientificName": "Lemuroidea spp.",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@thonoir"
+  },
+  {
+    "name": "Lion",
+    "scientificName": "Panthera leo",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "At least sedated ones.",
+    "paperLink": "",
+    "verifiedBy": "@FattebertJ"
+  },
+  {
+    "name": "Manatees",
+    "scientificName": "Trichechus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "near constantly",
+    "paperLink": "",
+    "verifiedBy": "@indik"
+  },
+  {
+    "name": "Mastodon",
+    "scientificName": "",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Not anymore",
+    "paperLink": "",
+    "verifiedBy": "@edorsatum"
+  },
+  {
+    "name": "Millipedes",
+    "scientificName": "wide variety, see attached paper",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Yes, of the silent but deadly variety (methane AND hydrogen sulfide!)",
+    "paperLink": "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0102659",
+    "verifiedBy": "@HereBeSpiders11"
+  },
+  {
+    "name": "Moonsnails",
+    "scientificName": "Naticidae",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@biolumiJEFFence"
+  },
+  {
+    "name": "Mustelids",
+    "scientificName": "Mustelidae spp.",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@thonoir"
+  },
+  {
+    "name": "Orangutan",
+    "scientificName": "Pongo pygmaeu",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "They do it often and have no shame",
+    "paperLink": "",
+    "verifiedBy": "@mjcreid"
+  },
+  {
+    "name": "Panther Chameleon",
+    "scientificName": "Furcifer pardalis",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Sometimes while defecating - audible and stinky",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Parakeets",
+    "scientificName": "Melopsittacus undulatus",
+    "doesItFart": false,
+    "doesItMaybeFart": true,
+    "descriptionExists": true,
+    "descriptionNotes": "My friend's parakeet farted in my face when I was 9 years old. (Note: literature disputes this - see Birds, which are purported not to fart)",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Parrots",
+    "scientificName": "Psittaciformes",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": ":(",
+    "paperLink": "",
+    "verifiedBy": "@alexevans91"
+  },
+  {
+    "name": "Pupfish",
+    "scientificName": "Cyprinodon spp.",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Ingest air with solids during summer months. Associated with behavioral changes until release of gas",
+    "paperLink": "http://www.tandfonline.com/doi/abs/10.1577/1548-8659%281967%2996%5B216%3AEAEOIG%5D2.0.CO%3B2?journalCode=utaf20",
+    "verifiedBy": "@jennygumm"
+  },
+  {
+    "name": "Rabbits",
+    "scientificName": "Oryctolagus sp",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Gas is dangerous in rabbits, however. It can cause intestinal stasis and lead to death within a short period of time.",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Rats",
+    "scientificName": "Rattus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "They smell worse than dog farts",
+    "paperLink": "",
+    "verifiedBy": "@Julie_B92 and @JuliesRats"
+  },
+  {
+    "name": "Rhesus macaque",
+    "scientificName": "Macaca mulatta",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@laurenmrobin"
+  },
+  {
+    "name": "Rhinoceros Iguana",
+    "scientificName": "Cyclura cornuta",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Sounds wet. Increased frequency with higher fruit and/or fiber intake. High parasites loads also lead to an increase in flatulence.",
+    "paperLink": "personal observations of captive cyclura",
+    "verifiedBy": "@squamatasci"
+  },
+  {
+    "name": "Rotifers",
+    "scientificName": "Rotifera",
+    "doesItFart": false,
+    "doesItMaybeFart": true,
+    "descriptionExists": true,
+    "descriptionNotes": "Probably not, but if they can they'd be tiny. No one to offend if you're asexual tho",
+    "paperLink": "",
+    "verifiedBy": "@Julie_B92"
+  },
+  {
+    "name": "Salamanders",
+    "scientificName": "Urodela",
+    "doesItFart": false,
+    "doesItMaybeFart": true,
+    "descriptionExists": true,
+    "descriptionNotes": "probably not audibly (see frogs), but their poops smell really bad",
+    "paperLink": "",
+    "verifiedBy": "@PlethodoNick"
+  },
+  {
+    "name": "Sea Anemone",
+    "scientificName": "Actiniaria",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "But awful burps",
+    "paperLink": "https://books.google.com/books/about/Invertebrate_Zoology.html?id=RoUZnQEACAAJ",
+    "verifiedBy": "Barnes, Robert D. (1982). Invertebrate Zoology"
+  },
+  {
+    "name": "Seals",
+    "scientificName": "Pinnipedia",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Smells like lutefisk",
+    "paperLink": "",
+    "verifiedBy": "@DaniRabaiotti"
+  },
+  {
+    "name": "Shore crabs",
+    "scientificName": "Carcinus maenas",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@CarinaDSLR"
+  },
+  {
+    "name": "Skunks",
+    "scientificName": "Mephitidae",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Sloths",
+    "scientificName": "Folivora",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Snakes",
+    "scientificName": "Serpentes",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@AlongsideWild"
+  },
+  {
+    "name": "Snakes - ball python",
+    "scientificName": "Python regius",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "We have not heard any audible sounds from the vent in 5+ years of care",
+    "paperLink": "",
+    "verifiedBy": "@mbystoma"
+  },
+  {
+    "name": "Snakes - corn and rat snakes",
+    "scientificName": "Pantherophis spp.",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Often with defecation",
+    "paperLink": "",
+    "verifiedBy": "@mbystoma"
+  },
+  {
+    "name": "Snakes - milksnake",
+    "scientificName": "Lampropeltis triangulum",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Often with defecation and quite smelly",
+    "paperLink": "",
+    "verifiedBy": "@mbystoma"
+  },
+  {
+    "name": "Snakes - western hognose",
+    "scientificName": "Heterodon nasicus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Powerful for the size with defecation and extremely foul smelling",
+    "paperLink": "",
+    "verifiedBy": "@mbystoma"
+  },
+  {
+    "name": "Snow leopards",
+    "scientificName": "Panthera uncia",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Their floofy bottoms help to muffle the sound",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Soft-shell clam",
+    "scientificName": "Mya arenaria",
+    "doesItFart": false,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "But they can puke (technically)",
+    "paperLink": "",
+    "verifiedBy": "@SS_Henriques"
+  },
+  {
+    "name": "Spotted hyenas",
+    "scientificName": "Crocuta crocuta",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Especially bad after eating camel intestines",
+    "paperLink": "",
+    "verifiedBy": "@ArjDheer"
+  },
+  {
+    "name": "Squid, octopus, cuttlefish",
+    "scientificName": "Many",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "If we count air coming out of the siphon as farting, yes",
+    "paperLink": "",
+    "verifiedBy": "@sarahmackattack"
+  },
+  {
+    "name": "Syrian hamster",
+    "scientificName": "Mesocricetus auratus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "probably; see rats, plus anecdata",
+    "paperLink": "",
+    "verifiedBy": "@BeesAndBaking"
+  },
+  {
+    "name": "Tapirs",
+    "scientificName": "Tapirus spp",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "In great amplitude",
+    "paperLink": "",
+    "verifiedBy": ""
+  },
+  {
+    "name": "Termites",
+    "scientificName": "Reticulitermes, others",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "A lot- may be a significant contributor to global climate change",
+    "paperLink": "http://science.sciencemag.org/content/218/4572/563",
+    "verifiedBy": "@HereBeSpiders11"
+  },
+  {
+    "name": "Tortoise - radiated",
+    "scientificName": "Astrochelys radiata",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "",
+    "verifiedBy": "@mbystoma"
+  },
+  {
+    "name": "Unicorns",
+    "scientificName": "Equus unicornus",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "It's glitter and rainbows soft serve (speculation)",
+    "paperLink": "",
+    "verifiedBy": "@NadWGab"
+  },
+  {
+    "name": "Wombat",
+    "scientificName": "Vombatidae",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": false,
+    "descriptionNotes": "",
+    "paperLink": "https://www.youtube.com/watch?v=VHy2yAuZzds",
+    "verifiedBy": "@ivandaum"
+  },
+  {
+    "name": "Woodlice",
+    "scientificName": "Armadillidium vulgare and Ligidium lapetum",
+    "doesItFart": true,
+    "doesItMaybeFart": false,
+    "descriptionExists": true,
+    "descriptionNotes": "Excrete ammonia",
+    "paperLink": "Wright J.C. & Peña-Peralta M. (2005) Diel variation in ammonia excretion, glutamine levels, and hydration status in two species of terrestrial isopods. Journal of Comparative Physiology B 175, 67-75",
+    "verifiedBy": "Kim Kennedy, MSc"
+  }
+]
