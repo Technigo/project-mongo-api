@@ -9,7 +9,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise;
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8090;
 const app = express()
 
 const Song = mongoose.model("song", {
