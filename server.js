@@ -56,7 +56,7 @@ app.use(express.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   const Landing = {
-    Welcome: "Hi! This is an open API for Top Music!",
+    Welcome: "Welcome! This is an open API for Top Music!",
     Routes: [
       {
         "/artists": "Get the Top Music",
