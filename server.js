@@ -10,6 +10,8 @@ import mongoose from "mongoose";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
+import players from './data/football-players.json'
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -24,10 +26,51 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const Player = mongoose.model("Player", {
+  id: Number,
+  name: String,
+  position: String,
+  club: String,
+  games: Number,
+  goals: Number,
+})
+
+
+if (process.env.RESET_DB) {
+  console.log('Resetting database')
+  const seedDatabase = async () => {
+    await Player.deleteMany()
+    players.forEach(player => {
+      const newPlayer = new Player(player)
+      newPlayer.save()
+    })
+  }
+  seedDatabase()
+  
+}
+
+
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Project Mongo API!");
 });
+
+app.get("/players", (req, res) => {
+  Player.find().then(players => {
+    res.json(players)
+  })
+})
+
+app.get('/:name', (req, res) => {
+  Player.findOne({name: req.params.name}).then(player => {
+    if(player) {
+      res.json(player)
+    } else {
+      res.status(404).json({ error: 'Not found' })
+    }
+  })
+})
 
 // Start the server
 app.listen(port, () => {
