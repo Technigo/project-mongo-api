@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import listEndpoints from 'express-list-endpoints';
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -52,13 +53,29 @@ app.use(cors());
 app.use(express.json());
 
 // Start defining your routes here
+app.get('/books', (req, res) => {
+  res.send(booksData);
+});
+
 app.get('/book/:bookName', async (req, res) => {
-  const singleBook = await Book.findOne({ title: req.params.bookName });
-  res.send(singleBook);
+  const singleBook = await Book.findOne({
+    title: req.params.bookName,
+  });
+
+  if (!singleBook) {
+    res.status(404).json("Sorry! Can't find a book with that name.");
+  } else {
+    res.status(200).json({
+      data: singleBook,
+      success: true,
+    });
+  }
 });
 
 app.get('/author/:bookAuthor', async (req, res) => {
-  const author = await Book.find({ authors: req.params.bookAuthor });
+  const author = await Book.find({
+    authors: req.params.bookAuthor,
+  });
   res.send(author);
 });
 
@@ -66,7 +83,7 @@ app.get('/id/:bookId', async (req, res) => {
   const whatId = await Book.findOne({ bookID: req.params.bookId });
 
   if (!whatId) {
-    res.status(404).json('Sorry! Not found.');
+    res.status(404).json("Sorry! Can't find a book with that ID.");
   } else {
     res.status(200).json({
       data: whatId,
@@ -76,7 +93,7 @@ app.get('/id/:bookId', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send(booksData);
+  res.send(listEndpoints(app));
 });
 
 // Start the server
