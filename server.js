@@ -50,13 +50,42 @@ if(process.env.RESET_DB) {
 //returning array of books
 app.get("/books", async (req, res) => {
   const allBooks = await Book.find()
-  res.json(allBooks)
-})
+  res.status(200).json({
+    data: allBooks,
+    success: true,
+  })
+});
+
+// //adding middleware to check if the database is up or not
+// app.use((req, res, next) => {
+//   if (mongoose.connection.readyState === 1) {
+//     next()
+//   } else {
+//     res.status(503).json({ error: 'Service unavailable'})
+//   }
+// })
 
 //returning one single object
 app.get("/books/:id", async (req, res) => {
-  const bookById = await Book.findOne({ bookID: req.params.id})
-  res.send(bookById);
+  try {
+    const bookById = await Book.findOne({ bookID: req.params.id})
+    if(bookById) {
+      res.status(200).json({
+        data: bookById,
+        success: true,
+      })
+    } else { 
+      res.status(404).json({
+        error: 'bookID not found',
+        success: false,
+      })
+    }
+  } catch (err) {
+    res.status(400).json({
+      error: 'Invalid bookID',
+      success: false,
+    })
+  }
 })
 
 // Start the server
