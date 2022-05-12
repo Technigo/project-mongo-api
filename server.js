@@ -88,13 +88,12 @@ app.get("/songs/song/:artistName", async (req, res) => {
 })
 
 app.get("/songs/song/", async (req, res) => {
-  // this will retrieve only the first found song
+  // this will retrieve either artistName or trackName depending on your search
   const {artistName, trackName} = req.query;
   const myRegex = /.*/gm 
   
   // const artistNameRegex = new RegExp(artistName, "i");
   // const trackNameRegex = new RegExp(trackName, "i");
-  
 
   if (trackName != undefined) {
     const secondSong = await Song.find({
