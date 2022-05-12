@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import listEndpoints from 'express-list-endpoints'
 
 import netflixData from './data/netflix-titles.json'
 
@@ -29,9 +30,9 @@ const Title = mongoose.model('Title', {
 if (process.env.RESET_DATABASE) {
 	const seedDatabase = async () => {
 		await Title.deleteMany()
+
 		netflixData.forEach((singleTitle) => {
-			const newTitle = new Title(singleTitle)
-			newTitle.save()
+			new Title(singleTitle).save()
 		})
 	}
 
@@ -44,37 +45,41 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-	res.send('Hello Technigo!')
+	res.send(listEndpoints(app))
 })
 
-// app.get('/authors', async (req, res) => {
-// 	const authors = await Author.find()
-// 	res.json(authors)
-// })
+//query string for title, country, director and cast
+app.get('/shows', async (req, res) => {
+	const { title, country, director, cast } = req.query
 
-// app.get('/authors/:id', async (req, res) => {
-// 	const author = await Author.findById(req.params.id)
-// 	if (author) {
-// 		res.json(author)
-// 	} else {
-// 		res.status(484).json({ error: 'Author not found' })
-// 	}
-// })
+	try {
+		const allTitles = await Title.find({
+			title: new RegExp(title, 'i'),
+			country: new RegExp(country, 'i'),
+			director: new RegExp(director, 'i'),
+			cast: new RegExp(cast, 'i'),
+		})
 
-// app.get('/authors/:id/books', async (req, res) => {
-// 	const author = await Author.findById(req.params.id)
-// 	if (author) {
-// 		const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) })
-// 		res.json(books)
-// 	} else {
-// 		res.status(484).json({ error: 'Author not found' })
-// 	}
-// })
+		res.status(200).json(allTitles)
+	} catch (error) {
+		res.status(400).json({
+			message: 'Not found, please try again',
+			success: false,
+		})
+	}
+})
 
-// app.get('/books', async (req, res) => {
-// 	const books = await Book.find().populate('author')
-// 	res.json(books)
-// })
+app.get('/shows/:id', async (req, res) => {
+	const { id } = req.params
+
+	const titleById = await Title.findOne({ show_id: +id })
+
+	if (titleById) {
+		res.status(200).json(titleById)
+	} else {
+		res.status(484).json({ error: 'No titles with that ID is found' })
+	}
+})
 
 // Start the server
 app.listen(port, () => {
