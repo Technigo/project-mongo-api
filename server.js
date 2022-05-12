@@ -28,15 +28,15 @@ const Animal = mongoose.model("Animal", {
   verifiedBy: String,
 });
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Animal.deleteMany();
-    doItBeFartin.forEach((animal) => {
-      new Animal(animal).save();
-    });
-  };
-  seedDatabase();
-}
+// if (process.env.RESET_DB) {
+const seedDatabase = async () => {
+  await Animal.deleteMany();
+  doItBeFartin.forEach((animal) => {
+    new Animal(animal).save();
+  });
+};
+seedDatabase();
+// }
 
 // Start defining your routes here
 app.get("/", (req, res) => {
