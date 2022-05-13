@@ -1,13 +1,24 @@
 # Project Mongo API
+The purpose of this project was to build a Mongo-backend API by using MongoDB as a database to store and retrieve data from. The data should then be used to produce a RESTful API.
 
-Replace this readme with your own information about your project.
+## API Endpoints
+### path: "/" 
+List of all endpoints with method
+### path: "/songs" 
+Get array of all songs
+### path: "/songs/song/:artistName" 
+Get song by artist name (example: "/songs/song/ed sheeran")
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Tech
+- MongoDB
+- Mongoose
+- Node.js
+- Express
 
 ## The problem
+My first approach to this project was to use Beatles albums data, however I had issues with the seeding and server app crashing. I then tried with the topMusic data that I used in my previous project and it worked fine locally. When deploying the project to Heroku the database only showed empty arrays. I solved this by adding RESET_DB true under Config Vars in Heroku deploy settings.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+If I hade more time I would like to troubleshoot the Beatles data problem further.
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://lisen-project-mongo.herokuapp.com/
