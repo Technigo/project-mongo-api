@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import bodyParser from "body-parser"
 import listEndpoints from "express-list-endpoints"
 import netflixData from "./data/netflix-titles.json";
 
@@ -45,15 +46,16 @@ if(process.env.RESET_DB) {
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json())
 
 // When mongoDB is not active
-// app.use((req, res, next) => {
-//   if (mongoose.connection.readyState === 1) {
-//     next()
-//   } else {
-//     res.status(503).json({ error: "Service unavailable" })
-//   }
-// })
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: "Service unavailable" })
+  }
+})
 
 // Start defining your routes here
 app.get("/", (req, res) => {
