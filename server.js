@@ -48,8 +48,9 @@ if (process.env.RESET_DB) {
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send(
-    'Hello world! This is an API with book data'
-    )
+    {"Tja":"Hi! This is an open API for Books!",
+    "Routes": [{"/books":"All Books","/books-title/:title":"Get Books by title","/books-id/:id":"Get Books by Id"}]}
+  )
 })
 
 // ALL ENDPOINTS
