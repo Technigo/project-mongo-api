@@ -97,11 +97,6 @@ app.get('/songs/song/:artistName', async (req, res) => {
 	res.send(songByArtist);
 });
 
-// Start the server
-app.listen(port, () => {
-	console.log(`Server running on http://localhost:${port}`);
-});
-
 // Get all beatles albums
 // app.get('/albums', async (req, res) => {
 // 	const albums = await Album.find();
@@ -113,3 +108,8 @@ app.listen(port, () => {
 // 	const songsByVocals = await Album.find({ vocals: req.params.vocals });
 // 	res.send(songsByVocals);
 // });
+
+// Start the server
+app.listen(port, () => {
+	console.log(`Server running on http://localhost:${port}`);
+});
