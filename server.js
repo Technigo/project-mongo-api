@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
 
-// import bookData from "./data/books.json";
+import bookData from "./data/books.json";
 
 dotenv.config();
 
@@ -34,20 +34,20 @@ const Author = mongoose.model("Author", {
   name: String
 });
 
-// if (process.env.RESET_DB) {
-// 	const seedDatabase = async () => {
-//     await Book.deleteMany();
-//     await Author.deleteMany();
-// 		bookData.forEach(book => {
-//       const newAuthor = new Author({ name: book.authors });
-//       newAuthor.save();
-//       book.authors = newAuthor;
-//       const newBook = new Book(book);
-// 			newBook.save();
-// 		});
-//   };
-//   seedDatabase();
-// };
+if (process.env.RESET_DB) {
+	const seedDatabase = async () => {
+    await Book.deleteMany();
+    await Author.deleteMany();
+		bookData.forEach(book => {
+      const newAuthor = new Author({ name: book.authors });
+      newAuthor.save();
+      book.authors = newAuthor;
+      const newBook = new Book(book);
+			newBook.save();
+		});
+  };
+  seedDatabase();
+};
 
 app.use(cors());
 app.use(express.json());
