@@ -72,7 +72,7 @@ app.get("/streams", async (req, res) => {
 
 app.get("/streams/title/:title", async (req, res) => {
 
-    const netflixTitle = await Stream.find({title: req.params.title})
+    const netflixTitle = await Stream.findOne({title: req.params.title})
 
     res.status(200).json({
       data: netflixTitle,
@@ -100,13 +100,6 @@ app.get("/streams/type/:type", async (req, res) => {
   })  
 })
 
-
-//Does not work....
-// app.get("/streams/type/:type", async (req, res) => {
-  
-//   const netflixTypes = await Stream.find({type: req.params.type})
-//   res.send(netflixTypes)
-// })
 
 // Start the server
 app.listen(port, () => {
