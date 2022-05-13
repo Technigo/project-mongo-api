@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "name": "Jennifer Falk",
     "club": "BK Häcken FF",
     "games": 13,
@@ -8,7 +7,6 @@
     "position": "goalkeeper"
   },
   {
-    "id": 2,
     "name": "Hedvig Lindahl",
     "club": "Atletico Madrid",
     "games": 183,
@@ -16,7 +14,6 @@
     "position": "goalkeeper"
   },
   {
-    "id": 3,
     "name": "Zecira Musovic",
     "club": "Chelsea FC",
     "games": 5,
@@ -24,7 +21,6 @@
     "position": "goalkeeper"
   },
   {
-    "id": 4,
     "name": "Jonna Andersson",
     "club": "Chelsea FC",
     "games": 69,
@@ -32,7 +28,6 @@
     "position": "defender"
   },
   {
-    "id": 5,
     "name": "Emma Berglund",
     "club": "FC Rosengård",
     "games": 58,
@@ -40,7 +35,6 @@
     "position": "defender"
   },
   {
-    "id": 6,
     "name": "Nathalie Björn",
     "club": "Everton FC",
     "games": 36,
@@ -48,7 +42,6 @@
     "position": "defender"
   },
   {
-    "id": 7,
     "name": "Magdalena Eriksson",
     "club": "Chelsea FC",
     "games": 83,
@@ -56,7 +49,6 @@
     "position": "defender"
   },
   {
-    "id": 8,
     "name": "Hanna Glas",
     "club": "FC Bayern München",
     "games": 53,
@@ -64,7 +56,6 @@
     "position": "defender"
   },
   {
-    "id": 9,
     "name": "Amanda Ilestedt",
     "club": "Paris Saint-Germain FC",
     "games": 54,
@@ -72,7 +63,6 @@
     "position": "defender"
   },
   {
-    "id": 10,
     "name": "Emma Kullberg",
     "club": "Brighton & Hove Albion FC",
     "games": 10,
@@ -80,7 +70,6 @@
     "position": "defender"
   },
   {
-    "id": 11,
     "name": "Amanda Nildén",
     "club": "Juventus FC",
     "games": 3,
@@ -88,7 +77,6 @@
     "position": "defender"
   },
   {
-    "id": 12,
     "name": "Julia Roddar",
     "club": "Washington Spirit",
     "games": 13,
@@ -96,7 +84,6 @@
     "position": "defender"
   },
   {
-    "id": 13,
     "name": "Josefine Rybrink",
     "club": "BK Häcken FF",
     "games": 4,
@@ -112,7 +99,6 @@
     "position": "defender"
   },
   {
-    "id": 15,
     "name": "Filippa Angeldahl",
     "club": "Manchester City FC",
     "games": 27,
@@ -120,7 +106,6 @@
     "position": "midfielder"
   },
   {
-    "id": 16,
     "name": "Anna Anvegård",
     "club": "Everton FC",
     "games": 25,
@@ -128,7 +113,6 @@
     "position": "forward"
   },
   {
-    "id": 17,
     "name": "Kosovare Asllani",
     "club": "Real Madrid",
     "games": 160,
@@ -136,7 +120,6 @@
     "position": "midfielder"
   },
   {
-    "id": 18,
     "name": "Hanna Bennison",
     "club": "Everton FC",
     "games": 21,
@@ -144,7 +127,6 @@
     "position": "midfielder"
   },
   {
-    "id": 19,
     "name": "Stina Blackstenius",
     "club": "Arsenal FC",
     "games": 76,
@@ -152,7 +134,6 @@
     "position": "forward"
   },
   {
-    "id": 20,
     "name": "Rebecka Blomqvist",
     "club": "VfL Wolfsburg",
     "games": 12,
@@ -160,7 +141,6 @@
     "position": "forward"
   },
   {
-    "id": 21,
     "name": "Filippa Curmark",
     "club": "BK Häcken FF",
     "games": 7,
@@ -168,7 +148,6 @@
     "position": "midfielder"
   },
   {
-    "id": 22,
     "name": "Lina Hurtig",
     "club": "Juventus FC",
     "games": 54,
@@ -176,7 +155,6 @@
     "position": "forward"
   },
   {
-    "id": 23,
     "name": "Sofia Jakobsson",
     "club": "San Diego Wave FC",
     "games": 137,
@@ -184,7 +162,6 @@
     "position": "forward"
   },
   {
-    "id": 24,
     "name": "Madelen Janogy",
     "club": "Hammarby IF",
     "games": 26,
@@ -192,7 +169,6 @@
     "position": "forward"
   },
   {
-    "id": 25,
     "name": "Fridolina Rolfö",
     "club": "FC Barcelona",
     "games": 64,
@@ -200,7 +176,6 @@
     "position": "forward"
   },
   {
-    "id": 26,
     "name": "Elin Rubensson",
     "club": "BK Häcken FF",
     "games": 71,
@@ -208,7 +183,6 @@
     "position": "midfielder"
   },
   {
-    "id": 27,
     "name": "Johanna Rytting Kaneryd",
     "club": "BK Häcken FF",
     "games": 11,
@@ -216,7 +190,6 @@
     "position": "midfielder"
   },
   {
-    "id": 28,
     "name": "Olivia Schough",
     "club": "FC Rosengård",
     "games": 97,
@@ -224,7 +197,6 @@
     "position": "midfielder"
   },
   {
-    "id": 29,
     "name": "Caroline Seger",
     "club": "FC Rosengård",
     "games": 229,
