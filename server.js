@@ -20,6 +20,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//modelling the database:
+const Laureate = mongoose.model("Laureate", {
+  id: Number,
+  name: String,
+  year: Number,
+  category: String,
+  country: String,
+  description: String,
+});
+
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
