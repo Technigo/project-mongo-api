@@ -13,7 +13,10 @@ mongoose.Promise = Promise;
 const Song = mongoose.model('Song', {
 	id: Number,
 	trackName: String,
-	artistName: String,
+	artistName: {
+		type: String,
+		lowercase: true,
+	},
 	genre: String,
 	bpm: Number,
 	energy: Number,
