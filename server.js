@@ -1,35 +1,102 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import 'dotenv/config';
+import listEndpoints from "express-list-endpoints";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import astronautsData from "./data/nasa-astronauts.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/astronauts";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
+const Astronaut = mongoose.model("Astronaut", {
+  id: Number,
+  name: String,
+  year: Number,
+  group: Number,
+  status: String,
+  birthDate: String,
+  birthPlace: String,
+  gender: String,
+  almaMater: String,
+  underGraduateMajor: String,
+  graduateMajor: String,
+  militaryRank: String,
+  militaryBranch: String,
+  spaceFlights: Number,
+  spaceFlight_hr: Number,
+  spaceWalks: Number,
+  spaceWalks_hr: Number,
+  missions: String,
+  deathDate: String,
+  deathMission: String,
+});
+
+if (process.env.RESET_DATABASE) {
+  const seedDatabase = async () => {
+    await Astronaut.deleteMany();
+
+    astronautsData.forEach((astronaut) => {
+      const newAstronaut = new Astronaut(astronaut);
+      newAstronaut.save()
+    })
+  };
+  seedDatabase();
+};
+
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+app.set('json spaces', 2);
+
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json(listEndpoints(app))
 });
 
-// Start the server
+app.get("/api/astronauts", async (req, res) => {
+  const { missions } = req.query;
+
+  const allAstronauts = await Astronaut.find();
+
+  if (missions) {
+    const filteredAstronauts = allAstronauts.filter((astronaut) => astronaut.missions.includes(missions))
+    res.status(200).json({
+      success: true,
+      results: filteredAstronauts
+    })
+  } else {
+    res.status(200).json({
+      success: true,
+      results: allAstronauts
+    })
+  }
+
+});
+
+app.get("/api/astronauts/:name", async (req, res) => {
+  const { name } = req.params;
+
+  const specificAstronaut = await Astronaut.findOne({ name: name });
+
+  if (specificAstronaut) {
+    res.status(200).json({
+      success: true,
+      astronaut: specificAstronaut
+    })
+  } else {
+    res.status(404).json({
+      success: false,
+      status_code: 404,
+      status_message: `Astronaut with the name of ${name} can't be found`
+    })
+  }
+
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
