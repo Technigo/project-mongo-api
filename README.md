@@ -1,12 +1,12 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week's project was to start using a database with MongoDB to store data and retrieve data from it, and use that data to produce a RESTful API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I used the spotify dataset as api and used MongoDB and mongoose model. I filterd the properties with number and string values.
+
+My biggest problem was to deploy this week, but solved it together with my team.
 
 ## View it live
 
