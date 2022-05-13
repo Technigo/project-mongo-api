@@ -72,9 +72,7 @@ app.get("/streams", async (req, res) => {
 
 app.get("/streams/title/:title", async (req, res) => {
 
-  const { title } = req.params.title
-
-    const netflixTitle = await Stream.find({title: title})
+    const netflixTitle = await Stream.find({title: req.params.title})
 
     res.status(200).json({
       data: netflixTitle,
