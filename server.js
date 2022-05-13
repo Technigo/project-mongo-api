@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
+import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
@@ -19,6 +19,39 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+
+const Book = mongoose.model('Book', {
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
+})
+
+
+  const seedDatabase = async () => {
+    await Book.deleteMany({}) //ASYNC AWAIT TO PREVENT DUPLICATION
+    //LOOP THROUGH THE BOOKS DATA, CREATES A NEW OBJECT
+    booksData.forEach(item => {
+      const newBook = new Book(item)
+      newBook.save()
+    })
+  }
+  seedDatabase()
+
+
+app.get('/books', (req, res) => {
+  Book.find().then(books => {
+    res.json(books)
+  })
+})
+
+
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
