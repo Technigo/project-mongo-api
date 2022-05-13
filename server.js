@@ -69,6 +69,7 @@ app.get("/animals", async (req, res) => {
   });
 });
 
+// Route for searching for a single animal by name
 app.get("/animal/:animal", async (req, res) => {
   let animals = await Animal.find();
 
@@ -83,6 +84,7 @@ app.get("/animal/:animal", async (req, res) => {
   }
 });
 
+// Route for if a description exists
 app.get("/description/:boolean", async (req, res) => {
   let animals = await Animal.find();
 
@@ -97,6 +99,7 @@ app.get("/description/:boolean", async (req, res) => {
   }
 });
 
+// Route true/false for if it be fartin
 app.get("/doitbefartin/:boolean", async (req, res) => {
   let animals = await Animal.find();
 
@@ -111,6 +114,7 @@ app.get("/doitbefartin/:boolean", async (req, res) => {
   }
 });
 
+// Route true/false for if it maybe be fartin
 app.get("/doitmaybebefartin/:boolean", async (req, res) => {
   let animals = await Animal.find();
 
