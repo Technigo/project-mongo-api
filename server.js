@@ -72,7 +72,7 @@ app.get("/", (req, res) => {
       {
         "/songs": "Get listed songs.",
         "/songs/trackName/:trackName": "Lists the specific song track",
-        "//songs/artistName/:artistName": "Lists the specific artist name ",
+        "/songs/artistName/:artistName": "Lists the specific artist name ",
       },
     ],
   };
@@ -81,6 +81,10 @@ app.get("/", (req, res) => {
 app.get("/songs", async (req, res) => {
   const AllSongs = await Song.find({ topMusicData: topMusicData });
   res.send(AllSongs);
+});
+app.get("/songs/artistName/:artistName", async (req, res) => {
+  const artistName = await Song.find({ artistName: req.query.artistName });
+  res.send(artistName);
 });
 
 app.get("/songs/song", async (req, res) => {
