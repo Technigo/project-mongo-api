@@ -30,7 +30,6 @@ const Song = mongoose.model('Song', {
 	popularity: Number,
 });
 
-// seed data
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
 		await Song.deleteMany();
@@ -92,7 +91,7 @@ app.get('/songs', async (req, res) => {
 	res.json(songs);
 });
 
-// Get first found song by artist name
+// Get songs by artist name
 app.get('/songs/song/:artistName', async (req, res) => {
 	const songByArtist = await Song.find({ artistName: req.params.artistName });
 	res.send(songByArtist);
