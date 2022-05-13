@@ -70,23 +70,14 @@ app.get("/animals", async (req, res) => {
 });
 
 app.get("/animal/:animal", async (req, res) => {
-  // const animalSearch = await Animal.find({name: req.params.animal})
-  // res.send(animalSearch)
   let animals = await Animal.find();
 
-  // const animal = req.params.animal;
-  let specificAnimal = animals.filter((a) =>
-    a.name.toLowerCase.includes(req.params.animal.toLocaleLowerCase())
+  animals = animals.filter((a) =>
+    a.name.toLowerCase().includes(req.params.animal.toLocaleLowerCase())
   );
 
-  // if (animal) {
-  //   specificAnimal = animals.filter((a) =>
-  //     a.name.toLowerCase().includes(animal.toLowerCase())
-  //   );
-  // }
-
-  if (specificAnimal) {
-    res.status(200).json({ data: specificAnimal, success: true });
+  if (animals) {
+    res.status(200).json({ data: animals, success: true });
   } else {
     res.status(400).json({ error: "Animal not found" });
   }
@@ -95,36 +86,43 @@ app.get("/animal/:animal", async (req, res) => {
 app.get("/description/:boolean", async (req, res) => {
   let animals = await Animal.find();
 
-  let boolean = req.params.descriptionExists;
-
-  const descriptionExists = animals.filter(
-    (a) => a.descriptionExists.toString() === boolean.toString()
+  animals = animals.filter(
+    (a) => a.descriptionExists.toString() === req.params.boolean.toString()
   );
 
-  if (descriptionExists.length > 0) {
-    res.status(200).json({ data: description, success: true });
+  if (animals) {
+    res.status(200).json({ data: animals, success: true });
   } else {
     res.status(400).json({ error: "Boolean incorrect. use true or false." });
   }
-  // if (animals)
-  // res.status(200).json({
-  //   data: doItBeFartin,
-  //   success: true,
-  // });
 });
 
 app.get("/doitbefartin/:boolean", async (req, res) => {
-  res.status(200).json({
-    data: doItBeFartin,
-    success: true,
-  });
+  let animals = await Animal.find();
+
+  animals = animals.filter(
+    (a) => a.doesItFart.toString() === req.params.boolean.toString()
+  );
+
+  if (animals) {
+    res.status(200).json({ data: animals, success: true });
+  } else {
+    res.status(400).json({ error: "Boolean incorrect. use true or false." });
+  }
 });
 
 app.get("/doitmaybebefartin/:boolean", async (req, res) => {
-  res.status(200).json({
-    data: doItBeFartin,
-    success: true,
-  });
+  let animals = await Animal.find();
+
+  animals = animals.filter(
+    (a) => a.doesItMaybeFart.toString() === req.params.boolean.toString()
+  );
+
+  if (animals) {
+    res.status(200).json({ data: animals, success: true });
+  } else {
+    res.status(400).json({ error: "Boolean incorrect. use true or false." });
+  }
 });
 
 // Start the server
