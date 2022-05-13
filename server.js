@@ -82,9 +82,23 @@ app.get("/songs", async (req, res) => {
   const AllSongs = await Song.find({ topMusicData: topMusicData });
   res.send(AllSongs);
 });
-app.get("/songs/artistName/:artistName", async (req, res) => {
-  const artistName = await Song.find({ artistName: req.query.artistName });
-  res.send(artistName);
+app.get("/songs/trackName/:trackName", (req, res) => {
+  const trackname = topMusicData.find(
+    (data) =>
+      data.trackName.toLocaleLowerCase() ===
+      req.params.trackName.toLocaleLowerCase()
+  );
+  if (!trackname) {
+    res.status(404).json({
+      data: "not found",
+      success: false,
+    });
+  } else {
+    res.status(200).json({
+      data: trackname,
+      success: true,
+    });
+  }
 });
 
 app.get("/songs/song", async (req, res) => {
