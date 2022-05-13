@@ -47,13 +47,13 @@ app.use(cors());
 app.use(express.json());
 
 // When mongoDB is not active
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next()
-  } else {
-    res.status(503).json({ error: "Service unavailable" })
-  }
-})
+// app.use((req, res, next) => {
+//   if (mongoose.connection.readyState === 1) {
+//     next()
+//   } else {
+//     res.status(503).json({ error: "Service unavailable" })
+//   }
+// })
 
 // Start defining your routes here
 app.get("/", (req, res) => {
