@@ -30,11 +30,25 @@ const Laureate = mongoose.model("Laureate", {
   description: String,
 });
 
+if (process.env.RESET_DB) {
+  const seedData = async () => {
+    await Laureate.deleteMany({});
+    laureatesData.forEach((item) => {
+      const newLaureate = new Laureate(item);
+      newLaureate.save();
+    });
+  };
+  seedData();
+}
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send(listEndpoints(app));
 });
 
+app.get("/laureates", async (req, res) => {
+  const allLaureates = await Laureate.find();
+  res.json(laureates);
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
