@@ -46,22 +46,40 @@ if (process.env.RESET_DB) {
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// Home page with listed endpoints
 app.get('/', (req, res) => {
 	res.send(listEndpoints(app));
 });
 
+// Get all albums
 app.get('/albums', async (req, res) => {
 	const albums = await Album.find();
 	res.json(albums);
 });
+
+app.get('/songs/vocals/:vocals', async (req, res) => {
+	const songsByVocals = await Album.find({ vocals: req.params.vocals });
+	res.send(songsByVocals);
+});
+
+// app.get('/titles/:title', (req, res) => {
+// 	const { title } = req.params;
+// 	const songByTitle = beatles.filter((beatles) =>
+// 		beatles.song.toLowerCase().includes(title.toLowerCase())
+// 	);
+
+// 	res.status(200).json({
+// 		data: songByTitle,
+// 		success: true,
+// 	});
+// });
 
 // Start the server
 app.listen(port, () => {
