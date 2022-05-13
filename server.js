@@ -1,60 +1,149 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import express from "express"
+import cors from "cors"
+import mongoose from "mongoose"
 
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-import topMusicData from "./data/top-music.json";
+import netflixShows from "./data/netflix-titles.json"
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.Promise = Promise
 
-const port = process.env.PORT || 8080;
-const app = express();
+const port = process.env.PORT || 8080
+const app = express()
 
-const User = mongoose.model("User", {
-//value types, do not go to the database but allows us to create objects that do
-name: String,
-age: Number,
-deceased: Boolean
-})
+// const Song = mongoose.model("Song", {
+//   id: Number,
+//   trackName: String,
+//   artistName: String,
+//   genre: String,
+//   bpm: Number,
+//   energy: Number,
+//   danceability: Number,
+//   loudness: Number,
+//   liveness: Number,
+//   valence: Number,
+//   length: Number,
+//   acousticness: Number,
+//   speechiness: Number,
+//   popularity: Number 
+//   })
 
-const Song = mongoose.model("Song", {
-  id: Number,
-  trackName: String,
-  artistName: String,
-  genre: String,
-  bpm: Number,
-  energy: Number,
-  danceability: Number,
-  loudness: Number,
-  liveness: Number,
-  valence: Number,
-  length: Number,
-  acousticness: Number,
-  speechiness: Number,
-  popularity: Number 
+  const Show = mongoose.model("Show", {
+    //value types, do not go to the database but allows us to create objects that do
+    show_id: Number,
+    title: String,
+    director: String,
+    cast: String,
+    country: String,
+    date_added: String,
+    release_year: Number,
+    rating: String,
+    duration: String,
+    listed_in: String,
+    description: String,
+    type: String
   })
 
-  //the await delateMany means wait for the deletion to begin
-  //and the populate the database anew
-  //for every song put in new record in the database
+  //await deleteMany means wait for deletion to begin then populate the db anew for every song put in new record in the db
   if(process.env.RESET_DB) {
     const seedDatabase = async () => {
-      await Song.deleteMany();
-      topMusicData.forEach( singleSong => {
-        const newSong = new Song(singleSong);
-        newSong.save();
+      await Show.deleteMany()
+      netflixShows.forEach(singleShow => {
+        const newShow = new Show(singleShow)
+        newShow.save()
       })
     }
-    seedDatabase();
+    seedDatabase()
   }
 
+  // if(process.env.RESET_DB) {
+  //   const seedDatabase = async () => {
+  //     await Song.deleteMany();
+  //     topMusicData.forEach( singleSong => {
+  //       const newSong = new Song(singleSong);
+  //       newSong.save();
+  //     })
+  //   }
+  //   seedDatabase();
+  // }
+
 app.use(cors());
-app.use(express.json());
+app.use(express.json())
+
+//error message for database down, server issue 
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: "Service unavailable" })
+  }
+})
+
+app.get('/shows', async (req, res) => {
+	const shows = await Show.find()
+	res.json(shows)
+});
+
+//find specific show by exact title
+app.get("/title/:title", async (req, res) => {
+  const { title } = req.params
+
+  // const singleShow = await Show.find(
+  //   (Show) => Show.title.toLowerCase().includes(title.toLowerCase())
+  //   )
+
+  // const singleShow = await netflixShows.filter(
+  //   (show) => show.title.toLowerCase().includes(title.toLowerCase())
+  //   )
+
+  const singleShow = await Show.find({ title: title })
+  res.send(singleShow)
+})
+
+app.get("/listed_in/:listed_in", async (req, res) => {
+  try {
+    const show = await Show.find(req.params.listed_in)
+    if (show) {
+      res.json(show)
+  } else {
+    res.status(404).json({ error: 'Show category not found'})
+  }
+} catch (err) {
+  res.status(400).json({ error: 'Invalid show category'})
+}
+})
+
+
+app.get("/authors/id/:id", async (req, res) => {
+  try {
+    const author = await Author.findById(req.params.id);
+    if (author) {
+      res.json(author)
+    } else {
+      res.status(404).json({ error: "Author not found" })
+    }
+  } catch (error) {
+    res.status(400).json({ error: "Invalid author id" })
+  }
+});
+
+
+
+
+app.get("/release_year/:release_year", async (req, res) => {
+  try {
+    const show = await Show.find(req.params.release_year)
+    if (show) {
+      res.json(show)
+  } else {
+    res.status(404).json({ error: 'Realese year not found'})
+  }
+} catch (err) {
+  res.status(400).json({ error: 'Invalid realese year'})
+}
+})
+
+
 
 app.get("/songs/song/:artistName", async (req, res) => {
   //this will retrieve only the first song
