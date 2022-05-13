@@ -2,18 +2,42 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
+
 import topMusicData from './data/top-music.json';
-import beatles from './data/beatles.json';
+// import beatles from './data/beatles.json';
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
+
+const Song = mongoose.model('Song', {
+	id: Number,
+	trackName: String,
+	artistName: String,
+	genre: String,
+	bpm: Number,
+	energy: Number,
+	danceability: Number,
+	loudness: Number,
+	liveness: Number,
+	valence: Number,
+	length: Number,
+	acousticness: Number,
+	speechiness: Number,
+	popularity: Number,
+});
+
+// seed data
+if (process.env.RESET_DB) {
+	const seedDatabase = async () => {
+		await Song.deleteMany();
+		topMusicData.forEach((songData) => {
+			const newSong = new Song(songData);
+			newSong.save();
+		});
+	};
+	seedDatabase();
+}
 
 // const Album = mongoose.model('Album', {
 // 	id: Number,
@@ -44,35 +68,6 @@ mongoose.Promise = Promise;
 // 	seedDatabase();
 // }
 
-const Song = mongoose.model('Song', {
-	id: Number,
-	trackName: String,
-	artistName: String,
-	genre: String,
-	bpm: Number,
-	energy: Number,
-	danceability: Number,
-	loudness: Number,
-	liveness: Number,
-	valence: Number,
-	length: Number,
-	acousticness: Number,
-	speechiness: Number,
-	popularity: Number,
-});
-
-// seed data
-if (process.env.RESET_DB) {
-	const seedDatabase = async () => {
-		await Song.deleteMany();
-		topMusicData.forEach((singleSong) => {
-			const newSong = new Song(singleSong);
-			newSong.save();
-		});
-	};
-	seedDatabase();
-}
-
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
@@ -88,7 +83,24 @@ app.get('/', (req, res) => {
 	res.send(listEndpoints(app));
 });
 
-// Get all albums
+// Get all top songs
+app.get('/songs', async (req, res) => {
+	const songs = await Song.find();
+	res.json(songs);
+});
+
+// Get first found song by artist name
+app.get('/songs/song/:artistName', async (req, res) => {
+	const songByArtist = await Song.find({ artistName: req.params.artistName });
+	res.send(songByArtist);
+});
+
+// Start the server
+app.listen(port, () => {
+	console.log(`Server running on http://localhost:${port}`);
+});
+
+// Get all beatles albums
 // app.get('/albums', async (req, res) => {
 // 	const albums = await Album.find();
 // 	res.json(albums);
@@ -99,20 +111,3 @@ app.get('/', (req, res) => {
 // 	const songsByVocals = await Album.find({ vocals: req.params.vocals });
 // 	res.send(songsByVocals);
 // });
-
-// Get all top songs
-app.get('/songs', async (req, res) => {
-	const songs = await Song.find();
-	res.json(songs);
-});
-
-// Get first found song by artist name
-app.get('/songs/song/:artistName', async (req, res) => {
-	const singleSong = await Song.find({ artistName: req.params.artistName });
-	res.send(singleSong);
-});
-
-// Start the server
-app.listen(port, () => {
-	console.log(`Server running on http://localhost:${port}`);
-});
