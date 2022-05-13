@@ -92,6 +92,16 @@ app.get("/streams/year/:release_year", async (req, res) => {
   })  
 })
 
+app.get("/streams/type/:type", async (req, res) => {
+  
+  const netflixType = await Stream.find({type: req.params.type})
+  
+  res.status(200).json({
+    data: netflixType,
+    success: true
+  })  
+})
+
 
 //Does not work....
 // app.get("/streams/type/:type", async (req, res) => {
