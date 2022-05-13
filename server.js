@@ -29,7 +29,7 @@ const Song = mongoose.model("song", {
     popularity: Number
 })
 
-if(process.env.RESET_DB) {
+//if(process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Song.deleteMany()
     topMusicData.forEach(singleSong => {
@@ -38,7 +38,7 @@ if(process.env.RESET_DB) {
     })
   }
   seedDatabase()
-}
+//}
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
