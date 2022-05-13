@@ -1,11 +1,13 @@
 # Project Mongo API
 
 The purpuose of this project is to learn how to use Mongodb to store data, and how to query that data from your API.
-The endpoints you can look for are: 
+I am using a dataset provided by Technigo. The endpoints you can look for are: 
 
-../books 
-../books/:id
-../books/title/:title
+../books (will return aray of books)
+<br>
+../books/:id (find a book by id)
+<br>
+../books/title/:title (find a book by title)
 
 ## The problem
 
