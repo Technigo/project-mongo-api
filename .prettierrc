@@ -1,0 +1,9 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "semi": false,
+  "trailingComma": "none",
+  "beforeSelfClosing": "allow",
+  "beforeClosing": "allow"
+}
