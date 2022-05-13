@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -20,13 +20,84 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
+const User = mongoose.model("User", {
+  name: String,
+  age: Number,
+  married: Boolean,
+});
+
+const Song = mongoose.model("Song", {
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number,
+});
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Song.deleteMany();
+    topMusicData.forEach((singleSong) => {
+      const newSong = new Song(singleSong);
+      newSong.save();
+    });
+  };
+  seedDatabase();
+}
+const testUser = new User({
+  name: "Susan",
+  age: 27,
+  married: true,
+});
+testUser.save();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
 // Start defining your routes here
+
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  const WelcomePage = {
+    " Hello music lovers": " This is an open API for top music albums.",
+    Routes: [
+      {
+        "/songs": "Get listed songs.",
+        "/songs/trackName/:trackName": "Lists the specific song track",
+        "//songs/artistName/:artistName": "Lists the specific artist name ",
+      },
+    ],
+  };
+  res.send(WelcomePage);
+});
+app.get("/songs", async (req, res) => {
+  const AllSongs = await Song.find({ topMusicData: topMusicData });
+  res.send(AllSongs);
+});
+
+app.get("/songs/song", async (req, res) => {
+  const { artistName, trackName } = req.query;
+
+  if (trackName) {
+    const singleSong = await Song.find({
+      artistName: artistName,
+      trackName: trackName,
+    });
+    res.send(singleSong);
+  } else {
+    const singleSong = await Song.find({
+      artistName: artistName,
+    });
+    res.send(singleSong);
+  }
 });
 
 // Start the server
