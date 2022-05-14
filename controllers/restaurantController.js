@@ -6,8 +6,31 @@ import Restaurant from "../models/restaurant";
 // @access	Private
 const getRestaurants = asyncHandler(async (req, res) => {
   const restaurants = await Restaurant.find();
+  const name = req.query.name;
+  const city = req.query.city;
+
+  // query specific restaurant by name
+  if (name) {
+    const restaurant = restaurants.find((item) => item.name === name);
+    restaurant ? res.status(200).json(restaurant) : res.status(404).json("Not found");
+  }
+
+  // query restaurants by city
+  if (city) {
+    const restaurantsByCity = restaurants.filter((item) => item.city === city);
+    res.status(200).json(restaurantsByCity);
+  }
 
   res.status(200).json(restaurants);
+});
+
+// @desc		Get restaurant by id
+// @route		GET /api/restaurants
+// @access	Private
+const getRestaurant = asyncHandler(async (req, res) => {
+  const restaurant = await Restaurant.findById(req.params.id);
+
+  res.status(200).json(restaurant);
 });
 
 // @desc		Set restaurant
@@ -64,6 +87,7 @@ const deleteRestaurant = asyncHandler(async (req, res) => {
 
 module.exports = {
   getRestaurants,
+  getRestaurant,
   setRestaurant,
   updateRestaurant,
   deleteRestaurant,
