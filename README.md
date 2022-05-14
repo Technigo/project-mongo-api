@@ -1,13 +1,24 @@
 # Project Mongo API
+REST API using Heroku and a MongoDB with 450 books using the mongoose model to fetch.
 
-Replace this readme with your own information about your project.
+Routes:
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+    "/authors  return array with all authors",
+    "/authors/id/:id  returns one author by id",
+    "/authors/id/:id/books  returns array with all books by one author",
+    "/books  return array with all books",
+    "/books/id/:id   returns one book by id "
+
+  
+Queries: 
+
+    "/authors?name='name'  returns array with authors whose names contain the string provided",
+    "/authors?id='id'  returns one author by id"
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I would like to add more routes and perhaps a few more queries. The dataset doesn't have any boolean values so I would like to try it with a different dataset as well to try that. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://week-18-project-mongo-api.herokuapp.com/
