@@ -4,9 +4,9 @@ import cors from "cors";
 import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
 
-import laureatesData from "./data/laureates.json";
+import femalesData from "./data/laureates.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/laureates";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -26,17 +26,18 @@ const Laureate = mongoose.model("Laureate", {
   id: Number,
   name: String,
   year: Number,
-  category: String,
   country: String,
+  category: String,
   description: String,
 });
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
+    console.log(femalesData);
     // deleti all items in the database to prevent to copy over the items
     await Laureate.deleteMany({});
 
-    laureatesData.forEach((item) => {
+    femalesData.forEach((item) => {
       const newLaureate = new Laureate(item);
       newLaureate.save();
     });
@@ -50,21 +51,32 @@ app.get("/", (req, res) => {
 
 // Req: A minimum of one endpoint to return a collection of results (array of elements)
 app.get("/laureates", async (req, res) => {
-  const list = await Laureate.find();
-  res.json(list);
+  const laureates = await Laureate.find();
+  res.json(laureates);
 });
 
-app.get("/shows/movies", async (req, res) => {
-  const showMovies = await Movie.find({ type: "Movie" });
-  res.json(showMovies);
-});
+// app.get("/shows/movies", async (req, res) => {
+//   const showMovies = await Movie.find({ type: "Movie" });
+//   res.json(showMovies);
+// });
 
-app.get("/shows/tvshows", async (req, res) => {
-  const showTvshows = await Movie.find({ type: "TV Show" });
-  res.json(showTvshows);
-});
+// app.get("/shows/tvshows", async (req, res) => {
+//   const showTvshows = await Movie.find({ type: "TV Show" });
+//   res.json(showTvshows);
+// });
 
 // Req: A minimum of one endpoint to return a single result (single element).
+app.get("/laureates/name/:name", async (req, res) => {
+  const laureateByName = await Laureate.find({ name: req.params.name });
+
+  if (laureateByName) {
+    res.json(laureateByName);
+  } else {
+    res
+      .status(404)
+      .json("Sorry, couldn't find a Nobel Prize laureate with this name");
+  }
+});
 
 // Start the server
 app.listen(port, () => {
