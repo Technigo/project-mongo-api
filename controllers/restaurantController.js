@@ -26,7 +26,6 @@ const setRestaurant = asyncHandler(async (req, res) => {
     price: req.body.price,
     category: req.body.category,
   });
-
   res.status(200).json(restaurant);
 });
 
