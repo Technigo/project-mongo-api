@@ -5,27 +5,32 @@ import Restaurant from "../models/restaurant";
 // @route		GET /api/restaurants
 // @access	Private
 const getRestaurants = asyncHandler(async (req, res) => {
-  const restaurants = await Restaurant.find();
-  const name = req.query.name;
-  const city = req.query.city;
+  const { name, city, area, price, category } = req.query;
+  let queries = {};
 
-  // query specific restaurant by name
   if (name) {
-    const restaurant = restaurants.find((item) => item.name === name);
-    restaurant ? res.status(200).json(restaurant) : res.status(404).json("Not found");
+    queries.name = name;
+  }
+  if (city) {
+    queries.city = city;
+  }
+  if (area) {
+    queries.area = area;
+  }
+  if (price) {
+    queries.price = price;
+  }
+  if (category) {
+    queries.category = category;
   }
 
-  // query restaurants by city
-  if (city) {
-    const restaurantsByCity = restaurants.filter((item) => item.city === city);
-    res.status(200).json(restaurantsByCity);
-  }
+  const restaurants = await Restaurant.find(queries);
 
   res.status(200).json(restaurants);
 });
 
 // @desc		Get restaurant by id
-// @route		GET /api/restaurants
+// @route		GET /api/restaurants/:id
 // @access	Private
 const getRestaurant = asyncHandler(async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
