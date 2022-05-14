@@ -55,9 +55,15 @@ app.use(cors());
 app.use(express.json());
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Welcome to ultimate source for books reviews! Below you will possible endpoints for this API");
-});
+    app.get('/', (req, res) => {
+      res.send(
+        {"Welcome":"This is the ultimate API source for book reviews!",
+          "Routes": [{"/books":"All books available","/books-id/:bookID":"Get one specific book based on its bookID","/books-author/:authors":"Get all books written by a specific author"}]}
+    
+      )
+    })
+
+
 
 //All books available
 
@@ -91,11 +97,28 @@ if(bookById) {
 })
 
  //Endpoint that returns all books written by a specific author
- app.get("/books/author/:authors", async (req, res) =>
- {const bookByAuthor=await Book.find({authors: req.params.authors});
- res.send(bookByAuthor);
- })
+ app.get("/books/author/:authors", async (req, res) => {
+  try {
+  const bookByAuthor=await Book.find({authors: req.params.authors})
 
+if(bookByAuthor) {
+  res.status(200).json({
+    data: bookByAuthor,
+    success: true,
+  })
+} else {
+  res.status(404).json({
+    error: 'No book written by that author was found.',
+    success: false,
+  })
+}
+} catch (err) {
+  res.status(400).json({
+    error: 'Invalid or misspelled author',
+    success: false,
+  })
+}
+})
 
 
 
