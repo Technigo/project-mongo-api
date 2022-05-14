@@ -6,7 +6,7 @@ const allMissions = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      results: missions
+      missions: missions
     });
   } catch (error) {
     console.log(error)

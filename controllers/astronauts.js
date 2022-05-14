@@ -13,7 +13,7 @@ const allAstronauts = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      results: filteredAstronauts
+      astronauts: filteredAstronauts
     });
 
   } catch (error) {

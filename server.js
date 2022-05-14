@@ -45,6 +45,17 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({
+      status_code: 503,
+      status_message: "Service Unavailable"
+    })
+  };
+});
+
 app.use("/api/astronauts", astronautsRoute);
 app.use("/api/missions", missionsRoute);
 app.use("/api/years", yearsRoute);
@@ -52,5 +63,7 @@ app.use("/api/years", yearsRoute);
 app.set('json spaces', 2);
 
 app.get("/", (req, res) => res.json(listEndpoints(app)));
+
+app.get('*', (req, res) => res.status(404).send("Not Found"));
 
 app.listen(port);

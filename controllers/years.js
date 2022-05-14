@@ -29,7 +29,7 @@ const astronautByYear = async (req, res) => {
 
   res.status(200).json({
     success: true,
-    astronaut: astronautYear
+    astronauts: astronautYear
   });
 
 };
