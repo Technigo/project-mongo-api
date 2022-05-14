@@ -1,12 +1,10 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
 import booksData from "./data/books.json";
 import { redirect } from "express/lib/response";
+
+// import avocadoSalesData from "./data/avocado-sales.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
@@ -21,6 +19,7 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
+//Mongoose model
 const Book = mongoose.model('Book', {
   bookID: Number,
   title: String,
@@ -34,10 +33,10 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 })
 
+//Loop through data set. Async in order to avoid duplication. 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Book.deleteMany() //ASYNC AWAIT TO PREVENT DUPLICATION
-    //LOOP THROUGH THE BOOKS DATA, CREATES A NEW OBJECT
+    await Book.deleteMany() 
     booksData.forEach(singleBook => {
       const newBook = new Book(singleBook)
       newBook.save()
@@ -45,10 +44,6 @@ if (process.env.RESET_DB) {
   }
   seedDatabase()
 }
-
-
-
-
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -58,15 +53,12 @@ app.use(express.json());
     app.get('/', (req, res) => {
       res.send(
         {"Welcome":"This is the ultimate API source for book reviews!",
-          "Routes": [{"/books":"All books available","/books/id/:bookID":"Get one specific book based on its bookID","/books/author/:authors":"Get all books written by a specific author"}]}
-    
+          "Routes": [{"/books":"All books available","/books/id/:bookID":"Get one specific book based on its bookID","/books/author/:authors":"Get all books written by a specific author","/books/language/:language_code":"Get all books written in a specific language"}]}
       )
     })
 
 
-
 //All books available
-
 app.get('/books', (req, res) => {
   Book.find().then(books => {
     res.json(books)
@@ -97,14 +89,8 @@ if(bookById) {
 })
 
  //Endpoint that returns all books written by a specific author
-
-
-   
-
   app.get("/books/author/:authors", async (req, res) => {
-    
     const bookByAuthor=await Book.find({authors: req.params.authors});
-  
     if (bookByAuthor.length===0) {
       res.status(400).json({
         data: "There are no books available by this author here.",
@@ -119,7 +105,21 @@ if(bookById) {
   });
 
 
-
+ //Endpoint that returns all books written in specific language (based on language code with three letters)
+ app.get("/books/language/:language_code", async (req, res) => {
+  const bookByLanguage=await Book.find({language_code: req.params.language_code});
+  if (bookByLanguage.length===0) {
+    res.status(400).json({
+      data: "No books written in that language are available here.",
+      success: false,
+    });
+  } else {
+    res.status(200).json({
+      data: bookByLanguage,
+      sucess: true,
+    });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
