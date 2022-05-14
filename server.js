@@ -43,6 +43,7 @@ const app = express()
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
+app.use(express.json())
 app.use(bodyParser.json())
 
 // Start defining your routes here
@@ -58,8 +59,8 @@ app.get('/myNetflix', async (req, res) => {
 
 // Geting route shows with ID
 
-app.get('/myNetflix/shows/:show_id', (reg, res) => {
-  const id = reg.params.show_id
+app.get('/myNetflix/shows/:show_id', (req, res) => {
+  const id = req.params.show_id
   Stream.find({ show_id: id })
     .then((results) => {
       res.json(results)
@@ -67,6 +68,12 @@ app.get('/myNetflix/shows/:show_id', (reg, res) => {
     .catch((err) => {
       res.json({ message: 'Cant find query', err: err })
     })
+})
+app.get('/myNetflix/title/:title', async (req, res) => {
+  const singleTitle = await Stream.findOne({
+    title: req.params.title,
+  })
+  res.send(singleTitle)
 })
 
 //Geting route year
@@ -76,10 +83,6 @@ app.get('/myNetflix/year/:release_year', async (req, res) => {
     release_year: req.params.release_year,
   })
   res.send(relaseDate)
-})
-app.get('/myNetflix/type/:type', async (req, res) => {
-  const movieType = await Stream.find({ type: req.params.type })
-  res.send(movieType)
 })
 
 // Start the server
