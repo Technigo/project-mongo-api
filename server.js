@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
 import booksData from "./data/books.json";
+import { redirect } from "express/lib/response";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
@@ -30,26 +31,22 @@ const Book = mongoose.model('Book', {
   language_code: String,
   num_pages: Number,
   ratings_count: Number,
-  text_reviews_count: Number,
+  text_reviews_count: Number
 })
 
-
+if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Book.deleteMany({}) //ASYNC AWAIT TO PREVENT DUPLICATION
+    await Book.deleteMany() //ASYNC AWAIT TO PREVENT DUPLICATION
     //LOOP THROUGH THE BOOKS DATA, CREATES A NEW OBJECT
-    booksData.forEach(item => {
-      const newBook = new Book(item)
+    booksData.forEach(singleBook => {
+      const newBook = new Book(singleBook)
       newBook.save()
     })
   }
   seedDatabase()
+}
 
 
-app.get('/books', (req, res) => {
-  Book.find().then(books => {
-    res.json(books)
-  })
-})
 
 
 
@@ -59,8 +56,32 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Welcome to ultimate source for books reviews! Below you will possible endpoints for this API");
 });
+
+//All books available
+
+app.get('/books', (req, res) => {
+  Book.find().then(books => {
+    res.json(books)
+  })
+})
+
+ //Endpoint that returns a single book by a specific bookID
+app.get("/books/id/:bookID", async (req, res) =>
+{const bookById=await Book.findOne({bookID: req.params.bookID});
+res.send(bookById);
+})
+
+ //Endpoint that returns all books written by a specific author
+ app.get("/books/author/:authors", async (req, res) =>
+ {const bookByAuthor=await Book.find({authors: req.params.authors});
+ res.send(bookByAuthor);
+ })
+
+
+
+
 
 // Start the server
 app.listen(port, () => {
