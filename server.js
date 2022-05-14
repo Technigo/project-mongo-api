@@ -10,6 +10,7 @@ import missionsData from "./data/missions.json";
 
 import astronautsRoute from "./routes/astronauts";
 import missionsRoute from "./routes/missions";
+import yearsRoute from "./routes/years";
 
 import AstronautSchema from "./models/astronaut";
 import MissionSchema from "./models/mission";
@@ -46,6 +47,7 @@ app.use(express.json());
 
 app.use("/api/astronauts", astronautsRoute);
 app.use("/api/missions", missionsRoute);
+app.use("/api/years", yearsRoute);
 
 app.set('json spaces', 2);
 
