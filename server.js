@@ -55,16 +55,6 @@ app.get("/laureates", async (req, res) => {
   res.json(laureates);
 });
 
-// app.get("/shows/movies", async (req, res) => {
-//   const showMovies = await Movie.find({ type: "Movie" });
-//   res.json(showMovies);
-// });
-
-// app.get("/shows/tvshows", async (req, res) => {
-//   const showTvshows = await Movie.find({ type: "TV Show" });
-//   res.json(showTvshows);
-// });
-
 // Req: A minimum of one endpoint to return a single result (single element).
 app.get("/laureates/name/:name", async (req, res) => {
   const laureateByName = await Laureate.find({ name: req.params.name });

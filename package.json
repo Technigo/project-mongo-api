@@ -16,10 +16,22 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "express-list-endpoints": "^6.0.0",
+    "mongodb": "^4.6.0",
     "mongoose": "^6.3.3",
     "nodemon": "^2.0.15"
   },
   "devDependencies": {
-    "eslint": "^8.15.0"
-  }
+    "babel-eslint": "^8.2.6",
+    "eslint": "^4.19.1"
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustineZwiazek/project-mongo-api.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/JustineZwiazek/project-mongo-api/issues"
+  },
+  "homepage": "https://github.com/JustineZwiazek/project-mongo-api#readme"
 }
