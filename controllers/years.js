@@ -23,9 +23,11 @@ const allYears = async (req, res) => {
 };
 
 const astronautByYear = async (req, res) => {
+  const limit = parseInt(req.query.limit);
+  const skip = parseInt(req.query.skip);
   const { year } = req.params;
 
-  const astronautYear = await AstronautSchema.find({ year: year });
+  const astronautYear = await AstronautSchema.find({ year: year }).skip(skip).limit(limit);
 
   res.status(200).json({
     success: true,

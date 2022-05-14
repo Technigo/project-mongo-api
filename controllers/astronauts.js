@@ -1,6 +1,8 @@
 import AstronautSchema from "../models/astronaut";
 
 const allAstronauts = async (req, res) => {
+  const limit = parseInt(req.query.limit);
+  const skip = parseInt(req.query.skip);
   let { status, missions } = req.query;
 
   const MissionsNoSpecialCharacters = missions?.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -9,7 +11,7 @@ const allAstronauts = async (req, res) => {
     const filteredAstronauts = await AstronautSchema.find({
       status: new RegExp(status, "i"),
       missions: new RegExp(MissionsNoSpecialCharacters, "i")
-    });
+    }).skip(skip).limit(limit)
 
     res.status(200).json({
       success: true,
