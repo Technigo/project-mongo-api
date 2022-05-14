@@ -11,23 +11,6 @@ mongoose.Promise = Promise
 const port = process.env.PORT || 8080
 const app = express()
 
-// const Song = mongoose.model("Song", {
-//   id: Number,
-//   trackName: String,
-//   artistName: String,
-//   genre: String,
-//   bpm: Number,
-//   energy: Number,
-//   danceability: Number,
-//   loudness: Number,
-//   liveness: Number,
-//   valence: Number,
-//   length: Number,
-//   acousticness: Number,
-//   speechiness: Number,
-//   popularity: Number 
-//   })
-
   const Show = mongoose.model("Show", {
     //value types, do not go to the database but allows us to create objects that do
     show_id: Number,
@@ -44,7 +27,7 @@ const app = express()
     type: String
   })
 
-  //await deleteMany means wait for deletion to begin then populate the db anew for every song put in new record in the db
+  //await deleteMany means wait for deletion to begin then populate the db anew for every show put in the db
   if(process.env.RESET_DB) {
     const seedDatabase = async () => {
       await Show.deleteMany()
@@ -55,17 +38,6 @@ const app = express()
     }
     seedDatabase()
   }
-
-  // if(process.env.RESET_DB) {
-  //   const seedDatabase = async () => {
-  //     await Song.deleteMany();
-  //     topMusicData.forEach( singleSong => {
-  //       const newSong = new Song(singleSong);
-  //       newSong.save();
-  //     })
-  //   }
-  //   seedDatabase();
-  // }
 
 app.use(cors());
 app.use(express.json())
@@ -79,22 +51,14 @@ app.use((req, res, next) => {
   }
 })
 
-app.get('/shows', async (req, res) => {
+app.get('/netflixShows', async (req, res) => {
 	const shows = await Show.find()
 	res.json(shows)
 });
 
 //find specific show by exact title
-app.get("/title/:title", async (req, res) => {
+app.get("/netflixShows/title/:title", async (req, res) => {
   const { title } = req.params
-
-  // const singleShow = await Show.find(
-  //   (Show) => Show.title.toLowerCase().includes(title.toLowerCase())
-  //   )
-
-  // const singleShow = await netflixShows.filter(
-  //   (show) => show.title.toLowerCase().includes(title.toLowerCase())
-  //   )
 
   const singleShow = await Show.find({ title: title })
   res.send(singleShow)
@@ -113,26 +77,9 @@ app.get("/listed_in/:listed_in", async (req, res) => {
 }
 })
 
-
-app.get("/authors/id/:id", async (req, res) => {
+app.get("netflixShows/release_year/:release_year", async (req, res) => {
   try {
-    const author = await Author.findById(req.params.id);
-    if (author) {
-      res.json(author)
-    } else {
-      res.status(404).json({ error: "Author not found" })
-    }
-  } catch (error) {
-    res.status(400).json({ error: "Invalid author id" })
-  }
-});
-
-
-
-
-app.get("/release_year/:release_year", async (req, res) => {
-  try {
-    const show = await Show.find(req.params.release_year)
+    const show = await Show.find(req.params.release_year.toString())
     if (show) {
       res.json(show)
   } else {
@@ -144,26 +91,21 @@ app.get("/release_year/:release_year", async (req, res) => {
 })
 
 
+// app.get("/shows/show/:cast", async (req, res) => {
+//   //this will retrieve only the first show from specific actor
+//   const findByCast = await Show.findOne({cast: req.params.cast})
+//   res.send(findByCast)
+// })
+// This only works if only one actor in crew like Christian Morales, needs includes for Winona Ryder etc.
 
-app.get("/songs/song/:artistName", async (req, res) => {
-  //this will retrieve only the first song
-  const singleSong = await Song.findOne({artistName: req.params.artistName})
-  res.send(singleSong)
-})
 
-app.get("/songs/song/:artistName", async (req, res) => {
-  //this will retrieve all artists songs
-  const singleSong = await Song.find({artistName: req.params.artistName})
-  res.send(singleSong)
-})
+//query path: http://localhost:8080/netflixShows/show?title=Stranger%20Things&realese_year=2019
 
-//query path: http://localhost:8080/songs/song?artistName=Marshmello&trackName=Happier&energy=79
-app.get("/songs/song", async (req, res) => {
-  const {artistName, trackName, energy} = req.query
-  const singleSong = await Song.find({artistName: artistName, 
-    trackName: trackName, 
-    energy: energy})
-  res.send(singleSong)
+app.get("/netflixShows/show", async (req, res) => {
+  const {title, realese_year} = req.query
+  const findByStuff = await Show.find({title: title, 
+    realese_year: realese_year})
+  res.send(findByStuff)
 })
 
 app.get("/songs/song", async (req, res) => {
