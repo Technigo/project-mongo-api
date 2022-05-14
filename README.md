@@ -1,13 +1,17 @@
-# Project Mongo API
+# Astronauts Mongo API
 
-Replace this readme with your own information about your project.
+I built a RESTful API using Node, Express, and MongoDB. Creating endpoints for reading data about Astronauts. This 
+project is built on top of a RESTful API I built using only Node and Express to read the same Astronauts data.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## The project
 
-## The problem
+The first thing I did was configured the mongoDB Database and created an Astronauts database. Then I created 
+Routes for my three endpoints (astronauts, missions, and years). Next I created two Models to define my database 
+structures. 
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Then use the Model.find method to fetch all the data from the database and return it back in JSON format. Lastly, 
+I implemented error handling and pagination using the .skip() and .limit() methods along with find().
 
-## View it live
+## Hosted
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+This project is hosted on Heroku: https://astronauts-mongo.herokuapp.com/
