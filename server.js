@@ -25,15 +25,17 @@ const Stream = mongoose.model('Stream', {
   type: String,
 })
 
-const seedDatabase = async () => {
-  await Stream.deleteMany()
-  netflixData.forEach((stream) => {
-    new Stream(stream).save()
-  })
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Stream.deleteMany()
+    netflixData.forEach((stream) => {
+      const newStream = new Stream(stream)
+      newStream.save()
+    })
+  }
+
+  seedDatabase()
 }
-
-seedDatabase()
-
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
 //
