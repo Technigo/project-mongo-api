@@ -49,18 +49,16 @@ app.use(express.json())
 app.use(bodyParser.json())
 
 // Start defining your routes here
-
+// The start with my endponits
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
-
+// Showing all the movie and tv show
 app.get('/myNetflix', async (req, res) => {
   const mystream = await Stream.find()
   res.json(mystream)
 })
-
-// Geting route shows with ID
-
+// So u can search by ID
 app.get('/myNetflix/shows/:show_id', (req, res) => {
   const id = req.params.show_id
   Stream.find({ show_id: id })
@@ -71,6 +69,7 @@ app.get('/myNetflix/shows/:show_id', (req, res) => {
       res.json({ message: 'Cant find query', err: err })
     })
 })
+// Get route with title
 app.get('/myNetflix/title/:title', async (req, res) => {
   const singleTitle = await Stream.findOne({
     title: req.params.title,
@@ -78,7 +77,7 @@ app.get('/myNetflix/title/:title', async (req, res) => {
   res.send(singleTitle)
 })
 
-//Geting route year
+//Geting route with year
 
 app.get('/myNetflix/year/:release_year', async (req, res) => {
   const relaseDate = await Stream.find({
