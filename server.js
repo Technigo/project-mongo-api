@@ -65,7 +65,7 @@ app.get('/books', (req, res) => {
   })
 })
 
- //Endpoint that returns a single book by a specific bookID
+ //Endpoint that returns a single book by a specific bookID.
 app.get("/books/id/:bookID", async (req, res) => {
 try {
   const bookById=await Book.findOne({bookID: req.params.bookID})
