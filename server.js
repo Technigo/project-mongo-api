@@ -68,9 +68,26 @@ app.get('/books', (req, res) => {
 })
 
  //Endpoint that returns a single book by a specific bookID
-app.get("/books/id/:bookID", async (req, res) =>
-{const bookById=await Book.findOne({bookID: req.params.bookID});
-res.send(bookById);
+app.get("/books/id/:bookID", async (req, res) => {
+try {
+  const bookById=await Book.findOne({bookID: req.params.bookID})
+if(bookById) {
+  res.status(200).json({
+    data: bookById,
+    success: true,
+  })
+} else {
+  res.status(404).json({
+    error: 'No book with that bookID was found.',
+    success: false,
+  })
+}
+} catch (err) {
+  res.status(400).json({
+    error: 'Invalid bookID',
+    success: false,
+  })
+}
 })
 
  //Endpoint that returns all books written by a specific author
