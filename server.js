@@ -6,7 +6,7 @@ import listEndpoints from "express-list-endpoints";
 
 import femalesData from "./data/laureates.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/laureates";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -18,7 +18,7 @@ const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Req: Your API should make use of Mongoose models to model your data and use these models to fetch data from the database.
 // Modelling the database:
@@ -31,15 +31,21 @@ const Laureate = mongoose.model("Laureate", {
   description: String,
 });
 
+// const testUser = new User({
+//   name: "Justyna Zwiazek",
+//   id: 65,
+//   category: "Peace",
+// });
+// console.log(testUser);
+// testUser.save();
+
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    console.log(femalesData);
     // deleti all items in the database to prevent to copy over the items
     await Laureate.deleteMany({});
 
     femalesData.forEach((item) => {
-      const newLaureate = new Laureate(item);
-      newLaureate.save();
+      new Laureate(item).save();
     });
   };
   seedDatabase();
@@ -51,13 +57,25 @@ app.get("/", (req, res) => {
 
 // Req: A minimum of one endpoint to return a collection of results (array of elements)
 app.get("/laureates", async (req, res) => {
-  const laureates = await Laureate.find();
-  res.json(laureates);
+  const { name, category } = req.query;
+
+  try {
+    const allLaureates = await Laureate.find({
+      name: new RegExp(name, "i"),
+      category: new RegExp(category, "i"),
+    });
+    res.json(allLaureates);
+  } catch (error) {
+    res
+      .status(400)
+      .json({ error: "We didn't find what you were looking for." });
+  }
 });
 
 // Req: A minimum of one endpoint to return a single result (single element).
-app.get("/laureates/name/:name", async (req, res) => {
-  const laureateByName = await Laureate.find({ name: req.params.name });
+app.get("/laureates/:id", async (req, res) => {
+  const { id } = req.params;
+  const laureatebyId = await Laureate.findOne({ laureateID: id });
 
   if (laureateByName) {
     res.json(laureateByName);
