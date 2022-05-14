@@ -60,6 +60,7 @@ app.get('/songs/genre/:genre', async (req, res) => {
   res.send(singleGenre);
 });
 
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
