@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
     "here is an api with data on some Netflix movies and TV shows",
     Routes: [{
       "/netflixShows": "Get whole array of the Netflix movies and TV shows",
-      "/netflixShows/release_year/'year of release'": "Get array of shows from specific release year",
+      "/netflixShows/release_year/'year of release'": "Get array of shows from a specific release year",
       "/netflixShows/title/'title of show'": "Get one specific show by it's title",
     }]
   }
@@ -67,19 +67,13 @@ app.use((req, res, next) => {
   }
 })
 
+//array with all shows
 app.get('/netflixShows', async (req, res) => {
 	const findAllShows = await Show.find()
 	res.json(findAllShows)
 });
 
-//find specific show by exact title
-// app.get("/netflixShows/title/:title", async (req, res) => {
-//   const { title } = req.params
-
-//   const singleShow = await Show.find({ title: title })
-//   res.send(singleShow)
-// })
-
+//find show by title
 app.get("/netflixShows/title/:title", async (req, res) => {
   try {
     const findByTitle = await Show.find({ title: req.params.title})
@@ -96,9 +90,9 @@ app.get("/netflixShows/title/:title", async (req, res) => {
 //find shows by their release year
 app.get("/netflixShows/release_year/:release_year", async (req, res) => {
   try {
-    const show = await Show.find({ release_year: req.params.release_year.toString() })
-    if (show) {
-      res.json(show)
+    const findByReleaseYear = await Show.find({ release_year: req.params.release_year.toString() })
+    if (findByReleaseYear) {
+      res.json(findByReleaseYear)
   } else {
     res.status(404).json({ error: 'Release year not found'})
   }
@@ -107,7 +101,6 @@ app.get("/netflixShows/release_year/:release_year", async (req, res) => {
 }
 })
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

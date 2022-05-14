@@ -1,13 +1,12 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week I built an API using MongoDB and mongoose. I used seed data and created routes with app.get() with status codes with try and catch method.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+If I had more time I would solve why the try and catch method is not working properly, it only returns error for the release_year when letters are typed otherwise all is considered success. 
+I'd like to find the correspondent to .includes() method to be able to search and return partly written key words and also more endpoints. Now I could not include cast since it would work if there were only one actor in crew like Christian Morales, but not for Winona Ryder who has other cast members.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+
