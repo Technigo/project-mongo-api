@@ -1,13 +1,14 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+Using MongoDb to store data in a database and Node to access it via endpoints.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+GET artistName route: "/songs/song/:artistName"
+GET genre route: "/songs/:genre"
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Tried out MongoDB in localhost before migrating data to MongoDb Atlas. Improvements could be to structure the code and divide it into folders, as well as removing the RESET_DB env which is written for educational purpose only. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-heroku.herokuapp.com/
