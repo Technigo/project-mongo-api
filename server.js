@@ -58,7 +58,7 @@ app.use(express.json());
     app.get('/', (req, res) => {
       res.send(
         {"Welcome":"This is the ultimate API source for book reviews!",
-          "Routes": [{"/books":"All books available","/books-id/:bookID":"Get one specific book based on its bookID","/books-author/:authors":"Get all books written by a specific author"}]}
+          "Routes": [{"/books":"All books available","/books/id/:bookID":"Get one specific book based on its bookID","/books/author/:authors":"Get all books written by a specific author"}]}
     
       )
     })
@@ -97,28 +97,26 @@ if(bookById) {
 })
 
  //Endpoint that returns all books written by a specific author
- app.get("/books/author/:authors", async (req, res) => {
-  try {
-  const bookByAuthor=await Book.find({authors: req.params.authors})
 
-if(bookByAuthor) {
-  res.status(200).json({
-    data: bookByAuthor,
-    success: true,
-  })
-} else {
-  res.status(404).json({
-    error: 'No book written by that author was found.',
-    success: false,
-  })
-}
-} catch (err) {
-  res.status(400).json({
-    error: 'Invalid or misspelled author',
-    success: false,
-  })
-}
-})
+
+   
+
+  app.get("/books/author/:authors", async (req, res) => {
+    
+    const bookByAuthor=await Book.find({authors: req.params.authors});
+  
+    if (bookByAuthor.length===0) {
+      res.status(400).json({
+        data: "There are no books available by this author here.",
+        success: false,
+      });
+    } else {
+      res.status(200).json({
+        data: bookByAuthor,
+        sucess: true,
+      });
+    }
+  });
 
 
 
