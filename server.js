@@ -18,9 +18,10 @@ const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-//modelling the database:
+// Req: Your API should make use of Mongoose models to model your data and use these models to fetch data from the database.
+// Modelling the database:
 const Laureate = mongoose.model("Laureate", {
   id: Number,
   name: String,
@@ -35,22 +36,36 @@ if (process.env.RESET_DB) {
     // deleti all items in the database to prevent to copy over the items
     await Laureate.deleteMany({});
 
-    laureateData.forEach((item) => {
+    laureatesData.forEach((item) => {
       const newLaureate = new Laureate(item);
       newLaureate.save();
     });
   };
   seedDatabase();
 }
-// Start defining your routes here
+// Endpoints
 app.get("/", (req, res) => {
   res.send(listEndpoints(app));
 });
 
+// Req: A minimum of one endpoint to return a collection of results (array of elements)
 app.get("/laureates", async (req, res) => {
-  const allLaureates = await Laureate.find();
-  res.json(names);
+  const list = await Laureate.find();
+  res.json(list);
 });
+
+app.get("/shows/movies", async (req, res) => {
+  const showMovies = await Movie.find({ type: "Movie" });
+  res.json(showMovies);
+});
+
+app.get("/shows/tvshows", async (req, res) => {
+  const showTvshows = await Movie.find({ type: "TV Show" });
+  res.json(showTvshows);
+});
+
+// Req: A minimum of one endpoint to return a single result (single element).
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
