@@ -22,7 +22,7 @@ const allAstronauts = async (req, res) => {
     res.status(400).json({
       success: false,
       status_code: 400,
-      status_message: "Bad request"
+      status_message: "Invalid request"
     });
   };
 };
