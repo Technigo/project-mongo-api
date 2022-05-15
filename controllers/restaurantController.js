@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import Restaurant from "../models/restaurant";
+import { Restaurant } from "../models/restaurant";
 
 // @desc		Get restaurants
 // @route		GET /restaurants
@@ -35,7 +35,7 @@ const getRestaurants = asyncHandler(async (req, res) => {
 const getRestaurant = asyncHandler(async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
 
-	if (!restaurant) {
+  if (!restaurant) {
     res.status(404);
     throw new Error("Restaurant not found");
   }
