@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
 // Get all the Netflix movies and shows
 app.get('/netflixtitles', async (req, res) => {
   const netflixTitles = await NetflixTitle.find(req.query)
-  res.json(netflixTitles)
+  res.send(netflixTitles)
 })
 
 // Get one Netflix title based on id
