@@ -28,15 +28,15 @@ const Title = mongoose.model('Title', {
 })
 
 if (process.env.RESET_DATABASE) {
-	const seedDatabase = async () => {
-		await Title.deleteMany()
+	// const seedDatabase = async () => {
+	// 	await Title.deleteMany()
 
-		netflixData.forEach((singleTitle) => {
-			new Title(singleTitle).save()
-		})
-	}
+	netflixData.forEach((singleTitle) => {
+		new Title(singleTitle).save()
+	})
+	// }
 
-	seedDatabase()
+	// seedDatabase()
 }
 
 // Add middlewares to enable cors and json body parsing
