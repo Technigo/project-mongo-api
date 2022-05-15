@@ -1,11 +1,13 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import listEndpoints from "express-list-endpoints";
+
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
+// import avocadoSalesData from "./data/avocad§o-sales.json";
+import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
@@ -24,12 +26,87 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+const Book = mongoose.model("Book", {
+  bookID: String,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
+})
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Book.deleteMany();
+    booksData.forEach((singleBook) => {
+      const newBook = new Book(singleBook);
+      newBook.save();
+    });
+  };
+  seedDatabase();
+}
+
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send(listEndpoints(app));
 });
+
+app.get("/books/book/", async (req, res) => {
+  const {title, authors} = req.query;
+  const myRegex = /.*/gm
+
+  if (title != undefined) {
+    const secondBook = await Book.find({
+      title: title ? title : myRegex,
+      authors: authors ? authors : myRegex})
+    res.send(secondBook);
+  } else {
+    const secondBook = await Book.find({
+      title: title})
+    res.send(secondBook);
+  }
+});
+
+//Params
+app.get("/", (req, res) => {
+  
+  const EntryPage = {
+    Welcome: "It's the possibility of having a dream come true that makes life interesting. - The Alchemist",
+    Endpoints: [
+      {
+        "/booksData": "Display all books",
+        "/booksData/title/:title": "Look for a specific title",
+        "/booksData/average_rating/": "Sort on rating (Higest to lowest)",
+        "/booksData/num_pages/": "Find the book with most pages",
+      },
+    ],
+  };
+  res.send(EntryPage);
+});
+
+//All books
+app.get('/booksData', async (req, res) => {
+  const allBooks = await Book.find()
+  res.send(allBooks)
+  })
+
+//Sort on title
+app.get("/books/book/:title", async (req, res) => {
+  const booksByTitle = await Book.find({title: req.params.title})
+  res.send(booksByTitle)
+});
+
+//Sort on title
+app.get("/books/book/:authors", async (req, res) => {
+  const booksByAuthors = await Book.find({authors: req.params.authors})
+  res.send(booksByAuthors)
+});
+
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
