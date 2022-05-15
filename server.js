@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import booksData from "./data/books.json";
 /* import { redirect } from "express/lib/response"; */
 
-dotenv.config()
+dotenv.config() 
 
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import goldenGlobesData from "./data/golden-globes.json";
