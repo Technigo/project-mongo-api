@@ -1,0 +1,264 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restaurants API",
+    "version": "1.0.0",
+    "description": "A basic API for Arianna's favorite restaurants across the world."
+  },
+  "paths": {
+    "/restaurants": {
+      "summary": "Get all restaurants",
+      "description": "This path is used to retrieve all of the restaurants ",
+      "get": {
+        "summary": "All restaurants",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Name of restaurant, ex. \"Noma\""
+          },
+          {
+            "in": "query",
+            "name": "city",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Name of city, ex. \"Copenhagen\""
+          },
+          {
+            "in": "query",
+            "name": "area",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Name of area or neighborhood, ex. \"Vesterbro\""
+          },
+          {
+            "in": "query",
+            "name": "price",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Price represented with number of dollar signs from \"$\" to \"$$$$\""
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Category, ex. \"Fine dining\""
+          }
+        ],
+        "description": "Retrieves all restaurant data",
+        "operationId": "get_restaurants",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "restaurants": {
+                    "value": [
+                      {
+                        "_id": "627d30afe1a0ce5afe18129d",
+                        "name": "Tacos Chukis",
+                        "city": "Seattle",
+                        "price": "$",
+                        "area": "Capitol Hill",
+                        "category": [
+                          "Streetfood",
+                          "Casual"
+                        ],
+                        "__v": 0
+                      },
+                      {
+                        "_id": "627d30c9e1a0ce5afe1812a0",
+                        "name": "The Walrus and the Carpenter",
+                        "city": "Seattle",
+                        "price": "$$",
+                        "area": "Ballard",
+                        "category": [
+                          "Date night",
+                          "Seafood"
+                        ],
+                        "__v": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Restaurants"
+        ]
+      },
+      "post": {
+        "summary": "New restaurant",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "restaurant",
+            "description": "The restaurant to add",
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "city",
+                "area"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "area": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "description": "Add new restaurant",
+        "operationId": "add_restaurant",
+        "responses": {
+          "201": {
+            "description": "Restaurant created"
+          }
+        },
+        "tags": [
+          "Restaurants"
+        ]
+      }
+    },
+    "/restaurants/{id}": {
+      "summary": "Get data for a single restaurant by ID",
+      "description": "This path provides data for a single restaurant",
+      "get": {
+        "summary": "Selected restaurant",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Unique ID of the restaurant"
+          }
+        ],
+        "description": "Get data for a single restaurant using its unique id",
+        "operationId": "get_restaurant",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "selected restaurant": {
+                    "value": {
+                      "_id": "627d30c9e1a0ce5afe1812a0",
+                      "name": "The Walrus and the Carpenter",
+                      "city": "Seattle",
+                      "price": "$$",
+                      "area": "Ballard",
+                      "category": [
+                        "Date night",
+                        "Seafood"
+                      ],
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "selected restaurant, not found": {
+                    "value": "{\n    \"message\": \"Restaurant not found\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Restaurants"
+        ]
+      },
+      "put": {
+        "summary": "Update restaurant",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Unique ID of the restaurant"
+          }
+        ],
+        "description": "Update restaurant with given ID",
+        "operationId": "update_restaurant",
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Restaurants"
+        ]
+      },
+      "delete": {
+        "summary": "Delete restaurant",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Unique ID of the restaurant"
+          }
+        ],
+        "description": "Delete restaurant with given ID",
+        "operationId": "delete_restaurant",
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Restaurants"
+        ]
+      }
+    }
+  }
+}

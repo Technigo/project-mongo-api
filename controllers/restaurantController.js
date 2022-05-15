@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import Restaurant from "../models/restaurant";
 
 // @desc		Get restaurants
-// @route		GET /api/restaurants
+// @route		GET /restaurants
 // @access	Private
 const getRestaurants = asyncHandler(async (req, res) => {
   const { name, city, area, price, category } = req.query;
@@ -30,20 +30,25 @@ const getRestaurants = asyncHandler(async (req, res) => {
 });
 
 // @desc		Get restaurant by id
-// @route		GET /api/restaurants/:id
+// @route		GET /restaurants/:id
 // @access	Private
 const getRestaurant = asyncHandler(async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
+
+	if (!restaurant) {
+    res.status(404);
+    throw new Error("Restaurant not found");
+  }
 
   res.status(200).json(restaurant);
 });
 
 // @desc		Set restaurant
-// @route		POST /api/restaurants
+// @route		POST /restaurants
 // @access	Private
 const setRestaurant = asyncHandler(async (req, res) => {
   if (!req.body) {
-    res.status(400);
+    res.status(404);
     throw new Error("Please add a body");
   }
 
@@ -54,17 +59,17 @@ const setRestaurant = asyncHandler(async (req, res) => {
     price: req.body.price,
     category: req.body.category,
   });
-  res.status(200).json(restaurant);
+  res.status(201).json(restaurant);
 });
 
 // @desc		Update restaurant
-// @route		PUT /api/restaurants/:id
+// @route		PUT /restaurants/:id
 // @access	Private
 const updateRestaurant = asyncHandler(async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
 
   if (!restaurant) {
-    res.status(400);
+    res.status(404);
     throw new Error("Restaurant not found");
   }
 
@@ -76,13 +81,13 @@ const updateRestaurant = asyncHandler(async (req, res) => {
 });
 
 // @desc		Delete restaurant
-// @route		DELETE /api/restaurants/:id
+// @route		DELETE /restaurants/:id
 // @access	Private
 const deleteRestaurant = asyncHandler(async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
 
   if (!restaurant) {
-    res.status(400);
+    res.status(404);
     throw new Error("Restaurant not found");
   }
   await restaurant.remove();
