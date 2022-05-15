@@ -74,17 +74,17 @@ app.get('/shows', async (req, res) => {
 	}
 })
 
-app.get('/shows/:id', async (req, res) => {
-	const { id } = req.params
+// app.get('/shows/:id', async (req, res) => {
+// 	const { id } = req.params
 
-	const titleById = await Title.findOne({ show_id: +id })
+// 	const titleById = await Title.findOne({ show_id: +id })
 
-	if (titleById) {
-		res.status(200).json(titleById)
-	} else {
-		res.status(484).json({ error: 'No titles with that ID is found' })
-	}
-})
+// 	if (titleById) {
+// 		res.status(200).json(titleById)
+// 	} else {
+// 		res.status(484).json({ error: 'No titles with that ID is found' })
+// 	}
+// })
 
 // Start the server
 app.listen(port, () => {
