@@ -67,32 +67,36 @@
               "application/json": {
                 "examples": {
                   "restaurants": {
-                    "value": [
-                      {
-                        "_id": "627d30afe1a0ce5afe18129d",
-                        "name": "Tacos Chukis",
-                        "city": "Seattle",
-                        "price": "$",
-                        "area": "Capitol Hill",
-                        "category": [
-                          "Streetfood",
-                          "Casual"
-                        ],
-                        "__v": 0
-                      },
-                      {
-                        "_id": "627d30c9e1a0ce5afe1812a0",
-                        "name": "The Walrus and the Carpenter",
-                        "city": "Seattle",
-                        "price": "$$",
-                        "area": "Ballard",
-                        "category": [
-                          "Date night",
-                          "Seafood"
-                        ],
-                        "__v": 0
-                      }
-                    ]
+                    "value": {
+                      "success": true,
+                      "total": 15,
+                      "results": [
+                        {
+                          "_id": "627d30afe1a0ce5afe18129d",
+                          "name": "Tacos Chukis",
+                          "city": "Seattle",
+                          "price": "$",
+                          "area": "Capitol Hill",
+                          "category": [
+                            "Street food",
+                            "Casual"
+                          ],
+                          "__v": 0
+                        },
+                        {
+                          "_id": "627d30c9e1a0ce5afe1812a0",
+                          "name": "The Walrus and the Carpenter",
+                          "city": "Seattle",
+                          "price": "$$",
+                          "area": "Ballard",
+                          "category": [
+                            "Date night",
+                            "Seafood"
+                          ],
+                          "__v": 0
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -107,7 +111,7 @@
         "summary": "New restaurant",
         "parameters": [
           {
-            "in": "header",
+            "in": "body",
             "name": "restaurant",
             "description": "The restaurant to add",
             "schema": {
@@ -143,8 +147,29 @@
         "description": "Add new restaurant",
         "operationId": "add_restaurant",
         "responses": {
+          "200": {
+            "description": "Missing required fields",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing required fields": {
+                    "value": "{\n    \"message\": \"Restaurant validation failed: name: Please add a text value, city: Please add a text value, area: Please add a text value\"\n}"
+                  }
+                }
+              }
+            }
+          },
           "201": {
-            "description": "Restaurant created"
+            "description": "Restaurant created",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Deglabbet": {
+                    "value": "{\n    \"success\": true,\n    \"created\": {\n        \"name\": \"Deglabbet\",\n        \"city\": \"Stockholm\",\n        \"area\": \"Kungsholmen\",\n        \"price\": \"$\",\n        \"category\": [\n            \"Pizza\",\n            \"Casual\"\n        ],\n        \"_id\": \"628151f54fa99518f96151b1\",\n        \"__v\": 0\n    }\n}"
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -156,7 +181,7 @@
       "summary": "Get data for a single restaurant by ID",
       "description": "This path provides data for a single restaurant",
       "get": {
-        "summary": "Selected restaurant",
+        "summary": "Single restaurant",
         "parameters": [
           {
             "in": "path",
@@ -178,16 +203,19 @@
                 "examples": {
                   "selected restaurant": {
                     "value": {
-                      "_id": "627d30c9e1a0ce5afe1812a0",
-                      "name": "The Walrus and the Carpenter",
-                      "city": "Seattle",
-                      "price": "$$",
-                      "area": "Ballard",
-                      "category": [
-                        "Date night",
-                        "Seafood"
-                      ],
-                      "__v": 0
+                      "success": true,
+                      "results": {
+                        "_id": "627d30c9e1a0ce5afe1812a0",
+                        "name": "The Walrus and the Carpenter",
+                        "city": "Seattle",
+                        "price": "$$",
+                        "area": "Ballard",
+                        "category": [
+                          "Date night",
+                          "Seafood"
+                        ],
+                        "__v": 0
+                      }
                     }
                   }
                 }
@@ -227,8 +255,29 @@
         "description": "Update restaurant with given ID",
         "operationId": "update_restaurant",
         "responses": {
-          "default": {
-            "description": "Default error sample response"
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "updated restaurant": {
+                    "value": "{\n    \"success\": true,\n    \"updated\": {\n        \"_id\": \"627d30c9e1a0ce5afe1812a0\",\n        \"name\": \"The Walrus and the Carpenter\",\n        \"city\": \"Seattle\",\n        \"price\": \"$$\",\n        \"area\": \"Ballard\",\n        \"category\": [\n            \"Date night\",\n            \"Seafood\"\n        ],\n        \"__v\": 0\n    }\n}"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Not found": {
+                    "value": "{\n    \"message\": \"Restaurant not found\"\n}"
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -251,8 +300,29 @@
         "description": "Delete restaurant with given ID",
         "operationId": "delete_restaurant",
         "responses": {
-          "default": {
-            "description": "Default error sample response"
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Success": {
+                    "value": "{\n    \"success\": true,\n    \"id\": \"62815430c262d18846a9c412\"\n}"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Not found": {
+                    "value": "{\n    \"message\": \"Restaurant not found\"\n}"
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [

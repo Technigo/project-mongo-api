@@ -26,7 +26,11 @@ const getRestaurants = asyncHandler(async (req, res) => {
 
   const restaurants = await Restaurant.find(queries);
 
-  res.status(200).json(restaurants);
+  res.status(200).json({
+    success: true,
+    total: restaurants.length,
+    results: restaurants,
+  });
 });
 
 // @desc		Get restaurant by id
@@ -40,7 +44,10 @@ const getRestaurant = asyncHandler(async (req, res) => {
     throw new Error("Restaurant not found");
   }
 
-  res.status(200).json(restaurant);
+  res.status(200).json({
+    success: true,
+    results: restaurant,
+  });
 });
 
 // @desc		Set restaurant
@@ -59,7 +66,10 @@ const setRestaurant = asyncHandler(async (req, res) => {
     price: req.body.price,
     category: req.body.category,
   });
-  res.status(201).json(restaurant);
+  res.status(201).json({
+    success: true,
+    created: restaurant,
+  });
 });
 
 // @desc		Update restaurant
@@ -77,7 +87,10 @@ const updateRestaurant = asyncHandler(async (req, res) => {
     new: true,
   });
 
-  res.status(200).json(updatedRestaurant);
+  res.status(200).json({
+    success: true,
+    updated: updatedRestaurant,
+  });
 });
 
 // @desc		Delete restaurant
@@ -92,7 +105,7 @@ const deleteRestaurant = asyncHandler(async (req, res) => {
   }
   await restaurant.remove();
 
-  res.status(200).json({ id: req.params.id });
+  res.status(200).json({ success: true, id: req.params.id });
 });
 
 module.exports = {
