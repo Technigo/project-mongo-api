@@ -19,19 +19,19 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const NetflixTitle = mongoose.model("NetflixTitle", {
-  "show_id": Number,
-  "title": String,
-  "director": String,
-  "cast": String,
-  "country": String,
-  "date_added": String,
-  "release_year": String,
-  "rating": String,
-  "duration": String,
-  "listed_in": String,
-  "description": String,
-  "type": String
+const NetflixTitle = mongoose.model('NetflixTitle', {
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: String,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
 })
 
 if (process.env.RESET_DB) {
