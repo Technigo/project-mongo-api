@@ -55,13 +55,6 @@ app.get("/", (req, res) => {
   res.send("Hello! This is the API for week 18!")
 })
 
-app.get("/netflixshows", async (req, res) => {
-  const netflixshows = await Netflixshow.findOne({
-    director: req.params.director,
-  })
-  res.send(netflixshows)
-})
-
 app.get("/netflixshows/director/:director", async (req, res) => {
   const singleDirector = await Netflixshow.findOne({
     director: req.params.director,
