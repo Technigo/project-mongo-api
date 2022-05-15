@@ -1,10 +1,10 @@
 import express from "express";
 import {} from "dotenv/config";
 import cors from "cors";
-import { connectDB } from "./config/db";
+import connectDB from "./config/db";
+import routes from "./routes/restaurantRoutes";
 import { errorHandler } from "./middlewear/errorMiddlewear";
 
-import router from "./routes/restaurantRoutes";
 
 const swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./openapi.json");
@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/restaurants", router);
+app.use("/restaurants", routes);
 
 app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument)); //openapi documentation with swagger
 
