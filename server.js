@@ -31,6 +31,7 @@ const Laureate = mongoose.model("Laureate", {
   description: String,
 });
 
+// Codealong - add to database code:
 // const testUser = new User({
 //   name: "Justyna Zwiazek",
 //   id: 65,
@@ -51,7 +52,7 @@ if (process.env.RESET_DB) {
   };
   seedDatabase();
 }
-// Endpoints
+// Endpoints on the landing page
 app.get("/", (req, res) => {
   res.send(listEndpoints(app));
 });
@@ -84,6 +85,19 @@ app.get("/laureates/:id", async (req, res) => {
       .json("Sorry, could not find a Nobel Prize laureate with this ID");
   } else {
     res.status(200).json(laureateById);
+  }
+});
+
+app.get("/laureates/:name", async (req, res) => {
+  const { name } = req.params;
+  const laureateByName = await Laureate.findOne({ laureateName: name });
+
+  if (!laureateByName) {
+    res
+      .status(404)
+      .json("Sorry, could not find a Nobel Prize laureate with this name");
+  } else {
+    res.status(200).json(laureateByName);
   }
 });
 
