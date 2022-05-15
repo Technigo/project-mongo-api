@@ -46,7 +46,7 @@
               "type": "string"
             },
             "required": false,
-            "description": "Price represented with number of dollar signs from \"$\" to \"$$$$\""
+            "description": "Price represented with number of dollar signs, ex. \"$$\""
           },
           {
             "in": "query",
