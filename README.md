@@ -8,5 +8,5 @@ A basic Netflix API built with Heroku and Express where the data is stored with 
 I started from last projects with endpoints. I spend some time zooming out and trying to understand how everything belongs.
 
 ## View it live
-
+https://week-18-mongodb.herokuapp.com/
 
