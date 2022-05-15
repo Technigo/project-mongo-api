@@ -35,7 +35,7 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 })
 
-//Loop through data set. Async in order to avoid duplication. 
+//Loop through data set. Async in order to avoid duplication..
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Book.deleteMany() 
