@@ -1,5 +1,5 @@
 import express from "express";
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
@@ -42,10 +42,11 @@ const Laureate = mongoose.model("Laureate", {
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     // deleti all items in the database to prevent to copy over the items
-    await Laureate.deleteMany({});
+    await Laureate.deleteMany();
 
-    femalesData.forEach((item) => {
-      new Laureate(item).save();
+    femalesData.forEach((female) => {
+      const newLaureate = new Laureate(female);
+      newLaureate.save();
     });
   };
   seedDatabase();
@@ -75,14 +76,14 @@ app.get("/laureates", async (req, res) => {
 // Req: A minimum of one endpoint to return a single result (single element).
 app.get("/laureates/:id", async (req, res) => {
   const { id } = req.params;
-  const laureatebyId = await Laureate.findOne({ laureateID: id });
+  const laureateById = await Laureate.findOne({ laureateID: id });
 
-  if (laureateByName) {
-    res.json(laureateByName);
-  } else {
+  if (!laureateById) {
     res
       .status(404)
-      .json("Sorry, couldn't find a Nobel Prize laureate with this name");
+      .json("Sorry, could not find a Nobel Prize laureate with this ID");
+  } else {
+    res.status(200).json(laureateById);
   }
 });
 
