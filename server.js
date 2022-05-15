@@ -72,12 +72,12 @@ app.get("/", (req, res) => {
       {
         "/songs": "Get listed songs.",
         "/songs/trackName/:trackName": "Lists the specific song track",
-        "/songs/artistName/:artistName": "Lists the specific artist name ",
       },
     ],
   };
   res.send(WelcomePage);
 });
+
 app.get("/songs", async (req, res) => {
   const AllSongs = await Song.find({ topMusicData: topMusicData });
   res.send(AllSongs);
