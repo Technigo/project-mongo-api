@@ -19,9 +19,5 @@
     "nodemon": "^2.0.15",
     "express-async-handler": "^1.2.0",
     "swagger-ui-express": "^4.4.0"
-  },
-  "engines": {
-    "node": "^18.0.0",
-    "npm": "^8.6.0"
   }
 }
