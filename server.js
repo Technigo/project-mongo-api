@@ -55,43 +55,55 @@ app.get("/", (req, res) => {
   res.send("Hello! This is the API for week 18!")
 })
 
-app.get("/netflixshows/netflixshow/:director", async (req, res) => {
+app.get("/netflixshows", async (req, res) => {
+  const netflixshows = await Netflixshow.findOne({
+    director: req.params.director,
+  })
+  res.send(netflixshows)
+})
+
+app.get("/netflixshows/director/:director", async (req, res) => {
   const singleDirector = await Netflixshow.findOne({
     director: req.params.director,
   })
   res.send(singleDirector)
 })
 
-app.get("/netflixshows/netfixshow/:title", async (req, res) => {
+app.get("/netflixshows/title/:title", async (req, res) => {
   const netflixTitle = await Netflixshow.find({
     title: req.params.title,
   })
   res.send(netflixTitle)
 })
 
-app.get("/netflixshows/netflixshow/:type", async (req, res) => {
+app.get("/netflixshows/showsbytype/:type", async (req, res) => {
   const showtype = await Netflixshow.filter({
     type: req.params.type,
   })
   res.send(showtype)
 })
 
-app.get("/netflixshows/netflixshow", async (req, res) => {
-  const { director, title, country } = req.query
+app.get("/netflixshows", async (req, res) => {
+  const { director, country } = req.query
 
-  if (director) {
-    const allNetflixShows = await Netflixshow.find({
+  let allNetflixShows = netflixShows
+  if (director && country) {
+    allNetflixShows = await Netflixshow.find({
       director: director,
-      title: title,
       country: country,
     })
     res.send(allNetflixShows)
-  } else {
-    const allNetflixShows = await Netflixshow.find({
-      country: country,
+  } else if (director && !country) {
+    allNetflixShows = await Netflixshow.find({
+      director: director,
     })
     res.send(allNetflixShows)
+  } else if (!director && country) {
+    allNetflixShows = await Netflixshow.find({
+      country: country,
+    })
   }
+  res.send(allNetflixShows)
 })
 
 // Start the server
