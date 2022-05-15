@@ -1,13 +1,13 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+A project to use MongoDB, seed the database and fetch the data from the database with Mongoose model.
+The minimum 2 endpoints, one array of elements and one to return a single element.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I wanted to have endpoints with both path params and queries. Also I wanted an explanation of routes in the "landingpage". This time I introduced the listEndpoints library in my project. I aimed for more errorhandling and more comprehensive endpoints with "includes" and "tolowercase" but ran out of time as I got some trouble with my mongoDB cloud account - not showing my database collecion. Got the tip from my Lions team to run resetDB in the terminal and also perhaps commment out the if statement of resetDB in the code. After a couple of resets, refreshs and pushes to Heroku it finally worked. For this project I also had great help of SO in order to create the cloud account.
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://technigo-mongo-topmusic.herokuapp.com/
