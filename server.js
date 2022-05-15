@@ -37,8 +37,8 @@ const NetflixTitle = mongoose.model("NetflixTitle", {
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await NetflixTitle.deleteMany()
-    netflixData.forEach((item) => {
-      const newNetflixTitle = new NetflixTitle(item)
+    netflixData.forEach((netflixData) => {
+      const newNetflixTitle = new NetflixTitle(netflixData)
       newNetflixTitle.save()
     })
   }
@@ -52,31 +52,35 @@ app.get('/', (req, res) => {
 
 // Get all the Netflix movies and shows
 app.get('/netflixtitles', async (req, res) => {
-  const netflixTitles = await NetflixTitle.find(req.query)
-  res.send(netflixTitles)
+  const netflixTitles = await NetflixTitle.find()
+  res.json(netflixTitles)
 })
 
 // Get one Netflix title based on id
-app.get('/netflixtitles/id/:id', async (req, res) => {
-  try {
-    const netflixTitleById = await NetflixTitle.findById(req.params.id)
-    if(!netflixTitleById) {
-      res.status(404).json({
-        response: 'Title not found',
-        success: false,
-      })
-    } else {
-      res.json({
-        response: netflixTitleById,
-        success: true,
-      })
-    }
-  } catch (err) {
-    res.status(400).json({
-      error: 'Id is invalid'
-    })
-  }
+app.get('/netflixtitles/id/:show_id', async (req, res) => {
+  const netflixTitleById = await NetflixTitle.find({ show_id: req.params.show_id })
+  res.send(netflixTitleById)
 })
+
+//   try {
+//     const netflixTitleById = await NetflixTitle.findById(req.params.id)
+//     if(!netflixTitleById) {
+//       res.status(404).json({
+//         response: 'Title not found',
+//         success: false,
+//       })
+//     } else {
+//       res.json({
+//         response: netflixTitleById,
+//         success: true,
+//       })
+//     }
+//   } catch (err) {
+//     res.status(400).json({
+//       error: 'Id is invalid'
+//     })
+//   }
+// })
 
 // Start the server
 app.listen(port, () => {
