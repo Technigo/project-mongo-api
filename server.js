@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import booksData from "./data/books.json";
-import { redirect } from "express/lib/response";
+/* import { redirect } from "express/lib/response"; */
 
 
 
@@ -36,7 +36,7 @@ const Book = mongoose.model('Book', {
 })
 
 //Loop through data set. Async in order to avoid duplication..
-if (process.env.RESET_DB) {
+if (process.env.RESET_DB === 'true') {
   const seedDatabase = async () => {
     await Book.deleteMany() 
     booksData.forEach(singleBook => {
