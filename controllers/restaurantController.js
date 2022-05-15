@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
-import restaurantSchema from "../models/restaurant";
+
+const Restaurant = require('../models/restaurant')
 
 // @desc		Get restaurants
 // @route		GET /restaurants
@@ -24,7 +25,7 @@ const getRestaurants = asyncHandler(async (req, res) => {
     queries.category = category;
   }
 
-  const restaurants = await restaurantSchema.find(queries);
+  const restaurants = await Restaurant.find(queries);
 
   res.status(200).json(restaurants);
 });
@@ -33,7 +34,7 @@ const getRestaurants = asyncHandler(async (req, res) => {
 // @route		GET /restaurants/:id
 // @access	Private
 const getRestaurant = asyncHandler(async (req, res) => {
-  const restaurant = await restaurantSchema.findById(req.params.id);
+  const restaurant = await Restaurant.findById(req.params.id);
 
   if (!restaurant) {
     res.status(404);
@@ -52,7 +53,7 @@ const setRestaurant = asyncHandler(async (req, res) => {
     throw new Error("Please add a body");
   }
 
-  const restaurant = await restaurantSchema.create({
+  const restaurant = await Restaurant.create({
     name: req.body.name,
     city: req.body.city,
     area: req.body.area,
@@ -66,14 +67,14 @@ const setRestaurant = asyncHandler(async (req, res) => {
 // @route		PUT /restaurants/:id
 // @access	Private
 const updateRestaurant = asyncHandler(async (req, res) => {
-  const restaurant = await restaurantSchema.findById(req.params.id);
+  const restaurant = await Restaurant.findById(req.params.id);
 
   if (!restaurant) {
     res.status(404);
     throw new Error("Restaurant not found");
   }
 
-  const updatedRestaurant = await restaurantSchema.findByIdAndUpdate(req.params.id, req.body, {
+  const updatedRestaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
 
@@ -84,7 +85,7 @@ const updateRestaurant = asyncHandler(async (req, res) => {
 // @route		DELETE /restaurants/:id
 // @access	Private
 const deleteRestaurant = asyncHandler(async (req, res) => {
-  const restaurant = await restaurantSchema.findById(req.params.id);
+  const restaurant = await Restaurant.findById(req.params.id);
 
   if (!restaurant) {
     res.status(404);
