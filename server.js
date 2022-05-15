@@ -48,6 +48,11 @@ app.get('/', (req, res) => {
 	res.send(listEndpoints(app))
 })
 
+app.get('/allShows', async (req, res) => {
+	const allShows = await Title.find({})
+	res.send(allShows)
+})
+
 //query string for title, country, director and cast
 app.get('/shows', async (req, res) => {
 	const { title, country, director, cast } = req.query
