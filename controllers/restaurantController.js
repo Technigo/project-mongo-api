@@ -1,6 +1,5 @@
 import asyncHandler from "express-async-handler";
-
-const Restaurant = require('../models/restaurant')
+import Restaurant from "../models/restaurant";
 
 // @desc		Get restaurants
 // @route		GET /restaurants
