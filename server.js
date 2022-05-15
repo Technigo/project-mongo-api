@@ -4,6 +4,8 @@ import cors from "cors";
 import { connectDB } from "./config/db";
 import { errorHandler } from "./middlewear/errorMiddlewear";
 
+import routes from "./routes/restaurantRoutes";
+
 const swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./openapi.json");
 
@@ -17,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/restaurants", require("./routes/restaurantRoutes").default);
+app.use("/restaurants", routes);
 
 app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument)); //openapi documentation with swagger
 
