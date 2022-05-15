@@ -1,13 +1,15 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+The purpose of this project was to build a RESTful API using Node, Express and MongoDB. The project enabled us to learn:
+- How to model data in Mongo using Mongoose
+- How to store secret information such as database passwords
+- How to return useful error messages from API endpoints
+- How to fetch items from a Mongo database using Mongoose
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Personal stretch goals that were achieved:
+- Implementation of the most common HTTP methods (GET, POST, PUT, DELETE) for retrieving from and sending data to a server
+- Documentation with OpenAPI and Swagger tooling
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://ari-restaurants.herokuapp.com/
