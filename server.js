@@ -57,6 +57,7 @@ app.get("/prints/title/:title", async (req,res) => {
   // this will retrieve only one print
   const onePrint = await Print.findOne({title: req.params.title})
   res.send(onePrint)
+
 })
 
 app.get("/prints/year/:year", async (req,res) => {
