@@ -70,7 +70,7 @@ app.get("/netflixshows/title/:title", async (req, res) => {
 })
 
 app.get("/netflixshows/showsbytype/:type", async (req, res) => {
-  const showtype = await Netflixshow.filter({
+  const showtype = await Netflixshow.find({
     type: req.params.type,
   })
   res.send(showtype)
