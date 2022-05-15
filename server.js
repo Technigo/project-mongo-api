@@ -39,14 +39,6 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-// const printOne = new Print({title: "Ocean View", price: 300, media: "Digital Photography", forSale: true})
-// printOne.save()
-
-// const printTwo = new Print({title: "Above", price: 400, media: "Digital Photography", forSale: true})
-// printTwo.save()
-
-
-
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
@@ -63,7 +55,7 @@ app.get("/prints", async (req,res) => {
 
 app.get("/prints/title/:title", async (req,res) => {
   // this will retrieve only one print
-  const onePrint = await Print.findOne({title: req.params.title.toLowerCase()})
+  const onePrint = await Print.findOne({title: req.params.title})
   res.send(onePrint)
 })
 
