@@ -1,4 +1,4 @@
-import { Router } from "express";
+import express from "express";
 import {
   getRestaurants,
   getRestaurant,
@@ -7,7 +7,7 @@ import {
   deleteRestaurant,
 } from "../controllers/restaurantController";
 
-const router = Router();
+const router = express.Router();
 
 router.get("/", getRestaurants);
 router.get("/:id", getRestaurant);
@@ -19,4 +19,4 @@ router.delete("/:id", deleteRestaurant);
 // router.route("/").get(getGoals).post(setGoal);
 // router.route("/:id").delete(deleteGoal).put(updateGoal);
 
-export default router;
+module.exports = router;
