@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/prints", async (req,res) => {
-  const allPrints = await Print.find(req.query)
+  const allPrints = await Print.find()
   res.send(allPrints)
 })
 
