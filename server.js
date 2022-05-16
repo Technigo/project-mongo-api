@@ -68,57 +68,31 @@ app.get("/", (req, res) => {
 app.get("/api/songs", async (req, res) => {
   const songs = await Song.find();
   
-  res.status(200).json(songs)
+  res.send(songs);
 })
 
 app.get("/api/genres/:genre", async (req, res) => {
   const songsByGenre = await Song.find({ genre: req.params.genre });
   
-  res.status(200).json({
-    data: songsByGenre,
-    success: true,
-  });
+  res.send(songsByGenre);
 });
 
 app.get("/api/artists/:artistName", async (req, res) => {
   const songsByArtist = await Song.find({ artistName: req.params.artistName });
 
-  res.status(200).json({
-    data: songsByArtist,
-    success: true,
-  });
+  res.send(songsByArtist);
 })
 
 app.get("/api/titles/:trackName", async (req, res) => {
   const songByTitle = await Song.findOne({ trackName: req.params.trackName });
 
-    if (!songByTitle) {
-    res.status(400).json({
-      data: "Not found",
-      success: false,
-    });
-  } else {
-    res.status(200).json({
-      data: songByTitle,
-      sucess: true,
-    });
-  }
+  res.send(songByTitle);
 })
 
 app.get("/api/song/:id", async (req, res) => {
   const songById = await Song.findOne({ id: req.params.id });
 
-   if (!songById) {
-    res.status(400).json({
-      data: "Not found",
-      success: false,
-    });
-  } else {
-    res.status(200).json({
-      data: songById,
-      sucess: true,
-    });
-  }
+  res.send(songById);
 })
 
 // Starting the server
