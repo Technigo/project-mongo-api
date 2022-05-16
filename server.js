@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+//import topMusicData from "./data/top-music.json";
 
 import booksData from "./data/books.json";
 
@@ -9,16 +10,19 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 // Port for running app
+// Defines the port the app will run on. Defaults to 8080, but can be overridden
+// when starting the server. Example command to overwrite PORT env variable value:
+// PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
 
 
-const User = mongoose.model("User", {
-  name: String,
-  age: Number,
-  deceased: Boolean,
-});
+// const User = mongoose.model("User", {
+//   name: String,
+//   age: Number,
+//   deceased: Boolean,
+// });
 
 const Book = mongoose.model("Book", {
     bookID: Number,
@@ -31,10 +35,42 @@ const Book = mongoose.model("Book", {
     num_pages: Number,
     ratings_count: Number,
     text_reviews_count: Number,
+
 });
+
+
 
 //const secondTestUser = new User({name: "Daniel, age: 27, deceased: false"});
 //secondTestUser.save():
+
+// const Song = mongoose.model("Song", {
+//   id: Number,
+//   trackName: String,
+//   artistName: String,
+//   genre: String,
+//   bpm: Number,
+//   energy: Number,
+//   danceability: Number,
+//   loudness: Number,
+//   liveness: Number,
+//   valence: Number,
+//   length: Number,
+//   acousticness: Number,
+//   speechiness: Number,
+//   popularity: Number
+// });
+
+// if(process.env.RESET_DB) {
+//   const seedDatabase = async () => {
+//     await Song.deleteMany();
+//     topMusicData.forEach( singleSong => {
+//       const newSong = new Song(singleSong);
+//       newSong.save();
+//     })
+//   }
+//   seedDatabase();
+// }
+
 
 if(process.env.RESET_DB) {
   const seedDatabase = async () => {
