@@ -66,14 +66,14 @@ app.get('/songs/song/:artistName', async (req, res) => {
   res.send(singleSong)
 })
 
-if (!singleSong) {
-  res.status(404).json('Sorry! Not found.')
-} else {
-  res.status(200).json({
-    data: whatId,
-    success: true,
-  })
-}
+// if (!singleSong) {
+//   res.status(404).json('Sorry! Not found.')
+// } else {
+//   res.status(200).json({
+//     data: whatId,
+//     success: true,
+//   })
+// }
 
 app.get('/songs/genre/:genre', async (req, res) => {
   //Retrives the songs that belongs to the genre
@@ -81,14 +81,14 @@ app.get('/songs/genre/:genre', async (req, res) => {
   res.send(singleGenre)
 })
 
-if (!singleGenre) {
-  res.status(404).json('Sorry! Not found.')
-} else {
-  res.status(200).json({
-    data: whatId,
-    success: true,
-  })
-}
+// if (!singleGenre) {
+//   res.status(404).json('Sorry! Not found.')
+// } else {
+//   res.status(200).json({
+//     data: whatId,
+//     success: true,
+//   })
+// }
 
 // Start the server
 app.listen(port, () => {
