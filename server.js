@@ -58,7 +58,7 @@ app.get("/books/book/", async (req, res) => {
   const {title, authors} = req.query;
   const myRegex = /.*/gm
 
-  if (title != undefined) {
+  if (title && authors != undefined) {
     const secondBook = await Book.find({
       title: title ? title : myRegex,
       authors: authors ? authors : myRegex})
@@ -68,23 +68,6 @@ app.get("/books/book/", async (req, res) => {
       title: title})
     res.send(secondBook);
   }
-});
-
-//Params
-app.get("/", (req, res) => {
-  
-  const EntryPage = {
-    Welcome: "It's the possibility of having a dream come true that makes life interesting. - The Alchemist",
-    Endpoints: [
-      {
-        "/booksData": "Display all books",
-        "/booksData/title/:title": "Look for a specific title",
-        "/booksData/average_rating/": "Sort on rating (Higest to lowest)",
-        "/booksData/num_pages/": "Find the book with most pages",
-      },
-    ],
-  };
-  res.send(EntryPage);
 });
 
 //All books
@@ -99,12 +82,29 @@ app.get("/books/book/:title", async (req, res) => {
   res.send(booksByTitle)
 });
 
-//Sort on title
+//Sort on authors
 app.get("/books/book/:authors", async (req, res) => {
   const booksByAuthors = await Book.find({authors: req.params.authors})
   res.send(booksByAuthors)
 });
 
+// Sorts out the book with the most amout of pages.
+app.get("/booksData/num_pages/max", async (req, res) => {
+  const booksByMaxPages = await Book.find().sort({num_pages:-1}).limit(1)
+  res.send(booksByMaxPages[0])
+})
+
+// Sorts out the book with the least amout of pages.
+app.get("/booksData/num_pages/min", async (req, res) => {
+  const booksByMinPages = await Book.find().sort({num_pages:+1}).limit(1)
+  res.send(booksByMinPages[0])
+})
+
+// Sorts out the book with the least amout of pages.
+app.get("/booksData/average_rating", async (req, res) => {
+  const booksByRating = await Book.find().sort( { average_rating:[-1] } )
+  res.send(booksByRating)
+})
 
 // Start the server
 app.listen(port, () => {
