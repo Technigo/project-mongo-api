@@ -59,21 +59,21 @@ app.get("/netflixshows/director/:director", async (req, res) => {
   const singleDirector = await Netflixshow.findOne({
     director: req.params.director,
   })
-  res.send(singleDirector)
+  res.status(200).send(singleDirector)
 })
 
 app.get("/netflixshows/title/:title", async (req, res) => {
   const netflixTitle = await Netflixshow.find({
     title: req.params.title,
   })
-  res.send(netflixTitle)
+  res.status(200).send(netflixTitle)
 })
 
 app.get("/netflixshows/showsbytype/:type", async (req, res) => {
   const showtype = await Netflixshow.find({
     type: req.params.type,
   })
-  res.send(showtype)
+  res.status(200).send(showtype)
 })
 
 app.get("/netflixshows", async (req, res) => {
@@ -85,18 +85,18 @@ app.get("/netflixshows", async (req, res) => {
       director: director,
       country: country,
     })
-    res.send(allNetflixShows)
+    res.status(200).send(allNetflixShows)
   } else if (director && !country) {
     allNetflixShows = await Netflixshow.find({
       director: director,
     })
-    res.send(allNetflixShows)
+    res.status(200).send(allNetflixShows)
   } else if (!director && country) {
     allNetflixShows = await Netflixshow.find({
       country: country,
     })
   }
-  res.send(allNetflixShows)
+  res.status(200).send(allNetflixShows)
 })
 
 // Start the server
