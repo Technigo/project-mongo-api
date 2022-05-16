@@ -66,29 +66,11 @@ app.get('/songs/song/:artistName', async (req, res) => {
   res.send(singleSong)
 })
 
-// if (!singleSong) {
-//   res.status(404).json('Sorry! Not found.')
-// } else {
-//   res.status(200).json({
-//     data: whatId,
-//     success: true,
-//   })
-// }
-
 app.get('/songs/genre/:genre', async (req, res) => {
   //Retrives the songs that belongs to the genre
   const singleGenre = await Song.find({ genre: req.params.genre })
   res.send(singleGenre)
 })
-
-// if (!singleGenre) {
-//   res.status(404).json('Sorry! Not found.')
-// } else {
-//   res.status(200).json({
-//     data: whatId,
-//     success: true,
-//   })
-// }
 
 // Start the server
 app.listen(port, () => {
