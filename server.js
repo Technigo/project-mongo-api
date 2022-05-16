@@ -52,7 +52,7 @@ app.use(cors())
 app.use(express.json())
 
 app.get("/", (req, res) => {
-  res.send("Hello! This is the API for week 18!")
+  res.send("Hello! This is the API for week 18!!")
 })
 
 app.get("/netflixshows/director/:director", async (req, res) => {
