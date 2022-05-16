@@ -53,7 +53,7 @@ if(process.env.RESET_DB) {
   
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Welcome to Suki's book APIs!");
 });
 
 app.get("/books", async (req, res) => {
