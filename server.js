@@ -56,7 +56,7 @@ app.get("/bookratings/booktitle/:title", async (req, res) => {
   res.send(bookByTitle);
 });
 
-// // 3. endpoint that returns all rated books written by a specific author..
+// // 3. endpoint that returns all rated books written by a specific author.
 app.get("/bookratings/author/:authors", async (req, res) => {
   const bookByAuthor = await Book.find({ authors: req.params.authors });
   res.send(bookByAuthor);
