@@ -55,7 +55,10 @@ app.get("/", (req, res) => {
     Routes: [
       {
         "/api/songs": "Get all songs",
-        "/api/song/{number}": "Get a songs by its ID",
+        "/api/genres/{genre}": "Get all songs in a specific genre",
+        "/api/artists/{artistName}": "Get songs from a specific artist",
+        "/api/titles/{trackName}": "Get a song by its title name",
+        "/api/ids/{id}": "Get a songs by its ID"
       },
     ],
   };
@@ -65,6 +68,21 @@ app.get("/", (req, res) => {
 app.get("/api/songs", async (req, res) => {
   const Songs = await Song.find();
   res.send(Songs)
+})
+
+app.get("/api/genres/:genre", async (req, res) => {
+  const songsByGenre = await Song.find({ genre: req.params.genre });
+  res.send(songsByGenre);
+});
+
+app.get("/api/artists/:artistName", async (req, res) => {
+  const SongsByArtist = await Song.find({ artistName: req.params.artistName });
+  res.send(SongsByArtist)
+})
+
+app.get("/api/titles/:trackName", async (req, res) => {
+  const SongByTitle = await Song.findOne({ trackName: req.params.trackName });
+  res.send(SongByTitle)
 })
 
 app.get("/api/song/:id", async (req, res) => {
