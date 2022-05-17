@@ -28,6 +28,7 @@ const Song = mongoose.model("song", {
     popularity: Number
 });
 
+//seeding the database
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Song.deleteMany();
@@ -40,12 +41,10 @@ if (process.env.RESET_DB) {
 }
 
 //middlewares
-
 app.use(cors());
 app.use(express.json());
 
 //routes
-
 app.get("/", (req, res) => {
   const welcomePage = {
     Hello:
@@ -60,7 +59,6 @@ app.get("/", (req, res) => {
 });
 
 //get all songs
-
 app.get("/songs", async (req,res) => {
   const allSongs = await Song.find()
   res.json(allSongs)
