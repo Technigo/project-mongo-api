@@ -28,15 +28,15 @@ const Song = mongoose.model("song", {
     popularity: Number
 });
 
-if(process.env.RESET_DB) {
+if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Song.deleteMany()
-    topMusicData.forEach( singleSong => {
-      const newSong = new Song(singleSong)
-      newSong.save()
-    })
-  }
-  seedDatabase()
+    await Song.deleteMany();
+    topMusicData.forEach(singleSong => {
+      const newSong = new Song(singleSong);
+      newSong.save();
+    });
+  };
+  seedDatabase();
 }
 
 //middlewares
