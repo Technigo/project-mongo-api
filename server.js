@@ -20,13 +20,13 @@ app.use(cors());
 app.use(express.json());
 
 //our own middleware that checks if the database is connected before going to our endpoints
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1){
-    next()
-  } else {
-    res.status(503).json({error: 'Service unavailable'})
-  }
-})
+// app.use((req, res, next) => {
+//   if (mongoose.connection.readyState === 1){
+//     next()
+//   } else {
+//     res.status(503).json({error: 'Service unavailable'})
+//   }
+// })
 
 const Book = mongoose.model('Book', {
     bookID: Number,
