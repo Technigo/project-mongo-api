@@ -30,10 +30,10 @@ const Song = mongoose.model("song", {
 
 if(process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Song.deleteMany();
+    await Song.deleteMany()
     topMusicData.forEach( singleSong => {
-      const newSong = new Song(singleSong);
-      newSong.save();
+      const newSong = new Song(singleSong)
+      newSong.save()
     })
   }
   seedDatabase()
@@ -49,13 +49,13 @@ app.use(express.json());
 app.get("/", (req, res) => {
   const welcomePage = {
     Hello:
-    "Welcome to an API with the top music songs on Spotify!",
+      "Welcome to an API with the top music songs on Spotify!",
     Routes: [{
       "/songs": "Get the whole array of top songs",
       "/songs/artist/'name of artist/band": "Get the songs by a specific artist/band",
       "/songs/title/'title of song": "Get a specific song"
     }]
-  }
+  };
   res.send(welcomePage);
 });
 
@@ -64,7 +64,7 @@ app.get("/", (req, res) => {
 app.get("/songs", async (req,res) => {
   const allSongs = await Song.find()
   res.json(allSongs)
-})
+});
 
 
 //param paths for artist and title
@@ -75,14 +75,14 @@ app.get("/songs/artist/:artistName", async (req, res) => {
     res.status(200).json ({
       data: songByArtistName,
       success: true,
-    })
+    });
   } else {
     res.status(404).json({
-      success: false,
-      error: "This artist/band does not have a song in this API. Have you spelled the name correctly?"
-    })
-  }
-})
+      error: "This artist/band does not have a song in this API. Have you spelled the name correctly?",
+      success: false
+    });
+  };
+});
 
 app.get("/songs/title/:trackName", async (req, res) => {
   const songByTrackName = await Song.find({trackName: req.params.trackName})
@@ -90,21 +90,20 @@ app.get("/songs/title/:trackName", async (req, res) => {
   if(songByTrackName) {
     res.status(200).json ({
       data: songByTrackName,
-      success: true,
-    })
+      success: true
+    });
   } else {
     res.status(404).json({
-      success: false,
-      error: "This is not the song you're looking for.. Have you spelled the title correctly?"
-    })
-  }
-})
+      error: "This is not the song you're looking for.. Have you spelled the title correctly?",
+      success: false
+    });
+  };
+});
 
 
-//query path for title
+//example of query path for title
 app.get("/songs/title", async (req, res) => {
   const { artistName, trackName } = req.query
-
   if (trackName) {
     const singleSong = await Song.find({trackName: trackName});
     res.send(singleSong)

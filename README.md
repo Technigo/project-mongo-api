@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week I have built a small backend API. The requirements was to built an API that had at least 2 routes. Minimum of one endpoint should return an array of elements and minimun of one endpoint should return a single element. The API should be built as Mongoose models and it should be RESTful.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+If I had more time I would definately build a small front-end to display the data in a nice way. I would also look into why the 404-messages doesn't seem to work as expected.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Deployed project: 
