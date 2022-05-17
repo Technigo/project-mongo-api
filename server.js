@@ -69,7 +69,7 @@ app.get("/books/book/", async (req, res) => {
 });
 
 //All books
-app.get('/booksData', async (req, res) => {
+app.get('/books', async (req, res) => {
   const allBooks = await Book.find()
   res.send(allBooks)
   })
@@ -87,19 +87,19 @@ app.get("/books/book/:authors", async (req, res) => {
 });
 
 // Sorts out the book with the most amout of pages.
-app.get("/booksData/num_pages/max", async (req, res) => {
+app.get("/books/num_pages/max", async (req, res) => {
   const booksByMaxPages = await Book.find().sort({num_pages:-1}).limit(1)
   res.send(booksByMaxPages[0])
 })
 
 // Sorts out the book with the least amout of pages.
-app.get("/booksData/num_pages/min", async (req, res) => {
+app.get("/books/num_pages/min", async (req, res) => {
   const booksByMinPages = await Book.find().sort({num_pages:+1}).limit(1)
   res.send(booksByMinPages[0])
 })
 
 // Sorts out the book with the least amout of pages.
-app.get("/booksData/average_rating", async (req, res) => {
+app.get("/books/average_rating", async (req, res) => {
   const booksByRating = await Book.find().sort( { average_rating:[-1] } )
   res.send(booksByRating)
 })
