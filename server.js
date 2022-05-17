@@ -57,11 +57,6 @@ if(process.env.RESET_DB){
 
 
 
-//first endpoint
-app.get('/', (req,res) => {
-  res.send('welcome to my first api')
-})
-
 //second endpoint to get all books
 app.get('/books', async (req,res) => {
   const booksToShow = await Book.find({})
@@ -107,11 +102,6 @@ app.get('/books/rating', async (req, res) => {
     })
 });
 
-
-// //this checks all the endpoints:
-app.get('/endpoints', (req, res) => {
-  res.send(listEndpoints(app))
-})
 
 
 // //get data by book's name and author using query parameters
