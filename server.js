@@ -76,6 +76,11 @@ app.get("/songs/artist/:artistName", async (req, res) => {
       data: songByArtistName,
       success: true,
     })
+  } else {
+    res.status(404).json({
+      success: false,
+      error: "This artist/band does not have a song in this API. Have you spelled the name correctly?"
+    })
   }
 })
 
@@ -86,6 +91,11 @@ app.get("/songs/title/:trackName", async (req, res) => {
     res.status(200).json ({
       data: songByTrackName,
       success: true,
+    })
+  } else {
+    res.status(404).json({
+      success: false,
+      error: "This is not the song you're looking for.. Have you spelled the title correctly?"
     })
   }
 })
