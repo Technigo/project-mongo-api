@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json";
+import dotenv from "dotenv";
+dotenv.config()
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -37,16 +40,22 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 
-app.get('/songs/song', async (req, res) => {
-  const {artistName, genre, energy} = req.query;
-const singleSong = await Song.findOne({artistName: artistName, genre: genre, energy: energy});
-res.send(singleSong);
-});
+// app.get('/songs/song', async (req, res) => {
+//   const {artistName, genre, energy} = req.query;
+// const singleSong = await Song.findOne({artistName: artistName, genre: genre, energy: energy});
+// res.send(singleSong);
+// });
 
 
 // Start defining your routes here
 app.get('/', (req, res) => {
   res.send('Welcome to the Api for the top music!');
+});
+
+app.get('/songs/song', async (req, res) => {
+  //Will retrive only the first found song
+  const songs = await Song.find();
+  res.send(songs);
 });
 
 app.get('/songs/song/:artistName', async (req, res) => {
