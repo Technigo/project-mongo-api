@@ -40,12 +40,6 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 
-// app.get('/songs/song', async (req, res) => {
-//   const {artistName, genre, energy} = req.query;
-// const singleSong = await Song.findOne({artistName: artistName, genre: genre, energy: energy});
-// res.send(singleSong);
-// });
-
 
 // Start defining your routes here
 app.get('/', (req, res) => {
