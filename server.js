@@ -39,11 +39,11 @@ const Book = mongoose.model("Book", {
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Book.deleteMany({});
-    booksData.forEach(item => {
-      const newBook = new Book(item);
+    await Book.deleteMany();
+    booksData.forEach((singlebook) => {
+      const newBook = new Book(singlebook);
       newBook.save();
-    })
+    });
   };
   seedDatabase();
 }
