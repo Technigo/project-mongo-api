@@ -11,7 +11,7 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express(); 
 
-const Song = mongoose.model("Song", {
+const Song = mongoose.model("song", {
     id: Number,
     trackName: String,
     artistName: String,
@@ -36,23 +36,73 @@ if(process.env.RESET_DB) {
       newSong.save();
     })
   }
-  seedDatabase();
+  seedDatabase()
 }
+
+//middlewares
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/songs/song/:artistName", async (req, res) => {
-  const singleSong = await Song.findOne({artistName: req.params.artistName});
-  res.send(singleSong);
+//routes
+
+app.get("/", (req, res) => {
+  const welcomePage = {
+    Hello:
+    "Welcome to an API with the top music songs on Spotify!",
+    Routes: [{
+      "/songs": "Get the whole array of top songs",
+      "/songs/artist/'name of artist/band": "Get the songs by a specific artist/band",
+      "/songs/title/'title of song": "Get a specific song"
+    }]
+  }
+  res.send(welcomePage);
+});
+
+//get all songs
+
+app.get("/songs", async (req,res) => {
+  const allSongs = await Song.find()
+  res.json(allSongs)
 })
 
 
+//param paths for artist and title
+app.get("/songs/artist/:artistName", async (req, res) => {
+  const songByArtistName = await Song.find({artistName: req.params.artistName})
 
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  if(songByArtistName) {
+    res.status(200).json ({
+      data: songByArtistName,
+      success: true,
+    })
+  }
+})
+
+app.get("/songs/title/:trackName", async (req, res) => {
+  const songByTrackName = await Song.find({trackName: req.params.trackName})
+
+  if(songByTrackName) {
+    res.status(200).json ({
+      data: songByTrackName,
+      success: true,
+    })
+  }
+})
+
+
+//query path for title
+app.get("/songs/title", async (req, res) => {
+  const { artistName, trackName } = req.query
+
+  if (trackName) {
+    const singleSong = await Song.find({trackName: trackName});
+    res.send(singleSong)
+  } else {
+    const singleSong = await Song.find({artistName: artistName});
+    res.send(singleSong)
+  }
 });
-
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
