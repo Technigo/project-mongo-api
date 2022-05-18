@@ -1,13 +1,17 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://mongo-db-suki.herokuapp.com
+
+Endpoints: 
+- View all book data:  https://mongo-db-suki.herokuapp.com/books
+- View books has more then certain rating number: https://mongo-db-suki.herokuapp.com/books/?average_rating=<rating>
+- Find book by language code: https://mongo-db-suki.herokuapp.com/books/?language_code=<language>
+- Find book by author name: https://mongo-db-suki.herokuapp.com/author/:author
+- Find book by Id: https://mongo-db-suki.herokuapp.com/books/id/:id
