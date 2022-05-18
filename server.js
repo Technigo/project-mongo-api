@@ -57,11 +57,21 @@ app.use(express.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   const routes = {
-    'GET artistName route': "/songs/song/:artistName",
-    'GET genre route': "/songs/:genre"
+    '[GET] all songs route': "/songs",
+    '[GET] artistName route': "/songs/song/:artistName",
+    '[GET] genre route': "/songs/:genre"
   }
   res.send(routes);
 });
+
+app.get("/songs", async (req, res) => {
+  try {
+    const allSongs = await Song.find();
+    res.status(200).json(allSongs);
+  } catch(err) {
+    res.status(400).json({error: 'Not found'});
+  }
+})
 
 app.get("/songs/song/:artistName", async (req, res) => {
   const singleSong = await Song.findOne({artistName: req.params.artistName});
