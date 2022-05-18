@@ -28,15 +28,14 @@ const Award = mongoose.model('Award', {
 
 //Starts seeding the database
 if (process.env.RESET_DB) {
-	const seedDatabase = async () => {
-		await Award.deleteMany({});
-		data.forEach((item) => {
-			const newAward = new Award(item);
-			newAward.save();
-		});
-	};
-	seedDatabase();
+	// const seedDatabase = async () => {
+	// 	await Award.deleteMany({});
+	data.forEach((item) => {
+		const newAward = new Award(item);
+		newAward.save();
+	});
 }
+// seedDatabase();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
