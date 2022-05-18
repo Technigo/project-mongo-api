@@ -45,15 +45,15 @@ const Book = mongoose.model('Book', {
 // Function to start seeding our Database, will only run if
 // RESET_DB environment variable is present and is true
 if(process.env.RESET_DB){
-  const seedDatabase = async () => {
-    await Book.deleteMany({})
+  // const seedDatabase = async () => {
+  //   await Book.deleteMany({})
     booksData.forEach(item => {
       const newBook = new Book(item)
       newBook.save()
     })
   }
-  seedDatabase()
-}
+  // seedDatabase()
+// }
 
 
 
