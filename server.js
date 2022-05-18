@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
+import dotenv from "dotenv";
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // import avocadoSalesData from "./data/avocad§o-sales.json";
@@ -9,6 +10,8 @@ import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
+
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -59,7 +62,7 @@ app.get("/books/book/", async (req, res) => {
   if (title && authors != undefined) {
     const secondBook = await Book.find({
       title: title ? title : myRegex,
-      authors: authors ? authors : myRegex})
+      authors: authors})
     res.send(secondBook);
   } else {
     const secondBook = await Book.find({
