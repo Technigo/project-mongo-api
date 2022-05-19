@@ -13,4 +13,4 @@ If I had more time I would also definately build a small front-end to display th
 
 Deployed project: 
 
-https://mongodb-database-topsongs.herokuapp.com/songs
+https://mongodb-database-topsongs.herokuapp.com
