@@ -75,11 +75,11 @@ app.get("/", (req, res) => {
       "/tracks/random-track":"Get a random track",
       "/tracks/genres/:genre":"Get tracks by genre (for example: /tracks/genres/latin)",
       "/tracks/artists/:artist":"Get a track by the artists name (for example: /tracks/artists/ed sheeran)",
-      "/tracks/songtitles/:songtitle":"Get a spesific track by the songtitle (for example: /tracks/songtitles/truth hurts)",
+      "/tracks/songtitles/:songtitle":"Get a specific track by the songtitle (for example: /tracks/songtitles/truth hurts)",
       "/tracks/id/:id":"Get a track by _id (for example: /tracks/id/6283e58592aafedccbeb0e0e)",
       "/tracks?genre=${genre}":"Get tracks by genre (for example: /tracks?genre=hip hop)",
-      "/tracks?artist=${artist}":"Get all tracks from a spesific artist (for example: /tracks?artist=billie eilish)",
-      "/tracks?songtitle=${songtitle}":"Get a spesific track by the songtitle (for example: /tracks?songtitle=shallow)"
+      "/tracks?artist=${artist}":"Get all tracks from a specific artist (for example: /tracks?artist=billie eilish)",
+      "/tracks?songtitle=${songtitle}":"Get a specific track by the songtitle (for example: /tracks?songtitle=shallow)"
     }]
   })
 })
