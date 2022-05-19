@@ -38,7 +38,7 @@ if (process.env.RESET_DB) {
 
   // Only for setting things up locally
   const seedDatabase = async () => {
-    await Track.deleteMany({})
+    // await Track.deleteMany({})
 
     topMusicData.forEach((track) => {
       const newTrack = new Track(track)
