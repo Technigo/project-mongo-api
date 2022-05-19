@@ -34,19 +34,19 @@ const Track = mongoose.model("Track", {
   popularity: Number
 })
 
-// if (process.env.RESET_DB) {
+if (process.env.RESET_DB) {
 
-//   // Only for setting things up locally
-//   const seedDatabase = async () => {
-//     await Track.deleteMany({})
+  // Only for setting things up locally
+  const seedDatabase = async () => {
+    await Track.deleteMany({})
 
-//     topMusicData.forEach((track) => {
-//       const newTrack = new Track(track)
-//       newTrack.save()
-//     })
-//   }
-//   seedDatabase()
-// }
+    topMusicData.forEach((track) => {
+      const newTrack = new Track(track)
+      newTrack.save()
+    })
+  }
+  seedDatabase()
+}
 
 
 // Add middlewares to enable cors and json body parsing
