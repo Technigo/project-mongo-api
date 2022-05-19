@@ -85,7 +85,24 @@ app.get("/", (req, res) => {
 })
 
 
-// get all tracks OR get tracks by genre OR get tracks by artist name OR get tracks by songtitle
+// get all tracks
+app.get("/tracks", async (req, res) => {
+  try {
+    const allTracks = await Track.find()
+    res.status(200).json({
+      data: allTracks,
+      succes: true
+    })
+  } catch(err) {
+    res.status(400).json({
+      error: "Invalid request",
+      success: false
+    })
+  }
+})
+
+
+// get tracks by genre OR get tracks by artist name OR get tracks by songtitle
 app.get("/tracks", async (req, res) => {
   try { 
     let tracks = await Track.find(req.query)
