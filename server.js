@@ -88,7 +88,7 @@ app.get("/", (req, res) => {
 // get all tracks
 app.get("/tracks", async (req, res) => {
   try {
-    const allTracks = await Track.find().sort({id: "asc"})
+    const allTracks = await Track.find().sort({id:1})
     res.status(200).json({
       data: allTracks,
       succes: true
