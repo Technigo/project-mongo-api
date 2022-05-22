@@ -7,7 +7,7 @@ import mongoose from "mongoose"
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
-import netflixData from "./data/netflix-titles.json"
+// import netflixData from "./data/netflix-titles.json"
 // import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/dorotheas-project-mongo"
@@ -72,12 +72,47 @@ if(process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.json(netflixData.slice(0, 100))
+  // res.json(netflixData.slice(0, 100))
+
+
 })
+
+
+app.get("/alltitles", async (req, res) => {
+
+
+  const allTitles = await NetflixTitle.find()
+  res.json(allTitles.slice(0, 10))
+
+})
+
+
+app.get("/titles/id/:id", async (req, res) => {
+const {id} = req.params
+
+const titleByID = await NetflixTitle.findById(id)
+
+try {
+if (titleByID) {
+  res.json(titleByID)
+} else {
+  res.status(404).json({error: 'not found'})
+} 
+} catch(err) {
+  res.json({error: 'ERROR!!!!'})
+}
+
+
+})
+
+
 
 app.get("/movies", (req, res) => {
 
 })
+
+
+
 
 app.get("/release-year", (req, res) => {
 
