@@ -26,18 +26,63 @@ app.use(express.json())
 
 
 
-const Title = mongoose.model('Title', {
+const NetflixTitle = mongoose.model('NetflixTitle', {
   show_id: Number,
   title: String,
-  director: String
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
 
 })
+
+// const newTitle = new Title ({title: 'Breaking bad', director: 'random dude'})
+// const newTitle2 = new Title ({title: 'Clark', director: 'Jonas Åkerlund'})
+
+
+
+
+
+if(process.env.RESET_DB) {
+
+  const seedDatabase = async () => {
+
+    await NetflixTitle.deleteMany({})
+   
+    netflixData.forEach((title) => {
+
+      const newTitle = new NetflixTitle(title)
+      newTitle.save()
+    })
+    // newTitle.save()
+    // newTitle2.save()
+
+  }
+
+  seedDatabase()
+  
+}
 
 
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.json(netflixData.slice(0, 100))
 })
+
+app.get("/movies", (req, res) => {
+
+})
+
+app.get("/release-year", (req, res) => {
+
+})
+
 
 // Start the server
 app.listen(port, () => {
