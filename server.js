@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 // Req: Your API should make use of Mongoose models to model your data and use these models to fetch data from the database.
 // Modelling the database:
 const Laureate = mongoose.model("Laureate", {
-  id: Number,
+  id: String,
   name: String,
   year: Number,
   country: String,
