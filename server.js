@@ -16,11 +16,6 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8082;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
-app.use(bodyParser.json());
-
 // Req: Your API should make use of Mongoose models to model your data and use these models to fetch data from the database.
 // Modelling the database:
 const Laureate = mongoose.model("Laureate", {
@@ -52,6 +47,20 @@ if (process.env.RESET_DB) {
   };
   seedDatabase();
 }
+
+// Add middlewares to enable cors and json body parsing
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
+});
+
 // Endpoints on the landing page
 app.get("/", (req, res) => {
   res.send(listEndpoints(app));
@@ -59,24 +68,16 @@ app.get("/", (req, res) => {
 
 // Req: A minimum of one endpoint to return a collection of results (array of elements)
 app.get("/laureates", async (req, res) => {
-  const { name, category } = req.query;
-
-  try {
-    const allLaureates = await Laureate.find({
-      name: new RegExp(name, "i"),
-      category: new RegExp(category, "i"),
-    });
-    res.json(allLaureates);
-  } catch (error) {
-    res
-      .status(400)
-      .json({ error: "We didn't find what you were looking for." });
-  }
+  const allLaureates = await Laureate.find({});
+  res.status(200).json({
+    data: allLaureates,
+    success: true,
+  });
 });
 
 // Req: A minimum of one endpoint to return a single result (single element).
 app.get("/laureates/id/:id", async (req, res) => {
-  const laureateById = await Laureate.findOne({ laureateID: req.params.id });
+  const laureateById = await Laureate.findOne({ id: req.params.id });
 
   if (!laureateById) {
     res
