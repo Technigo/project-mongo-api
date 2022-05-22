@@ -89,19 +89,6 @@ app.get("/laureates/id/:id", async (req, res) => {
   }
 });
 
-app.get("/laureate/name/:name", async (req, res) => {
-  const { name } = req.params;
-  const laureateByName = await Laureate.findOne({ laureateName: name });
-
-  if (!laureateByName) {
-    res
-      .status(404)
-      .json("Sorry, could not find a Nobel Prize laureate with this name");
-  } else {
-    res.status(200).json(laureateByName);
-  }
-});
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
