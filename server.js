@@ -13,7 +13,7 @@ mongoose.Promise = Promise;
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8082;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
@@ -77,7 +77,7 @@ app.get("/laureates", async (req, res) => {
 // Req: A minimum of one endpoint to return a single result (single element).
 app.get("/laureates/:id", async (req, res) => {
   const { id } = req.params;
-  const laureateById = await Laureate.findOne({ laureateID: id });
+  const laureateById = await Laureate.find({ laureateID: id });
 
   if (!laureateById) {
     res
@@ -88,9 +88,9 @@ app.get("/laureates/:id", async (req, res) => {
   }
 });
 
-app.get("/laureates/:name", async (req, res) => {
+app.get("/laureate/:name", async (req, res) => {
   const { name } = req.params;
-  const laureateByName = await Laureate.findOne({ laureateName: name });
+  const laureateByName = await Laureate.find({ laureateName: name });
 
   if (!laureateByName) {
     res
