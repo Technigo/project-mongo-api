@@ -77,7 +77,7 @@ app.get("/laureates", async (req, res) => {
 // Req: A minimum of one endpoint to return a single result (single element).
 app.get("/laureates/id/:id", async (req, res) => {
   const { id } = req.params;
-  const laureateById = await Laureate.find({ laureateID: id });
+  const laureateById = await Laureate.findOne({ laureateID: id });
 
   if (!laureateById) {
     res
@@ -90,7 +90,7 @@ app.get("/laureates/id/:id", async (req, res) => {
 
 app.get("/laureate/name/:name", async (req, res) => {
   const { name } = req.params;
-  const laureateByName = await Laureate.find({ laureateName: req.params.name });
+  const laureateByName = await Laureate.findOne({ laureateName: name });
 
   if (!laureateByName) {
     res
