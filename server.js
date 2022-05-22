@@ -1,5 +1,5 @@
 import express from "express";
-// import bodyParser from "body-parser";
+import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
@@ -19,6 +19,7 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 
 // Req: Your API should make use of Mongoose models to model your data and use these models to fetch data from the database.
 // Modelling the database:
