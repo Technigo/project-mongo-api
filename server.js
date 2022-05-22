@@ -45,7 +45,6 @@ if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     // deleti all items in the database to prevent to copy over the items
     await Laureate.deleteMany();
-
     femalesData.forEach((female) => {
       const newLaureate = new Laureate(female);
       newLaureate.save();
@@ -77,8 +76,7 @@ app.get("/laureates", async (req, res) => {
 
 // Req: A minimum of one endpoint to return a single result (single element).
 app.get("/laureates/id/:id", async (req, res) => {
-  const { id } = req.params;
-  const laureateById = await Laureate.findOne({ laureateID: id });
+  const laureateById = await Laureate.findOne({ laureateID: req.params.id });
 
   if (!laureateById) {
     res
