@@ -3,7 +3,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json";
 
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, {
   useNewUrlParser: true,
@@ -82,7 +81,6 @@ app.get("/songs", async (req, res) => {
   const allSongs = await Song.find()
   res.json(allSongs)
 })
-
  
  //this will retrieve all songs by an artist
 app.get("/songs/songs/:artistName", async (req, res) => {
@@ -92,7 +90,6 @@ app.get("/songs/songs/:artistName", async (req, res) => {
   });
   res.send(artistsSongs);
 });
-
 
 //this gets you the songs in a special genre like pop or reggeaton
 app.get("/songs/genre/:genre", async (req, res) => {
@@ -147,11 +144,9 @@ app.get("/songs/:id", async (req, res) => {
  
   try {
     const songId = parseInt(req.params.id);
-    console.log(songId);
-
+    
     const songById = await Song.findOne({id:songId});
-    console.dir(songById);
-
+    
     if (songById) {
       res.json(songById);
     } else {
@@ -160,14 +155,11 @@ app.get("/songs/:id", async (req, res) => {
       })
     }
   } catch (err) {
-    console.dir(err);
-    res.status(400).json({
+      res.status(400).json({
       error: "Input invalid for id"
     })
   }
 });
-
-
 
 // Start the server
 app.listen(port, () => {
