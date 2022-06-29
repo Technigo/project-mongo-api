@@ -91,23 +91,35 @@ app.get("/titles", async (req, res) => {
 })
 
 
-app.get("/titles/:id", async (req, res) => {
-const {id} = req.params
+// app.get("/titles/:id", async (req, res) => {
+// const {id} = req.params
 
-const titleByID = await NetflixTitle.findById(id)
+// const titleByID = await NetflixTitle.findById(id)
 
-try {
-if (titleByID) {
-  res.status(200).json(titleByID)
-} else {
-  res.status(404).json({error: 'not found'})
-} 
-} catch(err) {
-  res.json({error: 'ERROR!!!!'})
-}
+// try {
+// if (titleByID) {
+//   res.status(200).json(titleByID)
+// } else {
+//   res.status(404).json({error: 'not found'})
+// } 
+// } catch(err) {
+//   res.json({error: 'ERROR!!!!'})
+// }
+// })
 
+app.get('/titles/:id', async (req, res) => {
+	const { id } = req.params
 
+	const titleById = await Title.findOne({ show_id: +id })
+
+	if (titleById) {
+		res.status(200).json(titleById)
+	} else {
+		res.status(484).json({ error: 'No title with that ID' })
+	}
 })
+
+
 
 
 
