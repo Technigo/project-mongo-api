@@ -82,7 +82,7 @@ app.get("/", (req, res) => {
 })
 
 
-app.get("/alltitles", async (req, res) => {
+app.get("/titles", async (req, res) => {
 
 
   const allTitles = await NetflixTitle.find({})
@@ -91,14 +91,14 @@ app.get("/alltitles", async (req, res) => {
 })
 
 
-app.get("/titles/id/:id", async (req, res) => {
+app.get("/titles/:id", async (req, res) => {
 const {id} = req.params
 
 const titleByID = await NetflixTitle.findById(id)
 
 try {
 if (titleByID) {
-  res.json(titleByID)
+  res.status(200).json(titleByID)
 } else {
   res.status(404).json({error: 'not found'})
 } 
