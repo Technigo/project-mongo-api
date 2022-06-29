@@ -121,21 +121,6 @@ app.get('/titles/:id', async (req, res) => {
 
 
 
-
-
-app.get("/movies", (req, res) => {
-
-})
-
-
-
-
-app.get("/release-year", (req, res) => {
-
-})
-
-
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
