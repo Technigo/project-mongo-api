@@ -9,7 +9,7 @@ import listEndpoints from "express-list-endpoints"
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json"
+import netflixData from "./data/netflix-titles.json"
 // import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/dorotheas-project-mongo"
@@ -85,8 +85,8 @@ app.get("/", (req, res) => {
 app.get("/alltitles", async (req, res) => {
 
 
-  const allTitles = await NetflixTitle.find()
-  res.json(allTitles.slice(0, 10))
+  const allTitles = await NetflixTitle.find({})
+  res.send(allTitles.slice(0, 10))
 
 })
 
