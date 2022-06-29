@@ -110,7 +110,7 @@ app.get("/titles", async (req, res) => {
 app.get('/titles/:id', async (req, res) => {
 	const { id } = req.params
 
-	const titleById = await Title.findOne({ show_id: +id })
+	const titleById = await NetflixTitle.findOne({ show_id: +id })
 
 	if (titleById) {
 		res.status(200).json(titleById)
