@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import worldCupData from "./data/world-cup.json";
+/* import worldCupData from "./data/world-cup.json"; */
+import listEndpoints from "express-list-endpoints";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -17,10 +18,40 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/endpoints", (req, res) => {
+  res.send(listEndpoints(app))
+});
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hi, World Cup Api!");
 });
+
+// Seed the database
+const Cup = mongoose.model('Cup', {
+  year: Number,
+  host: String,
+  winner: String,
+  second: String,
+  third: String,
+  fourth: String,
+  goals_scored: Number,
+  teams: Number,
+  games: Number,
+  attendance: Number
+})
+
+if (process.env.RESET_DB) {
+	const seedDatabase = async () => {
+    await Cup.deleteMany({})
+
+		CupData.forEach((CupData) => {
+			new Cup(CupData).save()
+		})
+  }
+
+  seedDatabase()
+}
 
 // Start the server
 app.listen(port, () => {
