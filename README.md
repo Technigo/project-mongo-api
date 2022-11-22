@@ -1,13 +1,21 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+A database build in mongoDB.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+First I installed the different programs as needed and then I looked at the start code that was given. After choosen the dataset I started to build my different routs. When finished I delopyed thru MongoDB Cloud Atlas and google cloud. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+view it live: https://project-mongo-api-h2v3prkura-lz.a.run.app/
+
+endpoints:
+    "/songs": "All songs in the database",
+    "/songs/genre/:genre": "get songs in the same genre, exampel: pop ",
+    "/trackname/:trackname": "Gives you a specific song, exampel: bad guy",
+    "/artist/:artistName": "All songs from one artist, exampel: Post Malone",
+    "/bpm/:bpm": " all songes in a specific BPM, exampel: 75",
+
+
+

@@ -14,25 +14,6 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
-/* const User = mongoose.model("User", {
-  name: String, 
-  age: Number, 
-  deceased: Boolean
-})
-
-if(process.env.RESET_DB){
-  const resetDataBase = async () => {
-    await User.deleteMany();
-    const testUser = new User({name:"Amanda", age: 30, deceased: false});
-    testUser.save();
-
-    const userOne = new User({name: "Lina", age: 25, deceased: false})
-    userOne.save();
-  }
-  resetDataBase()
-}
- */
-
 // model of how something will look
 const Song = mongoose.model("Song", {
   id: Number,
@@ -68,7 +49,19 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send({
+    Message: "Browse in top music data titles, below you find the different endpoints",
+    Routes: [{
+      "/songs": "All songs in the database",
+      "/songs/genre/:genre": "get songs in the same genre, exampel: pop ",
+      "/trackname/:trackname": "Gives you a specific song, exampel: bad guy",
+      "/artist/:artistName": "All songs from one artist, exampel: Post Malone",
+      "/bpm/:bpm": " all songes in a specific BPM, exampel: 75",
+
+
+
+    }]
+  });
 });
 
 // All songs 
