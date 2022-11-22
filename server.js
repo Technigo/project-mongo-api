@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import topMusicData from "./data/top-music.json";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -17,6 +18,43 @@ mongoose.Promise = Promise;
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
+const User = mongoose.model("User", {
+  name: String,
+  age: Number,
+  deceased: Boolean 
+});
+
+const Song = mongoose.model("Song", {
+    id: Number,
+    trackName: String,
+    artistName: String,
+    genre: String,
+    bpm: Number,
+    energy: Number,
+    danceability: Number,
+    loudness: Number,
+    liveness: Number,
+    valence: Number,
+    length: Number,
+    acousticness: Number,
+    speechiness: Number,
+    popularity: Number
+});
+
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Song.deleteMany();
+    topMusicData.forEach(song => {
+      const newSong = new Song({song});
+      newSong.save();
+    });
+/*     await User.deleteMany();
+    const testUser = new User({name: "Fredrik", age: 36, deceased: false});
+    testUser.save(); */
+  }
+  resetDatabase();
+}
+
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -26,7 +64,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hello Baaaaaa!");
 });
 
 // Start the server
