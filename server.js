@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
+import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
@@ -24,10 +24,68 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const Book = mongoose.model('Book', {
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
+})
+
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Book.deleteMany();
+    booksData.forEach(item => {
+      const newBook = new Book(item)
+      newBook.save()
+    })
+  }
+  resetDatabase()
+}
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+res.send("Books!");
 });
+
+app.get('/books', (req, res) => {
+  Book.find().then(books => {
+    res.json(books)
+  })
+})
+
+app.get('/books/id/:id', async (req, res) => {
+  const book = await Book.findOne({ bookID: req.params.id })
+  if (book) {
+    res.json(book)
+  } else {
+    res.status(404).json({ error: 'No book with that ID was found' })
+  }
+})
+
+app.get('/books/title/:title', (req, res) => {
+  Book.findOne({ title: req.params.title }).then(book => {
+    if (book) {
+      res.json(book)
+    } else {
+      res.status(404).json({ error: 'There is no book with that title.' })
+    }
+  })
+})
+
+app.get('/books/authors/:authors', async (req, res) => {
+  const book = await Book.findOne({ authors: req.params.authors })
+  if (book) { 
+    res.json(book)
+  } else {
+    res.status(404).json({ error: 'No book by that author was found' })
+  }
+})
 
 // Start the server
 app.listen(port, () => {
