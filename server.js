@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-/* import worldCupData from "./data/world-cup.json"; */
+import worldCupData from "./data/world-cup.json";
 import listEndpoints from "express-list-endpoints";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -43,10 +43,10 @@ const Cup = mongoose.model('Cup', {
 
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
-    await Cup.deleteMany({})
+    // await Cup.deleteMany({})
 
-		CupData.forEach((CupData) => {
-			new Cup(CupData).save()
+		worldCupData.forEach((data) => {
+			new Cup(data).save()
 		})
   }
 
