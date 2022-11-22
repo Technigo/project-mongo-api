@@ -74,10 +74,28 @@ app.get("/", (req, res) => {
 // All songs 
 
 app.get("/songs", async(req,res) => {
+ /*  try{
+    const allSongs = await Song.find({trackName: req.params.trackName}).limit(50)
+    if(allSongs){
+      res.status(200).json({
+        data: allSongs,
+        success: true, 
+      })
+    }else {
+      res.status(404).json({
+        error: ' Song not found, try again ',
+        success: false, 
+      })
+    }
+  } catch(err) {
+    res.status(400).json({ error: "invalied songname" })
+  } 
+  })*/
   Song.find().then(songs => {
     res.json(songs)
   })
 })
+
 
 // return a song name by ID 
 app.get("songs/id/:_id", async(req, res) => {
