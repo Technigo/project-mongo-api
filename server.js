@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose"; //som react för frontend 
+import dotenv from "dotenv";
+
+
 
 //import bodyParser from 'body-parser' - Damines error-video?
 
@@ -12,7 +15,9 @@ import mongoose from "mongoose"; //som react för frontend
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+dotenv.config()
+
+const mongoUrl = process.env.MONGO_URL || `mongodb+srv://spacecake:${process.env.STRING_PW}@cluster0.jgvyhjl.mongodb.net/mongoAPI?retryWrites=true&w=majority`;
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -29,10 +34,14 @@ const Globe = mongoose.model("Globe", {
     win: Boolean
 })
 
+
+
  /* 
     await User.deleteMany();
     const testUser = new User({name: "Sarah", age: 33, deceased: false}) //object med properties (keys)
     testUser.save(); */
+
+    // 
 
 if(process.env.RESET_DB) {
   console.log("Resetting database!")
