@@ -50,7 +50,7 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-res.send("Books!");
+res.send("This is an api for books.");
 });
 
 app.get('/books', (req, res) => {
