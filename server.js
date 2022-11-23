@@ -63,9 +63,11 @@ app.get("/", (req, res) => {
   res.send([
     {"/": "Anime Playground"},
     {"/animes": "Display all animes"},
-    {"/animes/:english": "Anime title in English"},
-    {"/animes/score": "Sorting anime by popularity"},
-    {"/animes/:studio": "Find anime with specific studio producer"}
+    {"/animes/title/:english": "One anime title displayed for other countries than Japan"},
+    {"/animes/highscore": "Sorting anime by popularity"},
+    {"/animes/type/:type": "Find anime with specific type"},
+    {"/animes/status?query={status}": "Find anime with specific status"},
+    {"/animes/:studio/:studio?premiered={premiered}": "Find anime with specific studio producer and then can filter more depending on when it is premiered"}
   ]);
 });
 
