@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import anime from "./data/anime.json"
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-anime";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/animes";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
