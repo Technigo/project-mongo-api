@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import anime from "./data/anime.json"
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/animes";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/anime";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -67,12 +67,11 @@ app.get("/", (req, res) => {
     {"/animes/highscore": "Sorting anime by popularity"},
     {"/animes/type/:type": "Find anime with specific type"},
     {"/animes/status?query={status}": "Find anime with specific status"},
-    {"/animes/:studio/:studio?premiered={premiered}": "Find anime with specific studio producer and then can filter more depending on when it is premiered"}
+    {"/animes/studios/:studio?premiered={premiered}": "Find anime with specific studio producer and then can filter more depending on when it is premiered"}
   ]);
 });
 
 // Display all animes
-// example 
 app.get("/animes", async (req, res) => {
   const animes = await Anime.find()
   res.json(animes)
@@ -124,7 +123,7 @@ app.get("/animes/type/:type", async (req, res) => {
 })
 
 // /anime/status?query=Currently Airing
-app.get('/animes/status', async(req, res) => {
+app.get("/animes/status", async(req, res) => {
   const { query } = req.query;
   const queryRegex = new RegExp(query, 'i')
   const status = await Anime.find({ status: queryRegex })
@@ -138,13 +137,11 @@ app.get('/animes/status', async(req, res) => {
 // example /animes/studios/white%20fox?premiered=fall%202018
 app.get("/animes/studios/:studios", async (req, res) => {
   const studioRegex = new RegExp(req.params.studios, "i");
-  /* const { premiered } = req.query */
   const premieredRegex = new RegExp(req.query.premiered, "i")
   const animeStudio = await Anime.find({ 
     studios: studioRegex,
   premiered: premieredRegex
 })
-
   res.status(200).json(animeStudio)
 })
 
