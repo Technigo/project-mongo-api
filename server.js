@@ -39,7 +39,7 @@ const Book = mongoose.model('Book', {
 
 if (process.env.RESET_DB) {
   const resetDatabase = async () => {
-    await Book.deleteMany();
+    await Book.deleteMany({});
     booksData.forEach(item => {
       const newBook = new Book(item)
       newBook.save()
