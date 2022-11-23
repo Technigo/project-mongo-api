@@ -2,13 +2,6 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import anime from "./data/anime.json"
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-//import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/anime";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -17,12 +10,6 @@ mongoose.Promise = Promise;
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
-
-/* const User = mongoose.model("User", {
-  name: String,
-  age: Number,
-  deceased: Boolean
-}); */
 
 const Anime = mongoose.model("Anime",
 {
@@ -80,9 +67,8 @@ app.get("/", (req, res) => {
   res.send([
     {"/": "Anime Playground"},
     {"/animes": "Display all animes"},
-    {"/animes/:anime": "Anime title in English"},
-    {"/animes/:animejapan": "Anime title in Japanese"},
-    {"/popular": "Sorting anime by popularity"},
+    {"/animes/:english": "Anime title in English"},
+    {"/animes/score": "Sorting anime by popularity"},
     {"/animes/:studio": "Find anime with specific studio producer"}
   ]);
 });
@@ -91,16 +77,15 @@ app.get("/", (req, res) => {
 // example 
 app.get("/animes", async (req, res) => {
   const animes = await Anime.find()
-  res.status(200).json({
-    data: animes,
-    success: true,
-  })
+  res.json(animes)
 })
 
 // Display one anime by title
-// example /animes/Naruto
-app.get("/animes/:title", async (req, res) => {
-  let animeTitle = await Anime.findOne({ title: req.params.title })
+// example /animes/naruto
+app.get("/animes/title/:english", async (req, res) => {
+  const titleRegex = new RegExp(req.params.english, "i");
+  
+  const animeTitle = await Anime.findOne({ english: titleRegex })
 
   if(animeTitle){
     res.status(200).json({
@@ -109,11 +94,73 @@ app.get("/animes/:title", async (req, res) => {
   })
 } else {
     res.status(404).send({
-    data: "Title not found. Check upper & lowercase",
+    data: "Title not found",
     success: false 
     })}
 })
 
+
+// Display animes by its score
+// example /animes/highscore
+app.get("/animes/highscore", async (req, res) => {
+  const animeScore = await Anime.find({score: { $gte: 8 }})
+
+  if(animeScore){
+    res.status(200).json({
+    data: animeScore,
+    success: true,
+  })
+} else {
+    res.status(404).send({
+    data: "Error",
+    success: false 
+    })}
+})
+
+// Display animes by its type
+// example /animes/type
+app.get("/animes/type/:type", async (req, res) => {
+  const typeRegex = new RegExp(req.params.type, "i");
+  const animeType = await Anime.find({ type: typeRegex })
+
+  res.status(200).json(animeType)
+})
+
+// /anime/status?query=Currently Airing
+app.get('/anime/status', async(req, res) => {
+  const { query } = req.query;
+  const queryRegex = new RegExp(query, 'i')
+  const status = await Anime.find({ status: queryRegex })
+  if(status.length > 0){
+    res.json(status)
+  }else{
+    res.status(404).json('error')
+  }
+})
+
+
+app.get("/animes/studios/:studios", async (req, res) => {
+  const studioRegex = new RegExp(req.params.studios, "i");
+  /* const { premiered } = req.query */
+  const premieredRegex = new RegExp(req.query.premiered, "i")
+  const animeStudio = await Anime.find({ 
+    studios: studioRegex,
+  premiered: premieredRegex
+})
+
+  res.status(200).json(animeStudio)
+})
+/*
+const { status } = req.query
+const typeRegex = new RegExp(req.params.type, "i");
+let animeType = await Anime.find({ type: typeRegex })
+let singleStatus = await Anime.find({}).distinct('status)
+
+if(animeType.length > 0 ){
+  res.json({ results: animeType.length, animeType})}
+
+}
+*/
 
 // Start the server
 app.listen(port, () => {
