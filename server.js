@@ -63,9 +63,27 @@ app.use(cors());
 app.use(express.json());
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello Technigo!");
+// });
+
+// Start defining your routes here - based on Jenny's video
+app.get('/', (req, res) => {
+Song.find().then(singleSong => {
+  res.json(singleSong)
+})
+})
+
+app.get("/:artistname", (req, res) => {
+Song.findOne({artistName: req.params.artistname}).then(artist => {
+  if(artist) {
+    res.json(artist)
+  } else {
+    res.status(404).json({ error: 'Not found' })
+  }
+
+})
+})
 
 // Start the server
 app.listen(port, () => {
