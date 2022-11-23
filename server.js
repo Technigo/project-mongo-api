@@ -12,7 +12,7 @@ import topMusicData from "./data/top-music.json";
 
 dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || `mongodb+srv://Font:${STRING_PW}@cluster0.8xh88s6.mongodb.net/projectMongo?retryWrites=true&w=majority`;
+const mongoUrl = process.env.MONGO_URL || `mongodb+srv://Font:${process.env.STRING_PW}@cluster0.8xh88s6.mongodb.net/projectMongo?retryWrites=true&w=majority`;
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
