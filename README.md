@@ -1,13 +1,31 @@
-# Project Mongo API
+# Project mongo API
 
-Replace this readme with your own information about your project.
+This is a backend project using Express API and Mongo DB. This API is showing top music data.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Routes created:
+
+- /songs<br/>
+Show all songs <br/>
+- /songs/:id <br/>
+Show info about specific song by mongo id <br/>
+- /tracks/:trackName<br/>
+Show info about a track by name. Ex Truth Hurts <br/>
+- /artist/:artistName <br/>
+Show all songs by an artist. Ex Ed Sheeran <br/>
+- /genres/:genre <br/>
+See songs and artists of a specific genre. Ex pop <br/>
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+✓ What MongoDB is <br/>
+✓ How to model data in Mongo using Mongoose <br/>
+✓ How to store secret information such as database passwords <br/>
+✓ How to return useful error messages from your API endpoints <br/>
+✓ How to fetch items from a Mongo database using Mongoose <br/>
+✓ How to seed large amounts of data to a database <br/>
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Link to api: https://project-mongo-api-tc2ipn4gdq-lz.a.run.app/
+
