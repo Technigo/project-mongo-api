@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import anime from "./data/anime.json"
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/anime";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-anime";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -97,7 +97,6 @@ app.get("/animes/title/:english", async (req, res) => {
     })}
 })
 
-
 // Display animes by its score
 // example /animes/highscore
 app.get("/animes/highscore", async (req, res) => {
@@ -125,7 +124,7 @@ app.get("/animes/type/:type", async (req, res) => {
 })
 
 // /anime/status?query=Currently Airing
-app.get('/anime/status', async(req, res) => {
+app.get('/animes/status', async(req, res) => {
   const { query } = req.query;
   const queryRegex = new RegExp(query, 'i')
   const status = await Anime.find({ status: queryRegex })
