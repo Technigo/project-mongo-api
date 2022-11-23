@@ -25,7 +25,7 @@ const Episode = mongoose.model("Episode", {
 });
 
 // Generate entries into the db from the json file:
-if (process.env.RESET_DB) {
+// if (process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Episode.deleteMany();
     theOfficeData.forEach((singleEpisode) => {
@@ -34,7 +34,7 @@ if (process.env.RESET_DB) {
     })
   }
   resetDataBase();
-}
+// }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -53,6 +53,11 @@ app.get("/", (req, res) => {
   // Start page lists the two routes available:
   res.json(listEndpoints(app));
 });
+
+app.get("/episodes", (req, res) => {
+  res.json()
+})
+
 
 // Route for episodes for a specific season:
 app.get("/seasons/:season", async (req, res) => {
