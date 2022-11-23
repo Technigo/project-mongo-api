@@ -27,5 +27,5 @@ See songs and artists by a genre. Ex pop  (-- matches like above --) <br/>
 
 ## View it live
 
-Link to api: https://project-mongo-api-tc2ipn4gdq-lz.a.run.app/
+Link to api: https://project-mongo-api-tc2ipn4gdq-lz.a.run.app/ 
 
