@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -10,7 +11,10 @@ import mongoose from "mongoose";
 // import netflixData from "./data/netflix-titles.json";
 import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+dotenv.config()
+
+const mongoUrl = process.env.MONGO_URL || `mongodb+srv://Paprika:${process.env.STRING_PW}@cluster0.6gvgrxz.mongodb.net/?retryWrites=true&w=majority`;
+
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
