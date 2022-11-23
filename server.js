@@ -7,10 +7,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/anime";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-
 const Anime = mongoose.model("Anime",
 {
   id: Number,
@@ -138,7 +134,7 @@ app.get('/anime/status', async(req, res) => {
   }
 })
 
-
+// example /animes/studios/white%20fox?premiered=fall%202018
 app.get("/animes/studios/:studios", async (req, res) => {
   const studioRegex = new RegExp(req.params.studios, "i");
   /* const { premiered } = req.query */
@@ -150,17 +146,6 @@ app.get("/animes/studios/:studios", async (req, res) => {
 
   res.status(200).json(animeStudio)
 })
-/*
-const { status } = req.query
-const typeRegex = new RegExp(req.params.type, "i");
-let animeType = await Anime.find({ type: typeRegex })
-let singleStatus = await Anime.find({}).distinct('status)
-
-if(animeType.length > 0 ){
-  res.json({ results: animeType.length, animeType})}
-
-}
-*/
 
 // Start the server
 app.listen(port, () => {
