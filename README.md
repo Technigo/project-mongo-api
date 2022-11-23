@@ -9,11 +9,11 @@ Show all songs <br/>
 - /songs/:id <br/>
 Show info about specific song by mongo id <br/>
 - /tracks/:trackName<br/>
-Show info about a track by name. Ex Truth Hurts <br/>
+Show info about a track by name. Ex 'boyfriend' will give all tracks with word boyfriend in <br/>
 - /artist/:artistName <br/>
-Show all songs by an artist. Ex Ed Sheeran <br/>
+Show all songs by an artist. Ex Ed Sheeran (-- matches like above --) <br/>
 - /genres/:genre <br/>
-See songs and artists of a specific genre. Ex pop <br/>
+See songs and artists by a genre. Ex pop  (-- matches like above --) <br/>
 
 ## The problem
 
