@@ -1,19 +1,12 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
+import listEndpoints from "express-list-endpoints";
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-
 
 
 const Song = mongoose.model("Song", {
@@ -36,7 +29,9 @@ const Song = mongoose.model("Song", {
 // every time the server is re-started. "Await" is used to deal with promises (alike .then). 
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
+     // Starts by deleting any pre-existing Book objects to prevent duplicates
     await Song.deleteMany()
+     // Creates a new Book instance for each book in the booksData
     topMusicData.forEach(singleSong => {
       const newSong = new Song(singleSong)
       newSong.save()
@@ -55,6 +50,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//Just a test to see all data
+app.get("/test", (req, res) => {
+  res.json({topMusicData: topMusicData})
+});
+
+// Lists the endpoints for all routers that is created in this file. 
+app.get("/endpoints", (req, res) => {
+  res.send(listEndpoints(app))
+})
+
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send({
@@ -62,52 +67,69 @@ app.get("/", (req, res) => {
     Routes: [
       {
         "/songs": "See all songs in database",
+        "/songs?genre=*Name of genre*": "Show songs in a specific genre",
+        "/songs?track=*Name of track*": "Show tracks based on trackname",
+        "/songs?dancing=true": "Show songs great for dancing 💃",
+        "/songs?happy=true": "Show happy songs ✨", 
+        "/songs/search?artist=*Name of artist*": "Search for artist",
         "/songs/song/:id": "Show a single song based on its id",
-        "/songs?genre=*Name of genre*": "Show songs in a specific genre", 
-        "/songs/search?artist=*Name of artist*": "Search for artist"
       },
     ]});
 });
 
-app.get("/test", (req, res) => {
-  res.json({topMusicData: topMusicData})
-
-});
-
 // Lists all the songs and data
 app.get("/songs", (req, res) => {
-  const { artist, genre } = req.query
+  const { track, genre, dancing, happy } = req.query
   let songs = topMusicData
 
-  if (artist) {
-    songs = songs.filter((songsByArtist) =>
-    songsByArtist.artistName.toLowerCase()
-    .includes(artist.toLowerCase()))
+  if (track) {
+    songs = songs.filter((singleTrack) =>
+    singleTrack.trackName.toLowerCase()
+    .includes(track.toLowerCase()))
   }
 
   if (genre) {
   songs = songs.filter((type) => 
   type.genre.toLowerCase()
-  .includes(genre.toLowerCase())
-  )
+  .includes(genre.toLowerCase()))
   }
-  res.status(200).json(topMusicData)
+
+  if (dancing) {
+    songs = songs.filter((rating) => rating.danceability > '80')
+  }
+
+  if (happy) {
+    songs = songs.filter((rating) => rating.valence > '80')
+  }
+
+  res.status(200).json({
+    topMusicData: songs,
+    success: true
 })
 
-// Finding a single song based on it's ID, example path: /songs/1
+})
+
+// Finding a single song based on it's ID, example path: /songs/song/1
 app.get("/songs/song/:id", (req, res) => {
   const singleSong = topMusicData.find((song) => {
     return song.id === +req.params.id
   })
  if (singleSong) {
-  res.status(200).json(singleSong)
+  res.status(200).json({
+    data: singleSong,
+    success: true 
+  }
+    
+  )
  } else {
   res.status(404).send({
     message: "Song not found",
-    error: 404
+    error: 404,
+    success: false
   })
  }
 }) 
+
 
 // Search artist, example path: /songs/search?artist=shawn (or shawn+mendes)
 app.get("/songs/search", (req, res) => {
@@ -116,13 +138,16 @@ app.get("/songs/search", (req, res) => {
 
   if (getArtist.length === 0) {
     res.status(404).send({
-    message: "Sorry, could not find any songs by that artist name",
-    error: 404})
+    message: "Could not find any songs by that artist name",
+    error: 404,
+    success: false
+  })
   };
 
-  res.status(200).json(getArtist)
+  res.status(200).json({
+    data: getArtist,
+    success:true })
 })
-
 
 // Start the server
 app.listen(port, () => {
