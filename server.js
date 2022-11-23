@@ -43,7 +43,7 @@ if (process.env.RESET_DB) {
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
@@ -63,73 +63,82 @@ app.get("/endpoints", (req, res) => {
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send({
-    Message: "Hello and welcome your Spotify database! Look for songs at these endpoints:",
+    Message: "Hello and welcome your Spotify database! Look for songs at these routes:",
     Routes: [
       {
         "/songs": "See all songs in database",
-        "/songs?genre=*Name of genre*": "Show songs in a specific genre",
-        "/songs?track=*Name of track*": "Show tracks based on trackname",
-        "/songs?dancing=true": "Show songs great for dancing 💃",
-        "/songs?happy=true": "Show happy songs ✨", 
-        "/songs/search?artist=*Name of artist*": "Search for artist",
+        "/songs/artist/*Name of artist*": "Show songs from a specific artist",
+        "/songs/genre/*Name of genre": "Shows songs of a specific genre",
+       //"/songs?track=*Name of track*": "Show tracks based on trackname",
+        //"/songs?dancing=true": "Show songs great for dancing 💃",
+        //"/songs?happy=true": "Show happy songs ✨", 
+        //"/songs/search?artist=*Name of artist*": "Search for artist",
         "/songs/song/:id": "Show a single song based on its id",
       },
     ]});
 });
 
-// Lists all the songs and data
-app.get("/songs", (req, res) => {
-  const { track, genre, dancing, happy } = req.query
-  let songs = topMusicData
 
-  if (track) {
-    songs = songs.filter((singleTrack) =>
-    singleTrack.trackName.toLowerCase()
-    .includes(track.toLowerCase()))
+// Lists all songs  
+app.get("/songs", async(req,res) => {
+
+   Song.find().then(songs => {
+     res.json(songs)
+   })
+ })
+
+
+// Route to get songs by a specific artist
+app.get('/songs/artist/:artistName', async (req, res) => {
+  const paramsArtistName = req.params.artistName;
+  // Added a regex so that it will search non-case-sensitive and if the name is included
+  // in the authors string
+  const artist = await Song.find({ artistName: { $regex : new RegExp(paramsArtistName, "i") } });
+   
+  if (artist.length === 0) {
+    res.status(404).json("Sorry, could not find any songs by that artist name");
   }
 
-  if (genre) {
-  songs = songs.filter((type) => 
-  type.genre.toLowerCase()
-  .includes(genre.toLowerCase()))
+  res.json(artist);
+});
+
+// Return a specific genere 
+app.get("/songs/genre/:genre", async (req, res) => {
+  try{
+    const singleGenre = await Song.find({ genre: req.params.genre });
+    if(singleGenre){
+      res.status(200).json({
+      data: singleGenre,
+      success: true, 
+    })
+    } else {
+      res.status(404).json({
+        error: ' Song not found, try again ',
+        success: false, 
+      })
+    }
   }
-
-  if (dancing) {
-    songs = songs.filter((rating) => rating.danceability > '80')
-  }
-
-  if (happy) {
-    songs = songs.filter((rating) => rating.valence > '80')
-  }
-
-  res.status(200).json({
-    topMusicData: songs,
-    success: true
-})
-
+  catch(err) {
+    res.status(400).json({ error: "invalied songname" })
+  } 
 })
 
 // Finding a single song based on it's ID, example path: /songs/song/1
-app.get("/songs/song/:id", (req, res) => {
-  const singleSong = topMusicData.find((song) => {
-    return song.id === +req.params.id
-  })
- if (singleSong) {
-  res.status(200).json({
-    data: singleSong,
-    success: true 
-  }
-    
-  )
- } else {
-  res.status(404).send({
-    message: "Song not found",
-    error: 404,
-    success: false
-  })
- }
-}) 
+app.get('/songs/song/:id', async (req, res) => {
+  try {
+    const singleSong = await Song.findOne({ id: req.params.id });
 
+    if (singleSong) {
+      res.json(singleSong);
+    } else {
+      // Error when the id format is valid, but still no book is found with that id
+      res.status(404).json("Sorry, no songs found with that ID");
+    }
+  } catch (err) {
+    // error when the id format is wrong
+    res.status(400).json({ error: "Invalid Song ID, double check id value" });
+  }
+});
 
 // Search artist, example path: /songs/search?artist=shawn (or shawn+mendes)
 app.get("/songs/search", (req, res) => {

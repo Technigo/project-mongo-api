@@ -1,0 +1,55 @@
+/*// Lists all the songs and data - not using MongoDB
+app.get("/songs", (req, res) => {
+  const { track, genre, dancing, happy } = req.query
+  let songs = topMusicData
+
+  if (track) {
+    songs = songs.filter((singleTrack) =>
+    singleTrack.trackName.toLowerCase()
+    .includes(track.toLowerCase()))
+  }
+
+  if (genre) {
+  songs = songs.filter((type) => 
+  type.genre.toLowerCase()
+  .includes(genre.toLowerCase()))
+  }
+
+  if (dancing) {
+    songs = songs.filter((rating) => rating.danceability > '80')
+  }
+
+  if (happy) {
+    songs = songs.filter((rating) => rating.valence > '80')
+  }
+
+  res.status(200).json({
+    topMusicData: songs,
+    success: true
+})
+
+})
+*/
+
+
+/*
+// Finding a single song based on it's ID, example path: /songs/song/1
+app.get("/songs/song/:id", (req, res) => {
+  const singleSong = topMusicData.find((song) => {
+    return song.id === +req.params.id
+  })
+ if (singleSong) {
+  res.status(200).json({
+    data: singleSong,
+    success: true 
+  }
+    
+  )
+ } else {
+  res.status(404).send({
+    message: "Song not found",
+    error: 404,
+    success: false
+  })
+ }
+}) */
