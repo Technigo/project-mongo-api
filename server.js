@@ -66,9 +66,9 @@ app.get("/", (req, res) => {
       {
         "/songs": "Show all songs.",
         "/songs/:id": "Show info about specific song by mongo id.",
-        "/tracks/:trackName": "Show info about track by name. Ex Truth Hurts",
-        "/artists/:artistName": "Show all songs by an artist. Ex Ed Sheeran",
-        "/genres/:genre": "See songs and artists of a specific genre. Ex pop",
+        "/tracks/:trackName": "Search info about track by name. Ex 'boyfriend' will give all tracks with word boyfriend in",
+        "/artists/:artistName": "Show all songs by an artist. Ex 'Ed Sheeran' (--matches like above)",
+        "/genres/:genre": "See songs and artists by genre. Ex 'pop' (--matches like above)",
       },
     ]});
 });
@@ -112,9 +112,10 @@ app.get("/songs/:id", async (req, res) => {
 
 
 // Find a song by name
+// The RegExp with "i" makes it possible to search case-insensitive and shows all data which includes what you type. Like "beautiful" gives you all tracks that include the word "beautiful"
 app.get("/tracks/:trackName", async (req, res) => {
   try {
-    const theTrackName = await Song.findOne({ trackName: req.params.trackName })
+    const theTrackName = await Song.findOne({ trackName: new RegExp(req.params.trackName, "i") })
     if (theTrackName) {
       res.status(200).json({
       success: true,
@@ -137,10 +138,10 @@ app.get("/tracks/:trackName", async (req, res) => {
 
 })
 
-// Find list of artists songs 
+// Find list of artists songs. 
 app.get("/artist/:artistName", async (req, res) => {
   try {
-    const artistSongs = await Song.find({ artistName: req.params.artistName })
+    const artistSongs = await Song.find({ artistName: new RegExp(req.params.artistName, "i") })
     if (artistSongs) {
       res.status(200).json({
       success: true,
@@ -166,7 +167,7 @@ app.get("/artist/:artistName", async (req, res) => {
 // Find all songs within a specific genre
 app.get("/genres/:genre", async (req, res) => {
   try {
-    const genreList = await Song.find({ genre: req.params.genre })
+    const genreList = await Song.find({ genre: new RegExp(req.params.genre, "i") })
     if (genreList) {
       res.status(200).json({
       success: true,
