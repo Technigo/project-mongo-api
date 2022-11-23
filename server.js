@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
@@ -21,12 +21,6 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 
 // This is the first model. It's not putting info into the DB. It specify the types
-const User = mongoose.model("User", {
-  name: String,
-  age: Number,
-  deceased: Boolean
-});
-
 const Song = mongoose.model("Song", {
   id: Number,
   trackName: String,
@@ -45,7 +39,8 @@ const Song = mongoose.model("Song", {
 });
 
 
-// Deleting DB is in this case for educational porpouses.
+// Deleting DB is in this case for educational porpouses. 
+// And then populating it with Songs
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Song.deleteMany();
@@ -53,17 +48,9 @@ if (process.env.RESET_DB) {
       const newSong = new Song(singleSong);
       newSong.save();
     })
-
-    // await User.deleteMany();
-    // const testUser = new User({
-    //   name: "David",
-    //   age: 35,
-    //   deceased: false
-    // });
-    // testUser.save();
   }
   resetDataBase();
-}
+};
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -74,7 +61,102 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.status(200).json({
+    resMessage: "Top music data",
+    endPoints: "/songs -- /artist/:artistName -- /trackname/:trackname",
+    lists: "/lists?artistlist=true -- /lists?songlist=true"
+  });
+});
+
+// This will return an array of all songs and handles status 200
+app.get("/songs", (req, res) => {
+  const songs = topMusicData;
+  res.status(200).json({
+    success: true,
+    message: "OK",
+    response: {
+      topMusicData: songs
+    }
+  });
+});
+
+// This is an experiment.
+// It returns a list of all songs or artists based on queries
+app.get("/lists", (req, res) => {
+  const { songlist, artistlist } = req.query;
+
+  if (songlist) {
+    const songlist = topMusicData.map((song) => song.trackName)
+    res.status(200).json({
+      success: true,
+      message: "OK",
+      response: {
+        songList: songlist,
+      }
+    });
+  }
+  if (artistlist) {
+    const artistList = topMusicData.map((artist) => artist.artistName)
+    res.status(200).json({
+      success: true,
+      message: "OK",
+      response: {
+        songList: artistList,
+      }
+    });
+  }
+  res.status(200).json({
+    success: true,
+    message: "OK",
+    quieries: "/lists?artistlist=true -- /lists?songlist=true"
+  });
+})
+
+
+// This will return a single song sorted by trackname.
+// Handles 404
+app.get("/trackname/:trackname", (req, res) => {
+  const singleTrack = topMusicData.find((track) => {
+    return track.trackName.toLowerCase() === req.params.trackname.toLowerCase();
+  });
+  if (singleTrack) {
+    res.status(200).json({
+      succes: true,
+      message: "OK",
+      response: {
+        singleTrack: singleTrack
+      }
+    });
+  } else {
+    res.status(404).json({
+      success: false,
+      message: "Track not found",
+      response: {}
+    });
+  }
+});
+
+// This will return a single artist with an array of all songs. 
+// Handles 404 if name is wrong
+app.get("/artist/:artistName", (req, res) => {
+  const singleArtist = topMusicData.filter((artist) => {
+    return artist.artistName.toLowerCase() === req.params.artistName.toLowerCase();
+  });
+  if (singleArtist) {
+    res.status(200).json({
+      success: true,
+      message: "OK",
+      response: {
+        singleArtist: singleArtist
+      }
+    });
+  } else {
+    res.status(404).json({
+      success: false,
+      message: "Artist not found",
+      response: {}
+    });
+  }
 });
 
 // Start the server
