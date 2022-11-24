@@ -1,14 +1,13 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
+import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
- import topMusicData from "./data/top-music.json";
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -18,42 +17,39 @@ mongoose.Promise = Promise;
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
 
+
 // const User = mongoose.model("User", {
 //   name: String,
 //   age: Number,
 //   deceased: Boolean
 // });
 
-const Song = mongoose.model("Song", {
-  id: Number,
-  trackName: String,
-  artistName: String,
-  genre: String,
-  bpm: Number,
-  energy: Number,
-  danceability: Number,
-  loudness: Number,
-  liveness: Number,
-  valence: Number,
-  length: Number,
-  acousticness: Number,
-  speechiness: Number,
-  popularity: Number
+const Book = mongoose.model("Book", {
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
 });
 
 // clears the database and renders new user  
 if(process.env.RESET_DB) {
   const resetDataBase = async () => {
-    await Song.deleteMany();
-    topMusicData.forEach(singleSong => {
-      const newSong = new Song(singleSong);
-      newSong.save();
+    await Book.deleteMany();
+    booksData.forEach(singleBook => {
+      const newBook = new Book(singleBook);
+      newBook.save();
     })
    //  await User.deleteMany();
     // const testUser = new User({name: "Cecilia", age: 27, deceased: false}); 
     // testUser.save(); 
   }
-  resetDataBase();
+  resetDataBase();  //reset database should be inside an if, to not invoke by accident
 }
 
 const port = process.env.PORT || 8080;
