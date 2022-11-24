@@ -9,10 +9,9 @@ import booksData from "./data/books.json";
 // import netflixData from "./data/netflix-titles.json";
 
 
-const mongoUrl = process.env.MONGO_URL || "mongodb+srv://Sneezan:Sneezan34Ab@cluster0.hwfxk6d.mongodb.net/sneezanProjectMongo?retryWrites=true&w=majority";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo ";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-
 
 //mongodb://localhost/project-mongo  
 
