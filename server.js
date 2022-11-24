@@ -37,7 +37,7 @@ const Book = mongoose.model("Book", {
   text_reviews_count: Number
 });
 
-// clears the database and renders new book
+
 // RESET_DB=true npm run dev for MongoCompass
 if(process.env.RESET_DB) {
   const resetDataBase = async () => {
@@ -46,31 +46,26 @@ if(process.env.RESET_DB) {
       const newBook = new Book(singleBook);
       newBook.save();
     })
-   //  await User.deleteMany();
-    // const testUser = new User({name: "Cecilia", age: 27, deceased: false}); 
-    // testUser.save(); 
   }
-  resetDataBase();  //reset database should be inside an if, to not invoke by accident
+  resetDataBase();
 }
 
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+//Routes
 app.get("/", (req, res) => {
   const navigation = {
     guide: "These are the routes for this book API!",
     Endpoints: [
       {
         "/bookData": "Display all books",
-        "/bookData/authors/:authors": "Search for a author",
+        "/bookData/authors/:authors": "Search for specific author,  like /authors/Douglas Adams", 
         "/bookData/title/:title": "Search for a title", 
-        "/bookData/average_rating/": "Average rating of books - high to low",
-        "/bookData/num_pages/": "The book with most number of pages",
+        "/bookData/average_rating/": "Average rating of books - high to low"
       },
     ],
   };
@@ -85,25 +80,67 @@ app.get('/bookData', (req, res) => {
   })
 
  app.get('/bookData/average_rating', async (req, res) => {
+  const { average_rating } = req.params;
   const bookRating = booksData.sort((a, b) => b.average_rating - a.average_rating)
     res.json(bookRating.slice(0, [-1])) 
 })
 
 app.get("/bookData/title/:title", async (req, res) => {
-  const bookTitle = await Book.findOne({ title: req.params.title });
-  if (bookTitle) { 
-    res.json(bookTitle)
-  } else {
-    res.status(404).json({ error: 'There are no titles by that name here' })
+  const { title } = req.params
+
+  try {
+    const bookTitle = await Book.findOne({
+      title : new RegExp(title)
+    })
+
+    if (bookTitle) {
+      res.status(200).json({
+        success: true,
+        results: bookTitle,
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        status_code: 404,
+        message: `Sorry, we don't carry a book by this title: ${title} (* Hint * I'm sensitive!)`
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      status_code: 400,
+      message: "Bad request",
+    })
   }
 })
 
-app.get('/bookData/authors/:authors', async (req, res) => {
-  const authors = await Book.findOne({ authors: req.params.authors })
-  if (authors) { 
-    res.json(authors)
-  } else {
-    res.status(404).json({ error: 'We don´t have any books by that author - did you spell correctly?' })
+
+app.get("/bookData/authors/:authors", async (req, res) => {
+  const { authors } = req.params
+
+  try {
+    const authorByName = await Book.findOne({
+      authors : new RegExp(authors)
+    })
+
+    if (authorByName) {
+      res.status(200).json({
+        success: true,
+        results: authorByName,
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        status_code: 404,
+        message: `Sorry, we could not find any book by ${authors}`
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      status_code: 400,
+      message: "Bad request",
+    })
   }
 })
 
