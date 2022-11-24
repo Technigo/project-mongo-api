@@ -87,9 +87,86 @@ app.get("/", (req, res) => {
 });
 
 app.get("/songs", async (req, res) => {
-	const songs = await Song.find()
-	res.json(songs)
+	//assign to a variable. all songs would be equal to awaut sog.find(
+		//find takes an argument/all songs that have an object
+	const songs = await Song.find({});
+	res.status(200).json({
+		succes: true,
+	body: songs})
 })
+
+app.get("/songs/id/:id", async (req, res) => {
+	//always use try and catch to catch the errors in server
+	try{
+	//req take params which have id
+	const singleSong = await Song.findById(req.params.id);
+	if (singleSong) {
+		res.status(200).json({
+			success: true,
+			body: singleSong
+		});
+	} else {
+		res.status(404).json({
+			success: false,
+			body: {
+				message: "Could not find the song"
+			}
+		});
+	}
+} catch(error){
+	res.status(400).json({
+		success: false,
+		body: {
+			message: "Invalid id"
+		}
+	});
+}
+})
+// app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
+  // app.get("/songs/", async (req, res) => {
+
+	// const {genre, danceability} = req.query;
+	// const response = {
+  //   success: true,
+  //   body: {}
+  // }
+	//if genre property is present you will assig a specific genre property then else will regular expression present
+	//otherwise you will allow too much genre that is there
+	// const matchAllRegex = new RegExp (".*")
+	// const genreQuery = genre ? genre : matchAllRegex;
+	// const danceabilityQuery = danceability ? danceability : /.*/;
+  // try {
+    // if ( req.params.genre && req.params.danceability) {
+			// response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery});
+			// response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery}).limit(2).sort({energy: 1}).select({trackName:1, artistName: 1});
+			  //.exec() => to explore if you're curious enough :P
+    //   response.body = await Song.find({genre: req.params.genre, danceability: req.params.danceability});
+    // } else if (req.params.genre && !req.params.danceability) {
+    //   response.body = await Song.find({genre: req.params.genre});
+    // } else if (!req.params.genre && req.params.danceability){
+    //   response.body = await Song.find({danceability: req.params.danceability});
+    // }
+//     res.status(200).json({
+//       success: true,
+//       body: response
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       success: false,
+//       body: {
+//         message: error
+//       }
+//     });
+//   }
+
+// });
+//regual expression
+//https://regex101.com/
+// https://mongoosejs.com/docs/queries
+
+// /yourWodOfChoice/gm - regex to match yourWordOfChoice
+// /.*/gm - regex to match every character in a string
+
 
 // app.get("/trackname", async (req, res) => {
 //   const name = await trackName.findOne()
