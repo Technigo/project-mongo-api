@@ -1,13 +1,22 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+ This week I looked at how to use MongoDB to store data, and how to query that data from your API. Again, I used different data that is not provided by Technigo. I chose to retrieve data from Kaggle and convert it to JSON file. I also learnt some methods such as;
+ find()
+ findOne()
+ findById()
+ limit()
+ sort()
+ select()
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Problem -> solution
+
+- npm run dev didn't work -> seems like many other students had it as well, so the fixed was to downgrade node from v18 to v16.
+- sensitive case -> found out that I cannot use toLowerCase() in mongoDB, and looked on some documentation that I had to use regExp 'i'.
+- math symbol -> again, mongoDB has different way. Instead of >= (bigger than) I had to use $gte which also means greater than or equal.
+- query within params -> spent so much time Googling and did trial and error. But I ended up experimenting with my own logic and it worked.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-thr246hagq-lz.a.run.app/
