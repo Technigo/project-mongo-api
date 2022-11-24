@@ -137,9 +137,11 @@ app.get("/songs/", async (req, res) => {
 
 });
 // Start the server
-app.listen(port, () => {
+/* app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
-});
+}); */
+
+
 //RESET_DB=true npm run dev
 // Go here:
 //https://github.com/coreybutler/nvm-windows/releases
