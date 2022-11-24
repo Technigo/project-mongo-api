@@ -4,20 +4,22 @@ import mongoose from "mongoose";
 import worldCupData from "./data/world-cup.json";
 import listEndpoints from "express-list-endpoints";
 
+async function connectoToDB() {
+  const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Si esta definida la url usa this sino lo otro.
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Si esta definida la url usa this sino lo otro.
+  const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity 
+  };
 
+  await mongoose.connect(mongoUrl, options);
+  mongoose.Promise = Promise;
+}
 
-const options = {   
-  useNewUrlParser: true, 
-  useUnifiedTopology: true,
-  maxPoolSize: 10, // Maintain up to 10 socket connections
-  serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
-  socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity 
-};
-
-mongoose.connect(mongoUrl, options);
-mongoose.Promise = Promise;
+connectoToDB();
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -60,7 +62,6 @@ if (process.env.RESET_DB) {
 
   seedDatabase()
 }
-
 
 // Start the server
 app.listen(port, () => {
