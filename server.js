@@ -1,6 +1,10 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+import topMusicData from "./data/top-music.json";
+
+dotenv.config()
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -9,9 +13,9 @@ import mongoose from "mongoose";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
-import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+
+const mongoUrl = process.env.MONGO_URL || `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.eilze2r.mongodb.net/project-mongo-api?retryWrites=true&w=majority`
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -86,6 +90,16 @@ app.get("/songs", async (req, res) => {
 	const songs = await Song.find()
 	res.json(songs)
 })
+
+// app.get("/trackname", async (req, res) => {
+//   const name = await trackName.findOne()
+//   if (name) {
+//     // const books = await Song.find({ name: mongoose.Types.ObjectId(name.id) })
+//     res.json(trackname)
+//   } else {
+//     res.status(404).json({ error: 'TrackName not found' })
+//   }
+// })
 
 // Start the server
 app.listen(port, () => {
