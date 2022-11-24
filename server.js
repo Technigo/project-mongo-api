@@ -135,7 +135,6 @@ app.get("/bookData/authors/:authors", async (req, res) => {
   }
 })
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
