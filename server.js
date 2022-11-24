@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 import topMusicData from "./data/top-music.json";
+import { resolveShowConfigPath } from "@babel/core/lib/config/files";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -39,20 +40,20 @@ const Song = mongoose.model("Song", {
   acousticness: Number,
   speechiness: Number,
   popularity: Number
-})
+});
 
 if(process.env.RESET_DB) {
   const resetDataBase = async () => {
-    await Song.deleteMany()
+    await Song.deleteMany();
     topMusicData.forEach(singleSong => {
       const newSong = new Song(singleSong);
       newSong.save();
     })
-    // await User.deleteMany()
-    // const testUser = new User({name: "Charlotte", age: 31, deceased: false})
+    // await User.deleteMany();
+    // const testUser = new User({name: "Daniel", age: 28, deceased: false});
     // testUser.save();
   }
-  resetDataBase()
+  resetDataBase();
 }
 
 const port = process.env.PORT || 8080;
@@ -65,6 +66,75 @@ app.use(express.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
+});
+
+// app.get("/songs", async (req, res) => {
+//   const allTheSongs = await Song.find({})
+//   res.status(200).json({
+//    success: true,
+//    body: allTheSongs 
+//   });
+// });
+
+app.get("/songs/id/:id", async (req, res) => {
+try {
+  const singleSong = await Song.findById(req.params.id);
+  if (singleSong) {
+    res.status(200).json({
+      success: true,
+      body: singleSong 
+     });
+  } else {
+    res.status(404).json({
+      success: false,
+      body: {
+        message: "Could not find the song"
+      } 
+     });
+  }
+} catch(error) {
+  res.status(400).json({
+    success: false,
+    body: {
+      message: "Invalid id"
+    } 
+   });
+}
+
+});
+// app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
+  app.get("/songs/", async (req, res) => {
+
+  const {genre, danceability} = req.query;
+  const response = {
+    success: true,
+    body: {}
+  }
+  const genreQuery = genre ? genre : /.*/;
+  const danceabilityQuery = danceability ? danceability : /.*/;
+  try {
+    // if (req.params.genre && req.params.danceability) {
+      response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery}).limit(2).sort({energy: 1}).select({trackName: 1, artistName: 1})
+      //.exec() to explore
+    // } else if (req.params.genre && !req.params.danceability) {
+    //   response.body = await Song.find({genre: req.params.genre})
+    // } else if (!req.params.genre && req.params.danceability) {
+    //   response.body = await Song.find({danceability: req.params.danceability})
+    // }
+    res.status(200).json({
+      success: true,
+      body: response
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: error
+      } 
+     });
+  }
+
 });
 
 // Start the server
