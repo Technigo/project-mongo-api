@@ -68,13 +68,13 @@ app.get("/", (req, res) => {
     ],
   });
 });
-app.get("/songs", async (req, res) => {
-  const allTheSongs = await Song.find({}); //Song is the model variable
-  res.status(200).json({
-    success: true,
-    body: allTheSongs
-  });
-});
+// app.get("/songs", async (req, res) => {
+//   const allTheSongs = await Song.find({}); //Song is the model variable
+//   res.status(200).json({
+//     success: true,
+//     body: allTheSongs
+//   });
+// });
 app.get("/songs/id/:id", async (req, res) => {
   const allTheSongs = await Song.find({}); //Song is the model variable
   res.status(200).json({
@@ -112,41 +112,35 @@ app.get("/songs/id/:id", async (req, res) => {
   
 });
 
-// app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
-  app.get("/songs/", async (req, res) => {
 
-    const {genre, danceability} = req.query;
-    const response = {
+app.get("/songs/", async (req, res) => {
+
+  const {genre, danceability} = req.query;
+  const response = {
+    success: true,
+    body: {}
+  }
+  const matchAllRegex = new RegExp(".*");  //.* regular expre meaning match any genre
+  const genreQuery = genre ? genre : matchAllRegex;
+  const danceabilityQuery = danceability ? danceability : /.*/;
+
+  try {
+      response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery}).limit(2).sort({energy: 1}).select({trackName: 1, artistName: 1})
+   
+    res.status(200).json({
       success: true,
-      body: {}
-    }
-    const matchAllRegex = new RegExp(".*");
-    const genreQuery = genre ? genre : matchAllRegex;
-    const danceabilityQuery = danceability ? danceability : /.*/;
-  
-    try {
-      // if ( req.params.genre && req.params.danceability) {
-        response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery}).limit(2).sort({energy: 1}).select({trackName: 1, artistName: 1})
-        //.exec() => to explore if you're curious enough :P
-      // } else if (req.params.genre && !req.params.danceability) {
-      //   response.body = await Song.find({genre: req.params.genre});
-      // } else if (!req.params.genre && req.params.danceability) {
-      //   response.body = await Song.find({danceability: req.params.danceability});
-      // }
-      res.status(200).json({
-        success: true,
-        body: response
-      });
-    } catch (error) {
-      res.status(400).json({
-        success: false,
-        body: {
-          message: error
-        }
-      });
-    }
-  
-  });
+      body: response
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: error
+      }
+    });
+  }
+
+});
 
 // Start the server
 app.listen(port, () => {
