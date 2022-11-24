@@ -1,4 +1,5 @@
 import express from "express";
+import listEndpoints from "express-list-endpoints";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -83,7 +84,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Top-Music API data!");
+  res.send({Message:"Top-Music API data!", data: listEndpoints(app)});
 });
 
 app.get("/songs", async (req, res) => {
