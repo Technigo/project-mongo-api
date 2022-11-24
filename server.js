@@ -68,10 +68,15 @@ if (mongoose.connection.readyState===1) {
 
 // Start defining your routes here
 
+// Start route on default port
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.sendFile(__dirname + "/index.html");
 });
 
+//the style-sheet is linked in its own route, and sent as the response using sendFile
+app.get("/style.css", (req, res) => {
+  res.sendFile(__dirname + "/style.css");
+});
 // ROUTE 1: Get a list of all songs
 app.get("/songs", async (req, res) => {
   const allTheSongs = await Song.find({}).limit(10).sort({danceability: -1})
