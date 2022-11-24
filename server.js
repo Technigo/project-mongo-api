@@ -53,26 +53,23 @@ app.get("/", (req, res) => {
   res.send("Hello Baaaaaa!");
 });
 
-/* app.get("/songs", async (req, res) => {
-  const allSongs = await Song.find({});
-
-  try {
-    
-  }
-}); */
 app.get("/songs/", async (req, res) => {
-  const {genre, bpm} = req.query;
-  const response = {
-    success: true,
-    body: {}
-  }
-  const genreQuery = genre ? genre : /.*/gm;
-  const bpmQuery = bpm ? bpm : /.*/gm;
-  // const matchAllRegEx = newRegExp (".*");
+  const {bpm, genre} = req.query;
+  let query = {};
 
   try {
-    response.body = await Song.find({genre: genreQuery, bpm: bpmQuery})
-    res.status(200).json({response});
+    if (bpm) {
+      query.bpm = bpm;
+    };
+    if (genre) {
+      query.genre = genre;
+    };
+
+    const songs = await Song.find(query);
+    res.status(200).json({
+      success: true,
+      body: songs
+    });
   } catch(error) {
     res.status(400).json({
       success: false,
@@ -84,8 +81,9 @@ app.get("/songs/", async (req, res) => {
 });
 
 app.get("/songs/:id", async (req, res) => {
+  const songById = await Song.findById(req.params.id);
+
   try {
-    const songById = await Song.findById(req.params.id);
     if (songById) {
       res.status(200).json({
         success: true,
@@ -112,6 +110,7 @@ app.get("/songs/:id", async (req, res) => {
 // https://regex101.com
 // blablbalbbalb/gm – regex to match blablbalbbalb
 // /.*/gm – regex to match every character in a string
+  // const matchAllRegEx = newRegExp (".*");
 
     // funktion att chain:a på om man vill begränsa sökresultaten: 
     // .limit(2).sort({}).select({trackName: 1, artistName: 1});
@@ -124,3 +123,28 @@ app.get("/songs/:id", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+// app.get("/songs/", async (req, res) => {
+//   const {bpm, energy, genre} = req.query;
+//   const response = {
+//     success: "bajs det funkar",
+//     body: {}
+//   }
+
+//   const genreQuery = genre ? genre : /.*/;
+//   const bpmQuery = bpm ? bpm : /.*/;
+
+//   try {
+//     response.body = await Song.find({bpm: bpmQuery, genre: genreQuery});
+//     res.status(200).json(response);
+//     console.log(response.body)
+//   } catch(error) {
+//     console.log(response.body)
+//     res.status(400).json({
+//       success: false,
+//       body: {
+//         message: "No songs found"
+//       }
+//     });
+//   }
+// });
