@@ -77,8 +77,8 @@ app.get("/animes", async (req, res) => {
   res.json(animes)
 })
 
-// Display one anime by title
-// example /animes/naruto
+// Display one anime by the title they used for worldwide release
+// example /animes/title/naruto
 app.get("/animes/title/:english", async (req, res) => {
   const titleRegex = new RegExp(req.params.english, "i");
   
@@ -96,7 +96,7 @@ app.get("/animes/title/:english", async (req, res) => {
     })}
 })
 
-// Display animes by its score
+// Display all animes that scores 8 or higher
 // example /animes/highscore
 app.get("/animes/highscore", async (req, res) => {
   const animeScore = await Anime.find({score: { $gte: 8 }})
@@ -113,7 +113,7 @@ app.get("/animes/highscore", async (req, res) => {
     })}
 })
 
-// Display animes by its type
+// Display animes by its type and its limited to only maximum 5 objects, sorted from the highest score and it will only return title, synopsis and its score
 // example /animes/type/movie
 app.get("/animes/type/:type", async (req, res) => {
  try{
@@ -136,12 +136,11 @@ app.get("/animes/type/:type", async (req, res) => {
     body: {
       message: "bad request"
   }})
-}
-
-  
+} 
 })
 
-// /animes/status?query=Currently Airing
+// Display aall anime with the same airing status
+// example /animes/status?query=Currently Airing
 app.get("/animes/status", async(req, res) => {
   const { query } = req.query;
   const queryRegex = new RegExp(query, 'i')
@@ -153,13 +152,15 @@ app.get("/animes/status", async(req, res) => {
   }
 })
 
-// example /animes/studios/white%20fox?premiered=fall%202018
+// Display all animes that are made by the same studio and later on can be filtered more by the time it's premiered.
+// So, the example below means: animes that were made by White Fox studio & premiered in Spring 2016
+// example /animes/studios/white%20fox?premiered=spring%202016
 app.get("/animes/studios/:studios", async (req, res) => {
   const studioRegex = new RegExp(req.params.studios, "i");
   const premieredRegex = new RegExp(req.query.premiered, "i")
   const animeStudio = await Anime.find({ 
     studios: studioRegex,
-  premiered: premieredRegex
+    premiered: premieredRegex
 })
   res.status(200).json(animeStudio)
 })
