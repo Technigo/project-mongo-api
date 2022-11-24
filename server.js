@@ -1,35 +1,194 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import ProductData from "./data/ikea-products.json";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-ikea";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
+const Product = mongoose.model("Product", {
+  item_id: Number,
+  name: String,
+  category: String,
+  price: Number,
+  old_price: String,
+  sellable_online: String,
+  link: String,
+  other_colors: String,
+  short_description: String,
+  designer: String,
+  depth: Number,
+  height: Number,
+  width: Number,
+});
+
+
+if (process.env.RESET_DB) {
+  const resetDataBase = async () => {
+    await Product.deleteMany();
+    ProductData.forEach(singleProduct => {
+      const newProduct = new Product(singleProduct);
+      newProduct.save();
+    })
+  }
+  resetDataBase();
+}
+
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
+// Middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// First page displaying list of optional routes
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send([
+    { "/": "StartPage" },
+    { "/products": "Display all products" },
+    { "/products/name": "Search for a product by name" },
+    { "/products/lowestprice": "Display the cheapest products first" },
+    { "/products/designer/:designer": "Display all products by designer" },
+    { "/products/onlinesales": "Display all products sold online" },
+  ]);
+});
+
+// Display all products
+app.get("/products", async (req, res) => {
+  const products = await Product.find({});
+  res.status(200).json({
+    success: true,
+    body: ProductData
+  });
+});
+
+// Find product by name
+// Example route: /products/name/billy
+app.get("/products/name/:name", async (req, res) => {
+  try {
+    const products = await Product.findOne({ name: req.params.name.toUpperCase() });
+    console.log(products)
+    if (products) {
+      res.status(200).json({
+        success: true,
+        body: products
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Could not find the product"
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid id"
+      }
+    });
+  }
+});
+
+
+// Display products by lowest price
+app.get("/products/lowestprice/", async (req, res) => {
+  console.log(typeof req.params.id)
+  try {
+    const products = await Product.find({});
+    if (products) {
+      res.status(200).json({
+        success: true,
+        body: products.sort((a, b) => {
+          return a.price - b.price;
+        })
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Could not find the products"
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid id"
+      }
+    });
+  }
+});
+
+// Find product by designer
+// Example route: /products/designer/Francis Cayouette
+app.get("/products/designer/:designer", async (req, res) => {
+  try {
+    const products = await Product.find({ designer: req.params.designer });
+    console.log(products)
+    if (products) {
+      res.status(200).json({
+        success: true,
+        body: products
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Could not find this designer"
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid id"
+      }
+    });
+  }
+});
+
+// Find only products sold online - NOT YET WORKING
+app.get("/products/sellableonline", async (req, res) => {
+  try {
+    const products = await Product.find({ sellable_online: req.params.sellable_online=true });
+    console.log(products)
+    if (products) {
+      res.status(200).json({
+        success: true,
+        body: products
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Could not find this information"
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid id"
+      }
+    });
+  }
 });
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+//RESET_DB=true npm run dev
+// Go here:
+
+//https://regex101.com/
+
+// /yourWodOfChoice/gm - regex to match yourWordOfChoice
+// /.*/gm - regex to match every character in a string
