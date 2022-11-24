@@ -4,13 +4,21 @@ import mongoose from "mongoose";
 import worldCupData from "./data/world-cup.json";
 import listEndpoints from "express-list-endpoints";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Si esta definida la url usa this sino lo otro.
+
+
+const options = {   
+  useNewUrlParser: true, 
+  useUnifiedTopology: true,
+  maxPoolSize: 10, // Maintain up to 10 socket connections
+  serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+  socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity 
+};
+
+mongoose.connect(mongoUrl, options);
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -43,7 +51,7 @@ const Cup = mongoose.model('Cup', {
 
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
-    // await Cup.deleteMany({})
+    await Cup.deleteMany({})
 
 		worldCupData.forEach((data) => {
 			new Cup(data).save()
@@ -52,6 +60,7 @@ if (process.env.RESET_DB) {
 
   seedDatabase()
 }
+
 
 // Start the server
 app.listen(port, () => {
