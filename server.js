@@ -114,7 +114,7 @@ app.get("/songs/", async (req, res) => {
     // }
     // response.body = songs;
     response.body = await Song.find({
-      danceability: danceabilityQuery,
+      // danceability: danceabilityQuery,
       genre: genreQuery,
     });
 
