@@ -9,20 +9,12 @@ import booksData from "./data/books.json";
 // import netflixData from "./data/netflix-titles.json";
 
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://Sneezan:Sneezan34Ab@cluster0.hwfxk6d.mongodb.net/sneezanProjectMongo?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 
-
-// const User = mongoose.model("User", {
-//   name: String,
-//   age: Number,
-//   deceased: Boolean
-// });
+//mongodb://localhost/project-mongo  
 
 const Book = mongoose.model("Book", {
   bookID: Number,
