@@ -114,7 +114,7 @@ app.get("/animes/highscore", async (req, res) => {
 })
 
 // Display animes by its type
-// example /animes/type
+// example /animes/type/movie
 app.get("/animes/type/:type", async (req, res) => {
  try{
   const typeRegex = new RegExp(req.params.type, "i");
@@ -141,7 +141,7 @@ app.get("/animes/type/:type", async (req, res) => {
   
 })
 
-// /anime/status?query=Currently Airing
+// /animes/status?query=Currently Airing
 app.get("/animes/status", async(req, res) => {
   const { query } = req.query;
   const queryRegex = new RegExp(query, 'i')
