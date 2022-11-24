@@ -89,15 +89,19 @@ app.get("/", (req, res) => {
 app.get("/songs/", async (req, res) => {
   console.log("/songs req", req.query);
 
-  const { genre, danceability } = req.query;
+  const { genre, artist, danceability } = req.query;
   const response = {
     success: true,
     body: {},
   };
 
   const matchAllRegex = new RegExp(".*");
+  const matchAllNumbersGreaterThanZero = { $gt: 0 };
   const genreQuery = genre ? genre : matchAllRegex;
-  const danceabilityQuery = danceability ? danceability : /.*/;
+  const danceabilityQuery = danceability
+    ? danceability
+    : matchAllNumbersGreaterThanZero;
+  const artistQuery = artist ? artist : matchAllRegex;
 
   try {
     // if ( req.params.genre && req.params.danceability) {
@@ -114,7 +118,8 @@ app.get("/songs/", async (req, res) => {
     // }
     // response.body = songs;
     response.body = await Song.find({
-      // danceability: danceabilityQuery,
+      danceability: danceabilityQuery,
+      artistName: artistQuery,
       genre: genreQuery,
     });
 
