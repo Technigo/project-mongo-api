@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
 import booksData from "./data/books.json";
+import { getModulesPluginNames } from "@babel/preset-env";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
@@ -53,18 +54,37 @@ app.get("/", (req, res) => {
 res.send("This is an api for books.");
 });
 
-app.get('/books', (req, res) => {
-  Book.find().then(books => {
-    res.json(books)
+app.get('/books', async (req, res) => {
+  const Books = await Book.find({});
+  res.status(200).json ({
+    succes: true,
+    body: Books
   })
 })
 
 app.get('/books/id/:id', async (req, res) => {
-  const book = await Book.findOne({ bookID: req.params.id })
-  if (book) {
-    res.json(book)
-  } else {
-    res.status(404).json({ error: 'No book with that ID was found' })
+  try {
+    const book = await Book.findById(req.params.id)
+    if (book) {
+      res.status(200).json ({
+        succes: true,
+        body: book
+      })
+    } else {
+      res.status(200).json ({
+        succes: false,
+        body: {
+          message: "No book with that ID was found"
+        }
+      })
+    }
+  } catch (error) {
+    res.status(400).json ({
+      succes: false,
+      body: {
+        message: "Invalid Id"
+      }
+    })
   }
 })
 
@@ -76,7 +96,7 @@ app.get('/books/title/:title', (req, res) => {
       res.status(404).json({ error: 'There is no book with that title.' })
     }
   })
-})
+ })
 
 app.get('/books/authors/:authors', async (req, res) => {
   const book = await Book.findOne({ authors: req.params.authors })
@@ -85,7 +105,7 @@ app.get('/books/authors/:authors', async (req, res) => {
   } else {
     res.status(404).json({ error: 'No book by that author was found' })
   }
-})
+ })
 
 // Start the server
 app.listen(port, () => {
