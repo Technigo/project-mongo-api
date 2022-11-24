@@ -57,7 +57,7 @@ app.use(cors());
 app.use(express.json());
 
 // Start defining your routes here
-app.get("/avocados", async (req, res) => {
+app.get("/", async (req, res) => {
 const EveryAvocado = await Avocado.find();
 res.status(200).json({
   success: true, 
