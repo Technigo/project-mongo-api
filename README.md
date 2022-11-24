@@ -1,13 +1,16 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+First project working with a database, modeled data in Mongodb using Mongoose. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The API has 4 routes:
+
+# 1: "/songs" to view all data
+# 2: "/songs/pop" Filter on a specific genre and get top 5 in popularity
+# 3: "/songs/id/637f76ca41af53b76cbf1328" Filter on a specific song with an ID-number
+# 4: "songs/bpm/150"  Get names of the tracks with a selected bpm
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-2yjgfy4taq-lz.a.run.app/
