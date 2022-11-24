@@ -61,15 +61,18 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  const firstPage = {
+  const MusicData = {
     Hello: "Welcome to my MongoDB API with a list of popular song on spotify",
     Routes: [
       {
         "/songs": "Get the whole array of songs",
+        "/songs/id/:id": "Filter by id",
+        "/songs?artist=:artist&danceability=:danceability&genre=:genre":
+          "Filter by artist, danceability or genre",
       },
     ],
   };
-  res.send({ firstPage });
+  res.send({ MusicData });
 });
 
 // Songs endpoint
