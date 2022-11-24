@@ -37,9 +37,9 @@ if (process.env.RESET_DB) {
     topMusicData.forEach(song => {
       const newSong = new Song(song).save();
     });
-  }
+  };
   resetDatabase();
-}
+};
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -53,25 +53,72 @@ app.get("/", (req, res) => {
   res.send("Hello Baaaaaa!");
 });
 
-app.get("/songs", async (req, res) => {
-  const songs = await Song.find();
-  const { bpm, genre } = req.query;
+/* app.get("/songs", async (req, res) => {
+  const allSongs = await Song.find({});
 
-  if (bpm) {
-
-  }
-
-  if (genre) {
+  try {
     
   }
-  
-  res.json(songs);
+}); */
+app.get("/songs/", async (req, res) => {
+  const {genre, bpm} = req.query;
+  const response = {
+    success: true,
+    body: {}
+  }
+  const genreQuery = genre ? genre : /.*/gm;
+  const bpmQuery = bpm ? bpm : /.*/gm;
+  // const matchAllRegEx = newRegExp (".*");
+
+  try {
+    response.body = await Song.find({genre: genreQuery, bpm: bpmQuery})
+    res.status(200).json({response});
+  } catch(error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "No songs found"
+      }
+    });
+  }
 });
 
 app.get("/songs/:id", async (req, res) => {
-  const songById = await Song.findOne({id: req.params.id});
-  res.send(songById);
+  try {
+    const songById = await Song.findById(req.params.id);
+    if (songById) {
+      res.status(200).json({
+        success: true,
+        body: songById
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Could not find the song"
+        }
+      });
+    }
+  } catch(error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid id"
+      }
+    });
+  }
 });
+
+// https://regex101.com
+// blablbalbbalb/gm – regex to match blablbalbbalb
+// /.*/gm – regex to match every character in a string
+
+    // funktion att chain:a på om man vill begränsa sökresultaten: 
+    // .limit(2).sort({}).select({trackName: 1, artistName: 1});
+    // select bestämmer strukturen på responsen till frontend 
+    // för att inte hämta/skicka mer info än nödvändigt
+    // .exec() => to explore if you're curious enough
+
 
 // Start the server
 app.listen(port, () => {
