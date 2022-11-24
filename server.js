@@ -5,7 +5,7 @@ import worldCupData from "./data/world-cup.json";
 import listEndpoints from "express-list-endpoints";
 
 function connectoToDB() {
-  const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Si esta definida la url usa this sino lo otro.
+  const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 
   const options = {
     useNewUrlParser: true,
@@ -30,6 +30,7 @@ function connectoToDB() {
         seedDatabase()
       }
     });
+
   mongoose.Promise = Promise;
 }
 
@@ -38,17 +39,12 @@ connectoToDB();
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
+
 app.use(cors());
 app.use(express.json());
 
 app.get("/endpoints", (req, res) => {
   res.send(listEndpoints(app))
-});
-
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hi, World Cup Api!");
 });
 
 // Seed the database
@@ -63,9 +59,36 @@ const Cup = mongoose.model('Cup', {
   teams: Number,
   games: Number,
   attendance: Number
-})
+});
 
+// Start defining your routes here
+app.get("/", (req, res) => {
+  const WorldCupApi = {
+    Welcome: 'Hi! This a World Cup Api (1930 - 2018)',
+    Routes: [{
+      "/cups": 'Get all world cup.'
+    }]
+  }
 
+  res.send(WorldCupApi)
+});
+
+app.get("/cups", async (req, res) => {
+  let cups = await Cup.find(req.query)
+
+  if(req.query.year) {
+    const yearCup = await Cup.find().gt('year', req.query.year)
+    cups = yearCup
+  }
+
+  if(req.query.winner) {
+    const winnerCup = await Cup.find().gt('winner', req.query.winner)
+    cups = winnerCup
+  }
+
+  res.json(cups)
+
+});
 
 // Start the server
 app.listen(port, () => {
