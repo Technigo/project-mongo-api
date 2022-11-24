@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import theOfficeData from "./data/the_office_series.json";
+// import theOfficeData from "./data/the_office_series.json";
 
 // This is the database collection: 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = "mongodb+srv://IceCreamCloud:s6RBChEZzGAKCO2B@cluster0.ptl5tah.mongodb.net/project-mongo-api?retryWrites=true&w=majority"
 // Set up code according to documentation:
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -25,7 +26,7 @@ const Episode = mongoose.model("Episode", {
 });
 
 // Generate entries into the db from the json file:
-// if (process.env.RESET_DB) {
+if (process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Episode.deleteMany();
     theOfficeData.forEach((singleEpisode) => {
@@ -34,7 +35,7 @@ const Episode = mongoose.model("Episode", {
     })
   }
   resetDataBase();
-// }
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -47,42 +48,60 @@ const listEndpoints = require('express-list-endpoints');
 app.use(cors());
 app.use(express.json());
 
+
 // Route for start page
 app.get("/", (req, res) => {
-  // res.send("Hello Technigo!");
-  // Start page lists the two routes available:
+  // Start page lists the routes available:
   res.json(listEndpoints(app));
 });
 
-app.get("/episodes", (req, res) => {
-  res.json()
+// Route for all episodes available in the series
+app.get("/episodes", async (req, res) => {
+  const { title } = req.query;
+  const titleQuery = title ? title : /.*/;
+  
+  try {
+    const all = await Episode.find({EpisodeTitle: titleQuery})
+    res.json(all)
+  } catch(error) {
+      res.send('No data found') //STATUS HERE??
+  }
 })
 
+// Route for top 5 rated episode
+app.get("/episodes/top_5", async (req, res) => {
+  try {
+    const best = await Episode.find().limit(5).sort({ Ratings: -1}).select({EpisodeTitle: 1, About: 1, Ratings: 1, Season: 1})
+    res.json(best)
+  } catch(error){
+      res.send(error) 
+  }
+})
+
+// Route for a single episode
+app.get("/episodes/:id", async (req, res) => {
+  try {
+    const singleEpisode = await Episode.findOne({_id: req.params.id})
+    res.json(singleEpisode)
+  } catch(error){
+      res.send(error) 
+  }
+})
 
 // Route for episodes for a specific season:
-app.get("/seasons/:season", async (req, res) => {
-  const number = Number(req.params.season)
+app.get("/episodes/seasons/:season", async (req, res) => {
+  const number = req.params.season
   const season = await Episode.find({ Season: number });
-  if (season.length > 0) {
-    res.json(season)
-  } else {
-    res.status(404).json({ error: 'Season not found' })
+  try {
+    if (season.length > 0) {
+      res.json(season)
+    } else {
+      res.status(404).json({ error: 'Season not found' })
+    }
+  } catch(error){
+    res.send(error)
   }
 });
-
-// Route for a specific title
-app.get("/episodes/:title", async (req, res) => {
-  const name = req.params.title
-  const title = await Episode.findOne({ EpisodeTitle: name }) 
-  // how to make this searchable with a keyword?  
-  // db.content.find({$text:{$search:"love"}})  
-  // Episode.createIndexes({ EpisodeTitle: "text" })
-  if (title) {
-    res.json(title)
-  } else {
-    res.status(404).json({ error: 'Title not found' })
-  }
-})
 
 // Start the server
 app.listen(port, () => {

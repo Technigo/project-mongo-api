@@ -1,13 +1,28 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week's project involved using a MongoDB database to store and retrieve data. A RESTful API was created using that data.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+
+ENDPOINTS CREATED:
+
+  **/episodes** - returns all the episodes with all their data. 
+
+  **/episodes/top_5** - returns top 5 rated episodes
+
+  With path parameters:
+  **/episodes/:id** - returns a single episode according to a specific id entered 
+
+  **/episodes/seasons/:season** - returns all episodes of a specific season (1-9)
+
+  Filters that can be used with the following query params:
+
+  **/episodes?title=searchedAfterTitle**  - search for a specific episode by title
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Google Cloud Platform is used to deploy the API:
+
+https://project-mongo-api-u5vmpxdxpa-lz.a.run.app/
