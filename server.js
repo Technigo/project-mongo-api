@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import worldCupData from "./data/world-cup.json";
 import listEndpoints from "express-list-endpoints";
 
-async function connectoToDB() {
+function connectoToDB() {
   const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Si esta definida la url usa this sino lo otro.
 
   const options = {
@@ -15,7 +15,21 @@ async function connectoToDB() {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity 
   };
 
-  await mongoose.connect(mongoUrl, options);
+  mongoose.connect(mongoUrl, options)
+    .then(() => {
+      if (process.env.RESET_DB) {
+        const seedDatabase = async () => {
+          await Cup.deleteMany({})
+      
+          worldCupData.forEach((data) => {
+            new Cup(data).save()
+              .then(() => console.log(`Entry created: ${JSON.stringify(data)}`))
+          })
+        }
+      
+        seedDatabase()
+      }
+    });
   mongoose.Promise = Promise;
 }
 
@@ -51,17 +65,7 @@ const Cup = mongoose.model('Cup', {
   attendance: Number
 })
 
-if (process.env.RESET_DB) {
-	const seedDatabase = async () => {
-    await Cup.deleteMany({})
 
-		worldCupData.forEach((data) => {
-			new Cup(data).save()
-		})
-  }
-
-  seedDatabase()
-}
 
 // Start the server
 app.listen(port, () => {
