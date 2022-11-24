@@ -42,7 +42,7 @@ const Anime = mongoose.model("Anime",
 
 if(process.env.RESET_DB){
   const resetDataBase = async () => {
-    await Anime.deleteMany();
+    /* await Anime.deleteMany(); */
     anime.forEach(singleAnime => {
       const newAnime = new Anime(singleAnime);
       newAnime.save()
@@ -116,10 +116,29 @@ app.get("/animes/highscore", async (req, res) => {
 // Display animes by its type
 // example /animes/type
 app.get("/animes/type/:type", async (req, res) => {
+ try{
   const typeRegex = new RegExp(req.params.type, "i");
-  const animeType = await Anime.find({ type: typeRegex })
+  const animeType = await Anime.find({ type: typeRegex }).limit(5).sort({score: -1}).select({title: 1, synopsis: 1, score: 1})
 
-  res.status(200).json(animeType)
+  if(animeType){
+    res.status(200).json(animeType)
+  } else{
+    res.status(404).json({
+      success: false,
+      body: {
+        message: "invalid"
+      }
+    })
+  } 
+} catch(error){
+  res.status(400).json({
+    success: false,
+    body: {
+      message: "bad request"
+  }})
+}
+
+  
 })
 
 // /anime/status?query=Currently Airing
