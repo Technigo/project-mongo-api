@@ -10,7 +10,7 @@ import mongoose from "mongoose";
 // import netflixData from "./data/netflix-titles.json";
 import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://julia:C7Jp8a6VgDxSMrQo@cluster0.jwwnlm1.mongodb.net/mongoAPI?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
