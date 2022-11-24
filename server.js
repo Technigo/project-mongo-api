@@ -13,8 +13,7 @@ import topMusicData from "./data/top-music.json";
 
 dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || `mongodb+srv://Paprika:${process.env.STRING_PW}@cluster0.6gvgrxz.mongodb.net/?retryWrites=true&w=majority`;
-
+const mongoUrl = process.env.MONGO_URL || `mongodb+srv://Paprika:${process.env.STRING_PW}@cluster0.6gvgrxz.mongodb.net/mongo-API?retryWrites=true&w=majority`;
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
