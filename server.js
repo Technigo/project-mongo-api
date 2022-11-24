@@ -42,7 +42,7 @@ const Anime = mongoose.model("Anime",
 
 if(process.env.RESET_DB){
   const resetDataBase = async () => {
-    /* await Anime.deleteMany(); */
+    await Anime.deleteMany();
     anime.forEach(singleAnime => {
       const newAnime = new Anime(singleAnime);
       newAnime.save()
