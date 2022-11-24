@@ -67,33 +67,16 @@ app.get("/", (req, res) => {
 // All songs 
 
 app.get("/songs", async(req,res) => {
- /*  try{
-    const allSongs = await Song.find({trackName: req.params.trackName}).limit(50)
-    if(allSongs){
-      res.status(200).json({
-        data: allSongs,
-        success: true, 
-      })
-    }else {
-      res.status(404).json({
-        error: ' Song not found, try again ',
-        success: false, 
-      })
-    }
-  } catch(err) {
-    res.status(400).json({ error: "invalied songname" })
-  } 
-  })*/
-  Song.find().then(songs => {
+  await Song.find().then(songs => {
     res.json(songs)
   })
 })
 
 
 // return a song name by ID 
-app.get("songs/id/:_id", async(req, res) => {
+app.get("songs/id/:id", async(req, res) => {
   try{
-    const songByID = await Song.findById(_id);
+    const songByID = await Song.findById(req.params.id);
     if(songByID) {
       res.status(200).json({
         data: songByID,
@@ -113,7 +96,7 @@ app.get("songs/id/:_id", async(req, res) => {
 // Return a specific genere 
 app.get("/songs/genre/:genre", async (req, res) => {
   try{
-    const singleGenre = await Song.find({ genre: req.params.genre });
+    const singleGenre = await Song.find({ genre: new RegExp(req.params.genre,"i")  });
     if(singleGenre){
       res.status(200).json({
       data: singleGenre,
@@ -134,7 +117,7 @@ app.get("/songs/genre/:genre", async (req, res) => {
 // Single song by name 
 app.get("/trackname/:trackname", async(req,res) => {
   try{
-    const songsTrackName = await Song.findOne({ trackName: req.params.trackname })
+    const songsTrackName = await Song.findOne({ trackName: new RegExp(req.params.trackname ,"i") })
     if(songsTrackName) {
       res.status(200).json({
         data: songsTrackName,
@@ -155,7 +138,7 @@ app.get("/trackname/:trackname", async(req,res) => {
 // all songs by a specific artist - only get a blank on ed sheeran , why ? 
 app.get("/artist/:artistName", async(req, res) => {
   try{
-    const artistSongs = await Song.find({ artistName: req.params.artistName })
+    const artistSongs = await Song.find({ artistName: new RegExp(req.params.artistName,"i")  })
     if(artistSongs){
       res.status(200).json({
         data: artistSongs,
@@ -168,7 +151,7 @@ app.get("/artist/:artistName", async(req, res) => {
       })
     }
   }catch(err) {
-    res.status(400).json({ error: "invalied BPM number" })
+    res.status(400).json({ error: "invalied Artistname" })
   }
 })
 
