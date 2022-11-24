@@ -63,11 +63,14 @@ app.get("/", (req, res) => {
     Hello: "Here you can see all my routes!",
     Routes: [
       { "/songs": "all the song data" },
-      { "/titles": "a list of all titles" },
+      { "/songs/id/:d": "a specific song, for instance use id 637f5d218aae5dd90801358b" },
+      { "/songs/?danceability=70" : "or instaed of 70 try another pase for instace 50"},
+      { "/songs/?genre=pop" : "or instead of pop try another genre, for instance trap music"},
       
     ],
   });
 });
+
 // app.get("/songs", async (req, res) => {
 //   const allTheSongs = await Song.find({}); //Song is the model variable
 //   res.status(200).json({
@@ -139,7 +142,6 @@ app.get("/songs/", async (req, res) => {
       }
     });
   }
-
 });
 
 // Start the server
