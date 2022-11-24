@@ -8,7 +8,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-
 const Song = mongoose.model("Song", {
   id: Number,
   trackName: String,
@@ -26,7 +25,7 @@ const Song = mongoose.model("Song", {
   popularity: Number
 })
 // Function that makes sure that the datebase does not update itself with the same entries 
-// every time the server is re-started. "Await" is used to deal with promises (alike .then). 
+// every time the server is re-started. "Await" is used to deal with promises (like .then). 
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
      // Starts by deleting any pre-existing Book objects to prevent duplicates
@@ -50,17 +49,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//Just a test to see all data
-app.get("/test", (req, res) => {
-  res.json({topMusicData: topMusicData})
-});
-
 // Lists the endpoints for all routers that is created in this file. 
 app.get("/endpoints", (req, res) => {
   res.send(listEndpoints(app))
 })
 
-// Start defining your routes here
+// ROUTES
 app.get("/", (req, res) => {
   res.send({
     Message: "Hello and welcome your Spotify database! Look for songs at these routes:",
@@ -69,15 +63,13 @@ app.get("/", (req, res) => {
         "/songs": "See all songs in database",
         "/songs/artist/*Name of artist*": "Show songs from a specific artist",
         "/songs/genre/*Name of genre": "Shows songs of a specific genre",
-       //"/songs?track=*Name of track*": "Show tracks based on trackname",
-        //"/songs?dancing=true": "Show songs great for dancing 💃",
-        //"/songs?happy=true": "Show happy songs ✨", 
-        //"/songs/search?artist=*Name of artist*": "Search for artist",
-        "/songs/song/:id": "Show a single song based on its id",
+        "/songs/happy": "Show happy songs ✨",
+        "/songs/dancing": "Show songs great for dancing 💃",
+        "/songs/happydancing": "Show happy songs great for dancing ⭐",
+        "/songs/id/*ID*": "Show a single song based on its id",
       },
     ]});
 });
-
 
 // Lists all songs  
 app.get("/songs", async(req,res) => {
@@ -85,8 +77,7 @@ app.get("/songs", async(req,res) => {
    Song.find().then(songs => {
      res.json(songs)
    })
- })
-
+})
 
 // Route to get songs by a specific artist
 app.get('/songs/artist/:artistName', async (req, res) => {
@@ -102,7 +93,7 @@ app.get('/songs/artist/:artistName', async (req, res) => {
   res.json(artist);
 });
 
-// Return a specific genere 
+// Route to a specific genere 
 app.get("/songs/genre/:genre", async (req, res) => {
   try{
     const singleGenre = await Song.find({ genre: req.params.genre });
@@ -123,10 +114,10 @@ app.get("/songs/genre/:genre", async (req, res) => {
   } 
 })
 
-// Finding a single song based on it's ID, example path: /songs/song/1
-app.get('/songs/song/:id', async (req, res) => {
+// Route to a single song based on it's ID
+app.get('/songs/id/:_id', async (req, res) => {
   try {
-    const singleSong = await Song.findOne({ id: req.params.id });
+    const singleSong = await Song.findOne({ _id: req.params._id });
 
     if (singleSong) {
       res.json(singleSong);
@@ -136,27 +127,32 @@ app.get('/songs/song/:id', async (req, res) => {
     }
   } catch (err) {
     // error when the id format is wrong
-    res.status(400).json({ error: "Invalid Song ID, double check id value" });
+    res.status(400).json({ error: "Invalid Song ID, double check value" });
   }
 });
 
-// Search artist, example path: /songs/search?artist=shawn (or shawn+mendes)
-app.get("/songs/search", (req, res) => {
-  const artist = req.query.artist;
-  const getArtist = topMusicData.filter((item) => item.artistName.toLowerCase().includes(artist.toLowerCase())) 
 
-  if (getArtist.length === 0) {
-    res.status(404).send({
-    message: "Could not find any songs by that artist name",
-    error: 404,
-    success: false
-  })
-  };
+// Route to get songs with a high valence value = happy songs!
+// $gte is MongoDB's comparison query operator for greater or equal to
+app.get('/songs/happy', async (req, res) => {
+  const happySongs = await Song.find({ valence: { $gte: 80 } });
 
-  res.status(200).json({
-    data: getArtist,
-    success:true })
-})
+  res.json(happySongs);
+});
+
+// Route to get songs with a high danceability value
+app.get('/songs/dancing', async (req, res) => {
+  const danceSongs = await Song.find({ danceability: { $gte: 80 } });
+
+  res.json(danceSongs);
+});
+
+// Route to get songs with a high danceability and valence value = happy dance songs!
+app.get('/songs/happydancing', async (req, res) => {
+  const happyDanceSongs = await Song.find({ danceability: { $gte: 75 }, valence: { $gte: 75 } });
+
+  res.json(happyDanceSongs);
+});
 
 // Start the server
 app.listen(port, () => {
