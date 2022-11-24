@@ -3,15 +3,11 @@ import cors from "cors";
 import mongoose from "mongoose"; //som react för frontend 
 import dotenv from "dotenv";
 
-
-
 //import bodyParser from 'body-parser' - Damines error-video?
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
- import goldenGlobesData from "./data/golden-globes.json";
+// import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
@@ -21,9 +17,6 @@ const mongoUrl = process.env.MONGO_URL || `mongodb+srv://spacecake:${process.env
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const Globe = mongoose.model("Globe", {
     year_film: Number,
     year_award: Number,
@@ -33,15 +26,6 @@ const Globe = mongoose.model("Globe", {
     film: String,
     win: Boolean
 })
-
-
-
- /* 
-    await User.deleteMany();
-    const testUser = new User({name: "Sarah", age: 33, deceased: false}) //object med properties (keys)
-    testUser.save(); */
-
-    // 
 
 if(process.env.RESET_DB) {
   console.log("Resetting database!")
@@ -76,8 +60,8 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
-app.get("/globes", async (req, res) => {
-  const globes = await Globe.find()
+app.get("/allglobes", async (req, res) => {
+  const globes = await Globe.find({})
   res.json(globes);
 });
 
@@ -94,6 +78,36 @@ app.get("/globes/:id", async (req, res) => {
  }
 });
 
+app.get("/globes/", async (req, res) => {
+  const { category, nominee, film } = req.query;
+  const response = {
+    success: true,
+    body: {} // syns två gånger på sidan.... 
+  }
+  /* const matchRegex = new RegExp (".*") */
+  const categoryQuery = category ? category : /.*/;
+  const nomineeQuery = nominee ? nominee : /.*/;
+  const filmQuery = film ? film : /.*/;
+
+  try {
+    response.body = await Globe.find({category: categoryQuery, nominee: nomineeQuery, 
+      film: filmQuery})
+      // .limit(2).sort({ggg: }).select({ggg: 5, hhh: })
+
+    res.status(200).json({
+      success: true,
+      body: response
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: { 
+        message: error
+      }
+    })
+  }
+});
+
 
 //Damiens video:
 /* app.get("/globes/films", async (req, res) => {
@@ -101,12 +115,9 @@ app.get("/globes/:id", async (req, res) => {
   res.json(globes);
 }); */
 
-
-
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
 
-//enviroment variables .env (gör en fil - och säger till git att ignorera denna fil, 
-//då kan man använda det på samma sätt som att skriva i terminalen)
+// /myWord/gm - regex to match myWord
+// /.*/gm - regex to match every character in a string 
