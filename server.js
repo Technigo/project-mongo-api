@@ -37,7 +37,8 @@ const Book = mongoose.model("Book", {
   text_reviews_count: Number
 });
 
-// clears the database and renders new user  
+// clears the database and renders new book
+// RESET_DB=true npm run dev for MongoCompass
 if(process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Book.deleteMany();
@@ -61,8 +62,50 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  const navigation = {
+    guide: "These are the routes for this book API!",
+    Endpoints: [
+      {
+        "/bookData": "Display all books",
+        "/bookData/authors/:authors": "Search for a author",
+        "/bookData/title/:title": "Search for a title", 
+        "/bookData/average_rating/": "Average rating of books - high to low",
+        "/bookData/num_pages/": "The book with most number of pages",
+      },
+    ],
+  };
+  res.send(navigation);
 });
+
+app.get('/bookData', (req, res) => {
+  res.status(200).json({
+    data: booksData,
+    success: true,
+  })
+  })
+
+ app.get('/bookData/average_rating', async (req, res) => {
+  const bookRating = booksData.sort((a, b) => b.average_rating - a.average_rating)
+    res.json(bookRating.slice(0, [-1])) 
+})
+
+app.get("/bookData/title/:title", async (req, res) => {
+  const bookTitle = await Book.findOne({ title: req.params.title });
+  if (bookTitle) { 
+    res.json(bookTitle)
+  } else {
+    res.status(404).json({ error: 'There are no titles by that name here' })
+  }
+})
+
+app.get('/bookData/authors/:authors', async (req, res) => {
+  const authors = await Book.findOne({ authors: req.params.authors })
+  if (authors) { 
+    res.json(authors)
+  } else {
+    res.status(404).json({ error: 'We don´t have any books by that author - did you spell correctly?' })
+  }
+})
 
 // Start the server
 app.listen(port, () => {
