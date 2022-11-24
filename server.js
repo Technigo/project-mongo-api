@@ -27,6 +27,21 @@ app.get("/", (req, res) => {
   res.send("Hello !");
 });
 
+app.get("/books", async (req, res) => {
+  const { title, authors } = req.query;
+
+  let query = {};
+  if (authors) {
+    query.authors = { $regex: new RegExp(authors, "i") };
+  }
+  if (title) {
+    query.title = { $regex: new RegExp(title, "i") };
+  }
+
+  const books = await Book.find(query);
+  res.status(200).json(books);
+});
+
 app.get("/books/:id", async (req, res) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
