@@ -79,43 +79,14 @@ app.get("/style.css", (req, res) => {
 });
 // ROUTE 1: Get a list of all songs
 app.get("/songs", async (req, res) => {
-  const allTheSongs = await Song.find({}).limit(10).sort({danceability: -1})
+  const allTheSongs = await Song.find({})
   res.status(200).json({
     success: true,
     body: allTheSongs
   });
 });
 
-
-//ROUTE 2: Filter on a specific Artist
-app.get("/songs/artist/:artistName", async (req, res) => {
-  try {
-    const Artist = await Song.find({artistName: req.params.artistName})
-    if (Artist) {
-      res.status(200).json({
-        success: true,
-        body: Artist
-      });
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "Could not find that Artist"
-        }
-      });
-    }
-  } catch(error) {
-    res.status(400).json({
-      success: false,
-      body: {
-        message: "Invalid id"
-      }
-    });
-  }
-});
-
-
-// ROUTE 3: Filter on a specific genre and get the top 5 in popularity
+// ROUTE 2: Filter on a specific genre and get the top 5 in popularity
 app.get("/songs/:genre", async (req, res) => {
   try {
     const Genre = await Song.find({genre: req.params.genre}).limit(5).sort({popularity: -1});
@@ -142,7 +113,7 @@ app.get("/songs/:genre", async (req, res) => {
   }
 });
 
-// ROUTE 4: Filter on a specific song with ID-number
+// ROUTE 3: Filter on a specific song with ID-number
 app.get("/songs/id/:id", async (req, res) => {
   try {
     const singleSong = await Song.findById(req.params.id);
@@ -171,7 +142,7 @@ app.get("/songs/id/:id", async (req, res) => {
 
 
 
-//ROUTE 5: Get names of the tracks with a selected bpm
+//ROUTE 4: Get names of the tracks with a selected bpm
 app.get("/songs/bpm/:bpm", async (req, res) => {
   try {
     const Bpm = await Song.find({bpm: req.params.bpm}).select({trackName: 1})
@@ -200,35 +171,35 @@ app.get("/songs/bpm/:bpm", async (req, res) => {
 
   // ROUTE FROM LIVE SESSION, NOT USING: 
 
-app.get("/songs/", async (req, res) => {
-  const {genre, danceability} = req.params;
-  const response = {
-    sucess: true, 
-    body: {}
-  }
+// app.get("/songs/", async (req, res) => {
+//   const {genre, danceability} = req.params;
+//   const response = {
+//     sucess: true, 
+//     body: {}
+//   }
 
-  const matchAllRegex = new RegExp(".*");
-  const genreQuery = genre ? genre : matchAllRegex;
-  const danceabilityQuery = danceability ? danceability : /.*/;
+//   const matchAllRegex = new RegExp(".*");
+//   const genreQuery = genre ? genre : matchAllRegex;
+//   const danceabilityQuery = danceability ? danceability : /.*/;
   
-  try {
-    response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery }).limit(3).sort({energy: -1}).select({trackName: 1, artistName: 1})
-    // to explore more: .exec()
+//   try {
+//     response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery }).limit(3).sort({energy: -1}).select({trackName: 1, artistName: 1})
+//     // to explore more: .exec()
 
-    res.status(200).json({
-    success: true,
-    body: allMatchingSongs
-      })
+//     res.status(200).json({
+//     success: true,
+//     body: allMatchingSongs
+//       })
 
-    } catch (error) {
-      res.status(400).json({
-        success: false,
-        body: {
-          message: "Invalid id"
-        }
-      })
-    }
-})
+//     } catch (error) {
+//       res.status(400).json({
+//         success: false,
+//         body: {
+//           message: "Invalid id"
+//         }
+//       })
+//     }
+// })
 
 // Start the server
 app.listen(port, () => {
