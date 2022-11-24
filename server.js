@@ -24,7 +24,45 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hello !");
+});
+
+app.get("/books/:id", async (req, res) => {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      // return stops the execution of the code
+      return res.status(400).json({
+        success: false,
+        body: {
+          message: "invalid id",
+        },
+      });
+    }
+
+    const singleBook = await Book.findById(req.params.id);
+
+    if (singleBook) {
+      return res.status(200).json({
+        success: true,
+        body: singleBook,
+      });
+    }
+
+    return res.status(404).json({
+      sucess: false,
+      body: {
+        message: "Could not find single book",
+      },
+    });
+  } catch (error) {
+    console.warn(error);
+    return res.status(500).json({
+      success: false,
+      body: {
+        message: "Internal server error",
+      },
+    });
+  }
 });
 
 // Start the server
