@@ -64,23 +64,121 @@ app.get("/", (req, res) => {
   res.status(200).json({
     resMessage: "Top music data",
     endPoints: "/songs -- /artist/:artistName -- /trackname/:trackname",
-    lists: "/lists?artistlist=true -- /lists?songlist=true"
+    lists: "/lists?artistlist=true -- /lists?songlist=true",
+    query: "/songs?genre & /songs?danceability"
   });
 });
 
 // This will return an array of all songs and handles status 200
-app.get("/songs", (req, res) => {
-  const songs = topMusicData;
+/* app.get("/songs", async (req, res) => {
+  const songs = await Song.find({});
   res.status(200).json({
     success: true,
     message: "OK",
-    response: {
+    body: {
       topMusicData: songs
     }
   });
+}); */
+
+// FindByID is the quiquest search
+// This returns a single song by ID
+app.get("/songs/id/:id", async (req, res) => {
+  try {
+    const songById = await Song.findById(req.params.id);
+    if (songById) {
+      res.status(200).json({
+        success: true,
+        message: "OK",
+        body: {
+          topMusicData: songById
+        }
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Song Not found",
+        body: {
+          topMusicData: {}
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "Invalid id",
+      body: {
+        topMusicData: {}
+      }
+    });
+  }
 });
 
-// This is an experiment.
+// app.get("/songs/", async (req, res) => {
+
+//   const { genre, danceability } = req.query;
+//   const response = {
+//     success: true,
+//     body: {}
+//   }
+//   const matchAllRegex = new RegExp(".*");
+//   const genreQuery = genre ? genre : matchAllRegex;
+//   const danceabilityQuery = danceability ? danceability : /.*/;
+
+//   try {
+//     // if ( req.params.genre && req.params.danceability) {
+//     response.body = await Song.find({ genre: genreQuery, danceability: danceabilityQuery }).limit(2).sort({ energy: 1 }).select({ trackName: 1, artistName: 1 })
+//     //.exec() => to explore if you're curious enough :P
+//     // } else if (req.params.genre && !req.params.danceability) {
+//     //   response.body = await Song.find({genre: req.params.genre});
+//     // } else if (!req.params.genre && req.params.danceability) {
+//     //   response.body = await Song.find({danceability: req.params.danceability});
+//     // }
+//     res.status(200).json({
+//       success: true,
+//       body: response
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       success: false,
+//       body: {
+//         message: error
+//       }
+//     });
+//   }
+
+// });
+
+// app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
+app.get("/songsquery/", async (req, res) => {
+  const { genre, danceability } = req.query;
+  const response = {
+    succes: true,
+    body: {}
+  }
+  const genreQuery = genre ? genre : /.*/;
+  // const danceabilityQuery = danceability ? danceability : /.*/;
+  try {
+    response.body = await Song.find({ genre: genreQuery/* , danceability: danceabilityQuery */ }).limit(3)/* .sort({ energy: 1 }).select({ trackName: 1, artistName: 1 }) */
+    res.status(200).json({
+      success: true,
+      message: "OK",
+      body: {
+        message: response
+      }
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "error",
+      body: {
+        message: error
+      }
+    });
+  }
+});
+
+// This is an experiment for learning porpouses.
 // It returns a list of all songs or artists based on queries
 app.get("/lists", (req, res) => {
   const { songlist, artistlist } = req.query;
@@ -163,3 +261,9 @@ app.get("/artist/:artistName", (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+// NOTES
+
+// REGEX -- https://regex101.com/
+// /.*/gm - regex to match every character in a string.
+// /yourWordOfChoice/gm - regex to match your yourWordOfChoice
