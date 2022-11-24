@@ -59,12 +59,12 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  response.status(200).json({
+  res.status(200).json({
     Hello: "Here you can see all my routes!",
     Routes: [
       { "/songs": "all the song data" },
-      { "/songs/id/:d": "a specific song, for instance use id 637f5d218aae5dd90801358b" },
-      { "/songs/?danceability=70" : "or instaed of 70 try another pase for instace 50"},
+      { "/songs/id/:id": "a specific song, for instance use id 637f5d218aae5dd90801358b" },
+      { "/songs/?danceability=70" : "or instead of 70 try another pase for instace 50"},
       { "/songs/?genre=pop" : "or instead of pop try another genre, for instance trap music"},
       
     ],
@@ -78,42 +78,35 @@ app.get("/", (req, res) => {
 //     body: allTheSongs
 //   });
 // });
-app.get("/songs/id/:id", async (req, res) => {
-  const allTheSongs = await Song.find({}); //Song is the model variable
-  res.status(200).json({
-    success: true,
-    body: allTheSongs
-  });
-});
 
 
 // get a single song by using findById
-app.get("/songs/id/:id", async (req, res) => {
-  try {
-    const singleSong = await Song.findById(req.params.id);
-    if (singleSong) {
-      res.status(200).json({
-        success: true,
-        body: singleSong
-      });
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "Could not find the song"
-        }
-      });
-    }
-  } catch(error) {
-    res.status(400).json({
-      success: false,
-      body: {
-        message: "Invalid id"
-      }
-    });
-  }
+// app.get("/songs/id/:id", async (req, res) => {
+//   try {
+//     const singleSong = await Song.findById(req.params.id);
+//     if (singleSong) {
+//       res.status(200).json({
+//         success: true,
+//         body: singleSong
+//       });
+//     } else {
+//       res.status(404).json({
+//         success: false,
+//         body: {
+//           message: "Could not find the song"
+//         }
+//       });
+//     }
+//   } catch(error) {
+//     res.status(400).json({
+//       success: false,
+//       body: {
+//         message: "Invalid id"
+//       }
+//     });
+//   }
   
-});
+// });
 
 
 app.get("/songs/", async (req, res) => {
@@ -130,19 +123,20 @@ app.get("/songs/", async (req, res) => {
   try {
       response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery}).limit(2).sort({energy: 1}).select({trackName: 1, artistName: 1})
    
-    res.status(200).json({
-      success: true,
-      body: response
-    });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      body: {
-        message: error
-      }
-    });
-  }
-});
+      res.status(200).json({
+        success: true,
+        body: response
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        body: {
+          message: error
+        }
+      });
+    }
+  
+  });
 
 // Start the server
 app.listen(port, () => {
