@@ -73,7 +73,7 @@ app.get("/", (req, res) => {
 
 // Display all animes
 app.get("/animes", async (req, res) => {
-  const animes = await Anime.find()
+  const animes = await Anime.find({})
   res.json(animes)
 })
 
