@@ -14,6 +14,9 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
+// This enables to get a list of all routes, here used in main page
+const listEndpoints = require('express-list-endpoints');
+
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
@@ -56,16 +59,17 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello Technigo!');
+  res.json(listEndpoints(app));
 });
 
-// app.get('/songs', async (req, res) => {
-//   const allTheSongs = await Song.find({});
-//   res.status(200).json({
-//     success: true,
-//     body: allTheSongs
-//   });
-// });
+app.get('/songs', async (req, res) => {
+  const allTheSongs = await Song.find({});
+  res.status(200).json({
+    success: true,
+    body: allTheSongs
+  });
+});
+
 app.get('/songs/id/:id', async (req, res) => {
   try {
     const singleSong = await Song.findById(req.params.id);
@@ -95,21 +99,25 @@ app.get('/songs/id/:id', async (req, res) => {
 });
 
 // app.get('/songs/genre/:genre/danceability/:danceability', async (req, res) => {
+/*
 app.get('/songs/', async (req, res) => {
-  const matchAllRegex = new RegExp('.*');
   const { genre, danceability } = req.query;
+  const response = {
+    success: true,
+    body: {}
+  };
+  const matchAllRegex = new RegExp('.*');
   const genreQuery = genre ? genre : matchAllRegex;
   const danceabilityQuery = danceability ? danceability : matchAllRegex;
   try {
-    let allMatchingSongs = {};
     // if (req.params.genre && req.params.danceability) {
-    allMatchingSongs = await Song.find({
+    response.body = await Song.find({
       genre: genreQuery,
       danceability: danceabilityQuery
     })
-      .limit(2)
+      .limit(5)
       .sort({ energy: 1 })
-      .select({ artistName: true, trackName: false });
+      .select({ trackName: 1, artistName: 1 });
     // } else if (req.params.genre && !req.params.danceability) {
     //   allMatchingSongs = await Song.find({
     //     genre: req.params.genre
@@ -121,7 +129,7 @@ app.get('/songs/', async (req, res) => {
     // }
     res.status(200).json({
       success: true,
-      body: allMatchingSongs
+      body: response.body
     });
   } catch (error) {
     res.status(400).json({
@@ -132,6 +140,7 @@ app.get('/songs/', async (req, res) => {
     });
   }
 });
+*/
 
 // Start the server
 app.listen(port, () => {
