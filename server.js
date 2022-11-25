@@ -67,26 +67,26 @@ app.get('/books/id/:id', async (req, res) => {
     const book = await Book.findById(req.params.id)
     if (book) {
       res.status(200).json ({
-        succes: true,
+        success: true,
         body: book
-      })
+      });
     } else {
-      res.status(200).json ({
-        succes: false,
+      res.status(404).json ({
+        success: false,
         body: {
           message: "No book with that ID was found"
         }
-      })
+      });
     }
   } catch (error) {
     res.status(400).json ({
-      succes: false,
+      success: false,
       body: {
         message: "Invalid Id"
       }
-    })
+    });
   }
-})
+});
 
 app.get('/books/title/:title', (req, res) => {
   Book.findOne({ title: req.params.title }).then(book => {
