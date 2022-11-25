@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-// import theOfficeData from "./data/the_office_series.json";
+import theOfficeData from "./data/the_office_series.json";
 
 // This is the database collection: 
-// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-const mongoUrl = "mongodb+srv://IceCreamCloud:s6RBChEZzGAKCO2B@cluster0.ptl5tah.mongodb.net/project-mongo-api?retryWrites=true&w=majority"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+
 // Set up code according to documentation:
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
