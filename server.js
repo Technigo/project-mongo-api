@@ -20,19 +20,17 @@ function connectoToDB() {
       if (process.env.RESET_DB) {
         const seedDatabase = async () => {
           await Cup.deleteMany({})
-      
+
           worldCupData.forEach((data) => {
             new Cup(data).save()
               .then(() => console.log(`Entry created: ${JSON.stringify(data)}`))
           })
         }
-      
         seedDatabase()
       }
     });
-
   mongoose.Promise = Promise;
-}
+};
 
 connectoToDB();
 
@@ -66,28 +64,64 @@ app.get("/", (req, res) => {
   const WorldCupApi = {
     Welcome: 'Hi! This a World Cup Api (1930 - 2018)',
     Routes: [{
-      "/cups": 'Get all world cup.'
+      "/cups": 'Get all world cup.',
+      "/cups/id/'number'": 'Get World Champion with Matching Database ID.',
+      "/cups/winner/argentina": 'Get the years that Argentina was World Champion.',
+      "/cups/winner/'country'": 'Get the result of a World Champion',
+      "/endpoints": "Get API endpoints."
     }]
   }
-
   res.send(WorldCupApi)
 });
 
 app.get("/cups", async (req, res) => {
   let cups = await Cup.find(req.query)
 
-  if(req.query.year) {
+  if (req.query.year) {
     const yearCup = await Cup.find().gt('year', req.query.year)
     cups = yearCup
+  } else {
+    res.status(404).json({ error: 'Not found' });
   }
-
-  if(req.query.winner) {
-    const winnerCup = await Cup.find().gt('winner', req.query.winner)
-    cups = winnerCup
-  }
-
   res.json(cups)
+});
 
+app.get("/cups/id/:_id", async (req, res) => {
+  try {
+    const cupId = await Cup.findById(req.params._id)
+    if (cupId) {
+      res.json(cupId)
+    } else {
+      res.status(404).json({ error: "Id not found" })
+    }
+  } catch (error) {
+    res.status(400).json({ error: "Invalid Id" })
+  }
+});
+
+app.get("/cups/winner/argentina", async (req, res) => {
+  Cup.find({ winner: 'Argentina' }, (error, data) => {
+    if (error) {
+      res.status(404).json({ error: 'Not found' });
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+app.get("/cups/winner/:winner", async (req, res) => {
+  const { winner } = req.params
+
+  try {
+    const winnerCup = await Cup.find({ winner: { $regex: new RegExp("^" + winner, "i") } })
+    if (winnerCup) {
+      res.json(winnerCup)
+    } else {
+      res.status(404).json({ error: 'Winner not found' })
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Error' })
+  }
 });
 
 // Start the server
