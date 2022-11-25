@@ -4,11 +4,11 @@
 
 GET
 
-HOME:                 /
-GAMESLIST:            /games
-GAME BY ID:           /games/:id
-GAMES BY DEVELOPER:   /games?developer=<SEARCH FOR A DEVELOPER>
-GAMES BY PUBLISHER:   /games?publisher=<SEARCH FOR A PUBLISHER>
+#### HOME:                 /
+#### GAMESLIST:            /games
+#### GAME BY ID:           /games/:id
+#### GAMES BY DEVELOPER:   /games?developer=<SEARCH FOR A DEVELOPER>
+#### GAMES BY PUBLISHER:   /games?publisher=<SEARCH FOR A PUBLISHER>
 
 ### View it live
 
