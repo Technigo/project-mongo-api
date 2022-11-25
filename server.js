@@ -72,9 +72,7 @@ app.get("/songs/", async (req, res) => {
   try {
     response.body = await Song.find({bpm: bpmQuery, genre: genreQuery}).exec();
     res.status(200).json(response);
-    console.log(response.body)
   } catch(error) {
-    console.log(response.body)
     res.status(400).json({
       success: false,
       body: {
@@ -115,3 +113,42 @@ app.get("/songs/:id", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+
+// https://regex101.com
+// blablbalbbalb/gm – regex to match blablbalbbalb
+// /.*/gm – regex to match every character in a string
+  // const matchAllRegEx = newRegExp (".*");
+
+    // funktion att chain:a på om man vill begränsa sökresultaten: 
+    // .limit(2).sort({}).select({trackName: 1, artistName: 1});
+    // select bestämmer strukturen på responsen till frontend 
+    // för att inte hämta/skicka mer info än nödvändigt
+    // .exec() => to explore if you're curious enough
+
+    // app.get("/songs", async (req, res) => {
+    //   const {bpm, genre} = req.query;
+    //   let queries = {};
+    
+    //   try {
+    //     if (bpm) {
+    //       queries.bpm = bpm;
+    //     };
+    //     if (genre) {
+    //       queries.genre = genre;
+    //     };
+    
+    //     const songs = await Song.find(queries);
+    //     res.status(200).json({
+    //       success: true,
+    //       body: songs
+    //     });
+    //   } catch(error) {
+    //     res.status(400).json({
+    //       success: false,
+    //       body: {
+    //         message: "No songs found"
+    //       }
+    //     });
+    //   }
+    // });
