@@ -1,13 +1,16 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+First project to store information in a database using MongoDB. In this project I have stored and retrieved data from the database and used that data to produce a RESTful API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+"Routes created:
+"/songs": "Get the whole array of songs", one endpoint to return a **collection** of results (array of elements).
+"/songs/id/:id": "Filter by id", one endpoint to return a **single** result (single element).
+"/songs?artist=:artist&danceability=:danceability&genre=:genre": "Filter by artist, danceability or genre", queary parameters to filter the data.
+
+Mongoose models to model data and use these models to fetch data from the database.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-ibcmmeohvq-lz.a.run.app/
