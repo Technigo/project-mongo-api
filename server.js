@@ -6,59 +6,41 @@ import mongoose from "mongoose";
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
+import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
-import topMusicData from "./data/top-music.json";
+// import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb+srv://julia:C7Jp8a6VgDxSMrQo@cluster0.jwwnlm1.mongodb.net/mongoAPI?retryWrites=true&w=majority";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
+const port = process.env.PORT || 8080;
+const app = express();
 
-const User = mongoose.model("User", {
-  name: String,
-  age: Number,
-  deceased: Boolean
-});
-
-const Song = mongoose.model("Song", {
-  id: Number,
-  trackName: String,
-  artistName: String,
-  genre: String,
-  bpm: Number,
-  energy: Number,
-  danceability: Number,
-  loudness: Number,
-  liveness: Number,
-  valence: Number,
-  length: Number,
-  acousticness: Number,
-  speechiness: Number,
-  popularity: Number
+const GoldenGlobes = mongoose.model("GoldenGlobes", {
+  year_film: Number, 
+  year_award: Number, 
+  ceremony: Number, 
+  category: String, 
+  nominee: String,
+  film: String, 
+  win: Boolean
 });
 
 
 if(process.env.RESET_DB) {
   const resetDataBase = async () => {
-    await Song.deleteMany();
-    topMusicData.forEach(singleSong => {
-      const newSong = new Song(singleSong);
-      newSong.save();
+    await GoldenGlobes.deleteMany();
+    goldenGlobesData.forEach(item => {
+      const newItem = new GoldenGlobes(item);
+      newItem.save();
     })
-    // await User.deleteMany();
-    // const testUser = new User({name: "Daniel", age: 28, deceased: false});
-    // testUser.save();
   }
   resetDataBase();
 }
-
-
-const port = process.env.PORT || 8080;
-const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -66,29 +48,38 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  const endpoints = {
+    Welcome: "Hi! This is an open API about Golden Globes",
+    Routes: [
+      {
+        "/goldenglobes": "Get an array of all Golden Globes objects in the array",
+        "/goldenglobes/awardyear/:year_award": "Gives back an array with objects based on the year that is typed",
+        "/goldenglobes/nominees/:nominee": "Gives back an array with objects based on the name of the nominee",
+        "/goldenglobes/winners/:win": "Gives back an array of all the winners or the ones who did not win",
+      },
+    ],
+  }
+  res.send(endpoints)
 });
-// app.get("/songs", async (req, res) => {
-//   const allTheSongs = await Song.find({});
-//   res.status(200).json({
-//     success: true,
-//     body: allTheSongs
-//   });
-// });
 
-app.get("/songs/id/:id", async (req, res) => {
+app.get("/goldenglobes", async (req, res) => {
+  const allGoldenGlobes = await GoldenGlobes.find()
+  res.json(allGoldenGlobes)
+})
+
+app.get("/goldenglobes/awardyear/:year_award", async (req, res) => {
   try {
-    const singleSong = await Song.findById(req.params.id);
-    if (singleSong) {
+    const yearAward = await GoldenGlobes.find({year_award: req.params.year_award});
+    if (yearAward) {
       res.status(200).json({
         success: true,
-        body: singleSong
+        body: yearAward
       });
     } else {
       res.status(404).json({
         success: false,
         body: {
-          message: "Could not find the song"
+          message: "No nominee found by that year"
         }
       });
     }
@@ -96,47 +87,45 @@ app.get("/songs/id/:id", async (req, res) => {
     res.status(400).json({
       success: false,
       body: {
-        message: "Invalid id"
+        message: "Invalid input"
       }
     });
   }
   
 });
-// app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
-app.get("/songs/", async (req, res) => {
-
-  const {genre, danceability} = req.query;
-  const response = {
-    success: true,
-    body: {}
-  }
-  const matchAllRegex = new RegExp(".*");
-  const genreQuery = genre ? genre : matchAllRegex;
-  const danceabilityQuery = danceability ? danceability : /.*/;
-
+app.get("/goldenglobes/nominees/:nominee", async (req, res) => {
+  const { nominee } = req.params
   try {
-    // if ( req.params.genre && req.params.danceability) {
-      response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery}).limit(2).sort({energy: 1}).select({trackName: 1, artistName: 1})
-      //.exec() => to explore if you're curious enough :P
-    // } else if (req.params.genre && !req.params.danceability) {
-    //   response.body = await Song.find({genre: req.params.genre});
-    // } else if (!req.params.genre && req.params.danceability) {
-    //   response.body = await Song.find({danceability: req.params.danceability});
-    // }
-    res.status(200).json({
-      success: true,
-      body: response
-    });
-  } catch (error) {
+    const nominees = await GoldenGlobes.find({nominee: nominee});
+    if (nominees) {
+      res.status(200).json({
+        success: true,
+        body: nominees
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "No nominees found"
+        }
+      });
+    }
+  } catch(error) {
     res.status(400).json({
       success: false,
       body: {
-        message: error
+        message: "Invalid nominee name"
       }
     });
   }
-
 });
+
+app.get("/goldenglobes/winners/:win", async (req, res) => {
+  const winners = await GoldenGlobes.find({win: req.params.win})
+  res.send(winners)
+})
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
