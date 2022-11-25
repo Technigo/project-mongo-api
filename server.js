@@ -2,12 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
+import listEndpoints from "express-list-endpoints";
+
 import topMusicData from "./data/top-music.json";
 
 dotenv.config()
@@ -38,7 +34,6 @@ const Song = mongoose.model("Song", {
   popularity: Number
 });
 
-
 // Deleting DB is in this case for educational porpouses. 
 // And then populating it with Songs
 if (process.env.RESET_DB) {
@@ -62,15 +57,13 @@ app.use(express.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.status(200).json({
-    resMessage: "Top music data",
-    endPoints: "/songs -- /artist/:artistName -- /trackname/:trackname",
-    lists: "/lists?artistlist=true -- /lists?songlist=true",
-    query: "/songs?genre & /songs?danceability"
+    Message: "Top-Music data",
+    data: listEndpoints(app)
   });
 });
 
 // This will return an array of all songs and handles status 200
-/* app.get("/songs", async (req, res) => {
+app.get("/songs", async (req, res) => {
   const songs = await Song.find({});
   res.status(200).json({
     success: true,
@@ -79,7 +72,7 @@ app.get("/", (req, res) => {
       topMusicData: songs
     }
   });
-}); */
+});
 
 // FindByID is the quiquest search
 // This returns a single song by ID
@@ -114,52 +107,55 @@ app.get("/songs/id/:id", async (req, res) => {
   }
 });
 
-// app.get("/songs/", async (req, res) => {
+// This will return a single song sorted by trackname.
+// Handles 404 and 400
+app.get("/songs/trackname/:trackname", async (req, res) => {
+  try {
+    const singleTrack = await Song.find({ trackName: req.params.trackname });
+    if (singleTrack) {
+      res.status(200).json({
+        succes: true,
+        message: "OK",
+        body: {
+          singleTrack: singleTrack
+        }
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Track not found",
+        body: {
+          singleTrack: {}
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "Invalid trackname",
+      body: {
+        singleTrack: {}
+      }
+    });
+  }
+});
 
-//   const { genre, danceability } = req.query;
-//   const response = {
-//     success: true,
-//     body: {}
-//   }
-//   const matchAllRegex = new RegExp(".*");
-//   const genreQuery = genre ? genre : matchAllRegex;
-//   const danceabilityQuery = danceability ? danceability : /.*/;
+//This will create daceablity and genre query.
 
-//   try {
-//     // if ( req.params.genre && req.params.danceability) {
-//     response.body = await Song.find({ genre: genreQuery, danceability: danceabilityQuery }).limit(2).sort({ energy: 1 }).select({ trackName: 1, artistName: 1 })
-//     //.exec() => to explore if you're curious enough :P
-//     // } else if (req.params.genre && !req.params.danceability) {
-//     //   response.body = await Song.find({genre: req.params.genre});
-//     // } else if (!req.params.genre && req.params.danceability) {
-//     //   response.body = await Song.find({danceability: req.params.danceability});
-//     // }
-//     res.status(200).json({
-//       success: true,
-//       body: response
-//     });
-//   } catch (error) {
-//     res.status(400).json({
-//       success: false,
-//       body: {
-//         message: error
-//       }
-//     });
-//   }
-
-// });
-
-// app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
 app.get("/songsquery/", async (req, res) => {
-  const { genre, danceability } = req.query;
+  const { danceability, genre, } = req.query;
   const response = {
     succes: true,
     body: {}
   }
-  const genreQuery = genre ? genre : /.*/;
-  // const danceabilityQuery = danceability ? danceability : /.*/;
+
+  const matchAllRegex = new RegExp(".*");
+  const matchAllNumbersGreaterThanZero = { $gt: 0, $lt: 100 };
+  const genreQuery = genre ? genre : matchAllRegex;
+  const danceabilityQuery = danceability ? danceability : matchAllNumbersGreaterThanZero;
+
   try {
-    response.body = await Song.find({ genre: genreQuery/* , danceability: danceabilityQuery */ }).limit(3)/* .sort({ energy: 1 }).select({ trackName: 1, artistName: 1 }) */
+    response.body = await Song.find({ danceability: danceabilityQuery, genre: genreQuery }).limit(3)/* .sort({ energy: 1 }).select({ trackName: 1, artistName: 1 }) */
     res.status(200).json({
       success: true,
       message: "OK",
@@ -179,10 +175,13 @@ app.get("/songsquery/", async (req, res) => {
 });
 
 // This is an experiment for learning porpouses.
-// It returns a list of all songs or artists based on queries
+// It returns a list of all songs or artists based on queries.
+// Right now is working cause data is from json. 
+// But with this error: Error: Cannot set headers after they are sent to the client
+// I'm trying to do the same with the model. Not working. (look at bottom)
+
 app.get("/lists", (req, res) => {
   const { songlist, artistlist } = req.query;
-
   if (songlist) {
     const songlist = topMusicData.map((song) => song.trackName)
     res.status(200).json({
@@ -206,54 +205,37 @@ app.get("/lists", (req, res) => {
   res.status(200).json({
     success: true,
     message: "OK",
-    quieries: "/lists?artistlist=true -- /lists?songlist=true"
   });
 })
 
-
-// This will return a single song sorted by trackname.
-// Handles 404
-app.get("/trackname/:trackname", (req, res) => {
-  const singleTrack = topMusicData.find((track) => {
-    return track.trackName.toLowerCase() === req.params.trackname.toLowerCase();
-  });
-  if (singleTrack) {
-    res.status(200).json({
-      succes: true,
-      message: "OK",
-      response: {
-        singleTrack: singleTrack
-      }
-    });
-  } else {
-    res.status(404).json({
+// This will return all songs from the same artist.
+// Handles 404 and 400
+app.get("/songs/artistname/:artistname", async (req, res) => {
+  try {
+    const singleArtist = await Song.find({ artistName: req.params.artistname })
+    if (singleArtist) {
+      res.status(200).json({
+        success: true,
+        message: "OK",
+        response: {
+          singleArtist: singleArtist
+        }
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Artist not found",
+        response: {}
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
       success: false,
-      message: "Track not found",
-      response: {}
-    });
-  }
-});
-
-// This will return a single artist with an array of all songs. 
-// Handles 404 if name is wrong
-app.get("/artist/:artistName", (req, res) => {
-  const singleArtist = topMusicData.filter((artist) => {
-    return artist.artistName.toLowerCase() === req.params.artistName.toLowerCase();
-  });
-  if (singleArtist) {
-    res.status(200).json({
-      success: true,
-      message: "OK",
-      response: {
-        singleArtist: singleArtist
+      message: "Invalid artist",
+      body: {
+        singleArtist: {}
       }
-    });
-  } else {
-    res.status(404).json({
-      success: false,
-      message: "Artist not found",
-      response: {}
-    });
+    })
   }
 });
 
@@ -267,3 +249,45 @@ app.listen(port, () => {
 // REGEX -- https://regex101.com/
 // /.*/gm - regex to match every character in a string.
 // /yourWordOfChoice/gm - regex to match your yourWordOfChoice
+
+// Trying to make this work.
+
+// app.get("/lists/", async (req, res) => {
+//   const { songlist, artistlist } = req.query;
+//   try {
+//     const { songListData, artistListData } = await Song.find({})
+//     const songListMap = songListData.forEach((song) => song.trackName)
+//     const artistListMap = artistListData.forEach((artist) => artist.artistName)
+
+//     if (songlist) {
+//       res.status(200).json({
+//         success: true,
+//         message: "OK",
+//         response: {
+//           songList: songListMap,
+//         }
+//       });
+//     }
+//     if (artistlist) {
+//       res.status(200).json({
+//         success: true,
+//         message: "OK",
+//         response: {
+//           songList: artistListMap,
+//         }
+//       });
+//     }
+//     res.status(200).json({
+//       success: true,
+//       message: "OK",
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       success: false,
+//       message: "Invalid listname",
+//       body: {
+//         topMusicData: {}
+//       }
+//     });
+//   }
+// });
