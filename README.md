@@ -1,13 +1,27 @@
-# Project Mongo API
+# Project Mongo API [View Live &#10555;](https://project-mongo-api-ircjrh2jfq-lz.a.run.app/)
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+In this project I have created an API with endpoints using mongoose to model and store and fetch data in MongoDB.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I created the API by using a dataset found in kaggle.com, (converted from csv to json through csvjson.com).
+I have also added a simple fontend starting page displays available routes.
+
+If I had more time I would create more alterative endpoints and queries.
+
+# TECH used:
+MongoDB
+mongoose
+Postman
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-ircjrh2jfq-lz.a.run.app/
+
+ENDPOINTS:
+"/": "StartPage",
+"/products": "Display all products",
+"/products/name": "Search for a product by name",
+"/products/lowestprice": "Display the cheapest products first",
+"/products/designer/:designer": "Display all products by designer"
+    
