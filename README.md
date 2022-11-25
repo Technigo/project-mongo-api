@@ -9,7 +9,7 @@ I have also added a simple frontend starting page displays available routes.
 
 If I had more time I would create more alterative endpoints and queries.
 
-# TECH used:
+## TECH used:
 - MongoDB
 - mongoose
 - Postman
