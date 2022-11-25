@@ -21,7 +21,7 @@ const Avocado = mongoose.model("Avocado", {
   region: String
 });
 
-if(process.env.RESET_DB) {
+if(true) {
   const resetDataBase = async () => {
     await Avocado.deleteMany();
     avocadoSalesData.forEach(singleAvocado => {
