@@ -63,21 +63,40 @@ app.get("/", (req, res) => {
   res.send([
     {"/": "Anime Playground"},
     {"/animes": "Display all animes"},
-    {"/animes/id/:id": "Display one anime by id number comes from dataset"},
+    {"/animes?status={status}": "Display all animes that has the same status"},
+    {"/animes/id/:id": "Display one anime by id number comes from JSON data"},
+    {"animes/:id": "Display one anime by id number comes from mongoDB"},
     {"/animes/japanesetitle/:japanese": "One anime title displayed for Japan"},
     {"/animes/title/:english": "One anime title displayed for other countries than Japan"},
-    {"/animes/highscore": "Sorting anime by popularity"},
+    {"/highscore": "Sorting anime by score"},
     {"/animes/type/:type": "Find anime with specific type"},
-    {"/animes/status?query={status}": "Find anime with specific status"},
     {"/animes/studios/:studio": "Find anime with specific studio producer"},
     {"/animes/studios/:studio?premiered={premiered}": "Find anime with specific studio producer and then can filter more depending on when it is premiered"}
   ]);
 });
 
 // Display all animes but only return some data such as the title, japanese title, synopsis, score, type, studio, and status. Also it is sorted from the highest score
+// Can also filter more by adding query for status
+// example to show all animes /animes 
+// example to filter animes by specific status /animes?status=currently%20airing
 app.get("/animes", async (req, res) => {
-  const animes = await Anime.find({}).sort({score: -1}).select({title: 1, japanese: 1, synopsis: 1, score: 1, type: 1, studios: 1, status: 1, id: 1})
-  res.json(animes)
+  const statusRegex = new RegExp(req.query.status, "i")
+  const animes = await Anime.find({
+    status: statusRegex
+  }).sort({score: -1}).select({title: 1, japanese: 1, synopsis: 1, score: 1, type: 1, studios: 1, status: 1, id: 1})
+  
+  if(animes.length !== 0){
+    res.json({
+      data: animes,
+      success: true
+    })
+  } else {
+    res.status(404).json({
+      success: false,
+        body: {
+          message: "(404) Animes not found"
+    }})
+  }
 })
 
 // Display one anime by id number comes from dataset
@@ -190,19 +209,19 @@ app.get("/animes/title/:english", async (req, res) => {
 
 // Display all animes that scores 8 or higher
 // example /animes/highscore
-app.get("/animes/highscore", async (req, res) => {
+app.get("/highscore", async (req, res) => {
   try{
-    const animeScore = await Anime.find({score: { $gte: 8 }})
-
-    res.status(200).json({
+    const animeScore = await Anime.find({score: { $gte: 8 }
+    }).sort({score: -1})
+    res.status(200).send({
       data: animeScore,
-      success: true,
+      success: true
   })
   } catch(error){
     res.status(400).json({
-      success: false,
       body: {
-        message: "bad request"
+        message: "bad request",
+        success: false
     }})
   }
 })
@@ -234,35 +253,6 @@ app.get("/animes/type/:type", async (req, res) => {
       message: "bad request"
   }})
 } 
-})
-
-// Display all anime with the same airing status
-// example /animes/status?query=currently%20airing
-app.get("/animes/status", async(req, res) => {
-  try{
-    const { query } = req.query;
-    const queryRegex = new RegExp(query, 'i')
-    const status = await Anime.find({ status: queryRegex }).select({english: 1, japanese: 1, title: 1, start_Aired: 1, end_Aired: 1, premiered: 1, episodes: 1})
-    
-    if(status.length !== 0){
-      res.json({
-        data: status,
-        success: true,
-    })
-  } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "(404) Status not found"
-      }})
-    }
-  } catch(error){
-    res.status(400).json({
-      success: false,
-      body: {
-        message: "bad request"
-    }})
-  }
 })
 
 // Display all animes that are made by the same studio and later on can be filtered more by the time it's premiered.
