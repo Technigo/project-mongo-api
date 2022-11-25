@@ -7,7 +7,7 @@ const Main = () => {
   const [textInput, setTextInput] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8080/games')
+    fetch('https://project-mongo-api-pi3gkxc3ea-lz.a.run.app/games')
       .then((data) => data.json())
       .then((json) => setGamesList(json.nesGames))
   }, []);

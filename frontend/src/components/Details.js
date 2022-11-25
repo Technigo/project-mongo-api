@@ -6,7 +6,7 @@ const Details = () => {
   const { gameId } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:8080/games/${gameId}`)
+    fetch(`https://project-mongo-api-pi3gkxc3ea-lz.a.run.app/games/${gameId}`)
       .then((data) => data.json())
       .then((json) => setListItem(json.body))
   }, [gameId])
