@@ -50,27 +50,31 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Baaaaaa!");
+  res.status(200).json({
+    success: true,
+    body: {
+      Routes: "/songs – all songs, /songs/:id – single song by its id.",
+      Queries: "/songs – bpm, genre"
+    }
+  });
 });
 
 app.get("/songs/", async (req, res) => {
   const {bpm, genre} = req.query;
-  let query = {};
+  const response = {
+    success: true,
+    body: {}
+  }
+
+  const genreQuery = genre ? genre : /.*/;
+  const bpmQuery = bpm ? bpm : {$gt: 0, $lt: 100};
 
   try {
-    if (bpm) {
-      query.bpm = bpm;
-    };
-    if (genre) {
-      query.genre = genre;
-    };
-
-    const songs = await Song.find(query);
-    res.status(200).json({
-      success: true,
-      body: songs
-    });
+    response.body = await Song.find({bpm: bpmQuery, genre: genreQuery}).exec();
+    res.status(200).json(response);
+    console.log(response.body)
   } catch(error) {
+    console.log(response.body)
     res.status(400).json({
       success: false,
       body: {
@@ -81,7 +85,7 @@ app.get("/songs/", async (req, res) => {
 });
 
 app.get("/songs/:id", async (req, res) => {
-  const songById = await Song.findById(req.params.id);
+  const songById = await Song.findById(req.params.id).exec();
 
   try {
     if (songById) {
@@ -107,44 +111,7 @@ app.get("/songs/:id", async (req, res) => {
   }
 });
 
-// https://regex101.com
-// blablbalbbalb/gm – regex to match blablbalbbalb
-// /.*/gm – regex to match every character in a string
-  // const matchAllRegEx = newRegExp (".*");
-
-    // funktion att chain:a på om man vill begränsa sökresultaten: 
-    // .limit(2).sort({}).select({trackName: 1, artistName: 1});
-    // select bestämmer strukturen på responsen till frontend 
-    // för att inte hämta/skicka mer info än nödvändigt
-    // .exec() => to explore if you're curious enough
-
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-// app.get("/songs/", async (req, res) => {
-//   const {bpm, energy, genre} = req.query;
-//   const response = {
-//     success: "bajs det funkar",
-//     body: {}
-//   }
-
-//   const genreQuery = genre ? genre : /.*/;
-//   const bpmQuery = bpm ? bpm : /.*/;
-
-//   try {
-//     response.body = await Song.find({bpm: bpmQuery, genre: genreQuery});
-//     res.status(200).json(response);
-//     console.log(response.body)
-//   } catch(error) {
-//     console.log(response.body)
-//     res.status(400).json({
-//       success: false,
-//       body: {
-//         message: "No songs found"
-//       }
-//     });
-//   }
-// });
