@@ -69,7 +69,14 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Traveler!, Available endpoints: /nominees, nominees/category/:category");
+  res.send({"Hello Traveler!":"Here you can check an awards nominations",
+  Routes: [
+    {
+      "/nominees": "show all nominations",
+      "nominees/category/:category": "show nominations from chosen category"
+    }
+
+  ]});
 });
 
 app.get("/nominees", async (req, res) => {
