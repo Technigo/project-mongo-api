@@ -7,15 +7,6 @@ import topMusicData from "./data/top-music.json";
 
 dotenv.config()
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
-
 const mongoUrl = process.env.MONGO_URL || `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.eilze2r.mongodb.net/project-mongo-api?retryWrites=true&w=majority`
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -23,12 +14,6 @@ mongoose.Promise = Promise;
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
-
-// const User = mongoose.model("User", {
-// 	name: String,
-// 	age: Number,
-// 	deceased: Boolean
-// });
 
 const Song = mongoose.model("Song", {
   id: Number,
@@ -53,27 +38,15 @@ if(process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Song.deleteMany();
     topMusicData.forEach(singleSong => {
+			//Here Refrencing our variable Song. newSong will be equal to new Song 
+   // new Song will accept an argument 
       const newSong = new Song (singleSong)
 			newSong.save()
     })
-    // await User.deleteMany();
-    // const testUser = new User({name: "Daniel", age: 28, deceased: false});
-    // testUser.save();
   }
+	   //Invoke the seedDatabase
   seedDatabase();
 }
-
-// if(process.env.RESET_DB) {
-//   const resetDataBase = async () => {
-// 		await User.deleteMany();
-		//Here Refrencing our variable User. testUser will be equal to new User
-   // new user will accept an argument which will be an object
-  //  const testUser = new User({name: "Daniel", age: 28, deceased: false});
-   //Invoke the testUser
-//    testUser.save();
-// 	}
-// 	resetDataBase();
-// };
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -87,13 +60,13 @@ app.get("/", (req, res) => {
   res.send({Message:"Top-Music API data!", data: listEndpoints(app)});
 });
 
-app.get("/songs", async (req, res) => {
-	//assign to a variable. all songs would be equal to awaut sog.find(
-		//find takes an argument/all songs that have an object
-	const songs = await Song.find({});
+app.get("/allSongs", async (req, res) => {
+	//assign to a variable. all songs would be equal to await song.find()
+		//find() takes an argument/all songs that have an object
+	const allSongs= await Song.find({});
 	res.status(200).json({
 		succes: true,
-	body: songs})
+	body: allSongs})
 })
 
 app.get("/songs/id/:id", async (req, res) => {
@@ -123,20 +96,39 @@ app.get("/songs/id/:id", async (req, res) => {
 	});
 }
 })
-// app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
-  // app.get("/songs/", async (req, res) => {
-
-	// const {genre, danceability} = req.query;
-	// const response = {
-  //   success: true,
-  //   body: {}
-  // }
-	//if genre property is present you will assig a specific genre property then else will regular expression present
+app.get("/songsquery/", async (req, res) => {
+  const { danceability, genre, } = req.query;
+  const response = {
+    succes: true,
+    body: {}
+  }
+  //if genre property is present you will assig a specific genre property then else will regular expression present
 	//otherwise you will allow too much genre that is there
-	// const matchAllRegex = new RegExp (".*")
-	// const genreQuery = genre ? genre : matchAllRegex;
-	// const danceabilityQuery = danceability ? danceability : /.*/;
-  // try {
+  const matchAllRegex = new RegExp(".*");
+  const matchAllNumbersGreaterThanZero = { $gt: 0, $lt: 100 };
+
+  const genreQuery = genre ? genre : matchAllRegex;
+  const danceabilityQuery = danceability ? danceability : matchAllNumbersGreaterThanZero;
+  try {
+   response.body = await Song.find({ danceability: danceabilityQuery, genre: genreQuery }).limit(3) 
+	 //.sort({energy: 1}).select({trackName:1, artistName: 1});
+
+	    res.status(200).json({
+	      success: true,
+	      body: response
+	    });
+	  } catch (error) {
+	    res.status(400).json({
+	      success: false,
+	      body: {
+	        message: error
+	      }
+	    });
+	  }
+	
+	});
+
+//Long solution
     // if ( req.params.genre && req.params.danceability) {
 			// response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery});
 			// response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery}).limit(2).sort({energy: 1}).select({trackName:1, artistName: 1});
@@ -147,37 +139,12 @@ app.get("/songs/id/:id", async (req, res) => {
     // } else if (!req.params.genre && req.params.danceability){
     //   response.body = await Song.find({danceability: req.params.danceability});
     // }
-//     res.status(200).json({
-//       success: true,
-//       body: response
-//     });
-//   } catch (error) {
-//     res.status(400).json({
-//       success: false,
-//       body: {
-//         message: error
-//       }
-//     });
-//   }
 
-// });
-//regual expression
+//regular expression
 //https://regex101.com/
 // https://mongoosejs.com/docs/queries
-
-// /yourWodOfChoice/gm - regex to match yourWordOfChoice
+// /yourWordOfChoice/gm - regex to match yourWordOfChoice
 // /.*/gm - regex to match every character in a string
-
-
-// app.get("/trackname", async (req, res) => {
-//   const name = await trackName.findOne()
-//   if (name) {
-//     // const books = await Song.find({ name: mongoose.Types.ObjectId(name.id) })
-//     res.json(trackname)
-//   } else {
-//     res.status(404).json({ error: 'TrackName not found' })
-//   }
-// })
 
 // Start the server
 app.listen(port, () => {
