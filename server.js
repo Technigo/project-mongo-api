@@ -65,7 +65,7 @@ app.get("/", (req, res) => {
     {"/animes": "Display all animes"},
     {"/animes?status={status}": "Display all animes that has the same status"},
     {"/animes/id/:id": "Display one anime by id number comes from JSON data"},
-    {"animes/:id": "Display one anime by id number comes from mongoDB"},
+    {"animes/:id": "Display one anime by _id number comes from mongoDB"},
     {"/animes/japanesetitle/:japanese": "One anime title displayed for Japan"},
     {"/animes/title/:english": "One anime title displayed for other countries than Japan"},
     {"/highscore": "Sorting anime by score"},
@@ -77,8 +77,8 @@ app.get("/", (req, res) => {
 
 // Display all animes but only return some data such as the title, japanese title, synopsis, score, type, studio, and status. Also it is sorted from the highest score
 // Can also filter more by adding query for status
-// example to show all animes /animes 
-// example to filter animes by specific status /animes?status=currently%20airing
+// example https://project-mongo-api-thr246hagq-lz.a.run.app/animes -> to show all animes
+// example https://project-mongo-api-thr246hagq-lz.a.run.app/animes?status=currently%20airing -> to filter animes by specific status 
 app.get("/animes", async (req, res) => {
   const statusRegex = new RegExp(req.query.status, "i")
   const animes = await Anime.find({
@@ -100,8 +100,8 @@ app.get("/animes", async (req, res) => {
 })
 
 // Display one anime by id number comes from dataset
-// Chose to do findOne() for this part instead of findById because I don't have ObjectId _id in my dataset & it only shows up on my mongoDB
-// example /animes/id/33255
+// Chose to do findOne() for this part instead of findById because I don't have ObjectId _id in my dataset
+// example https://project-mongo-api-thr246hagq-lz.a.run.app/animes/id/33255
 app.get("/animes/id/:id", async (req, res) => {
   try{
     const id = Number(req.params.id)
@@ -129,9 +129,10 @@ app.get("/animes/id/:id", async (req, res) => {
   } 
 });
 
-// Display one anime by id number comes from mongoDB
-// Now can use findById taken from mongoDB data however I find it a bit complicated because ID changes whenever I refresh. So the example below might not work for code review but will work if I give new ID number
-// example /animes/638011acbe6b3aca7933c113
+// Display one anime by _id number
+// Now I can findById() to get id provided by mongoDB
+// To see this _id, please go to /anime route first and choose any _id instead of id
+// example https://project-mongo-api-thr246hagq-lz.a.run.app/animes/6380b672d0800c5e066e77ad
 app.get("/animes/:id", async (req, res) => {
   try{
     const animeId = await Anime.findById(req.params.id)
@@ -156,7 +157,7 @@ app.get("/animes/:id", async (req, res) => {
 }})
 
 // Display one anime by the japanese title
-// example /animes/japanesetitle/銀魂
+// example https://project-mongo-api-thr246hagq-lz.a.run.app/animes/japanesetitle/銀魂
 app.get("/animes/japanesetitle/:japanese", async (req, res) => {
   try{
     const japaneseTitleRegex = new RegExp(req.params.japanese, "i");
@@ -182,7 +183,7 @@ app.get("/animes/japanesetitle/:japanese", async (req, res) => {
 }})
 
 // Display one anime by the title for worldwide release
-// example /animes/title/naruto%20shippuuden
+// example https://project-mongo-api-thr246hagq-lz.a.run.app/animes/title/naruto%20shippuuden
 app.get("/animes/title/:english", async (req, res) => {
   try{
     const titleRegex = new RegExp(req.params.english, "i");
@@ -208,7 +209,7 @@ app.get("/animes/title/:english", async (req, res) => {
 }})
 
 // Display all animes that scores 8 or higher
-// example /animes/highscore
+// example https://project-mongo-api-thr246hagq-lz.a.run.app/highscore
 app.get("/highscore", async (req, res) => {
   try{
     const animeScore = await Anime.find({score: { $gte: 8 }
@@ -227,7 +228,7 @@ app.get("/highscore", async (req, res) => {
 })
 
 // Display all animes based on its type and sorted from the best score
-// example /animes/type/movie
+// example https://project-mongo-api-thr246hagq-lz.a.run.app/animes/type/movie
 app.get("/animes/type/:type", async (req, res) => {
  try{
   const typeRegex = new RegExp(req.params.type, "i");
@@ -257,7 +258,7 @@ app.get("/animes/type/:type", async (req, res) => {
 
 // Display all animes that are made by the same studio and later on can be filtered more by the time it's premiered.
 // So, the example below means: animes that were made by Madhouse studio & premiered in Fall 2015 (but even if the premiered time is omitted it should still work fine & show only animes from that specific studio)
-// example /animes/studios/madhouse?premiered=fall%202015
+// example https://project-mongo-api-thr246hagq-lz.a.run.app/animes/studios/madhouse?premiered=fall%202015
 app.get("/animes/studios/:studios", async (req, res) => {
   try{
     const studioRegex = new RegExp(req.params.studios, "i");
