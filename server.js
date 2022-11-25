@@ -37,7 +37,7 @@ app.use(express.json());
 
 // Routes
 app.get("/", async (req, res) => {
-const EveryAvocado = await Avocado.find();
+const EveryAvocado = await Avocado.find({});
 res.status(200).json({
   success: true, 
   body: EveryAvocado
