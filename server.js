@@ -47,10 +47,17 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("This is a book API!");
 });
 
-// Find a book from ID
+  app.get("/books/", async (req, res) => {
+    const Books = await Book.find({})
+    res.status(200).json({
+      success: true,
+      body: Books
+    })
+  })
+
 app.get("/books/id/:id", async (req, res) => {
   try {
     const singleBook = await Book.findById(req.params.id);
@@ -75,34 +82,31 @@ app.get("/books/id/:id", async (req, res) => {
       } 
      });
   }
-  
   });
 
-  app.get("/books/", async (req, res) => {
-
-    const {title} = req.query;
-    const response = {
-      success: true,
-      body: {}
-    }
-    const titleQuery = title ? title : /.*/;
-    try {
-        response.body = await Book.find({title: titleQuery}).limit(2).sort({energy: 1}).select({authors: 1, language_code: 1})
+  app.get("/books/title/:title", async (req, res) => {
+    const book = await Book.findOne({title: req.params.title})
+    if (book) {
       res.status(200).json({
         success: true,
-        body: response
-      });
-  
-    } catch (error) {
-      res.status(400).json({
-        success: false,
-        body: {
-          message: error
-        } 
+        body: book 
        });
-    }
-  
-  });
+      } else {
+        res.status(404).json({ error: 'There is no book with that title.' })
+      }
+    })
+
+    app.get("/books/authors/:authors", async (req, res) => {
+      const book = await Book.findOne({authors: req.params.authors})
+      if (book) {
+        res.status(200).json({
+          success: true,
+          body: book 
+         });
+        } else {
+          res.status(404).json({ error: 'There is no author with that name.' })
+        }
+      })
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
