@@ -23,7 +23,6 @@ const Avocado = mongoose.model("Avocado", {
 
 if(true) {
   const resetDataBase = async () => {
-    await Avocado.deleteMany();
     avocadoSalesData.forEach(singleAvocado => {
       const newAvocado = new Avocado(singleAvocado);
       newAvocado.save();
