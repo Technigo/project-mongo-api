@@ -34,7 +34,7 @@ const Song = mongoose.model("Song", {
 
 
 if(process.env.RESET_DB) {
-	//resetDataBase
+	//Database seeding is populating a database with an initial set of data. It's common to load seed data such as initial user accounts or dummy data upon initial setup of an application.
   const seedDatabase = async () => {
     await Song.deleteMany();
     topMusicData.forEach(singleSong => {
@@ -57,7 +57,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send({Message:"Top-Music API data!", data: listEndpoints(app)});
+  res.send({Message:"Top-Music API", data: listEndpoints(app)});
 });
 
 app.get("/allSongs", async (req, res) => {
