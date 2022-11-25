@@ -45,6 +45,27 @@ app.get("/", (req, res) => {
   res.json({responseMessage: "NES-games library at /games"});
 });
 
+app.get("/games/", async (req, res) => {
+  const {title, developer, publisher} = req.query;
+
+  const titleQuery = title ? title : /.*/gm;
+  const developerQuery = developer ? developer : /.*/gm;
+  const publisherQuery = publisher ? publisher : /.*/gm;
+
+  try {
+    const response = await Game.find({title: titleQuery, developer: developerQuery, publisher: publisherQuery});
+    res.status(200).json({
+      success: true,
+      nesGames: response
+    })
+  } catch (err) {
+    res.status(400).json({ 
+      success: false,
+      error: "Invalid id-request"
+    })
+  }
+});
+
 app.get("/games/:id", async (req, res) => {
   try {
     const singleGame = await Game.findById(req.params.id)
@@ -67,28 +88,7 @@ app.get("/games/:id", async (req, res) => {
   }
 })
 
-app.get("/games/", async (req, res) => {
-  const {developer, publisher} = req.query;
-  const developerQuery = developer ? developer : /.*/gm;
-  const publisherQuery = publisher ? publisher : /.*/gm;
-  try {
-    const response = await Game.find({developer: developerQuery, publisher: publisherQuery});
-    res.status(200).json({
-      success: true,
-      nesGames: response
-    })
-  } catch (err) {
-    res.status(400).json({ 
-      success: false,
-      error: "Invalid id-request"
-    })
-  }
-});
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-// response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery}).limit(2).sort({energy: 1}).select({trackName: 1, artistName: 1})
-// .exec() => to explore if you're curious enough

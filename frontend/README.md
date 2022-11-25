@@ -1,5 +1,5 @@
 
-## View the fronted live
+## View it live
 
 https://nes-games-mongodb.netlify.app/
 
