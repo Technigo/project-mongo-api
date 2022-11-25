@@ -7,8 +7,8 @@ GET
 #### HOME:                 /
 #### GAMESLIST:            /games
 #### GAME BY ID:           /games/:id
-#### GAMES BY DEVELOPER:   /games?developer=<SEARCH FOR A DEVELOPER>
-#### GAMES BY PUBLISHER:   /games?publisher=<SEARCH FOR A PUBLISHER>
+#### GAMES BY DEVELOPER:   /games?developer= ADD A DEVELOPER
+#### GAMES BY PUBLISHER:   /games?publisher= ADD A PUBLISHER
 
 ### View it live
 
