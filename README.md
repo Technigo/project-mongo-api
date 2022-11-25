@@ -23,14 +23,14 @@ ENDPOINTS CREATED:
   
 With path parameters:
 
-  **/episodes/:id** - get a single episode according to a specific id entered (e.g. 637e423a77f854a4ec9070f5)
+  **/episodes/:id** - get a single episode according to a specific id entered (ids are assigned by the database, e.g. 637e423a77f854a4ec9070f5)
 
   **/episodes/seasons/:season** - get all episodes of a specific season (1-9)
 
 
 Filters that can be used with the following query params:
 
-  **/episodes?title=searchedAfterTitle**  - get a specific episode by title. Needs to be case sensitive.
+  **/episodes?title=searchedAfterTitle**  - get a specific episode by title or keyword, e.g. 'diversity' will return all episode(s) with the word diversity in the title; in this case one episode called 'Diversity Day'.
 
 
 ## View it live

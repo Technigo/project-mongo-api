@@ -60,21 +60,19 @@ app.use((req, res, next) => {
 // Route for start page
 app.get("/", (req, res) => {
   
-  // Start page lists the routes available:
+  // Lists the enpoints available:
   res.json(listEndpoints(app));
 });
 
 // Route for all episodes available in the series
 app.get("/episodes", async (req, res) => {
   const { title } = req.query;
-  const titleQuery = title ? title : /.*/;
-  
   try {
-    const singleTitle = await Episode.find({ EpisodeTitle: titleQuery })
+    const singleTitle = await Episode.find({ EpisodeTitle: new RegExp(title, "i") })
 
-    // find() returns an array, therefore .length is used to check for results
+    // find() returns an array, which is true even when empty, therefore .length is used to check for results
     if (singleTitle.length > 0) {
-      res.json(singleTitle)
+      res.status(200).json(singleTitle)
     } else {
       res.status(404).json({ error: 'Episode not found' })
     }
@@ -88,7 +86,7 @@ app.get("/episodes/ratings/top_5", async (req, res) => {
   try {
     const bestRated = await Episode.find().limit(5).sort({ Ratings: -1}).select({EpisodeTitle: 1, About: 1, Ratings: 1, Season: 1})
     if (bestRated.length > 0) {
-      res.json(bestRated)
+      res.status(200).json(bestRated)
     } else {
         res.status(404).json({ error: 'No episodes found'})
     }
@@ -102,7 +100,7 @@ app.get("/episodes/ratings/bottom_5", async (req, res) => {
   try{
     const worstRated = await Episode.find().limit(5).sort({Ratings: 1}).select({EpisodeTitle: 1, About: 1, Ratings: 1, Season: 1})
     if (worstRated.length > 0) {
-      res.json(worstRated)
+      res.status(200).json(worstRated)
     } else {
         res.status(404).json({ error: 'No episodes found' })
     }
@@ -116,7 +114,7 @@ app.get("/episodes/views/most_viewed", async (req, res) => {
   try {
     const mostViewed = await Episode.find().limit(1).sort({Viewership: -1})
     if (mostViewed.length > 0) { 
-      res.json(mostViewed)
+      res.status(200).json(mostViewed)
     } else {
         res.status(404).json({ error: 'Episode not found' })
     }
@@ -130,7 +128,7 @@ app.get("/episodes/views/least_viewed", async (req, res) => {
   try {
     const leastViewed = await Episode.find().limit(1).sort({Viewership: 1})
     if (leastViewed.length > 0) { 
-      res.json(leastViewed)
+      res.status(200).json(leastViewed)
     } else {
         res.status(404).json({ error: 'Episode not found' })
     }
@@ -144,7 +142,7 @@ app.get("/episodes/:id", async (req, res) => {
   try {
     const singleEpisode = await Episode.findById({_id: req.params.id})
     if (singleEpisode) {
-      res.json(singleEpisode)
+      res.status(200).json(singleEpisode)
     } else {
       res.status(404).json({ error: 'User not found' })
     }
@@ -159,7 +157,7 @@ app.get("/episodes/seasons/:season", async (req, res) => {
   const season = await Episode.find({ Season: number });
   try {
     if (season.length > 0) {
-      res.json(season)
+      res.status(200).json(season)
     } else {
         res.status(404).json({ error: 'Season not found' })
     }
