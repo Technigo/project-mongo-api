@@ -42,16 +42,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// First page displaying list of optional routes
+// First page
+// When using sendFile the html & css files are sent as response.
 app.get("/", (req, res) => {
-  res.send([
+  res.sendFile(__dirname + "/index.html");
+app.get("/style.css", (req, res) => {
+  res.sendFile(__dirname + "/style.css");
+});
+// Alternative first page (without frontend added) displaying list of optional routes
+  /*res.send([
     { "/": "StartPage" },
     { "/products": "Display all products" },
     { "/products/name": "Search for a product by name" },
     { "/products/lowestprice": "Display the cheapest products first" },
     { "/products/designer/:designer": "Display all products by designer" },
     { "/products/onlinesales": "Display all products sold online" },
-  ]);
+  ]);*/
 });
 
 // Display all products
