@@ -1,27 +1,36 @@
 # Project Mongo API
 
-This week's project involved using a MongoDB database to store and retrieve data. A RESTful API was created using that data.
+This week's project involved using a MongoDB database to store and retrieve data from. A RESTful API was created to query data from MongoDB.
 
 ## The problem
+
+A dataset with episodes of the TV series The Office was used for this project - a CSV file was downloaded from Kaggle and converted to JSON using cvsjson.com. 
+Mongoose was used to model and store the data into the database, and fetch data from the database. 
 
 
 ENDPOINTS CREATED:
 
-  **/episodes** - returns all the episodes with all their data. 
+  **/episodes** - get all the episodes with all their data. 
 
-  **/episodes/top_5** - returns top 5 rated episodes
+  **/episodes/ratings/top_5** - get 5 best rated episodes
+
+  **/episodes/ratings/bottom_5** - get 5 worst rated episodes
+
+  **/episodes/views/most_viewed** - get the most viewed episode of the show
+
+  **/episodes/views/least_viewed** - get the least viewed episode of the show
+
   
-
 With path parameters:
 
-  **/episodes/:id** - returns a single episode according to a specific id entered 
+  **/episodes/:id** - get a single episode according to a specific id entered (e.g. 637e423a77f854a4ec9070f5)
 
-  **/episodes/seasons/:season** - returns all episodes of a specific season (1-9)
+  **/episodes/seasons/:season** - get all episodes of a specific season (1-9)
 
 
 Filters that can be used with the following query params:
 
-  **/episodes?title=searchedAfterTitle**  - search for a specific episode by title
+  **/episodes?title=searchedAfterTitle**  - get a specific episode by title. Needs to be case sensitive.
 
 
 ## View it live
