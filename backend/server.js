@@ -45,14 +45,6 @@ app.get("/", (req, res) => {
   res.json({responseMessage: "NES-games library at /games"});
 });
 
-// app.get("/games", async (req, res) => {
-//   const games = await Game.find({});
-//   res.status(200).json({
-//     success: true,
-//     body: games
-//   })
-// });
-
 app.get("/games/:id", async (req, res) => {
   try {
     const singleGame = await Game.findById(req.params.id)
@@ -77,24 +69,13 @@ app.get("/games/:id", async (req, res) => {
 
 app.get("/games/", async (req, res) => {
   const {developer, publisher} = req.query;
-  const response = {
-    success: true,
-    body: {}
-  }
   const developerQuery = developer ? developer : /.*/gm;
   const publisherQuery = publisher ? publisher : /.*/gm;
   try {
-    response.body = await Game.find({developer: developerQuery, publisher: publisherQuery});
-    // if (req.params.developer && req.params.publisher) {
-    //   response.body = await Game.find({developer: req.params.developer, publisher: req.params.publisher});
-    // } else if (req.params.developer && !req.params.publisher) {
-    //   response.body = await Game.find({developer: req.params.developer});
-    // } else if (!req.params.developer && req.params.publisher) {
-    //   response.body = await Game.find({publisher: req.params.publisher});
-    // }
+    const response = await Game.find({developer: developerQuery, publisher: publisherQuery});
     res.status(200).json({
       success: true,
-      body: response
+      nesGames: response
     })
   } catch (err) {
     res.status(400).json({ 
