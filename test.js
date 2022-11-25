@@ -12,7 +12,7 @@ app.use(express.json());
 const Avocado = mongoose.model("Avocado", {
   id: Number,
   // check date type
-  date: Date,
+  date: String,
   averagePrice: Number,
   totalVolume: Number,
   totalBagsSold: Number,
