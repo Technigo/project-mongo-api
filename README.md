@@ -1,13 +1,16 @@
 # Project Mongo API
-
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
+ Week 14 of Technigo Bootcamp.Intresting project using data base build in MongoDB with moongoose. 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Biggest problem was to understand how to connect everything together and build an DB without using json file. It is a project that I will need to come back to and build some more endpoints in the future. 
+
+Right now you can access endpoits:
+1. https://project-mongo-api-qka4oyjhma-uc.a.run.app/nominees/
+2. https://project-mongo-api-qka4oyjhma-uc.a.run.app/nominees/:category
+  available categories:
+    1. best actor
+    2. best tragedy comedy 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-qka4oyjhma-uc.a.run.app
