@@ -2,11 +2,12 @@
 
 GET
 
-/
-/games
-/games/:id
-/games?developer=<SEARCH FOR A DEVELOPER>
-/games?publisher=<SEARCH FOR A PUBLISHER>
+#### HOME:                 /
+#### GAMESLIST:            /games
+#### GAME BY ID:           /games/:id
+#### GAME BY TITLE:        /games?title= ADD A TITLE
+#### GAMES BY DEVELOPER:   /games?developer= ADD A DEVELOPER
+#### GAMES BY PUBLISHER:   /games?publisher= ADD A PUBLISHER
 
 ## View it live
 
