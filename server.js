@@ -38,8 +38,12 @@ app.use(express.json());
 
 // Routes
 
-app.get("/", (req, res) => {
-  res.send("Hello Technigo hihi!");
+app.get("/", async (req, res) => {
+  const everyAvocado = await Avocado.find({});
+  res.status(200).json({
+    success: true,
+    body: everyAvocado
+  });
 });
 
 // Start the server
