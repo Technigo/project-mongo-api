@@ -191,6 +191,8 @@ app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
 
+//--------NOTES--------
+
 //RESET_DB=true npm run dev
 // Go here:
 
