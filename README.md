@@ -5,7 +5,7 @@ Routes:
 - /songs (Show all songs)
 - /songs/id/:id (Show a song by id)
 - /songs/bpm/:bpm (Show all songs with specific BPM) 
-- /ratroute (A special route for rats that apparently likes rythms at 120-140 BPM)
+- /ratroute (A special route for rats that apparently likes music at 120-140 BPM)
 
 ## The problem
 - What MongoDB is
