@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
-// import theOffice from "./data/the-Office.json"
+import theOffice from "./data/the-Office.json"
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -18,14 +18,7 @@ mongoose.Promise = Promise;
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
-
-/* const theOffice = mongoose.model("theOffice", {
-  parent_id: Number,
-  parent: String,
-  reply: String,
-  character: String
-});
- */
+ 
 const Song = mongoose.model("Song", {
   id: Number,
   trackName: String,
@@ -41,6 +34,14 @@ const Song = mongoose.model("Song", {
   acousticness: Number,
   speechiness: Number,
   popularity: Number
+});
+
+
+const Office = mongoose.model("Office", {
+  parent_id: Number,
+  parent: String,
+  reply: String,
+  character: String
 });
 
 // RESET_DB=true npm run dev
@@ -59,6 +60,20 @@ if(process.env.RESET_DB) {
   resetDataBase();
 }
 
+if(process.env.RESET_OFFICE) {
+  const resetDataBase = async () => {
+    await Office.deleteMany();
+    theOffice.forEach(singleQuote => {
+      const newQuote = new Office(singleQuote);
+      newQuote.save();
+    })
+    // await User.deleteMany();
+    // const testUser = new User({name: "Daniel", age: 28, deceased: false});
+    // testUser.save();
+  }
+  resetDataBase();
+}
+
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -69,7 +84,10 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!"+ "\r\n" +"world");
+  res.send([
+    {"/": "Start page"},
+    {"/songs/all": "Displays all songs"}
+  ]);
 });
 
  app.get("/songs/:all", async (req, res) => {
@@ -87,6 +105,34 @@ app.get("/", (req, res) => {
         success: false,
         body: {
           message: "Could not find songs"
+        }
+    })
+  }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "invalid input"
+      }
+    })
+  }
+  }) 
+
+  app.get("/office", async (req, res) => {
+    // const allTheSongs = await Song.find({}); all songs 
+  // --- OBS! försök alltid att göra try & catch, för att skydda -----!
+    try {
+      const allQuotes = await Office.find({});
+      if (allQuotes) {
+      res.status(200).json({
+        success: true,
+        body: allQuotes
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Could not find quotes"
         }
     })
   }
