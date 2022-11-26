@@ -2,10 +2,6 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-// to get started!
-import booksData from "./data/books.json";
-// console.log(booksData);
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -34,9 +30,8 @@ const Book = mongoose.model("Book", {
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Book.deleteMany({});
-
-    booksData.forEach((book) => {
-      const newBook = new Book(book);
+    booksData.forEach((singleBook) => {
+      const newBook = new Book(singleBook);
       newBook.save();
     });
   };
@@ -65,49 +60,79 @@ app.get("/books", async (req, res) => {
   // res.send(booksData)
 
   // Filtering By query for booksByNumberOfPage. ".gt()" compering if the number is higher than a specified number.
-  let books = await Book.find(req.query);
-  if (res.query.numPages) {
-    const booksByNumberOfPage = await books
-      .find()
-      .gt("NumberOfPages", req.query.numPages);
-    books = booksByNumberOfPage;
-  }
-
-  // flitering By RatingsCount
-  if (res.query.ratingsCount) {
-    const booksByRatingCount = await books
-      .find()
-      .gt("RatigsCount", req.query.ratingsCount);
-    books = booksByRatingCount;
-  }
-
-  // filtering By AvrerageRating
-    if (res.query.averageRating) {
-      const booksByAvrerageRating= await books
-        .find()
-        .gt("AvrageRating", req.query.averageRating);
-      books = booksByAvrerageRating;
-    }
-
-  res.json(books);
+  const allBooks = await Book.find({});
+  res.status(200).json({
+    success: true,
+    body: allBooks,
+  });
 });
 
-// Author endpoints
-// app.get('/books/authors', async (req, res)=>{
-//   try{
-//     const booksAuthor = await Book
+// Quick search is findbyID
+app.get("/books/id/:id", async (req, res) => {
+  try {
+    const singleBook = await Book.findById(req.params.id);
+    if (singleBook) {
+      res.json({
+        status: 200,
+        success: true,
+        body: singleBook,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Book Not Found",
+        },
+      });
+    }
+  } catch (error) {
+    res.status(404).json({
+      success: false,
+      body: {
+        message: "Invalid ID",
+      },
+    });
+  }
+});
+// http://localhost:9000/books?title=Harry Potter&languageCode=eng&authors= Rowling-Mary GrandPré
 
-//   }
-//   catch(err){
+app.get("/books", async (req, res) => {
+  const { title, authors, languageCode, averageRating } = req.query;
+  const response = {
+    success: true,
+    body: {},
+  };
 
-//   }
+  const titleQuery = title ? title : /.*/gm;
+  const authorsQuery = authors ? authors : /.*/gm;
+  const languageCodeQuery = languageCode ? languageCode : /.*/gm;
+  const averageRatingQuery = averageRating ? averageRating : {$gt: 0, $lt: 10};
 
-// })
-
-
-
+  try {
+    response.body = await Book.find({
+      title: titleQuery,
+      authors: authorsQuery,
+      languageCode: languageCodeQuery,
+      averageRating: averageRatingQuery,
+    })
+      .limit(5)
+      .sort({ average_rating : 1});
+    res.status(200).json({
+      success: true,
+      body: response,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: error,
+      },
+    });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
