@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
 import avocadoSalesData from "./data/avocado-sales.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -23,10 +22,10 @@ const Avocado = mongoose.model("Avocado", {
   region: String
 });
 
-if(true) {
+if(process.env.RESET_DB) {
   const resetDataBase = async () => {
     avocadoSalesData.forEach(singleAvocado => {
-      const newAvocado = new Avocado(singleAvocado);
+      const newAvocado = new Avocado(singleAvocado)
       newAvocado.save();
     })
 
@@ -38,41 +37,11 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.get("/", async (req, res) => {
-const EveryAvocado = await Avocado.find({});
-res.status(200).json({
-  success: true, 
-  body: EveryAvocado
-})
+
+app.get("/", (req, res) => {
+  res.send("Hello Technigo hihi!");
 });
 
-app.get("/id/:id", async (req, res) => {
-  try {
-    const SingleAvocado = await Avocado.findById(req.params.id);
-    if (SingleAvocado) {
-      res.status(200).json({
-        success: true,
-        body: SingleAvocado
-      })
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "Could not find the region of the avocado"
-        }
-      });
-    }
-  } catch(error) {
-    res.status(400).json({
-      success: false,
-      body: {
-        message: "Invalid id"
-      }
-    });
-  }
-  
-});
-  
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
