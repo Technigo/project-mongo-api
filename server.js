@@ -18,12 +18,6 @@ mongoose.Promise = Promise;
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
 
-/* const User = mongoose.model("User", {
-  name: String,
-  age: Number,
-  deceased: Boolean
-}); */
-
 const Song = mongoose.model("Song", {
   id: Number,
   trackName: String,
@@ -58,14 +52,18 @@ app.use(express.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send({
-    Welcome: "Hi music lover! Please feel free to use the endpoints below to show the data you are looking for.",
+    Welcome: 
+    "Hi music lover! Please feel free to use the endpoints below to show the data you are looking for.",
+    ForRats: 
+    "Are you a rat surfing the world wide web? 🐀 According to the latest scientific studies you guys like to wiggle your heads to music with rythms between 120-140 BPM. So we have made a special route for you to find the nicest grooves. Enjoy!",
     Routes: [
       { 
         "/songs": "Show all songs.",
         "/songs/id/:id": "Show a song by id",
-        "/bpm/:bpm": "Show all songs with a specific BPM" 
+        "/songs/bpm/:bpm": "Show all songs with specific BPM", 
+        "/ratroute": "Show all songs with rythms at 120-140 BPM"
       }
-    ]
+    ],
   })
 });
 
@@ -106,7 +104,7 @@ app.get("/songs/id/:id", async (req, res) => {
 });
 
 // Show all songs with a specific BPM
-app.get("/bpm/:bpm", async (req, res) => {
+app.get("/songs/bpm/:bpm", async (req, res) => {
   try {
     const byBpm = await Song.find({ bpm: req.params.bpm })
     if (byBpm) {
@@ -126,10 +124,34 @@ app.get("/bpm/:bpm", async (req, res) => {
       success: false,
       status_code: 400,
       error: "Invalid bpm" 
-    })
+    });
   }
+});
 
-})
+// Show all songs with BPM 120-140
+app.get("/ratroute", async (req, res) => {
+  try {
+    const bpmRange = await Song.find({ bpm : { $gt :  120, $lt : 140}});
+    if (bpmRange) {
+      res.status(200).json({
+      success: true,
+      data: bpmRange
+    })
+    } else {
+      res.status(404).json({
+        success: false,
+        status_code: 404,
+        error: `This is not a bpm for rats`
+    })
+    }
+  } catch (err) {
+    res.status(400).json({ 
+      success: false,
+      status_code: 400,
+      error: "Invalid bpm" 
+    });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
