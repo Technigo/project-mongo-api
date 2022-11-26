@@ -65,8 +65,7 @@ app.get("/", (req, res) => {
     Welcome: 'Hi! This a World Cup Api (1930 - 2018)',
     Routes: [{
       "/cups": 'Get all world cup.',
-      "/cups/id/'number'": 'Get World Champion with Matching Database ID.',
-      "/cups/winner/argentina": 'Get the years that Argentina was World Champion.',
+      "/cups/'number'": 'Get World Champion with Matching Database ID.',
       "/cups/winner/'country'": 'Get the result of a World Champion',
       "/endpoints": "Get API endpoints."
     }]
@@ -74,19 +73,20 @@ app.get("/", (req, res) => {
   res.send(WorldCupApi)
 });
 
-app.get("/cups", async (req, res) => {
-  let cups = await Cup.find(req.query)
+// const yearCup = await Cup.find().gt('year', req.query.year)
+// cups = yearCup
 
-  if (req.query.year) {
-    const yearCup = await Cup.find().gt('year', req.query.year)
-    cups = yearCup
-  } else {
+app.get("/cups", async (req, res) => {
+  let query = req.query || {}
+  try {
+    let cups = await Cup.find(query)
+    res.json(cups)
+  } catch {
     res.status(404).json({ error: 'Not found' });
   }
-  res.json(cups)
 });
 
-app.get("/cups/id/:_id", async (req, res) => {
+app.get("/cups/:_id", async (req, res) => {
   try {
     const cupId = await Cup.findById(req.params._id)
     if (cupId) {
@@ -99,19 +99,8 @@ app.get("/cups/id/:_id", async (req, res) => {
   }
 });
 
-app.get("/cups/winner/argentina", async (req, res) => {
-  Cup.find({ winner: 'Argentina' }, (error, data) => {
-    if (error) {
-      res.status(404).json({ error: 'Not found' });
-    } else {
-      res.send(data);
-    }
-  });
-});
-
 app.get("/cups/winner/:winner", async (req, res) => {
   const { winner } = req.params
-
   try {
     const winnerCup = await Cup.find({ winner: { $regex: new RegExp("^" + winner, "i") } })
     if (winnerCup) {
