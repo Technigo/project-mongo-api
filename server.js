@@ -38,11 +38,11 @@ app.use(express.json());
 
 // Routes
 
-app.get("/", async (req, res) => {
-  const everyAvocado = await Avocado.find({});
+app.get("/avocados", async (req, res) => {
+  const allTheAvocados = await Avocado.find({});
   res.status(200).json({
     success: true,
-    body: everyAvocado
+    body: allTheAvocados
   });
 });
 
