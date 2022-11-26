@@ -59,7 +59,6 @@ const Cup = mongoose.model('Cup', {
   attendance: Number
 });
 
-// Start defining your routes here
 app.get("/", (req, res) => {
   const WorldCupApi = {
     Welcome: 'Hi! This a World Cup Api (1930 - 2018)',
@@ -67,14 +66,12 @@ app.get("/", (req, res) => {
       "/cups": 'Get all world cup.',
       "/cups/'number'": 'Get World Champion with Matching Database ID.',
       "/cups/winner/'country'": 'Get the result of a World Champion',
+      "/cups/year/:year": 'Get the place where the World Cup was played according to the year',
       "/endpoints": "Get API endpoints."
     }]
   }
   res.send(WorldCupApi)
 });
-
-// const yearCup = await Cup.find().gt('year', req.query.year)
-// cups = yearCup
 
 app.get("/cups", async (req, res) => {
   let query = req.query || {}
@@ -111,6 +108,20 @@ app.get("/cups/winner/:winner", async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: 'Error' })
   }
+});
+
+app.get("/cups/year/:year", async (req, res) => {
+  const { year } = req.params
+  try {
+    const yearCup = await Cup.find( {year: year} )
+  if (yearCup) {
+    res.json(yearCup)
+  } else {
+    res.status(404).json({ error: 'Year not found' })
+  }
+} catch (error) {
+  res.status(400).json({ error: 'Error' })
+}
 });
 
 // Start the server
