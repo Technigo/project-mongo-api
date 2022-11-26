@@ -2,7 +2,9 @@
 
 This weeks project was to create a backend using MongoDB database to store and retrieve data from, with a RESTful API.
 
-## The problem
+
+
+## Endpoints created:
 
 /songs: See all songs in database
 
@@ -19,5 +21,7 @@ This weeks project was to create a backend using MongoDB database to store and r
 /songs/id/_id: Shows a single song based on its id
 
 ## View it live
+
+Google Cloud API platform:
 
 https://project-mongo-api-fkbbu5sbga-lz.a.run.app
