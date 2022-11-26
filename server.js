@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import avocadoSalesData from "./data/avocado-sales.json";
+import netflixData from "./data/netflix-titles.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -10,23 +10,27 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
-const Avocado = mongoose.model("Avocado", {
-  id: Number,
-  date: String,
-  averagePrice: Number,
-  totalVolume: Number,
-  totalBagsSold: Number,
-  smallBagsSold: Number,
-  largeBagsSold: Number,
-  xLargeBagsSold: Number,
-  region: String
-});
+const Title = mongoose.model("Title", {
+  show_id: Number,
+  title: String,
+  director:String, 
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String,
+})
 
-if(process.env.RESET_DB) {
+if(true) {
   const resetDataBase = async () => {
-    avocadoSalesData.forEach(singleAvocado => {
-      const newAvocado = new Avocado(singleAvocado)
-      newAvocado.save();
+    await Title.deleteMany();
+   netflixData.forEach(singleTitle => {
+      const newTitle = new Title(singleTitle)
+      newTitle.save();
     })
 
   }
@@ -38,11 +42,11 @@ app.use(express.json());
 
 // Routes
 
-app.get("/avocados", async (req, res) => {
-  const allTheAvocados = await Avocado.find({});
+app.get("/titles", async (req, res) => {
+  const allTheTitles = await Title.find({});
   res.status(200).json({
     success: true,
-    body: allTheAvocados
+    body: allTheTitles
   });
 });
 
