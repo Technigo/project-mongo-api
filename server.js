@@ -101,7 +101,7 @@ app.get("/songs/", async (req, res) => {
 })
 
 // ROUTE 2: Find a specific song by its unique ID
-app.get("/songs/id/:id", async (req, res) => {
+app.get("/songs/:id", async (req, res) => {
   try {
     const singleSong = await Song.findById(req.params.id)
     if (singleSong) {
