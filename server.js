@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json"
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/27017/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
