@@ -58,7 +58,8 @@ app.get("/", (req, res) => {
     Routes: [
       {
         "/all": "Get all the info inside the API",
-        "/all/id/:id": "Filter by ID all the data"
+        "/all/id/:id": "Filter by ID all the data",
+        "/data/": "You can search for title, tpye or country(/data?title,country,type={info})"
       },
     ],
   })
