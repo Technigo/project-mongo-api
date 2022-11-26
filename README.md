@@ -1,12 +1,22 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This weeks project was to create a backend using MongoDB database to store and retrieve data from, with a RESTful API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+/songs: See all songs in database
+
+/songs/artist/Name of artist: Show songs from a specific artist
+
+/songs/genre/Name of genre: Shows songs of a specific genre
+
+/songs/happy: Shows happy songs ✨
+
+/songs/dancing: Shows songs great for dancing 💃
+
+/songs/happydancing: Shows happy songs great for dancing ⭐
+
+/songs/id/_id: Shows a single song based on its id
 
 ## View it live
 

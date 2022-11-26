@@ -24,8 +24,7 @@ const Song = mongoose.model("Song", {
   speechiness: Number,
   popularity: Number
 })
-// Function that makes sure that the datebase does not update itself with the same entries 
-// every time the server is re-started. "Await" is used to deal with promises (like .then). 
+// Function that makes sure that the datebase does not update itself with the same entries every time the server is re-started. 
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
      // Starts by deleting any pre-existing Book objects to prevent duplicates
@@ -48,6 +47,14 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({error: 'Service unavailable'})
+  }
+})
 
 // Lists the endpoints for all routers that is created in this file. 
 app.get("/endpoints", (req, res) => {
@@ -104,13 +111,13 @@ app.get("/songs/genre/:genre", async (req, res) => {
     })
     } else {
       res.status(404).json({
-        error: ' Song not found, try again ',
+        error: ' Genre not found, try again ',
         success: false, 
       })
     }
   }
   catch(err) {
-    res.status(400).json({ error: "invalied songname" })
+    res.status(400).json({ error: "Invalid search" })
   } 
 })
 
