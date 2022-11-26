@@ -74,7 +74,7 @@ app.get("/", (req, res) => {
     Routes:[{
         "/allTedTalks": "All TED Talks",
         "/top5Views": "Top 5 most viewd TED Talks",
-        "/speakers/:speaker": "Search speaker with RegExpTED and watch all TED Talks from named speaker", 
+        "/speaker/:speaker": "Search speaker with RegExpTED and watch all TED Talks from named speaker", 
         "/event/:event": "Serch by event, and get a list of TED Talks",
         "/tedTalk/id/:id": "search for a TED Talk with _Id (ex. 638271655ec3bb12878ae9b8)",
         "/tedTalk/talk_id/:talk_id": "search for a TED Talk with talk_Id (ex. 248)",
@@ -117,17 +117,17 @@ app.get("/top5Views", async (req, res) => {
 app.get("/speaker/:speaker", async (req, res) => {
 try{
   const speakersTalks = await TedTalk.find({ speaker: new RegExp(req.params.speaker, "i") })
-  if (speakersTalks) {
+  if (speakersTalks.length !== 0) {
     res.status(200).json({
     success: true,
     tedTalkData: speakersTalks
   })
-  // } else {
-  //   res.status(404).json({
-  //     success: false,
-  //     status_code: 404,
-  //     error: `No speaker with this name ${req.params.speaker} was found, try another`
-  //   })
+  } else {
+    res.status(404).json({
+      success: false,
+      status_code: 404,
+      error: `No speaker with this name ${req.params.speaker} was found, try another`
+    })
   }
 } catch (error) {
     res.status(400).json({
@@ -146,17 +146,17 @@ try{
 app.get("/event/:event", async (req, res) => {
   try{
     const eventTalks = await TedTalk.find({ event: new RegExp(req.params.event, "i") })
-    if (eventTalks) {
+    if (eventTalks.length !== 0) {
       res.status(200).json({
       success: true,
       tedTalkData: eventTalks
     })
-    // } else {
-    //   res.status(404).json({
-    //     success: false,
-    //     status_code: 404,
-    //     error: `No event with this name ${req.params.event} was found, try another`
-    //   })
+    } else {
+      res.status(404).json({
+        success: false,
+        status_code: 404,
+        error: `No event with this name ${req.params.event} was found, try another`
+      })
     }
   } catch (error) {
       res.status(400).json({
