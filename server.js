@@ -1,14 +1,8 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
 import netflixData from "./data/netflix-titles.json";
-//import topMusicData from "./data/top-music.json";
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -52,13 +46,43 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hello! Try out the routes '/titles' or '/titles/id/:id' ");
 });
 
-app.get("/title", async (req, res) => {
+//Shows all titiles in the json-file. 
+app.get("/titles", async (req, res) => {
   const allTitles = await Title.find()
   res.json(allTitles);
 })
+
+//Show a single title with specific id
+app.get("/titles/id/:id", async (req, res) => {
+  try {
+    const singleTitle = await Title.findById(req.params.id);
+    if (singleTitle) {
+      res.status(200).json({
+        success: true,
+        body: singleTitle
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Could not find the song"
+        }
+      });
+    }
+  } catch(error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid id"
+      }
+    });
+  }
+  
+});
+
 
 // Start the server
 app.listen(port, () => {
