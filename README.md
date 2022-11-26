@@ -1,13 +1,17 @@
-# Project Mongo API
+# Project Mongo API - Nina Berggren
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Backend project using Express API and Mongo DB, start using a database to store and retrieve data from and use that data to produce a RESTful API.
+To acces MongoDB we are using Mongoose, and learned many new methods like using a .
+We are using MongoDB compass to watch the database, and MongoDB Atlas to deploy our project. 
+I have used a modified verion of a tedTalk json-file from Keggele.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Allot of trial and error this week, much tecnical issues both when using available material/lectures and when installing and geting MongoDB up and running. 
+The challange for this week was to understand how to convert the methods you know to mongoose. 
+
+If I had more time I would spend it understanding RegExp. It's not exactly working the whay I whant to.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Link to deployde project: 

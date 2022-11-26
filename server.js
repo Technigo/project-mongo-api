@@ -6,15 +6,6 @@ import tedTalkData from "./data/ted-talksMod.json";
 
 // dotenv.config()
 
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -33,15 +24,13 @@ const TedTalk = mongoose.model('TedTalk', {
     "likes": Number
 })
 
-
 // SeedDataBase
 if (process.env.RESET_DB) {
-  console.log('Resetting database!')
+  // console.log('Resetting database!')
   
   	const seedDataBase = async () => {
       // All Models
-      await TedTalk.deleteMany();
-      // await TedTalk.deleteMany({})
+      await TedTalk.deleteMany({});
   		tedTalkData.forEach((singleTedTalk) => {
   			const newTedTalk = new TedTalk(singleTedTalk)
         newTedTalk.save()
@@ -61,8 +50,10 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
-// set up a middleware for error msg like DB down
-// this will start first before my routs, execute first.
+
+
+// Middleware set up for error msg like DB down.
+// This will execute first, if server is down => error msg, won't execute futher.
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next()
@@ -72,16 +63,26 @@ app.use((req, res, next) => {
 }) 
 
 
-// Start defining your routes here
+// -------All Routes start here------------
+
 // Route 1 show introductions to endpoints
 app.get("/", (req, res) => {
-  res.send("Hello Everybody and welcome!");
-  // TedTalk.find().then(tedTalks => {
-  //   res.json(tedTalkData)
-  // })
+  res.send({
+    responseMassage: "Hello Everybody and welcome!",
+    guide: "These are the routes for this TED Talk API!",
+    Endpoints:"",
+    Routes:[{
+        "/allTedTalks": "All TED Talks",
+        "/top5Views": "Top 5 most viewd TED Talks",
+        "/speakers/:speaker": "Search speaker with RegExpTED and watch all TED Talks from named speaker", 
+        "/event/:event": "Serch by event, and get a list of TED Talks",
+        "/tedTalk/id/:id": "search for a TED Talk with _Id (ex. 638271655ec3bb12878ae9b8)",
+        "/tedTalk/talk_id/:talk_id": "search for a TED Talk with talk_Id (ex. 248)",
+      }],
+  });
 });
 
-// Route # - List of all TED Talks (array of elements)
+// Route 2 - List of all TED Talks (array of elements)
 app.get("/allTedTalks", async (req, res) => {
   // res.status(200).json(tedTalkData); 
   const allTedTalks = await TedTalk.find({});
@@ -89,10 +90,85 @@ app.get("/allTedTalks", async (req, res) => {
       success: true,
       body: allTedTalks
     });
-    console.log(tedTalkData.length)
 });
 
-// ROUTE #: Filter on a specific TED TAlk with id.
+// Route 3 Returns top 5 most viewed TED Talks
+app.get("/top5Views", async (req, res) => {
+  try {
+    const mostViews = await TedTalk.find({}).sort({views: -1}).limit(5)
+    if (mostViews) {
+      res.status(200).json({
+        success: true,
+        body: mostViews
+      });
+    }
+  } catch(error){
+    res.status(400).json({
+      body: {
+        message: "bad request",
+        success: false
+    }})
+  }
+});
+
+// Route 4 find TED talks by speaker
+// The RegExp with "i" makes it possible to search 
+// by any charecter, so you vill accualy never get status(404).
+app.get("/speaker/:speaker", async (req, res) => {
+try{
+  const speakersTalks = await TedTalk.find({ speaker: new RegExp(req.params.speaker, "i") })
+  if (speakersTalks) {
+    res.status(200).json({
+    success: true,
+    tedTalkData: speakersTalks
+  })
+  // } else {
+  //   res.status(404).json({
+  //     success: false,
+  //     status_code: 404,
+  //     error: `No speaker with this name ${req.params.speaker} was found, try another`
+  //   })
+  }
+} catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid name"
+      }
+    });
+}
+});
+
+// Route 5 find TED talks by event
+// The RegExp with "i" makes it possible to search 
+// by any charecter, so you vill accualy never get status(404).
+
+app.get("/event/:event", async (req, res) => {
+  try{
+    const eventTalks = await TedTalk.find({ event: new RegExp(req.params.event, "i") })
+    if (eventTalks) {
+      res.status(200).json({
+      success: true,
+      tedTalkData: eventTalks
+    })
+    // } else {
+    //   res.status(404).json({
+    //     success: false,
+    //     status_code: 404,
+    //     error: `No event with this name ${req.params.event} was found, try another`
+    //   })
+    }
+  } catch (error) {
+      res.status(400).json({
+        success: false,
+        body: {
+          message: "Invalid input"
+        }
+      });
+  }
+  });
+
+// ROUTE 6: Filter on a specific TED Talk with id.
  // req.params.id refers to given _id
 app.get("/tedTalk/id/:id", async (req, res) => {
   try {
@@ -122,55 +198,34 @@ app.get("/tedTalk/id/:id", async (req, res) => {
   
 });
 
-app.get("/talks/", async (req, res) => {
-
-  const {event, speaker, views} = req.query;
-  const response = {
-    success: true,
-    body: {}
-  }
-  const matchAllRegex = new RegExp(".*");
-  const eventQuery = event ? event : matchAllRegex;
-  const speakerQuery = speaker ?speaker : matchAllRegex;
-  const viewsQuery = views ? views : {$gt:0, $lt:3000000};
-
+// ROUTE 7: Filter on a specific TED Talk with talk_id.
+app.get("/tedTalk/talk_id/:talk_id", async (req, res) => {
   try {
-    // if ( req.params.genre && req.params.danceability) {
-      response.body = await TedTalk.find({event: eventQuery,speaker: speakerQuery, views: viewsQuery}).limit(5)
-      // response.body = await TedTalk.find({event: speakerQuery,speaker: speakerQuery, views: viewsQuery}).limit(2).sort({energy: 1}).select({trackName: 1, artistName: 1})
-      //.exec() => to explore if you're curious enough :P
-    // } else if (req.params.genre && !req.params.danceability) {
-    //   response.body = await Song.find({genre: req.params.genre});
-    // } else if (!req.params.genre && req.params.danceability) {
-    //   response.body = await Song.find({danceability: req.params.danceability});
-    // }
-    res.status(200).json({
-      success: true,
-      body: response
-    });
-  } catch (error) {
+    const oneTedTalk = await TedTalk.find({talk_id: req.params.talk_id});
+     
+    if (oneTedTalk) {
+      res.status(200).json({
+        success: true,
+        body: oneTedTalk
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: `No TED Talk whit this talk_id ${req.params.talk_id}, please try again`
+        }
+      });
+    }
+  } catch(error) {
     res.status(400).json({
       success: false,
       body: {
-        message: error
+        message: "Invalid id"
       }
     });
   }
-
+  
 });
-
-
-
-// :name, is case sensetive need to be exact
-// app.get('/:speaker', (req, res) => {
-//   TedTalk.findOne({speaker: req.params.speaker}).then(talkSpeaker => {
-//     if(talkSpeaker) {
-//       res.json(talkSpeaker)
-//     } else {
-//       res.status(404).json({ error: 'Speaker not found, try again'})
-//     }
-//   })
-// })
 
 // Start the server
 app.listen(port, () => {
