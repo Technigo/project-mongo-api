@@ -1,6 +1,6 @@
 [
   {
-    "bookID": 1,
+    "id": 1,
     "title": "Harry Potter and the Half-Blood Prince (Harry Potter  #6)",
     "authors": "J.K. Rowling-Mary GrandPré",
     "average_rating": 4.56,
@@ -12,7 +12,7 @@
     "text_reviews_count": 26249
   },
   {
-    "bookID": 2,
+    "id": 2,
     "title": "Harry Potter and the Order of the Phoenix (Harry Potter  #5)",
     "authors": "J.K. Rowling-Mary GrandPré",
     "average_rating": 4.49,
@@ -24,7 +24,7 @@
     "text_reviews_count": 27613
   },
   {
-    "bookID": 3,
+    "id": 3,
     "title": "Harry Potter and the Sorcerer's Stone (Harry Potter  #1)",
     "authors": "J.K. Rowling-Mary GrandPré",
     "average_rating": 4.47,
@@ -36,7 +36,7 @@
     "text_reviews_count": 70390
   },
   {
-    "bookID": 4,
+    "id": 4,
     "title": "Harry Potter and the Chamber of Secrets (Harry Potter  #2)",
     "authors": "J.K. Rowling",
     "average_rating": 4.41,
@@ -48,7 +48,7 @@
     "text_reviews_count": 272
   },
   {
-    "bookID": 8,
+    "id": 8,
     "title": "Harry Potter Boxed Set  Books 1-5 (Harry Potter  #1-5)",
     "authors": "J.K. Rowling-Mary GrandPré",
     "average_rating": 4.78,
@@ -60,7 +60,7 @@
     "text_reviews_count": 154
   },
   {
-    "bookID": 9,
+    "id": 9,
     "title": "Unauthorized Harry Potter Book Seven News: \"Half-Blood Prince\" Analysis and Speculation",
     "authors": "W. Frederick Zimmerman",
     "average_rating": 3.69,
@@ -72,7 +72,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 10,
+    "id": 10,
     "title": "Harry Potter Collection (Harry Potter  #1-6)",
     "authors": "J.K. Rowling",
     "average_rating": 4.73,
@@ -84,7 +84,7 @@
     "text_reviews_count": 820
   },
   {
-    "bookID": 12,
+    "id": 12,
     "title": "The Ultimate Hitchhiker's Guide: Five Complete Novels and One Story (Hitchhiker's Guide to the Galaxy  #1-5)",
     "authors": "Douglas Adams",
     "average_rating": 4.38,
@@ -96,7 +96,7 @@
     "text_reviews_count": 258
   },
   {
-    "bookID": 13,
+    "id": 13,
     "title": "The Ultimate Hitchhiker's Guide to the Galaxy",
     "authors": "Douglas Adams",
     "average_rating": 4.38,
@@ -108,7 +108,7 @@
     "text_reviews_count": 3954
   },
   {
-    "bookID": 14,
+    "id": 14,
     "title": "The Hitchhiker's Guide to the Galaxy (Hitchhiker's Guide to the Galaxy  #1)",
     "authors": "Douglas Adams",
     "average_rating": 4.22,
@@ -120,7 +120,7 @@
     "text_reviews_count": 408
   },
   {
-    "bookID": 16,
+    "id": 16,
     "title": "The Hitchhiker's Guide to the Galaxy (Hitchhiker's Guide to the Galaxy  #1)",
     "authors": "Douglas Adams-Stephen Fry",
     "average_rating": 4.22,
@@ -132,7 +132,7 @@
     "text_reviews_count": 253
   },
   {
-    "bookID": 18,
+    "id": 18,
     "title": "The Ultimate Hitchhiker's Guide (Hitchhiker's Guide to the Galaxy #1-5)",
     "authors": "Douglas Adams",
     "average_rating": 4.38,
@@ -144,7 +144,7 @@
     "text_reviews_count": 192
   },
   {
-    "bookID": 22,
+    "id": 22,
     "title": "Bill Bryson's African Diary",
     "authors": "Bill Bryson",
     "average_rating": 3.43,
@@ -156,7 +156,7 @@
     "text_reviews_count": 470
   },
   {
-    "bookID": 23,
+    "id": 23,
     "title": "Bryson's Dictionary of Troublesome Words: A Writer's Guide to Getting It Right",
     "authors": "Bill Bryson",
     "average_rating": 3.88,
@@ -168,7 +168,7 @@
     "text_reviews_count": 124
   },
   {
-    "bookID": 24,
+    "id": 24,
     "title": "In a Sunburned Country",
     "authors": "Bill Bryson",
     "average_rating": 4.07,
@@ -180,7 +180,7 @@
     "text_reviews_count": 4077
   },
   {
-    "bookID": 26,
+    "id": 26,
     "title": "The Lost Continent: Travels in Small Town America",
     "authors": "Bill Bryson",
     "average_rating": 3.83,
@@ -192,7 +192,7 @@
     "text_reviews_count": 2146
   },
   {
-    "bookID": 27,
+    "id": 27,
     "title": "Neither Here nor There: Travels in Europe",
     "authors": "Bill Bryson",
     "average_rating": 3.87,
@@ -204,7 +204,7 @@
     "text_reviews_count": 2127
   },
   {
-    "bookID": 28,
+    "id": 28,
     "title": "Notes from a Small Island",
     "authors": "Bill Bryson",
     "average_rating": 3.92,
@@ -216,7 +216,7 @@
     "text_reviews_count": 3159
   },
   {
-    "bookID": 29,
+    "id": 29,
     "title": "The Mother Tongue: English and How It Got That Way",
     "authors": "Bill Bryson",
     "average_rating": 3.94,
@@ -228,7 +228,7 @@
     "text_reviews_count": 1986
   },
   {
-    "bookID": 30,
+    "id": 30,
     "title": "J.R.R. Tolkien 4-Book Boxed Set: The Hobbit and The Lord of the Rings",
     "authors": "J.R.R. Tolkien",
     "average_rating": 4.59,
@@ -240,7 +240,7 @@
     "text_reviews_count": 1536
   },
   {
-    "bookID": 31,
+    "id": 31,
     "title": "The Lord of the Rings (The Lord of the Rings  #1-3)",
     "authors": "J.R.R. Tolkien",
     "average_rating": 4.49,
@@ -252,7 +252,7 @@
     "text_reviews_count": 91
   },
   {
-    "bookID": 32,
+    "id": 32,
     "title": "The Lord of the Rings (The Lord of the Rings  #1-3)",
     "authors": "J.R.R. Tolkien",
     "average_rating": 4.49,
@@ -264,7 +264,7 @@
     "text_reviews_count": 139
   },
   {
-    "bookID": 34,
+    "id": 34,
     "title": "The Fellowship of the Ring (The Lord of the Rings  #1)",
     "authors": "J.R.R. Tolkien",
     "average_rating": 4.35,
@@ -276,7 +276,7 @@
     "text_reviews_count": 12784
   },
   {
-    "bookID": 35,
+    "id": 35,
     "title": "The Lord of the Rings (The Lord of the Rings  #1-3)",
     "authors": "J.R.R. Tolkien-Alan  Lee",
     "average_rating": 4.49,
@@ -288,7 +288,7 @@
     "text_reviews_count": 139
   },
   {
-    "bookID": 36,
+    "id": 36,
     "title": "The Lord of the Rings: Weapons and Warfare",
     "authors": "Chris   Smith-Christopher  Lee-Richard Taylor",
     "average_rating": 4.53,
@@ -300,7 +300,7 @@
     "text_reviews_count": 43
   },
   {
-    "bookID": 37,
+    "id": 37,
     "title": "The Lord of the Rings: Complete Visual Companion",
     "authors": "Jude Fisher",
     "average_rating": 4.5,
@@ -312,7 +312,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 38,
+    "id": 38,
     "title": "The Lord of the Rings Box Set",
     "authors": "J.R.R. Tolkien",
     "average_rating": 4.49,
@@ -324,7 +324,7 @@
     "text_reviews_count": 19
   },
   {
-    "bookID": 50,
+    "id": 50,
     "title": "Hatchet",
     "authors": "Gary Paulsen",
     "average_rating": 3.7,
@@ -336,7 +336,7 @@
     "text_reviews_count": 11346
   },
   {
-    "bookID": 51,
+    "id": 51,
     "title": "Hatchet: A Guide for Using \"Hatchet\" in the Classroom",
     "authors": "Donna Ickes-Edward Sciranko-Keith Vasconcelles",
     "average_rating": 3.97,
@@ -348,7 +348,7 @@
     "text_reviews_count": 2
   },
   {
-    "bookID": 53,
+    "id": 53,
     "title": "Guts: The True Stories behind Hatchet and the Brian Books",
     "authors": "Gary Paulsen",
     "average_rating": 3.87,
@@ -360,7 +360,7 @@
     "text_reviews_count": 326
   },
   {
-    "bookID": 54,
+    "id": 54,
     "title": "Molly Hatchet - 5 of the Best",
     "authors": "Molly Hatchet",
     "average_rating": 4.33,
@@ -372,7 +372,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 55,
+    "id": 55,
     "title": "Hatchet Jobs: Writings on Contemporary Fiction",
     "authors": "Dale Peck",
     "average_rating": 3.48,
@@ -384,7 +384,7 @@
     "text_reviews_count": 16
   },
   {
-    "bookID": 57,
+    "id": 57,
     "title": "A Changeling for All Seasons (Changeling Seasons #1)",
     "authors": "Angela Knight-Sahara Kelly-Judy Mays-Marteeka Karland-Kate Douglas-Shelby Morgen-Lacey Savage-Kate Hill-Willa Okati",
     "average_rating": 3.75,
@@ -396,7 +396,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 58,
+    "id": 58,
     "title": "Changeling (Changeling  #1)",
     "authors": "Delia Sherman",
     "average_rating": 3.6,
@@ -408,7 +408,7 @@
     "text_reviews_count": 112
   },
   {
-    "bookID": 59,
+    "id": 59,
     "title": "The Changeling Sea",
     "authors": "Patricia A. McKillip",
     "average_rating": 4.07,
@@ -420,7 +420,7 @@
     "text_reviews_count": 289
   },
   {
-    "bookID": 61,
+    "id": 61,
     "title": "The Changeling",
     "authors": "Zilpha Keatley Snyder",
     "average_rating": 4.17,
@@ -432,7 +432,7 @@
     "text_reviews_count": 92
   },
   {
-    "bookID": 63,
+    "id": 63,
     "title": "The Changeling",
     "authors": "Kate Horsley",
     "average_rating": 3.56,
@@ -444,7 +444,7 @@
     "text_reviews_count": 42
   },
   {
-    "bookID": 66,
+    "id": 66,
     "title": "The Changeling (Daughters of England  #15)",
     "authors": "Philippa Carr",
     "average_rating": 3.99,
@@ -456,7 +456,7 @@
     "text_reviews_count": 12
   },
   {
-    "bookID": 67,
+    "id": 67,
     "title": "The Known World",
     "authors": "Edward P. Jones",
     "average_rating": 3.83,
@@ -468,7 +468,7 @@
     "text_reviews_count": 2576
   },
   {
-    "bookID": 69,
+    "id": 69,
     "title": "The Known World",
     "authors": "Edward P. Jones",
     "average_rating": 3.83,
@@ -480,7 +480,7 @@
     "text_reviews_count": 3
   },
   {
-    "bookID": 71,
+    "id": 71,
     "title": "Traders  Guns & Money: Knowns and Unknowns in the Dazzling World of Derivatives",
     "authors": "Satyajit Das",
     "average_rating": 3.83,
@@ -492,7 +492,7 @@
     "text_reviews_count": 78
   },
   {
-    "bookID": 72,
+    "id": 72,
     "title": "Artesia: Adventures in the Known World",
     "authors": "Mark Smylie",
     "average_rating": 4.16,
@@ -504,7 +504,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 74,
+    "id": 74,
     "title": "The John McPhee Reader (John McPhee Reader  #1)",
     "authors": "John McPhee-William Howarth",
     "average_rating": 4.43,
@@ -516,7 +516,7 @@
     "text_reviews_count": 36
   },
   {
-    "bookID": 75,
+    "id": 75,
     "title": "Uncommon Carriers",
     "authors": "John McPhee",
     "average_rating": 3.95,
@@ -528,7 +528,7 @@
     "text_reviews_count": 192
   },
   {
-    "bookID": 76,
+    "id": 76,
     "title": "Heirs of General Practice",
     "authors": "John McPhee",
     "average_rating": 4.15,
@@ -540,7 +540,7 @@
     "text_reviews_count": 18
   },
   {
-    "bookID": 77,
+    "id": 77,
     "title": "The Control of Nature",
     "authors": "John McPhee",
     "average_rating": 4.24,
@@ -552,7 +552,7 @@
     "text_reviews_count": 290
   },
   {
-    "bookID": 78,
+    "id": 78,
     "title": "Annals of the Former World",
     "authors": "John McPhee",
     "average_rating": 4.33,
@@ -564,7 +564,7 @@
     "text_reviews_count": 211
   },
   {
-    "bookID": 79,
+    "id": 79,
     "title": "Coming Into the Country",
     "authors": "John McPhee",
     "average_rating": 4.22,
@@ -576,7 +576,7 @@
     "text_reviews_count": 245
   },
   {
-    "bookID": 80,
+    "id": 80,
     "title": "La Place de la Concorde Suisse",
     "authors": "John McPhee",
     "average_rating": 3.91,
@@ -588,7 +588,7 @@
     "text_reviews_count": 52
   },
   {
-    "bookID": 81,
+    "id": 81,
     "title": "Giving Good Weight",
     "authors": "John McPhee",
     "average_rating": 4.22,
@@ -600,7 +600,7 @@
     "text_reviews_count": 34
   },
   {
-    "bookID": 83,
+    "id": 83,
     "title": "Rising from the Plains",
     "authors": "John McPhee",
     "average_rating": 4.22,
@@ -612,7 +612,7 @@
     "text_reviews_count": 91
   },
   {
-    "bookID": 85,
+    "id": 85,
     "title": "The Heidi Chronicles",
     "authors": "Wendy Wasserstein",
     "average_rating": 3.73,
@@ -624,7 +624,7 @@
     "text_reviews_count": 69
   },
   {
-    "bookID": 86,
+    "id": 86,
     "title": "The Heidi Chronicles: Uncommon Women and Others & Isn't It Romantic",
     "authors": "Wendy Wasserstein",
     "average_rating": 3.83,
@@ -636,7 +636,7 @@
     "text_reviews_count": 63
   },
   {
-    "bookID": 89,
+    "id": 89,
     "title": "Active Literacy Across the Curriculum: Strategies for Reading  Writing  Speaking  and Listening",
     "authors": "Heidi Hayes Jacobs",
     "average_rating": 3.94,
@@ -648,7 +648,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 90,
+    "id": 90,
     "title": "Simply Beautiful Beaded Jewelry",
     "authors": "Heidi Boyd",
     "average_rating": 3.75,
@@ -660,7 +660,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 91,
+    "id": 91,
     "title": "Always Enough: God's Miraculous Provision Among the Poorest Children on Earth",
     "authors": "Heidi Baker-Rolland Baker",
     "average_rating": 4.45,
@@ -672,7 +672,7 @@
     "text_reviews_count": 53
   },
   {
-    "bookID": 92,
+    "id": 92,
     "title": "Mapping the Big Picture: Integrating Curriculum & Assessment K-12",
     "authors": "Heidi Hayes Jacobs",
     "average_rating": 3.7,
@@ -684,7 +684,7 @@
     "text_reviews_count": 2
   },
   {
-    "bookID": 93,
+    "id": 93,
     "title": "Heidi",
     "authors": "Johanna Spyri-Beverly Cleary-Angelo  Rinaldi",
     "average_rating": 3.98,
@@ -696,7 +696,7 @@
     "text_reviews_count": 2175
   },
   {
-    "bookID": 94,
+    "id": 94,
     "title": "Getting Results with Curriculum Mapping",
     "authors": "Heidi Hayes Jacobs",
     "average_rating": 3.28,
@@ -708,7 +708,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 96,
+    "id": 96,
     "title": "There's Always Enough: The Miraculous Move of God in Mozambique",
     "authors": "Rolland Baker-Heidi Baker",
     "average_rating": 4.45,
@@ -720,7 +720,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 98,
+    "id": 98,
     "title": "What to Expect the First Year (What to Expect)",
     "authors": "Heidi Murkoff-Sharon Mazel-Heidi Murkoff-Arlene Eisenberg-Sandee Hathaway-Mark D. Widome",
     "average_rating": 3.88,
@@ -732,7 +732,7 @@
     "text_reviews_count": 658
   },
   {
-    "bookID": 99,
+    "id": 99,
     "title": "The Player's Handbook: The Ultimate Guide on Dating and Relationships",
     "authors": "Heidi Fleiss-Libby Keatinge",
     "average_rating": 3.82,
@@ -744,7 +744,7 @@
     "text_reviews_count": 8
   },
   {
-    "bookID": 100,
+    "id": 100,
     "title": "Simply Beautiful Beading: 53 Quick and Easy Projects",
     "authors": "Heidi Boyd",
     "average_rating": 3.75,
@@ -756,7 +756,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 103,
+    "id": 103,
     "title": "God Emperor of Dune (Dune Chronicles  #4)",
     "authors": "Frank Herbert",
     "average_rating": 3.83,
@@ -768,7 +768,7 @@
     "text_reviews_count": 168
   },
   {
-    "bookID": 105,
+    "id": 105,
     "title": "Chapterhouse: Dune (Dune Chronicles #6)",
     "authors": "Frank Herbert",
     "average_rating": 3.9,
@@ -780,7 +780,7 @@
     "text_reviews_count": 552
   },
   {
-    "bookID": 106,
+    "id": 106,
     "title": "Dune Messiah (Dune Chronicles #2)",
     "authors": "Frank Herbert",
     "average_rating": 3.87,
@@ -792,7 +792,7 @@
     "text_reviews_count": 2306
   },
   {
-    "bookID": 107,
+    "id": 107,
     "title": "Dreamer of Dune: The Biography of Frank Herbert",
     "authors": "Brian Herbert",
     "average_rating": 4,
@@ -804,7 +804,7 @@
     "text_reviews_count": 21
   },
   {
-    "bookID": 109,
+    "id": 109,
     "title": "Heretics of Dune (Dune Chronicles  #5)",
     "authors": "Frank Herbert",
     "average_rating": 3.85,
@@ -816,7 +816,7 @@
     "text_reviews_count": 18
   },
   {
-    "bookID": 110,
+    "id": 110,
     "title": "The Road to Dune (Dune Universe)",
     "authors": "Frank Herbert-Brian Herbert-Kevin J. Anderson",
     "average_rating": 3.87,
@@ -828,7 +828,7 @@
     "text_reviews_count": 76
   },
   {
-    "bookID": 112,
+    "id": 112,
     "title": "Children of Dune (Dune Chronicles #3)",
     "authors": "Frank Herbert",
     "average_rating": 3.92,
@@ -840,7 +840,7 @@
     "text_reviews_count": 1370
   },
   {
-    "bookID": 117,
+    "id": 117,
     "title": "Heretics of Dune (Dune Chronicles #5)",
     "authors": "Frank Herbert",
     "average_rating": 3.85,
@@ -852,7 +852,7 @@
     "text_reviews_count": 616
   },
   {
-    "bookID": 123,
+    "id": 123,
     "title": "The Power of One (The Power of One  #1)",
     "authors": "Bryce Courtenay",
     "average_rating": 4.35,
@@ -864,7 +864,7 @@
     "text_reviews_count": 12
   },
   {
-    "bookID": 129,
+    "id": 129,
     "title": "The Power of One: One Person  One Rule  One Month",
     "authors": "John C. Maxwell-Stephen R. Graves-Thomas G. Addington",
     "average_rating": 4.28,
@@ -876,7 +876,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 130,
+    "id": 130,
     "title": "Power of an Hour: Business and Life Mastery in One Hour a Week",
     "authors": "Dave Lakhani",
     "average_rating": 3.31,
@@ -888,7 +888,7 @@
     "text_reviews_count": 16
   },
   {
-    "bookID": 131,
+    "id": 131,
     "title": "The Power of One: The Solo Play for Playwrights  Actors  and Directors",
     "authors": "Louis E. Catron",
     "average_rating": 3.79,
@@ -900,7 +900,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 133,
+    "id": 133,
     "title": "eBay for Dummies",
     "authors": "Marsha Collier",
     "average_rating": 3.5,
@@ -912,7 +912,7 @@
     "text_reviews_count": 9
   },
   {
-    "bookID": 135,
+    "id": 135,
     "title": "What to Sell on ebay and Where to Get It: The Definitive Guide to Product Sourcing for eBay and Beyond",
     "authors": "Chris Malta-Lisa Suttora",
     "average_rating": 3.62,
@@ -924,7 +924,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 137,
+    "id": 137,
     "title": "Starting an eBay Business for Dummies",
     "authors": "Marsha Collier",
     "average_rating": 3.52,
@@ -936,7 +936,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 138,
+    "id": 138,
     "title": "eBay: Top 100 Simplified Tips & Tricks",
     "authors": "Julia Wilkinson",
     "average_rating": 4.27,
@@ -948,7 +948,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 139,
+    "id": 139,
     "title": "ebay Timesaving Techniques for Dummies",
     "authors": "Marsha Collier",
     "average_rating": 3.55,
@@ -960,7 +960,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 140,
+    "id": 140,
     "title": "eBay Business All-in-One Desk Reference for Dummies",
     "authors": "Marsha Collier",
     "average_rating": 3.89,
@@ -972,7 +972,7 @@
     "text_reviews_count": 3
   },
   {
-    "bookID": 141,
+    "id": 141,
     "title": "Ruby Cookbook",
     "authors": "Lucas Carlson-Leonard Richardson",
     "average_rating": 3.82,
@@ -984,7 +984,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 142,
+    "id": 142,
     "title": "Ruby Ann's Down Home Trailer Park Cookbook",
     "authors": "Ruby Ann Boxcar",
     "average_rating": 4.09,
@@ -996,7 +996,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 144,
+    "id": 144,
     "title": "Ruby Ann's Down Home Trailer Park BBQin' Cookbook",
     "authors": "Ruby Ann Boxcar",
     "average_rating": 4.08,
@@ -1008,7 +1008,7 @@
     "text_reviews_count": 2
   },
   {
-    "bookID": 147,
+    "id": 147,
     "title": "Rails Cookbook: Recipes for Rapid Web Development with Ruby",
     "authors": "Rob Orsini",
     "average_rating": 3.65,
@@ -1020,7 +1020,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 151,
+    "id": 151,
     "title": "Anna Karenina",
     "authors": "Leo Tolstoy-Richard Pevear-Larissa Volokhonsky",
     "average_rating": 4.04,
@@ -1032,7 +1032,7 @@
     "text_reviews_count": 1795
   },
   {
-    "bookID": 152,
+    "id": 152,
     "title": "Anna Karenina",
     "authors": "Leo Tolstoy-David Magarshack-Priscilla Meyer",
     "average_rating": 4.04,
@@ -1044,7 +1044,7 @@
     "text_reviews_count": 5694
   },
   {
-    "bookID": 153,
+    "id": 153,
     "title": "Anna Karenina",
     "authors": "Leo Tolstoy-Richard Pevear-Larissa Volokhonsky-John Bayley",
     "average_rating": 4.04,
@@ -1056,7 +1056,7 @@
     "text_reviews_count": 300
   },
   {
-    "bookID": 154,
+    "id": 154,
     "title": "CliffsNotes on Tolstoy's Anna Karenina",
     "authors": "Marianne Sturman-Leo Tolstoy",
     "average_rating": 3.89,
@@ -1068,7 +1068,7 @@
     "text_reviews_count": 3
   },
   {
-    "bookID": 155,
+    "id": 155,
     "title": "Anna Karenina",
     "authors": "Leo Tolstoy-Amy Mandelker-Constance Garnett",
     "average_rating": 4.04,
@@ -1080,7 +1080,7 @@
     "text_reviews_count": 710
   },
   {
-    "bookID": 156,
+    "id": 156,
     "title": "Anna Karenina",
     "authors": "Leo Tolstoy-Louise Maude-Aylmer Maude",
     "average_rating": 4.04,
@@ -1092,7 +1092,7 @@
     "text_reviews_count": 71
   },
   {
-    "bookID": 157,
+    "id": 157,
     "title": "Anna Karenina",
     "authors": "Leo Tolstoy-Constance Garnett-Amy Mandelker",
     "average_rating": 4.04,
@@ -1104,7 +1104,7 @@
     "text_reviews_count": 47
   },
   {
-    "bookID": 159,
+    "id": 159,
     "title": "Dinner with Anna Karenina",
     "authors": "Gloria Goldreich",
     "average_rating": 2.96,
@@ -1116,7 +1116,7 @@
     "text_reviews_count": 64
   },
   {
-    "bookID": 160,
+    "id": 160,
     "title": "Tolstoy: Anna Karenina",
     "authors": "Anthony Thorlby",
     "average_rating": 4.19,
@@ -1128,7 +1128,7 @@
     "text_reviews_count": 32
   },
   {
-    "bookID": 162,
+    "id": 162,
     "title": "Untouchable",
     "authors": "Mulk Raj Anand-E.M. Forster",
     "average_rating": 3.7,
@@ -1140,7 +1140,7 @@
     "text_reviews_count": 250
   },
   {
-    "bookID": 163,
+    "id": 163,
     "title": "The Untouchable",
     "authors": "John Banville",
     "average_rating": 3.96,
@@ -1152,7 +1152,7 @@
     "text_reviews_count": 209
   },
   {
-    "bookID": 164,
+    "id": 164,
     "title": "The Untouchables",
     "authors": "Eliot Ness-Oscar Fraley",
     "average_rating": 3.89,
@@ -1164,7 +1164,7 @@
     "text_reviews_count": 29
   },
   {
-    "bookID": 165,
+    "id": 165,
     "title": "Untouchables: My Family's Triumphant Journey Out of the Caste System in Modern India",
     "authors": "Narendra Jadhav",
     "average_rating": 3.82,
@@ -1176,7 +1176,7 @@
     "text_reviews_count": 39
   },
   {
-    "bookID": 166,
+    "id": 166,
     "title": "Dalit: The Black Untaouchables of India",
     "authors": "V.T. Rajshekar-Y.N. Kly",
     "average_rating": 4.33,
@@ -1188,7 +1188,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 168,
+    "id": 168,
     "title": "Growing Up Untouchable in India: A Dalit Autobiography",
     "authors": "Vasant Moon-Gail Omvedt-Eleanor Zelliot",
     "average_rating": 3.58,
@@ -1200,7 +1200,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 171,
+    "id": 171,
     "title": "The Evidence-Based Social Work Skills Book",
     "authors": "Barry R. Cournoyer",
     "average_rating": 3.4,
@@ -1212,7 +1212,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 177,
+    "id": 177,
     "title": "A Wrinkle in Time: A Guide for Using \"A Wrinkle in Time\" in the Classroom",
     "authors": "John Carratello-Patty Carratello-Theresa Wright",
     "average_rating": 3.94,
@@ -1224,7 +1224,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 180,
+    "id": 180,
     "title": "Wrinkles in Time",
     "authors": "George Smoot-Keay Davidson",
     "average_rating": 3.99,
@@ -1236,7 +1236,7 @@
     "text_reviews_count": 23
   },
   {
-    "bookID": 181,
+    "id": 181,
     "title": "A Wrinkle in Time: With Related Readings (A Wrinkle in Time Quintet #1)",
     "authors": "Madeleine L'Engle",
     "average_rating": 4.01,
@@ -1248,7 +1248,7 @@
     "text_reviews_count": 7
   },
   {
-    "bookID": 201,
+    "id": 201,
     "title": "Una arruga en el tiempo – A Wrinkle in Time",
     "authors": "Madeleine L'Engle",
     "average_rating": 4.01,
@@ -1260,7 +1260,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 204,
+    "id": 204,
     "title": "The Long Shadow (The Morland Dynasty  #6)",
     "authors": "Cynthia Harrod-Eagles",
     "average_rating": 4.11,
@@ -1272,7 +1272,7 @@
     "text_reviews_count": 16
   },
   {
-    "bookID": 207,
+    "id": 207,
     "title": "Long Way Round: Chasing Shadows Across the World",
     "authors": "Ewan McGregor-Charley Boorman-Robert Uhlig",
     "average_rating": 3.94,
@@ -1284,7 +1284,7 @@
     "text_reviews_count": 45
   },
   {
-    "bookID": 208,
+    "id": 208,
     "title": "A Shadow in Summer (Long Price Quartet  #1)",
     "authors": "Daniel Abraham",
     "average_rating": 3.6,
@@ -1296,7 +1296,7 @@
     "text_reviews_count": 604
   },
   {
-    "bookID": 213,
+    "id": 213,
     "title": "New Hope for the Dead (Hoke Mosely #2)",
     "authors": "Charles Willeford-James Lee Burke",
     "average_rating": 3.91,
@@ -1308,7 +1308,7 @@
     "text_reviews_count": 72
   },
   {
-    "bookID": 214,
+    "id": 214,
     "title": "Sideswipe: A Hoke Moseley Novel",
     "authors": "Charles Willeford-Lawrence Block",
     "average_rating": 4.04,
@@ -1320,7 +1320,7 @@
     "text_reviews_count": 68
   },
   {
-    "bookID": 216,
+    "id": 216,
     "title": "Miami Blues (Hoke Mosely #1)",
     "authors": "Charles Willeford-Elmore Leonard",
     "average_rating": 3.94,
@@ -1332,7 +1332,7 @@
     "text_reviews_count": 158
   },
   {
-    "bookID": 231,
+    "id": 231,
     "title": "I am Charlotte Simmons",
     "authors": "Tom Wolfe",
     "average_rating": 3.41,
@@ -1344,7 +1344,7 @@
     "text_reviews_count": 1686
   },
   {
-    "bookID": 237,
+    "id": 237,
     "title": "Poetry for Young People: Edward Lear",
     "authors": "Edward Lear-Laura Huliska-Beith-Edward Mendelson",
     "average_rating": 3.9,
@@ -1356,7 +1356,7 @@
     "text_reviews_count": 18
   },
   {
-    "bookID": 244,
+    "id": 244,
     "title": "The Puffin Book of Nonsense Verse",
     "authors": "Quentin Blake",
     "average_rating": 4.04,
@@ -1368,7 +1368,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 245,
+    "id": 245,
     "title": "Henry Miller on Writing",
     "authors": "Henry Miller-Thomas H. Moore",
     "average_rating": 4.23,
@@ -1380,7 +1380,7 @@
     "text_reviews_count": 50
   },
   {
-    "bookID": 249,
+    "id": 249,
     "title": "Tropic of Cancer",
     "authors": "Henry Miller-Jiří Níl",
     "average_rating": 3.69,
@@ -1392,7 +1392,7 @@
     "text_reviews_count": 2290
   },
   {
-    "bookID": 250,
+    "id": 250,
     "title": "Tropic of Capricorn",
     "authors": "Henry Miller",
     "average_rating": 3.82,
@@ -1404,7 +1404,7 @@
     "text_reviews_count": 448
   },
   {
-    "bookID": 251,
+    "id": 251,
     "title": "Nexus (The Rosy Crucifixion  #3)",
     "authors": "Henry Miller",
     "average_rating": 4.09,
@@ -1416,7 +1416,7 @@
     "text_reviews_count": 53
   },
   {
-    "bookID": 252,
+    "id": 252,
     "title": "Sexus (The Rosy Crucifixion  #1)",
     "authors": "Henry Miller",
     "average_rating": 4.04,
@@ -1428,7 +1428,7 @@
     "text_reviews_count": 248
   },
   {
-    "bookID": 253,
+    "id": 253,
     "title": "The Air-Conditioned Nightmare",
     "authors": "Henry Miller",
     "average_rating": 3.83,
@@ -1440,7 +1440,7 @@
     "text_reviews_count": 142
   },
   {
-    "bookID": 264,
+    "id": 264,
     "title": "The Portrait of a Lady",
     "authors": "Henry James-Patricia Crick",
     "average_rating": 3.77,
@@ -1452,7 +1452,7 @@
     "text_reviews_count": 1854
   },
   {
-    "bookID": 269,
+    "id": 269,
     "title": "The Portrait of a Lady",
     "authors": "Henry James-Gabriel Brownstein-Mary Cregan",
     "average_rating": 3.77,
@@ -1464,7 +1464,7 @@
     "text_reviews_count": 40
   },
   {
-    "bookID": 275,
+    "id": 275,
     "title": "The Lover",
     "authors": "Marguerite Duras-Barbara Bray-Maxine Hong Kingston",
     "average_rating": 3.75,
@@ -1476,7 +1476,7 @@
     "text_reviews_count": 1363
   },
   {
-    "bookID": 278,
+    "id": 278,
     "title": "The War",
     "authors": "Marguerite Duras-Barbara Bray-قلسم روبین",
     "average_rating": 3.85,
@@ -1488,7 +1488,7 @@
     "text_reviews_count": 62
   },
   {
-    "bookID": 280,
+    "id": 280,
     "title": "The Ravishing of Lol Stein",
     "authors": "Marguerite Duras-Richard Seever",
     "average_rating": 3.67,
@@ -1500,7 +1500,7 @@
     "text_reviews_count": 122
   },
   {
-    "bookID": 283,
+    "id": 283,
     "title": "L'Amant de la Chine du Nord",
     "authors": "Marguerite Duras",
     "average_rating": 3.89,
@@ -1512,7 +1512,7 @@
     "text_reviews_count": 23
   },
   {
-    "bookID": 285,
+    "id": 285,
     "title": "Love Letters",
     "authors": "Kahlil Gibran-Suheil Bushrui-Salma H. Al-Kuzbari",
     "average_rating": 3.67,
@@ -1524,7 +1524,7 @@
     "text_reviews_count": 9
   },
   {
-    "bookID": 290,
+    "id": 290,
     "title": "Jesus the Son of Man",
     "authors": "Kahlil Gibran-جبران خليل جبران",
     "average_rating": 3.98,
@@ -1536,7 +1536,7 @@
     "text_reviews_count": 78
   },
   {
-    "bookID": 291,
+    "id": 291,
     "title": "The Broken Wings",
     "authors": "Kahlil Gibran-جبران خليل جبران-Anthony R. Ferris",
     "average_rating": 3.92,
@@ -1548,7 +1548,7 @@
     "text_reviews_count": 492
   },
   {
-    "bookID": 295,
+    "id": 295,
     "title": "Treasure Island",
     "authors": "Robert Louis Stevenson",
     "average_rating": 3.83,
@@ -1560,7 +1560,7 @@
     "text_reviews_count": 6160
   },
   {
-    "bookID": 296,
+    "id": 296,
     "title": "Treasure Island",
     "authors": "Robert Louis Stevenson-Scott McKowen",
     "average_rating": 3.83,
@@ -1572,7 +1572,7 @@
     "text_reviews_count": 41
   },
   {
-    "bookID": 297,
+    "id": 297,
     "title": "Treasure Island",
     "authors": "Robert Louis Stevenson",
     "average_rating": 3.83,
@@ -1584,7 +1584,7 @@
     "text_reviews_count": 270
   },
   {
-    "bookID": 298,
+    "id": 298,
     "title": "Treasure Island",
     "authors": "Robert Louis Stevenson-N.C. Wyeth-Timothy Meis",
     "average_rating": 3.83,
@@ -1596,7 +1596,7 @@
     "text_reviews_count": 16
   },
   {
-    "bookID": 299,
+    "id": 299,
     "title": "Treasure Island",
     "authors": "Robert Louis Stevenson-Milo Winter",
     "average_rating": 3.83,
@@ -1608,7 +1608,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 302,
+    "id": 302,
     "title": "Treasure Island (Great Illustrated Classics)",
     "authors": "Deidre S. Laiken-A.J. McAllister-Robert Louis Stevenson",
     "average_rating": 4.04,
@@ -1620,7 +1620,7 @@
     "text_reviews_count": 18
   },
   {
-    "bookID": 313,
+    "id": 313,
     "title": "100 Years of Lynchings",
     "authors": "Ralph Ginzburg",
     "average_rating": 4.63,
@@ -1632,7 +1632,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 320,
+    "id": 320,
     "title": "One Hundred Years of Solitude",
     "authors": "Gabriel García Márquez-Gregory Rabassa",
     "average_rating": 4.06,
@@ -1644,7 +1644,7 @@
     "text_reviews_count": 15763
   },
   {
-    "bookID": 324,
+    "id": 324,
     "title": "Cien años de soledad",
     "authors": "Gabriel García Márquez",
     "average_rating": 4.06,
@@ -1656,7 +1656,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 325,
+    "id": 325,
     "title": "Cien años de soledad",
     "authors": "Gabriel García Márquez",
     "average_rating": 4.06,
@@ -1668,7 +1668,7 @@
     "text_reviews_count": 8
   },
   {
-    "bookID": 330,
+    "id": 330,
     "title": "On Beyond Zebra!",
     "authors": "Dr. Seuss",
     "average_rating": 4.04,
@@ -1680,7 +1680,7 @@
     "text_reviews_count": 153
   },
   {
-    "bookID": 332,
+    "id": 332,
     "title": "The Wedding Clause",
     "authors": "Debbie Raleigh",
     "average_rating": 3.58,
@@ -1692,7 +1692,7 @@
     "text_reviews_count": 11
   },
   {
-    "bookID": 333,
+    "id": 333,
     "title": "The Zebra Wall",
     "authors": "Kevin Henkes",
     "average_rating": 3.46,
@@ -1704,7 +1704,7 @@
     "text_reviews_count": 23
   },
   {
-    "bookID": 337,
+    "id": 337,
     "title": "El perfume: Historia de un asesino",
     "authors": "Patrick Süskind",
     "average_rating": 4.02,
@@ -1716,7 +1716,7 @@
     "text_reviews_count": 242
   },
   {
-    "bookID": 338,
+    "id": 338,
     "title": "Jitterbug Perfume",
     "authors": "Tom Robbins",
     "average_rating": 4.24,
@@ -1728,7 +1728,7 @@
     "text_reviews_count": 393
   },
   {
-    "bookID": 343,
+    "id": 343,
     "title": "Perfume: The Story of a Murderer",
     "authors": "Patrick Süskind-John E. Woods",
     "average_rating": 4.02,
@@ -1740,7 +1740,7 @@
     "text_reviews_count": 7070
   },
   {
-    "bookID": 347,
+    "id": 347,
     "title": "Off the Main Sequence: The Other Science Fiction Stories of Robert A. Heinlein",
     "authors": "Robert A. Heinlein",
     "average_rating": 4.01,
@@ -1752,7 +1752,7 @@
     "text_reviews_count": 17
   },
   {
-    "bookID": 348,
+    "id": 348,
     "title": "The Door Into Summer",
     "authors": "Robert A. Heinlein",
     "average_rating": 4.01,
@@ -1764,7 +1764,7 @@
     "text_reviews_count": 617
   },
   {
-    "bookID": 349,
+    "id": 349,
     "title": "The Moon is a Harsh Mistress",
     "authors": "Robert A. Heinlein",
     "average_rating": 4.17,
@@ -1776,7 +1776,7 @@
     "text_reviews_count": 416
   },
   {
-    "bookID": 350,
+    "id": 350,
     "title": "Stranger in a Strange Land",
     "authors": "Robert A. Heinlein",
     "average_rating": 3.92,
@@ -1788,7 +1788,7 @@
     "text_reviews_count": 5985
   },
   {
-    "bookID": 354,
+    "id": 354,
     "title": "To Sail Beyond the Sunset",
     "authors": "Robert A. Heinlein",
     "average_rating": 3.87,
@@ -1800,7 +1800,7 @@
     "text_reviews_count": 187
   },
   {
-    "bookID": 355,
+    "id": 355,
     "title": "Job: A Comedy of Justice",
     "authors": "Robert A. Heinlein",
     "average_rating": 3.78,
@@ -1812,7 +1812,7 @@
     "text_reviews_count": 422
   },
   {
-    "bookID": 356,
+    "id": 356,
     "title": "Time for the Stars (Heinlein's Juveniles  #10)",
     "authors": "Robert A. Heinlein",
     "average_rating": 3.97,
@@ -1824,7 +1824,7 @@
     "text_reviews_count": 188
   },
   {
-    "bookID": 357,
+    "id": 357,
     "title": "The Long Dark Tea-Time of the Soul (Dirk Gently  #2)",
     "authors": "Douglas Adams",
     "average_rating": 4.06,
@@ -1836,7 +1836,7 @@
     "text_reviews_count": 1353
   },
   {
-    "bookID": 359,
+    "id": 359,
     "title": "The Salmon of Doubt (Dirk Gently  #3)",
     "authors": "Douglas Adams",
     "average_rating": 3.92,
@@ -1848,7 +1848,7 @@
     "text_reviews_count": 722
   },
   {
-    "bookID": 360,
+    "id": 360,
     "title": "Mostly Harmless (Hitchhiker's Guide to the Galaxy  #5)",
     "authors": "Douglas Adams",
     "average_rating": 3.97,
@@ -1860,7 +1860,7 @@
     "text_reviews_count": 1269
   },
   {
-    "bookID": 362,
+    "id": 362,
     "title": "Wish You Were Here: The Official Biography of Douglas Adams",
     "authors": "Nick  Webb",
     "average_rating": 4.14,
@@ -1872,7 +1872,7 @@
     "text_reviews_count": 47
   },
   {
-    "bookID": 367,
+    "id": 367,
     "title": "Douglas Adams's Starship Titanic",
     "authors": "Terry Jones",
     "average_rating": 3.6,
@@ -1884,7 +1884,7 @@
     "text_reviews_count": 80
   },
   {
-    "bookID": 377,
+    "id": 377,
     "title": "Salmon of Doubt: Hitchhiking the Galaxy One Last Time",
     "authors": "Douglas Adams-Christopher Cerf",
     "average_rating": 3.92,
@@ -1896,7 +1896,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 378,
+    "id": 378,
     "title": "The Phantom Tollbooth",
     "authors": "Norton Juster-Jules Feiffer",
     "average_rating": 4.21,
@@ -1908,7 +1908,7 @@
     "text_reviews_count": 8290
   },
   {
-    "bookID": 382,
+    "id": 382,
     "title": "The Phantom Tollbooth: A Children's Play in Two Acts",
     "authors": "Susan Nanus-Norton Juster",
     "average_rating": 4.1,
@@ -1920,7 +1920,7 @@
     "text_reviews_count": 13
   },
   {
-    "bookID": 385,
+    "id": 385,
     "title": "On Bullshit",
     "authors": "Harry G. Frankfurt",
     "average_rating": 3.57,
@@ -1932,7 +1932,7 @@
     "text_reviews_count": 937
   },
   {
-    "bookID": 386,
+    "id": 386,
     "title": "Another Bullshit Night in Suck City",
     "authors": "Nick Flynn",
     "average_rating": 3.78,
@@ -1944,7 +1944,7 @@
     "text_reviews_count": 907
   },
   {
-    "bookID": 394,
+    "id": 394,
     "title": "Lincoln at Gettysburg: The Words That Remade America",
     "authors": "Garry Wills",
     "average_rating": 4.13,
@@ -1956,7 +1956,7 @@
     "text_reviews_count": 14
   },
   {
-    "bookID": 397,
+    "id": 397,
     "title": "The Gettysburg Address",
     "authors": "Abraham Lincoln-Michael McCurdy",
     "average_rating": 4.53,
@@ -1968,7 +1968,7 @@
     "text_reviews_count": 69
   },
   {
-    "bookID": 399,
+    "id": 399,
     "title": "Underworld",
     "authors": "Don DeLillo",
     "average_rating": 3.92,
@@ -1980,7 +1980,7 @@
     "text_reviews_count": 170
   },
   {
-    "bookID": 400,
+    "id": 400,
     "title": "Libra",
     "authors": "Don DeLillo",
     "average_rating": 3.99,
@@ -1992,7 +1992,7 @@
     "text_reviews_count": 533
   },
   {
-    "bookID": 402,
+    "id": 402,
     "title": "Mao II",
     "authors": "Don DeLillo",
     "average_rating": 3.68,
@@ -2004,7 +2004,7 @@
     "text_reviews_count": 411
   },
   {
-    "bookID": 403,
+    "id": 403,
     "title": "Americana",
     "authors": "Don DeLillo",
     "average_rating": 3.43,
@@ -2016,7 +2016,7 @@
     "text_reviews_count": 54
   },
   {
-    "bookID": 404,
+    "id": 404,
     "title": "Running Dog",
     "authors": "Don DeLillo",
     "average_rating": 3.42,
@@ -2028,7 +2028,7 @@
     "text_reviews_count": 70
   },
   {
-    "bookID": 406,
+    "id": 406,
     "title": "Cosmopolis",
     "authors": "Don DeLillo",
     "average_rating": 3.22,
@@ -2040,7 +2040,7 @@
     "text_reviews_count": 40
   },
   {
-    "bookID": 407,
+    "id": 407,
     "title": "Great Jones Street",
     "authors": "Don DeLillo",
     "average_rating": 3.48,
@@ -2052,7 +2052,7 @@
     "text_reviews_count": 137
   },
   {
-    "bookID": 408,
+    "id": 408,
     "title": "The Names",
     "authors": "Don DeLillo",
     "average_rating": 3.64,
@@ -2064,7 +2064,7 @@
     "text_reviews_count": 201
   },
   {
-    "bookID": 410,
+    "id": 410,
     "title": "V.",
     "authors": "Thomas Pynchon",
     "average_rating": 3.96,
@@ -2076,7 +2076,7 @@
     "text_reviews_count": 176
   },
   {
-    "bookID": 411,
+    "id": 411,
     "title": "The Crying of Lot 49",
     "authors": "Thomas Pynchon",
     "average_rating": 3.7,
@@ -2088,7 +2088,7 @@
     "text_reviews_count": 229
   },
   {
-    "bookID": 412,
+    "id": 412,
     "title": "Gravity's Rainbow",
     "authors": "Thomas Pynchon",
     "average_rating": 4.02,
@@ -2100,7 +2100,7 @@
     "text_reviews_count": 211
   },
   {
-    "bookID": 413,
+    "id": 413,
     "title": "Mason & Dixon",
     "authors": "Thomas Pynchon",
     "average_rating": 4.06,
@@ -2112,7 +2112,7 @@
     "text_reviews_count": 570
   },
   {
-    "bookID": 414,
+    "id": 414,
     "title": "Vineland",
     "authors": "Thomas Pynchon",
     "average_rating": 3.68,
@@ -2124,7 +2124,7 @@
     "text_reviews_count": 64
   },
   {
-    "bookID": 415,
+    "id": 415,
     "title": "Gravity's Rainbow",
     "authors": "Thomas Pynchon",
     "average_rating": 4.02,
@@ -2136,7 +2136,7 @@
     "text_reviews_count": 2058
   },
   {
-    "bookID": 416,
+    "id": 416,
     "title": "Slow Learner: Early Stories",
     "authors": "Thomas Pynchon",
     "average_rating": 3.5,
@@ -2148,7 +2148,7 @@
     "text_reviews_count": 32
   },
   {
-    "bookID": 418,
+    "id": 418,
     "title": "Been Down So Long It Looks Like Up To Me",
     "authors": "Richard Fariña-Thomas Pynchon",
     "average_rating": 3.81,
@@ -2160,7 +2160,7 @@
     "text_reviews_count": 215
   },
   {
-    "bookID": 421,
+    "id": 421,
     "title": "The White Album",
     "authors": "Joan Didion",
     "average_rating": 4.17,
@@ -2172,7 +2172,7 @@
     "text_reviews_count": 651
   },
   {
-    "bookID": 422,
+    "id": 422,
     "title": "A Book of Common Prayer",
     "authors": "Joan Didion",
     "average_rating": 3.8,
@@ -2184,7 +2184,7 @@
     "text_reviews_count": 238
   },
   {
-    "bookID": 423,
+    "id": 423,
     "title": "Where I Was From",
     "authors": "Joan Didion",
     "average_rating": 3.86,
@@ -2196,7 +2196,7 @@
     "text_reviews_count": 282
   },
   {
-    "bookID": 425,
+    "id": 425,
     "title": "Democracy",
     "authors": "Joan Didion",
     "average_rating": 3.81,
@@ -2208,7 +2208,7 @@
     "text_reviews_count": 165
   },
   {
-    "bookID": 426,
+    "id": 426,
     "title": "We Tell Ourselves Stories in Order to Live: Collected Nonfiction",
     "authors": "Joan Didion-John Leonard",
     "average_rating": 4.49,
@@ -2220,7 +2220,7 @@
     "text_reviews_count": 107
   },
   {
-    "bookID": 428,
+    "id": 428,
     "title": "Play It as It Lays",
     "authors": "Joan Didion-David Thomson",
     "average_rating": 3.87,
@@ -2232,7 +2232,7 @@
     "text_reviews_count": 1577
   },
   {
-    "bookID": 431,
+    "id": 431,
     "title": "The New York Trilogy",
     "authors": "Paul Auster-Art Spiegelman-Luc Sante",
     "average_rating": 3.9,
@@ -2244,7 +2244,7 @@
     "text_reviews_count": 1794
   },
   {
-    "bookID": 432,
+    "id": 432,
     "title": "City of Glass (The New York Trilogy  #1)",
     "authors": "Paul Auster",
     "average_rating": 3.79,
@@ -2256,7 +2256,7 @@
     "text_reviews_count": 696
   },
   {
-    "bookID": 435,
+    "id": 435,
     "title": "The Locked Room (The New York Trilogy  #3)",
     "authors": "Paul Auster",
     "average_rating": 3.89,
@@ -2268,7 +2268,7 @@
     "text_reviews_count": 153
   },
   {
-    "bookID": 444,
+    "id": 444,
     "title": "Pyramids of Montauk: Explorations in Consciousness",
     "authors": "Peter Moon-Preston B. Nichols-Nina Helms",
     "average_rating": 3.91,
@@ -2280,7 +2280,7 @@
     "text_reviews_count": 2
   },
   {
-    "bookID": 446,
+    "id": 446,
     "title": "The Brooklyn Follies",
     "authors": "Paul Auster",
     "average_rating": 3.83,
@@ -2292,7 +2292,7 @@
     "text_reviews_count": 1138
   },
   {
-    "bookID": 447,
+    "id": 447,
     "title": "Moon Palace",
     "authors": "Paul Auster",
     "average_rating": 3.98,
@@ -2304,7 +2304,7 @@
     "text_reviews_count": 475
   },
   {
-    "bookID": 449,
+    "id": 449,
     "title": "Timbuktu",
     "authors": "Paul Auster",
     "average_rating": 3.68,
@@ -2316,7 +2316,7 @@
     "text_reviews_count": 599
   },
   {
-    "bookID": 453,
+    "id": 453,
     "title": "The Music of Chance",
     "authors": "Paul Auster",
     "average_rating": 3.9,
@@ -2328,7 +2328,7 @@
     "text_reviews_count": 35
   },
   {
-    "bookID": 454,
+    "id": 454,
     "title": "Travels in the Scriptorium",
     "authors": "Paul Auster",
     "average_rating": 3.23,
@@ -2340,7 +2340,7 @@
     "text_reviews_count": 558
   },
   {
-    "bookID": 456,
+    "id": 456,
     "title": "Leviathan",
     "authors": "Paul Auster",
     "average_rating": 3.95,
@@ -2352,7 +2352,7 @@
     "text_reviews_count": 420
   },
   {
-    "bookID": 463,
+    "id": 463,
     "title": "The Red Notebook: True Stories",
     "authors": "Paul Auster",
     "average_rating": 3.77,
@@ -2364,7 +2364,7 @@
     "text_reviews_count": 114
   },
   {
-    "bookID": 466,
+    "id": 466,
     "title": "Timbuktu / Leviathan / Moon Palace",
     "authors": "Paul Auster",
     "average_rating": 4.4,
@@ -2376,7 +2376,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 472,
+    "id": 472,
     "title": "Why Write?",
     "authors": "Paul Auster",
     "average_rating": 3.77,
@@ -2388,7 +2388,7 @@
     "text_reviews_count": 13
   },
   {
-    "bookID": 475,
+    "id": 475,
     "title": "Collapse: How Societies Choose to Fail or Succeed",
     "authors": "Jared Diamond",
     "average_rating": 3.93,
@@ -2400,7 +2400,7 @@
     "text_reviews_count": 2672
   },
   {
-    "bookID": 476,
+    "id": 476,
     "title": "The Coming Economic Collapse: How You Can Thrive When Oil Costs $200 a Barrel",
     "authors": "Stephen Leeb-Glen C. Strathy",
     "average_rating": 3.39,
@@ -2412,7 +2412,7 @@
     "text_reviews_count": 26
   },
   {
-    "bookID": 478,
+    "id": 478,
     "title": "Bowling Alone: The Collapse and Revival of American Community",
     "authors": "Robert D. Putnam",
     "average_rating": 3.79,
@@ -2424,7 +2424,7 @@
     "text_reviews_count": 479
   },
   {
-    "bookID": 484,
+    "id": 484,
     "title": "Reinventing the Enemy's Language: Contemporary Native Women's Writings of North America",
     "authors": "Joy Harjo-Gloria Bird-Beth Cuthand-Valerie Martinez-Patricia Blanco",
     "average_rating": 4.39,
@@ -2436,7 +2436,7 @@
     "text_reviews_count": 19
   },
   {
-    "bookID": 493,
+    "id": 493,
     "title": "My Inventions",
     "authors": "Nikola Tesla",
     "average_rating": 4.01,
@@ -2448,7 +2448,7 @@
     "text_reviews_count": 224
   },
   {
-    "bookID": 494,
+    "id": 494,
     "title": "Wizard: The Life and Times of Nikola Tesla: Biography of a Genius",
     "authors": "Marc J.  Seifer-William H. Terbo",
     "average_rating": 3.77,
@@ -2460,7 +2460,7 @@
     "text_reviews_count": 313
   },
   {
-    "bookID": 497,
+    "id": 497,
     "title": "Nikola Tesla: A Spark of Genius",
     "authors": "Carol Dommermuth-Costa",
     "average_rating": 3.95,
@@ -2472,7 +2472,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 498,
+    "id": 498,
     "title": "Tesla Papers",
     "authors": "Nikola Tesla-David Hatcher Childress",
     "average_rating": 4.12,
@@ -2484,7 +2484,7 @@
     "text_reviews_count": 2
   },
   {
-    "bookID": 505,
+    "id": 505,
     "title": "The Invention of Tradition",
     "authors": "Eric Hobsbawm-Terence O. Ranger-Hugh Trevor-Roper-Prys Morgan-David Cannadine-Bernard S. Cohn",
     "average_rating": 3.96,
@@ -2496,7 +2496,7 @@
     "text_reviews_count": 41
   },
   {
-    "bookID": 511,
+    "id": 511,
     "title": "Boys of Summer",
     "authors": "Julie Elizabeth Leto-Leslie Kelly-Kimberly Raye",
     "average_rating": 3.77,
@@ -2508,7 +2508,7 @@
     "text_reviews_count": 12
   },
   {
-    "bookID": 515,
+    "id": 515,
     "title": "Programming Ruby: The Pragmatic Programmers' Guide",
     "authors": "Dave Thomas-Chad Fowler-Andy Hunt",
     "average_rating": 4.04,
@@ -2520,7 +2520,7 @@
     "text_reviews_count": 52
   },
   {
-    "bookID": 523,
+    "id": 523,
     "title": "Golding's Lord of the Flies (Cliffs Notes)",
     "authors": "Maureen Kelly-CliffsNotes-William Golding",
     "average_rating": 3.92,
@@ -2532,7 +2532,7 @@
     "text_reviews_count": 7
   },
   {
-    "bookID": 524,
+    "id": 524,
     "title": "Lord of the Flies",
     "authors": "William Golding",
     "average_rating": 3.67,
@@ -2544,7 +2544,7 @@
     "text_reviews_count": 86
   },
   {
-    "bookID": 525,
+    "id": 525,
     "title": "Lord of the Flies",
     "authors": "William Golding-Ben Gibson-E.M. Forster-Edmund L. Epstein",
     "average_rating": 3.67,
@@ -2556,7 +2556,7 @@
     "text_reviews_count": 153
   },
   {
-    "bookID": 531,
+    "id": 531,
     "title": "A War Like No Other: How the Athenians & Spartans Fought the Peloponnesian War",
     "authors": "Victor Davis Hanson",
     "average_rating": 4.11,
@@ -2568,7 +2568,7 @@
     "text_reviews_count": 92
   },
   {
-    "bookID": 534,
+    "id": 534,
     "title": "We Were Not Like Other People",
     "authors": "Ephraim Sevela-Antonina W. Bouis",
     "average_rating": 4.15,
@@ -2580,7 +2580,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 537,
+    "id": 537,
     "title": "The Lovely Bones",
     "authors": "Alice Sebold",
     "average_rating": 3.79,
@@ -2592,7 +2592,7 @@
     "text_reviews_count": 960
   },
   {
-    "bookID": 539,
+    "id": 539,
     "title": "Lovely in Her Bones (Elizabeth MacPherson  #2)",
     "authors": "Sharyn McCrumb",
     "average_rating": 3.81,
@@ -2604,7 +2604,7 @@
     "text_reviews_count": 40
   },
   {
-    "bookID": 565,
+    "id": 565,
     "title": "The Zen of CSS Design: Visual Enlightenment for the Web",
     "authors": "Dave Shea-Molly E. Holzschlag",
     "average_rating": 4,
@@ -2616,7 +2616,7 @@
     "text_reviews_count": 28
   },
   {
-    "bookID": 570,
+    "id": 570,
     "title": "HTML  XHTML  and CSS (Visual Quickstart Guide)",
     "authors": "Elizabeth Castro",
     "average_rating": 3.8,
@@ -2628,7 +2628,7 @@
     "text_reviews_count": 43
   },
   {
-    "bookID": 576,
+    "id": 576,
     "title": "1000 Record Covers",
     "authors": "Michael Ochs-Patrick Javault-Ulrike Wasel",
     "average_rating": 3.84,
@@ -2640,7 +2640,7 @@
     "text_reviews_count": 28
   },
   {
-    "bookID": 597,
+    "id": 597,
     "title": "Killing Yourself to Live: 85% of a True Story",
     "authors": "Chuck Klosterman",
     "average_rating": 3.83,
@@ -2652,7 +2652,7 @@
     "text_reviews_count": 1104
   },
   {
-    "bookID": 599,
+    "id": 599,
     "title": "Sex  Drugs  and Cocoa Puffs: A Low Culture Manifesto",
     "authors": "Chuck Klosterman",
     "average_rating": 3.74,
@@ -2664,7 +2664,7 @@
     "text_reviews_count": 3341
   },
   {
-    "bookID": 604,
+    "id": 604,
     "title": "Reefer Madness: Sex  Drugs  and Cheap Labor in the American Black Market",
     "authors": "Eric Schlosser",
     "average_rating": 3.77,
@@ -2676,7 +2676,7 @@
     "text_reviews_count": 10
   },
   {
-    "bookID": 619,
+    "id": 619,
     "title": "Vice (V  #8)",
     "authors": "Jane Feather",
     "average_rating": 3.51,
@@ -2688,7 +2688,7 @@
     "text_reviews_count": 17
   },
   {
-    "bookID": 629,
+    "id": 629,
     "title": "Zen and the Art of Motorcycle Maintenance: An Inquiry Into Values",
     "authors": "Robert M. Pirsig",
     "average_rating": 3.77,
@@ -2700,7 +2700,7 @@
     "text_reviews_count": 6101
   },
   {
-    "bookID": 639,
+    "id": 639,
     "title": "Once Upon a Cool Motorcycle Dude",
     "authors": "Kevin O'Malley-Carol Heyer-Scott Goto",
     "average_rating": 4.08,
@@ -2712,7 +2712,7 @@
     "text_reviews_count": 267
   },
   {
-    "bookID": 642,
+    "id": 642,
     "title": "Guidebook to Zen and the Art of Motorcycle Maintenance",
     "authors": "Ronald L. DiSanto-Thomas J. Steele",
     "average_rating": 3.72,
@@ -2724,7 +2724,7 @@
     "text_reviews_count": 10
   },
   {
-    "bookID": 650,
+    "id": 650,
     "title": "LOGO Lounge: 2 000 International Identities by Leading Designers",
     "authors": "Catharine M. Fishel-Bill Gardner",
     "average_rating": 3.96,
@@ -2736,7 +2736,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 655,
+    "id": 655,
     "title": "The Death of Ivan Ilych And Other Stories",
     "authors": "Leo Tolstoy-Hugh McLean",
     "average_rating": 4.1,
@@ -2748,7 +2748,7 @@
     "text_reviews_count": 257
   },
   {
-    "bookID": 656,
+    "id": 656,
     "title": "War and Peace",
     "authors": "Leo Tolstoy-Henry Gifford-Aylmer Maude-Louise Maude",
     "average_rating": 4.11,
@@ -2760,7 +2760,7 @@
     "text_reviews_count": 5903
   },
   {
-    "bookID": 658,
+    "id": 658,
     "title": "The Kingdom of God Is Within You",
     "authors": "Leo Tolstoy-Constance Garnett",
     "average_rating": 4.13,
@@ -2772,7 +2772,7 @@
     "text_reviews_count": 191
   },
   {
-    "bookID": 661,
+    "id": 661,
     "title": "Hunters Of Dune (Dune Chronicles  #7)",
     "authors": "Brian Herbert-Kevin J. Anderson",
     "average_rating": 3.65,
@@ -2784,7 +2784,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 662,
+    "id": 662,
     "title": "Atlas Shrugged",
     "authors": "Ayn Rand-Leonard Peikoff",
     "average_rating": 3.68,
@@ -2796,7 +2796,7 @@
     "text_reviews_count": 14267
   },
   {
-    "bookID": 663,
+    "id": 663,
     "title": "For the New Intellectual: The Philosophy of Ayn Rand",
     "authors": "Ayn Rand",
     "average_rating": 3.68,
@@ -2808,7 +2808,7 @@
     "text_reviews_count": 105
   },
   {
-    "bookID": 664,
+    "id": 664,
     "title": "The Fountainhead",
     "authors": "Ayn Rand",
     "average_rating": 3.86,
@@ -2820,7 +2820,7 @@
     "text_reviews_count": 228
   },
   {
-    "bookID": 665,
+    "id": 665,
     "title": "The Virtue of Selfishness: A New Concept of Egoism",
     "authors": "Ayn Rand-Nathaniel Branden",
     "average_rating": 3.5,
@@ -2832,7 +2832,7 @@
     "text_reviews_count": 438
   },
   {
-    "bookID": 667,
+    "id": 667,
     "title": "Anthem",
     "authors": "Ayn Rand",
     "average_rating": 3.63,
@@ -2844,7 +2844,7 @@
     "text_reviews_count": 6951
   },
   {
-    "bookID": 668,
+    "id": 668,
     "title": "We the Living",
     "authors": "Ayn Rand-Leonard Peikoff",
     "average_rating": 3.91,
@@ -2856,7 +2856,7 @@
     "text_reviews_count": 1065
   },
   {
-    "bookID": 669,
+    "id": 669,
     "title": "Capitalism: The Unknown Ideal",
     "authors": "Ayn Rand-Nathaniel Branden-Alan Greenspan-Robert Hessen",
     "average_rating": 3.87,
@@ -2868,7 +2868,7 @@
     "text_reviews_count": 153
   },
   {
-    "bookID": 670,
+    "id": 670,
     "title": "Letters of Ayn Rand",
     "authors": "Ayn Rand-Michael S. Berliner-Leonard Peikoff",
     "average_rating": 3.97,
@@ -2880,7 +2880,7 @@
     "text_reviews_count": 2
   },
   {
-    "bookID": 672,
+    "id": 672,
     "title": "Sailing for Dummies",
     "authors": "J.J. Isler-Peter Isler",
     "average_rating": 3.94,
@@ -2892,7 +2892,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 675,
+    "id": 675,
     "title": "Sailing from Byzantium: How a Lost Empire Shaped the World",
     "authors": "Colin  Wells",
     "average_rating": 3.87,
@@ -2904,7 +2904,7 @@
     "text_reviews_count": 78
   },
   {
-    "bookID": 676,
+    "id": 676,
     "title": "Sailing Alone Around the Room: New and Selected Poems",
     "authors": "Billy Collins",
     "average_rating": 4.23,
@@ -2916,7 +2916,7 @@
     "text_reviews_count": 608
   },
   {
-    "bookID": 678,
+    "id": 678,
     "title": "The Greatest Sailing Stories Ever Told: Twenty-Seven Unforgettable Stories",
     "authors": "Christopher Caswell",
     "average_rating": 3.63,
@@ -2928,7 +2928,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 681,
+    "id": 681,
     "title": "Natural Cures \"They\" Don't Want You to Know about",
     "authors": "Kevin Trudeau",
     "average_rating": 3.08,
@@ -2940,7 +2940,7 @@
     "text_reviews_count": 283
   },
   {
-    "bookID": 685,
+    "id": 685,
     "title": "The Natural",
     "authors": "Bernard Malamud-Kevin Baker",
     "average_rating": 3.63,
@@ -2952,7 +2952,7 @@
     "text_reviews_count": 639
   },
   {
-    "bookID": 698,
+    "id": 698,
     "title": "Digging to America",
     "authors": "Anne Tyler",
     "average_rating": 3.55,
@@ -2964,7 +2964,7 @@
     "text_reviews_count": 1811
   },
   {
-    "bookID": 700,
+    "id": 700,
     "title": "Rereading America: Cultural Contexts for Critical Thinking and Writing",
     "authors": "Gary Colombo-Bonnie Lisle",
     "average_rating": 3.77,
@@ -2976,7 +2976,7 @@
     "text_reviews_count": 3
   },
   {
-    "bookID": 703,
+    "id": 703,
     "title": "The Plot Against America",
     "authors": "Philip Roth",
     "average_rating": 3.75,
@@ -2988,7 +2988,7 @@
     "text_reviews_count": 2749
   },
   {
-    "bookID": 706,
+    "id": 706,
     "title": "America (The Book): A Citizen's Guide to Democracy Inaction",
     "authors": "Jon Stewart-Ben Karlin-David Javerbaum-Rich Bloomquist-Steve Bodow-Tim Carvell-Eric Drysdale-J.R. Havlan-Scott Jacobson-Tom Johnson-Rob Kutner-Chris Regan-Jason Reich-Jason Ross-Stephen Colbert-Samantha Bee-Rob Corddry-Brendan Hay-Ed Helms",
     "average_rating": 4.02,
@@ -3000,7 +3000,7 @@
     "text_reviews_count": 1118
   },
   {
-    "bookID": 707,
+    "id": 707,
     "title": "Naked Pictures of Famous People",
     "authors": "Jon Stewart",
     "average_rating": 3.59,
@@ -3012,7 +3012,7 @@
     "text_reviews_count": 417
   },
   {
-    "bookID": 759,
+    "id": 759,
     "title": "Collected Stories",
     "authors": "Gabriel García Márquez-Gregory Rabassa-J.S. Bernstein",
     "average_rating": 4.19,
@@ -3024,7 +3024,7 @@
     "text_reviews_count": 173
   },
   {
-    "bookID": 762,
+    "id": 762,
     "title": "Crónica de una muerte anunciada",
     "authors": "Gabriel García Márquez",
     "average_rating": 3.96,
@@ -3036,7 +3036,7 @@
     "text_reviews_count": 371
   },
   {
-    "bookID": 763,
+    "id": 763,
     "title": "Cien años de soledad",
     "authors": "Gabriel García Márquez",
     "average_rating": 4.06,
@@ -3048,7 +3048,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 764,
+    "id": 764,
     "title": "Del amor y otros demonios",
     "authors": "Gabriel García Márquez",
     "average_rating": 3.98,
@@ -3060,7 +3060,7 @@
     "text_reviews_count": 237
   },
   {
-    "bookID": 766,
+    "id": 766,
     "title": "Memoria de mis putas tristes",
     "authors": "Gabriel García Márquez",
     "average_rating": 3.59,
@@ -3072,7 +3072,7 @@
     "text_reviews_count": 312
   },
   {
-    "bookID": 771,
+    "id": 771,
     "title": "The Elegant Universe: Superstrings  Hidden Dimensions  and the Quest for the Ultimate Theory",
     "authors": "Brian Greene",
     "average_rating": 4.07,
@@ -3084,7 +3084,7 @@
     "text_reviews_count": 1069
   },
   {
-    "bookID": 792,
+    "id": 792,
     "title": "London: City Guide (Lonely Planet City Guide)",
     "authors": "Lonely Planet-Sarah Johnstone-Tom Masters",
     "average_rating": 4.03,
@@ -3096,7 +3096,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 793,
+    "id": 793,
     "title": "Best of London (Lonely Planet Best Of)",
     "authors": "Lonely Planet-Sarah Johnstone-Steve Fallon",
     "average_rating": 4.09,
@@ -3108,7 +3108,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 797,
+    "id": 797,
     "title": "Lonely Planet Londres",
     "authors": "Lonely Planet-Sarah Johnstone-Tom Masters",
     "average_rating": 4.03,
@@ -3120,7 +3120,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 799,
+    "id": 799,
     "title": "Out to Eat London 2002 (Lonely Planet Out to Eat)",
     "authors": "Lonely Planet-Mark Honan",
     "average_rating": 0,
@@ -3132,7 +3132,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 815,
+    "id": 815,
     "title": "Three Nights in August: Strategy  Heartbreak  and Joy Inside the Mind of a Manager",
     "authors": "H.G. Bissinger",
     "average_rating": 3.87,
@@ -3144,7 +3144,7 @@
     "text_reviews_count": 235
   },
   {
-    "bookID": 816,
+    "id": 816,
     "title": "Cryptonomicon",
     "authors": "Neal Stephenson",
     "average_rating": 4.25,
@@ -3156,7 +3156,7 @@
     "text_reviews_count": 4104
   },
   {
-    "bookID": 820,
+    "id": 820,
     "title": "Golgotha (Cryptonomicon  #3)",
     "authors": "Neal Stephenson",
     "average_rating": 4.13,
@@ -3168,7 +3168,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 821,
+    "id": 821,
     "title": "Le Réseau Kinakuta (Cryptonomicon  #2)",
     "authors": "Neal Stephenson",
     "average_rating": 4.11,
@@ -3180,7 +3180,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 822,
+    "id": 822,
     "title": "The Confusion (The Baroque Cycle  #2)",
     "authors": "Neal Stephenson",
     "average_rating": 4.25,
@@ -3192,7 +3192,7 @@
     "text_reviews_count": 552
   },
   {
-    "bookID": 823,
+    "id": 823,
     "title": "Quicksilver (The Baroque Cycle  #1)",
     "authors": "Neal Stephenson",
     "average_rating": 3.93,
@@ -3204,7 +3204,7 @@
     "text_reviews_count": 1682
   },
   {
-    "bookID": 824,
+    "id": 824,
     "title": "The Cobweb",
     "authors": "Neal Stephenson-J. Frederick George",
     "average_rating": 3.61,
@@ -3216,7 +3216,7 @@
     "text_reviews_count": 129
   },
   {
-    "bookID": 825,
+    "id": 825,
     "title": "Zodiac",
     "authors": "Neal Stephenson",
     "average_rating": 3.71,
@@ -3228,7 +3228,7 @@
     "text_reviews_count": 525
   },
   {
-    "bookID": 826,
+    "id": 826,
     "title": "The Big U",
     "authors": "Neal Stephenson",
     "average_rating": 3.25,
@@ -3240,7 +3240,7 @@
     "text_reviews_count": 218
   },
   {
-    "bookID": 827,
+    "id": 827,
     "title": "The Diamond Age: Or  A Young Lady's Illustrated Primer",
     "authors": "Neal Stephenson",
     "average_rating": 4.19,
@@ -3252,7 +3252,7 @@
     "text_reviews_count": 2664
   },
   {
-    "bookID": 828,
+    "id": 828,
     "title": "Interface",
     "authors": "Neal Stephenson-George F. Jewsbury-Stephen  Bury",
     "average_rating": 3.67,
@@ -3264,7 +3264,7 @@
     "text_reviews_count": 259
   },
   {
-    "bookID": 829,
+    "id": 829,
     "title": "Odalisque (The Baroque Cycle  Vol. 1  Book 3)",
     "authors": "Neal Stephenson",
     "average_rating": 4.2,
@@ -3276,7 +3276,7 @@
     "text_reviews_count": 60
   },
   {
-    "bookID": 830,
+    "id": 830,
     "title": "Snow Crash",
     "authors": "Neal Stephenson",
     "average_rating": 4.03,
@@ -3288,7 +3288,7 @@
     "text_reviews_count": 6601
   },
   {
-    "bookID": 834,
+    "id": 834,
     "title": "Harrington on Hold 'em: Expert Strategy for No-Limit Tournaments  Volume II: The Endgame",
     "authors": "Dan Harrington-Bill Robertie",
     "average_rating": 4.15,
@@ -3300,7 +3300,7 @@
     "text_reviews_count": 30
   },
   {
-    "bookID": 835,
+    "id": 835,
     "title": "Harrington on Hold 'em: Expert Strategy for No-Limit Tournaments  Volume I: Strategic Play",
     "authors": "Dan Harrington-Bill Robertie",
     "average_rating": 4.23,
@@ -3312,7 +3312,7 @@
     "text_reviews_count": 73
   },
   {
-    "bookID": 840,
+    "id": 840,
     "title": "The Design of Everyday Things",
     "authors": "Donald A. Norman",
     "average_rating": 4.19,
@@ -3324,7 +3324,7 @@
     "text_reviews_count": 1236
   },
   {
-    "bookID": 841,
+    "id": 841,
     "title": "Emotional Design: Why We Love (or Hate) Everyday Things",
     "authors": "Donald A. Norman",
     "average_rating": 3.94,
@@ -3336,7 +3336,7 @@
     "text_reviews_count": 141
   },
   {
-    "bookID": 842,
+    "id": 842,
     "title": "The Psychology of Everyday Things",
     "authors": "Donald A. Norman",
     "average_rating": 4.19,
@@ -3348,7 +3348,7 @@
     "text_reviews_count": 30
   },
   {
-    "bookID": 848,
+    "id": 848,
     "title": "No Price Too High: A Pentecostal Preacher Becomes Catholic - The Inspirational Story of Alex Jones as Told to Diane Hanson",
     "authors": "Alex C. Jones-Diane M. Hanson-Stephen K. Ray",
     "average_rating": 4.26,
@@ -3360,7 +3360,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 864,
+    "id": 864,
     "title": "The Alchemist",
     "authors": "Paulo Coelho-Alan R. Clarke-James Noel Smith",
     "average_rating": 3.85,
@@ -3372,7 +3372,7 @@
     "text_reviews_count": 71
   },
   {
-    "bookID": 865,
+    "id": 865,
     "title": "The Alchemist",
     "authors": "Paulo Coelho-Alan R. Clarke-Özdemir İnce",
     "average_rating": 3.85,
@@ -3384,7 +3384,7 @@
     "text_reviews_count": 54668
   },
   {
-    "bookID": 868,
+    "id": 868,
     "title": "Fullmetal Alchemist  Vol. 3 (Fullmetal Alchemist  #3)",
     "authors": "Hiromu Arakawa-Akira Watanabe",
     "average_rating": 4.56,
@@ -3396,7 +3396,7 @@
     "text_reviews_count": 274
   },
   {
-    "bookID": 869,
+    "id": 869,
     "title": "Fullmetal Alchemist  Vol. 8 (Fullmetal Alchemist  #8)",
     "authors": "Hiromu Arakawa-Akira Watanabe",
     "average_rating": 4.57,
@@ -3408,7 +3408,7 @@
     "text_reviews_count": 145
   },
   {
-    "bookID": 870,
+    "id": 870,
     "title": "Fullmetal Alchemist  Vol. 1 (Fullmetal Alchemist  #1)",
     "authors": "Hiromu Arakawa-Akira Watanabe",
     "average_rating": 4.49,
@@ -3420,7 +3420,7 @@
     "text_reviews_count": 1326
   },
   {
-    "bookID": 871,
+    "id": 871,
     "title": "Fullmetal Alchemist  Vol. 4 (Fullmetal Alchemist  #4)",
     "authors": "Hiromu Arakawa-Akira Watanabe",
     "average_rating": 4.55,
@@ -3432,7 +3432,7 @@
     "text_reviews_count": 270
   },
   {
-    "bookID": 873,
+    "id": 873,
     "title": "Fullmetal Alchemist  Vol. 2 (Fullmetal Alchemist  #2)",
     "authors": "Hiromu Arakawa-Akira Watanabe",
     "average_rating": 4.52,
@@ -3444,7 +3444,7 @@
     "text_reviews_count": 384
   },
   {
-    "bookID": 874,
+    "id": 874,
     "title": "The Kite Runner",
     "authors": "Khaled Hosseini",
     "average_rating": 4.28,
@@ -3456,7 +3456,7 @@
     "text_reviews_count": 201
   },
   {
-    "bookID": 880,
+    "id": 880,
     "title": "Pompeii",
     "authors": "Robert   Harris",
     "average_rating": 3.81,
@@ -3468,7 +3468,7 @@
     "text_reviews_count": 1633
   },
   {
-    "bookID": 890,
+    "id": 890,
     "title": "Of Mice and Men",
     "authors": "John Steinbeck",
     "average_rating": 3.86,
@@ -3480,7 +3480,7 @@
     "text_reviews_count": 23959
   },
   {
-    "bookID": 899,
+    "id": 899,
     "title": "Of Mice and Men",
     "authors": "John Steinbeck-Jim Taylor",
     "average_rating": 3.86,
@@ -3492,7 +3492,7 @@
     "text_reviews_count": 162
   },
   {
-    "bookID": 900,
+    "id": 900,
     "title": "The Game: Penetrating the Secret Society of Pickup Artists",
     "authors": "Neil Strauss",
     "average_rating": 3.74,
@@ -3504,7 +3504,7 @@
     "text_reviews_count": 1510
   },
   {
-    "bookID": 903,
+    "id": 903,
     "title": "The Egypt Game",
     "authors": "Zilpha Keatley Snyder",
     "average_rating": 3.82,
@@ -3516,7 +3516,7 @@
     "text_reviews_count": 1083
   },
   {
-    "bookID": 929,
+    "id": 929,
     "title": "Memoirs of a Geisha",
     "authors": "Arthur Golden",
     "average_rating": 4.1,
@@ -3528,7 +3528,7 @@
     "text_reviews_count": 3015
   },
   {
-    "bookID": 930,
+    "id": 930,
     "title": "Memoirs of a Geisha",
     "authors": "Arthur Golden",
     "average_rating": 4.1,
@@ -3540,7 +3540,7 @@
     "text_reviews_count": 19452
   },
   {
-    "bookID": 931,
+    "id": 931,
     "title": "Memoirs of a Geisha",
     "authors": "Arthur Golden",
     "average_rating": 4.1,
@@ -3552,7 +3552,7 @@
     "text_reviews_count": 254
   },
   {
-    "bookID": 932,
+    "id": 932,
     "title": "Memoirs of a Geisha: A Portrait of the Film",
     "authors": "David        James-Peggy Mulloy-Rob Marshall-Arthur Golden",
     "average_rating": 4.08,
@@ -3564,7 +3564,7 @@
     "text_reviews_count": 8
   },
   {
-    "bookID": 933,
+    "id": 933,
     "title": "Memoirs of a Geisha",
     "authors": "Arthur Golden",
     "average_rating": 4.1,
@@ -3576,7 +3576,7 @@
     "text_reviews_count": 425
   },
   {
-    "bookID": 936,
+    "id": 936,
     "title": "Memoirs Of A Geisha",
     "authors": "Arthur Golden",
     "average_rating": 4.1,
@@ -3588,7 +3588,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 941,
+    "id": 941,
     "title": "Love As A Foreign Language #5",
     "authors": "J. Torres-Eric  Kim",
     "average_rating": 3.44,
@@ -3600,7 +3600,7 @@
     "text_reviews_count": 2
   },
   {
-    "bookID": 944,
+    "id": 944,
     "title": "Jungle Love",
     "authors": "Margaret Johnson-Philip Prowse",
     "average_rating": 3.37,
@@ -3612,7 +3612,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 947,
+    "id": 947,
     "title": "First Impressions",
     "authors": "Nora Roberts",
     "average_rating": 3.74,
@@ -3624,7 +3624,7 @@
     "text_reviews_count": 3
   },
   {
-    "bookID": 955,
+    "id": 955,
     "title": "The 5 Love Languages / The 5 Love Languages Journal",
     "authors": "Gary Chapman",
     "average_rating": 4.71,
@@ -3636,7 +3636,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 960,
+    "id": 960,
     "title": "Angels & Demons (Robert Langdon  #1)",
     "authors": "Dan Brown",
     "average_rating": 3.88,
@@ -3648,7 +3648,7 @@
     "text_reviews_count": 20851
   },
   {
-    "bookID": 966,
+    "id": 966,
     "title": "Angeles & Demonios",
     "authors": "Dan Brown-Raúl Amundaray",
     "average_rating": 3.88,
@@ -3660,7 +3660,7 @@
     "text_reviews_count": 7
   },
   {
-    "bookID": 968,
+    "id": 968,
     "title": "The Da Vinci Code (Robert Langdon  #2)",
     "authors": "Dan Brown",
     "average_rating": 3.82,
@@ -3672,7 +3672,7 @@
     "text_reviews_count": 35316
   },
   {
-    "bookID": 972,
+    "id": 972,
     "title": "Da Vinci Code (Robert Langdon  #2)",
     "authors": "Dan Brown-Daniel Roche",
     "average_rating": 3.82,
@@ -3684,7 +3684,7 @@
     "text_reviews_count": 14
   },
   {
-    "bookID": 975,
+    "id": 975,
     "title": "Deception Point",
     "authors": "Dan Brown",
     "average_rating": 3.7,
@@ -3696,7 +3696,7 @@
     "text_reviews_count": 410
   },
   {
-    "bookID": 976,
+    "id": 976,
     "title": "Deception Point",
     "authors": "Dan Brown",
     "average_rating": 3.7,
@@ -3708,7 +3708,7 @@
     "text_reviews_count": 6870
   },
   {
-    "bookID": 977,
+    "id": 977,
     "title": "Deception Point",
     "authors": "Dan Brown",
     "average_rating": 3.7,
@@ -3720,7 +3720,7 @@
     "text_reviews_count": 178
   },
   {
-    "bookID": 980,
+    "id": 980,
     "title": "Deception Point",
     "authors": "Dan Brown",
     "average_rating": 3.7,
@@ -3732,7 +3732,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 981,
+    "id": 981,
     "title": "حقيقة الخديعة",
     "authors": "Dan Brown-دان براون-فايزة المنجد-محمد فداء الهاشمي",
     "average_rating": 3.7,
@@ -3744,7 +3744,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 983,
+    "id": 983,
     "title": "Deception Point",
     "authors": "Dan Brown",
     "average_rating": 3.7,
@@ -3756,7 +3756,7 @@
     "text_reviews_count": 12
   },
   {
-    "bookID": 991,
+    "id": 991,
     "title": "Eye of the Storm (Hudson  #3)",
     "authors": "V.C. Andrews",
     "average_rating": 3.82,
@@ -3768,7 +3768,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 998,
+    "id": 998,
     "title": "The Millionaire Next Door: The Surprising Secrets of America's Wealthy",
     "authors": "Thomas J. Stanley-William D. Danko",
     "average_rating": 4.02,
@@ -3780,7 +3780,7 @@
     "text_reviews_count": 2373
   },
   {
-    "bookID": 1005,
+    "id": 1005,
     "title": "Think and Grow Rich: The Landmark Bestseller Now Revised and Updated for the 21st Century",
     "authors": "Napoleon Hill",
     "average_rating": 4.18,
@@ -3792,7 +3792,7 @@
     "text_reviews_count": 2305
   },
   {
-    "bookID": 1007,
+    "id": 1007,
     "title": "Think and Grow Rich",
     "authors": "Napoleon Hill",
     "average_rating": 4.18,
@@ -3804,7 +3804,7 @@
     "text_reviews_count": 9
   },
   {
-    "bookID": 1014,
+    "id": 1014,
     "title": "Pragmatic Version Control: Using Subversion (The Pragmatic Starter Kit Series)",
     "authors": "Mike   Mason",
     "average_rating": 3.57,
@@ -3816,7 +3816,7 @@
     "text_reviews_count": 14
   },
   {
-    "bookID": 1022,
+    "id": 1022,
     "title": "Read My Lips: Sexual Subversion and the End of Gender",
     "authors": "Riki Anne Wilchins",
     "average_rating": 3.95,
@@ -3828,7 +3828,7 @@
     "text_reviews_count": 16
   },
   {
-    "bookID": 1032,
+    "id": 1032,
     "title": "Trump: The Art of the Deal",
     "authors": "Donald J. Trump-Tony Schwartz",
     "average_rating": 3.65,
@@ -3840,7 +3840,7 @@
     "text_reviews_count": 856
   },
   {
-    "bookID": 1052,
+    "id": 1052,
     "title": "The Richest Man in Babylon",
     "authors": "George S. Clason",
     "average_rating": 4.25,
@@ -3852,7 +3852,7 @@
     "text_reviews_count": 2865
   },
   {
-    "bookID": 1053,
+    "id": 1053,
     "title": "The Richest Man in Babylon",
     "authors": "George S. Clason",
     "average_rating": 4.25,
@@ -3864,7 +3864,7 @@
     "text_reviews_count": 12
   },
   {
-    "bookID": 1059,
+    "id": 1059,
     "title": "Shibumi",
     "authors": "Trevanian-Gisela Stege",
     "average_rating": 4.22,
@@ -3876,7 +3876,7 @@
     "text_reviews_count": 612
   },
   {
-    "bookID": 1067,
+    "id": 1067,
     "title": "1776",
     "authors": "David McCullough",
     "average_rating": 4.07,
@@ -3888,7 +3888,7 @@
     "text_reviews_count": 6034
   },
   {
-    "bookID": 1068,
+    "id": 1068,
     "title": "1776",
     "authors": "Peter  Stone-Sherman Edwards",
     "average_rating": 4.21,
@@ -3900,7 +3900,7 @@
     "text_reviews_count": 30
   },
   {
-    "bookID": 1073,
+    "id": 1073,
     "title": "The Crescent Obscured: The United States and the Muslim World  1776-1815",
     "authors": "Robert J. Allison",
     "average_rating": 3.6,
@@ -3912,7 +3912,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 1077,
+    "id": 1077,
     "title": "Gap Creek",
     "authors": "Robert Morgan",
     "average_rating": 3.73,
@@ -3924,7 +3924,7 @@
     "text_reviews_count": 42
   },
   {
-    "bookID": 1078,
+    "id": 1078,
     "title": "The Good Earth (House of Earth  #1)",
     "authors": "Pearl S. Buck",
     "average_rating": 3.98,
@@ -3936,7 +3936,7 @@
     "text_reviews_count": 7481
   },
   {
-    "bookID": 1083,
+    "id": 1083,
     "title": "The Good Earth",
     "authors": "Pearl S. Buck",
     "average_rating": 3.98,
@@ -3948,7 +3948,7 @@
     "text_reviews_count": 7
   },
   {
-    "bookID": 1090,
+    "id": 1090,
     "title": "Purpose Driven Life - For Commuters: What on Earth Am I Here For?",
     "authors": "Rick Warren",
     "average_rating": 3.92,
@@ -3960,7 +3960,7 @@
     "text_reviews_count": 2
   },
   {
-    "bookID": 1093,
+    "id": 1093,
     "title": "Purpose Driven Life",
     "authors": "Rick Warren",
     "average_rating": 3.92,
@@ -3972,7 +3972,7 @@
     "text_reviews_count": 3
   },
   {
-    "bookID": 1097,
+    "id": 1097,
     "title": "Fast Food Nation: The Dark Side of the All-American Meal",
     "authors": "Eric Schlosser",
     "average_rating": 3.74,
@@ -3984,7 +3984,7 @@
     "text_reviews_count": 4923
   },
   {
-    "bookID": 1099,
+    "id": 1099,
     "title": "Fast Food Nation: What The All-American Meal is Doing to the World",
     "authors": "Eric Schlosser",
     "average_rating": 3.74,
@@ -3996,7 +3996,7 @@
     "text_reviews_count": 75
   },
   {
-    "bookID": 1103,
+    "id": 1103,
     "title": "Snow Flower and the Secret Fan",
     "authors": "Lisa See",
     "average_rating": 4.07,
@@ -4008,7 +4008,7 @@
     "text_reviews_count": 14990
   },
   {
-    "bookID": 1110,
+    "id": 1110,
     "title": "The Broker",
     "authors": "John Grisham",
     "average_rating": 3.78,
@@ -4020,7 +4020,7 @@
     "text_reviews_count": 2245
   },
   {
-    "bookID": 1111,
+    "id": 1111,
     "title": "The Power Broker: Robert Moses and the Fall of New York",
     "authors": "Robert A. Caro",
     "average_rating": 4.5,
@@ -4032,7 +4032,7 @@
     "text_reviews_count": 1109
   },
   {
-    "bookID": 1117,
+    "id": 1117,
     "title": "The Power Broker: A Novel (Christian Gillette  #3)",
     "authors": "Stephen W. Frey",
     "average_rating": 3.73,
@@ -4044,7 +4044,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 1120,
+    "id": 1120,
     "title": "Body For Life: 12 Weeks to Mental and Physical Strength",
     "authors": "Bill Phillips-Michael D'Orso",
     "average_rating": 3.73,
@@ -4056,7 +4056,7 @@
     "text_reviews_count": 275
   },
   {
-    "bookID": 1121,
+    "id": 1121,
     "title": "Body for Life for Women: A Woman's Plan for Physical and Mental Transformation",
     "authors": "Pamela Peeke-Cindy Crawford",
     "average_rating": 3.63,
@@ -4068,7 +4068,7 @@
     "text_reviews_count": 63
   },
   {
-    "bookID": 1123,
+    "id": 1123,
     "title": "Eating for Life: Your Guide to Great Health  Fat Loss and Increased Energy!",
     "authors": "Bill Phillips",
     "average_rating": 3.95,
@@ -4080,7 +4080,7 @@
     "text_reviews_count": 51
   },
   {
-    "bookID": 1130,
+    "id": 1130,
     "title": "The Warren Buffett Way",
     "authors": "Robert G. Hagstrom-Bill Miller-Kenneth L. Fisher",
     "average_rating": 4.12,
@@ -4092,7 +4092,7 @@
     "text_reviews_count": 17
   },
   {
-    "bookID": 1138,
+    "id": 1138,
     "title": "The Warren Buffett CEO: Secrets from the Berkshire Hathaway Managers",
     "authors": "Robert P. Miles-Tom Osborne",
     "average_rating": 4.05,
@@ -4104,7 +4104,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 1164,
+    "id": 1164,
     "title": "Monkey Business: True Story of the Scopes Trial",
     "authors": "Marvin N. Olasky-John R. Perry",
     "average_rating": 3.16,
@@ -4116,7 +4116,7 @@
     "text_reviews_count": 7
   },
   {
-    "bookID": 1167,
+    "id": 1167,
     "title": "Junie B. Jones and a Little Monkey Business (Junie B. Jones  #2)",
     "authors": "Barbara Park-Denise Brunkus",
     "average_rating": 3.98,
@@ -4128,7 +4128,7 @@
     "text_reviews_count": 591
   },
   {
-    "bookID": 1169,
+    "id": 1169,
     "title": "Monkey Business",
     "authors": "Sarah Mlynowski",
     "average_rating": 3.66,
@@ -4140,7 +4140,7 @@
     "text_reviews_count": 68
   },
   {
-    "bookID": 1171,
+    "id": 1171,
     "title": "Liar's Poker",
     "authors": "Michael   Lewis",
     "average_rating": 4.15,
@@ -4152,7 +4152,7 @@
     "text_reviews_count": 931
   },
   {
-    "bookID": 1177,
+    "id": 1177,
     "title": "Liar's Poker: A Harry Garnish Mystery",
     "authors": "Frank McConnell",
     "average_rating": 3.31,
@@ -4164,7 +4164,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 1192,
+    "id": 1192,
     "title": "Everyday Italian: 125 Simple and Delicious Recipes",
     "authors": "Giada De Laurentiis",
     "average_rating": 3.95,
@@ -4176,7 +4176,7 @@
     "text_reviews_count": 212
   },
   {
-    "bookID": 1193,
+    "id": 1193,
     "title": "Everyday Pasta",
     "authors": "Giada De Laurentiis-Victoria Pearson",
     "average_rating": 4.09,
@@ -4188,7 +4188,7 @@
     "text_reviews_count": 54
   },
   {
-    "bookID": 1196,
+    "id": 1196,
     "title": "Tyler's Ultimate: Brilliant Simple Food to Make Any Time",
     "authors": "Tyler Florence-Petrina Tinslay",
     "average_rating": 4.1,
@@ -4200,7 +4200,7 @@
     "text_reviews_count": 33
   },
   {
-    "bookID": 1197,
+    "id": 1197,
     "title": "Tyler Florence's Real Kitchen: An Indespensible Guide for Anybody Who Likes to Cook",
     "authors": "Tyler Florence-JoAnn Cianciulli-Bill Bettencourt-Bobby Flay",
     "average_rating": 4.05,
@@ -4212,7 +4212,7 @@
     "text_reviews_count": 16
   },
   {
-    "bookID": 1198,
+    "id": 1198,
     "title": "Eat This Book: Cooking with Global Fresh Flavors",
     "authors": "Tyler Florence-Petrina Tinslay",
     "average_rating": 3.92,
@@ -4224,7 +4224,7 @@
     "text_reviews_count": 15
   },
   {
-    "bookID": 1202,
+    "id": 1202,
     "title": "Freakonomics: A Rogue Economist Explores the Hidden Side of Everything",
     "authors": "Steven D. Levitt-Stephen J. Dubner",
     "average_rating": 3.96,
@@ -4236,7 +4236,7 @@
     "text_reviews_count": 12648
   },
   {
-    "bookID": 1204,
+    "id": 1204,
     "title": "Freakonomics: Un economista políticamente incorrecto explora el lado oculto de lo que nos afecta",
     "authors": "Steven D. Levitt-Stephen J. Dubner",
     "average_rating": 3.96,
@@ -4248,7 +4248,7 @@
     "text_reviews_count": 23
   },
   {
-    "bookID": 1206,
+    "id": 1206,
     "title": "Freakonomics: A Rogue Economist Explores the Hidden Side of Everything",
     "authors": "Steven D. Levitt-Stephen J. Dubner",
     "average_rating": 3.96,
@@ -4260,7 +4260,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 1207,
+    "id": 1207,
     "title": "Freakonomics  - O Estranho Mundo da Economia",
     "authors": "Steven D. Levitt-Stephen J. Dubner-Carlos Braga",
     "average_rating": 3.96,
@@ -4272,7 +4272,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 1217,
+    "id": 1217,
     "title": "Collapse",
     "authors": "Jared Diamond",
     "average_rating": 3.93,
@@ -4284,7 +4284,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 1218,
+    "id": 1218,
     "title": "The Last Assassin (John Rain  #5)",
     "authors": "Barry Eisler",
     "average_rating": 4.25,
@@ -4296,7 +4296,7 @@
     "text_reviews_count": 22
   },
   {
-    "bookID": 1226,
+    "id": 1226,
     "title": "Life of Pi",
     "authors": "Yann Martel",
     "average_rating": 3.9,
@@ -4308,7 +4308,7 @@
     "text_reviews_count": 672
   },
   {
-    "bookID": 1227,
+    "id": 1227,
     "title": "Vida de Pi",
     "authors": "Yann Martel",
     "average_rating": 3.9,
@@ -4320,7 +4320,7 @@
     "text_reviews_count": 8
   },
   {
-    "bookID": 1230,
+    "id": 1230,
     "title": "L'Histoire de Pi",
     "authors": "Yann Martel-Nicole Martel-Emile Martel",
     "average_rating": 3.9,
@@ -4332,7 +4332,7 @@
     "text_reviews_count": 24
   },
   {
-    "bookID": 1232,
+    "id": 1232,
     "title": "The Shadow of the Wind (The Cemetery of Forgotten Books  #1)",
     "authors": "Carlos Ruiz Zafón-Lucia Graves",
     "average_rating": 4.26,
@@ -4344,7 +4344,7 @@
     "text_reviews_count": 21008
   },
   {
-    "bookID": 1234,
+    "id": 1234,
     "title": "Shadows and Wind: A View of Modern Vietnam",
     "authors": "Robert Templer",
     "average_rating": 3.48,
@@ -4356,7 +4356,7 @@
     "text_reviews_count": 8
   },
   {
-    "bookID": 1239,
+    "id": 1239,
     "title": "Shadows and Wind: A View of Modern Vietnam",
     "authors": "Robert Templer",
     "average_rating": 3.48,
@@ -4368,7 +4368,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 1241,
+    "id": 1241,
     "title": "A Million Little Pieces",
     "authors": "James Frey",
     "average_rating": 3.63,
@@ -4380,7 +4380,7 @@
     "text_reviews_count": 10669
   },
   {
-    "bookID": 1242,
+    "id": 1242,
     "title": "A Million Little Pieces of Feces",
     "authors": "Python Bonkers",
     "average_rating": 3.55,
@@ -4392,7 +4392,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 1243,
+    "id": 1243,
     "title": "A Million Little Lies",
     "authors": "James Pinocchio-Pablo Fenjves",
     "average_rating": 3.4,
@@ -4404,7 +4404,7 @@
     "text_reviews_count": 24
   },
   {
-    "bookID": 1246,
+    "id": 1246,
     "title": "The Leadership Challenge",
     "authors": "James M. Kouzes-Barry Z. Posner",
     "average_rating": 4.04,
@@ -4416,7 +4416,7 @@
     "text_reviews_count": 41
   },
   {
-    "bookID": 1252,
+    "id": 1252,
     "title": "Lincoln on Leadership: Executive Strategies for Tough Times",
     "authors": "Donald T. Phillips",
     "average_rating": 4.13,
@@ -4428,7 +4428,7 @@
     "text_reviews_count": 267
   },
   {
-    "bookID": 1255,
+    "id": 1255,
     "title": "Leadership in Organizations",
     "authors": "Gary Yukl",
     "average_rating": 3.68,
@@ -4440,7 +4440,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 1259,
+    "id": 1259,
     "title": "Leadership Through the Ages: A Collection of Favorite Quotations",
     "authors": "Rudolph W. Giuliani",
     "average_rating": 3.95,
@@ -4452,7 +4452,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 1265,
+    "id": 1265,
     "title": "Leadership",
     "authors": "Rudolph W. Giuliani",
     "average_rating": 3.72,
@@ -4464,7 +4464,7 @@
     "text_reviews_count": 142
   },
   {
-    "bookID": 1274,
+    "id": 1274,
     "title": "Men Are from Mars  Women Are from Venus",
     "authors": "John Gray",
     "average_rating": 3.54,
@@ -4476,7 +4476,7 @@
     "text_reviews_count": 3115
   },
   {
-    "bookID": 1276,
+    "id": 1276,
     "title": "Mars and Venus Book of Days: 365 Inspriations to Enrich Your Relationships",
     "authors": "John Gray",
     "average_rating": 3.54,
@@ -4488,7 +4488,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 1277,
+    "id": 1277,
     "title": "Men are from Mars  Women are from Venus",
     "authors": "John Gray",
     "average_rating": 3.54,
@@ -4500,7 +4500,7 @@
     "text_reviews_count": 121
   },
   {
-    "bookID": 1280,
+    "id": 1280,
     "title": "Men Are From Mars  Women Are From Venus: A Practical Guide For Improving Communication and Getting What You Want",
     "authors": "John Gray",
     "average_rating": 3.54,
@@ -4512,7 +4512,7 @@
     "text_reviews_count": 9
   },
   {
-    "bookID": 1290,
+    "id": 1290,
     "title": "How to Succeed with Women",
     "authors": "Ron  Louis-David Copeland",
     "average_rating": 3.77,
@@ -4524,7 +4524,7 @@
     "text_reviews_count": 12
   },
   {
-    "bookID": 1295,
+    "id": 1295,
     "title": "The Clan of the Cave Bear (Earth's Children  #1)",
     "authors": "Jean M. Auel",
     "average_rating": 4.04,
@@ -4536,7 +4536,7 @@
     "text_reviews_count": 4406
   },
   {
-    "bookID": 1296,
+    "id": 1296,
     "title": "The Clan of the Cave Bear (Earth's Children  #1)",
     "authors": "Jean M. Auel",
     "average_rating": 4.04,
@@ -4548,7 +4548,7 @@
     "text_reviews_count": 63
   },
   {
-    "bookID": 1297,
+    "id": 1297,
     "title": "The Clan of the Cave Bear  Part 1 of 2 (Earth's Children  #1)",
     "authors": "Jean M. Auel-Donada  Peters",
     "average_rating": 4.43,
@@ -4560,7 +4560,7 @@
     "text_reviews_count": 34
   },
   {
-    "bookID": 1298,
+    "id": 1298,
     "title": "The Clan of the Cave Bear  Part 2 of 2 (Earth's Children  #1)",
     "authors": "Jean M. Auel",
     "average_rating": 4.56,
@@ -4572,7 +4572,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 1301,
+    "id": 1301,
     "title": "Moneyball: The Art of Winning an Unfair Game",
     "authors": "Michael   Lewis",
     "average_rating": 4.26,
@@ -4584,7 +4584,7 @@
     "text_reviews_count": 4002
   },
   {
-    "bookID": 1302,
+    "id": 1302,
     "title": "Juiced Official Strategy Guide",
     "authors": "Doug Walsh",
     "average_rating": 0,
@@ -4596,7 +4596,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 1303,
+    "id": 1303,
     "title": "The 48 Laws of Power",
     "authors": "Robert Greene-Joost Elffers",
     "average_rating": 4.19,
@@ -4608,7 +4608,7 @@
     "text_reviews_count": 2751
   },
   {
-    "bookID": 1306,
+    "id": 1306,
     "title": "Gates Of Fire",
     "authors": "Steven Pressfield",
     "average_rating": 4.41,
@@ -4620,7 +4620,7 @@
     "text_reviews_count": 31
   },
   {
-    "bookID": 1307,
+    "id": 1307,
     "title": "Fire Sea (The Death Gate Cycle  #3)",
     "authors": "Margaret Weis-Tracy Hickman",
     "average_rating": 4.06,
@@ -4632,7 +4632,7 @@
     "text_reviews_count": 173
   },
   {
-    "bookID": 1312,
+    "id": 1312,
     "title": "The Gate of Fire (Oath Of Empire Book Two)",
     "authors": "Thomas Harlan",
     "average_rating": 3.58,
@@ -4644,7 +4644,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 1317,
+    "id": 1317,
     "title": "Tides of War",
     "authors": "Steven Pressfield",
     "average_rating": 3.89,
@@ -4656,7 +4656,7 @@
     "text_reviews_count": 150
   },
   {
-    "bookID": 1318,
+    "id": 1318,
     "title": "Last of the Amazons",
     "authors": "Steven Pressfield",
     "average_rating": 3.75,
@@ -4668,7 +4668,7 @@
     "text_reviews_count": 121
   },
   {
-    "bookID": 1319,
+    "id": 1319,
     "title": "The War of Art: Break Through the Blocks & Win Your Inner Creative Battles",
     "authors": "Steven Pressfield-Robert McKee",
     "average_rating": 4.02,
@@ -4680,7 +4680,7 @@
     "text_reviews_count": 4238
   },
   {
-    "bookID": 1320,
+    "id": 1320,
     "title": "Gita on the Green",
     "authors": "Stephen J. Rosen-Steven Pressfield",
     "average_rating": 3.74,
@@ -4692,7 +4692,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 1322,
+    "id": 1322,
     "title": "Blood Stripes: The Grunt's View of the War in Iraq",
     "authors": "David J. Danelo-Steven Pressfield",
     "average_rating": 3.88,
@@ -4704,7 +4704,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 1326,
+    "id": 1326,
     "title": "Phaedrus and Letters VII and VIII",
     "authors": "Plato-Walter Hamilton",
     "average_rating": 4.12,
@@ -4716,7 +4716,7 @@
     "text_reviews_count": 19
   },
   {
-    "bookID": 1327,
+    "id": 1327,
     "title": "Phaedrus",
     "authors": "Plato-Robin Waterfield",
     "average_rating": 3.91,
@@ -4728,7 +4728,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 1328,
+    "id": 1328,
     "title": "Phaedrus",
     "authors": "Plato-C.J. Rowe",
     "average_rating": 3.91,
@@ -4740,7 +4740,7 @@
     "text_reviews_count": 20
   },
   {
-    "bookID": 1330,
+    "id": 1330,
     "title": "Euthyphro. Apology. Crito. Phaedo. Phaedrus.",
     "authors": "Plato-Harold North Fowler",
     "average_rating": 4.36,
@@ -4752,7 +4752,7 @@
     "text_reviews_count": 13
   },
   {
-    "bookID": 1331,
+    "id": 1331,
     "title": "Babrius and Phaedrus: Fables (Loeb Classical Library #436)",
     "authors": "Babrius-Phaedrus-Ben Edwin Perry",
     "average_rating": 4.31,
@@ -4764,7 +4764,7 @@
     "text_reviews_count": 2
   },
   {
-    "bookID": 1332,
+    "id": 1332,
     "title": "Parmenides/Philebus/Symposium/Phaedrus/Alcibiades 1-2/Hipparchus/Amatores (Platonis Opera  #2)",
     "authors": "Plato-John Burnet-Hipparchus",
     "average_rating": 4.87,
@@ -4776,7 +4776,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 1334,
+    "id": 1334,
     "title": "Lysis/Phaedrus/Symposium: Plato on Homosexuality",
     "authors": "Plato-Benjamin Jowett",
     "average_rating": 4.47,
@@ -4788,7 +4788,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 1338,
+    "id": 1338,
     "title": "On Love: Lysis/Symposium/Phaedrus/Alcibiades/Selections from Republic & Laws",
     "authors": "Plato-C.D.C. Reeve",
     "average_rating": 4.05,
@@ -4800,7 +4800,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 1342,
+    "id": 1342,
     "title": "Gorgias/Phaedrus (Agora)",
     "authors": "Plato-James H. Nichols Jr.",
     "average_rating": 4.41,
@@ -4812,7 +4812,7 @@
     "text_reviews_count": 1
   },
   {
-    "bookID": 1351,
+    "id": 1351,
     "title": "Statesman",
     "authors": "Plato-C.J. Rowe",
     "average_rating": 3.84,
@@ -4824,7 +4824,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 1354,
+    "id": 1354,
     "title": "Gorgias",
     "authors": "Plato-Walter Hamilton-Chris Emlyn-Jones",
     "average_rating": 3.95,
@@ -4836,7 +4836,7 @@
     "text_reviews_count": 180
   },
   {
-    "bookID": 1356,
+    "id": 1356,
     "title": "Lysis/Symposium/Gorgias",
     "authors": "Plato-W.R.M. Lamb",
     "average_rating": 4.39,
@@ -4848,7 +4848,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 1362,
+    "id": 1362,
     "title": "The Histories",
     "authors": "Herodotus-Aubrey de Sélincourt-John M. Marincola",
     "average_rating": 3.98,
@@ -4860,7 +4860,7 @@
     "text_reviews_count": 558
   },
   {
-    "bookID": 1363,
+    "id": 1363,
     "title": "The Histories",
     "authors": "Herodotus-Aubrey de Sélincourt-John M. Marincola",
     "average_rating": 3.98,
@@ -4872,7 +4872,7 @@
     "text_reviews_count": 18
   },
   {
-    "bookID": 1364,
+    "id": 1364,
     "title": "The History (Great Minds)",
     "authors": "Herodotus-Henry Francis Cary",
     "average_rating": 3.98,
@@ -4884,7 +4884,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 1365,
+    "id": 1365,
     "title": "The Histories",
     "authors": "Herodotus-Carolyn Dewald-Robin Waterfield",
     "average_rating": 3.98,
@@ -4896,7 +4896,7 @@
     "text_reviews_count": 39
   },
   {
-    "bookID": 1366,
+    "id": 1366,
     "title": "The Histories",
     "authors": "Herodotus-Aubrey de Sélincourt-Andrew Robert Burn",
     "average_rating": 3.98,
@@ -4908,7 +4908,7 @@
     "text_reviews_count": 17
   },
   {
-    "bookID": 1367,
+    "id": 1367,
     "title": "The Histories",
     "authors": "Herodotus-Jennifer Tolbert Roberts-Walter Blanco",
     "average_rating": 3.98,
@@ -4920,7 +4920,7 @@
     "text_reviews_count": 5
   },
   {
-    "bookID": 1368,
+    "id": 1368,
     "title": "The Histories",
     "authors": "Herodotus-Edward Henry Blakeney-George Rawlinson-Rosalind Thomas",
     "average_rating": 3.98,
@@ -4932,7 +4932,7 @@
     "text_reviews_count": 10
   },
   {
-    "bookID": 1369,
+    "id": 1369,
     "title": "The History",
     "authors": "Herodotus-Peter Grene",
     "average_rating": 3.98,
@@ -4944,7 +4944,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 1371,
+    "id": 1371,
     "title": "The Iliad",
     "authors": "Homer-Robert Fagles-Bernard Knox",
     "average_rating": 3.85,
@@ -4956,7 +4956,7 @@
     "text_reviews_count": 3218
   },
   {
-    "bookID": 1373,
+    "id": 1373,
     "title": "Iliad",
     "authors": "Homer-Stanley Lombardo-Sheila Murnaghan",
     "average_rating": 3.85,
@@ -4968,7 +4968,7 @@
     "text_reviews_count": 131
   },
   {
-    "bookID": 1374,
+    "id": 1374,
     "title": "The Iliad",
     "authors": "Homer-Robert Fitzgerald-Andrew Ford",
     "average_rating": 3.85,
@@ -4980,7 +4980,7 @@
     "text_reviews_count": 72
   },
   {
-    "bookID": 1375,
+    "id": 1375,
     "title": "The Iliad/The Odyssey",
     "authors": "Homer-Robert Fagles-Bernard Knox",
     "average_rating": 4.03,
@@ -4992,7 +4992,7 @@
     "text_reviews_count": 367
   },
   {
-    "bookID": 1376,
+    "id": 1376,
     "title": "The Iliad",
     "authors": "Homer-E.V. Rieu-Peter Jones-D.C.H. Rieu",
     "average_rating": 3.85,
@@ -5004,7 +5004,7 @@
     "text_reviews_count": 111
   },
   {
-    "bookID": 1377,
+    "id": 1377,
     "title": "The Iliad",
     "authors": "Homer-W.H.D. Rouse",
     "average_rating": 3.85,
@@ -5016,7 +5016,7 @@
     "text_reviews_count": 14
   },
   {
-    "bookID": 1378,
+    "id": 1378,
     "title": "The Essential Iliad",
     "authors": "Homer-Sheila Murnaghan-Stanley Lombardo",
     "average_rating": 3.95,
@@ -5028,7 +5028,7 @@
     "text_reviews_count": 16
   },
   {
-    "bookID": 1381,
+    "id": 1381,
     "title": "The Odyssey",
     "authors": "Homer-Robert Fagles-Bernard Knox",
     "average_rating": 3.75,
@@ -5040,7 +5040,7 @@
     "text_reviews_count": 6249
   },
   {
-    "bookID": 1382,
+    "id": 1382,
     "title": "The Odyssey",
     "authors": "Homer-Robert Fitzgerald-D.S. Carne-Ross",
     "average_rating": 3.75,
@@ -5052,7 +5052,7 @@
     "text_reviews_count": 173
   },
   {
-    "bookID": 1383,
+    "id": 1383,
     "title": "The Odyssey",
     "authors": "Homer-Richmond Lattimore",
     "average_rating": 3.75,
@@ -5064,7 +5064,7 @@
     "text_reviews_count": 78
   },
   {
-    "bookID": 1384,
+    "id": 1384,
     "title": "The Odyssey",
     "authors": "Homer-E.V. Rieu-Peter Jones-D.C.H. Rieu",
     "average_rating": 3.75,
@@ -5076,7 +5076,7 @@
     "text_reviews_count": 159
   },
   {
-    "bookID": 1387,
+    "id": 1387,
     "title": "The Odyssey",
     "authors": "Homer-W.H.D. Rouse",
     "average_rating": 3.75,
@@ -5088,7 +5088,7 @@
     "text_reviews_count": 24
   },
   {
-    "bookID": 1403,
+    "id": 1403,
     "title": "City Eclogue",
     "authors": "Ed Roberson",
     "average_rating": 4.14,
@@ -5100,7 +5100,7 @@
     "text_reviews_count": 7
   },
   {
-    "bookID": 1405,
+    "id": 1405,
     "title": "The Eclogues and The Georgics",
     "authors": "Virgil-Cecil Day-Lewis",
     "average_rating": 3.82,
@@ -5112,7 +5112,7 @@
     "text_reviews_count": 14
   },
   {
-    "bookID": 1414,
+    "id": 1414,
     "title": "The Riverside Shakespeare",
     "authors": "William Shakespeare-G. Blakemore Evans",
     "average_rating": 4.55,
@@ -5124,7 +5124,7 @@
     "text_reviews_count": 163
   },
   {
-    "bookID": 1417,
+    "id": 1417,
     "title": "The Complete Pelican Shakespeare",
     "authors": "William Shakespeare-Stephen Orgel-A.R. Braunmuller",
     "average_rating": 4.59,
@@ -5136,7 +5136,7 @@
     "text_reviews_count": 25
   },
   {
-    "bookID": 1419,
+    "id": 1419,
     "title": "The Complete Works",
     "authors": "William Shakespeare",
     "average_rating": 4.49,
@@ -5148,7 +5148,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 1420,
+    "id": 1420,
     "title": "Hamlet",
     "authors": "William Shakespeare-Harold Bloom-Rex Gibson",
     "average_rating": 4.01,
@@ -5160,7 +5160,7 @@
     "text_reviews_count": 6702
   },
   {
-    "bookID": 1421,
+    "id": 1421,
     "title": "The Oxford Shakespeare: The Complete Works",
     "authors": "William Shakespeare-Stanley Wells-Gary Taylor",
     "average_rating": 4.62,
@@ -5172,7 +5172,7 @@
     "text_reviews_count": 38
   },
   {
-    "bookID": 1423,
+    "id": 1423,
     "title": "The Compleat Works of Wllm Shkspr (abridged)",
     "authors": "Reduced Shakespeare Company-Jess Borgeson-Adam Long-Daniel Singer-Jess Winfield",
     "average_rating": 4.46,
@@ -5184,7 +5184,7 @@
     "text_reviews_count": 117
   },
   {
-    "bookID": 1425,
+    "id": 1425,
     "title": "The Valkyries",
     "authors": "Paulo Coelho-Alan R. Clarke",
     "average_rating": 3.31,
@@ -5196,7 +5196,7 @@
     "text_reviews_count": 56
   },
   {
-    "bookID": 1426,
+    "id": 1426,
     "title": "Warrior of the Light",
     "authors": "Paulo Coelho",
     "average_rating": 3.7,
@@ -5208,7 +5208,7 @@
     "text_reviews_count": 905
   },
   {
-    "bookID": 1427,
+    "id": 1427,
     "title": "The Zahir",
     "authors": "Paulo Coelho-Margaret Jull Costa",
     "average_rating": 3.57,
@@ -5220,7 +5220,7 @@
     "text_reviews_count": 2500
   },
   {
-    "bookID": 1428,
+    "id": 1428,
     "title": "By the River Piedra I Sat Down and Wept",
     "authors": "Paulo Coelho-Alan R. Clarke",
     "average_rating": 3.57,
@@ -5232,7 +5232,7 @@
     "text_reviews_count": 2644
   },
   {
-    "bookID": 1429,
+    "id": 1429,
     "title": "The Fifth Mountain",
     "authors": "Paulo Coelho-Clifford E. Landers",
     "average_rating": 3.62,
@@ -5244,7 +5244,7 @@
     "text_reviews_count": 49
   },
   {
-    "bookID": 1430,
+    "id": 1430,
     "title": "Eleven Minutes",
     "authors": "Paulo Coelho-Margaret Jull Costa",
     "average_rating": 3.69,
@@ -5256,7 +5256,7 @@
     "text_reviews_count": 4731
   },
   {
-    "bookID": 1431,
+    "id": 1431,
     "title": "Veronika Decides to Die",
     "authors": "Paulo Coelho-Margaret Jull Costa",
     "average_rating": 3.7,
@@ -5268,7 +5268,7 @@
     "text_reviews_count": 5201
   },
   {
-    "bookID": 1433,
+    "id": 1433,
     "title": "Hamlet",
     "authors": "William Shakespeare-Stephen Orgel-A.R. Braunmuller",
     "average_rating": 4.01,
@@ -5280,7 +5280,7 @@
     "text_reviews_count": 116
   },
   {
-    "bookID": 1437,
+    "id": 1437,
     "title": "Cliffs Notes on Shakespeare's Hamlet",
     "authors": "Carla Lynn Stockton",
     "average_rating": 3.68,
@@ -5292,7 +5292,7 @@
     "text_reviews_count": 6
   },
   {
-    "bookID": 1438,
+    "id": 1438,
     "title": "Shakespeare's Hamlet",
     "authors": "William Shakespeare-Terri Mategrano",
     "average_rating": 4.04,
@@ -5304,7 +5304,7 @@
     "text_reviews_count": 16
   },
   {
-    "bookID": 1439,
+    "id": 1439,
     "title": "Hamlet's Mill: An Essay Investigating  the Origins of Human Knowledge & Its Transmission Through Myth",
     "authors": "Giorgio De Santillana-Hertha Von Dechend",
     "average_rating": 4.27,
@@ -5316,7 +5316,7 @@
     "text_reviews_count": 52
   },
   {
-    "bookID": 1440,
+    "id": 1440,
     "title": "History of the Peloponnesian War: Bk. 1-2",
     "authors": "Thucydides-C.F. Smith",
     "average_rating": 4.3,
@@ -5328,7 +5328,7 @@
     "text_reviews_count": 7
   },
   {
-    "bookID": 1441,
+    "id": 1441,
     "title": "On Justice  Power and Human Nature: Selections from The History of the Peloponnesian War",
     "authors": "Thucydides-Paul Woodruff",
     "average_rating": 3.72,
@@ -5340,7 +5340,7 @@
     "text_reviews_count": 13
   },
   {
-    "bookID": 1444,
+    "id": 1444,
     "title": "History of the Peloponnesian War: Bk. 5-6",
     "authors": "Thucydides-C.F. Smith",
     "average_rating": 4.34,
@@ -5352,7 +5352,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 1445,
+    "id": 1445,
     "title": "The Peloponnesian War",
     "authors": "Thucydides-Steven Lattimore",
     "average_rating": 3.89,
@@ -5364,7 +5364,7 @@
     "text_reviews_count": 23
   },
   {
-    "bookID": 1449,
+    "id": 1449,
     "title": "The Peloponnesian War: A New Translation  Backgrounds  Interpretations",
     "authors": "Thucydides-Jennifer Tolbert Roberts-Walter Blanco",
     "average_rating": 3.89,
@@ -5376,7 +5376,7 @@
     "text_reviews_count": 4
   },
   {
-    "bookID": 1459,
+    "id": 1459,
     "title": "History of the Peloponnesian War  Bk. 7-8",
     "authors": "Thucydides-C.F. Smith",
     "average_rating": 4.28,
@@ -5388,7 +5388,7 @@
     "text_reviews_count": 0
   },
   {
-    "bookID": 1461,
+    "id": 1461,
     "title": "Thucydides  Book 6 Commentary",
     "authors": "Cynthia W. Shelmerdine",
     "average_rating": 4.5,
