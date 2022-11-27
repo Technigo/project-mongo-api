@@ -11,5 +11,5 @@ https://github.com/joeohm/project-mongo-api-frontend
 
 ## View it live
 
-Frontend: https://joels-mongo-frontend.netlify.app/
-API: https://project-mongo-api-h6oeu2xskq-uc.a.run.app/
+Frontend: https://joels-mongo-frontend.netlify.app/  
+API: https://project-mongo-api-h6oeu2xskq-uc.a.run.app/  
