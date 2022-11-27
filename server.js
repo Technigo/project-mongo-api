@@ -1,18 +1,16 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from "dotenv"
 import listEndpoints from "express-list-endpoints";
 import topMusicData from "./data/top-music.json";
 
-//for later: 
-//install & import dotenv for sensitive data (enviromental variables, external file)
+//to do:install & import dotenv for sensitive data (enviromental variables, external file)
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-
-//convention user upercase
-//property "type" (angular, typescript)
 
 //property keys saved as the model, User, Song
 //mongoose user model - the structure
@@ -41,9 +39,7 @@ const Song = mongoose.model("Song", {
   popularity: Number
 });
 
-
-// delete duplicates
-// can choose when we want to delete. when if(true) and will always happen
+// choose when we want to delete. when if(true) and will always happen
 // put and delete entries in database
   if(process.env.RESET_DB) {
   const resetDataBase = async () => {
@@ -59,8 +55,6 @@ const Song = mongoose.model("Song", {
 }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -71,25 +65,11 @@ app.use(express.json());
 //Start route show endpoints
 app.get("/", (req, res) => {
   res.status(200).json ({
-    message: "Top music endpoints",
-    data: listEndpoints(app)
+    data:({ "Available Routes for Top-Music" : listEndpoints(app) })
   }) 
 });
 
-// 2 endpoint songs --> this needed to desplay songs in browser and postman
-// call object {}
-// app.get("/songs", async (req, res) => {
-//   const allTheSongs = await Song.find({});
-//   res.status(200).json({
-//     success: true,
-//     body: allTheSongs
-//   });
-// });
-
-// what we see in postman is what we get from the backend (backend build what to see, filter out)
-// what we see in compass: the entire database, all the data
 // :id = path param
-// get the id for the 
 app.get("/songs/id/:id", async (req, res) => {
 try {
   const singleSong = await Song.findById(req.params.id);
@@ -115,13 +95,11 @@ try {
     });
   }})
 
-  // get parameter genre, get all the matching songs
-  // regular expression when to matching strings
+  // regular expression when to match strings
   // problem: every path parm declared must also be present in the url req - the whole path. instead create optional query params.
-  //app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
   app.get("/songs/", async (req, res) => {
 
-    const {genre, danceability} = req.query; //params
+    const {genre, danceability} = req.query; 
     const response = {
       success: true,
       body: {}
@@ -131,15 +109,9 @@ try {
     const genreQuery = genre ? genre : {$regex: matchAllRegex, $options: 'i'}; // /.*/gm;
     const danceabilityQuery = danceability ? danceability : {$gt: 0, $lt: 100}; // /.*/gm;  global multilines
     try {
-    //  if (req.params.genre && req.params.danceability) {
-      //sort by object {}
-      response.body = await Song.find({genre: genreQuery, danceability:danceabilityQuery}).limit(10).sort({energy: 1}).select({trackName: 1, artistName: 1, genre: 1})
+      response.body = await Song.find({genre: genreQuery, danceability:danceabilityQuery})
+      .limit(10).sort({energy: 1}).select({trackName: 1, artistName: 1, genre: 1})
 
-     // } else if (req.params.genre && !req.params.danceability) {
-     //   repsone.body = await Song .find({genre: req.params.genre});
-     // }else if (!req.params.genre && req.params.danceability) {
-      //  repsone.body = await Song .find({genre: req.params.danceability});
-    //  }
     res.status(200).json({
        success: true,
        body: response
@@ -155,7 +127,18 @@ try {
     
     }); 
    
-   
+    // the 3 most popular songs 
+  app.get('/songs/popular', async (req, res) => {
+   //const popularity  = req.params;
+      const mostPopular = topMusicData.sort((start, end) => 
+      end.popularity - start.popularity)
+
+      const popularList = mostPopular.slice(0, 3)
+      res.status(200).json ({
+        data: popularList }) 
+      })
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
@@ -169,6 +152,29 @@ app.listen(port, () => {
 //creating a object--> : instead of = new user accept an argument, argument will be a object
  
 {/*
+
+Notes: 
+//convention user upercase
+//property "type" (angular, typescript)
+// 2 endpoint songs --> this needed to desplay songs in browser and postman
+// call object {}
+// app.get("/songs", async (req, res) => {
+//   const allTheSongs = await Song.find({});
+//   res.status(200).json({
+//     success: true,
+//     body: allTheSongs
+//   });
+// });
+
+// what we see in postman is what we get from the backend (backend build what to see, filter out)
+// what we see in compass: the entire database, all the data
+// get parameter genre, get all the matching songs
+ //app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
+
+ //  if (req.params.genre && req.params.danceability) {
+      //sort by object {}
+
+
  if (req.params.genre) {
         const allMatchingSongs = await Song.find({
         genre: req.params.genre, danceability: req.params.danceability });
