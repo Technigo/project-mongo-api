@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
     Routes: [
       {
         "/goldenglobes": "An array of all Golden Globes objects",
-        "/goldenglobes/awardyear/:year_award": "Gives back an array with objects based on the year that is typed",
+        "/goldenglobes/year/:year_award": "Gives back an array with objects based on the year that is typed",
         "/goldenglobes/nominees/:nominee": "Gives back an array with objects based on the name of the nominee",
         "/goldenglobes/winners/:win": "Gives back an array of all the winners or the ones who did not win. True/False",
       },
@@ -59,7 +59,7 @@ app.get("/goldenglobes", async (req, res) => {
   res.json(allGoldenGlobes)
 })
 
-app.get("/goldenglobes/awardyear/:year_award", async (req, res) => {
+app.get("/goldenglobes/year/:year_award", async (req, res) => {
   try {
     const yearAward = await GoldenGlobes.find({year_award: req.params.year_award});
     if (yearAward) {
