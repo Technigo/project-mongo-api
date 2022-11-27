@@ -7,5 +7,5 @@ The most difficult part about this project was the deployment. Connecting Google
 
 ## View it live
 
-Documented version: https://project-mongo-api-oac2twtmjq-lz.a.run.app/api-docs/
-Google Cloud version: https://project-mongo-api-oac2twtmjq-lz.a.run.app/
+- Documented version: https://project-mongo-api-oac2twtmjq-lz.a.run.app/api-docs/
+- Google Cloud version: https://project-mongo-api-oac2twtmjq-lz.a.run.app/
