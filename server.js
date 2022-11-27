@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import booksData from "./data/books.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -27,9 +28,11 @@ const Book = mongoose.model("Book", {
   textReviewsCount: Number,
 });
 
+// RESET_DB=true npm run dev "inordet to send data to MongoCompass"
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Book.deleteMany({});
+
     booksData.forEach((singleBook) => {
       const newBook = new Book(singleBook);
       newBook.save();
@@ -50,16 +53,25 @@ app.use((req, res, next) => {
   }
 });
 
-// Start defining your routes
+// Start defining all routes
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.status(200).json({
+    Routes: "You Can Find All Routes Here! ",
+    Routes: [
+      { "/books": "All Books Data " },
+      // http://localhost:9000/books?id=6381ef7876920a4f808bfdce
+      { "/books/id/:id": "Specefic ID " },
+      // J.K. Rowling-Mary GrandPré
+      { "/books/authours/J.K. Rowling-Mary GrandPré": "Specefic Authour" },
+      // http://localhost:9000/books?title=Harry%20Potter
+      { "/books/title/Harry Poter": "Harry's books" },
+    ],
+  });
 });
 
 //Satrting endpoints , Get all the books
 app.get("/books", async (req, res) => {
   // res.send(booksData)
-
-  // Filtering By query for booksByNumberOfPage. ".gt()" compering if the number is higher than a specified number.
   const allBooks = await Book.find({});
   res.status(200).json({
     success: true,
@@ -94,6 +106,7 @@ app.get("/books/id/:id", async (req, res) => {
     });
   }
 });
+
 // http://localhost:9000/books?title=Harry Potter&languageCode=eng&authors= Rowling-Mary GrandPré
 
 app.get("/books", async (req, res) => {
@@ -106,7 +119,9 @@ app.get("/books", async (req, res) => {
   const titleQuery = title ? title : /.*/gm;
   const authorsQuery = authors ? authors : /.*/gm;
   const languageCodeQuery = languageCode ? languageCode : /.*/gm;
-  const averageRatingQuery = averageRating ? averageRating : {$gt: 0, $lt: 10};
+  const averageRatingQuery = averageRating
+    ? averageRating
+    : { $gt: 0, $lt: 10 };
 
   try {
     response.body = await Book.find({
@@ -116,7 +131,7 @@ app.get("/books", async (req, res) => {
       averageRating: averageRatingQuery,
     })
       .limit(5)
-      .sort({ average_rating : 1});
+      .sort({ average_rating: 1 });
     res.status(200).json({
       success: true,
       body: response,
@@ -135,4 +150,3 @@ app.get("/books", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
