@@ -13,7 +13,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const Title = mongoose.model('Title', {
+const Title = mongoose.model("Title", {
   show_id: Number,
   title: String,
   director: String, 
@@ -47,11 +47,12 @@ app.get("/", (req, res) => {
 
 app.get("/titles", async (req, res) => {
   const allTheTitles = await Title.find({})
-  res.status(200).json({
+  res.status(200).json ({
     success: true,
     body: allTheTitles
   })
 })
+
 
 // Start the server
 app.listen(port, () => {
