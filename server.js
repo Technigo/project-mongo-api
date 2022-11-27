@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
+import netflixData from './data/netflix-titles.json';
 import topMusicData from './data/top-music.json';
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
@@ -44,12 +44,31 @@ const Song = mongoose.model('Song', {
   popularity: Number
 });
 
+const Movie = mongoose.model('Movie', {
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
+});
+
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Song.deleteMany();
     topMusicData.forEach((singleSong) => {
       const newSong = new Song(singleSong);
       newSong.save();
+    });
+    netflixData.forEach((singleMovie) => {
+      const newMovie = new Movie(singleMovie);
+      newMovie.save();
     });
   };
 
@@ -98,49 +117,41 @@ app.get('/songs/id/:id', async (req, res) => {
   }
 });
 
-// app.get('/songs/genre/:genre/danceability/:danceability', async (req, res) => {
-/*
-app.get('/songs/', async (req, res) => {
-  const { genre, danceability } = req.query;
-  const response = {
+app.get('/movies', async (req, res) => {
+  const allTheMovies = await Movie.find({});
+  res.status(200).json({
     success: true,
-    body: {}
-  };
-  const matchAllRegex = new RegExp('.*');
-  const genreQuery = genre ? genre : matchAllRegex;
-  const danceabilityQuery = danceability ? danceability : matchAllRegex;
+    body: allTheMovies
+  });
+});
+
+app.get('/movies/id/:id', async (req, res) => {
   try {
-    // if (req.params.genre && req.params.danceability) {
-    response.body = await Song.find({
-      genre: genreQuery,
-      danceability: danceabilityQuery
-    })
-      .limit(5)
-      .sort({ energy: 1 })
-      .select({ trackName: 1, artistName: 1 });
-    // } else if (req.params.genre && !req.params.danceability) {
-    //   allMatchingSongs = await Song.find({
-    //     genre: req.params.genre
-    //   });
-    // } else if (!req.params.genre && req.params.danceability) {
-    //   allMatchingSongs = await Song.find({
-    //     danceability: req.params.danceability
-    //   });
-    // }
-    res.status(200).json({
-      success: true,
-      body: response.body
-    });
+    const singleMovie = await Movie.findById(req.params.id);
+    console.log(singleMovie);
+
+    if (singleMovie) {
+      res.status(200).json({
+        success: true,
+        body: singleMovie
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: 'Movie was not found'
+        }
+      });
+    }
   } catch (error) {
     res.status(400).json({
       success: false,
       body: {
-        message: error
+        message: 'Invalid id'
       }
     });
   }
 });
-*/
 
 // Start the server
 app.listen(port, () => {
