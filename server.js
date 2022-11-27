@@ -51,19 +51,33 @@ app.get('/', (req, res) => {
     endpoints: 
       {
         "/titles": "lists all the tv-shows & movies on Netflix",
-          "/titles/movies": "lists all the tv-shows & movies on Netflix",
-            "/titles/movies/:id": "lists all the tv-shows & movies on Netflix",
-          "/titles/tvshows": "lists all the tv-shows & movies on Netflix",
-          "/titles/tvshows/:id": "lists all the tv-shows & movies on Netflix",
+          "/titles/movies": "lists all the movies",
+            "/titles/movies/:id": "lists a specific movie",
+          "/titles/tvshows": "lists all the tv-shows",
+          "/titles/tvshows/:id": "lists a specific tv-shows",
           "/titles/latest": "lists all latest titles in a descending chronological order",
             "/titles/latest?limit=<number>": "Same as above but with the query so you can limit the result to the latest 10 shows for example",
 
       }});
 });
 
-
 // list all titles
 app.get("/titles", async (req, res) => {
+  const movies = req.query.movies
+  const tvshows = req.query.tvshows
+  let response = {
+    success: true,
+    body: {}
+  }
+  if (movies) {
+    response.body = await Title.find({ type: 'Movie' });
+    res.status(200).json(response)
+  }
+  if (tvshows) {
+    response.body = await Title.find({ type: 'TV Show' });
+    res.status(200).json(response)
+  }
+  
   const allTheTitles = await Title.find({});
   res.status(200).json({
     success: true,
@@ -146,7 +160,7 @@ app.get("/titles/tvshows/:id", async (req, res) => {
 })
 
 
-// see the x latest titles
+// see the x latest titles (only title name, release year and type)
 //e.g. http://localhost:8080/titles/latest?limit=10
 app.get("/titles/latest", async (req, res) => {
   const {limit} = req.query
@@ -156,6 +170,27 @@ app.get("/titles/latest", async (req, res) => {
     body: latestTitles
   });
 });
+
+
+
+app.get("/titles/latestMovies", async (req, res) => {
+
+  const latestMovieTitles = await Title.aggregate( [
+  {
+     $match: { type: "Movie" }
+  },
+  {
+     $group: { _id: "$name", duration: { $sum: "$duration" } }
+  }
+] )
+  res.status(200).json({
+    success: true,
+    body: latestMovieTitles
+  });
+});
+
+
+
 
 // Start the server
 app.listen(port, () => {
