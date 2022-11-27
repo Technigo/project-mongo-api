@@ -34,9 +34,8 @@ const Office = mongoose.model("Office", {
   character: String
 });
 
-// RESET_DB=true npm run dev
 
-/* if(process.env.RESET_DB) {
+if(process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Song.deleteMany();
     topMusicData.forEach(singleSong => {
@@ -45,7 +44,7 @@ const Office = mongoose.model("Office", {
     })
   }
   resetDataBase();
-} */
+} 
 
 if(process.env.RESET_OFFICE) {
   const resetDataBase = async () => {
