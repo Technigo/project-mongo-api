@@ -6,6 +6,10 @@ API hosted on Google Cloud Drive
 
 Available methods listed on '/' using express-list-endpoints
 
+Frontend project here:  
+https://github.com/joeohm/project-mongo-api-frontend
+
 ## View it live
 
-https://project-mongo-api-h6oeu2xskq-uc.a.run.app/
+Frontend: https://joels-mongo-frontend.netlify.app/
+API: https://project-mongo-api-h6oeu2xskq-uc.a.run.app/
