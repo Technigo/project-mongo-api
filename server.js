@@ -47,8 +47,7 @@ app.get("/", (req, res) => {
       {
         "/bookData": "Display all books",
         "/bookData/authors/:authors": "Search for specific author,  like /authors/Douglas Adams", 
-        "/bookData/title/:title": "Search for a title", 
-        "/bookData/average_rating/": "Average rating of books - high to low"
+        "/bookData/title/:title": "Search for a title"
       },
     ],
   };
