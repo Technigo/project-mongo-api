@@ -63,7 +63,7 @@ app.get("/", (req, res) => {
     {"/games/names/:Name": "Shows game by name (case insensitive)"},
     {"/games/best": "Shows 10 best games (by BGG rank)"},
     {"/games/mechanics/:Mechanics": "Shows game by game mechanics (case insensitive)"},
-    {"/games/domains/:Domains": "Shows game by domain (case insensitive)"},
+    {"/games/domains/:Domains": "Filters by domain and then by mechanics (case insensitive)"},
     {"/games/minimum/2": "Shows all games with a minimum of 2 players"}
   ]);
 });
@@ -73,7 +73,7 @@ app.get("/games", async (req, res) => {
   const allGames = await BoardGame.find({})
  res.status(200).json({
   success: true,
-  body: allGames
+  data: allGames
  })
 });
 
@@ -84,16 +84,16 @@ app.get("/games/id/:ID", async (req, res) => {
     if(singleGame) {
       res.status(200).json({
         success: true,
-        body: singleGame
+        data: singleGame
        })
     } else {
       res.status(404).json({
         success: false,
-        body: { message: 'could not find'}
+        data: { message: 'could not find'}
        })}} catch {
       res.status(400).json({
       success: false,
-      body: {message: 'Bad request'} })} 
+      data: {message: 'Bad request'} })} 
 });
 
 // Find one by name
@@ -102,38 +102,38 @@ app.get("/games/names/:Name", async (req, res) => {
 
     const NameRegex = new RegExp(req.params.Name, "i");
   const gameName = await BoardGame.find({ Name: NameRegex })
-    if(gameName) {
+    if(gameName.length !== 0) {
       res.status(200).json({
         success: true,
-        body: gameName
+        data: gameName
        })
     } else {
       res.status(404).json({
         success: false,
-        body: { message: 'could not find'}
+        data: { message: 'could not find'}
        })}} catch {
       res.status(400).json({
       success: false,
-      body: {message: 'Bad request'} })} 
+      data: {message: 'Bad request'} })} 
 });
 
 // Show 10 best game by rating (BGG rank)
 app.get("/games/best/", async (req, res) => {
   try {
     const gameRating = await BoardGame.find({BGG_Rank: {$lte: 10} }).limit(10).sort({BGG_Rank: 1});
-    if(gameRating) {
+    if(gameRating.length !== 0) {
       res.status(200).json({
         success: true,
-        body: gameRating
+        data: gameRating
        })
     } else {
       res.status(404).json({
         success: false,
-        body: { message: 'could not find'}
+        data: { message: 'could not find'}
        })}} catch {
       res.status(400).json({
       success: false,
-      body: {message: 'Bad request'} })} 
+      data: {message: 'Bad request'} })} 
 });
 
 // Find game by game mechanics (case insensitive)
@@ -142,41 +142,52 @@ app.get("/games/mechanics/:Mechanics", async (req, res) => {
 
     const MechanicsRegex = new RegExp(req.params.Mechanics, "i");
   const mechanics = await BoardGame.find({ Mechanics: MechanicsRegex })
-    if(mechanics) {
+    if(mechanics.length !== 0) {
       res.status(200).json({
         success: true,
-        body: mechanics
+        data: mechanics
        })
     } else {
       res.status(404).json({
         success: false,
-        body: { message: 'could not find'}
+        data: { message: 'could not find'}
        })}} catch {
       res.status(400).json({
       success: false,
-      body: {message: 'Bad request'} })} 
+      data: {message: 'Bad request'} })} 
 });
 
-// Find games by domain
+//Filters by domain and then by mechanics
+// example http://localhost:8080/games/domains/thematic?Mechanics=Line of sight
 app.get("/games/domains/:Domains", async (req, res) => {
-  try {
-
+  try{
     const DomainsRegex = new RegExp(req.params.Domains, "i");
-  const domains = await BoardGame.find({ Domains: DomainsRegex })
-    if(domains) {
-      res.status(200).json({
+    const MechanicsRegex = new RegExp(req.query.Mechanics, "i")
+    const Dom = await BoardGame.find({ 
+      Domains: DomainsRegex,
+      Mechanics: MechanicsRegex
+  })
+    
+  if(Dom.length !== 0){
+      res.json({
+        data: Dom,
         success: true,
-        body: domains
-       })
-    } else {
+      })
+  } else {
       res.status(404).json({
         success: false,
-        body: { message: 'could not find'}
-       })}} catch {
+        data: {
+          message: "Could not found"
+        }})
+      }
+    } catch(error){
       res.status(400).json({
-      success: false,
-      body: {message: 'Bad request'} })} 
-});
+        success: false,
+        data: {
+          message: "bad request"
+      }})
+    }
+})
 
 // Show games with a minimum of 2 or more players
 app.get("/games/minimum/2", async (req, res) => {
@@ -190,7 +201,7 @@ app.get("/games/minimum/2", async (req, res) => {
     } else {
       res.status(404).json({
         success: false,
-        data: { message: 'could not find'}
+        data: { message: 'Could not find'}
        })}} catch {
       res.status(400).json({
       success: false,
