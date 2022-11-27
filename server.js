@@ -6,6 +6,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
+// Using a Mongoose model to model my data and to fetch data from the database.
 const Sale = mongoose.model("Sale", {
   id: Number,
   date: Number,
@@ -32,7 +33,6 @@ if(process.env.RESET_DB) {
 const port = process.env.PORT || 8080;
 const app = express()
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
   res.send("Hello Avocado Sales Lover!");
 });
 
-// 2nd route. To get a specific sale, using try-catch code block and the _id. The _id is in the MongoDB Compass.
+// 2nd route. To get a specific sale, using try-catch code block and the _id. The _id is from the MongoDB Compass.
 app.get("/sales/id/:id", async (req, res) => {
   try {
     const singleSale = await Sale.findById(req.params.id);
@@ -70,7 +70,7 @@ app.get("/sales/id/:id", async (req, res) => {
   }
 });
 
-// 3rd route. To get a sale/sales with specific parameters, using try-catch. The params are; region & averagePrice.
+// 3rd route. To get an array of sales (if there are more than one) with specific parameters, using try-catch code block and query.
 app.get("/sales/", async (req, res) => {
   const {region, averagePrice} = req.query;
   const response = {
@@ -81,7 +81,7 @@ app.get("/sales/", async (req, res) => {
   const regionQuery = region ? region : matchAllRegex;
   const averagePriceQuery = averagePrice ? averagePrice : matchAllRegex;
   try {
-      response.body = await Sale.find({region: regionQuery, averagePrice: averagePriceQuery}).limit(3).sort({totalVolume: 1}).select({totalBagsSold: 1, largeBagsSold: 1})
+      response.body = await Sale.find({region: regionQuery, averagePrice: averagePriceQuery}).limit(5).sort({totalVolume: 1}).select({totalBagsSold: 1, largeBagsSold: 1})
     res.status(200).json({
       success: true,
       body: response
@@ -97,24 +97,7 @@ app.get("/sales/", async (req, res) => {
 });
 // --- End of ROUTES ---
 
-// Start the server
+// To start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-// The connection string that I will need:
-// mongodb+srv://Maria:<password>@cluster0.0cj9ggy.mongodb.net/?retryWrites=true&w=majority
-
-// RESET_DB=true npm run dev
-// Go here:
-// https://github.com/coreybutler/nvm-windows/releases
-// download nvm-setup.exe
-// run as admin
-// open cmd as admin
-// type nvm install v16.18.1
-// https://mongoosejs.com/docs/queries
-
-// https://regex101.com = regular expression
-
-// /yourWordOfChoice/gm - regex to match yourWordOfChoice
-// /.*/gm - regex to match every character in a string
