@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+This is my second API project, documented via Swagger. I learned to "translate" Express queries from a previous project to Mongoose. The dataset consists of the World Cup (1930 - 2018).
+## Challenges
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The most difficult part about this project was the deployment. Connecting Google Cloud and Mongo Compass with MongoDB Cloud Atlas took a while to figure out.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Documented version: https://project-mongo-api-oac2twtmjq-lz.a.run.app/api-docs/
+Google Cloud version: https://project-mongo-api-oac2twtmjq-lz.a.run.app/
