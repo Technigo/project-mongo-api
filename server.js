@@ -64,16 +64,8 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Welcome to top music on Spotify! Look for your favorite top music with these endpoints.");
 });
-
-// app.get("/songs", async (req, res) => {
-//   const allTheSongs = await Song.find({})
-//   res.status(200).json({
-//     success: true,
-//     body: allTheSongs
-//   });
-// });
 
 app.get("/songs/id/:id", async (req, res) => {
   try {
@@ -169,7 +161,6 @@ app.get("/songs/", async (req, res) => {
       });
     }
 });
-
 
 // Start the server
 app.listen(port, () => {
