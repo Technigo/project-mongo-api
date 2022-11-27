@@ -13,7 +13,7 @@ const Product = mongoose.model("Product", {
   category: String,
   price: Number,
   old_price: String,
-  sellable_online: String,
+  sellable_online: Boolean,
   link: String,
   other_colors: String,
   short_description: String,
@@ -56,7 +56,7 @@ app.get("/style.css", (req, res) => {
     { "/products/name": "Search for a product by name" },
     { "/products/lowestprice": "Display the cheapest products first" },
     { "/products/designer/:designer": "Display all products by designer" },
-    { "/products/onlinesales": "Display all products sold online" },
+    { "/products/sellableonline": "Display all products sold online" },
   ]);*/
 });
 
@@ -74,7 +74,6 @@ app.get("/products", async (req, res) => {
 app.get("/products/name/:name", async (req, res) => {
   try {
     const products = await Product.findOne({ name: req.params.name.toUpperCase() });
-    console.log(products)
     if (products) {
       res.status(200).json({
         success: true,
@@ -101,7 +100,6 @@ app.get("/products/name/:name", async (req, res) => {
 
 // Display products by lowest price
 app.get("/products/lowestprice/", async (req, res) => {
-  console.log(typeof req.params.id)
   try {
     const products = await Product.find({});
     if (products) {
@@ -161,7 +159,7 @@ app.get("/products/designer/:designer", async (req, res) => {
 // Find only products sold online - NOT YET WORKING
 app.get("/products/sellableonline", async (req, res) => {
   try {
-    const products = await Product.find({ sellable_online: req.params.sellable_online=true });
+    const products = await Product.find({ sellable_online: true });
     console.log(products)
     if (products) {
       res.status(200).json({
