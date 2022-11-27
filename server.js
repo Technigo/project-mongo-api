@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import listEndpoints from "express-list-endpoints";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -42,8 +43,7 @@ if(process.env.RESET_DB){
       const newSong = new Song (singleSong);
       newSong.save();
     })
-    // const testUser = new User({ name: "Daniel", age: 28, deceased: false });
-    // testUser.save();
+
   }
   resetDataBase();
 }
@@ -62,22 +62,12 @@ app.use((req, res, next) => {
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
-// Start defining your routes here
-// app.get("/", (req, res) => {
-//   res.send("Hello Technigo!");
-// });
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send({
-    Welcome: "Check out artists and songs with below endpoints.",
-  Routes: [
-    {
-      "/songs": "Display all songs",
-      "/songs/id": "Display a song by id"
-    }
-  ],
+  res.send({ "Routes": listEndpoints(app)});
 });
-});
+
 
 /// All songs
 app.get("/songs", async (req, res) => {
@@ -101,10 +91,11 @@ app.get("/songs", async (req, res) => {
 
 
 ///endpoint that returns only one single item
-app.get("/songs/id/:id", async (req, res) => {
+app.get("/id/:id", async (req, res) => {
+  const { id } = req.params;
   try {
     const singleSongID = await Song.findById(req.params.id);
-    const { id } = req.params;
+    
     
 
     if (singleSongID) {
