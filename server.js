@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 import netflixData from "./data/netflix-titles.json"
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true })
 mongoose.Promise = Promise
 
 const port = process.env.PORT || 8080
@@ -52,7 +52,6 @@ app.get("/titles", async (req, res) => {
     body: allTheTitles
   })
 })
-
 
 // Start the server
 app.listen(port, () => {
