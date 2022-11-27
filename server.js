@@ -1,15 +1,10 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose"; //som react för frontend 
+import mongoose from "mongoose";
 import dotenv from "dotenv";
+import listEndpoints from "express-list-endpoints";
 
-//import bodyParser from 'body-parser' - Damines error-video?
-
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+/* import goldenGlobesData from "./data/golden-globes.json"; */
 
 dotenv.config()
 
@@ -42,10 +37,8 @@ if(process.env.RESET_DB) {
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
-// app.use(bodyParser.json())
 
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
@@ -55,9 +48,9 @@ app.use((req, res, next) => {
   }
 })
 
-// Start defining your routes here
+// endpoints start here 
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send({Message:"Golden Globes, endpoints after /globes are ?ceremony= or ?film= or ?nominee= or ?category= ", data: listEndpoints(app)});
 });
 
 app.get("/allglobes", async (req, res) => {
@@ -65,7 +58,7 @@ app.get("/allglobes", async (req, res) => {
   res.json(globes);
 });
 
-app.get("/globes/:id", async (req, res) => {
+app.get("/globes/id/:id", async (req, res) => {
   try {
     const award = await Globe.findById(req.params.id)
     if (award) {
@@ -79,23 +72,20 @@ app.get("/globes/:id", async (req, res) => {
 });
 
 app.get("/globes/", async (req, res) => {
-  const { category, nominee, film } = req.query;
+  const { category, nominee, film, ceremony } = req.query;
   const response = {
     success: true,
-    body: {} // syns två gånger på sidan.... 
+    body: {}
   }
   /* const matchRegex = new RegExp (".*") */
   const categoryQuery = category ? category : /.*/;
   const nomineeQuery = nominee ? nominee : /.*/;
   const filmQuery = film ? film : /.*/;
-
+  const ceremonyQuery = ceremony ? ceremony : {$gt: 0, $lt: 100};
   try {
-    response.body = await Globe.find({category: categoryQuery, nominee: nomineeQuery, 
-      film: filmQuery})
+    response.body = await Globe.find({category: categoryQuery, nominee: nomineeQuery, film: filmQuery, ceremony: ceremonyQuery})
       // .limit(2).sort({ggg: }).select({ggg: 5, hhh: })
-
     res.status(200).json({
-      success: true,
       body: response
     });
   } catch (error) {
@@ -108,16 +98,6 @@ app.get("/globes/", async (req, res) => {
   }
 });
 
-
-//Damiens video:
-/* app.get("/globes/films", async (req, res) => {
-  const films = await Globe.find().populate('film')
-  res.json(globes);
-}); */
-
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-// /myWord/gm - regex to match myWord
-// /.*/gm - regex to match every character in a string 
