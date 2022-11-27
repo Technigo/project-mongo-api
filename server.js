@@ -99,7 +99,6 @@ app.get("/songs/", async (req, res) => {
     body: {}
   }
   const matchAllRegex = new RegExp(".*");
-  const matchAllNumeric = new RegExp("[0-9]");
   const genreQuery = genre ? genre : {$regex: matchAllRegex,  $options: 'i' };
   const danceabilityQuery = danceability ? danceability : {$gt: 0, $lt: 100};
   try {
