@@ -10,7 +10,6 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const Song = mongoose.model("Song", {
-  _id: Number,
   id: Number,
   trackName: String,
   artistName: String,
@@ -48,7 +47,7 @@ if(process.env.RESET_DB) {
   resetDataBase();
 }
 
-if(process.env.RESET_OFFICE) {
+/* if(process.env.RESET_OFFICE) {
   const resetDataBase = async () => {
     await Office.deleteMany();
     theOffice.forEach(singleQuote => {
@@ -58,7 +57,7 @@ if(process.env.RESET_OFFICE) {
   }
   resetDataBase();
 }
-
+ */
 
 const port = process.env.PORT || 8080;
 const app = express();
