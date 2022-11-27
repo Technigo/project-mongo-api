@@ -39,37 +39,37 @@ const Song = mongoose.model("Song", {
 //   song: String
 // })
 
-// if(process.env.RESET_DB) {
-//   const resetDataBase = async () => {
-//     await Song.deleteMany();
-//     topMusicData.forEach(singleSong => {
-//       const newSong = new Song(singleSong);
-//       newSong.save();
-//     })
-//     const testSong = new Song ({ 
-//       id: 75,
-//       trackName: 'TestSong',
-//       artistName: 'TestArtist',
-//       genre: 'TestGenre',
-//       bpm: 190,
-//       energy: 70,
-//       danceability: 45,
-//       loudness: 90,
-//       liveness: 80,
-//       valence: 34,
-//       length: 937,
-//       acousticness: 23,
-//       speechiness: 46,
-//       popularity: 97
-//      })
-//     await testSong.save()
+if(process.env.RESET_DB) {
+  const resetDataBase = async () => {
+    await Song.deleteMany();
+    topMusicData.forEach(singleSong => {
+      const newSong = new Song(singleSong);
+      newSong.save();
+    })
+    const testSong = new Song ({ 
+      id: 75,
+      trackName: 'TestSong',
+      artistName: 'TestArtist',
+      genre: 'TestGenre',
+      bpm: 190,
+      energy: 70,
+      danceability: 45,
+      loudness: 90,
+      liveness: 80,
+      valence: 34,
+      length: 937,
+      acousticness: 23,
+      speechiness: 46,
+      popularity: 97
+     })
+    await testSong.save()
 
-//     await new Album({ title: 'TestTitle1', tracks: 8, song: 'testSong'}).save()
-//     await new Album({ title: 'TestTitle2', tracks: 8, song: 'testSong'}).save()
-//     await new Album({ title: 'TestTitle3', tracks: 8, song: 'testSong'}).save()
-//   }
-//   resetDataBase();
-// }
+    // await new Album({ title: 'TestTitle1', tracks: 8, song: 'testSong'}).save()
+    // await new Album({ title: 'TestTitle2', tracks: 8, song: 'testSong'}).save()
+    // await new Album({ title: 'TestTitle3', tracks: 8, song: 'testSong'}).save()
+  }
+  resetDataBase();
+}
 
 const port = process.env.PORT || 8080;
 const app = express();
