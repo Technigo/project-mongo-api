@@ -79,7 +79,7 @@ app.get("/", (req, res) => {
     Welcome: 'Hi! This a World Cup Api (1930 - 2018)',
     Routes: [{
       "/cups": 'Get all world cup.',
-      "/cups/'number'": 'Get World Champion with Matching ID.',
+      "/cups/'number'": 'Get a World Champion with Matching ID.',
       "/cups/winner/'country'": 'Get the result of a World Champion',
       "/cups/year/:year": 'Get the place where the World Cup was played according to the year',
       "/endpoints": "Get API endpoints."
@@ -123,9 +123,15 @@ app.get("/cups", async (req, res) => {
 
 /**
  * @openapi
- * /cups/:_id:
+ * /cups/{_id}:
  *   get:
- *     description: Get World Champion with Matching ID.
+ *     description: Get a World Champion with Matching ID.
+ *     parameters:
+ *       - in: path
+ *         name: _id
+ *         schema:
+ *           type: string
+ *         description: Get a World Champion with Matching ID.
  *     responses: 
  *       200: 
  *         description: Successful response. 
@@ -145,9 +151,15 @@ app.get("/cups/:_id", async (req, res) => {
 
 /**
  * @openapi
- * /cups/winner/:winner:
+ * /cups/winner/{winner}:
  *   get:
  *     description: Get the result of a World Champion.
+ *     parameters:
+ *       - in: path
+ *         name: winner
+ *         schema:
+ *           type: string
+ *         description: Get the result of a World Champion.
  *     responses: 
  *       200: 
  *         description: Successful response. 
@@ -168,9 +180,15 @@ app.get("/cups/winner/:winner", async (req, res) => {
 
 /**
  * @openapi
- * /cups/year/:year:
+ * /cups/year/{year}:
  *   get:
  *     description: Get the place where the World Cup was played according to the year.
+ *     parameters:
+ *       - in: path
+ *         name: year
+ *         schema:
+ *           type: number
+ *         description: Get the place where the World Cup was played according to the year.
  *     responses: 
  *       200: 
  *         description: Successful response. 
