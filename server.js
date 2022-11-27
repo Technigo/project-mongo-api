@@ -50,9 +50,9 @@ const navigation = {
     guide: "Routes for this API",
     Endpoints: [
       {
-        "/books": "Display all booksData",
-        "/id/:id": "Display a book with that ID",
-        "/author/:authors": "Display all books from that author"
+        "/books": "Display all books",
+        "/id/:id": "Display a book with special ID",
+        "/author/:authors": "Display all books from an author"
       },
     ],
   };
