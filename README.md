@@ -1,13 +1,12 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+During this weeks project we were using MongoDB to store our data, and learned how to query that data from our API.
+We used MongoCompass to view the data, a server.js file and mongoose to mainiplulate the data, and finally mongo Atlas and google cloud to deploy and host the backend.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+My family was sick this week so I have only followed the tutorials/lessons that we were given and I will explore more on my own when I have an oportunity. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-5hh7g2htwq-lz.a.run.app/
