@@ -28,18 +28,25 @@ app.get("/", (req, res) => {
 });
 
 app.get("/books", async (req, res) => {
-  const { title, authors } = req.query;
+  try {
+    const { title, authors } = req.query;
 
-  let query = {};
-  if (authors) {
-    query.authors = { $regex: new RegExp(authors, "i") };
-  }
-  if (title) {
-    query.title = { $regex: new RegExp(title, "i") };
-  }
+    let filter = {};
+    if (authors) {
+      filter.authors = { $regex: new RegExp(authors, "i") };
+    }
+    if (title) {
+      filter.title = { $regex: new RegExp(title, "i") };
+    }
 
-  const books = await Book.find(query);
-  res.status(200).json(books);
+    const books = await Book.find(filter);
+    res.status(200).json(books);
+  } catch (error) {
+    console.warn(error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
 });
 
 app.get("/books/:id", async (req, res) => {
