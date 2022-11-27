@@ -112,8 +112,7 @@ app.get("/top5Views", async (req, res) => {
 });
 
 // Route 4 find TED talks by speaker
-// The RegExp with "i" makes it possible to search 
-// by any charecter, so you vill accualy never get status(404).
+// The RegExp with "i" makes it possible to search with no case sesitivity/
 app.get("/speaker/:speaker", async (req, res) => {
 try{
   const speakersTalks = await TedTalk.find({ speaker: new RegExp(req.params.speaker, "i") })
@@ -140,9 +139,7 @@ try{
 });
 
 // Route 5 find TED talks by event
-// The RegExp with "i" makes it possible to search 
-// by any charecter, so you vill accualy never get status(404).
-
+// The RegExp with "i" makes it possible to search with no case sesitivity
 app.get("/event/:event", async (req, res) => {
   try{
     const eventTalks = await TedTalk.find({ event: new RegExp(req.params.event, "i") })
