@@ -62,8 +62,8 @@ app.get("/", (req, res) => {
   res.status(200).json({
     Hello: "Here you can see all my routes!",
     Routes: [
-      { "/songs": "all the song data" },
-      { "/songs/id/:id": "a specific song, for instance use id 637f5d218aae5dd90801358b" },
+      { "/songs": "All the song data" },
+      { "/songs/id/:id": "A specific song, for instance use id 637f5d218aae5dd90801358b" },
       { "/songs/?danceability=70" : "or instead of 70 try another pase for instace 50"},
       { "/songs/?genre=pop" : "or instead of pop try another genre, for instance trap music"},
       
