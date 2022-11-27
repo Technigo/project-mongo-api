@@ -27,9 +27,9 @@ const Song = mongoose.model("Song", {
 // Function that makes sure that the datebase does not update itself with the same entries every time the server is re-started. 
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
-     // Starts by deleting any pre-existing Book objects to prevent duplicates
+     // Starts by deleting any pre-existing song objects to prevent duplicates
     await Song.deleteMany()
-     // Creates a new Book instance for each book in the booksData
+     // Creates a new song instance for each song in the topMusicData
     topMusicData.forEach(singleSong => {
       const newSong = new Song(singleSong)
       newSong.save()
@@ -89,8 +89,7 @@ app.get("/songs", async(req,res) => {
 // Route to get songs by a specific artist
 app.get('/songs/artist/:artistName', async (req, res) => {
   const paramsArtistName = req.params.artistName;
-  // Added a regex so that it will search non-case-sensitive and if the name is included
-  // in the authors string
+  // Regex so that it will search non-case-sensitive 
   const artist = await Song.find({ artistName: { $regex : new RegExp(paramsArtistName, "i") } });
    
   if (artist.length === 0) {
@@ -129,7 +128,6 @@ app.get('/songs/id/:_id', async (req, res) => {
     if (singleSong) {
       res.json(singleSong);
     } else {
-      // Error when the id format is valid, but still no book is found with that id
       res.status(404).json("Sorry, no songs found with that ID");
     }
   } catch (err) {
