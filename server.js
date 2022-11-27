@@ -49,6 +49,16 @@ if(process.env.RESET_DB){
 }
 const port = process.env.PORT || 8080;
 const app = express();
+
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({
+      error: `Service unavailable`
+    })
+  }
+})
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
@@ -78,9 +88,20 @@ app.get("/songs", async (req, res) => {
     });
   });
 
+  //sorts all songs based on popularity rating
+  app.get("/songs/popularity", async (req, res) => {
+    try {
+      let popular = await Song.find()
+      popular = popular.sort((a, b) => b.popularity - a.popularity)
+      res.json({ length: popular.length, data: popular })
+    } catch {
+      res.status(400).json ({ error: `invalid request` })
+    }
+  })
 
-///Find song by ID
-app.get("/songs/:id", async (req, res) => {
+
+///endpoint that returns only one single item
+app.get("/songs/id/:id", async (req, res) => {
   try {
     const singleSongID = await Song.findById(req.params.id);
     const { id } = req.params;
@@ -105,12 +126,14 @@ app.get("/songs/:id", async (req, res) => {
       success: false,
       status_code: 400,
       body: {
-        message: "Invalid id"
+        message: `Invalid id ${id}`
       }
     });
   }
   
 });
+
+
 // app.get("/songs/genre/:genre/danceability/:danceability", async (req, res) => {
 app.get("/songs/", async (req, res) => {
 
