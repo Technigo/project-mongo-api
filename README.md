@@ -1,13 +1,15 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+For week 14 of the Technigo frontend developer boot camp out assignment was to create a database using MongoDB and fetch data from it using an Express API. One endpoint had to return a single item and one endpoint should return a collection.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I seeded data to the database from a downloaded json file with song data.
+I decided on using params to fetch data for the different endpoints. At the root you get a list of the endpoints, other than that there are three in total: get all songs, get song by id and get songs by genre.
+
+If I had more time, I'd like to use queries to sort data with multiple parameters.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+API is live here:
+https://project-mongo-api-sz4vw4o3jq-lz.a.run.app

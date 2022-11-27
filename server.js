@@ -1,11 +1,10 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
+import topMusicData from "./data/top-music.json";
 
 dotenv.config()
-
-import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -47,9 +46,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
+})
+
+// endpoints 
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send({
+    Message:"Welcome to Songs-API!Here are popular songs", 
+    endpoints: 
+      {'/songs': 'Lists all songs',
+      '/songs/id/:id' : 'Filters song per id',
+      '/songs/genre/:genre' : 'Lists all songs of chosen genre.'
+     }
+    })
 });
 
 app.get("/songs", async (req, res) => {
@@ -61,7 +75,6 @@ app.get("/songs", async (req, res) => {
 });
 
 app.get("/songs/id/:id", async (req, res) => {
-  console.log(req.params.id)
   try {
     const singleSong = await Song.findById(req.params.id).exec();
     if (singleSong) {
@@ -88,7 +101,6 @@ app.get("/songs/id/:id", async (req, res) => {
 });
 
 app.get("/songs/genre/:genre", async (req, res) => {
-  console.log(req.params.genre)
   try {
     const genreCollection = await Song.find({genre: req.params.genre}).exec();
     if (genreCollection) {
@@ -114,7 +126,7 @@ app.get("/songs/genre/:genre", async (req, res) => {
   }
 });
 
-// Start the server
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
