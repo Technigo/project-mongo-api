@@ -4,6 +4,23 @@ import mongoose from "mongoose";
 import worldCupData from "./data/world-cup.json";
 import listEndpoints from "express-list-endpoints";
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: { title: "World Cup (1930 - 2018)", version: '1.0.0',
+    contact: {
+      name: 'Antonella Cardozo',
+      email: 'sylcardozo.sc@gmail.com',
+      url: 'https://github.com/Sailornina',
+    },
+  },
+},
+  apis: ['./server.js']
+};
+
 function connectoToDB() {
   const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 
@@ -37,13 +54,11 @@ connectoToDB();
 const port = process.env.PORT || 8080;
 const app = express();
 
+const swaggerDocs = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(cors());
 app.use(express.json());
-
-app.get("/endpoints", (req, res) => {
-  res.send(listEndpoints(app))
-});
 
 // Seed the database
 const Cup = mongoose.model('Cup', {
@@ -64,7 +79,7 @@ app.get("/", (req, res) => {
     Welcome: 'Hi! This a World Cup Api (1930 - 2018)',
     Routes: [{
       "/cups": 'Get all world cup.',
-      "/cups/'number'": 'Get World Champion with Matching Database ID.',
+      "/cups/'number'": 'Get World Champion with Matching ID.',
       "/cups/winner/'country'": 'Get the result of a World Champion',
       "/cups/year/:year": 'Get the place where the World Cup was played according to the year',
       "/endpoints": "Get API endpoints."
@@ -73,6 +88,29 @@ app.get("/", (req, res) => {
   res.send(WorldCupApi)
 });
 
+
+/**
+ * @openapi
+ * /endpoints:
+ *   get:
+ *     description: Get API endpoints.
+ *     responses: 
+ *       200: 
+ *         description: Successful response. 
+ */
+app.get("/endpoints", (req, res) => {
+  res.send(listEndpoints(app))
+});
+
+/**
+ * @openapi
+ * /cups:
+ *   get:
+ *     description: Get all World Cup.
+ *     responses: 
+ *       200: 
+ *         description: Successful response. 
+ */
 app.get("/cups", async (req, res) => {
   let query = req.query || {}
   try {
@@ -83,6 +121,15 @@ app.get("/cups", async (req, res) => {
   }
 });
 
+/**
+ * @openapi
+ * /cups/:_id:
+ *   get:
+ *     description: Get World Champion with Matching ID.
+ *     responses: 
+ *       200: 
+ *         description: Successful response. 
+ */
 app.get("/cups/:_id", async (req, res) => {
   try {
     const cupId = await Cup.findById(req.params._id)
@@ -96,6 +143,15 @@ app.get("/cups/:_id", async (req, res) => {
   }
 });
 
+/**
+ * @openapi
+ * /cups/winner/:winner:
+ *   get:
+ *     description: Get the result of a World Champion.
+ *     responses: 
+ *       200: 
+ *         description: Successful response. 
+ */
 app.get("/cups/winner/:winner", async (req, res) => {
   const { winner } = req.params
   try {
@@ -110,6 +166,15 @@ app.get("/cups/winner/:winner", async (req, res) => {
   }
 });
 
+/**
+ * @openapi
+ * /cups/year/:year:
+ *   get:
+ *     description: Get the place where the World Cup was played according to the year.
+ *     responses: 
+ *       200: 
+ *         description: Successful response. 
+ */
 app.get("/cups/year/:year", async (req, res) => {
   const { year } = req.params
   try {

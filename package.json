@@ -16,6 +16,8 @@
     "express": "^4.17.3",
     "express-list-endpoints": "^6.0.0",
     "mongoose": "^6.3.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.6.0"
   }
 }
