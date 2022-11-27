@@ -4,10 +4,6 @@ import mongoose from "mongoose";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -48,9 +44,6 @@ if(process.env.RESET_DB) {
       const newSong = new Song(singleSong);
       newSong.save()
     })
-    // await User.deleteMany();
-    // const testUser = new User({ name: "Linus", age: 29, deceased: false });
-    // testUser.save();
   }
   resetDataBase();
 }
