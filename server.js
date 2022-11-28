@@ -26,9 +26,9 @@ const Song = mongoose.model("Song", {
 
 const resetDataBase = async () => {
   await Song.deleteMany()
-  topMusicData.forEach(singleSong => {
+  await topMusicData.forEach( async singleSong => {
     const newSong = new Song(singleSong)
-    newSong.save()
+    await newSong.save()
   })
 }
 
@@ -51,8 +51,9 @@ app.get("/reset-db", async (req, res) => {
   if (req.query.hax === 'lax') {
     await resetDataBase();
     res.send("db haxxed by haxx0rz")
+  } else {
+    res.send("Wrong password")
   }
-  res.send("Wrong password")
 })
 
 app.get("/songs/:id", async (req, res) => {
