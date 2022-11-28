@@ -53,9 +53,10 @@ app.get("/", (req, res) => {
   res.send({
   Message: "Avocado sale data", 
   Routes: [{ 
-  "/avocadoSales/:date": "example: /avocadoSales/2015-10-25",
-  "/highestPrice": "Just highest price available in the data",
-  "/avocados/:id": "example: /avocados/56"
+    "/avocadoSales": "all of the data",
+    "/avocadoSales/:date": "example: /avocadoSales/2015-10-25",
+    "/highestPrice": "Sorts the data in order of highest price",
+    "/avocados/:id": "example: /avocadoSales/id/63834553a60461fc8065b2bf"
   }]
  
   });
