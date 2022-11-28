@@ -43,7 +43,7 @@ app.use(cors());
 app.use(express.json());
 
 // First page
-// When using sendFile the html & css files are sent as response.
+// When using sendFile the HTML & CSS files are sent as response.
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 app.get("/style.css", (req, res) => {
