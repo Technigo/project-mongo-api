@@ -7,12 +7,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }); // connection. Using the method connect, passing on the url and then the parameter object
 mongoose.Promise = Promise;
 
-// const User = mongoose.model("User", {
-//   name: String,
-//   age: Number,
-//   deceased: Boolean
-// });
-
 //model how your data set will look like
 const Song = mongoose.model("Song", {
   "id": Number,
@@ -40,9 +34,6 @@ if (process.env.RESET_DB) {
     const newSong = new Song (singleSong);
     newSong.save();
    })
-    // await User.deleteMany();
-    // const testUser = new User ({name: "Lisa", age: 53, deceased: false });
-    // testUser.save();
   }
   resetDataBase();
 }
@@ -66,7 +57,6 @@ app.get("/", (req, res) => {
       { "/songs/id/:id": "A specific song, for instance use id 637f5d218aae5dd90801358b" },
       { "/songs/?danceability=70" : "or instead of 70 try another pase for instace 50"},
       { "/songs/?genre=pop" : "or instead of pop try another genre, for instance trap music"},
-      
     ],
   });
 });
@@ -80,34 +70,32 @@ app.get("/", (req, res) => {
 // });
 
 
-// get a single song by using findById
-// app.get("/songs/id/:id", async (req, res) => {
-//   try {
-//     const singleSong = await Song.findById(req.params.id);
-//     if (singleSong) {
-//       res.status(200).json({
-//         success: true,
-//         body: singleSong
-//       });
-//     } else {
-//       res.status(404).json({
-//         success: false,
-//         body: {
-//           message: "Could not find the song"
-//         }
-//       });
-//     }
-//   } catch(error) {
-//     res.status(400).json({
-//       success: false,
-//       body: {
-//         message: "Invalid id"
-//       }
-//     });
-//   }
-  
-// });
-
+//get a single song by using findById
+app.get("/songs/id/:id", async (req, res) => {
+  try {
+    const singleSong = await Song.findById(req.params.id);
+    if (singleSong) {
+      res.status(200).json({
+        success: true,
+        body: singleSong
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+        message: "Could not find the song"
+        }
+      });
+    }
+  } catch(error) {
+    res.status(400).json({
+      success: false,
+      body: {
+      message: "Invalid id"
+      }
+    });
+  }
+});
 
 app.get("/songs/", async (req, res) => {
 
@@ -131,7 +119,7 @@ app.get("/songs/", async (req, res) => {
       res.status(400).json({
         success: false,
         body: {
-          message: error
+        message: error
         }
       });
     }
