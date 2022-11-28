@@ -1,13 +1,20 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week I looked at how to use MongoDB to store data, and how to query that data from your API. I did 2 routes one from local json, and then I  retrieved data from Kaggle and convert it to JSON file. I also learnt some methods such as;
+ find()
+ findOne()
+ findById()
+ limit()
+ sort()
+ select()
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The problem was to connect everything through MongoDB and google cloud,
+and "personal problem" was to get the node to work 
+ - The solution was to to downgrade node from v18 to v16.
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-afvtyql6wq-lz.a.run.app/
