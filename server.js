@@ -25,7 +25,7 @@ const Song = mongoose.model('Song', {
 });
 
 
-if (true) {
+if (process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Song.deleteMany();
     topMusicData.forEach(singleSong => {
@@ -44,10 +44,64 @@ app.use(express.json());
 
 // Routes defined here
 app.get("/", (req, res) => {
-  res.send("Hello Technigoooooo heyhooooo!");
+ res.json({ 
+  Message: "Welcome to Top 50 at Spotify! Here you can look at all songs or search for specific song, artist, genre, energy and danceability by typing in the following strings after the adress in the browser:",
+  routes: {
+    "/songs": "look for all songs availible here",
+    "/songs?trackName=*the name of the track*": "search for a specific track",
+    "/songs?artistName=*the artist's name*" : "search for songs by a specific artist",
+    "/songs?genre=*name of the genre*": "search for a specific genre", 
+    "/songs?energy=*number of enery*": "search for a energy level",
+    "/Songs?danceability=*number of danceability*": "search for danceability level",
+    "/songs/:id": "search for a song by its unique id"
+    }
+  });
+});
+app.get('/songs', async (req, res) => {
+  const songs = await Song.find()
+  res.json(songs)
+})
+
+app.get('/songs/', async (req, res) => {
+  const {trackName, artistName, genre, energy, danceability} = req.query;
+  const response = {
+    success: true,
+    body: {}
+  }
+  const matchAllRegex = new RegExp(".*");
+  const trackQuery = trackName ? trackName : {$regex: matchAllRegex,  $options: 'i' }
+  const artistQuery = artistName ? artistName : {$regex: matchAllRegex,  $options: 'i' }
+  const genreQuery = genre ? genre : {$regex: matchAllRegex, $options: 'i'}
+  const energyQuery = energy ? energy : {$gt: 0, $lt: 100};
+  const danceabilityQuery = danceability ? danceability : {$gt: 0, $lt: 100};
+
+  try {
+    response.body = await Song.find({trackName:trackQuery, artistName:artistQuery, genre:genreQuery, energy:energyQuery, danceability:danceabilityQuery})
+   if(response.body.length > 1) {  
+    res.status(200).json({
+      success: true,
+      body: response
+    });
+  } else if(response.body.length === 0) {
+    res.status(404).json({
+      success: false,
+      body: {
+        message: 'Sorry, we could not find your query'
+      }
+    });
+  }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: error
+      }
+    });
+  }
 });
 
-app.get('/songs/id/:id', async (req, res) => {
+// Route to find spec song after unique ID
+app.get('/songs/:id', async (req, res) => {
   try {
     const singleSong = await Song.findById(req.params.id);
     if (singleSong) {
@@ -59,7 +113,7 @@ app.get('/songs/id/:id', async (req, res) => {
       res.status(404).json({
         success: false,
         body: {
-          message: 'Could not find the song'
+          message: 'Could not find song'
         }
       });
     }
@@ -71,38 +125,8 @@ app.get('/songs/id/:id', async (req, res) => {
       }
     });
   }
-  
 });
 
-app.get('/songs/', async (req, res) => {
-  const {genre, danceability} = req.query;
-  const response = {
-    success: true,
-    body: {}
-  }
-  const matchAllRegex = new RegExp(".*");
-  const matchAllNumeric = new RegExp("[0-9]");
-  const genreQuery = genre ? genre : {$regex: matchAllRegex,  $options: 'i' };
-  const danceabilityQuery = danceability ? danceability : {$gt: 0, $lt: 100};
-
-  try {
-    // if ( req.params.genre && req.params.danceability) {
-      response.body = await Song.find({genre: genreQuery, danceability:danceabilityQuery}).limit(2).sort({energy: 1}).select({trackName: 1, artistName: 1})
-   
-    res.status(200).json({
-      success: true,
-      body: response
-    });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      body: {
-        message: error
-      }
-    });
-  }
-
-});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
