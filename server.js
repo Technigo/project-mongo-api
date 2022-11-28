@@ -40,10 +40,10 @@ app.get("/", (req, res) => {
     Welcome: "Hi! This is an open API about Golden Globes",
     Routes: [
       {
-        "/goldenglobes": "An array of all Golden Globes objects",
-        "/goldenglobes/year/:year_award": "Gives back an array with objects based on the year that is typed",
-        "/goldenglobes/nominees/:nominee": "Gives back an array with objects based on the name of the nominee",
-        "/goldenglobes/winners/:win": "Gives back an array of all the winners or the ones who did not win. True/False",
+        "/goldenglobes": "Shows an array of all Golden Globes objects",
+        "/goldenglobes/year/:year_award": "Displays all nominees from a specific year",
+        "/goldenglobes/nominees/:nominee": "Displays information on a specific nominee",
+        "/goldenglobes/winners/:win": "Displays an array of all the winners or the ones who did not win. True/False",
       },
     ],
   }
