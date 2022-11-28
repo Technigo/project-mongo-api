@@ -15,12 +15,8 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 const GoldenGlobes = mongoose.model("GoldenGlobes", {
-  year_film: Number, 
   year_award: Number, 
-  ceremony: Number, 
-  category: String, 
-  nominee: String,
-  film: String, 
+  nominee: String, 
   win: Boolean
 });
 
