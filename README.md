@@ -1,13 +1,17 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project was to practise to create API and using Mongo DB to store the database. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I took my last project where I did an API and "translated" it to Mongo DB version. And got to practise to deploy it on google cloud and get the connection to Mongo Atlas to work. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-ogeb54s3sa-lz.a.run.app/
+
+Routes: 
+    "/avocadoSales": "all of the data",
+    "/avocadoSales/:date": "example: /avocadoSales/2015-10-25",
+    "/highestPrice": "Sorts the data in order of highest price",
+    "/avocados/:id": "example: /avocadoSales/id/63834553a60461fc8065b2bf"
