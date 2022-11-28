@@ -66,11 +66,11 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send([
-    {"/": "Start page"},
+    {"/": "Start page: https://project-mongo-api-afvtyql6wq-lz.a.run.app"},
     {"/songs/all": "Displays all songs"},
-    {"/songs/id/:id": "Displays one song with specific ID. example songs/id/637cebbb8d84e049f7380e06"},
-    {"/songs?danceability": "To find max 2 songs with a danceability. example: http://localhost:8080/songs?danceability=76"},
-    {"/songs?genre": "To find max 2 songs with a danceability. example: http://localhost:8080/songs?genre=country rap"},
+    {"/songs/id/:id": "Displays one song with specific ID. example https://project-mongo-api-afvtyql6wq-lz.a.run.app/songs/id/637cebbb8d84e049f7380e06"},
+    {"/songs?danceability": "To find max 2 songs with a danceability. example:https://project-mongo-api-afvtyql6wq-lz.a.run.app/songs?danceability=76"},
+    {"/songs?genre": "To find max 2 songs with a danceability. example: https://project-mongo-api-afvtyql6wq-lz.a.run.app/songs?genre=country rap"},
     {"/office/all": "display all office quotes"},
   ]);
 });
