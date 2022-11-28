@@ -38,12 +38,12 @@ if (process.env.RESET_DB) {
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Middlewares to enable cors and json body parsing
+// Middlewares to enable cors and json body parsing.
 app.use(cors());
 app.use(express.json());
 
 // First page
-// When using sendFile the HTML & CSS files are sent as response.
+// When using sendFile the HTML & CSS files are sent as response...
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 app.get("/style.css", (req, res) => {
