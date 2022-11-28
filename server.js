@@ -101,13 +101,14 @@ app.get("/products/name/:name", async (req, res) => {
 // Display products by lowest price
 app.get("/products/lowestprice/", async (req, res) => {
   try {
-    const products = await Product.find({});
+    const products = await Product.find({}).sort({price:1});
     if (products) {
       res.status(200).json({
         success: true,
-        body: products.sort((a, b) => {
-          return a.price - b.price;
-        })
+        body: products
+        //body: products.sort((a, b) => {
+        //  return a.price - b.price;
+       // })
       });
     } else {
       res.status(404).json({
