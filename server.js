@@ -71,7 +71,7 @@ app.get("/", (req, res) => {
     {"/songs/id/:id": "Displays one song with specific ID. example https://project-mongo-api-afvtyql6wq-lz.a.run.app/songs/id/637cebbb8d84e049f7380e06"},
     {"/songs?danceability": "To find max 2 songs with a danceability. example:https://project-mongo-api-afvtyql6wq-lz.a.run.app/songs?danceability=76"},
     {"/songs?genre": "To find max 2 songs with a danceability. example: https://project-mongo-api-afvtyql6wq-lz.a.run.app/songs?genre=country rap"},
-    {"/office/all": "display all office quotes"},
+    {"/office": "display all office quotes"},
   ]);
 });
 
