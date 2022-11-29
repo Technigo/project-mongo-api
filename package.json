@@ -9,12 +9,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.20.2",
-    "@babel/node": "^7.20.2",
+    "@babel/core": "^7.20.5",
+    "@babel/node": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "mongoose": "^6.7.2",
     "nodemon": "^2.0.20"
-  }
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CeciliaMichele/project-mongo-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CeciliaMichele/project-mongo-api/issues"
+  },
+  "homepage": "https://github.com/CeciliaMichele/project-mongo-api#readme"
 }
