@@ -14,7 +14,8 @@
     "@babel/preset-env": "^7.20.2",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "mongoose": "^6.7.2",
+    "express-api-starter": "^0.0.1",
+    "mongoose": "^6.7.4",
     "nodemon": "^2.0.20"
   },
   "main": "server.js",
