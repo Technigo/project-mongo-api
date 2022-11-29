@@ -93,7 +93,7 @@ app.get("/songs/", async (req, res) => {
   const popularityQuery = popularity ? popularity : {$gt: 0, $lt: 100}
 
   try {
-      response.body = await Song.find({genre: genreQuery, bpm: bpmQuery, popularity: popularityQuery}).limit(50).sort({popularity: 1}).select({trackName: 1, artistName: 1, genre: 1, bpm: 1, popularity: 1})
+      response.body = await Song.find({genre: genreQuery, bpm: bpmQuery, popularity: popularityQuery}).limit(50).sort({popularity: -1}).select({trackName: 1, artistName: 1, genre: 1, bpm: 1, popularity: 1})
     res.status(200).json({
       success: true,
       body: response
