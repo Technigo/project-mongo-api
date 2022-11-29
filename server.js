@@ -24,15 +24,14 @@ const Song = mongoose.model("Song", {
   popularity: Number
 })
 
-const resetDataBase = async () => {
-  await Song.deleteMany()
-  await topMusicData.forEach( async singleSong => {
-    const newSong = new Song(singleSong)
-    await newSong.save()
-  })
-}
-
 if(process.env.RESET_DB) {
+  const resetDataBase = async () => {
+    await Song.deleteMany()
+    topMusicData.forEach(singleSong => {
+      const newSong = new Song(singleSong)
+      newSong.save()
+    })
+  }
   resetDataBase()
 }
 
@@ -43,17 +42,7 @@ app.use(cors());
 app.use(express.json())
 
 app.get("/", (req, res) => {
-  res.send("Hello hi")
-})
-
-
-app.get("/reset-db", async (req, res) => {
-  if (req.query.hax === 'lax') {
-    await resetDataBase();
-    res.send("db haxxed by haxx0rz")
-  } else {
-    res.send("Wrong password")
-  }
+  res.send("Hello hiii")
 })
 
 app.get("/songs/:id", async (req, res) => {
@@ -93,7 +82,7 @@ app.get("/songs/", async (req, res) => {
   const popularityQuery = popularity ? popularity : {$gt: 0, $lt: 100}
 
   try {
-      response.body = await Song.find({genre: genreQuery, bpm: bpmQuery, popularity: popularityQuery}).limit(50).sort({popularity: -1}).select({trackName: 1, artistName: 1, genre: 1, bpm: 1, popularity: 1})
+      response.body = await Song.find({genre: genreQuery, bpm: bpmQuery, popularity: popularityQuery}).sort({popularity: -1}).select({trackName: 1, artistName: 1, genre: 1, bpm: 1, popularity: 1})
     res.status(200).json({
       success: true,
       body: response
