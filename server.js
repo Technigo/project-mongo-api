@@ -19,13 +19,13 @@ const Book = mongoose.model("Book", {
   bookID: Number,
   title: String,
   authors: String,
-  averageRating: Number,
+  average_rating: Number,
   isbn: Number,
   isbn13: Number,
-  languageCode: String,
-  numPages: Number,
-  ratingsCount: Number,
-  textReviewsCount: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
 });
 
 // RESET_DB=true npm run dev "inordet to send data to MongoCompass"
@@ -46,8 +46,8 @@ app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next();
   } else {
-    res.status(404).json({
-      error: "Bad request",
+    res.status(400).json({
+      error: "The page does not exist!",
       success: false,
     });
   }
@@ -59,11 +59,11 @@ app.get("/", (req, res) => {
     Routes: "You Can Find All Routes Here! ",
     Routes: [
       { "/books": "All Books Data " },
-      // http://localhost:9000/books?id=6381ef7876920a4f808bfdce
+      // http://localhost:9000/books/id/6381ef7876920a4f808bfdce
       { "/books/id/:id": "Specefic ID " },
-      // J.K. Rowling-Mary GrandPré
-      { "/books/authours/J.K. Rowling-Mary GrandPré": "Specefic Authour" },
-      // http://localhost:9000/books?title=Harry%20Potter
+      //   http://localhost:9000/books/authors/Bill Bryson
+      { "/books/authours/Bill Bryson": "Specefic Authour" },
+      // http://localhost:9000/books/title/Harry%20Potter
       { "/books/title/Harry Poter": "Harry's books" },
     ],
   });
@@ -107,35 +107,53 @@ app.get("/books/id/:id", async (req, res) => {
   }
 });
 
-// http://localhost:9000/books?title=Harry Potter&languageCode=eng&authors= Rowling-Mary GrandPré
+app.get("/books/authors/:author", async (req, res) => {
+  try {
+    const bookByAuthor = await Book.find({ authors: req.params.author });
+    if (bookByAuthor) {
+      res.json({
+        response: bookByAuthor,
+        status: 200,
+        success: true,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Author Not Found",
+        },
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid request",
+      },
+    });
+  }
+});
 
-app.get("/books", async (req, res) => {
-  const { title, authors, languageCode, averageRating } = req.query;
+// http://localhost:9000/book?title=HarryPotter
+
+app.get("/book", async (req, res) => {
+  const { title } = req.query;
+
   const response = {
     success: true,
     body: {},
   };
-
+  // const matchAllRegex = new RegExp(".*");
   const titleQuery = title ? title : /.*/gm;
-  const authorsQuery = authors ? authors : /.*/gm;
-  const languageCodeQuery = languageCode ? languageCode : /.*/gm;
-  const averageRatingQuery = averageRating
-    ? averageRating
-    : { $gt: 0, $lt: 10 };
 
   try {
     response.body = await Book.find({
-      title: titleQuery,
-      authors: authorsQuery,
-      languageCode: languageCodeQuery,
-      averageRating: averageRatingQuery,
-    })
-      .limit(5)
-      .sort({ average_rating: 1 });
-    res.status(200).json({
-      success: true,
-      body: response,
-    });
+      title: titleQuery
+     });
+     
+    res.status(200).json(
+     response
+    );
   } catch (error) {
     res.status(400).json({
       success: false,
