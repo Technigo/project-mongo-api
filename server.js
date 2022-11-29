@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import booksData from "./data/books.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/projectMongoApi"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
