@@ -2,9 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import booksData from "./data/books.json";
-import { resolveShowConfigPath } from "@babel/core/lib/config/files";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/projectMongoApi"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
