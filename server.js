@@ -77,12 +77,14 @@ app.get("/songs/", async (req, res) => {
     success: true,
     body: {}
   }
-  const genreQuery = genre ? genre : /.*/
+
+  const matchAllRegex = new RegExp(".*")
+  const genreQuery = genre ? genre : matchAllRegex
   const bpmQuery = bpm ? bpm : {$gt: 0, $lt: 100}
   const popularityQuery = popularity ? popularity : {$gt: 0, $lt: 100}
 
   try {
-      response.body = await Song.find({genre: genreQuery, bpm: bpmQuery, popularity: popularityQuery}).sort({popularity: -1}).select({trackName: 1, artistName: 1, genre: 1, bpm: 1, popularity: 1})
+      response.body = await Song.find({genre: genreQuery, bpm: bpmQuery, popularity: popularityQuery}).limit(10).sort({popularity: -1}).select({trackName: 1, artistName: 1, genre: 1, bpm: 1, popularity: 1})
     res.status(200).json({
       success: true,
       body: response
@@ -100,14 +102,3 @@ app.get("/songs/", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
-
-
-
-//RESET_DB=true npm run dev
-
-
-
-//https://regex101.com/
-
-// /yourWodOfChoice/gm - regex to match yourWordOfChoice
-// /.*/gm - regex to match every character in a string
