@@ -2,8 +2,9 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import booksData from "./data/books.json";
+import { resolveShowConfigPath } from "@babel/core/lib/config/files";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb+srv://kristin-larsson:MONGODB_PASSWORD@cluster0.6asmbxp.mongodb.net/projectMongoApi?retryWrites=true&w=majority";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -108,7 +109,7 @@ app.get("/books/author/:authors", async (req, res) => {
     res.status(404).json({
       success: false,
       body: {
-        message: "No book with that author"
+        message: "No book from that author"
       }
       })
     }
@@ -116,7 +117,7 @@ app.get("/books/author/:authors", async (req, res) => {
     res.status(400).json({
       success: false,
       body: {
-        message: "Invalid author"
+        message: "Invalid name"
       }
       })
   }
@@ -127,4 +128,3 @@ app.get("/books/author/:authors", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
