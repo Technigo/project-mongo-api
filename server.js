@@ -43,7 +43,7 @@ app.use(cors());
 app.use(express.json())
 
 app.get("/", (req, res) => {
-  res.send("See README for how to use")
+  res.send("Hello hi")
 })
 
 
@@ -80,20 +80,20 @@ app.get("/songs/:id", async (req, res) => {
       }
     })
   }
-
 })
 
 app.get("/songs/", async (req, res) => {
-  const {genre, danceability} = req.query
+  const {genre, bpm, popularity} = req.query
   const response = {
     success: true,
     body: {}
   }
   const genreQuery = genre ? genre : /.*/
-  const danceabilityQuery = danceability ? danceability : {$gt: 0, $lt: 100}
+  const bpmQuery = bpm ? bpm : {$gt: 0, $lt: 100}
+  const popularityQuery = popularity ? popularity : {$gt: 0, $lt: 100}
 
   try {
-      response.body = await Song.find({genre: genreQuery, danceability: danceabilityQuery}).limit(10).sort({energy: 1}).select({trackName: 1, artistName: 1, genre: 1})
+      response.body = await Song.find({genre: genreQuery, bpm: bpmQuery, popularity: popularityQuery}).limit(50).sort({popularity: 1}).select({trackName: 1, artistName: 1, genre: 1, bpm: 1, popularity: 1})
     res.status(200).json({
       success: true,
       body: response
