@@ -28,8 +28,9 @@ const Title = mongoose.model("Title", {
   type: String
 })
 
-if(true) {
+if(process.env.RESET_DB) {
   const resetDataBase = async () => {
+    await Title.deleteMany();
    netflixData.forEach(singleTitle => {
       const newTitle = new Title(singleTitle)
       newTitle.save()
