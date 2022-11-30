@@ -62,6 +62,8 @@ const Movie = mongoose.model('Movie', {
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
     await Song.deleteMany();
+    await Movie.deleteMany();
+
     topMusicData.forEach((singleSong) => {
       const newSong = new Song(singleSong);
       newSong.save();
