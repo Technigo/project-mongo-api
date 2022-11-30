@@ -17,12 +17,13 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const Nomination = mongoose.model("Nomination", {
-  "year_film": Number,
-    "year_award": Number,
-    "ceremony": Number,
-    "category": String,
-    "nominee": String,
-    "win": Boolean
+  year_film: Number,
+  year_award: Number,
+  ceremony: Number,
+  category: String,
+  nominee: String,
+  film: String,
+  win: Boolean
 
 }); 
 
@@ -31,28 +32,9 @@ const Nomination = mongoose.model("Nomination", {
 if (process.env.RESET_DB) {
   const resetDataBase = async () => {
       await Nomination.deleteMany(); // waiting to delete all data before we create a new object
-    const addedNominate = new Nomination({
-      year_film: 2044, 
-      year_award: 2045,
-      ceremony: 165,
-      category: "best tragic comedy",
-      nominee: "smurf",
-      win: false
-      
-    }); 
-    
-    const addedNominate2 = new Nomination({
-      _id: ObjectId,
-      year_film: 2023, 
-      year_award: 2015,
-      ceremony: 65,
-      category: "best actor",
-      nominee: "Johny Deep",
-      win: true
-    
-    });
-    addedNominate.save();// we need to put it in the reset function because if is after the deleteMany happens before and we do not update the DB
-    addedNominate2.save()
+      goldenGlobesData.forEach(singleNomination => {
+        const newNomination = new Nomination(singleNomination).save();
+      })
   }
   resetDataBase();
 }
@@ -91,7 +73,6 @@ app.get("/nominees/category/:category", async (req, res) => {
     if(category) {
       res.status(200).json({
         success: true,
-        status_code: 200,
         data: category
       })
     }
@@ -99,11 +80,10 @@ app.get("/nominees/category/:category", async (req, res) => {
       res.status(404).json({
         success: false,
         status_code: 404, 
-        data: "There is not data with this category. Try: <br> best actor <br> best tragic comedy "
+        error: "There is not data with this category. Try: <br> best actor <br> best tragic comedy "
       })
     }
-  }
-     catch (err) {
+  } catch (err) {
       res.status(400).json({
         success: false,
         status_code: 400,
