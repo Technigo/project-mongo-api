@@ -137,7 +137,7 @@ app.get('/songs/happy', async (req, res) => {
   res.json(happySongs);
 });
 
-// Route to get songs with a high danceability value (see noNo Environmenttes.txt)
+// Route to get songs with a high danceability value (see notes.txt)
 app.get('/songs/dancing', async (req, res) => {
   const danceSongs = await Song.find({ danceability: { $gte: 80 } });
 
