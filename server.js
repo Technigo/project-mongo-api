@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import listEndpoints from "express-list-endpoints";
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -38,9 +37,7 @@ if (process.env.RESET_DB) {
   resetDataBase()
 }
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
+// Defines the port the app will run on.
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -54,11 +51,6 @@ app.use((req, res, next) => {
   } else {
     res.status(503).json({error: 'Service unavailable'})
   }
-})
-
-// Lists the endpoints for all routers that is created in this file. 
-app.get("/endpoints", (req, res) => {
-  res.send(listEndpoints(app))
 })
 
 // ROUTES
@@ -137,7 +129,7 @@ app.get('/songs/id/:_id', async (req, res) => {
 });
 
 
-// Route to get songs with a high valence value = happy songs!
+// Route to get songs with a high valence value = happy songs! (see notes.txt)
 // $gte is MongoDB's comparison query operator for greater or equal to
 app.get('/songs/happy', async (req, res) => {
   const happySongs = await Song.find({ valence: { $gte: 80 } });
@@ -145,7 +137,7 @@ app.get('/songs/happy', async (req, res) => {
   res.json(happySongs);
 });
 
-// Route to get songs with a high danceability value
+// Route to get songs with a high danceability value (see noNo Environmenttes.txt)
 app.get('/songs/dancing', async (req, res) => {
   const danceSongs = await Song.find({ danceability: { $gte: 80 } });
 
