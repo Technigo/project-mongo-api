@@ -54,9 +54,9 @@ app.get("/titles", async (req, res) => {
   })
 })
 
-app.get("/titles/:show_id", async (req, res) => {
+app.get("/titles/:id", async (req, res) => {
   try {
-    const SingleTitle = await Title.findById(req.params.show_id)
+    const SingleTitle = await Title.findById(req.params.id)
     if (SingleTitle) {
       res.status(200).json({
         success: true,
