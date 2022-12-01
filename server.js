@@ -43,7 +43,7 @@ if(process.env.RESET_DB) {
 // Routes
 
 app.get("/", (req, res) => {
-  res.send("This is an api for Netflix-titles.")
+  res.send("This is an api for Netflix-titles. Go to /titles to see all titles, and then add the _id of the title in /titles/ to see a specific title")
   })
 
 app.get("/titles", async (req, res) => {
