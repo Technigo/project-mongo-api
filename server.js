@@ -106,7 +106,7 @@ app.get("/songs/", async (req, res) => {
 
   const {genre, danceability} = req.query
   const response = {
-    sucess: true,
+    success: true,
     body: {}
   }
   const genreQuery = genre ? genre : /.*/
