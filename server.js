@@ -70,7 +70,7 @@ app.get("/nominees/category/:category", async (req, res) => {
   try{
     const category =  await Nomination.find({category: req.params.category}) // finding a requested category, it is possible to add RegEXP as well inside "find" to make it possible to write only one word.
                                                                              // example: await Nomination.find({category: new RegExp(req.params.category)})
-    if(category) {
+    if(category.length !== 0) {
       res.status(200).json({
         success: true,
         data: category
@@ -80,7 +80,7 @@ app.get("/nominees/category/:category", async (req, res) => {
       res.status(404).json({
         success: false,
         status_code: 404, 
-        error: "There is not data with this category. Try: <br> best actor <br> best tragic comedy "
+        error: "There is not data with this category."
       })
     }
   } catch (err) {
