@@ -45,13 +45,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next()
-  } else {
-    res.status(503).json({error: 'Service unavailable'})
-  }
-})
 
 // ROUTES
 app.get("/", (req, res) => {
