@@ -3,9 +3,17 @@ import cors from "cors";
 import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = "mongodb+srv://Tanmark:uuuYbm//L@cluster0.kjfnmzm.mongodb.net/?retryWrites=true&w=majority" || "mongodb://127.0.0.1/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
+/*mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+  if(err) {
+    console.log(err)
+  } else {
+    console.log("mongdb is connected")
+  }
+})*/
+
 
 const Song = mongoose.model("Song", {
   id: Number,
@@ -47,7 +55,15 @@ app.use(express.json());
 // Start defining your routes here
 // Main route
 app.get("/", (req, res) => {
-  res.send("Hello Let's look at some music!");
+  res.json({ 
+    responseMessage: "Hi, let's look at some music!",
+    routes: {
+      "/songs": "shows all songs",
+      "/songs?genre= add genre": "a specific genre",
+      "/songs?artistName= add name of artist" : "songs by a specific artist", 
+      "/songs/:id": "songs by its unique id"
+    }
+  } );
 });
 
 // All songs (genre, danceability, artist)
@@ -64,7 +80,7 @@ app.get("/songs/", async (req, res) => {
   const danceabilityQuery = danceability ? danceability : {$regex: matchAllRegex, $options: 'i'};
 
   try {
-      response.body = await Song.find({genre: genreQuery, artistName: artistQuery, danceability: danceabilityQuery,})
+      response.body = await Song.find({genre: genreQuery, artistName: artistQuery, danceability: danceabilityQuery})
    
     res.status(200).json({
       success: true,
