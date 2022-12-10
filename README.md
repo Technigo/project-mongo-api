@@ -7,9 +7,6 @@ Biggest problem was to understand how to connect everything together and build a
 Right now you can access endpoits:
 1. https://project-mongo-api-qka4oyjhma-uc.a.run.app/nominees/
 2. https://project-mongo-api-qka4oyjhma-uc.a.run.app/nominees/category/:category
-  available categories:
-    1. best actor
-    2. best tragedy comedy 
 
 ## View it live
 
