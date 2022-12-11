@@ -53,7 +53,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send({
     Welcome: 
-    "Hi music lover! Please feel free to use the endpoints below to show the data you are looking for.",
+    "Hi music lover! 👋 Please feel free to use the endpoints below to show the data you are looking for.",
     ForRats: 
     "Are you a rat surfing the world wide web in search of some top music? 🐀 According to the latest scientific studies you guys like to wiggle your heads to music with rythms between 120-140 BPM. So we have made a special route for you to find the nicest grooves. Enjoy!",
     Routes: [
