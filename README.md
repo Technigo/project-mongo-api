@@ -4,10 +4,8 @@ Week 13 at Technigo. First week using Mongo and Mongoose. This project was to cr
 
 ## The problem
 
-This week my biggest challange was to figure out all the installations and how to use Mongodb, Atlas and Compass.
-
 Technologies I used
--MongoDB
+-MongoDB, Atlas and Compass
 -Model data in Mongo using Mongoose
 -Store secret password
 
