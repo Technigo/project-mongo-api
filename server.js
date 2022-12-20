@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import tedTalkData from "./data/ted-talksMod.json";
 
 // dotenv.config()
+// console.log(process.env) // remove this after you've confirmed it is working
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -75,7 +76,7 @@ app.get("/", (req, res) => {
         "/allTedTalks": "All TED Talks",
         "/top5Views": "Top 5 most viewd TED Talks",
         "/speaker/:speaker": "Search speaker with RegExpTED and watch all TED Talks from named speaker", 
-        "/event/:event": "Serch by event, and get a list of TED Talks",
+        "/event/:event": "Serch by event, and get a list of TED Talks from that event",
         "/tedTalk/id/:id": "search for a TED Talk with _Id (ex. 638271655ec3bb12878ae9b8)",
         "/tedTalk/talk_id/:talk_id": "search for a TED Talk with talk_Id (ex. 248)",
       }],
