@@ -97,8 +97,7 @@ app.get("/songs/id/:id", async (req, res) => {
 // Find all songs
 app.get("/songs/", async (req, res) => {
   try {
-    const allTheSongs = await Song.find({});
-    //response.body = await Song.find({})
+    response.body = await Song.find({})
     if (allTheSongs) {
       res.status(200).json({
         success: true,
