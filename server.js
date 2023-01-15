@@ -88,7 +88,7 @@ app.get("/songs/", async (req, res) => {
 });
 
 // Find specific song with id
-app.get("/songs/id/:id", async (req, res) => {
+app.get("/songs/:id", async (req, res) => {
   try {
     const singleSong = await Song.findById(req.params.id);
     if (singleSong) {
