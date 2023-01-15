@@ -67,6 +67,11 @@ app.get("/", (req, res) => {
 
 // All songs (genre, danceability, artist)
 app.get("/songs/", async (req, res) => {
+  const {genre, trackName, artistName} = req.query
+  const response = {
+    sucess: true,
+    body: {}
+  }
 
   try {
       /* response.body = await Song.find({genre: genreQuery, artistName: artistQuery})*/ 
