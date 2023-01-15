@@ -65,37 +65,39 @@ app.get("/", (req, res) => {
   } );
 });
 
-// All songs (genre, danceability, artist)
-app.get("/songs/", async (req, res) => {
-  const {genre, trackName, artistName} = req.query
-  const response = {
-    sucess: true,
-    body: {}
-  }
-
+// Find specific song with id
+app.get("/songs/id/:id", async (req, res) => {
   try {
       /* response.body = await Song.find({genre: genreQuery, artistName: artistQuery})*/ 
-      response.body = await Song.find({})
-   
-    res.status(200).json({
-      success: true,
-      body: response
-    });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      body: {
-        message: error
+      // response.body = await Song.find({})
+      const singleSong = await Song.findById(req.params.id);
+      if (singleSong) {
+        res.status(200).json({
+          success: true,
+          body: singleSong
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          body: {
+            message: "Could not find the song"
+          }
+        });
       }
-    });
-  }
+    } catch(error) {
+      res.status(400).json({
+        success: false,
+        body: {
+          message: "Invalid id"
+        }
+      });
+    }
+  });
 
-});
-
-// Find specific song with id
-app.get("/songs/:id", async (req, res) => {
+// Find all songs
+app.get("/songs/", async (req, res) => {
   try {
-    const singleSong = await Song.findById(req.params.id);
+    response.body = await Song.find({})
     if (singleSong) {
       res.status(200).json({
         success: true,
