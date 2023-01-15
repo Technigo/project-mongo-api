@@ -3,7 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo";
+const mongoUrl = process.env.MONGO_URL
+|| "mongodb://127.0.0.1/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 /*mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
@@ -45,7 +46,7 @@ if(process.env.RESET_DB) {
 }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 9090;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
@@ -59,8 +60,6 @@ app.get("/", (req, res) => {
     responseMessage: "Hi, let's look at some music!",
     routes: {
       "/songs": "shows all songs",
-      "/songs?genre= add genre": "a specific genre",
-      "/songs?artistName= add name of artist" : "songs by a specific artist", 
       "/songs/:id": "songs by its unique id"
     }
   } );
@@ -69,18 +68,9 @@ app.get("/", (req, res) => {
 // All songs (genre, danceability, artist)
 app.get("/songs/", async (req, res) => {
 
-  const {genre, artistName, danceability} = req.query;
-  const response = {
-    success: true,
-    body: {}
-  }
-  const matchAllRegex = new RegExp(".*");
-  const genreQuery = genre ? genre : {$regex: matchAllRegex,  $options: 'i' };
-  const artistQuery = artistName ? artistName : {$regex: matchAllRegex, $options: 'i'};
-  const danceabilityQuery = danceability ? danceability : {$regex: matchAllRegex, $options: 'i'};
-
   try {
-      response.body = await Song.find({genre: genreQuery, artistName: artistQuery, danceability: danceabilityQuery})
+      /* response.body = await Song.find({genre: genreQuery, artistName: artistQuery})*/ 
+      response.body = await Song.find({})
    
     res.status(200).json({
       success: true,
