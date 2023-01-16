@@ -68,22 +68,27 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
-// endpoint shows all songs
+// Endpoint - returns all songs
 app.get("/music", async (req, res)=> {
   const music = await Song.find()
   res.send(music)
 });
 
-//endpoint shows a single song
+// Endpoint - returns a single song
 app.get("/music/:id", async (req, res) => {
+  try {
   const singleSong = await Song.findById(req.params.id)
   if (singleSong){
     res.json(singleSong)
   } else {
     res.status(404).json("Error: Song not found")
   }
-  //res.json(singleSong)
+ } catch (err) {
+  res.status(400).json({error:'Invalid song id'})
+ }
 });
+
+
 
 // Start the server
 app.listen(port, () => {
