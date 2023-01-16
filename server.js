@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import avocadoSalesData from "./data/avocado-sales.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -9,14 +10,14 @@ mongoose.Promise = Promise;
 // Using a Mongoose model to model my data and to fetch data from the database.
 const Sale = mongoose.model("Sale", {
   id: Number,
-  date: Number,
+  date: String,
   averagePrice: Number,
   totalVolume: Number,
   totalBagsSold: Number,
   smallBagsSold: Number,
   largeBagsSold: Number,
   xLargeBagsSold: Number,
-  popularity: String
+  region: String
 });
 
 if(process.env.RESET_DB) {
@@ -79,7 +80,7 @@ app.get("/sales/", async (req, res) => {
   }
   const matchAllRegex = new RegExp(".*");
   const regionQuery = region ? region : matchAllRegex;
-  const averagePriceQuery = averagePrice ? averagePrice : matchAllRegex;
+  const averagePriceQuery = averagePrice ? averagePrice : {$gt: 0, $lt: 100};
   try {
       response.body = await Sale.find({region: regionQuery, averagePrice: averagePriceQuery}).limit(5).sort({totalVolume: 1}).select({totalBagsSold: 1, largeBagsSold: 1})
     res.status(200).json({
