@@ -68,7 +68,6 @@ app.get("/", (req, res) => {
 // Find specific song with id
 app.get("/songs/id/:id", async (req, res) => {
   try {
-      /* response.body = await Song.find({genre: genreQuery, artistName: artistQuery})*/ 
       // response.body = await Song.find({})
       const singleSong = await Song.findById(req.params.id);
       if (singleSong) {
@@ -97,7 +96,7 @@ app.get("/songs/id/:id", async (req, res) => {
 // Find all songs
 app.get("/songs/", async (req, res) => {
   try {
-    response.body = await Song.find({})
+    const allTheSongs = await Song.find({})
     if (allTheSongs) {
       res.status(200).json({
         success: true,
