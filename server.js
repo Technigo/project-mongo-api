@@ -100,7 +100,7 @@ app.get("/songs/", async (req, res) => {
     if (allTheSongs) {
       res.status(200).json({
         success: true,
-        body: singleSong
+        body: allTheSongs
       });
     } else {
       res.status(404).json({
