@@ -49,8 +49,17 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Here's a bunch of songs!");
+  res.send("Songs! '/songs' returns all songs, '/songs/id/:id' returns a single song");
 });
+
+app.get("/songs", async (req, res) => {
+  const allTheSongs = await Song.find({});
+  res.status(200).json({
+   success: true,
+   body: allTheSongs
+  });
+});
+
 app.get("/songs/id/:id", async (req, res) => {
   try {
     const singleSong = await Song.findById(req.params.id);
@@ -63,7 +72,7 @@ app.get("/songs/id/:id", async (req, res) => {
       res.status(404).json({
         success: false,
         body: {
-          message: "Could not find the song"
+          message: "Could not find a song with that ID"
         }
       });
     }
