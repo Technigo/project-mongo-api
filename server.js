@@ -87,7 +87,6 @@ app.get("/songs/", async (req, res) => {
 });
 
 
-
   app.get('/songs/dancing', async (req, res) => {
     const danceSongs = await Song.find({ danceability: { $gte: 80 } });
   
