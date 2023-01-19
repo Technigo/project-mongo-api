@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import netflixData from "./data/netflix-titles.json";
 
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://mdhmdh:NcrDhQ14QIBVLwcd@cluster0.yw2pt9y.mongodb.net/ProjectMongoDB?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
