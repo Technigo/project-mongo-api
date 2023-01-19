@@ -60,38 +60,11 @@ app.get("/", (req, res) => {
     responseMessage: "Hi, let's look at some music!",
     routes: {
       "/songs": "shows all songs",
-      "/songs/:id": "songs by its unique id"
+      "/songs/:id": "songs by its unique id",
+      "/songs/dancing": "Show songs great for dancing",
     }
   } );
 });
-
-// Find specific song with id
-app.get("/songs/id/:id", async (req, res) => {
-  try {
-      // response.body = await Song.find({})
-      const singleSong = await Song.findById(req.params.id);
-      if (singleSong) {
-        res.status(200).json({
-          success: true,
-          body: singleSong
-        });
-      } else {
-        res.status(404).json({
-          success: false,
-          body: {
-            message: "Could not find the song"
-          }
-        });
-      }
-    } catch(error) {
-      res.status(400).json({
-        success: false,
-        body: {
-          message: "Invalid id"
-        }
-      });
-    }
-  });
 
 // Find all songs
 app.get("/songs/", async (req, res) => {
@@ -120,6 +93,44 @@ app.get("/songs/", async (req, res) => {
   }
   
 });
+
+// Find specific song with id
+app.get("/songs/id/:_id", async (req, res) => {
+  try {
+      //response.body = await Song.find({})
+      //response.body = await Song.findById(req.params.id)
+     // const singleSong = await Song.findById(req.params.id);
+      const singleSong = await Song.findOne({_id:req.params._id});
+      if (singleSong) {
+        res.status(200).json({
+          success: true,
+          body: singleSong
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          body: {
+            message: "Could not find the song"
+          }
+        });
+      }
+    } catch(error) {
+      res.status(400).json({
+        success: false,
+        body: {
+          message: "Invalid id"
+        }
+      });
+    }
+  });
+
+  app.get('/songs/dancing', async (req, res) => {
+    const danceSongs = await Song.find({ danceability: { $gte: 80 } });
+  
+    res.json(danceSongs);
+  });
+
+
 
 // Start the server
 app.listen(port, () => {
