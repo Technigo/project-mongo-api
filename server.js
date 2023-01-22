@@ -44,7 +44,16 @@ app.get("/", (req, res) => {
   res.send("Hello Avocado Sales Lover!");
 });
 
-// 2nd route. To get a specific sale, using try-catch code block and the _id. The _id is from the MongoDB Compass.
+// 2nd route.
+app.get("/sales", async (req, res) => {
+  const allTheSales = await Sale.find({});
+  res.status(200).json({
+    success: true,
+    body: allTheSales
+  });
+});
+
+// 3rd route. To get a specific sale, using try-catch code block and the _id. The _id is from the MongoDB Compass.
 app.get("/sales/id/:id", async (req, res) => {
   try {
     const singleSale = await Sale.findById(req.params.id);
@@ -71,7 +80,7 @@ app.get("/sales/id/:id", async (req, res) => {
   }
 });
 
-// 3rd route. To get an array of sales (if there are more than one) with specific parameters, using try-catch code block and query.
+/* WILL MAKE THIS WORK IN THE DEPLOY LATER! 4th route. To get an array of sales (if there are more than one) with specific parameters, using try-catch code block and query.
 app.get("/sales/", async (req, res) => {
   const {region, averagePrice} = req.query;
   const response = {
@@ -95,7 +104,7 @@ app.get("/sales/", async (req, res) => {
       }
     });
   }
-});
+});*/
 // --- End of ROUTES ---
 
 // To start the server
