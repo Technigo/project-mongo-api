@@ -11,4 +11,4 @@ Further on I want to simplify my code and make the filtering and queries more ef
 
 ## View it live
 
-https://boardgame-3asmq7u3ga-lz.a.run.app
+https://mongo-api-boardgames.onrender.com
