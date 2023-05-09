@@ -42,7 +42,6 @@ const Movie = mongoose.model('Movie', {
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
     await Movie.deleteMany({})
-
 		netflixData.forEach((movie) => {
 			new Movie(movie).save()
 		})
@@ -51,14 +50,21 @@ if (process.env.RESET_DB) {
   seedDatabase()
 }
 
-
-// Start defining your routes here
+// Routes
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
 app.get('/movies', async (req, res) => {
-  const movies = await Movie.find()
+  const limit = parseInt(req.query.limit) || 10 // default limit is 10
+  const page = parseInt(req.query.page) || 1 // default page is 1
+  const skip = (page - 1) * limit // calculate the number of objects to skip
+
+  const movies = await Movie.aggregate([
+    { $skip: skip },
+    { $limit: limit }
+  ])
+
   res.json(movies)
 })
 
@@ -107,7 +113,14 @@ console.log(filteredMovies)
 
 app.get('/movies/title/:title', async (req, res) => {
   try{
-  const movies = await Movie.find({title: { $regex: req.params.title, $options: 'i' }})
+  const movies = await Movie.aggregate(
+   [
+     { $match: { $text: { $search: req.params.title } } },
+     { $sort: { release_year: 1 } },
+   ]
+)
+  console.log(req.params.title)
+  // Movie.find({title: { $regex: req.params.title, $options: 'i' }})
   if(movies.length>0){
       res.json(movies)
   }
