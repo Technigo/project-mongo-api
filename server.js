@@ -29,6 +29,56 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
+const { Schema } = mongoose;
+
+const userSchema = new Schema ({
+  name: String,
+  age: Number,
+  alive: Boolean
+});
+
+const songSchema = new Schema({
+    id: Number,
+    trackName: String,
+    artistName: String,
+    genre: String,
+    bpm: Number,
+    energy: Number,
+    danceability: Number,
+    loudness: Number,
+    liveness: Number,
+    valence: Number,
+    length: Number,
+    acousticness: Number,
+    speechiness: Number,
+    popularity: Number
+});
+
+const Song = mongoose.model("Song", songSchema);
+
+
+app.get("/songs/id/:id", async (req, res) => {
+  try {
+    const singleSong = await Song.findById(req.params.id)
+    if (singleSong) {
+      res.status(200).json({
+        message: "It works!",
+        success: true,
+        body: singleSong
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Song not found"
+        }
+      })
+    }
+  } catch(e) {
+
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
