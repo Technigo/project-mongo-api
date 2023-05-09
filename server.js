@@ -45,6 +45,7 @@ const songSchema = new Schema({
 
 const Song = mongoose.model("Song", songSchema);
 
+//ID from MongoDB compass now working: http://localhost:8080/songs/id/645a44f0b48471d63a3e18db
 app.get("/songs/id/:id", async (req, res) => {
   try {
     const singleSong = await Song.findById(req.params.id);
@@ -73,7 +74,7 @@ app.get("/songs/id/:id", async (req, res) => {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Songs for the people!");
 });
 
 // Start the server
