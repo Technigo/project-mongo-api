@@ -25,11 +25,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
-
 const { Schema } = mongoose;
 const songSchema = new Schema({
     id: Number,
@@ -76,6 +71,10 @@ app.get("/songs/id/:id", async (req, res) => {
   }
 });
 
+// Start defining your routes here
+app.get("/", (req, res) => {
+  res.send("Hello Technigo!");
+});
 
 // Start the server
 app.listen(port, () => {
