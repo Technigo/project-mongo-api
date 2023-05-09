@@ -2,74 +2,47 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/zoo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
+const zooSchema = new mongoose.Schema ({
+  "animal_name": String,
+  "hair": Number,
+  "feathers": Number,
+  "eggs": Number,
+  "milk": Number,
+  "airborne": Number,
+  "aquatic": Number,
+  "predator": Number,
+  "toothed": Number,
+  "backbone": Number,
+  "breathes": Number,
+  "venomous": Number,
+  "fins": Number,
+  "legs": Number,
+  "tail": Number,
+  "domestic": Number,
+  "catsize": Number,
+  "class_type": Number
+})
+const zooAnimal = mongoose.model("Zoo", zooSchema);
+
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hello Zoo Page!");
 });
 
-// const { Schema } = mongoose;
-// const userSchema = new Schema ({
-  // name:String,
-  // age: Number,
-  // alive: Boolean
-// });
-
-const Bear = mongoose.model("Bear", bearSchema);
-const bearSchema = new Schema ({
-  TaxonURL: String,
-   Ancestry: String,
-   ScientificName: String,
-   CommonName: String
-})
-
-app.get("/commonname", async (req, res) => {
-  try{
-    const singleBear = await Bear.findbyId(req.params.CommonName);
-    if(singleBear) {
-      res.status(200).json({
-      sucess: true,
-      body: singleBear
-    })
-    } else {
-      res.status(404).json({
-        success:false,
-        body: {
-          message: "Bear not found"
-        }
-      })
-    }
-  } catch(e){
-    res.status(500).json({
-      sucess:false,
-      body: {
-        message: e
-      }
-    })
-  }
-})
-
+app.get("/zooanimals", async (req, res) =>{
+const zooAnimals = await zooAnimal.find()
+res.json(zooAnimals)})
+    
 
 
 // Start the server
