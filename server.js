@@ -142,19 +142,20 @@ app.get("/songs/artists", async (req, res) => {
   }
 });
 
-app.get("/songs/artists/name", async (req, res) => {
+app.get("/songs/artists/:name", async (req, res) => {
   try {
-    const artistList = await Song.find().populate('artistName');
-    if (artistList) {
+    const artistDiscography = await Song.find({ artistName: req.params.name });
+    console.log(artistDiscography)
+    if (artistDiscography.length > 0) {
       res.status(200).json({
         success: true,
-        body: artistList
+        body: artistDiscography
       })
     } else {
       res.status(404).json({
         success: false,
         body: {
-          message: "Data not found"
+          message: `No songs by ${req.params.name}`
         }
       })
     }
