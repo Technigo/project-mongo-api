@@ -29,6 +29,49 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
+// const { Schema } = mongoose;
+// const userSchema = new Schema ({
+  // name:String,
+  // age: Number,
+  // alive: Boolean
+// });
+
+const Bear = mongoose.model("Bear", bearSchema);
+const bearSchema = new Schema ({
+  TaxonURL: String,
+   Ancestry: String,
+   ScientificName: String,
+   CommonName: String
+})
+
+app.get("/commonname", async (req, res) => {
+  try{
+    const singleBear = await Bear.findbyId(req.params.CommonName);
+    if(singleBear) {
+      res.status(200).json({
+      sucess: true,
+      body: singleBear
+    })
+    } else {
+      res.status(404).json({
+        success:false,
+        body: {
+          message: "Bear not found"
+        }
+      })
+    }
+  } catch(e){
+    res.status(500).json({
+      sucess:false,
+      body: {
+        message: e
+      }
+    })
+  }
+})
+
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
