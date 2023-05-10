@@ -72,6 +72,33 @@ app.get("/songs/id/:id", async (req, res) => {
   }
 });
 
+// To find genre exising or not by typing in genre and name 
+app.get("/songs/genre", async (req, res) => {
+  try {
+    const genreList = await Song.findByGenre(req.params.genre)
+    if (genreList) {
+      res.status(200).json({
+        success: true,
+        body: genreList
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "No genre found on the list"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
+  }
+});
+
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Songs for the people!");
