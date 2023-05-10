@@ -62,7 +62,69 @@ app.get('/prizes', async (req, res) => {
   }
 });
 
-// Not working properly
+// Get prize by subject // See if possible to return full list if not
+app.get('/prizes/subject/:subject', async (req, res) => {
+  const { subject } = req.params;
+
+  try {
+    const subjectList = await Prize.find({ Subject: subject });
+
+    if (subjectList.length > 0) {
+      res.status(200).json({
+        success: true,
+        message: `Found ${subjectList.length} prizes with subject '${subject}'`,
+        body: {
+          subjectList: subjectList,
+        },
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: `No prizes found with subject '${subject}'. Please, make sure to check spelling and use Capital first letter`,
+        body: {},
+      });
+    }
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e,
+      body: {},
+    });
+  }
+});
+
+// Get prize by year // See if possible to return full list if not
+app.get('/prizes/year/:year', async (req, res) => {
+  const { year } = req.params;
+
+  try {
+    const yearList = await Prize.find({ Year: year });
+
+    if (yearList.length > 0) {
+      res.status(200).json({
+        success: true,
+        message: `Found ${yearList.length} prizes from year '${year}'`,
+        body: {
+          yearList: yearList,
+        },
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: `No prizes found from year '${year}'. Please, make sure to provide a year between 1991-2022`,
+        body: {},
+      });
+    }
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e,
+      body: {},
+    });
+  }
+});
+
+// Not working properly - check!
 app.get("/prizes/:id", async (req, res) => {
   try {
     const singlePrizeByID = await Prize.findById(req.params.id);
