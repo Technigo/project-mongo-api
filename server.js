@@ -85,34 +85,34 @@ const Song = mongoose.model("Song", songSchema);
 //   }
 // });
 
-// //Get all songs in the dataset
-// app.get("/songs", async (req, res) => {
-//   try {
-//     const songList =  await Song.find(req.params);
-//     if (songList) {
-//       res.status(200).json({
-//         success: true,
-//         body: {
-//           songList: songList
-//         } 
-//       })
-//     } else {
-//       res.status(404).json({
-//         success: false,
-//         body: {
-//           message: "No songs in the list"
-//         }
-//       })
-//     }
-//   } catch(e) {
-//     res.status(500).json({
-//       success: false,
-//       body: {
-//         message: e
-//       }
-//     })
-//   }
-// });
+//Get all songs in the dataset
+app.get("/songs", async (req, res) => {
+  try {
+    const songList =  await Song.find(req.params);
+    if (songList) {
+      res.status(200).json({
+        success: true,
+        body: {
+          songList: songList
+        } 
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "No songs in the list"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
+  }
+});
 
 // Get song by id
 app.get("/songs/id/:id", async (req, res) => {
