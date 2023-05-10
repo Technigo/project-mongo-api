@@ -31,16 +31,9 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello and welcome to this API. Here are the endspoints.");
+  res.send("<h1>Hello and welcome to this Music API. <br> Here are the endspoints: <br> All songs (10 per page): http://localhost:8080/allsongs10by10?page=1&pageSize=5%27. <br> Single Song: http://localhost:8080/singlesongs/id/1</h1>");
 });
 const { Schema } = mongoose;
-const userSchema = new Schema ({
-  name: String,
-  age: Number,
-  alive: Boolean
-});
-
-const User = mongoose.model("User", userSchema);
 
 const songSchema = new Schema({
     id: Number,
@@ -61,9 +54,9 @@ const songSchema = new Schema({
 
 const Song = mongoose.model("Song", songSchema);
 
-app.get("/songs/id/:id", async (req, res) => {
+app.get("/singlesongs/id/:id", async (req, res) => {
   try {
-    const singleSong = await Song.findById(req.params.id);
+    const singleSong = await Song.findOne({ id: req.params.id });
     if (singleSong) {
       res.status(200).json({
         success: true,
@@ -87,24 +80,7 @@ app.get("/songs/id/:id", async (req, res) => {
   }
 });
 
-app.get("/songs", async (req, res) => {
-  try {
-    const allSongs = await Song.find();
-    res.status(200).json({
-      success: true,
-      body: allSongs
-    })
-  } catch (e) {
-    res.status(500).json({
-      success: false,
-      body: {
-        message: e
-      }
-    })
-  }
-});
-
-app.get("/songsdevided", async (req, res) => {
+app.get("/allsongs10by10", async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.pageSize) || 10;
