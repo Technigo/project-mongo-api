@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import topMusicData from "./data/top-music.json";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -8,7 +9,7 @@ import mongoose from "mongoose";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -104,7 +105,7 @@ app.get("/allsongs", async (req, res) => {
   }
 });
 
-//To get all songs
+//To get specifik genre collection 
 app.get("/allsongs/:style", async (req, res) => {
   try {
     const allSongs = await Song.find({ genre: req.params.style });
@@ -122,32 +123,6 @@ app.get("/allsongs/:style", async (req, res) => {
   }
 });
 
-// To find genre exising or not by typing in genre and name 
-// app.get("/songs/genre", async (req, res) => {
-//   try {
-//     const genreList = await Song.findByGenre(req.params.genre)
-//     if (genreList) {
-//       res.status(200).json({
-//         success: true,
-//         body: genreList
-//       })
-//     } else {
-//       res.status(404).json({
-//         success: false,
-//         body: {
-//           message: "No genre found on the list"
-//         }
-//       })
-//     }
-//   } catch(e) {
-//     res.status(500).json({
-//       success: false,
-//       body: {
-//         message: e
-//       }
-//     })
-//   }
-// });
 
 
 // Start the server
