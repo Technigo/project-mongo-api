@@ -14,6 +14,26 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
+const { Schema } = mongoose;
+const movieSchema = new Schema ({
+    rank: Number,
+    movie_id: String,
+    title: String,
+    year: Number,
+    link: String,
+    imbd_votes: String,
+    imbd_rating: Number,
+    certificate: String,
+    duration: String,
+    genre: String,
+    cast_name: String,
+    director_name: String,
+    storyline: String
+
+})
+
+const Movie = mongoose.model("Movie", movieSchema)
+
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
@@ -28,6 +48,78 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
+
+app.get("/movies/id/:movie_id", async (req, res) => {
+  try {
+    const singleMovie = await Movie.findById(req.params.movie_id)
+    if (singleMovie) {
+      res.status(200).json({
+        success: true,
+        body: singleMovie
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Movie not found"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
+
+  }
+})
+
+app.get("/rank/:rank", async (req, res) => {
+  try {
+    const singleMovieRank = await Movie.findById(req.params.rank)
+    if (singleMovieRank) {
+      res.status(200).json({
+        success: true,
+        body: singleMovieRank
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Movie not found"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
+
+  }
+})
+
+// app.get("/books", async (req, res) => {
+//   const books = await Book.find().populate('author')
+//   res.json(books)
+// })
+
+// app.get('/authors/:id', async (req, res) => {
+//   const author = await Author.findById(req.params.id)
+
+//   res.json(author)
+// })
+
+// app.get('/authors/:id/books', async (req, res) => {
+//   const author = await Author.findById(req.params.id)
+//   const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) })
+
+//   res.json(books)
+// })
 
 // Start the server
 app.listen(port, () => {
