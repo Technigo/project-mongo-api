@@ -8,9 +8,9 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// creating a Mongoose Schema and model ( the wrapper on the mongoose schema )
+// creating a Mongoose Schema and model ( the wrapper on the mongoose schema that adds funtionality to it  )
 
-const SongStructure = new mongoose.Schema({
+const SongSchema = new mongoose.Schema({
   id: Number,
   trackName: String,
   artistName: String,
@@ -26,7 +26,7 @@ const SongStructure = new mongoose.Schema({
   speechiness: Number,
   popularity: Number
 })
-const Song = mongoose.model("Song", SongStructure);
+const Song = mongoose.model("Song", SongSchema);
 
 // Resetting the Database
 
@@ -68,8 +68,8 @@ app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
     body: {
-      Routes: "/songs – all songs, /songs/:id – single song by its id.",
-      Queries: "/songs – bpm, genre"
+      Routes: "/songs  all songs, /songs/:id single song by its id.",
+      Queries: "/songs  bpm, genre"
     }
   });
 });
@@ -104,6 +104,33 @@ app.get("/songs/", async (req, res) => {
   }
 });
 
+// songs by id 
+app.get("/songs/id/:id", async (req, res) => {
+
+  try {
+ const singleSong = await Song.findById(req.params.id)
+ if (singleSong) {
+  res.status(200).json ({
+    success:true,
+    body: singleSong
+  })
+ } else {
+  res.status(404).json ({
+    success:false,
+    body: {
+      message: "Song not found"
+    }
+  })
+ }
+  } catch (e) {
+    res.status(500).json ({
+      success:false,
+      body: {
+        message: "Server error "
+      }
+  })
+}
+})
 
 
 // Start the server
