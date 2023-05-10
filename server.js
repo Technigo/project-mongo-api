@@ -34,9 +34,11 @@ if (process.env.RESET_DB) {
   const resetDatabase = async () => {
     await Song.deleteMany();
 
-    topMusicData.forEach(song => {
-      const newSong = new Song(song).save();
-    });
+    for (let song of topMusicData) {
+      const newSong = new Song(song);
+      await newSong.save();
+    }
+
   };
   resetDatabase();
 };
@@ -60,39 +62,43 @@ app.use ((req, res, next) => {
   }
 })
 
-// Start defining your routes here
 
-// ALL SONGS ROUTE 
+// Start defining your routes here
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
+    body: {
+      Routes: "/songs – all songs, /songs/:id – single song by its id.",
+      Queries: "/songs – bpm, genre"
+    }
   });
 });
 
-// SONGS by ID
+app.get("/songs/", async (req, res) => {
+  let {bpm, genre} = req.query;
+  bpm = bpm ? Number(bpm) : null;
 
-app.get("/songs/:id", async (req, res) => {
-  const songById = await Song.findById(req.params.id).exec();
+  let query = {};
+
+  if (genre) {
+    query.genre = genre;
+  }
+
+  if (bpm) {
+    query.bpm = bpm;
+  }
 
   try {
-    if (songById) {
-      res.status(200).json({
-        success: true,
-        body: songById
-      });
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: " This song id doesnt exist"
-        }
-      });
-    }
+    const songs = await Song.find(query).exec();
+    res.status(200).json({
+      success: true,
+      body: songs
+    });
   } catch(error) {
     res.status(400).json({
       success: false,
       body: {
-        message: "Invalid id song "
+        message: "No songs found"
       }
     });
   }
