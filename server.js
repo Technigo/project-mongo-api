@@ -25,7 +25,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Start defining your routes here
+app.get("/", (req, res) => {
+  res.send(
+    {
+      Welcome: "Songs for the people!",
+      Routes: [
+        { "/": "Startpage" },
+        { "/allsongs": "All tracks data" },
+        { "/allsongs/:style": "Search for specifik genre" }
+      ]
+});
+});
+
 const { Schema } = mongoose;
+
 const songSchema = new Schema({
     id: Number,
     trackName: String,
@@ -48,7 +62,7 @@ const Song = mongoose.model("Song", songSchema);
 //ID from MongoDB compass now working: http://localhost:8080/songs/id/645a44f0b48471d63a3e18db
 app.get("/songs/id/:id", async (req, res) => {
   try {
-    const singleSong = await Song.findById(req.params.id);
+    const singleSong = await Song.findOne({id: req.params.id });
     if (singleSong) {
       res.status(200).json({
         success: true,
@@ -72,24 +86,15 @@ app.get("/songs/id/:id", async (req, res) => {
   }
 });
 
-// To find genre exising or not by typing in genre and name 
-app.get("/songs/genre", async (req, res) => {
+//To get all songs
+app.get("/allsongs", async (req, res) => {
   try {
-    const genreList = await Song.findByGenre(req.params.genre)
-    if (genreList) {
-      res.status(200).json({
-        success: true,
-        body: genreList
-      })
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "No genre found on the list"
-        }
-      })
-    }
-  } catch(e) {
+    const allSongs = await Song.find();
+    res.status(200).json({
+      success: true,
+      body: allSongs
+    })
+  } catch (e) {
     res.status(500).json({
       success: false,
       body: {
@@ -99,10 +104,51 @@ app.get("/songs/genre", async (req, res) => {
   }
 });
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Songs for the people!");
+//To get all songs
+app.get("/allsongs/:style", async (req, res) => {
+  try {
+    const allSongs = await Song.find({ genre: req.params.style });
+    res.status(200).json({
+      success: true,
+      body: allSongs
+    })
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
+  }
 });
+
+// To find genre exising or not by typing in genre and name 
+// app.get("/songs/genre", async (req, res) => {
+//   try {
+//     const genreList = await Song.findByGenre(req.params.genre)
+//     if (genreList) {
+//       res.status(200).json({
+//         success: true,
+//         body: genreList
+//       })
+//     } else {
+//       res.status(404).json({
+//         success: false,
+//         body: {
+//           message: "No genre found on the list"
+//         }
+//       })
+//     }
+//   } catch(e) {
+//     res.status(500).json({
+//       success: false,
+//       body: {
+//         message: e
+//       }
+//     })
+//   }
+// });
+
 
 // Start the server
 app.listen(port, () => {
