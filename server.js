@@ -1,14 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
 import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -25,7 +18,6 @@ app.use(cors());
 app.use(express.json());
 
 const Movie = mongoose.model('Movie', {
-  // show_id:Number,
   title: String,
   director:String,
   cast:String,
@@ -59,13 +51,22 @@ app.get('/movies', async (req, res) => {
   const limit = parseInt(req.query.limit) || 10 // default limit is 10
   const page = parseInt(req.query.page) || 1 // default page is 1
   const skip = (page - 1) * limit // calculate the number of objects to skip
-
+try{
   const movies = await Movie.aggregate([
+    { $sort: { release_year: -1 } },
     { $skip: skip },
     { $limit: limit }
   ])
-
+  if(movies){
   res.json(movies)
+  }else{
+  res.status(404).json({ error: 'No movies found' })
+  }
+}catch{
+      console.log(err)
+    res.status(400).json({ error: 'Invalid type' })
+}
+
 })
 
 app.get('/movies/:id', async (req, res) => {
@@ -92,13 +93,9 @@ app.get('/movies/type/:type', async (req, res) => {
 
 app.get('/movies/type/:type/:release_year', async (req, res) => {
   try{
-  const moviesType = await Movie.find({type: req.params.type})
+  const moviesType = await Movie.find({type: req.params.type}).where('release_year', Number(req.params.release_year))
   if(moviesType.length>0){
-const filteredMovies= moviesType.filter((movie)=>{
-  return Number(movie.release_year)===Number(req.params.release_year)
-})
-console.log(filteredMovies)
-      res.json(filteredMovies)
+  res.json(moviesType)
   }
   else {
     res.status(404).json({ error: 'No movies found with this release date' })
@@ -115,12 +112,15 @@ app.get('/movies/title/:title', async (req, res) => {
   try{
   const movies = await Movie.aggregate(
    [
-     { $match: { $text: { $search: req.params.title } } },
-     { $sort: { release_year: 1 } },
+      { $match: {
+         $or: [
+        { title: { $regex: req.params.title, $options: 'i' } },
+      ]
+      }},
+      { $sort: { release_year: -1 } },
    ]
 )
   console.log(req.params.title)
-  // Movie.find({title: { $regex: req.params.title, $options: 'i' }})
   if(movies.length>0){
       res.json(movies)
   }
