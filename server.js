@@ -13,7 +13,14 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 const listEndpoints = require('express-list-endpoints');
+const  swaggerJsdoc = require("./swagger.json");
+const swaggerUi = require("swagger-ui-express");
 
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerJsdoc)
+);
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());

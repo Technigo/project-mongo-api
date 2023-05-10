@@ -1,0 +1,203 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "",
+        "version": "1.0.6",
+        "title": ""
+    },
+    "host": "project-mongo-api-jbnyu77ahq-lz.a.run.app",
+    "basePath": "/",
+    "tags": [],
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/movies": {
+            "get": {
+                "tags": [
+                    "movies"
+                ],
+                "summary": "Get all movies",
+                "description": "",
+                "operationId": "movies",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "type": "integer($int64)"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of results per page",
+                        "required": false,
+                        "type": "integer($int64)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful request"
+                    },
+                    "404": {
+                        "description": "No movies found"
+                    }
+                }
+            }
+        },
+        "/movies/{id}": {
+            "get": {
+                "tags": [
+                    "movies"
+                ],
+                "summary": "Get specific movie based on id",
+                "description": "Id of movies data that needs to be fetched",
+                "operationId": "movies",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of movies data that needs to be fetched",
+                        "required": false,
+                        "type": "integer($int64)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful request"
+                    },
+                    "404": {
+                        "description": "No specific movie data found"
+                    }
+                }
+            }
+        },
+        "/movies/type/{type}": {
+            "get": {
+                "tags": [
+                    "movies"
+                ],
+                "summary": "Get all movies data for specific type",
+                "description": "Name of the type that needs to be fetched",
+                "operationId": "movies",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Name of the type that needs to be fetched",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "TV Show",
+                                "Movie"
+                            ],
+                            "default": "available"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful request"
+                    },
+                    "404": {
+                        "description": "No type was found"
+                    }
+                }
+            }
+        },
+        "/movies/type/{type}/{release_year}": {
+            "get": {
+                "tags": [
+                    "movies"
+                ],
+                "summary": "Get a certain type of movies in a particular year",
+                "description": "",
+                "operationId": "movies",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Name of the type that needs to be fetched",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "TV Show",
+                                "Movie"
+                            ],
+                            "default": "available"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "release_year",
+                        "in": "path",
+                        "description": "Year that needs to be fetched",
+                        "required": false,
+                        "type": "string",
+                        "example": 2019
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful request"
+                    },
+                    "404": {
+                        "description": "No type or date was found"
+                    }
+                }
+            }
+        },
+        "/movies/title/{title}": {
+            "get": {
+                "tags": [
+                    "movies"
+                ],
+                "summary": "Get all matching titles",
+                "description": "Movie title that needs to be fetched",
+                "operationId": "movies",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "path",
+                        "description": "Movie title that needs to be fetched",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "default": "available"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful request"
+                    },
+                    "404": {
+                        "description": "No title was found"
+                    }
+                }
+            }
+        }
+    }
+}
