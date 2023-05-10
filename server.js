@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
+import mongoose, { SchemaType } from "mongoose";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -27,6 +27,61 @@ app.use(express.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
+});
+
+const { Schema } = mongoose;
+const userSchema = new Schema ({
+  name: String,
+  age: Number,
+  alive: Boolean
+});
+
+const User = mongoose.model("User", userSchema);
+
+const songSchema = new Schema({
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number
+})
+
+const Song = mongoose.model("Song", songSchema);
+
+
+app.get("/songs/id/:id", async (req, res) => {
+  try {
+    const singleSong = await Song.findById(req.params.id);
+    if (singleSong) {
+      res.status(200).json({
+        success: true,
+        body: singleSong
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Song not found"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+  })
+}
 });
 
 // Start the server
