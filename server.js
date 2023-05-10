@@ -32,13 +32,23 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 const { Schema } = mongoose;
-/* const netflixSchema = new Schema ({
-  name: String,
-  age: Number,
-  alive: Boolean
+
+const netflixSchema = new Schema({
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
 });
 
-const User = mongoose.model("User", userSchema); */
+const Netflix = mongoose.model("Netflix", netflixSchema);
 
 const songSchema = new Schema({
     id: Number,
@@ -79,7 +89,7 @@ app.get("/songdata", async (req, res) => {
     res.status(500).json({
       success: false,
       body: {
-        message: e
+        message: e.message
       }
     })
   }
@@ -97,7 +107,7 @@ app.get("/songdata/artists", async (req, res) => {
       res.status(404).json({
         success: false,
         body: {
-          message: "Data not found"
+          message: "Artist list not found"
         }
       })
     }
@@ -105,27 +115,26 @@ app.get("/songdata/artists", async (req, res) => {
     res.status(500).json({
       success: false,
       body: {
-        message: e
+        message: e.message
       }
     })
   }
 });
 
-
-/* app.get("/songdata/artists", async (req, res) => {
+app.get("/songdata/artists/:name", async (req, res) => {
   try {
-    const artistList = await Song.distinct("artistName");
-    console.log(artistList)
-    if (artistList.length > 0) {
+    const artistDiscography = await Song.find({ artistName: { '$regex' : new RegExp(req.params.name, 'i') } });
+    console.log(artistDiscography)
+    if (artistDiscography.length > 0) {
       res.status(200).json({
         success: true,
-        body: artistList
+        body: artistDiscography
       })
     } else {
       res.status(404).json({
         success: false,
         body: {
-          message: "Data not found"
+          message: `No songs by ${req.params.name}`
         }
       })
     }
@@ -133,11 +142,11 @@ app.get("/songdata/artists", async (req, res) => {
     res.status(500).json({
       success: false,
       body: {
-        message: e
+        message: e.message
       }
     })
   }
-}); */
+});
 
 app.get("/songdata/id/:id", async (req, res) => {
   try {
@@ -160,6 +169,33 @@ app.get("/songdata/id/:id", async (req, res) => {
       success: false,
       body: {
         message: e
+      }
+    })
+  }
+});
+
+app.get("/netflixdata", async (req, res) => {
+  try {
+    const showList = await Netflix.find(req.params);
+    console.log(showList)
+    if (showList) {
+      res.status(200).json({
+        success: true,
+        body: showList
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Show data not found"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e.message
       }
     })
   }
