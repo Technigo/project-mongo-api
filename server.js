@@ -31,8 +31,16 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("<h1>Hello and welcome to this Music API. <br> Here are the endspoints: <br> All songs (10 per page): http://localhost:8080/allsongs10by10?page=1&pageSize=5%27. <br> Single Song: http://localhost:8080/singlesongs/id/1</h1>");
+  res.send({
+    Hello: "Welcome to this top-music API!",
+    Endpoints: [
+      { "/": "Startpage / Api Info" },
+      { "/singlesongs/id/:id": "Single song. Just change the :id to a number between 1-50" },
+      { "/allsongs10by10?page=1&pageSize=10": "All songs (10 per page). Change the url to show a specific page number or change the number of songs displayd ber page." },
+    ]
+  })
 });
+
 const { Schema } = mongoose;
 
 const songSchema = new Schema({
