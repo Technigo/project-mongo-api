@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week we were doing a MongoDB project
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started this project by coding with codecoach Daniel for seting up the basics for MongoDb and Mongoose. Then I added the endpoints that was filtered for each purpose. After that me and Ajmal started the process of deploying to google cloud and setting up the database/json in cloudMongoDB.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-4o4nc525qa-lz.a.run.app/
