@@ -29,7 +29,18 @@ const SongStructure = new mongoose.Schema({
 const Song = mongoose.model("Song", SongStructure);
 
 // Resetting the Database
-HERE
+
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Song.deleteMany();
+
+    topMusicData.forEach(song => {
+      const newSong = new Song(song).save();
+    });
+  };
+  resetDatabase();
+};
+
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=8080 npm start
