@@ -2,13 +2,6 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/animals";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -40,7 +33,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
+app.use ((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+ 
+  } else {
+    res.status(503).json ({ error: 'Service unavailable'})
+  }
+})
 
 // Start defining your routes here
 app.get("/", (req, res) => {
@@ -49,15 +49,20 @@ Animal.find().then(animals => {
 })
 });
 
-app.get ('/:name', (req, res) => {
-Animal.findOne({name: req.params.name}).then(animal => {
-  if(animal) {
-  res.json(animal)
-  } else {
-    res.status(404).json({ error: 'not found animal'})
+app.get('/:name', async (req, res) => {
+  try {
+    const animal = await Animal.findOne({ name: req.params.name });
+    if (animal) {
+      res.json(animal);
+    } else {
+      res.status(404).json({ error: 'Animal not found' });
+    }
+  } catch (err) {
+    res.status(404).json({ error: 'Invalid name' });
   }
-})
-})
+});
+
+
 
 // Start the server
 app.listen(port, () => {
