@@ -73,7 +73,7 @@ app.get("/songs/:id", async (req, res) => {
       res.status(404).json({
         success: false,
         body: {
-          message: "Could not find the song"
+          message: " This song id doesnt exist"
         }
       });
     }
@@ -81,7 +81,7 @@ app.get("/songs/:id", async (req, res) => {
     res.status(400).json({
       success: false,
       body: {
-        message: "Invalid id"
+        message: "Invalid id song "
       }
     });
   }
