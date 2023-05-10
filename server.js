@@ -20,7 +20,7 @@ app.use(express.json());
 
 // Defining routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Joanna's Songs API");
 });
 const { Schema } = mongoose;
 
