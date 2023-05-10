@@ -123,8 +123,15 @@ app.get("/songdata/artists", async (req, res) => {
 
 app.get("/songdata/artists/:name", async (req, res) => {
   try {
-    const artistDiscography = await Song.find({ artistName: { '$regex' : new RegExp(req.params.name, 'i') } });
-    console.log(artistDiscography)
+    let regExpression = "";
+    let artistNameNoSpace = req.params.name.replace(" ", "")
+    for(const char of artistNameNoSpace) {
+      regExpression += `(((\\s)*)(${char})((\\s)*))`;
+    }
+    console.log(regExpression)
+
+    const artistDiscography = await Song.find({ artistName: { '$regex' : new RegExp(`(.*)(${regExpression})(.*)`), '$options' : 'ix'} });
+    console.log(artistDiscography);
     if (artistDiscography.length > 0) {
       res.status(200).json({
         success: true,
@@ -200,6 +207,74 @@ app.get("/netflixdata", async (req, res) => {
     })
   }
 });
+
+app.get("/netflixdata/listingcategories", async (req, res) => {
+  try {
+    const listingCategories = await Netflix.find({}, { listed_in: 1, _id: 0 });
+    if (listingCategories) {
+      const categories = [...new Set(listingCategories.flatMap(category => category.listed_in.split(', ').map(item => item.trim())))];
+      categories.sort();
+      res.status(200).json({
+        success: true,
+        body: categories
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "List data not found"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e.message
+      }
+    })
+  }
+});
+
+app.get("/netflixdata/listingcategories/:category", async (req, res) => {
+  try {
+    const category = req.params.category;
+
+    const results = await Netflix.find({ listed_in: category });
+
+    const transformedResults = results.map((result) => {
+      return {
+        ...result._doc,
+        listed_in: result.listed_in.split(", ")
+      };
+    });
+
+    if (transformedResults.length > 0) {
+      res.status(200).json({
+        success: true,
+        body: transformedResults
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: `No TV Shows or Movies found for category '${category}'`
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e.message
+      }
+    })
+  }
+});
+
+
+
+
 
 // Start the server
 app.listen(port, () => {
