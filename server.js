@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import netflixData from "./data/netflix-titles.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-movies";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/projectmoviesmongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
