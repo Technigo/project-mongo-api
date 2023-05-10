@@ -29,7 +29,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("/songdata", "/songdata/artists", "/songdata/artists/:name", "/songdata/id/:id", "/netflixdata", "/netflixdata/listingcategories", "/netflixdata/listingcategories/:category" );
 });
 const { Schema } = mongoose;
 
