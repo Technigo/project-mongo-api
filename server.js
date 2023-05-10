@@ -1,31 +1,38 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import topMusicData from "./data/top-music.json"
 
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/animals";
+// This is where the application is connecting to the MongoDB database.
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Animal = mongoose.model('Animal', {
-name: String,
-age: Number,
-isFurry: Boolean
+// creating a Mongoose Schema and model ( the wrapper on the mongoose schema )
+
+const SongStructure = new mongoose.Schema({
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number
 })
+const Song = mongoose.model("Song", SongStructure);
 
-
-const createAnimals = async () => {
-  await Animal.deleteMany({}); // Clear the collection before creating new animals
-  await new Animal({ name: 'Alfons', age: 2, isFurry:true }).save();
-  await new Animal({ name: 'Lucy', age: 5, isFurry:true }).save();
-  await new Animal({ name: 'Goldy', age: 1, isFurry:false }).save();
-};
-
-createAnimals();
-
+// Resetting the Database
+HERE
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
+// PORT=8080 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -43,22 +50,40 @@ app.use ((req, res, next) => {
 })
 
 // Start defining your routes here
+
+// ALL SONGS ROUTE 
 app.get("/", (req, res) => {
-Animal.find().then(animals => {
-  res.json(animals)
-})
+  res.status(200).json({
+    success: true,
+  });
 });
 
-app.get('/:name', async (req, res) => {
+// SONGS by ID
+
+app.get("/songs/:id", async (req, res) => {
+  const songById = await Song.findById(req.params.id).exec();
+
   try {
-    const animal = await Animal.findOne({ name: req.params.name });
-    if (animal) {
-      res.json(animal);
+    if (songById) {
+      res.status(200).json({
+        success: true,
+        body: songById
+      });
     } else {
-      res.status(404).json({ error: 'Animal not found' });
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Could not find the song"
+        }
+      });
     }
-  } catch (err) {
-    res.status(404).json({ error: 'Invalid name' });
+  } catch(error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid id"
+      }
+    });
   }
 });
 
