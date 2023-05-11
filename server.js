@@ -1,9 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-//C:\Program Files\MongoDB\Server\6.0\bin\mongod.exe" --dbpath="c:\data\db
-//import topMusicData from "./data/top-music.json";
+import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -18,10 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Defining routes here
-app.get("/", (req, res) => {
-  res.send("Joanna's Songs API");
-});
+
 const { Schema } = mongoose;
 
 const songSchema = new Schema({
@@ -43,6 +38,23 @@ const songSchema = new Schema({
 
 
 const Song = mongoose.model("Song", songSchema);
+
+if (process.env.RESET_DB) {
+	const seedDatabase = async () => {
+    await Song.deleteMany({})
+
+		topMusicData.forEach((track) => {
+			new Song(track).save()
+		})
+  }
+
+  seedDatabase()
+}
+
+// Defining routes here
+app.get("/", (req, res) => {
+  res.send("Joanna's Songs API");
+});
 
 // Get all songs in the dataset with paging
 // app.get("/songs", async (req, res) => {
