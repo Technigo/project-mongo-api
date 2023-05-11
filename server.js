@@ -1,13 +1,14 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import netflixData from "./data/netflix-titles.json";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
+
 // import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -24,8 +25,41 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const Schema = mongoose.model("Schema", {
+  show_id: Number,
+  title: String,
+  director: String, 
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
+})
+
+if(process.env.RESET_DB) {
+  const resetDataBase = async () => {
+    await Schema.deleteMany();
+   netflixData.forEach(singleTitle => {
+      const newTitle = new Title(singleTitle)
+      newTitle.save()
+    })
+
+  }
+  resetDataBase()
+}
+
 // Start defining your routes here
 app.get("/", (req, res) => {
+  res.send("netflixGuide");
+});
+
+app.get("/movies", async (req, res) => {
+  const movies = await Movie.find()
+  res.json(movies)
   res.send("Hello Technigo!");
 });
 
