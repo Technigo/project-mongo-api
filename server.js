@@ -1,14 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+dotenv.config();
+
+import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -31,12 +28,6 @@ app.get("/", (req, res) => {
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema ({
-  name: String,
-  age: Number,
-  alive: Boolean
-});
-
 const songSchema = new Schema({
     id: Number,
     trackName: String,
@@ -56,13 +47,17 @@ const songSchema = new Schema({
 
 const Song = mongoose.model("Song", songSchema);
 
+app.get("/songs", async (req, res) => {
+  let allSongs = topMusicData;
+  res.send(allSongs);
+})
 
-app.get("/songs/id/:id", async (req, res) => {
+app.get("/songs/:id", async (req, res) => {
   try {
     const singleSong = await Song.findById(req.params.id)
     if (singleSong) {
       res.status(200).json({
-        message: "It works!",
+        message: "It works, here is your song :)",
         success: true,
         body: singleSong
       })
@@ -75,7 +70,12 @@ app.get("/songs/id/:id", async (req, res) => {
       })
     }
   } catch(e) {
-
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
   }
 });
 
