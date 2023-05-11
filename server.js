@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json"
 
 // This is where the application is connecting to the MongoDB database.
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -101,6 +101,8 @@ app.get('/', (req, res) => {
   });
 });
 
+// Get all songs route
+
 app.get("/songs", async (req, res) => {
   const {genre, danceability } = req.query;
   const response = {
@@ -126,7 +128,7 @@ app.get("/songs", async (req, res) => {
 });
 
 
-// songs by id 
+// Get a single song by ID route
 app.get("/songs/id/:id", async (req, res) => {
   try {
     const singleSong = await Song.findOne({ id: req.params.id })
@@ -152,8 +154,6 @@ app.get("/songs/id/:id", async (req, res) => {
     })
   }
 })
-
-
 
 // Start the server
 app.listen(port, () => {
