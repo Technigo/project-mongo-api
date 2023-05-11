@@ -100,32 +100,34 @@ app.get("/songs", async (req, res) => {
   }
 });
 
+
 // songs by id 
 app.get("/songs/id/:id", async (req, res) => {
   try {
- const singleSong = await Song.findById(req.params.id)
- if (singleSong) {
-  res.status(200).json ({
-    success:true,
-    body: singleSong
-  })
- } else {
-  res.status(404).json ({
-    success:false,
-    body: {
-      message: "Song not found"
+    const singleSong = await Song.findOne({ id: req.params.id })
+    if (singleSong) {
+      res.status(200).json ({
+        success:true,
+        body: singleSong
+      })
+    } else {
+      res.status(404).json ({
+        success:false,
+        body: {
+          message: "Song not found"
+        }
+      })
     }
-  })
- }
   } catch (e) {
     res.status(500).json ({
       success:false,
       body: {
         message: "Server error "
       }
-  })
-}
+    })
+  }
 })
+
 
 
 // Start the server
