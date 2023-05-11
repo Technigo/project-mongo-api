@@ -2,8 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
+
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
@@ -89,8 +88,7 @@ app.get("/songs", async (req, res) => {
     success: true,
     body: {}
   }
-  // Makes any word search give back search results that includes the word you search for, ex "pop" shows you canadian pop, dance pop etc 
-  // Works on strings
+  // Makes any word search give back search results that includes the word you search for, ex "pop" shows you canadian pop, dance pop etc (works on strings not numbers)
   const genreRegex = new RegExp(genre)
   // $gt means greater than in moongose
   // if the dancebility value we search for is true return danceability if not return 0
