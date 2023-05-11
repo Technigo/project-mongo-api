@@ -11,7 +11,7 @@ import topMusicData from "./data/top-music.json";
 // import netflixData from "./data/netflix-titles.json";
 
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongosongsproject";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -57,6 +57,17 @@ const songSchema = new Schema({
     speechiness: Number,
     popularity: Number
 })
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Song.deleteMany({})
+    topMusicData.forEach((song) => {
+      new Song(song).save()
+    })
+  }
+  seedDatabase()
+}
+
 
 const Song = mongoose.model("Song", songSchema);
 
