@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import nfdata from './data/netflix-titles.json'
+import mdata from './data/top-music.json'
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -12,10 +14,24 @@ import mongoose from "mongoose";
 
 //import topMusicData from "./data/top-music.json";
 //127.0.0.1:27017
-const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/projectltmdb";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
+const netflixTitle = mongoose.model('netflixTitle', {
+})
+
+if (process.env.RESET_DB) {
+	const seedDatabase = async () => {
+    await Netflix.deleteMany({})
+
+		data.forEach((netflixData) => {
+			new Netflix(netflixData).save()
+		})
+  }
+
+  seedDatabase()
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -29,7 +45,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("/songdata", "/songdata/artists", "/songdata/artists/:name", "/songdata/id/:id", "/netflixdata", "/netflixdata/listingcategories", "/netflixdata/listingcategories/:category" );
+  res.send("/songdata, /songdata/artists, /songdata/artists/:name, /songdata/id/:id, /netflixdata, /netflixdata/listingcategories, /netflixdata/listingcategories/:category" );
 });
 const { Schema } = mongoose;
 
