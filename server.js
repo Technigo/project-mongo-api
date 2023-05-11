@@ -76,13 +76,45 @@ app.get("/movies/id/:movie_id", async (req, res) => {
   }
 })
 
-app.get("/rank/:rank", async (req, res) => {
+app.get("/movies", async (req, res) => {
+  const {genre, year} = req.query
+  const response = {
+    success: true,
+    body: {}
+  }
+  const genreRegex = new RegExp(genre)
+
   try {
-    const singleMovieRank = await Movie.findById(req.params.rank)
-    if (singleMovieRank) {
+    const resultFromDB = await Movie.find({genre: genreRegex}, {year: year})
+    if (resultFromDB) {
+      response.body = resultFromDB
+      res.status(200).json(response)
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Movie not found"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
+
+  }
+})
+
+app.get("movies/rank/:rank", async (req, res) => {
+  try {
+    const movieRank = await Movie.find(req.params.rank)
+    if (movieRank) {
       res.status(200).json({
         success: true,
-        body: singleMovieRank
+        body: movieRank
       })
     } else {
       res.status(404).json({
