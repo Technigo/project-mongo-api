@@ -64,7 +64,7 @@ app.get("/", (req, res) => {
       {
         "/": "Startpage",
         "/allsongs": "All tracks data",
-        "/allsongs/:style": "Search for specifik genre"
+        "/allsongs/:style": "Search for exisiting genre by adding /nameOfGenre"
       },
     ],
   };
