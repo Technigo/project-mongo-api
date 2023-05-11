@@ -1,0 +1,1662 @@
+[
+  {
+    "Character ID": 1,
+    "Character Name": "Harry Potter",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "Stag",
+    "Wand (Wood)": "Holly",
+    "Wand (Core)": "Phoenix Feather"
+  },
+  {
+    "Character ID": 2,
+    "Character Name": "Ron Weasley",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "Jack Russell Terrier",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 3,
+    "Character Name": "Hermione Granger",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Gryffindor",
+    "Patronus": "Otter",
+    "Wand (Wood)": "Vine",
+    "Wand (Core)": "Dragon Heartstring"
+  },
+  {
+    "Character ID": 4,
+    "Character Name": "Albus Dumbledore",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "Phoenix",
+    "Wand (Wood)": "Elder",
+    "Wand (Core)": "Thestral Tail Hair"
+  },
+  {
+    "Character ID": 5,
+    "Character Name": "Rubeus Hagrid",
+    "Species": "Half-Human/Half-Giant",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "Oak",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 6,
+    "Character Name": "Severus Snape",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "Doe",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 7,
+    "Character Name": "Minerva McGonagall",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Gryffindor",
+    "Patronus": "Cat",
+    "Wand (Wood)": "Fir",
+    "Wand (Core)": "Dragon Heartstring"
+  },
+  {
+    "Character ID": 8,
+    "Character Name": "Horace Slughorn",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "Cedar",
+    "Wand (Core)": "Dragon Heartstring"
+  },
+  {
+    "Character ID": 9,
+    "Character Name": "Voldemort",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "Yew",
+    "Wand (Core)": "Phoenix Feather"
+  },
+  {
+    "Character ID": 10,
+    "Character Name": "Neville Longbottom",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "Cherry",
+    "Wand (Core)": "Unicorn Hair"
+  },
+  {
+    "Character ID": 11,
+    "Character Name": "Remus Lupin",
+    "Species": "Werewolf",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "Wolf",
+    "Wand (Wood)": "Cypress",
+    "Wand (Core)": "Unicorn Hair"
+  },
+  {
+    "Character ID": 12,
+    "Character Name": "Draco Malfoy",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "Hawthorn",
+    "Wand (Core)": "Unicorn Hair"
+  },
+  {
+    "Character ID": 13,
+    "Character Name": "Alastor Moody",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 14,
+    "Character Name": "Fred Weasley",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 15,
+    "Character Name": "Dolores Umbridge",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Slytherin",
+    "Patronus": "Cat",
+    "Wand (Wood)": "Birch",
+    "Wand (Core)": "Dragon Heartstring"
+  },
+  {
+    "Character ID": 16,
+    "Character Name": "Arthur Weasley",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "Weasel",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 17,
+    "Character Name": "Cornelius Fudge",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 18,
+    "Character Name": "Sirius Black",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 19,
+    "Character Name": "George Weasley",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 20,
+    "Character Name": "Ginny Weasley",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Gryffindor",
+    "Patronus": "Horse",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 21,
+    "Character Name": "Vernon Dursley",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 22,
+    "Character Name": "Bellatrix Lestrange",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "Walnut",
+    "Wand (Core)": "Dragon Heartstring"
+  },
+  {
+    "Character ID": 23,
+    "Character Name": "Lucius Malfoy",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "Elm",
+    "Wand (Core)": "Dragon Heartstring"
+  },
+  {
+    "Character ID": 24,
+    "Character Name": "Tom Riddle",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "Yew",
+    "Wand (Core)": "Phoenix Feather"
+  },
+  {
+    "Character ID": 25,
+    "Character Name": "Luna Lovegood",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Ravenclaw",
+    "Patronus": "Hare",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 26,
+    "Character Name": "Molly Weasley",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 27,
+    "Character Name": "Dobby",
+    "Species": "House Elf",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 28,
+    "Character Name": "Gilderoy Lockhart",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Ravenclaw",
+    "Patronus": "",
+    "Wand (Wood)": "Cherry",
+    "Wand (Core)": "Dragon Heartstring"
+  },
+  {
+    "Character ID": 29,
+    "Character Name": "Seamus Finnigan",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "Fox",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 30,
+    "Character Name": "Griphook",
+    "Species": "Goblin",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 31,
+    "Character Name": "Dudley Dursley",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 32,
+    "Character Name": "Petunia Dursley",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 33,
+    "Character Name": "Barty Crouch Sr.",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 34,
+    "Character Name": "Xenophilius Lovegood",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 35,
+    "Character Name": "Argus Filch",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 36,
+    "Character Name": "Cedric Diggory",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Hufflepuff",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 37,
+    "Character Name": "Percy Weasley",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 38,
+    "Character Name": "Sybill Trelawney",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Ravenclaw",
+    "Patronus": "",
+    "Wand (Wood)": "Hazel",
+    "Wand (Core)": "Unicorn Hair"
+  },
+  {
+    "Character ID": 39,
+    "Character Name": "Moaning Myrtle",
+    "Species": "Ghost",
+    "Gender": "Female",
+    "House": "Ravenclaw",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 40,
+    "Character Name": "Aberforth Dumbledore",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "Goat",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 41,
+    "Character Name": "Quirinus Quirrell",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Ravenclaw",
+    "Patronus": "",
+    "Wand (Wood)": "Alder",
+    "Wand (Core)": "Unicorn Hair"
+  },
+  {
+    "Character ID": 42,
+    "Character Name": "James Potter",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "Stag",
+    "Wand (Wood)": "Mahogany",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 43,
+    "Character Name": "Garrick Ollivander",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Ravenclaw",
+    "Patronus": "",
+    "Wand (Wood)": "Hornbeam",
+    "Wand (Core)": "Dragon Heartstring"
+  },
+  {
+    "Character ID": 44,
+    "Character Name": "Peter Pettigrew",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "Chestnut",
+    "Wand (Core)": "Dragon Heartstring"
+  },
+  {
+    "Character ID": 45,
+    "Character Name": "Lily Potter",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Gryffindor",
+    "Patronus": "Doe",
+    "Wand (Wood)": "Willow",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 46,
+    "Character Name": "Oliver Wood",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 47,
+    "Character Name": "Nearly Headless Nick",
+    "Species": "Ghost",
+    "Gender": "Human",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 48,
+    "Character Name": "Kreacher",
+    "Species": "House Elf",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 49,
+    "Character Name": "Igor Karkaroff",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 50,
+    "Character Name": "Rolanda Hooch",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 51,
+    "Character Name": "Rufus Scrimgeour",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 52,
+    "Character Name": "Lee Jordan",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 53,
+    "Character Name": "Scabior",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 54,
+    "Character Name": "Helena Ravenclaw",
+    "Species": "Ghost",
+    "Gender": "Female",
+    "House": "Ravenclaw",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 55,
+    "Character Name": "Cho Chang",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Ravenclaw",
+    "Patronus": "Swan",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 56,
+    "Character Name": "Kingsley Shacklebolt",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "Lynx",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 57,
+    "Character Name": "Rita Skeeter",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 58,
+    "Character Name": "Stanley Shunpike",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 59,
+    "Character Name": "Filius Flitwick",
+    "Species": "Human (Part-Goblin)",
+    "Gender": "Male",
+    "House": "Ravenclaw",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 60,
+    "Character Name": "Marge Dursley",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 61,
+    "Character Name": "Nymphadora Tonks",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Hufflepuff",
+    "Patronus": "Jack rabbit",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 62,
+    "Character Name": "Elphias Doge",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 63,
+    "Character Name": "Narcissa Malfoy",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 64,
+    "Character Name": "Bogrod",
+    "Species": "Goblin",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 65,
+    "Character Name": "Lavender Brown",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 66,
+    "Character Name": "Rosmerta",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 67,
+    "Character Name": "Amos Diggory",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 68,
+    "Character Name": "Aragog",
+    "Species": "Acromantula",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 69,
+    "Character Name": "Olympe Maxime",
+    "Species": "Half-Human/Half-Giant",
+    "Gender": "Female",
+    "House": "Beauxbatons Academy of Magic",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 70,
+    "Character Name": "Corban Yaxley",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 71,
+    "Character Name": "Cormac McLaggen",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 72,
+    "Character Name": "Susan Bones",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Hufflepuff",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 73,
+    "Character Name": "Bill Weasley",
+    "Species": "Human�(Werewolf�traits)",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 74,
+    "Character Name": "Angelina Johnson",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 75,
+    "Character Name": "Dean Thomas",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 76,
+    "Character Name": "Mundungus Fletcher",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 77,
+    "Character Name": "Muriel",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 78,
+    "Character Name": "Parvati Patil",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 79,
+    "Character Name": "Pomona Sprout",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Hufflepuff",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 80,
+    "Character Name": "Vincent Crabbe",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 81,
+    "Character Name": "Fleur Delacour",
+    "Species": "Human (Quarter-Veela)",
+    "Gender": "Female",
+    "House": "Beauxbatons Academy of Magic",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 82,
+    "Character Name": "Marcus Flint",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 83,
+    "Character Name": "Mary Cattermole",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 84,
+    "Character Name": "Albus Potter",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 85,
+    "Character Name": "Poppy Pomfrey",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 86,
+    "Character Name": "Serpent of Slitherin",
+    "Species": "Basilisk",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 87,
+    "Character Name": "Firenze",
+    "Species": "Centaur",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 88,
+    "Character Name": "Arabella Figg",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 89,
+    "Character Name": "Barty Crouch Jr.",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 90,
+    "Character Name": "Mrs. Cole",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 91,
+    "Character Name": "Pansy Parkinson",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 92,
+    "Character Name": "Tom",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 93,
+    "Character Name": "Grawp",
+    "Species": "Giant",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 94,
+    "Character Name": "Katie Bell",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 95,
+    "Character Name": "Mrs. Granger",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 96,
+    "Character Name": "Pius Thicknesse",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 97,
+    "Character Name": "Bane",
+    "Species": "Centaur",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 98,
+    "Character Name": "Gellert Grindelwald",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Durmstrang Institute",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 99,
+    "Character Name": "Gregory Goyle",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 100,
+    "Character Name": "Leanne",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Hufflepuff",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 101,
+    "Character Name": "Padma Patil",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Ravenclaw",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 102,
+    "Character Name": "Fenrir Greyback",
+    "Species": "Werewolf",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 103,
+    "Character Name": "Magorian",
+    "Species": "Centaur",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 104,
+    "Character Name": "Bathilda Bagshot",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 105,
+    "Character Name": "Blaise Zabini",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 106,
+    "Character Name": "Colin Creevey",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 107,
+    "Character Name": "Everard",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 108,
+    "Character Name": "Griselda Marchbanks",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 109,
+    "Character Name": "Justin Finch-Fletchley",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Hufflepuff",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 110,
+    "Character Name": "Mr. Granger",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 111,
+    "Character Name": "Nigel Wolpert",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Gryffindor",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 112,
+    "Character Name": "Perkins",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 113,
+    "Character Name": "Phineas",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 114,
+    "Character Name": "Viktor Krum",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Durmstrang Institute",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 115,
+    "Character Name": "Walburga Black",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 116,
+    "Character Name": "Zacharias Smith",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Hufflepuff",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 117,
+    "Character Name": "Bloody Baron",
+    "Species": "Ghost",
+    "Gender": "Male",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 118,
+    "Character Name": "Ernest Macmillan",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Hufflepuff",
+    "Patronus": "Boar",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 119,
+    "Character Name": "Michael Corner",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Ravenclaw",
+    "Patronus": "Squirrel",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 120,
+    "Character Name": "Alecto Carrow",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "Slytherin",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 121,
+    "Character Name": "Charity Burbage",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 122,
+    "Character Name": "Dilys Derwent",
+    "Species": "Human",
+    "Gender": "Female",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 123,
+    "Character Name": "Eldred Worple",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 124,
+    "Character Name": "Marcus Belby",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "Ravenclaw",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 125,
+    "Character Name": "Mykew Gregorovitch",
+    "Species": "Human",
+    "Gender": "Male",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 126,
+    "Character Name": "Other",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 127,
+    "Character Name": "Students",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 128,
+    "Character Name": "Sorting Hat",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 129,
+    "Character Name": "Ghosts",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 130,
+    "Character Name": "Merpeople",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 131,
+    "Character Name": "Gang thug",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 132,
+    "Character Name": "Goblin",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 133,
+    "Character Name": "Station guard",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 134,
+    "Character Name": "Girl",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 135,
+    "Character Name": "Guard",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 136,
+    "Character Name": "All",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 137,
+    "Character Name": "Maid",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 138,
+    "Character Name": "Boy",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 139,
+    "Character Name": "Man",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 140,
+    "Character Name": "Woman",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 141,
+    "Character Name": "The Fat Lady",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 142,
+    "Character Name": "Snatcher",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 143,
+    "Character Name": "Wizard",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 144,
+    "Character Name": "Diary",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 145,
+    "Character Name": "Trolley witch",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 146,
+    "Character Name": "Waitress",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 147,
+    "Character Name": "Ghost",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 148,
+    "Character Name": "Howler",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 149,
+    "Character Name": "Old man",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 150,
+    "Character Name": "Shrunken head",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 151,
+    "Character Name": "Skinny kid",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 152,
+    "Character Name": "Snake",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 153,
+    "Character Name": "Witch",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 154,
+    "Character Name": "Class",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 155,
+    "Character Name": "Whomping Willow",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 156,
+    "Character Name": "Centaur",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 157,
+    "Character Name": "Death Eater",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 158,
+    "Character Name": "Man in a painting",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 159,
+    "Character Name": "Photographer",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 160,
+    "Character Name": "Pixie",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 161,
+    "Character Name": "Student",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 162,
+    "Character Name": "Waiter",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 163,
+    "Character Name": "Boy 2",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 164,
+    "Character Name": "Crowd",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 165,
+    "Character Name": "Gryffindors",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  },
+  {
+    "Character ID": 166,
+    "Character Name": "Professors",
+    "Species": "",
+    "Gender": "",
+    "House": "",
+    "Patronus": "",
+    "Wand (Wood)": "",
+    "Wand (Core)": ""
+  }
+]

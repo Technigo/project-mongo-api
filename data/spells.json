@@ -1,0 +1,429 @@
+[
+  {
+    "Spell ID": 1,
+    "Incantation": "Accio",
+    "Spell Name": "Summoning Charm",
+    "Effect": "Summons an object",
+    "Light": ""
+  },
+  {
+    "Spell ID": 2,
+    "Incantation": "Aguamenti",
+    "Spell Name": "Water-Making Spell",
+    "Effect": "Conjures water",
+    "Light": "Icy blue"
+  },
+  {
+    "Spell ID": 3,
+    "Incantation": "Alarte Ascendare",
+    "Spell Name": "Launch an object up into the air",
+    "Effect": "Rockets target upward",
+    "Light": "Red"
+  },
+  {
+    "Spell ID": 4,
+    "Incantation": "Alohomora",
+    "Spell Name": "Unlocking Charm",
+    "Effect": "Unlocks target",
+    "Light": "Blue"
+  },
+  {
+    "Spell ID": 5,
+    "Incantation": "Arania Exumai",
+    "Spell Name": "Spider repelling spell",
+    "Effect": "Repels spiders",
+    "Light": "Blue"
+  },
+  {
+    "Spell ID": 6,
+    "Incantation": "Arresto Momentum",
+    "Spell Name": "Slowing Charm",
+    "Effect": "Slows or stops target's velocity",
+    "Light": ""
+  },
+  {
+    "Spell ID": 7,
+    "Incantation": "Avada Kedavra",
+    "Spell Name": "Killing Curse",
+    "Effect": "Instantaneous death",
+    "Light": "Green"
+  },
+  {
+    "Spell ID": 8,
+    "Incantation": "Bombarda",
+    "Spell Name": "Exploding Charm",
+    "Effect": "Small explosion",
+    "Light": ""
+  },
+  {
+    "Spell ID": 9,
+    "Incantation": "Brackium Emendo",
+    "Spell Name": "Brackium Emendo",
+    "Effect": "Mends bones",
+    "Light": "Blue"
+  },
+  {
+    "Spell ID": 10,
+    "Incantation": "Cistem Aperio",
+    "Spell Name": "Cistem Aperio",
+    "Effect": "Opens chests",
+    "Light": "White"
+  },
+  {
+    "Spell ID": 11,
+    "Incantation": "Colloportus",
+    "Spell Name": "Locking Spell",
+    "Effect": "Locks doors",
+    "Light": ""
+  },
+  {
+    "Spell ID": 12,
+    "Incantation": "Confringo",
+    "Spell Name": "Blasting Curse",
+    "Effect": "Explosion",
+    "Light": "Fiery Orange"
+  },
+  {
+    "Spell ID": 13,
+    "Incantation": "Crucio",
+    "Spell Name": "Cruciatus Curse",
+    "Effect": "Excruciating pain",
+    "Light": "Red"
+  },
+  {
+    "Spell ID": 14,
+    "Incantation": "Diffindo",
+    "Spell Name": "Severing Charm",
+    "Effect": "Cuts objects",
+    "Light": "Light green"
+  },
+  {
+    "Spell ID": 15,
+    "Incantation": "Dissendium",
+    "Spell Name": "Dissendium",
+    "Effect": "Reveals secret passages",
+    "Light": ""
+  },
+  {
+    "Spell ID": 16,
+    "Incantation": "Engorgio",
+    "Spell Name": "Engorgement Charm",
+    "Effect": "Causes swelling",
+    "Light": "Icy blue"
+  },
+  {
+    "Spell ID": 17,
+    "Incantation": "Episkey",
+    "Spell Name": "Episkey",
+    "Effect": "Heals minor injuries",
+    "Light": ""
+  },
+  {
+    "Spell ID": 18,
+    "Incantation": "Expecto Patronum",
+    "Spell Name": "Patronus Charm",
+    "Effect": "Conjures a spirit guardian",
+    "Light": "Silver"
+  },
+  {
+    "Spell ID": 19,
+    "Incantation": "Expelliarmus",
+    "Spell Name": "Disarming Charm",
+    "Effect": "Disarms an opponent",
+    "Light": "Scarlet"
+  },
+  {
+    "Spell ID": 20,
+    "Incantation": "Expulso",
+    "Spell Name": "Expulso Curse",
+    "Effect": "Blows things up",
+    "Light": "Blue"
+  },
+  {
+    "Spell ID": 21,
+    "Incantation": "Finite",
+    "Spell Name": "General Counter-Spell",
+    "Effect": "Terminates all spell effects",
+    "Light": "Red"
+  },
+  {
+    "Spell ID": 22,
+    "Incantation": "Homenum Revelio",
+    "Spell Name": "Human Presence Revealing Spell",
+    "Effect": "Reveals human presence",
+    "Light": ""
+  },
+  {
+    "Spell ID": 23,
+    "Incantation": "Immobulus",
+    "Spell Name": "Freezing Charm",
+    "Effect": "Stops movement and actions of the target",
+    "Light": "Blue"
+  },
+  {
+    "Spell ID": 24,
+    "Incantation": "Impedimenta",
+    "Spell Name": "Impediment Jinx",
+    "Effect": "Hinders movement",
+    "Light": "Turquoise"
+  },
+  {
+    "Spell ID": 25,
+    "Incantation": "Imperio",
+    "Spell Name": "Imperius Curse",
+    "Effect": "Total control over the victim",
+    "Light": ""
+  },
+  {
+    "Spell ID": 26,
+    "Incantation": "Incarcerous",
+    "Spell Name": "Incarcerous Spell",
+    "Effect": "Binds target in ropes",
+    "Light": ""
+  },
+  {
+    "Spell ID": 27,
+    "Incantation": "Incendio",
+    "Spell Name": "Fire-Making Spell",
+    "Effect": "Conjures flames",
+    "Light": "Orange"
+  },
+  {
+    "Spell ID": 28,
+    "Incantation": "Levicorpus",
+    "Spell Name": "Levicorpus",
+    "Effect": "Suspends people by the ankles",
+    "Light": "Green"
+  },
+  {
+    "Spell ID": 29,
+    "Incantation": "Locomotor",
+    "Spell Name": "Locomotion Charm",
+    "Effect": "Moves objects in midair",
+    "Light": ""
+  },
+  {
+    "Spell ID": 30,
+    "Incantation": "Locomotor Mortis",
+    "Spell Name": "Leg-Locker Curse",
+    "Effect": "Sticks legs together",
+    "Light": "Purple"
+  },
+  {
+    "Spell ID": 31,
+    "Incantation": "Lumos",
+    "Spell Name": "Wand-Lighting Charm",
+    "Effect": "Illuminates the wand tip",
+    "Light": "White"
+  },
+  {
+    "Spell ID": 32,
+    "Incantation": "Lumos Maxima",
+    "Spell Name": "Lumos Maxima",
+    "Effect": "Produces bright light",
+    "Light": "White"
+  },
+  {
+    "Spell ID": 33,
+    "Incantation": "Lumos Solem",
+    "Spell Name": "Lumos Solem Spell",
+    "Effect": "Produces sunlight",
+    "Light": "Bright yellow"
+  },
+  {
+    "Spell ID": 34,
+    "Incantation": "Muffliato",
+    "Spell Name": "Muffliato Charm",
+    "Effect": "Conceals sound",
+    "Light": ""
+  },
+  {
+    "Spell ID": 35,
+    "Incantation": "Nox",
+    "Spell Name": "Wand-Extinguishing Charm",
+    "Effect": "Extinguishes wandlight",
+    "Light": ""
+  },
+  {
+    "Spell ID": 36,
+    "Incantation": "Obliviate",
+    "Spell Name": "Memory Charm",
+    "Effect": "Erases memories",
+    "Light": "Green"
+  },
+  {
+    "Spell ID": 37,
+    "Incantation": "Oculus Reparo",
+    "Spell Name": "Oculus Reparo",
+    "Effect": "Repairs glasses",
+    "Light": ""
+  },
+  {
+    "Spell ID": 38,
+    "Incantation": "Oppugno",
+    "Spell Name": "Oppugno Jinx",
+    "Effect": "Assaults target with directed object(s)",
+    "Light": ""
+  },
+  {
+    "Spell ID": 39,
+    "Incantation": "Peskipiksi Pesternomi",
+    "Spell Name": "Peskipiksi Pesternomi",
+    "Effect": "Nothing (supposedly captures pixies)",
+    "Light": ""
+  },
+  {
+    "Spell ID": 40,
+    "Incantation": "Petrificus Totalus",
+    "Spell Name": "Full Body-Bind Curse",
+    "Effect": "Temporary Paralysis",
+    "Light": "White"
+  },
+  {
+    "Spell ID": 41,
+    "Incantation": "Piertotum Locomotor",
+    "Spell Name": "Piertotum Locomotor",
+    "Effect": "Animates target",
+    "Light": "Green"
+  },
+  {
+    "Spell ID": 42,
+    "Incantation": "Portus",
+    "Spell Name": "Portus",
+    "Effect": "Turns object into Portkey",
+    "Light": "Blue"
+  },
+  {
+    "Spell ID": 43,
+    "Incantation": "Priori Incantatem",
+    "Spell Name": "Reverse Spell",
+    "Effect": "Shows the previous spells cast by a wand",
+    "Light": "Gold"
+  },
+  {
+    "Spell ID": 44,
+    "Incantation": "Protego",
+    "Spell Name": "Shield Charm",
+    "Effect": "Reflects spells and blocks physical forces",
+    "Light": ""
+  },
+  {
+    "Spell ID": 45,
+    "Incantation": "Protego Maxima",
+    "Spell Name": "Protego Maxima",
+    "Effect": "Summons a large protective barrier",
+    "Light": "White"
+  },
+  {
+    "Spell ID": 46,
+    "Incantation": "Protego totalum",
+    "Spell Name": "Protego totalum",
+    "Effect": "Shields an area",
+    "Light": ""
+  },
+  {
+    "Spell ID": 47,
+    "Incantation": "Reducio",
+    "Spell Name": "Shrinking Charm",
+    "Effect": "Shrinks target",
+    "Light": "Purple"
+  },
+  {
+    "Spell ID": 48,
+    "Incantation": "Relashio",
+    "Spell Name": "Revulsion Jinx",
+    "Effect": "Forces target to let go",
+    "Light": "Purple"
+  },
+  {
+    "Spell ID": 49,
+    "Incantation": "Reparo",
+    "Spell Name": "Mending Charm",
+    "Effect": "Fixes broken objects",
+    "Light": ""
+  },
+  {
+    "Spell ID": 50,
+    "Incantation": "Repello Inimicum",
+    "Spell Name": "Repello Inimicum",
+    "Effect": "Repels enemies. If used with Protego Maxima and Fianto Duri",
+    "Light": ""
+  },
+  {
+    "Spell ID": 51,
+    "Incantation": "Repello Muggletum",
+    "Spell Name": "Muggle-Repelling Charm",
+    "Effect": "Repels Muggles",
+    "Light": "Haze"
+  },
+  {
+    "Spell ID": 52,
+    "Incantation": "Revelio",
+    "Spell Name": "Revelio Charm",
+    "Effect": "Reveals secrets about a person or object",
+    "Light": "Blue"
+  },
+  {
+    "Spell ID": 53,
+    "Incantation": "Rictusempra",
+    "Spell Name": "Tickling Charm",
+    "Effect": "Tickles and weakens",
+    "Light": "Silver"
+  },
+  {
+    "Spell ID": 54,
+    "Incantation": "Riddikulus",
+    "Spell Name": "Boggart-Banishing Spell",
+    "Effect": "Turns a Boggart into something amusing",
+    "Light": ""
+  },
+  {
+    "Spell ID": 55,
+    "Incantation": "Salvio hexia",
+    "Spell Name": "Salvio hexia",
+    "Effect": "Hex deflection",
+    "Light": "Haze"
+  },
+  {
+    "Spell ID": 56,
+    "Incantation": "Sectumsempra",
+    "Spell Name": "Sectumsempra",
+    "Effect": "Lacerates target",
+    "Light": "White"
+  },
+  {
+    "Spell ID": 57,
+    "Incantation": "Serpensortia",
+    "Spell Name": "Snake Summons Spell",
+    "Effect": "Conjures snake",
+    "Light": "White"
+  },
+  {
+    "Spell ID": 58,
+    "Incantation": "Stupefy",
+    "Spell Name": "Stunning Spell",
+    "Effect": "Knocks out target",
+    "Light": "Red"
+  },
+  {
+    "Spell ID": 59,
+    "Incantation": "Vera Verto",
+    "Spell Name": "Vera Verto",
+    "Effect": "Transforms animals into water goblets",
+    "Light": "Crystal clear"
+  },
+  {
+    "Spell ID": 60,
+    "Incantation": "Vipera Evanesca",
+    "Spell Name": "Snake-Vanishing Spell",
+    "Effect": "Vanishes snakes",
+    "Light": "Black smoke"
+  },
+  {
+    "Spell ID": 61,
+    "Incantation": "Wingardium Leviosa",
+    "Spell Name": "Levitation Charm",
+    "Effect": "Makes objects fly",
+    "Light": ""
+  }
+]
