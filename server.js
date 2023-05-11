@@ -1,14 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,19 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
-
 const { Schema } = mongoose;
-const userSchema = new Schema ({
-  name: String,
-  age: Number,
-  alive: Boolean
-});
-
-const User = mongoose.model("User", userSchema);
 
 const songSchema = new Schema ({
   id: Number,
@@ -56,6 +37,46 @@ const songSchema = new Schema ({
 })
 
 const Song = mongoose.model("Song", songSchema);
+
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Song.deleteMany();
+    topMusicData.forEach((singleSong) => {
+      const newSong = new Song(singleSong);
+      newSong.save()
+    })
+  }
+  resetDatabase();
+}
+
+// Start defining your routes here
+app.get("/", (req, res) => {
+  res.send("Hello Technigo!");
+});
+
+app.get("/songs", async (req, res) => {
+  const { genre, danceability } = req.query;
+  const response = {
+    success: true,
+    body: {}
+  }
+  const genreRegex = new RegExp(genre);
+  const danceabilityQuery = { $gt: danceability ? danceability : 0 };
+
+  try {
+    const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery});
+    if (searchResultFromDB) {
+      response.body = searchResultFromDB,
+      res.status(200).json(response)
+    } else {
+      response.success = false,
+      res.status(500).json(response)
+    }
+  } catch(e) {
+    response.success = false,
+    res.status(500).json(response)
+  }
+});
 
 app.get("/songs/id/:id", async (req, res) => {
   try {
