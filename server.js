@@ -27,6 +27,7 @@ const SongSchema = new mongoose.Schema({
   speechiness: Number,
   popularity: Number
 })
+// model
 const Song = mongoose.model("Song", SongSchema);
 
 // Resetting the Database
@@ -64,17 +65,41 @@ app.use ((req, res, next) => {
 })
 
 
-// Start defining your routes here
-app.get("/", (req, res) => {
+// Welcome route
+app.get('/', (req, res) => {
   res.status(200).json({
     success: true,
-    body: {
-      Routes: "/songs  all songs, /songs/:id single song by its id.",
-      Queries: "/songs "
-    }
+    message: 'Welcome to the music API',
+    routes: [
+      {
+        path: '/songs',
+        description: 'Get all songs',
+        method: 'GET',
+        queryParameters: [
+          {
+            name: 'genre',
+            description: 'Filter songs by genre'
+          },
+          {
+            name: 'danceability',
+            description: 'Filter songs by danceability score (greater than or equal to the specified value)'
+          }
+        ]
+      },
+      {
+        path: '/songs/:id',
+        description: 'Get a single song by ID',
+        method: 'GET',
+        pathParameters: [
+          {
+            name: 'id',
+            description: 'ID of the song (number between 1 and 50)'
+          }
+        ]
+      }
+    ]
   });
 });
-
 
 app.get("/songs", async (req, res) => {
   const {genre, danceability } = req.query;
