@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Importing the top-music dataset from json-file:
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -21,11 +22,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
-
+// extracting schema from mongoose:
 const { Schema } = mongoose;
 
 const songSchema = new Schema({
@@ -47,11 +44,66 @@ const songSchema = new Schema({
 
 const Song = mongoose.model("Song", songSchema);
 
+// here we are resetting the database, will happen only if RESET_DB variable is set to true:
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Song.deleteMany();
+    topMusicData.forEach((singleSong) => {
+      const newSong = new Song (singleSong);
+      newSong.save();
+    })
+  }
+  resetDatabase();
+  // call a function while declaring it  - extra curriculum
+}
+
+////// DEFINING ROUTES HERE //////
+
+//index route:
+app.get("/", (req, res) => {
+  res.send("Hello Technigo!");
+});
+
 app.get("/songs", async (req, res) => {
-  let allSongs = topMusicData;
-  res.send(allSongs);
+  // the way I did it in the week before, with the Express API:
+  // let allSongs = topMusicData;
+  // res.send(allSongs);
+  // another way:
+  const {genre, danceability} = req.query;
+  const response = {
+    success: true,
+    message: "Here are your songs!",
+    body: {}
+  }
+  // creating new regex (regular expression) that includes all genres with the word "pop" in them:
+  const genreRegex = new RegExp(genre);
+  // "if (?) there are songs with danceability greater than what the user put in the url, then show list.
+  // else (:), show nothing" is what this variable is saying:
+  const danceabilityQuery = { $gt: danceability ? danceability : 0 }
+  try {
+    // this would only get the songs with the genres that exactly match "pop":
+    // response.body = await Song.find({genre: genre})
+    // every song that includes the word "pop":
+    const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
+    if (searchResultFromDB) {
+      response.body = searchResultFromDB;
+      res.status(200).json(response)
+    } else {
+      response.status(404).json()
+      response.success = false,
+      res.status(500).json(response)
+      }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
+  }
 })
 
+// endpoint to get song by id:
 app.get("/songs/:id", async (req, res) => {
   try {
     const singleSong = await Song.findById(req.params.id)
