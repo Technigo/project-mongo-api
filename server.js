@@ -26,18 +26,6 @@ const NetflixTitles = mongoose.model('NetflixTitles', {
 
 });
 
-// const Show = mongoose.model('Show', {
-//   title: String,
-//   show_id: Number,
-//   director: String,
-//   cast: String,
-//   country: String,
-//   release_year: Number,
-//   listed_in: String,
-//   type: String
-
-// });
-
   if (process.env.RESET_DB) {
     const seedDatabase = async () => {
       await NetflixTitles.deleteMany({})
@@ -64,12 +52,23 @@ app.get("/", (req, res) => {
   // res.send("Hello Frida!");
 });
 
-
 //shows all shows and movies
 app.get('/netflix-titles', async (req, res) => {
   const allTitles = await NetflixTitles.find({})
   res.json(allTitles)
 })
+
+//shows only tv-shows
+app.get('/tv-shows', async (req, res) => {
+  const tvShows = await NetflixTitles.find({ type: 'TV Show' });
+  res.json(tvShows);
+});
+
+//shows only movies
+app.get('/movies', async (req, res) => {
+  const allMovies = await NetflixTitles.find({ type: 'Movie' });
+  res.json(allMovies);
+});
 
 //shows a single title by id
 app.get('/netflix-titles/:id', async (req, res) => {
@@ -78,13 +77,19 @@ app.get('/netflix-titles/:id', async (req, res) => {
   
   if (showID) {
     res.status(200).json({
-      data:showID,
-      success: true
+      success: true,
+      message: 'OK',
+      body: {
+        showID
+      }
     })
   } else {
       res.status(404).send({
-      data: "(404) ID not found",
-      success: false 
+      success: false ,
+      body: {
+        message: "(404) ID not found",
+
+      }
       }
      )}
 
@@ -93,37 +98,12 @@ app.get('/netflix-titles/:id', async (req, res) => {
        success: false,
        body: {
          message: "bad request"
+      }
+})
 }})
-}})
-// app.get("/animes/:id", async (req, res) => {
-//   try{
-//     const animeId = await Anime.findById(req.params.id)
-
-//   if(animeId){
-//     res.status(200).json({
-//       data: animeId,
-//       success: true,
-//     })
-// } else {
-//     res.status(404).send({
-//       data: "(404) ID not found",
-//       success: false 
-//     }
-//     )}
-// } catch(error){
-//   res.status(400).json({
-//     success: false,
-//     body: {
-//       message: "bad request"
-//   }})
-// }})
 
 
 
-// app.get('/shows', async (req, res) => {
-// const allTvShows = await Show.find({})
-// res.json(allTvShows)
-// })
 
 // Start the server
 app.listen(port, () => {
