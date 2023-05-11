@@ -51,12 +51,136 @@ app.use((req, res, next) => {
   }
 })
 
-
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
   res.json(listEndpoints(app))
 });
+
+app.get('/companies', async (req, res) => {
+  try {
+    const companies = await Company.find()
+    if (companies) {
+      res.json(companies)
+    } else {
+      res.status(500).json({ error: 'not found' })
+    }
+  }
+  catch (error) {
+    res.status(400).json({ error: 'No data available' })
+  }
+})
+
+app.get('/companies/:id', async (req, res) => {
+  try {
+    const specificId = await Company.findById(req.params.id)
+    if (specificId) {
+      res.status(200).json({
+        success: true,
+        message: 'OK',
+        body: {
+          specificId
+        }
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        message: 'Id not found',
+        body: {}
+      })
+    }
+  }
+  catch (error) {
+    res.status(400).json({ error: 'Invalid id search' })
+  }
+})
+
+app.get('/companies/grade/:grade', async (req, res) => {
+  try {
+    const { grade } = req.params
+    const { country } = req.query
+
+    let gradeResult = await Company.find({ Grade: { '$regex': new RegExp(grade, 'i') } })
+
+    if (country) {
+      gradeResult = gradeResult.filter(item => item.Country.match(new RegExp(country, 'i')))
+    }
+
+    // if (country) {
+    //   gradeResult = gradeResult.filter(company => company.Country.match(new RegExp(country, 'i')))
+    // }
+
+    if (gradeResult.length) {
+      res.status(200).json({
+        success: true,
+        message: `Companies with grade ${grade}`,
+        body: {
+          gradeResult
+        }
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        message: `No companies match the inserted grade`,
+        body: {}
+      })
+    }
+  }
+  catch (error) {
+    res.status(400).json({ error: 'Invalid search criteria' })
+  }
+})
+
+// app.get('/titles/movies', (req, res) => {
+//   const { year } = req.query
+//   let movies = netflixData.filter(item => item.type === 'Movie')
+
+//   if (year) {
+//     movies = movies.filter((releaseYear) => {
+//       return releaseYear.release_year === Number(year)
+//     })
+
+//   }
+//   if (movies.length) {
+//     res.status(200).json({
+//       success: true,
+//       message: 'OK',
+//       body: {
+//         netflixMovies: movies
+//       }
+//     })
+//   } else {
+//     res.status(404).json({
+//       success: false,
+//       message: 'Not found',
+//       body: {}
+//     })
+//   }
+// })
+
+app.get('/companies/country/:country', async (req, res) => {
+  try {
+    const { country } = req.params
+    let countryResult = await Company.find({ Country: { '$regex': new RegExp(country, 'i') } })
+    if (countryResult.length) {
+      res.status(200).json({
+        success: true,
+        message: `Companies from ${country}`,
+        body: {
+          countryResult
+        }
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        message: `No Companies found from ${country}`,
+        body: {}
+      })
+    }
+  }
+  catch (error) {
+    res.status(400).json({ error: 'Invalid country search' })
+  }
+})
 
 // Start the server
 app.listen(port, () => {
