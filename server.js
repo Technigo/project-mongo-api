@@ -41,13 +41,13 @@ const Song = mongoose.model("Song", songSchema);
 
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
-    await topMusicData.deleteMany({})
+    await Song.deleteMany({})
 
-		topMusicData.forEach((track) => {
-			new Song(track).save()
+		topMusicData.forEach((singleSong) => {
+      const newSong = new Song(singleSong);
+			newSong.save()
 		})
   }
-
   seedDatabase()
 }
 
