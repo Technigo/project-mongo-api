@@ -12,36 +12,43 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndpoints = require(('express-list-endpoints'))
 
-const Movie = mongoose.model('Movie', {
+const NetflixTitles = mongoose.model('NetflixTitles', {
   title: String,
   show_id: Number,
   director: String,
   cast: String,
   country: String,
   release_year: Number,
-  listed_in: String
+  listed_in: String,
+  type: String
+
 });
 
-// const tvShow = mongoose.model('tvShow', {
+// const Show = mongoose.model('Show', {
 //   title: String,
 //   show_id: Number,
 //   director: String,
 //   cast: String,
 //   country: String,
 //   release_year: Number,
-//   listed_in: String
+//   listed_in: String,
+//   type: String
+
 // });
 
   if (process.env.RESET_DB) {
     const seedDatabase = async () => {
-      await Movie.deleteMany({})
-      // await tvShow.deleteMany({})
+      await NetflixTitles.deleteMany({})
+      // await Show.deleteMany({})
 
       netflixData.forEach((movieData) => {
-      new Movie(movieData).save();
-      
+      new NetflixTitles(movieData).save();
       })
+      // netflixData.forEach((tvShowData) => {
+      //   new Show(tvShowData).save();
+      //   })
     }
     seedDatabase()
   }
@@ -53,17 +60,69 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Frida!");
+  res.json(listEndpoints(app))
+  // res.send("Hello Frida!");
 });
 
-// app.get('/movies', async (req, res) => {
-//   const allMovies = await Movie.find({})
-//   res.json(allMovies)
-// }) RESET_DB
 
-// app.get('/tvShows', async (req, res) => {
-// const tvShows = await tvShow.find()
-// res.json(tvShows)
+//shows all shows and movies
+app.get('/netflix-titles', async (req, res) => {
+  const allTitles = await NetflixTitles.find({})
+  res.json(allTitles)
+})
+
+//shows a single title by id
+app.get('/netflix-titles/:id', async (req, res) => {
+  try{
+  const showID = await NetflixTitles.findById(req.params.id)
+  
+  if (showID) {
+    res.status(200).json({
+      data:showID,
+      success: true
+    })
+  } else {
+      res.status(404).send({
+      data: "(404) ID not found",
+      success: false 
+      }
+     )}
+
+} catch(error){
+     res.status(400).json({
+       success: false,
+       body: {
+         message: "bad request"
+}})
+}})
+// app.get("/animes/:id", async (req, res) => {
+//   try{
+//     const animeId = await Anime.findById(req.params.id)
+
+//   if(animeId){
+//     res.status(200).json({
+//       data: animeId,
+//       success: true,
+//     })
+// } else {
+//     res.status(404).send({
+//       data: "(404) ID not found",
+//       success: false 
+//     }
+//     )}
+// } catch(error){
+//   res.status(400).json({
+//     success: false,
+//     body: {
+//       message: "bad request"
+//   }})
+// }})
+
+
+
+// app.get('/shows', async (req, res) => {
+// const allTvShows = await Show.find({})
+// res.json(allTvShows)
 // })
 
 // Start the server
