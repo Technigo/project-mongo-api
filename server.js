@@ -34,6 +34,9 @@ const songSchema = new Schema({
     popularity: Number
 })
 
+const Song = mongoose.model("Song", songSchema);
+
+
 // RESET_DB=true npm run dev for MongoCompass
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
@@ -70,9 +73,6 @@ app.get("/", (req, res) => {
   res.send(navigation);
 });
 
-
-
-const Song = mongoose.model("Song", songSchema);
 
 //To get all songs
 app.get("/allsongs", async (req, res) => {
