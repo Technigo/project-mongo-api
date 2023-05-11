@@ -7,15 +7,51 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mon
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-
 // Define the port the app will run on
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndpoints = require('express-list-endpoints');
+
+// const swaggerJsdoc = require("swagger-jsdoc");
+// const swaggerUi = require("swagger-ui-express");
+
+// const options = {
+//   definition: {
+//     openapi: "3.1.0",
+//     info: {
+//       title: "LogRocket Express API with Swagger",
+//       version: "0.1.0",
+//       description:
+//         "This is a simple CRUD API application made with Express and documented with Swagger",
+//       license: {
+//         name: "MIT",
+//         url: "https://spdx.org/licenses/MIT.html",
+//       },
+//       contact: {
+//         name: "LogRocket",
+//         url: "https://logrocket.com",
+//         email: "info@email.com",
+//       },
+//     },
+//     servers: [
+//       {
+//         url: "http://localhost:3000",
+//       },
+//     ],
+//   },
+//   apis: ["./routes/*.js"],
+// };
+
+// const specs = swaggerJsdoc(options);
+// app.use(
+//   "/api-docs",
+//   swaggerUi.serve,
+//   swaggerUi.setup(specs)
+// );
 
 // Middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
-
 
 const { Schema } = mongoose;
 
@@ -53,68 +89,40 @@ if (process.env.RESET_DB) {
 
 // Defining routes here
 app.get("/", (req, res) => {
-  res.send("Joanna's Songs API");
+  // res.send("Joanna's Songs API")
+  res.send(listEndpoints(app));
 });
 
-// Get all songs in the dataset with paging
-// app.get("/songs", async (req, res) => {
-//   try {
-//     // Parse query parameters to integers or default to 1 page/10 entries limit
-//     const page = parseInt(req.query.page) || 1;
-//     const limit = parseInt(req.query.limit) || 10;
-
-//     // Calculate skip value - how many entries to skip from the beginning of the dataset
-//     const skip = (page - 1) * limit;
-
-//     // Query database with skip and limit
-//     const songList = await Song.find(req.params).skip(skip).limit(limit);
-
-//     if (songList.length > 0) {
-//       res.status(200).json({
-//         success: true,
-//         body: {
-//           songList: songList,
-//           currentPage: page,
-//           totalPages: Math.ceil(await Song.countDocuments() / limit), // Eg: 50 / 10 = 5 pages
-//           totalSongRecords: await Song.countDocuments() // Counts total number of records or items in the DB
-//         }
-//       });
-//     } else {
-//       res.status(404).json({
-//         success: false,
-//         body: {
-//           message: "No songs in the list"
-//         }
-//       });
-//     }
-//   } catch(e) {
-//     res.status(500).json({
-//       success: false,
-//       body: {
-//         message: e
-//       }
-//     });
-//   }
-// });
-
-//Get all songs in the dataset
+//Get all songs in the dataset with paging
 app.get("/songs", async (req, res) => {
   try {
-    const songList =  await Song.find(req.params);
-    if (songList) {
+    // Parse query parameters to integers or default to 1 page/10 entries limit
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    // Calculate skip value - how many entries to skip from the beginning of the dataset
+    const skip = (page - 1) * limit;
+
+    // Query database with skip and limit
+    const songList = await Song.find(req.params).skip(skip).limit(limit);
+
+    if (songList.length > 0) {
       res.status(200).json({
         success: true,
         body: {
-          songList: songList
-        } 
-      })
+          songList: songList,
+          currentPage: page,
+          totalPages: Math.ceil(await Song.countDocuments() / limit), // Eg: 50 / 10 = 5 pages
+          totalSongRecords: await Song.countDocuments() // Counts total number of records or items in the DB
+        }
+      });
     } else {
       res.status(404).json({
         success: false,
         body: {
           message: "No songs in the list"
         }
-      })
+      });
     }
   } catch(e) {
     res.status(500).json({
@@ -122,9 +130,64 @@ app.get("/songs", async (req, res) => {
       body: {
         message: e
       }
-    })
+    });
   }
 });
+
+// Get songs by genre and danceability
+app.get("/songs", async (req, res) => {
+  const {genre, danceability } = req.query;
+  const response = {
+    success: true,
+    body:{}
+  }
+  // Regex only for strings
+  const genreRegex = new RegExp(genre);
+  const danceabilityQuery =  { $gt: danceability ? danceability : 0 }
+
+  try {
+    const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
+    if (searchResultFromDB) {
+      response.body = searchResultFromDB
+      res.status(200).json(response)
+    } else {
+      response.success = false,
+      res.status(500).json(response)
+    }
+  } catch(e) {
+    response.success = false,
+    res.status(500).json(response)
+  }
+});
+
+// //Get all songs in the dataset
+// app.get("/songs", async (req, res) => {
+//   try {
+//     const songList =  await Song.find(req.params);
+//     if (songList) {
+//       res.status(200).json({
+//         success: true,
+//         body: {
+//           songList: songList
+//         } 
+//       })
+//     } else {
+//       res.status(404).json({
+//         success: false,
+//         body: {
+//           message: "No songs in the list"
+//         }
+//       })
+//     }
+//   } catch(e) {
+//     res.status(500).json({
+//       success: false,
+//       body: {
+//         message: e
+//       }
+//     })
+//   }
+// });
 
 // Get song by id
 app.get("/songs/id/:id", async (req, res) => {
