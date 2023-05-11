@@ -58,15 +58,15 @@ const songSchema = new Schema({
     popularity: Number
 })
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Song.deleteMany({})
-    topMusicData.forEach((song) => {
-      new Song(song).save()
-    })
-  }
-  seedDatabase()
-}
+// if (process.env.RESET_DB) {
+//   const seedDatabase = async () => {
+//     await Song.deleteMany({})
+//     topMusicData.forEach((song) => {
+//       new Song(song).save()
+//     })
+//   }
+//   seedDatabase()
+// }
 
 
 const Song = mongoose.model("Song", songSchema);
