@@ -59,6 +59,7 @@ app.get('/movies', async (req, res) => {
   const limit = parseInt(req.query.limit) || 10 // default limit is 10
   const page = parseInt(req.query.page) || 1 // default page is 1
   const skip = (page - 1) * limit // calculate the number of objects to skip
+  const totalLengthofData=await Movie.find().countDocuments()
 try{
   const movies = await Movie.aggregate([
     { $sort: { release_year: -1 } },
@@ -66,7 +67,14 @@ try{
     { $limit: limit }
   ])
   if(movies){
-  res.json(movies)
+     res.status(200).json({
+      success: true,
+      message: "OK",
+      body: {
+        data: movies,
+        totalPages: Math.ceil(totalLengthofData / limit)
+      }
+    })
   }else{
   res.status(404).json({ error: 'No movies found' })
   }
