@@ -59,7 +59,7 @@ app.use(express.json());
 //Routes
 app.get("/", (req, res) => {
   const navigation = {
-    guide: "These are the routes for this book API!",
+    guide: "These are the routes for this Music data API!",
     Endpoints: [
       {
         "/": "Startpage",
