@@ -95,6 +95,7 @@ app.get("/songs", async (req, res) => {
       res.status(500).json(response)
     }
   } catch(e) {
+    response.success = false,
     res.status(500).json(response)
   }
 });
