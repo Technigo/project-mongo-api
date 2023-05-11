@@ -25,7 +25,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const Schema = mongoose.model("Schema", {
+const Title = mongoose.model("Title", {
   show_id: Number,
   title: String,
   director: String, 
@@ -42,7 +42,7 @@ const Schema = mongoose.model("Schema", {
 
 if(process.env.RESET_DB) {
   const resetDataBase = async () => {
-    await Schema.deleteMany();
+    await Title.deleteMany();
    netflixData.forEach(singleTitle => {
       const newTitle = new Title(singleTitle)
       newTitle.save()
@@ -54,14 +54,53 @@ if(process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("netflixGuide");
+  const netflixGuide = {
+    Routes: [
+      {
+        '/movies': 'Get all movies',
+        '/movies/:title': 'All movietitles',
+        '/cast/:cast': 'Get movie by castmembers',
+        '/country/:country': 'Get movie by country',
+        '/director/:director': 'Get movie by director'
+      }
+    ]
+  }
+  res.json({responseMessage: netflixGuide});
 });
 
 app.get("/movies", async (req, res) => {
-  const movies = await Movie.find()
-  res.json(movies)
-  res.send("Hello Technigo!");
+  const allTheMovies = await movies.find()
+  res.status(200).json ({
+    success: true,
+    body: allTheMovies
+  })
 });
+
+app.get("/movies/:titles", async (req, res) => {
+  try {
+    const SingleTitle = await Title.findById(req.params.id)
+    if (SingleTitle) {
+      res.status(200).json({
+        success: true,
+        body: SingleTitle
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Could not find the title"
+        }
+      })
+    }
+  } catch(error) {
+    res.status(400).json({
+      success: false,
+      body: {
+        message: "Invalid id"
+      }
+    })
+  }
+})
 
 // Start the server
 app.listen(port, () => {
