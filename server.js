@@ -31,7 +31,6 @@ const SongSchema = new mongoose.Schema({
 const Song = mongoose.model("Song", SongSchema);
 
 // Resetting the Database
-
 if (process.env.RESET_DB) {
   const resetDatabase = async () => {
     await Song.deleteMany();
