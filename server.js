@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import cors from "cors";
 import mongoose, { SchemaType } from "mongoose";
 
@@ -8,7 +8,7 @@ import mongoose, { SchemaType } from "mongoose";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,20 +24,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
-
 const { Schema } = mongoose;
-const userSchema = new Schema ({
-  name: String,
-  age: Number,
-  alive: Boolean
-});
+// const userSchema = new Schema ({
+//   name: String,
+//   age: Number,
+//   alive: Boolean
+// });
 
-const User = mongoose.model("User", userSchema);
-
+// const User = mongoose.model("User", userSchema);
 const songSchema = new Schema({
   id: Number,
   trackName: String,
@@ -56,6 +50,65 @@ const songSchema = new Schema({
 })
 
 const Song = mongoose.model("Song", songSchema);
+
+
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => { // with async, comes await = before anything else happens, wait for all songs to be deleted
+    await Song.deleteMany(); // make sure no duplicates - deletes everything
+    topMusicData.forEach((singleSong) => { // populates the json data //
+      const newSong = new Song(singleSong); // 
+      newSong.save() // These three lines // can't do if manually import jSON
+    })
+  } 
+  resetDatabase();
+  // call a function while declaring it
+}
+
+// RESET_DB=true npm run dev 
+
+// Start defining your routes here
+app.get("/", (req, res) => {
+  res.send("Hello Technigo!");
+});
+
+app.get("/songs", async (req, res) => {
+  const { genre, danceability } = req.query;
+  const response = {
+    success: true,
+    body: {}
+  }
+  const genreRegex = new RegExp(genre) // Regular expression, works for STRINGS
+  const danceabilityQuery = { $gt: danceability ? danceability : 0 }; //gt - greater than the one provided
+  // adding the ternary operator gets /songs to work now 
+  try {
+    // const searchResultFromDB= await Song.find({genre: genreRegex, danceability: danceabilityQuery})
+    // if (searchResultFromDB) {
+    //   response.body = searchResultFromDB
+    //   res.status(200).json(response)
+    // } else {
+    //   response.success = false,
+    //   res.status(500).json(response)
+    // } catch(e) {
+    // response.success = false,
+    //   res.status(500).json(response)
+    // }
+    response.body = await Song.find({genre: genreRegex, danceability: danceabilityQuery}) // now 'pop' includes 'canadian pop' etc 
+    if (true) {
+      res.status(200).json(response)
+    
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Song not found"
+        }
+      })
+      } 
+    } catch(e) {
+        res.status(500).json(response)
+      }
+});
+
 
 
 app.get("/songs/id/:id", async (req, res) => {
