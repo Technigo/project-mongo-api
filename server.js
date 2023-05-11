@@ -8,6 +8,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
+
 // creating a Mongoose Schema and model ( the wrapper on the mongoose schema that adds funtionality to it  )
 
 const SongSchema = new mongoose.Schema({
@@ -46,7 +47,7 @@ if (process.env.RESET_DB) {
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=8080 npm start
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 9090;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
@@ -69,44 +70,37 @@ app.get("/", (req, res) => {
     success: true,
     body: {
       Routes: "/songs  all songs, /songs/:id single song by its id.",
-      Queries: "/songs  bpm, genre"
+      Queries: "/songs "
     }
   });
 });
 
-app.get("/songs/", async (req, res) => {
-  let {bpm, genre} = req.query;
-  bpm = bpm ? Number(bpm) : null;
 
-  let query = {};
-
-  if (genre) {
-    query.genre = genre;
+app.get("/songs", async (req, res) => {
+  const {genre, danceability } = req.query;
+  const response = {
+    success: true,
+    body:{}
   }
-
-  if (bpm) {
-    query.bpm = bpm;
-  }
+  const genreRegex = new RegExp(genre);
+  const danceabilityQuery =  { $gt: danceability ? danceability : 0 }
 
   try {
-    const songs = await Song.find(query).exec();
-    res.status(200).json({
-      success: true,
-      body: songs
-    });
-  } catch(error) {
-    res.status(400).json({
-      success: false,
-      body: {
-        message: "No songs found"
-      }
-    });
+    const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
+    if (searchResultFromDB) {
+      response.body = searchResultFromDB
+      res.status(200).json(response)
+    } else {
+      response.success = false,
+      res.status(500).json(response)
+    }
+  } catch(e) {
+    res.status(500).json(response)
   }
 });
 
 // songs by id 
 app.get("/songs/id/:id", async (req, res) => {
-
   try {
  const singleSong = await Song.findById(req.params.id)
  if (singleSong) {
