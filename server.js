@@ -24,6 +24,15 @@ const listEndpoints = require('express-list-endpoints')
 app.use(cors());
 app.use(express.json());
 
+// Another middleware - gives an error message if it can't connect to the database
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable' })
+  }
+})
+
 const { Schema } = mongoose;
 const songSchema = new Schema({
   id: Number,
@@ -44,28 +53,18 @@ const songSchema = new Schema({
 
 const Song = mongoose.model("Song", songSchema);
 
-// Environmental variable, will be evaluated to true
+// RESET_DB is an environmental variable, write "RESET_DB=true npm run dev" in terminal to reset database
 if (process.env.RESET_DB) {
   const resetDatabase = async () => {
     await Song.deleteMany()
     topMusicData.forEach((singleSong) => {
     const newSong = new Song (singleSong) 
-    newSong.save()
-    // the .save is what actually saves the song to the database
+    newSong.save() // The .save is what actually saves the song to the database
     })
   }
-  // call a function while declaring it  - extra curruculum (research)
+  // Call a function while declaring it  - extra curriculum (do research)
   resetDatabase()
 }
-
-// Another middleware - gives an error message if it can't connect to the database
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next()
-  } else {
-    res.status(503).json({ error: 'Service unavailable' })
-  }
-})
 
 
 // const userSchema = new Schema ({
@@ -78,23 +77,23 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  // res.send("Hello Technigo!");
   res.json(listEndpoints(app));
 });
 
 app.get("/songs", async (req, res) => {
-  const { genre, danceability } = req.query
+  const { artistName, genre, danceability } = req.query
   const response = {
     success: true,
     body: {}
   }
   // Makes any word search give back search results that includes the word you search for, ex "pop" shows you canadian pop, dance pop etc (works on strings not numbers)
+  const artistRegex = new RegExp(artistName)
   const genreRegex = new RegExp(genre)
   // $gt means greater than in moongose
   // if the dancebility value we search for is true return danceability if not return 0
   const danceabilityQuery = { $gt: danceability ? danceability : 0}
   try {
-    const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
+    const searchResultFromDB = await Song.find({artistName: artistRegex, genre: genreRegex, danceability: danceabilityQuery})
     if (searchResultFromDB) {
       response.body = searchResultFromDB
       res.status(200).json(response)
@@ -118,7 +117,7 @@ app.get("/songs", async (req, res) => {
 
 app.get("/songs/id/:id", async (req, res) => {
   try {
-    // Here it is trying to a song with by its id and returns a different status message depending on if it is found or not
+    // Here it is trying to find a song through its id and returns a different status message depending on if it is found or not
     const singleSong = await Song.findById(req.params.id)
     if (singleSong) {
       res.status(200).json({
