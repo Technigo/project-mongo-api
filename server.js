@@ -54,7 +54,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
 
 //Routes
 app.get("/", (req, res) => {
@@ -64,7 +63,7 @@ app.get("/", (req, res) => {
       {
         "/": "Startpage",
         "/allsongs": "All tracks data",
-        "/allsongs/:style": "Search for exisiting genre by adding /nameOfGenre"
+        "/allsongs/:style": "Search for exisiting genre by adding /typeInGenreSearch"
       },
     ],
   };
