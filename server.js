@@ -1,37 +1,21 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import nfdata from './data/netflix-titles.json'
-import mdata from './data/top-music.json'
+import netflixData from "./data/netflix-titles.json";
+import topMusicData from "./data/top-music.json";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
 //C:\Program Files\MongoDB\Server\6.0\bin\mongod.exe" --dbpath="c:\data\db
 
-//import topMusicData from "./data/top-music.json";
 //127.0.0.1:27017
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/projectltmdb";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const netflixTitle = mongoose.model('netflixTitle', {
-})
-
-if (process.env.RESET_DB) {
-	const seedDatabase = async () => {
-    await Netflix.deleteMany({})
-
-		data.forEach((netflixData) => {
-			new Netflix(netflixData).save()
-		})
-  }
-
-  seedDatabase()
-}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -43,10 +27,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("/songdata, /songdata/artists, /songdata/artists/:name, /songdata/id/:id, /netflixdata, /netflixdata/listingcategories, /netflixdata/listingcategories/:category" );
-});
 const { Schema } = mongoose;
 
 const netflixSchema = new Schema({
@@ -67,31 +47,63 @@ const netflixSchema = new Schema({
 const Netflix = mongoose.model("Netflix", netflixSchema);
 
 const songSchema = new Schema({
-    id: Number,
-    trackName: String,
-    artistName: String,
-    genre: String,
-    bpm: Number,
-    energy: Number,
-    danceability: Number,
-    loudness: Number,
-    liveness: Number,
-    valence: Number,
-    length: Number,
-    acousticness: Number,
-    speechiness: Number,
-    popularity: Number
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number
 })
 
 const Song = mongoose.model("Song", songSchema);
 
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Song.deleteMany(), Netflix.deleteMany()
+    topMusicData.forEach((singleSong) => {
+      const newSong = new Song(singleSong);
+      newSong.save()
+    })
+    netflixData.forEach((singleShow) => {
+      const newShow = new Netflix(singleShow);
+      newShow.save()
+  })
+  }
+  resetDatabase();
+  // call a function while declaring it - extra curriculum 
+}
+
+// Start defining your routes here
+app.get("/", (req, res) => {
+  res.send({
+  Message: "Netflix and Top music-data", 
+  Routes: [{ 
+    "/songdata": "Music data",
+      "songdata/artists": "list artists within database",
+      "/songdata/artists/:name": "lists releases from a specific artist",
+      "/songdata/id/:id": "lists artists by database id",
+      "/netflixdata": "Netflix data",
+      "/netflixdata/listingcategories": "lists available show categories within the database",
+      "/netflixdata/listingcategories/:category": "lists all shows categorized under a certain category" 
+  }]
+  });
+})
+
 app.get("/songdata", async (req, res) => {
   try {
-    const songList = await Song.find(req.params);
-    if (songList) {
+    const singleSong = await Song.find(req.params);
+    if (singleSong) {
       res.status(200).json({
         success: true,
-        body: songList
+        body: singleSong
       })
     } else {
       res.status(404).json({
@@ -110,6 +122,30 @@ app.get("/songdata", async (req, res) => {
     })
   }
 });
+
+/* app.get("/songs", async (req, res) => {
+  const {genre, danceability } = req.query;
+  const response = {
+    success: true,
+    body:{}
+  }
+  const genreRegex = new RegExp(genre);
+  const danceabilityQuery =  { $gt: danceability ? danceability : 0 }
+
+  try {
+    const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
+    if (searchResultFromDB) {
+      response.body = searchResultFromDB
+      res.status(200).json(response)
+    } else {
+      response.success = false,
+      res.status(500).json(response)
+    }
+  } catch(e) {
+    res.status(500).json(response)
+  }
+});
+ */
 
 app.get("/songdata/artists", async (req, res) => {
   try {

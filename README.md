@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+First project made using MongoDB, creating a database
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Alot of new bits and pieces that had to come together, the reference points I could grasp but seeding data and deploying the site was a greater challenge.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-3oe2ikwwwa-lz.a.run.app/
