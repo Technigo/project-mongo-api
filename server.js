@@ -1,6 +1,9 @@
-import express from 'express'
+import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+
+// Adds list of all endpoints for GET '/'
+const endpoints = require('express-list-endpoints');
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/ig-noble-prize";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,7 +27,12 @@ app.use(express.json());
 
 // Welcome message
 app.get('/', (req, res) => {
-  res.send('Search IG Noble Prize by year, category or description (free text)')
+  const appEndpoints = endpoints(app);
+  
+  res.json({
+    message: 'IG Noble Prizes from 1991-2022. Search by year, category or description (free text)',
+    endpoints: appEndpoints
+  });
 });
 
 // Full list of Ig Noble Prizes
@@ -57,16 +65,18 @@ app.get('/prizes', async (req, res) => {
 });
 
 // Get prize by subject // See if possible to return full list if not
-app.get('/prizes/subject/:subject', async (req, res) => {
+app.get('/prizes/subjects/:subject', async (req, res) => {
   const { subject } = req.params;
+   // For case-insensitive partial matching (eg. 'biO' matches 'Biology')
+  const regexSubject = { $regex: subject, $options: 'i' };
 
   try {
-    const subjectList = await Prize.find({ Subject: subject });
+    const subjectList = await Prize.find({ Subject: regexSubject });
 
     if (subjectList.length > 0) {
       res.status(200).json({
         success: true,
-        message: `Found ${subjectList.length} prizes with subject '${subject}'`,
+        message: `Found ${subjectList.length} prizes with subject matching '${subject}'`,
         body: {
           subjectList: subjectList,
         },
@@ -74,7 +84,7 @@ app.get('/prizes/subject/:subject', async (req, res) => {
     } else {
       res.status(404).json({
         success: false,
-        message: `No prizes found with subject '${subject}'. Please, make sure to check spelling and use Capital first letter`,
+        message: `No prizes found with subject matching '${subject}'`,
         body: {},
       });
     }
@@ -88,7 +98,7 @@ app.get('/prizes/subject/:subject', async (req, res) => {
 });
 
 // Get prize by year
-app.get('/prizes/year/:year', async (req, res) => {
+app.get('/prizes/years/:year', async (req, res) => {
   const { year } = req.params;
 
   try {
@@ -124,17 +134,17 @@ app.get("/prizes/id/:id", async (req, res) => {
 
   try {
     // checks if id-input is incorrect! (eg. wrong lenght). Returns error 400 
-    if (!mongoose.Types.ObjectId.isValid(prizeId)) {
+    if (prizeId.length !== 24) {
       return res.status(400).json({
         success: false,
         body: {
-          message: 'Invalid ID',
+          message: 'Invalid ID. Id should be 24 characters long',
         },
       });
     };
     
     const singlePrize = await Prize.findById(prizeId);
-    // If the input is correct but not matched in database, returns 404.
+    // If the id.length is correct but not matched in database, returns 404.
     if (!singlePrize) {
       return res.status(404).json({
         success: false,
@@ -157,7 +167,6 @@ app.get("/prizes/id/:id", async (req, res) => {
     });
   }
 });
-
 
 // Start the server
 app.listen(port, () => {
