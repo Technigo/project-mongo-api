@@ -134,19 +134,35 @@ app.get("/songs", async (req, res) => {
   }
 });
 
-// Get songs by genre and danceability
-app.get("/songs", async (req, res) => {
-  const {genre, danceability } = req.query;
+// Get happy songs - songs between bpm 100 and 160 and group them by genre
+app.get("/songs/happy", async (req, res) => {
   const response = {
     success: true,
     body:{}
   }
-  // Regex only for strings
-  const genreRegex = new RegExp(genre);
-  const danceabilityQuery =  { $gt: danceability ? danceability : 0 }
+  
+  // array of stages applied in sequence to the collection
+  const pipeline = [
+    {
+      $match: { bpm: { $gte: 100, $lte: 160 } }
+    },
+    {
+      $group: { 
+        _id: "$genre",
+        happySongs: { $push: { trackName: "$trackName", artistName: "$artistName", bpm: "$bpm" }}
+      }
+    },
+    {
+      $project: {
+        _id: 0, // _id is excluded from the output by setting it to 0
+        genre: "$_id", //rename the _id field from the previous stage to genre
+        happySongs: 1
+      }
+    }
+  ];
 
   try {
-    const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
+    const searchResultFromDB = await Song.aggregate(pipeline)
     if (searchResultFromDB) {
       response.body = searchResultFromDB
       res.status(200).json(response)
@@ -159,35 +175,6 @@ app.get("/songs", async (req, res) => {
     res.status(500).json(response)
   }
 });
-
-// //Get all songs in the dataset
-// app.get("/songs", async (req, res) => {
-//   try {
-//     const songList =  await Song.find(req.params);
-//     if (songList) {
-//       res.status(200).json({
-//         success: true,
-//         body: {
-//           songList: songList
-//         } 
-//       })
-//     } else {
-//       res.status(404).json({
-//         success: false,
-//         body: {
-//           message: "No songs in the list"
-//         }
-//       })
-//     }
-//   } catch(e) {
-//     res.status(500).json({
-//       success: false,
-//       body: {
-//         message: e
-//       }
-//     })
-//   }
-// });
 
 // Get song by id
 app.get("/songs/id/:id", async (req, res) => {
