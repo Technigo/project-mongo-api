@@ -14,6 +14,7 @@ mongoose.Promise = Promise;
 
 
 const { Schema } = mongoose;
+
 const charactersSchema = new mongoose.Schema({
   "Character ID": Number,
   "Character Name": String,
@@ -37,17 +38,6 @@ const spellsSchema = new mongoose.Schema({
 
 const Spells = mongoose.model("Spells", spellsSchema);
 
-if (process.env.RESET_DATABASE) {
-  const resetDatabase = async () => {
-    await Characters.deleteMany();
-    charactersPotter.forEach((singleCharacter) => {
-      const newCharacter = new Characters(singleCharacter);
-      newCharacter.save()
-    });
-  }
-  resetDatabase();
-}
-
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
@@ -58,9 +48,38 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+if (process.env.RESET_DATABASE) {
+  const resetDatabase = async () => {
+    await Characters.deleteMany();
+    await Spells.deleteMany();
+    charactersPotter.forEach((singleCharacter) => {
+      const newCharacter = new Characters(singleCharacter);
+      newCharacter.save()
+    });
+    spellsPotter.forEach((singleSpell) => {
+      const newSpell = new Spells(singleSpell)
+      newSpell.save()
+    })
+  }
+  resetDatabase();
+}
+
+
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Nina!");
+  const navigation = {
+    guide: "Routes for Harry Potter API",
+    Endpoints: [
+      {
+        "/characters": "Display all Characters from Harry Potter Movies",
+        "/characters/ID/:ID": "Search specific Character",
+        "/characters/name/:name": "Search for a name in Harry Potter Movies",
+        "/spells": "Display all spells"
+      },
+    ],
+  };
+  res.send(navigation);
 });
 
 app.get("/populate", async (req, res) => {
@@ -94,7 +113,6 @@ app.get("/spells", async (req, res) => {
 
 
 app.get("/characters/ID/:ID", async (req, res) => {
-  // res.send("Hello Nina!");
   try {
     const singleCharacter = await Characters.findById(req.params.ID);
     if (singleCharacter) {
