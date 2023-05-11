@@ -10,6 +10,8 @@ import mongoose from "mongoose";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
+const app = express();
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/books";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -54,20 +56,57 @@ seedDatabase()
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
-const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
+// const Book = mongoose.model("Book", BookSchema);
+
+// localhost and Postman http://localhost:8080/books/id/:id (id from books in Compass)
 // Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+app.get("/books/id/:id", async (req, res) => {
+  try {
+    const singleBook =  await Book.findById(req.params.id);
+    if (singleBook) {
+      res.status(200).json({
+        success: true,
+        body: singleBook
+      })
+       res.send("Hello Technigo!");
+    } else {
+      res.status(400).json({
+        success: false,
+        body: {
+          message: "Book not found"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    });
+  }
+});
+  
+
+const { Schema } = mongoose;
+const userSchema = new Schema ({
+  name: String, 
+  age: Number, 
+  alive: Boolean
 });
 
-// app.get('/books', (req, res) => {
-//   res.json(books);
-// });
+const User = mongoose.model("User", userSchema);
+
+const bookSchema = new Schema({
+  id: Number,
+  title: String,
+  author: String
+})
 
 app.get('/books', async (req, res) => {
   const books = await Book.find().populate('author');
