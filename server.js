@@ -36,7 +36,7 @@ const Student = mongoose.model("Student", studentSchema);
 
 if (process.env.RESET_DB) {
       const resetDatabase = async () => { 
-        await Song.deleteMany(); 
+        await Student.deleteMany(); 
         StudentData.forEach((singleStudent) => { 
           const newStudent = new Song(singleStudent); 
           newStudent.save()
