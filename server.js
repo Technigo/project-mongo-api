@@ -92,34 +92,6 @@ app.get("/allsongs", async (req, res) => {
   }
 });
 
-//ID from MongoDB compass now working: http://localhost:8080/songs/id/645a44f0b48471d63a3e18db
-app.get("/allsongs/id/:id", async (req, res) => {
-  try {
-    const singleSong = await Song.findOne({id: req.params.id });
-    if (singleSong) {
-      res.status(200).json({
-        success: true,
-        body: singleSong
-      })
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "Song not found"
-        }
-      })
-    }
-  } catch(e) {
-    res.status(500).json({
-      success: false,
-      body: {
-        message: e
-      }
-    })
-  }
-});
-
-
 //To get specifik genre collection 
 app.get("/allsongs/:style", async (req, res) => {
   try {
