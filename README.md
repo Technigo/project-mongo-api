@@ -1,13 +1,10 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+A database build in mongoDB.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
-## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
-
+Route1 : "/songs": This engpoint returns a list of top music titles.
+Route2 : "/songs/id/:id" : This engpoint returns a specific music item by music id. exampel: /songs/id/2.
+Route3 : "/songs/artist/" :artistname" :This endpoint returns a list of the music titles by a specific artist name, exampel: Lady Gaga.
+Route4 : "/songs/genre"  "danceability" :This endpoint returns a list of the top music titles in a specific genre/danceability, exampel: genre=pop.
+      
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
