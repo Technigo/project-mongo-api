@@ -39,13 +39,13 @@ const Song = mongoose.model("Song", songSchema);
 
 // RESET_DB=true npm run dev for MongoCompass
 if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
+  const resetDatabase = async () => {
     await Song.deleteMany({})
    topMusicData.forEach((song) => {
       new Song(song).save()
     })
  }
-  seedDatabase()
+  resetDatabase()
 }
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
