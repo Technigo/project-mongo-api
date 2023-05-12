@@ -68,7 +68,7 @@ app.get("/", (req, res) => {
       "/songs": "This engpoint returns a list of top music titles",
       "/songs/id/:id" : "This engpoint returns a specific music item by music id. exampel: /songs/id/2",
       "/songs/artist/:artistname" :"This endpoint returns a list of the music titles by a specific artist name, exampel: Lady Gaga",
-      "/songs/genre": "This endpoint returns a list of the top music titles in a specific genre, exampel: /songs?genre=pop&danceability=76",
+      "/songs/genre&danceability": "This endpoint returns a list of the top music titles in a specific genre, exampel: /songs?genre=pop&danceability=76",
       
     }]
   });
@@ -76,7 +76,7 @@ app.get("/", (req, res) => {
 });
 
 
-// Route1 : all songs fron database
+//Route1 : all songs from database
 app.get("/songs", (request, response) => {
   const songes = topMusicData;
   if (songes) {
@@ -94,8 +94,35 @@ app.get("/songs", (request, response) => {
       body: {}
     })
   }
-
 })
+// pagination 10 song item on each page, total 5 pages.
+// app.get("/songs", (request, response) => {
+//   const { limit = 10, page = 1 } = request.query;
+//   const startIndex = (page - 1) * limit;
+//   const endIndex = page * limit;
+//   const songes = topMusicData.slice(startIndex, endIndex);
+//   if (songes.length > 0) {
+//     response.status(200).json({
+//       success: true,
+//       message: "OK",
+//       body: {
+//         topMusicData: songes
+//       },
+//       pagination: {
+//         currentPage: parseInt(page, 10),
+//         totalPages: Math.ceil(topMusicData.length / limit),
+//         totalItems: topMusicData.length,
+//         itemsPerPage: limit,
+//       }
+//     })
+//   } else {
+//     response.status(404).json({
+//       success: false,
+//       message: "No songs found",
+//       body: {}
+//     })
+//   }
+// })
 
 //Route2 : get one song item from topMusicData by input song's ID.
 app.get("/songs/id/:id", async (req, res) => {
