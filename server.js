@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { query } from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import igData from './data/ig-noble.json';
@@ -81,14 +81,19 @@ app.get('/prizes', async (req, res) => {
   }
 });
 
-// Get prize by subject // See if possible to return full list if not
-app.get('/prizes/subjects/:subject', async (req, res) => {
-  const { subject } = req.params;
-   // For case-insensitive partial matching (eg. 'biO' matches 'Biology')
+// Sorted by subject with query for case-insensitive subject searching (eg. 'bIO')
+app.get('prizes/subjects', async (req, res) => {
+  const { subject } = req.query;
   const regexSubject = { $regex: subject, $options: 'i' };
 
   try {
-    const subjectList = await Prize.find({ Subject: regexSubject });
+    let subjectList;
+
+    if (subject) {
+      subjectList = await Prize.find({Subject: regexSubject}).sort('Subject');
+    } else {
+      subjectList = await Prize.find().sort('Subject');
+    }
 
     if (subjectList.length > 0) {
       res.status(200).json({
