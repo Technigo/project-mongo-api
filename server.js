@@ -1,6 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import igData from './data/ig-noble.json';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Adds list of all endpoints for GET '/'
 const endpoints = require('express-list-endpoints');
@@ -9,21 +13,34 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/ig-noble-pr
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const { Schema } = mongoose;
-
-const prizeSchema = new Schema ({
-  id: String,
-  Year: Number,
-  Subject: String,
-  Description: String
-});
-
-const Prize = mongoose.model("Prize", prizeSchema);
-
 const port = process.env.PORT || 8080;
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+const { Schema } = mongoose;
+
+const prizeSchema = new Schema ({
+  Year: Number,
+  Subject: String,
+  Description: String,
+  References: [Number]
+});
+
+const Prize = mongoose.model("Prize", prizeSchema);
+
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+   await Prize.deleteMany();
+    igData.forEach((prize) => {
+      const newPrize = new Prize(prize);
+      newPrize.save();
+      console.log(newPrize);
+    });
+  };
+  resetDatabase();
+};
+
 
 // Welcome message
 app.get('/', (req, res) => {
