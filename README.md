@@ -1,13 +1,15 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+ This project is about using MOngoDB and Mongoose in order to model data, return useful error messages, fetch items from the database and to seed data to the database.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+For this project I was faced with a lot of new tools and tech that had to be installed and learnt including MongoDB Compass and MongoDB Atlas. I also implemented Swagger for API Documentation and learnt new functions such as aggregate() in Mongoose to implement the pipeline model in MongoDB. All this required a lot of time spent on reading documentation and looking for answers on stackOverflow and other tech help sites in order to get it up and running. 
 
-## View it live
+## API
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+ https://project-mongo-api-zrwa4mpyyq-lz.a.run.app
+
+## API Documentation
+
+https://project-mongo-api-zrwa4mpyyq-lz.a.run.app/api-docs
