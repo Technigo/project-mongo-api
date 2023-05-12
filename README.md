@@ -1,11 +1,17 @@
 # Project Mongo API
 
-This backend project is built using MongoDB as the database to store and query data via API endpoints. It includes information on how to model data using Mongoose, store sensitive information securely, return helpful error messages, retrieve data using Mongoose, and seed large amounts of data to the database.
+This weeks project was to create a backend using MongoDB database to store and retrieve data from, with a RESTful API.
+
+Endpoints created:
+/titles: See all Netflix titles in the database
+/directors: See all Netflix directors in the database 
+/titles/id/_id: Shows a single title based on its id
+/directors/id_id: Shows a single director based on its id
 
 ## The problem
-
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I based the code on a code along example and live session from Technigo but modified it with other data. If I had more time I would connect the MongoDB database in Atlas with Google Cloud API platform. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Google CLoud API platform: 
+(not deployed yet). 
