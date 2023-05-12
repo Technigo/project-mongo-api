@@ -5398,5 +5398,17 @@
     "num_pages": 34,
     "ratings_count": 2,
     "text_reviews_count": 0
+  },
+  {
+    "bookID": 1462,
+    "title": "Under månen",
+    "authors": "Aki-Pekka Sinikoski Ilja Karsikas",
+    "average_rating": 5,
+    "isbn": 515250414,
+    "isbn13": 9789515250414,
+    "language_code": "swe",
+    "num_pages": 35,
+    "ratings_count": 1,
+    "text_reviews_count": 0
   }
 ]
