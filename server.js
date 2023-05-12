@@ -10,10 +10,14 @@ import mongoose from "mongoose";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/imdb-250";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
+
+const listEndpoints = require('express-list-endpoints')
+
+//Defines the properties in the dataset I'm using
 const { Schema } = mongoose;
 const movieSchema = new Schema ({
     rank: Number,
@@ -29,7 +33,6 @@ const movieSchema = new Schema ({
     cast_name: String,
     director_name: String,
     storyline: String
-
 })
 
 const Movie = mongoose.model("Movie", movieSchema)
@@ -46,9 +49,10 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+  res.json(listEndpoints(app));
+})
 
+//Endpoint to show single movie based on it's id (from MongoDB)
 app.get("/movies/id/:movie_id", async (req, res) => {
   try {
     const singleMovie = await Movie.findById(req.params.movie_id)
@@ -76,13 +80,15 @@ app.get("/movies/id/:movie_id", async (req, res) => {
   }
 })
 
+//Queries for genre, year and cast
+//RegExp make it possible to only type part of the value from the array
+//"i" is the same as toLowerCase()
 app.get("/movies", async (req, res) => {
   const {genre, year, cast} = req.query
   const response = {
     success: true,
     body: {}
   }
-  // const genreRegex = new RegExp(genre)
 
   try {
     let query = {}
@@ -91,6 +97,7 @@ app.get("/movies", async (req, res) => {
 
     } if (year) {
       query.year = Number(year)
+
     } if (cast) {
       query.cast_name = new RegExp(cast, "i")
     }
@@ -119,9 +126,10 @@ app.get("/movies", async (req, res) => {
   }
 })
 
+//Endpoint to show single movie based on it's rank
 app.get("/movies/rank/:rank", async (req, res) => {
   try {
-    const movieRank = await Movie.find({ rank: req.params.rank })
+    const movieRank = await Movie.findOne({ rank: req.params.rank })
     if (movieRank) {
       res.status(200).json({
         success: true,
@@ -145,24 +153,6 @@ app.get("/movies/rank/:rank", async (req, res) => {
 
   }
 })
-
-// app.get("/books", async (req, res) => {
-//   const books = await Book.find().populate('author')
-//   res.json(books)
-// })
-
-// app.get('/authors/:id', async (req, res) => {
-//   const author = await Author.findById(req.params.id)
-
-//   res.json(author)
-// })
-
-// app.get('/authors/:id/books', async (req, res) => {
-//   const author = await Author.findById(req.params.id)
-//   const books = await Book.find({ author: mongoose.Types.ObjectId(author.id) })
-
-//   res.json(books)
-// })
 
 // Start the server
 app.listen(port, () => {
