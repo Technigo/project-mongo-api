@@ -68,7 +68,7 @@ app.get("/", (req, res) => {
       "/songs": "This engpoint returns a list of top music titles",
       "/songs/id/:id" : "This engpoint returns a specific music item by music id. exampel: /songs/id/2",
       "/songs/artist/:artistname" :"This endpoint returns a list of the music titles by a specific artist name, exampel: Lady Gaga",
-      "/songs?genre": "This endpoint returns a list of the top music titles in a specific genre, exampel: genre=pop",
+      "/songs/genre": "This endpoint returns a list of the top music titles in a specific genre, exampel: /songs?genre=pop&danceability=76",
       
     }]
   });
@@ -152,14 +152,15 @@ app.get("/songs/artist/:artistname", async(req,res) => {
 })
 
 // Route4 : get song item by grenre and danceability.
-app.get("/songs", async(req, res) => {
-  const {genre,danceability} = req.query;
+app.get("/songs", async (req, res) => {
+  const {genre, danceability } = req.query;
   const response = {
     success: true,
     body:{}
   }
-  const genreRegex = new RegExp(genre)
-  const danceabilityQuery = {$gt:danceability ? danceability:0}
+  // Regex only for strings
+  const genreRegex = new RegExp(genre);
+  const danceabilityQuery =  { $gt: danceability ? danceability : 0 }
 
   try {
     const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
@@ -174,7 +175,7 @@ app.get("/songs", async(req, res) => {
     response.success = false,
     res.status(500).json(response)
   }
-})
+});
 
 
 // Start the server
