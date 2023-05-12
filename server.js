@@ -64,7 +64,7 @@ if (process.env.RESET_DB) {
 //////////////ROUTES//////////////////////
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hello this is my books database!!");
 });
 
 
