@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import data from "./data/movies.json"
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -16,6 +17,8 @@ mongoose.Promise = Promise;
 
 
 const listEndpoints = require('express-list-endpoints')
+
+
 
 //Defines the properties in the dataset I'm using
 const { Schema } = mongoose;
@@ -36,6 +39,18 @@ const movieSchema = new Schema ({
 })
 
 const Movie = mongoose.model("Movie", movieSchema)
+
+if (process.env.RESET_DB) {
+	const seedDatabase = async () => {
+    await Movie.deleteMany({})
+
+		data.forEach((movieData) => {
+			new Movie(movieData).save()
+		})
+  }
+
+  seedDatabase()
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
