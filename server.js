@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv'
-import booksData from "./data/books.json";
 
 const { Schema } = mongoose;
 dotenv.config()
@@ -49,11 +48,6 @@ if (process.env.RESET_DB) {
     // the seedDatabase is started and also has async, which tells it to wait for some processes to be finished.
     await Book.deleteMany({})
     //awaut tells the function seedDatabase to wait for the deletion of all books in the database (using the mongoose function deleteMany). The empty object passed to deleteMany is a filter object, it will match ALL documents in the collection. 
-
-		booksData.forEach((booksData) => {
-      // We loop through the booksData (from the books.json-file) and save each book-object in the database
-			new Book(booksData).save()
-		})
   }
 
   seedDatabase()
