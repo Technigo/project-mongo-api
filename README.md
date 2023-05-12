@@ -1,8 +1,6 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This backend project is built using MongoDB as the database to store and query data via API endpoints. It includes information on how to model data using Mongoose, store sensitive information securely, return helpful error messages, retrieve data using Mongoose, and seed large amounts of data to the database.
 
 ## The problem
 
