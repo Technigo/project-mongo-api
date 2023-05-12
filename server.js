@@ -102,6 +102,10 @@ app.get('/games/id/:id', async (req, res) => {
     }
 })
 
+app.get('/test', async (req, res) => {
+  res.send("Nintendo Games!");
+})
+
 
 // Start the server
 app.listen(port, () => {
