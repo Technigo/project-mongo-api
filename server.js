@@ -38,9 +38,66 @@ app.get("/", (req, res) => {
     res.json(listEndpoints(app))
 });
 
+// route to fetch all students http://localhost:8080/students
+
 app.get("/students", async (req, res) => {
     const students = await Student.find();
     res.json(students);
+})
+
+// app.get("/students", async (req, res) => {
+//     const { gender } = req.query;
+//     const response = {
+//         success: true,
+//         body: {}
+//     }
+//     const readingScore = Number(reading_score);
+//     const reading_scoreQuery = { $gte: reading_score ? reading_score : 0 };
+
+//     try {
+//         response.body = await Student.find({gender: gender, reading_score: reading_scoreQuery})
+//         response.body = await Student.find({gender: gender})
+
+//         if (response.body.length > 0) {
+//             res.status(200).json(response)
+//         } else {
+//             res.status(404).json({
+//                 success: false,
+//                 body: {
+//                     message: "No students found"
+//                 }
+//             })
+//         }
+//     } catch(e) {
+//         res.status(500).json(response)
+//     }
+// })
+
+// route to fetch one single student ID http://localhost:8080/students/id/645e0ec3abe30d48033fcfeb
+app.get("/students/id/:id", async (req, res) => {
+    try {
+        const singleStudent = await Student.findById(req.params.id);
+        if (singleStudent) {
+            res.status(200).json({
+                success: true,
+                body: singleStudent
+            })
+        } else {
+            res.status(404).json({
+                success: false,
+                body: {
+                    message: "Student not found"
+                }
+            })
+        }
+    } catch(e) {
+        res.status(500).json({
+            success: false,
+            body: {
+                message: e
+            }
+        })
+    }
 })
 
 // Start the server
