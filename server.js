@@ -82,7 +82,7 @@ app.get('/prizes', async (req, res) => {
 });
 
 // Sorted by subject with query for case-insensitive subject searching (eg. 'bIO')
-app.get('prizes/subjects', async (req, res) => {
+app.get('/subjects', async (req, res) => {
   const { subject } = req.query;
   const regexSubject = { $regex: subject, $options: 'i' };
 
@@ -120,7 +120,7 @@ app.get('prizes/subjects', async (req, res) => {
 });
 
 // Get prize by year
-app.get('/prizes/years/:year', async (req, res) => {
+app.get('/years/:year', async (req, res) => {
   const { year } = req.params;
 
   try {
@@ -151,7 +151,7 @@ app.get('/prizes/years/:year', async (req, res) => {
 });
 
 // Prize by Id
-app.get("/prizes/id/:id", async (req, res) => {
+app.get("/id/:id", async (req, res) => {
   const prizeId = req.params.id;
 
   try {
