@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
+import StudentData from "./data/students.json"
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -32,6 +33,18 @@ const studentSchema = new Schema({
 })
 
 const Student = mongoose.model("Student", studentSchema);
+
+if (process.env.RESET_DB) {
+      const resetDatabase = async () => { 
+        await Song.deleteMany(); 
+        StudentData.forEach((singleStudent) => { 
+          const newStudent = new Song(singleStudent); 
+          newStudent.save()
+        })
+      } 
+      resetDatabase();
+    }
+    
 
 // Start defining your routes here
 app.get("/", (req, res) => {
