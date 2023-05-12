@@ -14,7 +14,6 @@ const app = express();
 // Swagger for API documentation
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Middlewares to enable cors and json body parsing
@@ -70,7 +69,7 @@ app.get("/", (req, res) => {
   });
 });
 
-//Get all songs in the dataset with paging
+//Get all songs in the dataset with paging, params are page and limit
 app.get("/songs", async (req, res) => {
   try {
     // Parse query parameters to integers or default to 1 page/10 entries limit
@@ -97,7 +96,7 @@ app.get("/songs", async (req, res) => {
       res.status(404).json({
         success: false,
         body: {
-          message: "No songs in the list"
+          message: "No songs found in the list"
         }
       });
     }
@@ -229,7 +228,7 @@ app.get("/artists", async (req, res) => {
       res.status(404).json({
         success: false,
         body: {
-          message: "Data not found"
+          message: "Data for artists not found"
         }
       })
     }
@@ -279,8 +278,6 @@ app.get("/artists/:name", async (req, res) => {
     });
   }
 });
-
-
 
 // Start the server
 app.listen(port, () => {

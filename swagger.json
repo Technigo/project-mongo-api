@@ -24,7 +24,7 @@
     },
     "/songs": {
       "get": {
-        "description": "Get a list of all the songs with pagination",
+        "description": "Get a list of all the songs seaprated into pages",
         "parameters": [
           {
             "name": "page",
@@ -42,7 +42,7 @@
             "description": "OK"
           },
           "404": {
-            "description": "Not Found"
+            "description": "No songs found in the list"
           },
           "500": {
             "description": "Internal Server Error"
@@ -80,7 +80,7 @@
             "description": "OK"
           },
           "404": {
-            "description": "Not Found"
+            "description": "No song with that ID"
           },
           "500": {
             "description": "Internal Server Error"
@@ -104,7 +104,7 @@
             "description": "OK"
           },
           "404": {
-            "description": "Not Found"
+            "description": "No songs with that name, try again!"
           },
           "500": {
             "description": "Internal Server Error"
@@ -121,7 +121,7 @@
             "description": "OK"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Data for artists not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -145,7 +145,7 @@
             "description": "OK"
           },
           "404": {
-            "description": "Not Found"
+            "description": "No songs by that artist"
           },
           "500": {
             "description": "Internal Server Error"
