@@ -7,13 +7,15 @@ import mongoose from "mongoose";
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import titlesData from "./data/titles.json";
 // import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
+import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('strictQuery', false);
 mongoose.Promise = Promise;
+
+const { Schema } = mongoose;
 
 const Title = mongoose.model('Title', {
   title: String,
@@ -31,18 +33,32 @@ const Director = mongoose.model('Director', {
   }
 })
 
-if (process.env.RESET_DB) {
-  console.log('Resetting database');
-  
-  const seedDatabase = async () => {
-    await Title.deleteMany()
+const dataSchema = new Schema({
+  id: Number, 
+  title: String, 
+  director: String,
+  cast: String, 
+  country: String, 
+  date_added: String, 
+  release_year: Number, 
+  rating: String, 
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
+});
 
-    const iLostMyBody = new Title({ title: 'I Lost My Body' })
-    await iLostMyBody.save()
+const Data = mongoose.model("Data", dataSchema)
 
-    await new Title({ title: iLostMyBody, director: "Jérémy Clapin" }).save()
+if (process.env.RESET_DB) { 
+  const resetDatabase = async () => {
+    await Data.deleteMany();
+    netflixData.forEach = ((singleData) => {
+      const newData = new Data(singleData);
+      newData.save()
+    })
   }
-  seedDatabase();
+ resetDatabase();
 }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
