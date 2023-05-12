@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api-Irupe";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -38,13 +38,6 @@ const songSchema = new Schema({
 
 const Song = mongoose.model("Song", songSchema);
 
-const artistSchema = new Schema({
-  artistName: String,
-  genre: String,
-  songs: [{ type: Schema.Types.ObjectId, ref: "Song" }]
-});
-
-const Artist = mongoose.model("Artist", artistSchema);
 
 if (process.env.RESET_DB) {
   const resetDatabase = async () => {
@@ -101,7 +94,7 @@ app.get("/songs/id/:id", async (req, res) => {
 
 app.get("/artists/:artistName", async (req, res) => {
   try {
-    const artist = await Artist.find({ artistName: req.params.artistName }).populate("songs");
+    const artist = await Song.find({ artistName: req.params.artistName });
 
     if (artist) {
       res.status(200).json({
