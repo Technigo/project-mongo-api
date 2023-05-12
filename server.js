@@ -105,14 +105,10 @@ app.get('/companies/grade/:grade', async (req, res) => {
       gradeResult = gradeResult.filter(item => item.Country.match(new RegExp(country, 'i')))
     }
 
-    // if (country) {
-    //   gradeResult = gradeResult.filter(company => company.Country.match(new RegExp(country, 'i')))
-    // }
-
     if (gradeResult.length) {
       res.status(200).json({
         success: true,
-        message: `Companies with grade ${grade}`,
+        message: `Companies classified by grade ${grade}`,
         body: {
           gradeResult
         }
