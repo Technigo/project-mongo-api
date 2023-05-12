@@ -9,8 +9,23 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mon
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
+// Defines the port the app will run on. Defaults to 8080, but can be overridden
+// when starting the server. Example command to overwrite PORT env variable value:
+// PORT=9000 npm start
+const port = process.env.PORT || 8080;
+const app = express();
 
-// mongoose.set('strictQuery', false);
+// Add middlewares to enable cors and json body parsing
+app.use(cors());
+app.use(express.json());
+
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable'})
+  }
+})
 
 
 const { Schema } = mongoose;
@@ -38,15 +53,7 @@ const spellsSchema = new mongoose.Schema({
 
 const Spells = mongoose.model("Spells", spellsSchema);
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
 
 if (process.env.RESET_DATABASE) {
   const resetDatabase = async () => {
@@ -104,11 +111,21 @@ app.get("/populate", async (req, res) => {
 
 
 app.get("/characters", async (req, res) => {
-  res.json(charactersPotter)
+  try {
+    res.json(charactersPotter)
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" })
+  }
 })
 
 app.get("/spells", async (req, res) => {
-  res.json(spellsPotter);
+  try {
+    res.json(spellsPotter);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" })
+  }
 });
 
 
@@ -143,9 +160,14 @@ app.get("/characters/name/:name", async (req, res) => {
     const characters = await Characters.find({
       "Character Name": { $regex: req.params.name, $options: "i" }
     });
-    res.json(characters);
-  } catch (e) {
-    res.status(500).json({ message: e.message });
+    if (characters.length === 0) {
+      res.status(404).json({ message: "No characters found" });
+    } else {
+      res.json(characters);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
 });
 
