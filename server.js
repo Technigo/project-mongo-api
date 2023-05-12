@@ -18,7 +18,8 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Nintendo Games!");
+  //res.send("Nintendo Games!");
+  res.json(allEndpoints(app));
 });
 
 const { Schema } = mongoose;
