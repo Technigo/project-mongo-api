@@ -31,7 +31,7 @@ const Director = mongoose.model('Director', {
   }
 })
 
-if (process.env.RESET_DATABASE) {
+if (process.env.RESET_DB) {
   console.log('Resetting database');
   
   const seedDatabase = async () => {
@@ -60,6 +60,7 @@ app.get("/", (req, res) => {
   res.send("Get your Netflix data");
 });
 
+// https://project-mongo-api-kpnlmcrmoq-lz.a.run.app/titles
 // http://localhost:8080/titles
 // Route to get all titles
 app.get('/titles', async (req, res) => {
@@ -67,6 +68,7 @@ app.get('/titles', async (req, res) => {
   res.json(titles)
 });
 
+// https://project-mongo-api-kpnlmcrmoq-lz.a.run.app/titles/645cd880f1686cd98b080ddd
 // http://localhost:8080/titles/645cd880f1686cd98b080ddd
 // Route to get a single title by ID
 app.get('/titles/:id', async (req, res) => {
@@ -78,6 +80,7 @@ app.get('/titles/:id', async (req, res) => {
   }
 });
 
+// https://project-mongo-api-kpnlmcrmoq-lz.a.run.app/directors
 // http://localhost:8080/directors
 // Route to get all directors 
 app.get('/directors', async (req, res) => {
@@ -85,6 +88,7 @@ app.get('/directors', async (req, res) => {
   res.json(directors)
 })
 
+// https://project-mongo-api-kpnlmcrmoq-lz.a.run.app/645cde94f1686cd98b081343
 // http://localhost:8080/directors/ + director id
 // e.g. http://localhost:8080/directors/645cde94f1686cd98b081343
 // Route to get a single director by ID
