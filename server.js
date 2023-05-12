@@ -3,8 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv'
 import booksData from "./data/books.json";
-const { Schema } = mongoose;
 
+const { Schema } = mongoose;
 dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo"
@@ -40,21 +40,25 @@ const bookSchema = new Schema({
 const Book = mongoose.model("Book", bookSchema);
 //Book is a model that represents a collection of documents. It is a way to interact with the "books" collection. It can be used for CRUD. 
 
-////////////////////////SEED DATABASE //////////////
-
+/////////////// RESET/SEED DATABASE USING ENVIRONMENTAL VARIABLE //////////////
 if (process.env.RESET_DB) {
+  // if the environmental variable RESET_DB is used it resets the database to contain the data that is in the booksData (books.json).
   console.log('Resetting database!')
+  // we have a consle log that tells us what's happening 
 	const seedDatabase = async () => {
+    // the seedDatabase is started and also has async, which tells it to wait for some processes to be finished.
     await Book.deleteMany({})
+    //awaut tells the function seedDatabase to wait for the deletion of all books in the database (using the mongoose function deleteMany). The empty object passed to deleteMany is a filter object, it will match ALL documents in the collection. 
 
 		booksData.forEach((booksData) => {
+      // We loop through the booksData (from the books.json-file) and save each book-object in the database
 			new Book(booksData).save()
 		})
   }
 
   seedDatabase()
+  //The function is invoked.
 }
-
 
 
 //////////////ROUTES//////////////////////
