@@ -24,7 +24,7 @@ const prizeSchema = new Schema ({
   Year: Number,
   Subject: String,
   Description: String,
-  References: [Number]
+  References: []
 });
 
 const Prize = mongoose.model("Prize", prizeSchema);
