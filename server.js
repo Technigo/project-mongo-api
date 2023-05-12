@@ -93,7 +93,7 @@ app.get("/allsongs", async (req, res) => {
 });
 
 //ID from MongoDB compass now working: http://localhost:8080/songs/id/645a44f0b48471d63a3e18db
-app.get("/songs/id/:id", async (req, res) => {
+app.get("/allsongs/id/:id", async (req, res) => {
   try {
     const singleSong = await Song.findOne({id: req.params.id });
     if (singleSong) {

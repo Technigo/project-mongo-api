@@ -14,5 +14,5 @@ Due to new programs and installing MongoDB Compass, Atlas and also adding the Cl
 The endppoints creation made more sense ones the Compass become a bit clearer.
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Google cloude deployed link for endpoints: 
+https://project-mongo-api-6nzr46lxka-lz.a.run.app
