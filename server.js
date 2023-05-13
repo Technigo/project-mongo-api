@@ -1,12 +1,27 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import zoo from "./data/zoo.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/zoo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const zooSchema = new mongoose.Schema ({
+const port = process.env.PORT || 8080;
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+
+const { Schema } = mongoose;
+const userSchema = new Schema ({
+  name:String,
+  email: String,
+});
+const User = mongoose.model("User", userSchema);
+
+const zooSchema = new Schema ({
   "animal_name": String,
   "hair": Number,
   "feathers": Number,
@@ -25,24 +40,60 @@ const zooSchema = new mongoose.Schema ({
   "domestic": Number,
   "catsize": Number,
   "class_type": Number
-})
-const zooAnimal = mongoose.model("Zoo", zooSchema);
+});
 
-const port = process.env.PORT || 8080;
-const app = express();
+const ZooAnimal = mongoose.model("ZooAnimal", zooSchema);
 
-app.use(cors());
-app.use(express.json());
+if(process.env.RESET_DATABASE){
+  console.log('resetting database')
+  const resetDatabase = async () => {
+    await ZooAnimal.deleteMany();
+    zoo.forEach((zooAnimal) => {
+      const newZooAnimal = new ZooAnimal(zooAnimal) 
+      newZooAnimal.save()
+    }) 
+  }
+  resetDatabase();
+}
 
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Zoo Page!");
 });
 
-app.get("/zooanimals", async (req, res) =>{
-const zooAnimals = await zooAnimal.find()
-res.json(zooAnimals)})
-    
+app.get("/Zoo/:id", async (req, res) => {
+// const { legs, class_type } = req.query
+  const response = {
+  sucess:true,
+  body:{}
+}
+
+  try{
+    const zooAnimal = await ZooAnimal.findbyId(req.params.id);
+    if (zooAnimal) {
+      res.status(200).json({
+        sucess:true,
+        body: zooAnimal
+      })
+    } else {
+      res.status(404).json ({
+        sucess:false,
+        body:{
+          message: "Animal not found"
+        }
+      });
+    }
+  } catch (error){
+    console.error(error);
+    res.status(500).json({
+      sucess:false,
+      body:{
+        message: "Internal Server Error",
+      },
+    });
+  }
+});
+
 
 
 // Start the server
