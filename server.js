@@ -49,15 +49,14 @@ if(process.env.RESET_DB){
 }
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Song Page!");
-  res.json(listEndPoints(app))
+  app.get("/", (req, res) => {
+  res.send("Song Page")
 });
 
 app.get("/songs", async (req, res) => {
 const { genre, danceability } = req.query
   const response = {
-  sucess:true,
+  success:true,
   body:{}
 }
 
@@ -71,21 +70,27 @@ const danceabilityQuery = { $gt: danceability ? danceability :0 };
       response.body = searchResultFromDB,
       res.status(200).json(response)
     } else {
-      response.sucess = false,
+      response.success = false,
       res.status(404).json(response)
     }
   } catch (e){
-    response.sucess= false,
+    response.success= false,
     res.status(500).json(response)
     }
     });
 
-    app.get("/songs/id/:id", async (req, res) =>{
+    app.get("/songs/id/:id", async (req, res) => {
+      // https://lorem.ipsum.io?id=
       try {
-        const singleSong = await Song.findOne({id: requestAnimationFrame.params.id});
+        const singleSong = await Song.findOne({id: req.params.id});
         if (singleSong) {
           res.status(200).json({
-            sucess: false,
+            success: true,
+            body: singleSong
+          })
+        } else {
+          res.status(404).json({
+            success: false,
             body: {
               message: "Song not found"
             }
@@ -93,14 +98,13 @@ const danceabilityQuery = { $gt: danceability ? danceability :0 };
         }
       } catch(e) {
         res.status(500).json({
-          sucess: false,
+          success: false,
           body: {
-            message: "error"
+            message: e
           }
         })
       }
     });
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

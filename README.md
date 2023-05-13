@@ -1,13 +1,18 @@
 # Project Mongo API
-
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This is a project to use Express, MongoDB Compass and MongoDB Atlas along with mongoose to return API endpoints. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+First it took sometime just to get Mongo, Mongoose, Compass and Atlas up and running. From there I created the server.js according to the instructions in the class videos. I initially started with data downloaded from an outside source but could not make it work with Mongo so switched to datasets provided. If I have more time I will go back and rework the original animal dataset I had downloaded and would make a frontend to show the API endpoints easier. 
+
+/ - Homepage
+
+/songs  - List of all availible songs in the dataset
+
+/songs?genre=(enter genre of interest here)  - returns songs of particular genres
+
+/songs?danceability(enter # of danceability you would like in your song)   - will list all songs with danceablity higher than what the user inputs
+
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
