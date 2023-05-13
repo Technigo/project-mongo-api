@@ -80,7 +80,7 @@ app.get("/", (req, res) => {
     Endpoints: [
       {
         "/characters": "Display all Characters from Harry Potter Movies",
-        "/characters/ID/:ID": "Search specific Character",
+        "/characters/ID/:ID": "Search specific Character id",
         "/characters/name/:name": "Search for a name in Harry Potter Movies",
         "/spells": "Display all spells"
       },
@@ -89,25 +89,6 @@ app.get("/", (req, res) => {
   res.send(navigation);
 });
 
-app.get("/populate", async (req, res) => {
-  try {
-    await Characters.deleteMany({}); // Remove any existing documents in the collection
-    const inserted = await Characters.insertMany(charactersPotter); // Insert new documents
-    res.status(201).json({
-      success: true,
-      body: {
-        message: `Inserted ${inserted.length} documents`
-      }
-    });
-  } catch (e) {
-    res.status(500).json({
-      success: false,
-      body: {
-        message: e.message
-      }
-    });
-  }
-});
 
 
 app.get("/characters", async (req, res) => {
