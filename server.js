@@ -14,13 +14,15 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Company = mongoose.model('Company', {
+const companySchema = new mongoose.Schema({
   Name: String,
   Action: String,
   Industry: String,
   Country: String,
   Grade: String
 })
+
+const Company = mongoose.model('Company', companySchema)
 
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
@@ -60,9 +62,19 @@ app.get('/companies', async (req, res) => {
   try {
     const companies = await Company.find()
     if (companies) {
-      res.json(companies)
+      res.status(200).json({
+        success: true,
+        message: 'All companies',
+        body: {
+          companies
+        }
+      })
     } else {
-      res.status(500).json({ error: 'not found' })
+      res.status(404).json({
+        success: false,
+        message: 'No companies found',
+        body: null
+      })
     }
   }
   catch (error) {
@@ -85,7 +97,7 @@ app.get('/companies/:id', async (req, res) => {
       res.status(404).json({
         success: false,
         message: 'Id not found',
-        body: {}
+        body: null
       })
     }
   }
@@ -105,10 +117,15 @@ app.get('/companies/grade/:grade', async (req, res) => {
       gradeResult = gradeResult.filter(item => item.Country.match(new RegExp(country, 'i')))
     }
 
+    let message = `Companies classified by grade ${grade}`
+    if (country) {
+      message += `, from ${country}`
+    }
+
     if (gradeResult.length) {
       res.status(200).json({
         success: true,
-        message: `Companies classified by grade ${grade}`,
+        message: message,
         body: {
           gradeResult
         }
@@ -116,8 +133,8 @@ app.get('/companies/grade/:grade', async (req, res) => {
     } else {
       res.status(404).json({
         success: false,
-        message: `No companies match the inserted grade`,
-        body: {}
+        message: `No companies found for the specifies criteria`,
+        body: null
       })
     }
   }
@@ -125,33 +142,6 @@ app.get('/companies/grade/:grade', async (req, res) => {
     res.status(400).json({ error: 'Invalid search criteria' })
   }
 })
-
-// app.get('/titles/movies', (req, res) => {
-//   const { year } = req.query
-//   let movies = netflixData.filter(item => item.type === 'Movie')
-
-//   if (year) {
-//     movies = movies.filter((releaseYear) => {
-//       return releaseYear.release_year === Number(year)
-//     })
-
-//   }
-//   if (movies.length) {
-//     res.status(200).json({
-//       success: true,
-//       message: 'OK',
-//       body: {
-//         netflixMovies: movies
-//       }
-//     })
-//   } else {
-//     res.status(404).json({
-//       success: false,
-//       message: 'Not found',
-//       body: {}
-//     })
-//   }
-// })
 
 app.get('/companies/country/:country', async (req, res) => {
   try {
@@ -169,7 +159,7 @@ app.get('/companies/country/:country', async (req, res) => {
       res.status(404).json({
         success: false,
         message: `No Companies found from ${country}`,
-        body: {}
+        body: null
       })
     }
   }

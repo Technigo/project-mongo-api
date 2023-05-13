@@ -1,13 +1,21 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Create a restful API using Express to provide routes & endpoints
+Use mongoose to define data models and the structure of the data.
+Use mongoose to fetch items from Mongo database
+Seed large amount of data to database
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started with choosing a dataset, that I converted to json file.
+My dataset did not need any modifications, so I added all properties to my mongoose schema.
+Then I set up the data to be seeded to the database.
+After that I started with creating the different routes and finally adding more endpoints by query params. It was a bit tricky to learn the new syntax used with mongoose. I look forward to next week when we will get even more practice with those.
+Deploying the API went well and I got an introduction to env. variables and were to add them.
+I ran into major problem when deploying my database to Mongo Atlas. But after comparing all settings to my team mates, we discovered the missing piece.
+
+There is a problem with the service showing as unavailable some times, then when you refresh it shows the result.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+[API connected to Mongo Database] (https://project-mongo-api-g54dl7acxq-lz.a.run.app/)
