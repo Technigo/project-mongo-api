@@ -7,10 +7,10 @@ import mongoose from "mongoose";
 // import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
+import Data from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -24,10 +24,64 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const { Schema } = mongoose;
+const dataSchema = new Schema ({
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String, 
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String
+})
+
+const Title = mongoose.model('Title', dataSchema)
+
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Title.deleteMany();
+    Data.forEach((title) => {
+      const newTitle = new Title(title)
+      newTitle.save();
+    })
+  }
+  resetDatabase();
+
+}
+
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
+
+
+app.get("/title/id/:id", async(req, res) => {
+  try {
+    const singleTitle = await Title.findById(req.params.id)
+    if (singleTitle) {
+      res.status(200).json({
+        success: true,
+        body: singleTitle
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: { message: "No such title" }
+    })
+  } 
+}
+  catch(err) {
+    res.status(500).json({
+      success: false,
+      body: { message: err }
+    })
+  }
+})
 
 // Start the server
 app.listen(port, () => {
