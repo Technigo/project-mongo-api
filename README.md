@@ -1,13 +1,13 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The project for this week was to create a RESTful API using mongoose, MOngoDB, MongoDB Compass, and MongoDB Atlas. The API needed to have at least two endpoints - one that would return an array of data, and one that was capable of returning a specific/single item. There was also the option to accept filters via query parameters which I included.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I spent most of this week sick, so my main goals were to satisfy the requirements of the assignment. I relied heavily on replicating last project's functionality. However, I also spent a lot of time understanding MongoDB and incorporating mongoose. I chose to use data from Kaggle on Nintendo game releases from 1996-2021. I downloaded my data, and cleaned up the data set to make it more useable. When I began coding I wrote one endpoint at a time, testing it before moving to the next. Once my API was functioning, I deployed the backend, and began working on the frontend. I chose to use the frontend as a way to share the API documentation, and example data from different query values.
+
+If I had more time, I would work on creating more endpoints and queries for my API
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Deployed API: https://project-mongo-api-wjvhdzdcja-lz.a.run.app/
