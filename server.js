@@ -102,8 +102,33 @@ app.get('/games/id/:id', async (req, res) => {
     }
 })
 
+const Test = mongoose.model("Test", gameSchema)
+
 app.get('/test', async (req, res) => {
-  res.send("Nintendo Games!");
+  try {
+   let tests = await Test.find();
+
+  if (tests) {
+    res.status(200).json({
+      success: true,
+      body: tests
+    })
+  } else {
+    res.status(404).json({
+      success: false,
+      body: {
+        message: "Tests not found"
+      }
+    })
+  }
+} catch (error) {
+  res.status(500).json({
+    success:false,
+    body: {
+      message: error
+    }
+  })
+}
 })
 
 
