@@ -45,9 +45,9 @@ app.get("/games", async (req, res) => {
     }
     const platformRegex = new RegExp(platform);
     const ratingRegex = new RegExp(rating);
-    const releaseyearQuery = releaseyear ? {$eq: releaseyear} : {$gt: 0};
-    
     //these are case sensitive
+    const releaseyearQuery = releaseyear ? {$eq: releaseyear} : {$gt: 0};
+
     try {
       const searchResults = await Game.find({platform: platformRegex, esrb_rating: ratingRegex, year_released: releaseyearQuery});
       
