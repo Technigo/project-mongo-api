@@ -38,7 +38,7 @@ const gameSchema = new Schema ({
 const Game = mongoose.model("Game", gameSchema)
 
 app.get("/games", async (req, res) => {
-    const { platform, rating, releaseyear, sinceyear } = req.query
+    const { platform, rating, releaseyear } = req.query
     const response = {
       success: true,
       body: {}
