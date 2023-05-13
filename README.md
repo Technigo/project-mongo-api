@@ -1,8 +1,6 @@
-# Project Mongo API
+# Beer style guide API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This dataset uses parts of the Beer Judge Certification Program (BJCP) 2015 guidelines from Kaggle. The beer style guidelines are used in order to categorize beers and judge beer competitions. 
 
 ## The problem
 
