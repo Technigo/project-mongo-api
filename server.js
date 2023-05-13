@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import zoo from "./data/zoo.json";
+import topMusicData from "./data/top-music.json";
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -15,42 +16,33 @@ app.use(express.json());
 
 
 const { Schema } = mongoose;
-const userSchema = new Schema ({
-  name:String,
-  email: String,
-});
-const User = mongoose.model("User", userSchema);
 
-const zooSchema = new Schema ({
-  "animal_name": String,
-  "hair": Number,
-  "feathers": Number,
-  "eggs": Number,
-  "milk": Number,
-  "airborne": Number,
-  "aquatic": Number,
-  "predator": Number,
-  "toothed": Number,
-  "backbone": Number,
-  "breathes": Number,
-  "venomous": Number,
-  "fins": Number,
-  "legs": Number,
-  "tail": Number,
-  "domestic": Number,
-  "catsize": Number,
-  "class_type": Number
+const songSchema = new Schema ({
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number,
 });
 
-const ZooAnimal = mongoose.model("ZooAnimal", zooSchema);
+const Song = mongoose.model("Song", songSchema);
 
-if(process.env.RESET_DATABASE){
+if(process.env.RESET_DB){
   console.log('resetting database')
   const resetDatabase = async () => {
-    await ZooAnimal.deleteMany();
-    zoo.forEach((zooAnimal) => {
-      const newZooAnimal = new ZooAnimal(zooAnimal) 
-      newZooAnimal.save()
+    await Song.deleteMany();
+    topMusicData.forEach((singleSong) => {
+      const newSong = new Song(singleSong) 
+      newSong.save()
     }) 
   }
   resetDatabase();
@@ -58,45 +50,58 @@ if(process.env.RESET_DATABASE){
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Zoo Page!");
+  res.send("Hello Song Page!");
+  res.json(listEndPoints(app))
 });
 
-app.get("/Zoo/:id", async (req, res) => {
-// const { legs, class_type } = req.query
+app.get("/songs", async (req, res) => {
+const { genre, danceability } = req.query
   const response = {
   sucess:true,
   body:{}
 }
 
+const genreRegex = new RegExp(genre);
+const danceabilityQuery = { $gt: danceability ? danceability :0 };
+
   try{
-    const zooAnimal = await ZooAnimal.findbyId(req.params.id);
-    if (zooAnimal) {
-      res.status(200).json({
-        sucess:true,
-        body: zooAnimal
-      })
+    const searchResultFromDB = await Song.find({
+      genre: genreRegex, danceability: danceabilityQuery });
+    if (searchResultFromDB) {
+      response.body = searchResultFromDB,
+      res.status(200).json(response)
     } else {
-      res.status(404).json ({
-        sucess:false,
-        body:{
-          message: "Animal not found"
-        }
-      });
+      response.sucess = false,
+      res.status(404).json(response)
     }
-  } catch (error){
-    console.error(error);
-    res.status(500).json({
-      sucess:false,
-      body:{
-        message: "Internal Server Error",
-      },
+  } catch (e){
+    response.sucess= false,
+    res.status(500).json(response)
+    }
     });
-  }
-});
 
-
+    app.get("/songs/id/:id", async (req, res) =>{
+      try {
+        const singleSong = await Song.findOne({id: requestAnimationFrame.params.id});
+        if (singleSong) {
+          res.status(200).json({
+            sucess: false,
+            body: {
+              message: "Song not found"
+            }
+          })
+        }
+      } catch(e) {
+        res.status(500).json({
+          sucess: false,
+          body: {
+            message: "error"
+          }
+        })
+      }
+    });
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
-});
+})
