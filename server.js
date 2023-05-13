@@ -29,6 +29,7 @@ const gameSchema = new Schema ({
   title: String,
   platform: String,
   unix_timestamp: Number,
+  year_released: Number,
   esrb_rating: String,
   developers: Array,
   genres: Array,
@@ -37,99 +38,84 @@ const gameSchema = new Schema ({
 const Game = mongoose.model("Game", gameSchema)
 
 app.get("/games", async (req, res) => {
-  try {
-  const { platform, rating } = req.query
-  let games = await Game.find();
-
-  if (platform) {
-    games=games.filter((game) => {
-      return game.platform.toLowerCase() === platform.toLowerCase()
-    })
-  }
-
-  if (rating) {
-    games=games.filter((game) => {
-      return game.esrb_rating.toLowerCase() === rating.toLowerCase()
-    })
-  }
-
-  if (games) {
-    res.status(200).json({
+    const { platform, rating, releaseyear, sinceyear } = req.query
+    const response = {
       success: true,
-      body: games
-    })
-  } else {
-    res.status(404).json({
-      success: false,
-      body: {
-        message: "Games not found"
-      }
-    })
-  }
-} catch (error) {
-  res.status(500).json({
-    success:false,
-    body: {
-      message: error
+      body: {}
     }
-  })
-}
+    const platformRegex = new RegExp(platform);
+    const ratingRegex = new RegExp(rating);
+    const releaseyearQuery = releaseyear ? {$eq: releaseyear} : {$gt: 0};
+    
+    //these are case sensitive
+    try {
+      const searchResults = await Game.find({platform: platformRegex, esrb_rating: ratingRegex, year_released: releaseyearQuery});
+      
+      if (searchResults) {
+        response.body = searchResults;
+        res.status(200).json(response);
+      } else {
+        response.success = false,
+        response.body = {message: "Games not found"};
+        res.status(404).json(response);
+      }
+  } catch (error) {
+      response.success = false,
+      response.body = {message: error};
+      res.status(500).json(response);
+  }
 })
 
 app.get('/games/id/:id', async (req, res) => {
-  try {
-    const singleGame = await Game.findById(req.params.id);
-    if (singleGame) {
-      res.status(200).json({
-        success: true,
-        body: singleGame
-      })
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "Game not found"
-        }
-      })
-    }
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        body: {
-          message: e
-        }
-      })
-    }
-})
-
-const Test = mongoose.model("Test", gameSchema)
-
-app.get('/test', async (req, res) => {
-  try {
-   let tests = await Test.find();
-
-  if (tests) {
-    res.status(200).json({
+    const response = {
       success: true,
-      body: tests
-    })
-  } else {
-    res.status(404).json({
-      success: false,
-      body: {
-        message: "Tests not found"
-      }
-    })
-  }
-} catch (error) {
-  res.status(500).json({
-    success:false,
-    body: {
-      message: error
+      body: {}
     }
-  })
-}
+    try {
+      const singleGame = await Game.findById(req.params.id);
+      if (singleGame) {
+        response.body = singleGame;
+        res.status(200).json(response);
+      } else {
+        response.success = false,
+        response.body = {message: "Games not found"};
+        res.status(404).json(response);
+      }
+    } catch (error) {
+      response.success = false,
+      response.body = {message: error};
+      res.status(500).json(response);
+    }
 })
+
+// const Test = mongoose.model("Test", gameSchema)
+
+// app.get('/test', async (req, res) => {
+//   try {
+//    let tests = await Test.find();
+
+//   if (tests) {
+//     res.status(200).json({
+//       success: true,
+//       body: tests
+//     })
+//   } else {
+//     res.status(404).json({
+//       success: false,
+//       body: {
+//         message: "Tests not found"
+//       }
+//     })
+//   }
+// } catch (error) {
+//   res.status(500).json({
+//     success:false,
+//     body: {
+//       message: error
+//     }
+//   })
+// }
+// })
 
 
 // Start the server
