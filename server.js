@@ -12,6 +12,7 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndPoints = require('express-list-endpoints');
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -37,13 +38,6 @@ app.get("/", (req, res) => {
 // CREATE SCHEMA
 
 const { Schema } = mongoose;
-const userSchema = new Schema ({
-  name: String,
-  age: Number,
-  alive: Boolean
-});
-
-const User = mongoose.model("User", userSchema);
 
 const songSchema = new Schema({
   id: Number,
@@ -64,9 +58,20 @@ const songSchema = new Schema({
 
 const Song = mongoose.model("Song", songSchema);
 
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Song.deleteMany();
+    topMusicData.forEach((singleSong) => {
+      const newSong = new Song(singleSong);
+      newSong.save()
+    })
+  }
+  resetDatabase();
+}
+
 // ROUTE: ALL SONGS
 
-app.get("/songs", (req, res) => {
+app.get("/songs", async (req, res) => {
   const songs = topMusicData;
   if (songs) {
     res.status(200).json({
