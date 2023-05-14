@@ -12,32 +12,15 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
-const listEndPoints = require('express-list-endpoints');
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-
-// ROUTE: START
-app.get("/", (req, res) => {
-  res.send({
-    Message: "Here you can browse the top music data. Below you find the endpoints you can use 🎶",
-    Routes: [
-      {
-        "/songs": "= all songs",
-        "/songs/id/:id": "= a specific song based on id, write the id of the song instead of :id",
-        "/songs/artist/:artistname": "= get the titles from a specific artist, write the artist instead of :artistname"
-      }
-    ],
-  })
-});
-
-
 // CREATE SCHEMA
 
 const { Schema } = mongoose;
+
 const songSchema = new Schema({
   id: Number,
   trackName: String,
@@ -69,6 +52,25 @@ if (process.env.RESET_DB) {
   }
   resetDatabase();
 }
+
+// Start defining your routes here
+
+// ROUTE: START
+app.get("/", (req, res) => {
+  res.send({
+    Message: "Here you can browse the top music data. Below you find the endpoints you can use 🎶",
+    Routes: [
+      {
+        "/songs": "= all songs",
+        "/songs/id/:id": "= a specific song based on id, write the id of the song instead of :id",
+        "/songs/artist/:artistname": "= get the titles from a specific artist, write the artist instead of :artistname"
+      }
+    ],
+  })
+});
+
+
+
 
 // ROUTE: ALL SONGS
 
