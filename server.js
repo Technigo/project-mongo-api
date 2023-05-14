@@ -45,7 +45,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  const welcomeText = ("Welcome to my Mongo API Page")
+  const welcomeText = ("Welcome to my Mongo API Page. Try the list below or search for titles in the url, using the netflix-titles/?title=...")
   const endpoints = (listEndpoints(app))
   res.send({ body: welcomeText, endpoints})
 });
