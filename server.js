@@ -32,49 +32,6 @@ app.use(cors());
 app.use(express.json());
 
 
-/*
-const bookSchema = new Schema({
-  bookID: Number,
-  title: String,
-  authors: String,
-  average_rating: Number,
-  isbn: Number,
-  isbn13: Number,
-  language_code: String,
-  num_pages: Number,
-  ratings_count: Number,
-  text_reviews_count: Number
-});
-
-const Book = mongoose.model("Book", bookSchema);
-
-app.get("books/id/:id", async (req, res) => {
-  try {
-    const singleBook = await Book.findById(req.params.id);
-    if (singleBook) {
-      res.status(200).json({
-        success: true,
-        body: singleBook
-      })
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-        message: "Book not found"
-        }
-      })
-    }
-  } catch (err) {
-    res(500).json({
-      success: false,
-      body: {
-        message: "Book not found"
-      }
-    })
-  }
-});
-*/
-
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Getting some songs!");
@@ -112,8 +69,7 @@ const Song = mongoose.model("Song", songSchema);
 if (process.env.RESET_DB) {
   console.log("Resetting database");
   const resetDatabase = async () => {
-    //without the specific confition it would delete everything, just as find() without any parameters would return everything
-    await Song.deleteMany();
+    await Song.deleteMany();     //without the specific confition it would delete everything, just as find() without any parameters would return everything
     topMusicData.forEach((singleSong) => {
       const newSong = new Song(singleSong);
       newSong.save()
@@ -121,7 +77,6 @@ if (process.env.RESET_DB) {
   }
   resetDatabase();
 }
-// call a function while declaring it = extra curriculum
 
 
 app.get("/songs/id/:id", async (req, res) => {
@@ -157,12 +112,15 @@ app.get("/songs", async (req, res) => {
     success: true,
     body: {}
   }
-  //RegEx only used for strings
-  const genreRegex = new RegExp(genre, "i") //this regex looks for everything that has the genre that was provided by the user
+
+    
+   // If we only wanted to find genre we could use Song.find(genre: genre), and /songs?genre=pop. With the regex we also get all songs that include pop but isn't exclusively pop
+  //RegEx only used for strings. "i" to make it case insensitive
+  const genreRegex = new RegExp(genre, "i") //this regex looks for everything that includes the genre that was provided by the user
   const danceabilityQuery = { $gte: danceability ? Number(danceability) : 0 }
   const artistNameRegex = new RegExp(artistName, "i");
 
-  //To also display songs with the artist name only in the track name, we are here cleaning up the artist name from special characters. To make sure we only call replace when there is an artist name (to avoid errors), we are using a ternary operator
+  //To also display songs with the artist name only in the track name the featured/with artists), we are here cleaning up the artist name from special characters. To make sure we only call replace when there is an artist name (to avoid errors), we are using a ternary operator
   const cleanedUpArtistName = artistName ? artistName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') : "";
   //in the dataset the artist names in tracknames are always in parantheses, so here we specify that we are looking only for the value within parantheses
   const artistNameInTrackNameRegex = new RegExp(`\\((.*?)${cleanedUpArtistName}(.*?)\\)`, "i");
@@ -177,8 +135,7 @@ app.get("/songs", async (req, res) => {
       { trackName: artistNameInTrackNameRegex }
     ]
   })
-    /*await Song.find({genre: genreRegex, danceability: danceabilityQuery})
-    if we only wanted genre we could do Song.find(genre: genre), and /songs?genre=pop. With the regex we also get all songs that include pop */
+
     if (searchResultFromDB) {
       response.body = searchResultFromDB
       res.status(200).json(response)
