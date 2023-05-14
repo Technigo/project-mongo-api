@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
-// import booksData from "./data/books.json";
+import booksData from "./data/books.json";
 
 // Had to change localhost to 127.0.0.1:27017 to stop constant crashing.
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo";
@@ -16,11 +16,11 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndpoints = require('express-list-endpoints')
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
-
 
 // Schema - blueprint for the data structure
 const { Schema } = mongoose;
@@ -40,9 +40,24 @@ const bookSchema = new Schema ({
 // Model -  creates based on the schema
 const Book = mongoose.model("Book", bookSchema)
 
+// Reset the database - This function in here, will only run on reset
+// resetDatabase deletes everything from database, and then uses the forEact
+// loop to add every object from books.json to database.
+// this method is the same as adding json to compass.
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Book.deleteMany();
+    booksData.forEach((singleBook) => {
+      const newBook = new Book (singleBook)
+      newBook.save()
+    })
+  }
+  resetDatabase()
+}
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.json(listEndpoints(app))
 });
 
 //Route to all books
