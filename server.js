@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import beerData from "./data/beer-styleguide-2015.json"
 
 const mongoUrl = process.env.MONGO_URL || 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });

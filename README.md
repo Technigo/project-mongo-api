@@ -1,6 +1,7 @@
 # Beer style guide API
 
-This dataset uses parts of the Beer Judge Certification Program (BJCP) 2015 guidelines from Kaggle. The beer style guidelines are used in order to categorize beers and judge beer competitions. 
+This week was about using MongoDB to store data, and how to query that data from our API.
+I used a dataset from Kaggle, which I tweaked a little. The data is from the Beer Judge Certification Program (BJCP) 2015 guidelines. The beer style guidelines are used in order to categorize beers and judge beer competitions. 
 
 ## The endpoints
 
@@ -10,7 +11,7 @@ This dataset uses parts of the Beer Judge Certification Program (BJCP) 2015 guid
 
 ## The problem
 
-This week I was sick again. I've attempted a frontend anyway. If I had more time, I would definitely work on different aggregations, filters and more paths. Would also be very nice to work on the frontend and make it user friendly.
+This week I was sick again. If I had more time, I would definitely work on different aggregations, filters and more paths. I've done a very tentative frontend as well.
 
 ## View it live
 
