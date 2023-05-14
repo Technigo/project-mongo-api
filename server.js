@@ -29,6 +29,16 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
+const { Schema } = mongoose;
+const userSchema = new Schema({
+  name: String,
+  age: Number,
+  alive: Boolean
+});
+
+const User = mongoose.model("User", userSchema);
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
