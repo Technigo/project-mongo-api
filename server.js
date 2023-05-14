@@ -62,6 +62,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/titles/all/", async (req, res) => {
+  // in case you just want all titles :)
   try { 
   const titles = await Title.find();
   if (titles) {
