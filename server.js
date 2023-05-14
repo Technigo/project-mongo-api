@@ -20,7 +20,7 @@ const { Schema } = mongoose;
 const beerSchema = new Schema ({
   id: String,
   name: String,
-  type: String,
+  style: String,
   impression: String,
   aroma: String,
   appearance: String,
