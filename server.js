@@ -52,16 +52,14 @@ if (process.env.RESET_DB) {
     })
   }
   resetDatabase();
-
 }
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
   res.json(listEndpoints(app));
 });
 
-app.get("/titles/all/", async (req, res) => {
+app.get("/titles/all", async (req, res) => {
   // in case you just want all titles :)
   try { 
   const titles = await Title.find();
@@ -79,7 +77,7 @@ app.get("/titles/all/", async (req, res) => {
 } 
   catch(err) {res.status(500).json({
     success: false,
-    body: { message: err }
+    body: {message: "Error: " + err}
   });}
 })
 
@@ -103,12 +101,12 @@ app.get("/titles/", async (req, res) => {
 } 
   catch(err) {res.status(500).json({
     success: false,
-    body: { message: err }
+    body: {message: "Error: " + err}
   });}
 })
 
 
-app.get("/title/id/:id", async(req, res) => {
+app.get("/titles/:id", async(req, res) => {
   try {
     const singleTitle = await Title.findById(req.params.id)
     if (singleTitle) {
@@ -126,12 +124,12 @@ app.get("/title/id/:id", async(req, res) => {
   catch(err) {
     res.status(500).json({
       success: false,
-      body: { message: err }
+      body: {message: "Error: " + err}
     })
   }
 })
 
-app.get("/title/random", async (req, res) => {
+app.get("/titles/random", async (req, res) => {
   // https://www.mongodb.com/docs/upcoming/reference/operator/aggregation/sample/#pipe._S_sample
   const randomTitle = await Title.aggregate([{$sample:{size: 1}}])
   try {
@@ -142,12 +140,13 @@ app.get("/title/random", async (req, res) => {
     }
   }
   catch(err) { 
-    res.status(500).json({ success: false, body: "Error: " + err });
+    res.status(500).json({ success: false, body: {message: "Error: " + err} });
   }
 })
 
 app.get("/movies", async (req, res) => {
-  const movieTitles = await Title.find({ type: "Movie"})
+  // get all titles where type = "movie"
+  const movieTitles = await Title.find({ type: "Movie" })
   try {
     if(movieTitles) {
       res.status(200).json({success: true, body: movieTitles});
@@ -156,7 +155,7 @@ app.get("/movies", async (req, res) => {
     }
   }
   catch(err) { 
-    res.status(500).json({ success: false, body: "Error: " + err });
+    res.status(500).json({ success: false, body: {message: "Error: " + err} });
   }
 })
 
