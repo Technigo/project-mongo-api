@@ -48,7 +48,7 @@ const Beer = mongoose.model("Beer", beerSchema)
 if(process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Beer.deleteMany();
-    Object.values(beerData).forEach((beer) => {
+   beerData.forEach((beer) => {
       new Beer(beer).save()
     })
 
