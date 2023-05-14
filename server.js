@@ -80,7 +80,6 @@ const danceabilityQuery = { $gt: danceability ? danceability :0 };
     });
 
     app.get("/songs/id/:id", async (req, res) => {
-      // https://lorem.ipsum.io?id=
       try {
         const singleSong = await Song.findOne({id: req.params.id});
         if (singleSong) {
