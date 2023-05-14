@@ -1,9 +1,6 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
 import booksData from "./data/books.json";
 
 // Had to change localhost to 127.0.0.1:27017 to stop constant crashing.
@@ -40,10 +37,10 @@ const bookSchema = new Schema ({
 // Model -  creates based on the schema
 const Book = mongoose.model("Book", bookSchema)
 
-// Reset the database - This function in here, will only run on reset
-// resetDatabase deletes everything from database, and then uses the forEact
+// Reset the database - resetDatabase will only run on reset.
+// resetDatabase deletes everything from database, and then uses a forEact
 // loop to add every object from books.json to database.
-// this method is the same as adding json to compass.
+// this method achieves the same as adding json through compass.
 if (process.env.RESET_DB) {
   const resetDatabase = async () => {
     await Book.deleteMany();
@@ -60,11 +57,42 @@ app.get("/", (req, res) => {
   res.json(listEndpoints(app))
 });
 
-//Route to all books
+// Route to all books
+// Example with query parameters: http://localhost:8080/books?page=1&limit=10
 app.get("/books", async (req, res) => {
-  const books = await Book.find()
-  res.json(books)
-})
+  const { page = 1, limit = 10 } = req.query;
+  const startIndex= (page - 1) * limit;
+
+  try {
+    const books = await Book.find().skip(startIndex).limit(limit)
+    const totalCount = await Book.countDocuments()
+
+    if (books) {
+      res.status(200).json({
+        success: true,
+        body: {
+          currentPage: page,
+          totalPages: Math.ceil(totalCount / limit),
+          books
+        }
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Books not found"
+        }
+      })
+    }
+  } catch(e) {
+    res.status(404).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
+  }
+  })
 
 // Route to a single book
 // Note that id here refers to the object-id, which can be found in compass
