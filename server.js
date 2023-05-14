@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import StudentData from "./data/students.json"
+import CountriesData from "./data/countries.json"
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -21,28 +21,32 @@ const listEndpoints = require("express-list-endpoints")
 
 const { Schema } = mongoose;
 
-const studentSchema = new Schema({
- gender: String,
- race_ethnicity: String,
- parental_level_of_education: String, 
- lunch: String,
- test_preparation_course: String, 
- math_score: Number, 
- reading_score: Number,
- writing_score: Number
+const countrySchema = new Schema({
+    Country: String,
+    Human_development: String,
+    GII: Number,
+    Rank: Number,
+    Maternal_mortality: Number,
+    Adolescent_birth_rate: Number,
+    Seats_parliament: Number,
+    F_secondary_educ: Number,
+    M_secondary_educ: Number,
+    F_Labour_force: Number,
+    M_Labour_force: Number
+
 }, { versionKey: false });
 
-const Student = mongoose.model("Student", studentSchema);
+const Country = mongoose.model("Country", countrySchema);
 
 if (process.env.RESET_DB) {
       const resetDatabase = async () => { 
-        await Student.deleteMany(); 
+        await Country.deleteMany(); 
 
         // StudentData.forEach((singleStudent) => { 
         //   const newStudent = new Student(singleStudent); 
         //   newStudent.save()
-        StudentData.forEach((singleStudent) => { 
-            new Student(singleStudent).save()
+        CountriesData.forEach((singleCountry) => { 
+            new Country(singleCountry).save()
         })
       } 
       resetDatabase();
@@ -56,16 +60,16 @@ app.get("/", (req, res) => {
 
 // route to fetch all students http://localhost:8080/students
 
-app.get("/students", async (req, res) => {
-    const students = await Student.find().select('')
+app.get("/countries", async (req, res) => {
+    const countries = await Country.find()
 
-    console.log(students, "students")
+    console.log(countries, "countries")
 
-    res.json(students);
+    res.json(countries);
 })
 
-// app.get("/students", async (req, res) => {
-//     const { gender } = req.query;
+// app.get("/countries", async (req, res) => {
+//     const { rank } = req.query;
 //     const response = {
 //         success: true,
 //         body: {}
@@ -93,19 +97,19 @@ app.get("/students", async (req, res) => {
 // })
 
 // route to fetch one single student ID http://localhost:8080/students/id/645e0ec3abe30d48033fcfeb
-app.get("/students/id/:id", async (req, res) => {
+app.get("/countries/id/:id", async (req, res) => {
     try {
-        const singleStudent = await Student.findById(req.params.id);
-        if (singleStudent) {
+        const singleCountry = await Country.findById(req.params.id);
+        if (singleCountry) {
             res.status(200).json({
                 success: true,
-                body: singleStudent
+                body: singleCountry
             })
         } else {
             res.status(404).json({
                 success: false,
                 body: {
-                    message: "Student not found"
+                    message: "Country not found"
                 }
             })
         }
@@ -113,7 +117,7 @@ app.get("/students/id/:id", async (req, res) => {
         res.status(500).json({
             success: false,
             body: {
-                message: e
+                message: e.message
             }
         })
     }
