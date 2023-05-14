@@ -19,6 +19,7 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndpoints = require('express-list-endpoints')
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -57,11 +58,36 @@ if (process.env.RESET_DB) {
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
+  res.json(listEndpoints(app));
 });
 
-app.get("/titles/", async (req, res) => {
+app.get("/titles/all/", async (req, res) => {
   try { 
   const titles = await Title.find();
+  if (titles) {
+    res.status(200).json({
+      success: true,
+      body: titles 
+    }) 
+  } else { 
+    res.status(404).json({
+      success: false,
+      body: { message: "Titles not found" },
+    }) 
+  } 
+} 
+  catch(err) {res.status(500).json({
+    success: false,
+    body: { message: err }
+  });}
+})
+
+
+app.get("/titles/", async (req, res) => {
+  const page = req.query.page || 0;
+  const perPage = req.query.perPage || 10;
+  try { 
+  const titles = await Title.find().limit(perPage).skip(page * perPage);
   if (titles) {
     res.status(200).json({
       success: true,
@@ -101,6 +127,35 @@ app.get("/title/id/:id", async(req, res) => {
       success: false,
       body: { message: err }
     })
+  }
+})
+
+app.get("/title/random", async (req, res) => {
+  // https://www.mongodb.com/docs/upcoming/reference/operator/aggregation/sample/#pipe._S_sample
+  const randomTitle = await Title.aggregate([{$sample:{size: 1}}])
+  try {
+    if(randomTitle) {
+      res.status(200).json({success: true, body: randomTitle});
+    } else {
+      res.status(404).json({success: false, body: {message: "Random title not found"}})
+    }
+  }
+  catch(err) { 
+    res.status(500).json({ success: false, body: "Error: " + err });
+  }
+})
+
+app.get("/movies", async (req, res) => {
+  const movieTitles = await Title.find({ type: "Movie"})
+  try {
+    if(movieTitles) {
+      res.status(200).json({success: true, body: movieTitles});
+    } else {
+      res.status(404).json({success: false, body: {message: "No titles with type:movie found"}})
+    }
+  }
+  catch(err) { 
+    res.status(500).json({ success: false, body: "Error: " + err });
   }
 })
 
