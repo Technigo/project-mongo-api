@@ -3,6 +3,9 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import musicData from './data/top-music.json';
 import listEndpoints from 'express-list-endpoints';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -12,7 +15,9 @@ import listEndpoints from 'express-list-endpoints';
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://127.0.0.1/musicDB';
+const mongoUrl =
+  process.env.MONGO_URL ||
+  `mongodb+srv://danne:${process.env.SECRET_PASSWORD}@cluster0.zio0l.mongodb.net/musicDB`;
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
