@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import beerData from "./data/beer-styleguide-2015.json"
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo-api";
+const mongoUrl = process.env.MONGO_URL || 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -58,7 +58,7 @@ if(process.env.RESET_DB) {
 
 // Routes
 app.get("/", (req, res) => {
-  res.json('Beer');
+  res.json('Hello and welcome to the beers. Please see readme for endpoints.');
 });
 
 // Endpoint for all the beers or beers by style

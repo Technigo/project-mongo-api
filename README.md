@@ -2,10 +2,11 @@
 
 This dataset uses parts of the Beer Judge Certification Program (BJCP) 2015 guidelines from Kaggle. The beer style guidelines are used in order to categorize beers and judge beer competitions. 
 
-## The problem
+## The endpoints
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+/beers - all beers in a long list
+/beers?style= - All beers in a certain style - example query: /beers?style=Kellerbier
+/beers/:id - A certain beer - example query: /beers/6460d8450c3f651774e546c8
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
