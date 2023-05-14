@@ -29,14 +29,11 @@ const NetflixTitles = mongoose.model('NetflixTitles', {
   if (process.env.RESET_DB) {
     const seedDatabase = async () => {
       await NetflixTitles.deleteMany({})
-      // await Show.deleteMany({})
 
       netflixData.forEach((movieData) => {
       new NetflixTitles(movieData).save();
       })
-      // netflixData.forEach((tvShowData) => {
-      //   new Show(tvShowData).save();
-      //   })
+    
     }
     seedDatabase()
   }
@@ -48,15 +45,39 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.json(listEndpoints(app))
-  // res.send("Hello Frida!");
+  const welcomeText = ("Welcome to my Mongo API Page")
+  const endpoints = (listEndpoints(app))
+  res.send({ body: welcomeText, endpoints})
 });
 
-//shows all shows and movies
-app.get('/netflix-titles', async (req, res) => {
-  const allTitles = await NetflixTitles.find({})
-  res.json(allTitles)
-})
+//Shows a list of all titles and makes it possible to search for the 
+//movie or show by name in the url. It also works to search for parts 
+//of the name.
+
+app.get("/netflix-titles", async (req, res) => {
+  const { title } = req.query
+    const response = {
+    success:true,
+    body:{}
+  }
+  
+  const titleRegex = new RegExp(title);
+  //The 'i' makes the query case insensitive 
+    try{
+      const searchResultFromDB = await NetflixTitles.find({
+        title: { '$regex': titleRegex, $options: 'i' }});
+        if (searchResultFromDB) {
+          response.body = searchResultFromDB,
+          res.status(200).json(response)
+        } else {
+          response.success = false,
+          res.status(404).json(response)
+        }
+      } catch (e){
+        response.success= false,
+        res.status(500).json(response)
+        }
+        });
 
 //shows only tv-shows
 app.get('/tv-shows', async (req, res) => {
@@ -101,7 +122,6 @@ app.get('/netflix-titles/:id', async (req, res) => {
       }
 })
 }})
-
 
 
 
