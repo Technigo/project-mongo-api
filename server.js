@@ -61,37 +61,43 @@ app.get("/", (req, res) => {
   res.json('Beer');
 });
 
-
+// Endpoint for all the beers or beers by style
 app.get("/beers", async (req, res) => {
   try {
     let beers;
-    if (req.query.type) {
-      beers = await Beer.find({ type: req.query.type });
+    if (req.query.style) {
+      beers = await Beer.find({ type: req.query.style });
     } else {
       beers = await Beer.find();
     }
-    res.status(200).json({ success: true, body: beers });
+    res.status(200).json({ 
+      success: true, 
+      body: beers 
+    });
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    res.status(404).json({ 
+      success: false, 
+      body: {
+        message: "Something went wrong!"
+      } 
+    });
   }
 });
 
-
+//Endpoint for single beer by id
 app.get("/beers/:id", async (req, res) => {
-
   try {
     const singleBeer = await Beer.findById(req.params.id)
     if (singleBeer) {
       res.status(200).json({
         success: true,
         body: singleBeer
-        
       })
     } else {
       res.status(404).json({
         success: false,
         body: {
-          message: "Could not find the beer"
+          message: "Could not find the beer!"
         }
       })
     }
