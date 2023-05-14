@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
-
+import mongoose, { Schema } from "mongoose";
 
 import topMusicData from "./data/top-music.json";
 
@@ -69,7 +68,7 @@ app.get("/songs", async (req, res) => {
   const danceabilityQuery = {$gt: danceability ? danceability : 0 };
   try {
     const searchResultFromDb = await Song.find({genre: genreRegex, 
-      danceability: danceabilityQuery  })
+      danceability: danceabilityQuery  });
   
   if (searchResultFromDb) {
     response.body = searchResultFromDb
