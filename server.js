@@ -79,7 +79,7 @@ app.get("/songs", (request, response) => {
   } else {
     response.status(500).json({
       success: false,
-      message: "Songs not found",
+      message: "ERROR! Songs not found!",
       body: {}
     })
   }
@@ -99,7 +99,7 @@ app.get("/songs/artist/:artistname", async(req,res) => {
       res.status(404).json({
         success: false,
         body: {
-          message: "Artist not found!"
+          message: "ERROR! Artist not found!"
         }
       })
     }
