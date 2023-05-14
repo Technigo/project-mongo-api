@@ -1,12 +1,16 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+endpoints:
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+/titles/all - get all titles
 
-## The problem
+/titles/?page=3&perPage=15 - get the third page with 15 (default 10) results per page
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+/titles/645f96b25cd8115580cc1d14 - get single title from id
+
+/titles/random - get random title from database
+
+/movies - get all titles with type Movies
 
 ## View it live
 
