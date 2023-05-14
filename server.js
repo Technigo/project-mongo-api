@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import errors from "./data/errors.json";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -28,6 +29,24 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
+
+//TUESDAY CS
+const { Schema } = mongoose;
+const userSchema = new Schema ({
+  name: String,
+  age: Number,
+  alive: Boolean
+}); 
+
+const User = mongoose.model("User", userSchema);
+
+//also possible without schema but less proff, just like this
+//const User2 = mongoose.model("User", {
+ // name: String,
+  //age: Number,
+  //alive: Boolean
+//}); 
+
 
 // Start the server
 app.listen(port, () => {

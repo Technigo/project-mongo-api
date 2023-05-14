@@ -1,0 +1,107 @@
+[
+    {
+        "errorId": 1,
+        "code": 100,
+        "message": "Continue",
+        "length": 8,
+        "displayMessage": "Keep calm and carry on."
+      },
+      {
+        "errorId": 2,
+        "code": 101,
+        "message": "Switching Protocols",
+        "length": 19,
+        "displayMessage": "Your wish is my command."
+      },
+      {
+        "errorId": 3,
+        "code": 102,
+        "message": "Processing",
+        "length": 10,
+        "displayMessage": "I'm working on it, I swear."
+      },
+      {
+        "errorId": 4,
+        "code": 103,
+        "message": "Early Hints",
+        "length": 11,
+        "displayMessage": "Hang in there, it's coming."
+      },
+      {
+        "errorId": 5,
+        "code": 200,
+        "message": "OK",
+        "length": 2,
+        "displayMessage": "All good, boss!"
+      },
+      {
+        "errorId": 6,
+        "code": 201,
+        "message": "Created",
+        "length": 7,
+        "displayMessage": "We did it! High five!"
+      },
+      {
+        "errorId": 7,
+        "code": 202,
+        "message": "Accepted",
+        "length": 8,
+        "displayMessage": "You got it! Patience is a virtue."
+      },
+      {
+        "errorId": 8,
+        "code": 204,
+        "message": "No Content",
+        "length": 10,
+        "displayMessage": "Nothing to see here, move along."
+      },
+      {
+        "errorId": 9,
+        "code": 301,
+        "message": "Moved Permanently",
+        "length": 18,
+        "displayMessage": "New address!"
+      },
+      {
+        "errorId": 10,
+        "code": 302,
+        "message": "Found",
+        "length": 5,
+        "displayMessage": "Eureka! I found it!"
+      },
+      {
+        "errorId": 11,
+        "code": 304,
+        "message": "Not Modified",
+        "length": 12,
+        "displayMessage": "No changes"
+      },
+      {
+        "errorId": 12,
+        "code": 400,
+        "message": "Bad Request",
+        "length": 11,
+        "displayMessage": "Oopsie daisy, try again."
+      },
+      {
+        "errorId": 13,
+        "code": 401,
+        "message": "Unauthorized",
+        "length": 12,
+        "displayMessage": "No entry without the secret handshake."
+      },
+      {
+        "errorId": 14,
+        "code": 403,
+        "message": "Forbidden",
+        "length": 9,
+        "displayMessage": "Access denied, try again later."
+      },
+      {
+        "errorId": 15,
+        "code": 404,
+        "message": "Not Found",
+        "length": 9,
+        "displayMessage": "Oops, we lost it. Sorry about that!"
+      }
+]
