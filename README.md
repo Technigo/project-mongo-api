@@ -15,4 +15,4 @@ First it took sometime just to get Mongo, Mongoose, Compass and Atlas up and run
 
 
 ## View it live
-
+GCP link: https://project-mongo-api-ikwo36w6vq-lz.a.run.app/

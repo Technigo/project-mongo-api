@@ -10,6 +10,7 @@ mongoose.Promise = Promise;
 
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndpoints = require('express-list-endpoints');
 
 app.use(cors());
 app.use(express.json());
@@ -49,7 +50,9 @@ if(process.env.RESET_DB){
 
 // Start defining your routes here
   app.get("/", (req, res) => {
-  res.send("Song Page")
+  const text = ("Welcome to the song page")
+  const endpoints = (listEndpoints(app))
+  res.send({ body: text, endpoints})
 });
 
 app.get("/songs", async (req, res) => {
