@@ -19,4 +19,4 @@ I followed Daniels instructions when creating the routs but took my time to writ
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-wbm4xjxtua-lz.a.run.app/
