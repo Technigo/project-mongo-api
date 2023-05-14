@@ -8,7 +8,7 @@ There were many installation problems with MongoDB, Mongoose and Homebrew this w
 
 For this week’s project, I selected a dataset from Kaggle, converted it into JSON format and imported it into Compass to use. I created two routes - returning the full collection as an array, and a single result by targeting an ID.  I started creating queries but these did not seem to work, and I was running low on time to continue troubleshooting, so I will come back to these in future. 
 
-Deployment also created issues. I had to export the data from Compass and insert it into my VS Code, and then import the data from a JSON file into Server.js which seemed counter-intuitive. Then, although I deployed to Render, I could not access the database via Atlas. This is something I am still in the process of troubleshooting. 
+Deployment also created issues. I had to export the data from Compass and insert it into my VS Code, and then import the data from a JSON file into Server.js which seemed counter-intuitive. Then, although I deployed to Render, I could not access the database via Atlas. After fixing this, I realised there was an additional problem to my dataset - the property names had spaces and it was hard to reconcile this with the underscores I had been using in my data Schema so after a long time of trying to solve this problem, I switched the data to another set. 
 
 ## View it live
 

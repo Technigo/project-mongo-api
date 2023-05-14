@@ -63,31 +63,29 @@ app.get("/", (req, res) => {
 app.get("/countries", async (req, res) => {
     const countries = await Country.find()
 
-    console.log(countries, "countries")
+    // console.log(countries, "countries")
 
     res.json(countries);
 })
 
 // app.get("/countries", async (req, res) => {
-//     const { rank } = req.query;
+//     const { F_secondary_educ } = req.query;
 //     const response = {
 //         success: true,
 //         body: {}
 //     }
-//     const readingScore = Number(reading_score);
-//     const reading_scoreQuery = { $gte: reading_score ? reading_score : 0 };
+//     const F_secondary_educQuery = { $gte: F_secondary_educ  ? F_secondary_educ : 0 };
 
 //     try {
-//         response.body = await Student.find({gender: gender, reading_score: reading_scoreQuery})
-//         response.body = await Student.find({gender: gender})
+//         response.body = await Country.find({F_secondary_educ: F_secondary_educQuery})
 
-//         if (response.body.length > 0) {
+//         if (true) {
 //             res.status(200).json(response)
 //         } else {
 //             res.status(404).json({
 //                 success: false,
 //                 body: {
-//                     message: "No students found"
+//                     message: "No countries found"
 //                 }
 //             })
 //         }
