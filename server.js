@@ -3,14 +3,13 @@ import cors from "cors";
 import mongoose from "mongoose";
 import beerData from "./data/beer-styleguide-2015.json"
 
-const mongoUrl = process.env.MONGO_URL
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo-api";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
-const listEndpoints = require('express-list-endpoints')
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -18,7 +17,7 @@ app.use(express.json());
 
 const { Schema } = mongoose;
 
-const beerCategorySchema = new Schema ({
+const beerSchema = new Schema ({
   id: String,
   name: String,
   type: String,
@@ -43,14 +42,14 @@ const beerCategorySchema = new Schema ({
     }
 })
 
-const BeerCategory = mongoose.model("BeerCategory", beerCategorySchema)
+const Beer = mongoose.model("Beer", beerSchema)
 
 
 if(process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await BeerCategory.deleteMany();
+    await Beer.deleteMany();
    beerData.forEach((beer) => {
-      new BeerCategory(beer).save()
+      new Beer(beer).save()
     })
 
   }
@@ -59,7 +58,7 @@ if(process.env.RESET_DB) {
 
 // Routes
 app.get("/", (req, res) => {
-  res.json(listEndpoints(app));
+  res.json('Beer');
 });
 
 
@@ -67,9 +66,9 @@ app.get("/beers", async (req, res) => {
   try {
     let beers;
     if (req.query.type) {
-      beers = await BeerCategory.find({ type: req.query.type });
+      beers = await Beer.find({ type: req.query.type });
     } else {
-      beers = await BeerCategory.find();
+      beers = await Beer.find();
     }
     res.status(200).json({ success: true, body: beers });
   } catch (err) {
@@ -81,7 +80,7 @@ app.get("/beers", async (req, res) => {
 app.get("/beers/:id", async (req, res) => {
 
   try {
-    const singleBeer = await BeerCategory.findById(req.params.id)
+    const singleBeer = await Beer.findById(req.params.id)
     if (singleBeer) {
       res.status(200).json({
         success: true,
