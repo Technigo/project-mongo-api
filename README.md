@@ -1,13 +1,23 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The aim of this project was to was create a database using mongoDB, use Monggose models to model data, seed and retrieve data from database + create a RESTful API with min. 2 routes (one endpoint returns an array and the other a single object)
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The most challenging part of this project was getting it started. For a long time, the app just kept crashing. After changing "mongodb://localhost/project-mongo" to "mongodb://127.0.0.1:27017/project-mongo", the app stopped crashing and I could finally get started.
+
+I created to endpoints, and for the endpoint returning an array, I added pages using queries.
+
+Deployment was a bit tricky as well. I followed the deployment guide and set up environment variables for MONGO_URL and RESET_DB. After doing 'npm install mongodb', it finally deployed.
+
+Tools: express, mongoDB, mongoose.
+
+If I had more time, I would:
+- Use different data, either create something myself or find a fun dataset.
+- Create a simple front end.
+- Try Swagger
+- Create more endpoints (and queries)
+- Try Mongoose's aggregate() function
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-lnyuqa6nqq-uc.a.run.app/
