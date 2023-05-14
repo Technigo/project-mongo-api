@@ -62,13 +62,11 @@ app.get("/", (req, res) => {
     Routes: [
       { 'Hello': 'Welcome to Annikas book-API! See instrucktions below',
         '/books': 'Get all books.',
-        '/books/authors=[authorname]': 'Get all books with that author. Be aware that authors is plural.',
-        '/books/?title=[title]': 'Get all books with that title, you can write a part of the title.',
+        '/books?authors=[authorname]': 'Get all books with that author. Be aware that authors is plural.',
+        '/books?title=[title]': 'Get all books with that title, you can write a part of the title.',
         '/books/?title=[title]&authors=[authorname]': 'Get books with a specific author and title. You can write part of the authors name',
         '/books/:bookID': 'Get specific book by ID',
         '/isbn/:isbn': 'Get a book`s isbn',
-        '/languages/language_code': 'Get book by language. For example fre, spa, eng, en-us, en-gb and mul',
-        '/top_10': 'Get the top 10 highest rating books, based on average rating'
       },
     ],
   };
