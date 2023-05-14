@@ -59,6 +59,27 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
+app.get("/titles/", async (req, res) => {
+  try { 
+  const titles = await Title.find();
+  if (titles) {
+    res.status(200).json({
+      success: true,
+      body: titles 
+    }) 
+  } else { 
+    res.status(404).json({
+      success: false,
+      body: { message: "Titles not found" },
+    }) 
+  } 
+} 
+  catch(err) {res.status(500).json({
+    success: false,
+    body: { message: err }
+  });}
+})
+
 
 app.get("/title/id/:id", async(req, res) => {
   try {
