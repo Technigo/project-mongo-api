@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+An API with Pokemon data built using Mongoose and MongoDB.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started out with adding a couple of basic endpoints, and progressed into a few queries. I wanted to try out fetching string, numbers and boolean values, so I chose endpoints that enabled me to do that. After connecting my Compass to Atlas I deployed it on Render.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api.onrender.com
