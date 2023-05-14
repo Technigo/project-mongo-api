@@ -22,6 +22,10 @@ const listEndpoints = require("express-list-endpoints")
 const { Schema } = mongoose;
 
 const studentSchema = new Schema({
+ _id: {
+        type: Schema.Types.ObjectId,
+        default: () => new mongoose.Types.ObjectId()
+      },
  gender: String,
  race_ethnicity: String,
  parental_level_of_education: String, 
@@ -33,6 +37,21 @@ const studentSchema = new Schema({
 })
 
 const Student = mongoose.model("Student", studentSchema);
+// const Student = require("./data/students.json");
+
+
+// const newStudent = new Student({
+//     gender: "Male",
+//     race_ethnicity: "Group A",
+//     parental_level_of_education: "Bachelor's Degree",
+//     lunch: "Standard",
+//     test_preparation_course: "None",
+//     math_score: 80,
+//     reading_score: 90,
+//     writing_score: 70
+// });
+
+// newStudent.save();
 
 if (process.env.RESET_DB) {
       const resetDatabase = async () => { 
@@ -48,6 +67,18 @@ if (process.env.RESET_DB) {
       resetDatabase();
     }
     
+// const resetDatabase = async () => {
+//     try {
+//       await Student.deleteMany({});
+//       const StudentData = require("./data/students.json");
+//       StudentData.forEach(async (singleStudent) => { 
+//           await Student.create(singleStudent);
+//       });
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+  
 
 // Start defining your routes here
 app.get("/", (req, res) => {
@@ -58,6 +89,8 @@ app.get("/", (req, res) => {
 
 app.get("/students", async (req, res) => {
     const students = await Student.find();
+    // console.log(students, "students")
+
     res.json(students);
 })
 
