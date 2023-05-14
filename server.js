@@ -66,7 +66,7 @@ app.get("/beers", async (req, res) => {
   try {
     let beers;
     if (req.query.style) {
-      beers = await Beer.find({ type: req.query.style });
+      beers = await Beer.find({ style: req.query.style });
     } else {
       beers = await Beer.find();
     }
