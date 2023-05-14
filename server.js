@@ -4,12 +4,9 @@ import mongoose from "mongoose";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
 // import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
 
+// Had to change localhost to 127.0.0.1:27017 to stop constant crashing.
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -25,7 +22,7 @@ app.use(cors());
 app.use(express.json());
 
 
-// Schema
+// Schema - blueprint for the data structure
 const { Schema } = mongoose;
 const bookSchema = new Schema ({
   bookID: Number,
@@ -40,7 +37,7 @@ const bookSchema = new Schema ({
   text_reviews_count: Number
 })
 
-// Model
+// Model -  creates based on the schema
 const Book = mongoose.model("Book", bookSchema)
 
 // Start defining your routes here
