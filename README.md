@@ -8,4 +8,4 @@ I hade a whole lot of trouble with tha installation of everything nut when that 
 
 ## View it live
 
-https://console.cloud.google.com/run/detail/europe-north1/project-mongo-api/revisions?project=project-mongo-api-386719
+https://project-mongo-api-vkixbizyda-lz.a.run.app/
