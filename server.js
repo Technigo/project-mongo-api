@@ -38,7 +38,6 @@ app.get("/", (req, res) => {
 // CREATE SCHEMA
 
 const { Schema } = mongoose;
-
 const songSchema = new Schema({
   id: Number,
   trackName: String,
@@ -57,6 +56,8 @@ const songSchema = new Schema({
 })
 
 const Song = mongoose.model("Song", songSchema);
+
+// RESET DB
 
 if (process.env.RESET_DB) {
   const resetDatabase = async () => {
