@@ -15,57 +15,9 @@ dotenv.config();
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl =
-  process.env.MONGO_URL ||
-  `mongodb+srv://danne:${process.env.SECRET_PASSWORD}@cluster0.zio0l.mongodb.net/musicDB`;
+const mongoUrl = process.env.MONGO_URL || `mongodb://127.0.0.1/musicDB`;
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-
-const Book = mongoose.model('Book', {
-  bookID: Number,
-  title: String,
-  authors: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Author'
-  }
-});
-
-const Author = mongoose.model('Author', {
-  name: String
-});
-
-if (process.env.RESET_DB) {
-  console.log('Resetting database!');
-  const seedDatabase = async () => {
-    await Author.deleteMany();
-    await Book.deleteMany();
-
-    const tolkien = new Author({ name: 'J.R.R. Tolkien' });
-    await tolkien.save();
-
-    const rowling = new Author({ name: 'J.K. Rowling' });
-    await rowling.save();
-
-    await new Book({
-      bookID: 1,
-      title: 'The Hobbit',
-      authors: tolkien
-    }).save();
-
-    await new Book({
-      bookID: 2,
-      title: 'The Fellowship of the Ring',
-      authors: tolkien
-    }).save();
-
-    await new Book({
-      bookID: 3,
-      title: "Harry Potter and the Philosopher's Stone",
-      authors: rowling
-    }).save();
-  };
-  seedDatabase();
-}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
