@@ -66,10 +66,10 @@ const Song = mongoose.model("Song", songSchema);
 
 // ROUTE: ALL SONGS
 
-app.get("/songs", (request, response) => {
+app.get("/songs", (req, res) => {
   const songs = topMusicData;
   if (songs) {
-    response.status(200).json({
+    res.status(200).json({
       success: true,
       message: "OK",
       body: {
@@ -77,7 +77,7 @@ app.get("/songs", (request, response) => {
       }
     })
   } else {
-    response.status(500).json({
+    res.status(500).json({
       success: false,
       message: "ERROR! Songs not found!",
       body: {}
@@ -127,7 +127,7 @@ app.get("/songs/id/:id", async (req, res) => {
       res.status(404).json({
         success: false,
         body: {
-          message: "No song found!"
+          message: "ERROR! Song not found!"
         }
       })
     }
