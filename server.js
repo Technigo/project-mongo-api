@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json"
 
 // This is where the application is connecting to the MongoDB database.
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -109,7 +109,21 @@ app.get("/songs", async (req, res) => {
     body:{}
   }
   const genreRegex = new RegExp(genre);
-  const danceabilityQuery =  { $gt: danceability ? danceability : 0 }
+  let danceabilityQuery = {};
+
+  switch (danceability) {
+    case 'low':
+      danceabilityQuery = {$lt: 34};
+      break;
+    case 'medium':
+      danceabilityQuery = {$gte: 34, $lt: 67};
+      break;
+    case 'high':
+      danceabilityQuery = {$gte: 67};
+      break;
+    default:
+      danceabilityQuery = {$gt: 0};
+  }
 
   try {
     const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
