@@ -19,3 +19,5 @@ There is a problem with the service showing as unavailable some times, then when
 ## View it live
 
 [API connected to Mongo Database] (https://project-mongo-api-g54dl7acxq-lz.a.run.app/)
+
+[Swagger documentation for the API] (https://project-mongo-api-g54dl7acxq-lz.a.run.app/api-docs/)

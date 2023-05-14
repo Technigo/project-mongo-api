@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import data from './data/yale-ceo-russia-sanctions.json'
+import swaggerUi from 'swagger-ui-express';
 
 // Info about dataset: 
 // All rights belong to the authors (Jeffrey Sonnenfeld et al.), please attirbute to original authors.
@@ -167,6 +168,32 @@ app.get('/companies/country/:country', async (req, res) => {
     res.status(400).json({ error: 'Invalid country search' })
   }
 })
+
+// for the swagger documentation
+const options = {
+  definition: {
+    openapi: '3.1.0',
+    info: {
+      title: 'All rights belong to the authors (Jeffrey Sonnenfeld et al.), please attirbute to original authors. Over 1,000 companies have publicly announced they are voluntarily curtailing operations in Russia to some degree beyond the bare minimum',
+      version: '0.1.0',
+      description:
+        'A simple Express library API, documented with Swagger',
+    },
+    servers: [
+      {
+        url: 'http://localhost:8080',
+      },
+    ],
+  },
+  apis: ['./server/.js'],
+};
+
+const specs = require('./swagger.json');
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(specs, { explorer: true })
+);
 
 // Start the server
 app.listen(port, () => {

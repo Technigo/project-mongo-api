@@ -1,0 +1,147 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title":"Voluntary Curtailment of Operations in Russia by Companies Beyond Legal Requirements",
+    "description": "All rights belong to the authors (Jeffrey Sonnenfeld et al.), please attirbute to original authors. The list below is updated continuously by Jeffrey Sonnenfeld and his team of experts, research fellows, and students at the Yale Chief Executive Leadership Institute to reflect new announcements from companies in as close to real time as possible. Over 1,000 companies have publicly announced they are voluntarily curtailing operations in Russia to some degree beyond the bare minimum legally required by international sanctions — but some companies have continued to operate in Russia undeterred.",
+    "externalDocs":{
+      "description": "Link to dataset source",
+      "url": "https://www.kaggle.com/datasets/vadimtynchenko/list-of-companies-leaving-or-staying-in-russia?resource=download"
+    }
+  },
+  "host": "project-mongo-api-g54dl7acxq-lz.a.run.app",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/": {
+        "get": {
+          "tags": ["List of endpoints"],
+          "description": "Index route - displays all endpoints",
+          "produces": [
+            "text/plain"
+          ],
+          "responses": {
+            "200": {
+              "description": "All endpoints displayed succesful"
+            }
+          }
+        }
+      },
+  "/companies": {
+    "get": {
+      "tags": ["Companies"],
+      "description": "Returns the full data for all companies",
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "Data returned successfully"
+        },
+        "404": {
+          "description": "No companies found"
+        },
+        "400": {
+          "description": "No data available"
+        }
+      }
+    }
+  },
+  "/companies/{id}": {
+    "get": {
+      "tags": ["Company by id"],
+      "description": "Returns company based on id",
+      "produces": [
+        "application/json"
+      ],
+        "parameters": [
+          {
+            "name": "id",
+            "in":"path",
+            "description": "Find specific id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+      "responses": {
+        "200": {
+          "description": "Data returned successfully"
+        },
+        "404": {
+          "description": "Id not found"
+        },
+        "400": {
+          "description": "Invalid id search"
+        }
+      }
+    }
+  },
+  "/companies/grade/{grade}": {
+    "get": {
+      "tags": ["Companies by grade"],
+      "description": "Returns companies based on grade, with option to sort on country",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "grade",
+          "in":"path",
+          "description": "filtered based on grade",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "country",
+          "in":"query",
+          "description": "filter based on country",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Data returned successfully"
+        },
+        "404": {
+          "description": "No companies found for the specifies criteria"
+        },
+        "400": {
+          "description": "Invalid search criteria"
+        }
+      }
+    }
+  },
+  "/companies/country/{country}": {
+    "get": {
+      "tags": ["Companies by country"],
+      "description": "Returns companies based on country",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "country",
+          "in":"path",
+          "description": "Filter by contry",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Data returned successfully"
+        },
+        "404": {
+          "description": "No companies matching search criteria"
+        },
+        "400": {
+          "description": "Invalid country search"
+        }
+      }
+    }
+  }
+    }
+  }
