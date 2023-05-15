@@ -1,13 +1,32 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+We were supposed to create and deploy our own API, this week using data stored in a MongoDB database. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Short on time this week, so I focused on getting a hang of the basics. 
+
+Technologies used:
+- Express
+- Cors
+- Dotenv
+- Mongoose
+- MongoDB 
+- MongoDB Compass
+- MongoDB Atlas
+- Google Cloud
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-4jvehtmy3a-lz.a.run.app/
+
+
+
+All titles:
+https://project-mongo-api-4jvehtmy3a-lz.a.run.app/titles
+
+Search for a specific type, e.g.
+https://project-mongo-api-4jvehtmy3a-lz.a.run.app/titles?type=TV
+
+Search for a title with a specific _id, e.g.
+https://project-mongo-api-4jvehtmy3a-lz.a.run.app/titles/id/646286b6d5a20f9364b4a8f1
