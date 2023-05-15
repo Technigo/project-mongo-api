@@ -11,3 +11,7 @@ If I had more time, I would work on creating more endpoints and queries for my A
 ## View it live
 
 Deployed API: https://project-mongo-api-wjvhdzdcja-lz.a.run.app/
+
+Deployed frontend: https://coruscating-treacle-fe0c52.netlify.app/
+
+GitHub repo for frontend:  https://github.com/beemailley/project-mongo-api-frontend
