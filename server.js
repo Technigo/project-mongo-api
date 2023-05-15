@@ -76,8 +76,21 @@ app.get('/', (req, res) => {
 
 // Endpoint to get all songs
 app.get('/songs', async (req, res) => {
-  const songs = await Song.find();
-  res.json(songs);
+  // can only await something in an async
+  try {
+    const songs = await Song.find();
+    res.status(200).json({
+      success: true,
+      body: songs
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: error
+      }
+    });
+  }
 });
 
 // Endpoint to get a specific song
