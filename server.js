@@ -88,12 +88,17 @@ app.get('/titles', async (req, res) => {
 // http://localhost:8080/titles/645cd880f1686cd98b080ddd
 // Route to get a single title by ID
 app.get('/titles/:id', async (req, res) => {
+  try {
   const title = await Title.findById(req.params.id).populate('director'); 
   if (title) {
     res.json(title)
   } else {
     res.status(404).json({ error: 'Title not found '});
   }
+} catch (error) {
+  console.error(error);
+  res.status(500).json({ error: 'Server error' })
+}
 });
 
 // https://project-mongo-api-kpnlmcrmoq-lz.a.run.app/directors
@@ -109,6 +114,7 @@ app.get('/directors', async (req, res) => {
 // e.g. http://localhost:8080/directors/645cde94f1686cd98b081343
 // Route to get a single director by ID
 app.get('/directors/:id', async (req, res, next) => {
+  try {
   const director = await Director.findById(req.params.id)
   if (director) {
     res.json(director)
@@ -116,7 +122,11 @@ app.get('/directors/:id', async (req, res, next) => {
     req.message = 'Director not found';
     next();
   }
-})
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
 // Middleware function to handle 404 errors
 app.use((req, res, next) => {
