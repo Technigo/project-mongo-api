@@ -13,7 +13,6 @@ import topMusicData from "./data/top-music.json";
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/songs";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-// mongodb+srv://Oscarsin:Notafraid98@projectmongoapibooks.bgvpfrn.mongodb.net/projectMongo?retryWrites=true&w=majority
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
