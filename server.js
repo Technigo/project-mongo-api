@@ -11,7 +11,7 @@ mongoose.Promise = Promise;
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
-const port = process.env.PORT || 9090;
+const port = process.env.PORT || 9000;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
@@ -51,9 +51,9 @@ if (process.env.RESET_DB) {
 // Start defining your routes here
 
 app.get("/", (req, res) => {  // this is the root route
-  res.send("Hello world");
 res.send(listEndpoints(app));
 });
+
 
 app.get("/movies", async (req, res) => {
   const { title, director, cast } = req.query;
@@ -84,30 +84,3 @@ app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
   
-/*  app.get("/", (req, res) => {
-    res.send("Hello Technigo!");
-  });
-app.get("/songs", async (req, res) => {
-  const { genre, danceability } = req.query;
-  const response = {
-    success: true,
-    body: {}
-  }
-  const genreRegex = new RegExp(genre);
-  const danceabilityQuery = { $gt: danceability ? danceability : 0 } // this line is a ternary operator that checks if danceability is true, if it is, it will return danceability, if not, it will return 0 (lt means less than, gt means greater than)
-
-  try {
-    const searchResultFromDB = await Song.find({ genre: genreRegex, danceability: danceabilityQuery })
-    if (searchResultFromDB) {
-      response.body = searchResultFromDB
-      res.status(200).json(response)
-    } else {
-      response.success = false,
-        res.status(500).json(response)
-    }
-  } catch (e) {
-    res.status(500).json(response)
-  }
-});
-
- */
