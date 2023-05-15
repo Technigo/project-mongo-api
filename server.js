@@ -46,8 +46,8 @@ if (process.env.RESET_DB) {
 app.get('/', (req, res) => {
   const appEndpoints = endpoints(app);
   
-  res.json({ // changes message
-    message: `IG Noble Prizes from 1991-2022. Search by subject (?subject='abc'), year or id.`
+  res.json({
+    message: `IG Noble Prizes from 1991-2022. Search by subject (?subject='abc'), year or id.`,
     endpoints: appEndpoints
   });
 });
