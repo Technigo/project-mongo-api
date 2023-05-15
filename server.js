@@ -106,34 +106,34 @@ app.get("/songs", async (req, res) => {
   }
 });
 
-// Search for a specific endpoint using a songs ID
-// The ID needs to be from MongoDB
-// for example http://localhost:8080/songs/id/64611da98e828372360c431a
-app.get("/songs/id/:id", async (req, res) => {
-  try {
-    const singleSong = await Song.findById(req.params.id)
-    if (singleSong) {
-      res.status(200).json({
-        success: true,
-        body: singleSong
-      });
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "Song not found"
-        } 
-      });
-    }
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      body: {
-        message: error
-      } 
-    });
-  }
-});
+// // Search for a specific endpoint using a songs ID
+// // The ID needs to be from MongoDB
+// // for example http://localhost:8080/songs/id/64611da98e828372360c431a
+// app.get("/songs/id/:id", async (req, res) => {
+//   try {
+//     const singleSong = await Song.findById(req.params.id)
+//     if (singleSong) {
+//       res.status(200).json({
+//         success: true,
+//         body: singleSong
+//       });
+//     } else {
+//       res.status(404).json({
+//         success: false,
+//         body: {
+//           message: "Song not found"
+//         } 
+//       });
+//     }
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       body: {
+//         message: error
+//       } 
+//     });
+//   }
+// });
 
 
 // Search for a specific endpoint using an artists name
@@ -167,36 +167,36 @@ app.get("/artists/:artistName", async (req, res) => {
   }
 });
 
-// Search for a specific endpoint using a songs (tracks) name
-// for example http://localhost:8080/songs/señorita
-app.get("/songs/:trackName", async (req, res) => {
-  try {
-    // RegEx to make the song name case insensitive
-    const trackNameRegex = new RegExp(req.params.trackName, "i");
+// // Search for a specific endpoint using a songs (tracks) name
+// // for example http://localhost:8080/songs/señorita
+// app.get("/songs/:trackName", async (req, res) => {
+//   try {
+//     // RegEx to make the song name case insensitive
+//     const trackNameRegex = new RegExp(req.params.trackName, "i");
 
-    const singleTrack = await Song.find({ trackName: trackNameRegex });
-    if (singleTrack && singleTrack.length > 0) {
-      res.status(200).json({
-        success: true,
-        body: singleTrack
-      });
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "Track not found"
-        } 
-      });
-    }
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      body: {
-        message: error
-      } 
-    });
-  }
-});
+//     const singleTrack = await Song.find({ trackName: trackNameRegex });
+//     if (singleTrack && singleTrack.length > 0) {
+//       res.status(200).json({
+//         success: true,
+//         body: singleTrack
+//       });
+//     } else {
+//       res.status(404).json({
+//         success: false,
+//         body: {
+//           message: "Track not found"
+//         } 
+//       });
+//     }
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       body: {
+//         message: error
+//       } 
+//     });
+//   }
+// });
 
 // Start the server
 app.listen(port, () => {
