@@ -162,7 +162,7 @@ app.get("/spells", async (req, res) => {
 
 app.get("/characters/ID/:ID", async (req, res) => {
   try {
-    const singleCharacter = await Characters.findById(req.params.ID);
+    const singleCharacter = await Characters.findOne({ "Character ID": req.params.ID });
     if (singleCharacter) {
       res.status(200).json({
         success: true,
@@ -185,6 +185,7 @@ app.get("/characters/ID/:ID", async (req, res) => {
     })
   }
 });
+
 
 app.get("/characters/name/:name", async (req, res) => {
   try {
