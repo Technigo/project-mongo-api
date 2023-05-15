@@ -66,8 +66,9 @@ app.get("/", (req, res) => {
       {
         "/": "Start Page",
         "/allsongs": "All songs",
-        "/songs/id/:id": "Find single song",
-        "/authors/:id/books": "All books by single author"
+        "/authors/allsongs/:style": "All songs in genre",
+        "/songs/id/:id": "Find single song"
+        
       },
     ],
   };
