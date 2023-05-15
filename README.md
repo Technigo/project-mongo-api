@@ -25,8 +25,8 @@ https://project-mongo-api-4jvehtmy3a-lz.a.run.app/
 All titles:
 https://project-mongo-api-4jvehtmy3a-lz.a.run.app/titles
 
-Search for a specific type, e.g.
+Search for a specific type, e.g:
 https://project-mongo-api-4jvehtmy3a-lz.a.run.app/titles?type=TV
 
-Search for a title with a specific _id, e.g.
+Search for a title with a specific _id, e.g:
 https://project-mongo-api-4jvehtmy3a-lz.a.run.app/titles/id/646286b6d5a20f9364b4a8f1
