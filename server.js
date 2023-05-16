@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json";
 const listEndpoints = require('express-list-endpoints')
 
+//Should I use docker for below issue or what do I need to do to solve it?
+//I couldn't make the MONGO_URL work with the localhost-version - when I did that it stopped working locally
 const mongoUrl = process.env.MONGO_URL || "mongodb+srv://ylva87:hHwxpsqpR3V62DS9@cluster0.hsexulf.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
