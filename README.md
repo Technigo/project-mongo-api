@@ -12,10 +12,10 @@ Endpoints created:
 /directors/id_id: Shows a single director based on its id
 
 ## The problem
-I based the code on a code along example and live session from Technigo but modified it with other data. If I had more time I would connect the MongoDB database in Atlas with Google Cloud API platform. 
+I based the code on a code along example and live session from Technigo but modified it with other data. If I had more time I would add queries. 
 
 ## View it live
 
 Google CLoud API platform: 
 
-(not deployed yet). 
+https://project-mongo-api-kpnlmcrmoq-lz.a.run.app
