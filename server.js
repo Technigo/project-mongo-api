@@ -46,7 +46,7 @@ if (process.env.RESET_DB) {
 }
 
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hello!");
 });
 
 app.get("/songs", async (req, res) => {
