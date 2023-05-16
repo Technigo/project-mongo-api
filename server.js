@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import mongoose, { Model } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -12,8 +12,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-const { Schema } = mongoose;
 
 const songSchema = new Schema({
     id: Number,
