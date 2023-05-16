@@ -1,34 +1,53 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-//THIS IS NOT WORKING BUT NEEDED TO HAND-IN SOMETHING!
+import topMusicData from "./data/top-music.json";
+const listEndpoints = require('express-list-endpoints')
 
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/artists";
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://ylva87:hHwxpsqpR3V62DS9@cluster0.hsexulf.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 
-const Artist = mongoose.model('Artist', {
-  name: String
+const Song = mongoose.model('Song', {
+  id: Number,
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  popularity: Number
 })
 
 const seedDatabase = async () => {
-  const spears = new Artist({ name: 'Britney Spears' })
-  await spears.save()
-
-  const cyrus = new Artist({ name: 'Miley Cyrus' })
-  await cyrus.save()
+  const data = topMusicData
+  Song.collection.insertMany(data, function(err, r) {
+  })
 }
-seedDatabase()
+// seedDatabase()
+
+//switch to cover error-types and generate response
+const handleErrors = (err, res) => {
+  switch (err) {
+    case err instanceof mongoose.Error.DocumentNotFoundError:
+      res.status(404).json({ message: "Document not found" })
+      break;
+    case err instanceof mongoose.Error.CastError:
+      res.status(400).json({ message: "Value cast error" })
+      break;
+    default:
+      console.log(err.messages)
+      // res.status(500)
+      break;
+  }
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -42,12 +61,48 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json(listEndpoints(app));
 });
 
-app.get('/artists', async (req, res) => {
-  const artists = await Artist.find()
-  res.json(artists)
+// for all songs
+app.get('/songs', async (req, res) => {
+  const songs = await Song.find()
+  res.json(songs)
+})
+// app.get('/songs', async (req, res) => {
+//   const songs = await Song.find().exec((err, response) =>  {
+//     console.log(err)
+//     if (err !== "null") handleErrors(err, res)} )
+//   res.json(songs)
+// })
+
+// for individual songs and their id
+app.get('/songs/:id', async (req, res) => {
+  const song = await Song.find({id:req.params.id})
+  res.json(song)
+})
+
+// app.get('/songs/:id', async (req, res) => {
+//   const song = await Song.find({id:req.params.id}).exec()
+//   .then(function (err, response) { if (err) handleErrors(err, res)})
+//   res.json(song)
+// })
+
+// to add song
+app.post('/songs', async (req, res) => {
+  const newSong = req.body
+  await Song.create(newSong, function(err, newSong){
+    if (err) handleErrors(err, res)
+  })
+  res.status(201).end()
+})
+
+// to delete song
+app.delete('/songs/:id', async (req, res) => {
+  await Song.deleteOne({id:req.params.id}, function(err, newSong){
+    if (err) handleErrors(err, res)
+  })
+  res.status(200).end()
 })
 
 // Start the server
