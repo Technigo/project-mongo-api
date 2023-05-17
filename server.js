@@ -58,6 +58,7 @@ app.get("/", (req, res) => {
   res.json(listEndpoints(app));
 });
 
+// An endpoint returning a collection of all errors. Method Find is used. 
 app.get("/errors", async (req, res) => {
   try {
     const errors = await Error.find();
@@ -75,6 +76,7 @@ app.get("/errors", async (req, res) => {
   }
 });
 
+// Single endpoint. 
 
 app.get("/errors/id/:id", async (req, res) => {
   try {
@@ -88,7 +90,7 @@ app.get("/errors/id/:id", async (req, res) => {
       res.status(404).json({
         success: false,
         body: {
-          message: "Error not found"
+          message: "Error with this id is not found. Are you sure you passed the right id?"
         }
       })
     }
@@ -102,6 +104,7 @@ app.get("/errors/id/:id", async (req, res) => {
   }
 });
 
+// Single endpoint. Error.countDocuments() method to get the total count of error documents in the database. Next, generate a random index within that range using Math.random() and Math.floor(). After that, Error.findOne().skip(randomIndex) method to retrieve a random error document by skipping to the randomly generated index.
 app.get("/errors/random", async (req, res) => {
   try {
     const count = await Error.countDocuments();
