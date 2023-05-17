@@ -56,6 +56,9 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
+// Route to a single error messasge
+// Id refers to the object-id, which can be found in compass
+
 app.get("/errors/id/:id", async (req, res) => {
   try {
     const singleError = await Error.findById(req.params.id)
@@ -81,6 +84,38 @@ app.get("/errors/id/:id", async (req, res) => {
     })
   }
 });
+
+// Route to a collection of errors 
+// Errors that have the same property length
+app.get("/errors/length/:length", async (req, res) => {
+  const requestedLength = parseInt(req.params.length);
+
+  try {
+    const errorCollection = await Error.find({ length: requestedLength });
+
+    if (errorCollection.length > 0) {
+      res.status(200).json({
+        success: true,
+        body: errorCollection
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        body: {
+          message: "Error collection not found for the requested length"
+        }
+      });
+    }
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    });
+  }
+});
+
 
 // Start the server
 app.listen(port, () => {
