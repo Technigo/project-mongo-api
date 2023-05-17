@@ -20,6 +20,8 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+// npm install express-list-endpoints
+const listEndpoints = require('express-list-endpoints')
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -53,7 +55,7 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json(listEndpoints(app));
 });
 
 // Route to a single error messasge
