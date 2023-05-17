@@ -58,8 +58,23 @@ app.get("/", (req, res) => {
   res.json(listEndpoints(app));
 });
 
-// Route to a single error messasge
-// Id refers to the object-id, which can be found in compass
+app.get("/errors", async (req, res) => {
+  try {
+    const errors = await Error.find();
+    res.status(200).json({
+      success: true,
+      body: errors,
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: "An error occurred",
+      },
+    });
+  }
+});
+
 
 app.get("/errors/id/:id", async (req, res) => {
   try {
@@ -87,33 +102,21 @@ app.get("/errors/id/:id", async (req, res) => {
   }
 });
 
-// Route to a collection of errors 
-// Errors that have the same property length
-app.get("/errors/length/:length", async (req, res) => {
-  const requestedLength = parseInt(req.params.length);
-
+app.get("/errors/random", async (req, res) => {
   try {
-    const errorCollection = await Error.find({ length: requestedLength });
-
-    if (errorCollection.length > 0) {
-      res.status(200).json({
-        success: true,
-        body: errorCollection
-      });
-    } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "Error collection not found for the requested length"
-        }
-      });
-    }
+    const count = await Error.countDocuments();
+    const randomIndex = Math.floor(Math.random() * count);
+    const randomError = await Error.findOne().skip(randomIndex);
+    res.status(200).json({
+      success: true,
+      body: randomError,
+    });
   } catch (e) {
     res.status(500).json({
       success: false,
       body: {
-        message: e
-      }
+        message: "An error occurred",
+      },
     });
   }
 });
