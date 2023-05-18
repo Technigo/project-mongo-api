@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import netflixTitles from "./data/netflix-titles.json";
 import listEndpoints from "express-list-endpoints"; 
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/Cluster0";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -54,7 +54,7 @@ app.get("/", (req, res) => {  // this is the root route
 res.send(listEndpoints(app));
 });
 
-
+// try this in postman by using the url http://localhost:9000/movies and then add the query parameters you want to search for like for example http://localhost:9000/movies?title=The%20Matrix or http://localhost:9000/movies?director=Quentin%20Tarantino
 app.get("/movies", async (req, res) => {
   const { title, director, cast } = req.query;
   const response = {
