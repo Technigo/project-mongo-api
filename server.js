@@ -89,7 +89,7 @@ app.get("/titles", async (req, res) => {
     success: true,
     body: {}
   }
-  const typeRegex = new RegExp(type)
+  const typeRegex = new RegExp(type, 'i')
   console.log('typeRegex', typeRegex)
   // E.g. http://localhost:8080/titles?type=TV
 
