@@ -10,7 +10,7 @@ The main challenge of this project was designing an API that allows users to sea
 - CORS
 - Mongoose
 - MongoDB
-
+- Google Cloud
 
 # MongoDB Schema:
 A song in the database is defined with the following properties:
@@ -31,12 +31,12 @@ Various characteristics of the song, all numbers.
 
 
 # How to run the API locally:
-Clone the repository
-Install dependencies with npm install
-Make sure MongoDB is installed and running
-If you want to reset and populate the database, set an environment variable RESET_DB to true. The database will be populated with data from data/top-music.json
-Run the server with npm start
-Access the API at http://localhost:8080
+- Clone the repository
+- Install dependencies with npm install
+- Make sure MongoDB is installed and running
+- If you want to reset and populate the database, set an environment variable RESET_DB to true. The database will be populated with data from data/top-music.json
+- Run the server with npm start
+- Access the API at http://localhost:8080
 
-# API Deployed on Render:
-https://project-mongo-api-y81i.onrender.com/
+# API Deployed on Google Cloud:
+https://project-mongo-api-45a55p775a-lz.a.run.app/
