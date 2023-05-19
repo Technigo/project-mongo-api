@@ -61,14 +61,15 @@ app.get("/", (request, response) => {
 // https://localhost:8080/netflix-titles
 // This gets a list of all titles 
 app.get('/netflix-titles', async (request, response) => {
+  console.log('Received GET request for /netflix-titles');
   const netflixTitles = await NetflixTitle.find();
   response.json(netflixTitles);
 });
 
-// https://localhost:8080/netflix.titles/
-// This gets a single title when adding its id-number after the last formard slash
+// https://localhost:8080/netflix.titles/ and then you add the unique id number for the series you want
+// This gets a single title when adding its id-number after the last forward slash
 app.get('/netflix-titles/:id', async (request, response) => {
-  const netflixTitle = await NetflixTitle.findOne({ id: request.params.id });
+  const netflixTitle = await NetflixTitle.findOne({ _id: request.params.id });
   response.json(netflixTitle);
 });
 
