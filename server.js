@@ -55,7 +55,14 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (request, response) => {
-  response.send("Hello Bananas!");
+  response.send({
+    API: "Netflix series",
+    Routes: [
+      { "/": "Start" },
+      { "/netflix-titles": "All titles" },
+      { "netflix-titles/:id": "Data for the specific series belonging to the id-number entered" }
+    ]
+  });
 });
 
 // https://localhost:8080/netflix-titles
