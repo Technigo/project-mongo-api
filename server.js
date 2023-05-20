@@ -73,8 +73,8 @@ app.use(cors());
 app.use(express.json());
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Get your Netflix data");
+app.get('/', (req, res) => {
+  res.json(listEndpoints(app));
 });
 
 // https://project-mongo-api-kpnlmcrmoq-lz.a.run.app/titles
