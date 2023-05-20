@@ -41,19 +41,32 @@ const errorSchema = new Schema ({
 // Create a model based on schema
 
 const Error = mongoose.model("Error", errorSchema)
+const resetDatabase = async () => {
+  await Error.deleteMany();
+  errorData.forEach((singleError) => {
+    const newError = new Error (singleError)
+    newError.save()
+  })
+}
 
 if (process.env.RESET_DB) {
-  const resetDatabase = async () => {
-    await Error.deleteMany();
-    errorData.forEach((singleError) => {
-      const newError = new Error (singleError)
-      newError.save()
-    })
-  }
   resetDatabase()
 }
 
 // Start defining your routes here
+app.get("/reset", async (req, res) => {
+  try {
+    await resetDatabase();
+    res.json({
+      success: true
+    }) 
+  } catch (e) {
+    res.json({
+      success: false,
+    })
+  }
+})
+
 app.get("/", (req, res) => {
   res.json(listEndpoints(app));
 });
@@ -64,7 +77,7 @@ app.get("/errors", async (req, res) => {
     const errors = await Error.find();
     res.status(200).json({
       success: true,
-      body: [...errors, {test: true}],
+      body: errors,
     });
   } catch (e) {
     res.status(500).json({
