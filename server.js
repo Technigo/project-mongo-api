@@ -64,7 +64,7 @@ app.get("/errors", async (req, res) => {
     const errors = await Error.find();
     res.status(200).json({
       success: true,
-      body: errors,
+      body: [...errors, {test: true}],
     });
   } catch (e) {
     res.status(500).json({
