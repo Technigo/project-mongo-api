@@ -54,11 +54,11 @@ const Data = mongoose.model("Data", dataSchema)
 if (process.env.RESET_DB) { 
   const resetDatabase = async () => {
     await Data.deleteMany();
-    netflixData.forEach = ((singleData) => {
+    for (const singleData of netflixData) {
       const newData = new Data(singleData);
-      newData.save()
-    })
-  }
+      await newData.save();
+    }
+  };
  resetDatabase();
 }
 
