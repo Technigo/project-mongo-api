@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import inequality from './data/inequality.json';
+import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -16,11 +16,6 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
-
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
 
 const { Schema } = mongoose;
 const songSchema = new Schema({
@@ -41,6 +36,61 @@ const songSchema = new Schema({
 })
 
 const Song = mongoose.model("Song", songSchema);
+
+// here we are resetting the database, will happen only if RESET_DB variable is set to true
+// command in terminal RESET_DB = true npm run dev
+if (process.env.RESET_DB) {
+  const resetDatabase = async () => {
+    await Song.deleteMany();
+    topMusicData.forEach((singleSong) => {
+      const newSong = new Song (singleSong);
+      newSong.save();
+    })
+  }
+  
+  // resetDatabase(); call the function 
+}
+
+//index route:
+app.get("/", (req, res) => {
+  res.send(listEndpoints(app));
+});
+
+app.get("/songs", async (req, res) => {
+
+  const {genre, danceability} = req.query;
+  const response = {
+    success: true,
+    message: "Here are your songs!",
+    body: {}
+  }
+  //regEx only for strings 
+  const genreRegex = new RegExp(genre);
+  // if there are songs with danceability greater than what the user put in the url, then show list.
+  // else show nothing
+  const danceabilityQuery = { $gt: danceability ? danceability : 0 }
+  try {
+    // this would only get the songs with the genres that exactly match "pop":
+    // response.body = await Song.find({genre: genre})
+    // but we want every song that includes the word "pop":
+    const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
+    if (searchResultFromDB) {
+      response.body = searchResultFromDB;
+      res.status(200).json(response)
+    } else {
+      response.status(404).json()
+      response.success = false,
+      res.status(500).json(response)
+      }
+  } catch(e) {
+    res.status(500).json({
+      success: false,
+      body: {
+        message: e
+      }
+    })
+  }
+})
 
 
 app.get("/songs/id/:id", async (req, res) => {
