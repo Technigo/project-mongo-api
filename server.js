@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
-import gotQuotesData from "./data/got-quotes.json"
+import gotQuotesData from "./data/got-quotes.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -28,28 +28,29 @@ app.use(express.json());
 
 const { Schema } = mongoose;
 
-const quoteSchema = new Schema ({
+const quoteSchema = new Schema({
   sentence: String,
   character: {
-  name: String,
-  slug: String,
-  house: {
-  name: String,
-  slug: String
+    name: String,
+    slug: String,
+    house: {
+      name: String,
+      slug: String
+    }
   }
-  }
-  })
+});
+
 
 const Quote = mongoose.model("Quote", quoteSchema);
 
 if (process.env.RESET_DB) {
   const resetDatabase = async () => {
     await Quote.deleteMany();
-    topMusicData.forEach((singleQuote) => {
+    gotQuotesData.forEach((singleQuote) => {
       const newQuote = new Quote(singleQuote);
-      newQuote.save()
-    })
-  }
+      newQuote.save();
+    });
+  };
   resetDatabase();
 }
 
