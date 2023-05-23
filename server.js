@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import netflixTitles from "./data/netflix-titles.json";
+
 import listEndpoints from "express-list-endpoints"; 
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/Cluster0";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; //this is the connection string to the database in MongoDB Atlas
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -36,8 +36,7 @@ const movieSchema = new mongoose.Schema({
 
 const Movie = mongoose.model("Movie", movieSchema);
 
-
-
+/* 
 if (process.env.RESET_DB) {
   const resetDatabase = async () => {
     await Movie.deleteMany();
@@ -47,14 +46,14 @@ if (process.env.RESET_DB) {
     })
   }
   resetDatabase();
-}
+} */
 // Start defining your routes here
 
 app.get("/", (req, res) => {  // this is the root route
 res.send(listEndpoints(app));
 });
 
-// try this in postman by using the url http://localhost:9000/movies and then add the query parameters you want to search for like for example http://localhost:9000/movies?title=The%20Matrix or http://localhost:9000/movies?director=Quentin%20Tarantino
+
 app.get("/movies", async (req, res) => {
   const { title, director, cast } = req.query;
   const response = {
