@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
         { "/": "Startpage / Api Info" },
         { "/allsongs": "all tracks-data" },
         { "/songs/id/:id": "singel track" },
-        { "/songs": " first 5 songs (5 per page)" },
+        { "/songs": " first 10 songs (10 per page)" },
         { "/songs?page=2&pageSize=5": "page 2 (5 per page)" },
       ]
     });
