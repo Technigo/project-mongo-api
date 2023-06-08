@@ -8,13 +8,12 @@ Endpoints created:
 
 /songs?genre=pop&danceability=76 shows songs in gnre pop and with danceability greater than 76
 
-/songs/id/645f77ae555b7244afb95eaf shows a specific justin Bieber song
+/songs/id/6481cf086559b8246a3f1f1f shows a specific Drake song
 
 The problem
 I based the code on a code along example and live session from Technigo. If I had more time I would connect the MongoDB database in Atlas with Google Cloud API platform.
 I have som problems with my log in at the moment.
 
 View it live
-Google CLoud API platform:
+Google CLoud API platform: https://project-mongo-api-ennsd5tifa-ey.a.run.app
 
-(not deployed yet).
