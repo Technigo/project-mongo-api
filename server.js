@@ -2,14 +2,6 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json";
-import { getRequireSource } from "@babel/preset-env/lib/polyfills/utils";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -26,14 +18,6 @@ app.use(cors());
 app.use(express.json());
 
 const { Schema } = mongoose;
-const userSchema = new Schema ({
-  name: String,
-  age: Number,
-  married: Boolean
-})
-
-const User = mongoose.model("User", userSchema)
-
 
 const songSchema = new Schema ({
   id: Number,
@@ -68,42 +52,37 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hi music lover!");
 });
 
-
+// Fetch one or more songs according to genre and/or danceability
 app.get("/songs/", async (req, res) => {
   const {genre, danceability} = req.query;
   const response = {
     success: true,
     body: {}
   }
+  // Regex only for strings
   const genreRegex = new RegExp(genre);
-  const danceabilityQuery = { $gt: danceability ?
-  danceability : 0 }
+  const danceabilityQuery = { $gt: danceability ? danceability : 0 }
 
   try {
-    response.body = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
-    if (true) {
+    const searchResultFromDB = await Song.find({genre: genreRegex, danceability: danceabilityQuery})
+    if (searchResultFromDB) {
+      response.body = searchResultFromDB
       res.status(200).json(response)
     } else {
-      res.status(404).json({
-        success: false,
-        body: {
-          message: "Song not found"
-        }
-     })
+      response.success = false,
+      res.status(500).json(response)
     } 
   } catch(e) {
+    response.success = false,
     res.status(500).json(response)
   }
 });
 
-
-
 // Fetch a song
 app.get("/songs/id/:id", async (req, res) => {
-  //res.send("Hello Technigo!");
   try {
     const singleSong = await Song.findById(req.params.id)
     if (singleSong) {
