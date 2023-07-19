@@ -7,9 +7,9 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo-api
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndpoints = require('express-list-endpoints');
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -58,31 +58,58 @@ if(process.env.RESET_DB) {
 
 // Routes
 app.get("/", (req, res) => {
-  res.json('Hello and welcome to the beers. Please see readme for endpoints.');
-});
+  res.send({
+    success: true,
+    message: "OK",
+    body: {
+      content: "Hello and welcome to the beers!",
+      endpoints: listEndpoints(app)
+    }
+  })
+})
 
-// Endpoint for all the beers or beers by style
+// Endpoint for all the beers, paginated
 app.get("/beers", async (req, res) => {
   try {
-    let beers;
-    if (req.query.style) {
-      beers = await Beer.find({ style: req.query.style });
-    } else {
-      beers = await Beer.find();
-    }
-    res.status(200).json({ 
-      success: true, 
-      body: beers 
-    });
+    const page = parseInt(req.query.page) || 1 // Get the requested page number from the query parameters (default: 1)
+    const perPage = parseInt(req.query.perPage) || 5 // Get the number of items per page from the query parameters (default: 5)
+    const skip = (page - 1) * perPage; // Calculate the number of items to skip
+
+    const beers = await Beer.aggregate([
+      { $sort: { style: 1, _id: 1 } },
+      { $skip: skip },
+      { $limit: perPage },
+    ])
+
+    res.status(200).json({
+      success: true,
+      body: beers,
+    })
   } catch (err) {
-    res.status(404).json({ 
-      success: false, 
+    res.status(404).json({
+      success: false,
       body: {
-        message: "Something went wrong!"
-      } 
-    });
+        message: "Something went wrong!",
+      },
+    })
   }
-});
+})
+
+
+// //Endpoint for beer types
+// app.get("/beers/:beerType", async (req, res) => {
+//   const {beerType} = req.query
+//   const matchingRegex = new RegExp{beerType};
+//   const foundBeerType = Beer.findAll({name: matchingRegEx})
+//   if (foundBeerType) {
+//     res.status(200).json({success: true, response: foundBeerType})
+//   } else {
+//     fetch(``)
+//     .then((response) => response.json())
+//     .then(async (data) => 7
+//     const newBeer)
+//   }
+// })
 
 //Endpoint for single beer by id
 app.get("/beers/:id", async (req, res) => {
