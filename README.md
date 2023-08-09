@@ -1,13 +1,23 @@
-# Project Mongo API
+Project Mongo API - https://project-mongo-api-c33hk2ngfq-lz.a.run.app/
 
-Replace this readme with your own information about your project.
+🏁 Goals:
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The goal of this project was to start using a database to store and retrieve data from and use that data to produce a RESTful API.
 
-## The problem
+Must-have requirements:
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+✅ The API should have at least 2 routes.
 
-## View it live
+✅ A minimum of one endpoint to return a collection of results (array of elements).
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+✅ A minimum of one endpoint to return a single result (single element).
+
+✅ The API should make use of Mongoose models to model the data and use these models to fetch data from the database.
+
+✅ The API should be RESTful.
+
+💻 Tech stack:
+
+MongoDB - MongoDB Atlas - POSTMAN - Google Cloud
+
+View it live: https://project-mongo-api-c33hk2ngfq-lz.a.run.app/
