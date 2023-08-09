@@ -16,6 +16,10 @@ Must-have requirements:
 
 ✅ The API should be RESTful.
 
+🚧 The problem:
+
+I am quite pleased with the turnout of this project. It fulfilled all the requirements and I enjoyed working with the backend part as always.
+
 💻 Tech stack:
 
 MongoDB - MongoDB Atlas - POSTMAN - Google Cloud
