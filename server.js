@@ -31,13 +31,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next()
-  } else {
-    res.status(503).json({ error: 'Service unavailable'})
-  }
-})
 
 /*
  port: The port number on which the server will run. The process.env.PORT variable specifies the port number stored in an environment variable,
@@ -47,6 +40,13 @@ app.use(cors()): Adds middleware to enable CORS for all routes.
 app.use(express.json()): Adds middleware to parse incoming requests with JSON payloads.
 app.use((req, res, next) => {...}): Adds middleware to check if the database connection is ready before handling incoming requests. 
 If the connection is not ready, it returns a 503 Service Unavailable error.
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: 'Service unavailable'})
+  }
+})
 */
 
 // The next lines of code define the schemas for the Characters and Spells collections and create the corresponding models:
