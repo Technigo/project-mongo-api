@@ -1,3 +1,6 @@
+Check out the FRONTEND part on Github! --->
+https://github.com/NinaWald/project-mongo-frontend
+
 # Project Mongo API
 
 This weeks project was about learning how to work with MongoDB , Compass, Atlas, Google Cloud.
