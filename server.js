@@ -104,7 +104,7 @@ If this variable is present,
 it will delete all data from the Characters and Spells collections in the MongoDB database, 
 and then insert all the characters and spells from the characters.json and spells.json files into the respective collections. 
 This is useful for resetting the database to a known state during development or testing.
-*/
+
 if (process.env.RESET_DATABASE) {
   const resetDatabase = async () => {
     await Characters.deleteMany();
@@ -120,7 +120,7 @@ if (process.env.RESET_DATABASE) {
   }
   resetDatabase();
 }
-
+*/
 
 
 // Start defining your routes here
