@@ -14,16 +14,16 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/usersExample";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// const User = mongoose.model('User', {
-//   name: String
-// })
+const User = mongoose.model('User', {
+  name: String
+})
 
-// User.deleteMany().then(() => {
-//   new User({ name: 'Bob' }).save()
-//   new User({ name: 'Jane' }).save()
-//   new User({ name: 'Rebecca' }).save()
-//   new User({ name: 'Steve' }).save()
-// })
+User.deleteMany().then(() => {
+  new User({ name: 'Bob' }).save()
+  new User({ name: 'Jane' }).save()
+  new User({ name: 'Rebecca' }).save()
+  new User({ name: 'Steve' }).save()
+})
 
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
