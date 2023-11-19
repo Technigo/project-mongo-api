@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
