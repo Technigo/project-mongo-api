@@ -1,6 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
+import Book from './books'; // Adjust the path as needed
+
+
+dotenv.config()
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -24,9 +29,37 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+app.get('/', (req, res) => {
+  res.send('Welcome to my API!');
+});
+
+// Get all books
+app.get('/books', async (req, res) => {
+  const books = await Book.find();
+  res.json(books);
+});
+
+// Get a single book by bookID
+app.get('/books/:id', async (req, res) => {
+  const { id } = req.params;
+  const book = await Book.findOne({ bookID: id });
+
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).json({ error: 'Book not found' });
+  }
+});
+
+// Add a new book
+app.post('/books', async (req, res) => {
+  const newBook = new Book(req.body); // Ensure body contains the required fields
+  try {
+    const savedBook = await newBook.save();
+    res.status(201).json(savedBook);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 // Start the server
