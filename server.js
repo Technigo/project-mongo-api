@@ -1,16 +1,15 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+import listEndpoints from "express-list-endpoints";
+import booksData from "./data/books.json";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+mongoose.set("strictQuery", false);
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -23,12 +22,62 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service Unavailable" });
+  }
+});
+// Import Schema and Define the schema
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+const Book = mongoose.model("Book", {
+  bookID: Number,
+  title: String,
+  author: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
 });
 
+if (process.env.RESET_DB) {
+  console.log("Resetting database!");
+
+  const seedDatabase = async () => {
+    await Book.deleteMany();
+
+    booksData.forEach((book) => {
+      new Book(book).save();
+    });
+  };
+
+  seedDatabase();
+}
+
+// Route to get a list of all registered endpoints
+app.get("/", (req, res) => {
+  const endpoints = listEndpoints(app);
+  res.json(endpoints);
+});
+
+app.get("/books", async (req, res) => {
+  try {
+    const books = await Book.find();
+    res.status(200).json({
+      success: true,
+      message: "OK ✅",
+      body: { books },
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error!" });
+  }
+});
+
+app.get("/books/:id", async (req, res) => {});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
