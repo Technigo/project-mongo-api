@@ -10,9 +10,9 @@ import mongoose from "mongoose";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/usersExample";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/usersExample";
+// mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.Promise = Promise;
 
 // const User = mongoose.model('User', {
 //   name: String
@@ -36,16 +36,36 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// app.use((req, res, next) => {
+//   if (mongoose.connection.readyState === 1) {
+//     next()
+//   } else {
+//     res.status(503).json({ error: 'Service unavailable'})
+//   }
+// })
+
 // Start defining your routes here
-app.get("/users/:id", async (req, res) => {
-  const user = await User.findById(req.params.id)
-  if (user) {
-    res.json(user)
-  } else {
-    res.json({ error: 'User not found'})
-  }
+
+// app.get("/users/:id", async (req, res) => {
+//   try {
+//     const user = await User.findById(req.params.id)
+//     if (user) {
+//       res.json(user)
+//     } else {
+//       res.status(404).json({ error: 'User not found'})
+//     }
+//   } catch (err) {
+//     res.status(400).json({ error: 'Invalid user id' })
+//   }
   
-});
+  
+// });
+
+app.get('/', (req, res) => {
+  // fetch('...', { headers: { Authorization: 'my secret api key' }})
+  res.send('process.env.API_KEY')
+})
+
 
 // Start the server
 app.listen(port, () => {
