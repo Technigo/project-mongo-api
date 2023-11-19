@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -23,6 +24,11 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  mongoose.connection.readyState !== 1
+    ? next()
+    : res.status(503).json({ error: "Service Unavailable" });
+});
 
 // Mongoose object models
 const Title = mongoose.model("Title", {
@@ -40,9 +46,45 @@ const Title = mongoose.model("Title", {
   type: String,
 });
 
+const seeder = () => {
+  netflixData.map((title) =>
+    new Title({
+      show_id: title.show_id,
+      title: title.title,
+      director: title.director,
+      cast: title.cast,
+      country: title.country,
+      date_added: title.date_added,
+      release_year: title.release_year,
+      rating: title.rating,
+      duration: title.duration,
+      listed_in: title.listed_in,
+      description: title.description,
+      type: title.type,
+    }).save()
+  );
+};
+
+console.log(mongoUrl);
+
+Title.deleteMany().then(() => {
+  seeder();
+});
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
+});
+
+app.get("/titles", (req, res) => {});
+
+app.get("/titles/:id", async (req, res) => {
+  try {
+    const title = await Title.findById(req.params.id);
+
+    user ? res.json(title) : res.status(404).send({ error: "Title not found" });
+  } catch (err) {
+    res.status(400).json({ error: `${err}` });
+  }
 });
 
 // Start the server
