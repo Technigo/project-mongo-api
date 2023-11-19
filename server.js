@@ -31,45 +31,63 @@ app.use((req, res, next) => {
 });
 
 // Mongoose object models
+// const Title = mongoose.model("Title", {
+//   show_id: Number,
+//   title: String,
+//   director: String,
+//   cast: String,
+//   country: String,
+//   date_added: String,
+//   release_year: Number,
+//   rating: String,
+//   duration: String,
+//   listed_in: String,
+//   description: String,
+//   type: String,
+// });
 const Title = mongoose.model("Title", {
   show_id: Number,
   title: String,
   director: String,
-  cast: String,
+  cast: [String],
   country: String,
   date_added: String,
   release_year: Number,
   rating: String,
   duration: String,
-  listed_in: String,
+  listed_in: [String],
   description: String,
   type: String,
 });
 
-const seeder = () => {
+const seeder = async () => {
+  await Title.deleteMany();
   netflixData.map((title) =>
     new Title({
       show_id: title.show_id,
       title: title.title,
       director: title.director,
-      cast: title.cast,
+      cast: title.cast.split(", "),
       country: title.country,
       date_added: title.date_added,
       release_year: title.release_year,
       rating: title.rating,
       duration: title.duration,
-      listed_in: title.listed_in,
+      listed_in: title.listed_in.split(", "),
       description: title.description,
       type: title.type,
     }).save()
   );
 };
-
+Title.deleteMany();
 console.log(mongoUrl);
 
-Title.deleteMany().then(() => {
-  seeder();
-});
+//Seed DB
+// Title.deleteMany().then(() => {
+//   seeder();
+// });
+
+seeder();
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
