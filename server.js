@@ -2,11 +2,14 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
-import Book from './books'; // Adjust the path as needed
+import booksData from './data/books.json';
 import listEndpoints from 'express-list-endpoints';
-
+import Book from './models/book'; // Adjust the path to your Book model
 
 dotenv.config()
+
+
+
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -43,8 +46,12 @@ app.get('/', (req, res) => {
 
 // Get all books
 app.get('/books', async (req, res) => {
-  const books = await Book.find();
-  res.json(books);
+  try {
+    const books = await Book.find();
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // Get a single book by bookID
