@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import Book from './books'; // Adjust the path as needed
+import listEndpoints from 'express-list-endpoints';
 
 
 dotenv.config()
@@ -30,8 +31,10 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Welcome to my API!');
+  const endpoints = listEndpoints(app);
+  res.json({ endpoints });
 });
+
 
 // Get all books
 app.get('/books', async (req, res) => {
