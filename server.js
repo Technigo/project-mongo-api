@@ -11,7 +11,10 @@ dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
+  .then(() => {
+    console.log('MongoDB connected');
+    mongoose.set('strictQuery', false); // Set strictQuery option to false
+  })
   .catch(err => console.error('MongoDB connection error:', err));
 
 mongoose.Promise = Promise;
