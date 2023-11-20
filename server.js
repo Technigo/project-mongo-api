@@ -43,7 +43,7 @@ const Book = mongoose.model("Book", {
   ratings_count: Number,
   text_reviews_count: Number,
 });
-
+// RESET Database
 if (process.env.RESET_DB) {
   console.log("Resetting database!");
 
@@ -77,7 +77,23 @@ app.get("/books", async (req, res) => {
   }
 });
 
-app.get("/books/:id", async (req, res) => {});
+app.get("/books/:id", async (req, res) => {
+  try {
+    const bookID = Number(req.params.id);
+    const book = await Book.findOne({ bookID });
+    if (book) {
+      res.status(200).json({
+        success: true,
+        message: "OK✅",
+        body: { book },
+      });
+    } else {
+      res.status(404).json({ error: "Book cannot be found!❌" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error!" });
+  }
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
