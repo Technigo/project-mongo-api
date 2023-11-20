@@ -64,9 +64,30 @@ app.get("/", (req, res) => {
   res.json(endpoints);
 });
 
+// /books?page=1&pageSize=10: Get the first page with 10 items per page.
+// /books?page=2&pageSize=20: Get the second page with 20 items per page.
 app.get("/books", async (req, res) => {
   try {
-    const books = await Book.find();
+    // Parse query parameters for pagination
+    const page = parseInt(req.query.page) || 1; // Default to page 1 if not specified
+    const pageSize = parseInt(req.query.pageSize) || 10; // Default to 10 items per page if not specified
+
+    // Calculate the number of items to skip based on the page and pageSize
+    const pipeline = [
+      {
+        $sort: { average_rating: -1 },
+      },
+      {
+        $skip: (page - 1) * pageSize,
+      },
+      {
+        $limit: pageSize,
+      },
+    ];
+
+    // Sort the book's average_rating from highest to lowest, -1 represents descending order.
+    const books = await Book.aggregate(pipeline);
+
     res.status(200).json({
       success: true,
       message: "OK ✅",
@@ -90,6 +111,22 @@ app.get("/books/:id", async (req, res) => {
     } else {
       res.status(404).json({ error: "Book cannot be found!❌" });
     }
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error!" });
+  }
+});
+// The url should provide the `maxPages` /books/pages/num?maxPages=50
+app.get("/books/pages/num", async (req, res) => {
+  try {
+    const { maxPages } = req.query;
+    const filter = maxPages ? { num_pages: { $lt: maxPages } } : {};
+
+    const books = await Book.find(filter);
+    res.status(200).json({
+      success: true,
+      message: "OK✅",
+      body: { books },
+    });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error!" });
   }
