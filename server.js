@@ -9,6 +9,8 @@ import booksData from './data/books.json';
 dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/8080";
+
+// Function to establish MongoDB connection with retries
 const connectWithRetry = () => {
   mongoose
     .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -72,14 +74,10 @@ app.post('/books', async (req, res) => {
 const seedDatabase = async () => {
   await Book.deleteMany({}); // Clears the existing books collection
 
-  for (const bookData of booksData) {
+  booksData.forEach(async (bookData) => {
     const newBook = new Book(bookData);
-    try {
-      await newBook.save();
-    } catch (error) {
-      console.error('Error seeding book:', error);
-    }
-  }
+    await newBook.save();
+  });
 
   console.log('Database has been seeded!');
 };
@@ -88,8 +86,19 @@ seedDatabase().then(() => {
   mongoose.connection.close();
 });
 
-const port = process.env.PORT || 8080;
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+// Error handling for MongoDB connection
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
 });
+
+// Start the server after establishing the MongoDB connection
+mongoose.connection.once('open', () => {
+  console.log('MongoDB connection established');
+  
+  const port = process.env.PORT || 8080;
+
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+});
+
