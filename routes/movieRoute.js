@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { MovieModel } = require('../models/MovieModel');
 const listEndpoints = require("express-list-endpoints");
-import netflixData from "../data/netflix-titles.json"; // Dataset
+// import netflixData from "../data/netflix-titles.json"; // Dataset
 
 // ------------ SEEDING DATABSE ------------ //
 // This is here to make sure that the database is reset every time the server is restarted. I have commented it out because I don't want to reset the database every time I restart the server but I want to be able to use it if I need to.
@@ -20,10 +20,10 @@ import netflixData from "../data/netflix-titles.json"; // Dataset
 
 // ------------ ROUTES ------------ //
 router.get("/", (req, res) => {
-    // Define your route logic here
-    res.send(listEndpoints(router));
+    res.send(listEndpoints(router)); // Displays all available endpoints in json
 });
 
+// Gets all the movies from the dataset
 router.get("/movies", (req, res) => {
     MovieModel.find()
         .then(movies => {
@@ -40,8 +40,8 @@ router.get("/movies", (req, res) => {
 
 // Gets an individual movie based on its id. 
 router.get("/movies/:id", (req, res) => {
-    const movieID = parseInt(req.params.id); // Gets the id from the params
-    MovieModel.findOne({ show_id: movieID }).then(movie => { // Checks if the id from the param is the same as the show_id, if it then it's displayed in json. Findone, because I only want one result.
+    const movieID = req.params.id; // Gets the id from the params
+    MovieModel.findOne({ _id: movieID }).then(movie => { // Checks if the id from the param is the same as the show_id, if it then it's displayed in json. Findone, because I only want one result.
         if (movie) {
             res.json(movie);
         } else {
@@ -91,58 +91,5 @@ router.get("/movies/title/:title", (req, res) => {
             res.status(500).json({ error: "Something went wrong, please try again. If your having problems with the query, check the readme for further instructions." });
         });
 });
-
-
-
-// router.post("/add", async (req, res) => {
-//     const newMovieTitle = req.body.title
-//     await MovieModel.create({ newMovieTitle: title })
-//         .then((result) => res.json(result))
-//         .catch((error) => res.status(500).json({ error: "Something went wrong, please try again." }));
-// });
-
-// router.put("/update/:id", async (req, res) => {
-//     const { id } = req.params;
-//     console.log(id);
-
-//     await MovieModel.findByIdAndUpdate({ _id: id }, { done: true })
-//         .then((result) => res.json(result))
-//         .catch((error) => res.status(500).json({ error: "Something went wrong, please try again." }));
-// });
-
-// router.delete("/delete/:id", async (req, res) => {
-//     const { id } = req.params;
-
-//     await MovieModel.findByIdAndDelete(id)
-//         .then((result) => {
-//             if (result) {
-//                 res.json({
-//                     message: `Movie with id ${id} was deleted successfully`,
-//                     deletedMovie: result
-//                 });
-//             } else {
-//                 res.status(404).json({ error: `Movie with id ${id} not found. Having troubles finding the movie? Make sure you switch out ':id' for the id you wish to base your query on` });
-//             }
-//         })
-//         .catch((error) => {
-//             res.status(500).json({ error: "Something went wrong, please try again." });
-//         });
-// });
-
-// router.delete("/deleteAll", async (req, res) => {
-//     try {
-//         const result = await MovieModel.deleteMany();
-//         if (result.deletedCount > 0) {
-//             res.json({
-//                 message: `All movies were deleted successfully`,
-//                 deletedCount: result.deletedCount
-//             });
-//         } else {
-//             res.status(404).json({ error: `No movies found. There are no movies to delete.` });
-//         }
-//     } catch (error) {
-//         res.status(500).json({ error: "Something went wrong, please try again." });
-//     }
-// });
 
 module.exports = router;
