@@ -1,24 +1,24 @@
+// ------------ IMPORTS ------------ //
 const express = require('express');
 const router = express.Router();
 const { MovieModel } = require('../models/MovieModel');
 const listEndpoints = require("express-list-endpoints");
+import netflixData from "../data/netflix-titles.json"; // Dataset
 
-// Dataset
-import netflixData from "../data/netflix-titles.json";
-
-// The if statement here is to make sure that the database is reset every time the server is restarted. I have commented it out because I don't want to reset the database every time I restart the server.
+// ------------ SEEDING DATABSE ------------ //
+// This is here to make sure that the database is reset every time the server is restarted. I have commented it out because I don't want to reset the database every time I restart the server but I want to be able to use it if I need to.
 // if (process.env.RESET_DB) {
-const seedDatabase = async () => {
-    await MovieModel.deleteMany({})
+// const seedDatabase = async () => {
+//     await MovieModel.deleteMany({})
 
-    netflixData.forEach((netflixItem) => {
-        new MovieModel(netflixItem).save()
-    });
-}
-seedDatabase()
+//     netflixData.forEach((netflixItem) => {
+//         new MovieModel(netflixItem).save()
+//     });
+// }
+// seedDatabase()
 // }
 
-// Define your routes using router
+// ------------ ROUTES ------------ //
 router.get("/", (req, res) => {
     // Define your route logic here
     res.send(listEndpoints(router));
@@ -93,13 +93,6 @@ router.get("/movies/title/:title", (req, res) => {
 });
 
 
-
-// const router = express.router();
-// router.get("/get", async (req, res) => {
-//     await MovieModel.find()
-//         .then((result) => res.json(result))
-//         .catch((error) => res.status(500).json({ error: "Something went wrong, please try again." }));
-// });
 
 // router.post("/add", async (req, res) => {
 //     const newMovieTitle = req.body.title
