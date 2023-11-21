@@ -1,17 +1,18 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import dotenv from 'dotenv';
+import express from "express"
+import cors from "cors"
+import mongoose from "mongoose"
+import dotenv from 'dotenv'
 
+// Load configuration variables from the .env file into process.env with purpose to keep sensitive inormation
 dotenv.config()
 
 // Import of dataset
 import booksData from "./data/books.json"
 
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+// Access the MONGO_URL environment variable, connects to MongoDB using Mongoose and sets Mongoose to use native JavaScript promises
+const mongoUrl = process.env.MONGO_URL
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.Promise = Promise
 
 // Creates mongoose model with the name "Book"
 const Books = mongoose.model("Book", {
@@ -42,32 +43,32 @@ seedDatabase()
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
-const listEndpoints = require("express-list-endpoints");
+const port = process.env.PORT || 8080
+const app = express()
+const listEndpoints = require("express-list-endpoints")
 
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
 // ***** Defining routes starts here *****
 // Route for documentation and "/" with endpoints
 app.get("/", (req, res) => {
-  res.send(listEndpoints(app));
-});
+  res.send(listEndpoints(app))
+})
 
 // Route to get a array of all books
 app.get("/books", async (req, res) => {
   try {
     // Fetch all books from the database
-    const allBooks = await Books.find();
+    const allBooks = await Books.find()
 
     // Send the array of books as a JSON response
-    res.json(allBooks);
+    res.json(allBooks)
   } catch (error) {
     // If there is an error, send an error response
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error" })
   }
 });
 
@@ -75,26 +76,26 @@ app.get("/books", async (req, res) => {
 app.get("/books/:bookID", async (req, res) => {
   try {
     // Extract the bookID from the request parameters
-    const { bookID } = req.params;
+    const { bookID } = req.params
 
     // Fetch the book from the database based on the bookID
-    const singleBook = await Books.findOne({ bookID: parseInt(bookID) });
+    const singleBook = await Books.findOne({ bookID: parseInt(bookID) })
 
     // Check if the book was found
     if (singleBook) {
       // Send the book as a JSON response
-      res.json(singleBook);
+      res.json(singleBook)
     } else {
       // If the book with the specified ID is not found, send a 404 response
-      res.status(404).json({ error: "Book not found, try another number" });
+      res.status(404).json({ error: "Book not found, try another number" })
     }
   } catch (error) {
     // If there is an error, send an error response
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error" })
   }
-});
+})
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`)
 });
