@@ -4,8 +4,19 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 
+// Set strictQuery to false to address the deprecation warning
+mongoose.set('strictQuery', false);
+
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/birds';
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
+
 mongoose.Promise = Promise;
 
 const BirdFamily = mongoose.model('BirdFamily', {
