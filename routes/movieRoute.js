@@ -49,22 +49,30 @@ router.get("/movies/:id", (req, res) => {
         }
     })
         .catch(error => {
-            res.status(500).json({ error: "Something went wrong, please try again." });
+            res.status(500).json({ error: "Something went wrong, please try again. If your having problems with the query, check the readme for further instructions." });
         });
 });
 
 // Gets all movies with the release year searched for in the querystring. 
 router.get("/movies/year/:year", (req, res) => {
     const releaseYear = parseInt(req.params.year); // Gets the id from the params
-    MovieModel.find({ release_year: releaseYear }).then(year => { // Checks if the id from the param is the same as the show_id, if it then it's displayed in json
-        if (year.length > 0) {
-            res.json(year);
-        } else {
-            res.status(404).json({ error: `Movie with the release date ${releaseYear} wasn't found` });
-        }
-    })
+
+    // An extra error message to provide a better user experience.
+    if (isNaN(releaseYear)) {
+        res.status(400).json({ error: "Please enter a valid year, in place of the \":year\"-placeholder, in the URL field" });
+        return;
+    }
+
+    MovieModel.find({ release_year: releaseYear })
+        .then(year => { // Checks if the release_year from the param is the same as the release_year, if it is, then it's displayed in json.
+            if (year.length > 0) { // Checks if a movie was found
+                res.json(year);
+            } else {
+                res.status(404).json({ error: `Movie with the release date ${releaseYear} wasn't found` });
+            }
+        })
         .catch(error => {
-            res.status(500).json({ error: "Internal Server Error" });
+            res.status(500).json({ error: "Something went wrong, please try again. If your having problems with the query, check the readme for further instructions." });
         });
 });
 
@@ -73,14 +81,14 @@ router.get("/movies/title/:title", (req, res) => {
     const titleQuery = req.params.title.toLowerCase();
     MovieModel.find({ title: { $regex: titleQuery, $options: "i" } }) // Query-filter. Search is performed on "title", titleQuery is the regex pattern searched for, options: "i" makes the search case-insensitive
         .then(movies => {
-            if (movies) {
+            if (movies.length > 0) {
                 res.json(movies);
             } else {
                 res.status(404).json({ error: `No movies found with the word '${titleQuery}' in the title` });
             }
         })
         .catch(error => {
-            res.status(500).json({ error: "Internal Server Error" });
+            res.status(500).json({ error: "Something went wrong, please try again. If your having problems with the query, check the readme for further instructions." });
         });
 });
 
