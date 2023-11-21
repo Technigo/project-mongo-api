@@ -8,7 +8,7 @@ import booksData from './data/books.json';
 
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/8080";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 const connectWithRetry = () => {
   mongoose
     .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
