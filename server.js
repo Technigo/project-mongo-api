@@ -1,35 +1,147 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import listEndpoints from 'express-list-endpoints';
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/birds';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
+const BirdFamily = mongoose.model('BirdFamily', {
+  name: String,
+  habitat: String,
+  diet: String,
+  averageLifespan: Number,
+});
+
+const Bird = mongoose.model('Bird', {
+  name: String,
+  family: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BirdFamily',
+  },
+  habitat: String,
+  diet: String,
+  averageLifespan: Number,
+});
+
+if (process.env.RESET_DATABASE) {
+  console.log('Resetting database!');
+  const seedDatabase = async () => {
+    await BirdFamily.deleteMany();
+    await Bird.deleteMany();
+
+    //collection of birds in bird families 
+    const parrots = new BirdFamily({
+      name: 'Parrots',
+      habitat: 'Various',
+      diet: 'Seeds and Fruits',
+      averageLifespan: 30,
+    });
+    await parrots.save();
+
+    const eagles = new BirdFamily({
+      name: 'Eagles',
+      habitat: 'Mountainous',
+      diet: 'Fish and Small Mammals',
+      averageLifespan: 25,
+    });
+    await eagles.save();
+
+    await new Bird({
+      name: 'African Grey Parrot',
+      family: parrots,
+      habitat: 'Rainforest',
+      diet: 'Seeds',
+      averageLifespan: 40,
+    }).save();
+
+    await new Bird({
+      name: 'Amazon Parrot',
+      family: parrots,
+      habitat: 'Jungle',
+      diet: 'Fruits',
+      averageLifespan: 50,
+    }).save();
+
+    await new Bird({
+      name: 'Bald Eagle',
+      family: eagles,
+      habitat: 'Mountainous regions',
+      diet: 'Fish',
+      averageLifespan: 20,
+    }).save();
+
+    await new Bird({
+      name: 'Golden Eagle',
+      family: eagles,
+      habitat: 'Mountainous regions',
+      diet: 'Small mammals',
+      averageLifespan: 25,
+    }).save();
+
+  };
+
+  seedDatabase();
+}
+
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+// New endpoint to list all endpoints
+app.get('/', (req, res) => {
+  const endpoints = listEndpoints(app);
+  res.json({ endpoints });
+});
+//gets all the families
+app.get('/families', async (req, res) => {
+  const families = await BirdFamily.find();
+  res.json(families);
 });
 
-// Start the server
+//gets the families and then a single bird by id 
+app.get('/families/:id', async (req, res) => {
+  const family = await BirdFamily.findById(req.params.id);
+  if (family) {
+    res.json(family);
+  } else {
+    res.status(404).json({ error: 'Bird family not found' });
+  }
+});
+
+//get the birds based ont their habitat
+app.get('/habitat/:habitat', async (req, res) => {
+  try {
+    const birds = await Bird.find({ habitat: req.params.habitat }).populate('family');
+    res.json(birds);
+  } catch (error) {
+    console.error('Error fetching birds by habitat:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+//get the birds based ont their diet
+app.get('/diet/:diet', async (req, res) => {
+  try {
+    const birds = await Bird.find({ diet: req.params.diet }).populate('family');
+    res.json(birds);
+  } catch (error) {
+    console.error('Error fetching birds by habitat:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+//get all the birds
+app.get('/birds', async (req, res) => {
+  const birds = await Bird.find().populate('family');
+  res.json(birds);
+});
+
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
