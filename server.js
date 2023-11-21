@@ -5,8 +5,6 @@ import dotenv from 'dotenv';
 import listEndpoints from 'express-list-endpoints';
 import Book from './models/book';
 import booksData from './data/books.json'; 
-
-// Load environment variables
 dotenv.config();
 
 // MongoDB Connection with retry logic
@@ -75,7 +73,9 @@ app.post('/books', async (req, res) => {
 
 // Seed the database (execute cautiously)
 
-seedDatabase();
+if (process.env.RESET_DB === 'true') {
+  seedDatabase();
+}
 
 // Start the server
 const port = process.env.PORT || 8080;
