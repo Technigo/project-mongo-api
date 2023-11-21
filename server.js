@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
+import listEndpoints from "express-list-endpoints";
 import booksData from "./data/books.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -21,8 +22,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Start defining your routes here
+// Endpoint "/" to return documentation of API using Express List Endpoints
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  const endpoints = listEndpoints(app);
+  res.json({ endpoints });
 });
 
 // Start the server
