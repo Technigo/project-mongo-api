@@ -1,18 +1,10 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+import listEndpoints from "express-list-endpoints";
+import booksData from "./data/books.json";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -24,9 +16,34 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/Project_MongoDB";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
+
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
+});
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json(listEndpoints(app));
+});
+
+app.get("books/:bookId", async (req, res) => {
+  try {
+    const book = await UserActivation.findById(req.params.id);
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).json({ error: "Book not found" });
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Invalid book id" });
+  }
 });
 
 // Start the server
