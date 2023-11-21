@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
-import booksData from './data/books.json';
 import listEndpoints from 'express-list-endpoints';
 import Book from './models/book'; // Adjust the path to your Book model
 
