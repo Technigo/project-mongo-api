@@ -4,6 +4,16 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 
+// Require dotenv only for development, not needed for production with hard-coded connection string
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+// Use hard-coded connection string during development or specific scenarios
+const uri = process.env.NODE_ENV === 'production'
+  ? process.env.MONGODB_URI
+  : "mongodb+srv://robertiniisa:<password>@cluster0.rgjich4.mongodb.net/?retryWrites=true&w=majority";
+
 // Set strictQuery to false to address the deprecation warning
 mongoose.set('strictQuery', false);
 
@@ -151,7 +161,6 @@ app.get('/birds', async (req, res) => {
   const birds = await Bird.find().populate('family');
   res.json(birds);
 });
-
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
