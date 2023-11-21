@@ -32,6 +32,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
   const endpoints = listEndpoints(app);
@@ -68,6 +69,12 @@ app.post('/books', async (req, res) => {
   }
 });
 
+
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
 // Data Seeding
 const seedDatabase = async () => {
   await Book.deleteMany({}); // Clears the existing books collection
@@ -79,13 +86,3 @@ const seedDatabase = async () => {
 
   console.log('Database has been seeded!');
 };
-
-seedDatabase().then(() => {
-  mongoose.connection.close();
-});
-
-const port = process.env.PORT || 8080;
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
