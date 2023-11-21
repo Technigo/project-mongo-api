@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import listEndpoints from 'express-list-endpoints';
 import Book from './models/book';
 import booksData from './data/books.json'; 
+
 dotenv.config();
 
 // MongoDB Connection with retry logic
@@ -18,22 +19,17 @@ const connectWithRetry = () => {
     });
 };
 
-// Call the connection function
 connectWithRetry();
 
-// Set Mongoose to use ES6 Promises and address deprecation warning
 mongoose.Promise = Promise;
-mongoose.set('strictQuery', true); // Add this line to address the deprecation warning
+mongoose.set('strictQuery', true); // Address the deprecation warning
 
-// Initialize Express app
 const app = express();
 
-// Apply middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Root route showing available endpoints
 app.get('/', (req, res) => {
   res.json({ endpoints: listEndpoints(app) });
 });
@@ -44,6 +40,7 @@ app.get('/books', async (req, res) => {
     const books = await Book.find();
     res.json(books);
   } catch (error) {
+    console.error('Error fetching books:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -57,6 +54,7 @@ app.get('/books/:id', async (req, res) => {
       res.status(404).json({ error: 'Book not found' });
     }
   } catch (error) {
+    console.error('Error fetching book by ID:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -67,12 +65,12 @@ app.post('/books', async (req, res) => {
     const savedBook = await newBook.save();
     res.status(201).json(savedBook);
   } catch (error) {
+    console.error('Error saving new book:', error);
     res.status(400).json({ error: error.message });
   }
 });
 
 // Seed the database (execute cautiously)
-
 if (process.env.RESET_DB === 'true') {
   seedDatabase();
 }
@@ -80,7 +78,7 @@ if (process.env.RESET_DB === 'true') {
 // Start the server
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });
 
 // Function to seed the database with error handling
