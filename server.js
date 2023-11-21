@@ -9,8 +9,6 @@ import booksData from './data/books.json';
 dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/8080";
-
-// Function to establish MongoDB connection with retries
 const connectWithRetry = () => {
   mongoose
     .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -86,19 +84,8 @@ seedDatabase().then(() => {
   mongoose.connection.close();
 });
 
-// Error handling for MongoDB connection
-mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
-
-// Start the server after establishing the MongoDB connection
-mongoose.connection.once('open', () => {
-  console.log('MongoDB connection established');
-  
-  const port = process.env.PORT || 8080;
-
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-  });
-});
-
