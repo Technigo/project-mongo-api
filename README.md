@@ -9,7 +9,7 @@ To run this project, you will need to add the following environment variables to
 
 `MONGO_URL` - Get your Conncection String from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register). 
 
-`RESET_DB` - if you choose to uncomment that part of the seedDatabase function. 
+`RESET_DB` - If you choose to uncomment that part of the seedDatabase-function. 
 ## API Reference
 
 #### Get all movies
@@ -20,7 +20,7 @@ To run this project, you will need to add the following environment variables to
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
+| `movies` | `string` | Lists all movies |
 
 #### Get one movie
 
