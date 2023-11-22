@@ -47,17 +47,28 @@ app.get("/", (req, res) => {
 });
 
 app.get('/books', (req, res) => {
-  res.json(booksData)
+  try {
+    const books = await Book.find()
+    res.json(books)
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
 })
 
-app.get('/books/:id', (req, res) => {
-  const id = req.params.id
-  const book = booksData.find(b => b.bookID == id) // find book with id
+app.get('/books/:id', async (req, res) => {
+  // const id = req.params.id
+  // const book = booksData.find(b => b.bookID == id) // find book with id
 
-  if (book) {
-    res.json(book)
-  } else {
-    res.status(404).send('there is no such thing like that')
+  
+  try {
+    const book = await Book.findById(req.params.id)
+    if (book) {
+      res.json(book)
+    } else {
+      res.status(404).send('there is no such thing like that')
+    }
+  } catch (error) {
+    
   }
 })
 
