@@ -4,20 +4,11 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 
-// Require dotenv only for development, not needed for production with hard-coded connection string
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+require('dotenv').config();
 
-// Use hard-coded connection string during development or specific scenarios
-const uri = process.env.NODE_ENV === 'production'
-  ? process.env.MONGODB_URI
-  : "mongodb+srv://robertiniisa:<password>@cluster0.rgjich4.mongodb.net/?retryWrites=true&w=majority";
 
-// Set strictQuery to false to address the deprecation warning
-mongoose.set('strictQuery', false);
+const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/birds';
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/birds';
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -29,6 +20,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 mongoose.Promise = Promise;
 
+// Define Mongoose model for BirdFamily collection in MongoDB
 const BirdFamily = mongoose.model('BirdFamily', {
   name: String,
   habitat: String,
@@ -36,6 +28,7 @@ const BirdFamily = mongoose.model('BirdFamily', {
   averageLifespan: Number,
 });
 
+// Define Mongoose model for Bird collection in MongoDB
 const Bird = mongoose.model('Bird', {
   name: String,
   family: {
