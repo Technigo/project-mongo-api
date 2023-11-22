@@ -24,6 +24,7 @@ Description: Replace ":bookID" with an id of your choice
 
 ## Connect with Me
 
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-blue?style=flat-square&logo=github)](https://github.com/IdahCollin)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/idah-collin)
+[![GitHub](https://img.shields.io/badge/GitHub-blue?style=flat-square&logo=github)](https://github.com/IdahCollin)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/idah-collin)
+
 [My portfolio](https://idah-collin-portfolio.netlify.app/)
