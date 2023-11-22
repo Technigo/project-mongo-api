@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 
 require('dotenv').config();
-
+mongoose.set('strictQuery', false);
 
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/birds';
 
