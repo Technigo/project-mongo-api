@@ -22,32 +22,40 @@ const NetflixTitle = mongoose.model('NetflixTitle', {
   // other properties...
 });
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    try {
-      await NetflixTitle.deleteMany({});
-      await Promise.all(netflixData.map(titleData => new NetflixTitle(titleData).save()));
+// Check MongoDB connection before seeding
+mongoose.connection.on('connected', () => {
+  if (process.env.RESET_DB) {
+    seedDatabase();
+  }
+});
 
-      console.log('Database seeded successfully.');
-    } catch (error) {
-      console.error('Error seeding database:', error.message);
+// Seed database function
+const seedDatabase = async () => {
+  try {
+    await NetflixTitle.deleteMany({});
+
+    for (const titleData of netflixData) {
+      await new NetflixTitle(titleData).save();
     }
-  };
 
-  seedDatabase();
-}
+    console.log('Database seeded successfully.');
+  } catch (error) {
+    console.error('Error seeding database:', error.message);
+  }
+};
 
 app.get('/', (req, res) => {
-  res.send('Hello Technigo!');
+  const endpoints = expressListEndpoints(app);
+  res.json(endpoints);
 });
 
 app.get('/netflix-titles', async (req, res) => {
   try {
     const titles = await NetflixTitle.find();
-    res.json(titles);
+    res.status(200).json(titles);
   } catch (error) {
     console.error('Error fetching Netflix titles:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
   }
 });
 
@@ -55,18 +63,13 @@ app.get('/netflix-titles/:id', async (req, res) => {
   try {
     const title = await NetflixTitle.findById(req.params.id);
     if (!title) {
-      return res.status(404).json({ message: 'Title not found' });
+      return res.status(404).json({ error: 'Not Found', message: 'Title not found' });
     }
-    res.json(title);
+    res.status(200).json(title);
   } catch (error) {
     console.error('Error fetching Netflix title by ID:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
   }
-});
-
-app.get('/documentation', (req, res) => {
-  const endpoints = expressListEndpoints(app);
-  res.json(endpoints);
 });
 
 app.listen(port, () => {
