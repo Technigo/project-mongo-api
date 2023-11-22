@@ -10,7 +10,7 @@ dotenv.config()
 import booksData from "./data/books.json"
 
 // Access the MONGO_URL environment variable, connects to MongoDB using Mongoose and sets Mongoose to use native JavaScript promises
-const mongoUrl = process.env.MONGO_URL
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
