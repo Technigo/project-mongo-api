@@ -80,14 +80,14 @@ app.get('/books/:id', async (req, res) => {
 
   
   try {
-    const book = await Book.findById(req.params.id)
+    const book = await Book.findOne({ bookID: req.params.id })
     if (book) {
       res.json(book)
     } else {
       res.status(404).send('there is no such thing like that')
     }
   } catch (error) {
-    
+    res.status(500).json({ error: error.message })
   }
 })
 
