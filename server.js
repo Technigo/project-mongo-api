@@ -23,9 +23,11 @@ if (process.env.RESET_DATABASE == 'true') {
   const seedDatabase = async () => {
     await Book.deleteMany({})
 
-    booksData.forEach((bookData) => {
-      new Book(bookData).save()
-    })
+    // booksData.forEach((bookData) => {
+    //   new Book(bookData).save()
+    // })
+
+    await Promise.all(booksData.map(bookData => new Book(bookData).save()))
   }
 
   seedDatabase()
