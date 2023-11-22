@@ -30,17 +30,23 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number
 })
 
+const seedDatabase = async () => {
+  console.log("Starting database seeding...")
+  await Book.deleteMany({})
+  console.log("Existing books deleted.")
+
+  // booksData.forEach((bookData) => {
+  //   new Book(bookData).save()
+  // })
+
+  await Promise.all(booksData.map(bookData => new Book(bookData).save()))
+  .then(() => console.log("Database seeded successfully"))
+  .catch(err => console.error("Error seeding database:", err))
+}
+
+
 if (process.env.RESET_DATABASE == 'true') {
-  const seedDatabase = async () => {
-    await Book.deleteMany({})
-
-    // booksData.forEach((bookData) => {
-    //   new Book(bookData).save()
-    // })
-
-    await Promise.all(booksData.map(bookData => new Book(bookData).save()))
-  }
-
+  
   seedDatabase()
 }
 
