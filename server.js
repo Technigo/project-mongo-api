@@ -12,7 +12,9 @@ import booksData from "./data/books.json";
 // import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.error("MongoDB connection error:", err))
 mongoose.Promise = Promise;
 
 const Book = mongoose.model('Book', {
