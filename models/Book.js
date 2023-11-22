@@ -7,17 +7,17 @@ export const bookSchema = new Schema({
         type: String,
         minLength: 4
     },
-    author: {
+    authors: {
         type: String,
         minLength: 4
     },
-    language: String,
-    rating: Number,
+    average_rating: Number,
+    language_code: String,
     isbn: {
         type: Number,
         minLength: 9
     },
-    numberOfPages: {
+    num_pages: {
         type: Number,
         min: 3
     }
