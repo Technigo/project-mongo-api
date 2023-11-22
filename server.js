@@ -19,7 +19,7 @@ const Book = mongoose.model('Book', {
   // something
 })
 
-if (process.env.RESET_DB == 'true') {
+if (process.env.RESET_DATABASE == 'true') {
   const seedDatabase = async () => {
     await Book.deleteMany({})
 
