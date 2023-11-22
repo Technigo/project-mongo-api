@@ -10,8 +10,10 @@ import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Error connecting to MongoDB: ", err));
+
 
 // Mongoose model for Show
 const Show = mongoose.model('Show', {
@@ -33,6 +35,7 @@ const Show = mongoose.model('Show', {
 // Seeding function
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
+    console.log("Running seeding script...");
     await Show.deleteMany({});
 
     netflixData.forEach((showData) => {
@@ -70,6 +73,35 @@ app.get("/api/shows", async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+// Endpoint to get a single show by ID
+app.get("/api/shows/:id", async (req, res) => {
+  try {
+    const show = await Show.findOne({ show_id: req.params.id });
+    if (show) {
+      res.json(show);
+    } else {
+      res.status(404).json({ error: "Show not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Endpoint to get shows by release year
+app.get("/api/shows/year/:year", async (req, res) => {
+  try {
+    const shows = await Show.find({ release_year: req.params.year });
+    if (shows.length > 0) {
+      res.json(shows);
+    } else {
+      res.status(404).json({ error: "No shows found for this year" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 // Start the server
 app.listen(port, () => {
