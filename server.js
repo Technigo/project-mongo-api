@@ -9,7 +9,7 @@ import booksData from './data/books.json';
 dotenv.config();
 
 // MongoDB Connection with retry logic
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "project-mongo";
 const connectWithRetry = () => {
   mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
