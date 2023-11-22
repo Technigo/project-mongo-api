@@ -20,6 +20,7 @@ router.get("/books", async (req, res) => {
 
 // Define a route to add a new book
 router.post("/add", async (req, res) => {
+    const bookID = req.body.bookID;
     const title = req.body.title;
     const authors = req.body.authors;
     const language_code = req.body.language_code;
@@ -28,6 +29,7 @@ router.post("/add", async (req, res) => {
     const num_pages = req.body.num_pages;
 
     await BookModel.create({ 
+        bookID: bookID,
         title: title,
         authors: authors,
         language_code: language_code,
