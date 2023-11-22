@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
   res.json(listEndpoints(app));
 });
 
-app.get('/books', (req, res) => {
+app.get('/books', async (req, res) => {
   try {
     const books = await Book.find()
     res.json(books)
