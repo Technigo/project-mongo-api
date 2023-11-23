@@ -8,4 +8,5 @@ router.route("/latest-filmes").get(filmsController.aliasLatestMovies, filmsContr
 router.route("/movies").get(filmsController.getMovies);
 router.route("/title/:title").get(filmsController.getFilm);
 router.route("/").get(filmsController.getAllFilms);
+
 module.exports = router;

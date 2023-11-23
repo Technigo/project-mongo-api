@@ -16,7 +16,7 @@ app.use("/", (req, res) => {
 });
 
 app.all("*", (req, res, next) => {
-  res.status(404).json({ status: "fail", message: "Something went very wrong 💥 " });
+  res.status(400).json({ status: "fail", message: "Something went very wrong 💥 " });
   next();
 });
 
