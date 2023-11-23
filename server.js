@@ -45,8 +45,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-
+// Defining my routes below
 // Root endpoint - Returns all available endpoints
 app.get("/", (req, res) => {
   res.json(listEndpoints(app));
@@ -87,7 +86,6 @@ app.get("/books/:bookId", async (req, res) => {
     res.status(404).json({ message: "Book not found" });
   }
 });
-
 
 // Start the server
 app.listen(port, () => {
