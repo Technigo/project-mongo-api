@@ -1,19 +1,24 @@
 const { default: mongoose } = require("mongoose");
 
 const filmSchema = new mongoose.Schema({
-  director: String,
-  show_id: Number,
-  title: String,
-  country: String,
-  cast: String,
-  release_year: Number,
-  description: String,
-  cast: String,
-  date_added: String,
-  rating: String,
-  duration: String,
-  listed_in: String,
-  type: String,
+  director: { type: String },
+  show_id: { type: Number },
+  title: { type: String, require: [true, "A film must has a title"] },
+  country: { type: String },
+  cast: { type: String },
+  release_year: { type: Number },
+  description: { type: String },
+  date_added: { type: String, default: new Date() },
+  rating: { type: String },
+  duration: { type: String },
+  listed_in: { type: String },
+  type: {
+    type: String,
+    enum: {
+      values: ["Movie", "TV Show"],
+      message: "Type is either : Movie or TV Show",
+    },
+  },
 });
 
 const Film = mongoose.model("films", filmSchema);

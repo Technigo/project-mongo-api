@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import express from "express";
+
 const dotenv = require("dotenv");
 const app = require("./app");
 dotenv.config({ path: "./.env" });
@@ -12,8 +12,6 @@ mongoose.set("strictQuery", false);
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((con) => console.log("connected"));
-
-// mongoose.Promise = Promise;
 
 const port = process.env.PORT || 8080;
 

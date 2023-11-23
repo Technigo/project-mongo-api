@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+const listEndpoints = require("express-list-endpoints");
 
 const app = express();
 
@@ -10,8 +11,12 @@ const filmsRouter = require("./routes/filmsRoutes");
 
 app.use("/api/v1/", filmsRouter);
 
+app.use("/", (req, res) => {
+  res.json(listEndpoints(app));
+});
+
 app.all("*", (req, res, next) => {
-  res.status(404).json({ status: "fail", message: "Something went wrong 💥 " });
+  res.status(404).json({ status: "fail", message: "Something went very wrong 💥 " });
   next();
 });
 

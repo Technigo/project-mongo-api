@@ -6,7 +6,8 @@ class APIFeatures {
 
   filter() {
     const queryObj = { ...this.queryString };
-
+    const excludedFields = ["page", "sort", "limit", "fields"];
+    excludedFields.forEach((el) => delete queryObj[el]);
     this.query = this.query.find(queryObj);
 
     return this;
@@ -20,15 +21,6 @@ class APIFeatures {
       this.query = this.query.sort("-date_added");
     }
     return this;
-  }
-
-  limitFields() {
-    if (this.queryString.fields) {
-      const fields = this.queryString.fields.split(",").join(" ");
-      this.query = this.query.select(fields);
-    } else {
-      this.query = this.query.select("-_id");
-    }
   }
 
   paginate() {
