@@ -10,7 +10,7 @@ import Book from './models/book'; // The Mongoose model for a Book
 
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/mongo-api";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:127.0.0.1:27017/mongo-api";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
   console.log('MongoDB connected');
   if (process.env.RESET_DB) {
