@@ -2,11 +2,13 @@ import mongoose from "mongoose";
 
 const dotenv = require("dotenv");
 const app = require("./app");
-dotenv.config({ path: "./.env" });
+dotenv.config({ path: "./config.env" });
 
 // import data from "./data/netflix-titles.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/project-mongo";
+const mongoUrl =
+  process.env.MONGO_URL.replace("<PASSWORD>", process.env.DATABASE_PASSWORD) ||
+  "mongodb://localhost:27017/project-mongo";
 
 mongoose.set("strictQuery", false);
 mongoose
