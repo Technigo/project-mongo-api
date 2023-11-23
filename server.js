@@ -32,8 +32,8 @@ app.use(express.urlencoded({ extended: false})) //Cool method according to Diego
 
 //Seeding the database
 //RESET_DB=true npm run dev
-if (process.env.RESET_DB) {
-  console.log("Resetting database!")
+// if (process.env.RESET_DB) {
+  // console.log("Resetting database!")
 
   const seedDatabase = async () => {
     await BookModel.deleteMany({})
@@ -42,7 +42,7 @@ if (process.env.RESET_DB) {
     })
   }
   seedDatabase()
-}
+// }
 
 //Getting hold of the get/post-methods (routes) through the bookRoutes
 app.use(bookRoutes)
