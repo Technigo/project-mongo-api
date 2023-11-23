@@ -7,8 +7,8 @@ mongoose.set("strictQuery", true);
 import dotenv from "dotenv";
 dotenv.config();
 
-import booksData from "./data/books.json";
-import { BookModel } from "./models/Book";
+// import booksData from "./data/books.json";
+// import { BookModel } from "./models/Book";
 import bookRoutes from "./routes/bookRoutes";
 
 // Seeding the database - comment out this code block once the database has been seeded
