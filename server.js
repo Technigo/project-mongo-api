@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import titleRoutes from "./routes/titleRoutes";
 
 import netflixData from "./data/netflix-titles.json";
 
@@ -19,6 +20,7 @@ const listEndpoints = require("express-list-endpoints");
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+//app.use(express.urlencoded({extended: false}))
 // app.use((req, res, next) => {
 //   mongoose.connection.readyState !== 1
 //     ? next()
@@ -48,6 +50,9 @@ app.use((req, res, next) => {
 //   type: String,
 // });
 
+//#REGION ROUTES
+app.use(titleRoutes);
+//#ENDREGION
 const Title = mongoose.model("Title", {
   show_id: Number,
   title: String,
