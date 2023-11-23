@@ -72,11 +72,13 @@ app.get("/books", async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Default to page 1 if not specified
     const pageSize = parseInt(req.query.pageSize) || 10; // Default to 10 items per page if not specified
 
-    // Calculate the number of items to skip based on the page and pageSize
+  
     const pipeline = [
       {
+      // Sort the book's average_rating from highest to lowest, -1 represents descending order
         $sort: { average_rating: -1 },
       },
+        // Calculate the number of items to skip based on the page and pageSize
       {
         $skip: (page - 1) * pageSize,
       },
@@ -85,7 +87,7 @@ app.get("/books", async (req, res) => {
       },
     ];
 
-    // Sort the book's average_rating from highest to lowest, -1 represents descending order.
+    //aggregate method is used to execute the aggregation pipeline.
     const books = await Book.aggregate(pipeline);
 
     res.status(200).json({
