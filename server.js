@@ -161,6 +161,38 @@ app.delete('/songs/delete/:id', async (req, res) => {
   }
 });
 
+// Endpoint PUT to update data for a song in the database by ID
+app.put('/songs/update/:id', async (req, res) => {
+  try {
+    // Get the song ID from the request parameter
+    const songID = parseInt(req.params.id);
+
+    // Get the updated data from the request body
+    const updatedData = req.body;
+
+    // Check if a song with the given ID exists
+    const existingSong = await Song.findOne({ id: songID });
+
+    // If the song doesn't exist, return a 404 error
+    if (!existingSong) {
+      return res.status(404).json({ error: `Song with id ${songID} not found.` });
+    }
+
+    // Update the song data in the database
+    const updatedSong = await Song.findOneAndUpdate(
+      { id: songID },
+      { $set: updatedData },
+      { new: true }, // Option to return the updated document
+    );
+
+    // Return the updated song data in JSON format
+    res.json(updatedSong);
+  } catch (error) {
+    // Return a 500 error if an unexpected error occurs
+    res.status(500).json({ error: 'Could not update the song.' });
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
