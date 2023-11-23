@@ -19,62 +19,30 @@ const mongoUrl =
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Author = mongoose.model("Author", {
-  name: String,
-});
-
-const Book = mongoose.model("Book", {
+const BookDataModel = mongoose.model("BookData", {
+  bookID: Number,
   title: String,
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Author",
-  },
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
 });
 
 // wrap this part in an inviroment variabel
+
 if (process.env.RESET_DATABASE) {
   const seedDatabase = async () => {
     console.log("Resetting database!");
 
-    // this delete makes the authors just to run ones and not be duplicates
-    await Author.deleteMany();
+    await BookDataModel.deleteMany({});
 
-    const tolkien = new Author({ name: "J.R.R Tolkien" });
-    await tolkien.save();
-
-    const rowling = new Author({ name: "J.K Rowling" });
-    await rowling.save();
-
-    await new Book({
-      title: "Harry Potter and the Philosopher's Stone",
-      author: rowling,
-    }).save();
-    await new Book({
-      title: "Harry Potter and the Chamber of Secrets",
-      author: rowling,
-    }).save();
-    await new Book({
-      title: "Harry Potter and the Prisoner of Azkaban",
-      author: rowling,
-    }).save();
-    await new Book({
-      title: "Harry Potter and the Goblet of Fire",
-      author: rowling,
-    }).save();
-    await new Book({
-      title: "Harry Potter and the Order of the Phoenix",
-      author: rowling,
-    }).save();
-    await new Book({
-      title: "Harry Potter and the Half-Blood Prince",
-      author: rowling,
-    }).save();
-    await new Book({
-      title: "Harry Potter and the Deathly Hallows",
-      author: rowling,
-    }).save();
-    await new Book({ title: "The Lord of the Rings", author: tolkien }).save();
-    await new Book({ title: "The Hobbit", author: tolkien }).save();
+    booksData.forEach(async (book) => {
+      await new BookDataModel(book).save();
+    });
   };
   seedDatabase();
 }
@@ -82,6 +50,7 @@ if (process.env.RESET_DATABASE) {
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
+
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -98,19 +67,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/authors", async (req, res) => {
-  const authors = await Author.find();
+  const authors = await BookDataModel.find();
   res.json(authors);
 });
 
 app.get("/authors/:id", async (req, res) => {
-  const author = await Author.findById(req.params.id);
+  const author = await BookDataModel.findById(req.params.id);
   res.json(author);
 });
 
 app.get("/authors/:id/books", async (req, res) => {
-  const author = await Author.findById(req.params.id);
+  const author = await BookDataModel.findById(req.params.id);
   if (author) {
-    const books = await Book.find({
+    const books = await BookDataModel.find({
       author: mongoose.Types.ObjectId(author.id),
     });
     res.json(books);
@@ -120,11 +89,28 @@ app.get("/authors/:id/books", async (req, res) => {
 });
 
 // I get null on author in this route instead if it's being connected with authors rout. Why?
+
 app.get("/books", async (req, res) => {
   try {
-    const books = await Book.find().populate("author");
-    console.log(books);
-    res.json(books);
+    const booksData = await BookDataModel.find();
+    res.json(booksData);
+  } catch (error) {
+    console.error(error);
+    res.status(404).json({ error: "Data not found" });
+  }
+});
+
+app.get("/books/:bookID", async (req, res) => {
+  const { bookID } = req.params;
+
+  try {
+    const book = await BookDataModel.findOne({ bookID: +bookID });
+
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).json({ error: "Book not found" });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -132,6 +118,7 @@ app.get("/books", async (req, res) => {
 });
 
 // Start the server
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
