@@ -13,9 +13,12 @@ router.get("/", (req, res) => {
 // Define a route to get all the books
 router.get("/books", async (req, res) => {
     // Use the BookModel to find all the books in the database
-    await BookModel.find()
-        .then(result => res.json(result))
-        .catch(error => res.json(error));
+    try {
+        let result = await BookModel.find();
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    } 
 })
 
 // Define a route to get a book based on ID
@@ -61,7 +64,7 @@ router.put("/update/:id", async (req, res) => {
     const { id } = req.params;
     const average_rating = req.body.average_rating;
 
-    await BookModel.findByIdAndUpdate({bookID: id}, {average_rating: average_rating})
+    await BookModel.findByIdAndUpdate(id, {average_rating: average_rating})
         .then(result => res.json(result))
         .catch(error => res.json(error));
 })
@@ -70,7 +73,7 @@ router.put("/update/:id", async (req, res) => {
 router.delete("/delete/:id", async (req, res) => {
     const { id } = req.params;
 
-    await BookModel.findByIdAndDelete({bookID: id})
+    await BookModel.findByIdAndDelete(id)
         .then(result => {
             if (result) {
                 res.json({
