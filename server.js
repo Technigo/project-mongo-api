@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { MensItemsModel } from "./backend/models/MensItem";
 dotenv.config(); // Load environment variables from the .env file
 
 // If you're using one of our datasets, uncomment the appropriate import below
@@ -28,74 +29,66 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//Set the model
-const MensItem = mongoose.model("MensItem", {
-  name: String,
-  category: String,
-  price: Number,
-  currency: String,
-  color: String,
-  size: Array,
-  quantity_sold: Number,
-  quantity_in_stock: Number,
-  isPromotion: Boolean,
+MensItemsModel.deleteMany().then(() => {
+  MensItemsModel.insertMany(mensWearData);
 });
 
-MensItem.deleteMany().then(() => {
-  new MensItem({
-    name: "ULTRA LIGHT DOWN VEST",
-    category: "coats_and_jackets",
-    price: 499.99,
-    currency: "SEK",
-    color: "Blue",
-    size: ["S", "M", "L", "XL"],
-    quantity_sold: 30,
-    quantity_in_stock: 20,
-    isPromotion: true,
-  }).save();
-
-  new MensItem({
-    name: "seamless down 3d cut parka",
-    category: "coats_and_jackets",
-    price: 899.99,
-    currency: "SEK",
-    color: "Black",
-    size: ["M", "L", "XL"],
-    quantity_sold: 15,
-    quantity_in_stock: 10,
-    isPromotion: false,
-  }).save();
-});
-
-// Start defining your routes here
+// Fetch the whole set of data
 app.get("/", async (req, res) => {
-  MensItem.find().then((item) => {
-    res.json(item);
-  });
-});
-
-//Get info by catagories
-app.get("/:category", async (req, res) => {
-  MensItem.find({ category: req.params.category }).then((item) => {
-    if (item) {
-      res.json(item);
-    } else {
-      res.status(404).json({ error: "Item Not found" });
-    }
+  MensItemsModel.find().then((items) => {
+    res.json(items);
   });
 });
 
 //Get the items which are on promotion
 app.get("/promotions", async (req, res) => {
-  MensItem.find({ isPromotion: false })
-    .then((item) => {
-      res.json(item);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    });
+  const items = await MensItemsModel.find({ isPromotion: true });
+  res.json(items);
 });
+
+//Get the items which are on promotion & sort them by the best selling item
+app.get("/promotions/bestSelling", async (req, res) => {
+  const items = await MensItemsModel.find({ isPromotion: true }).sort({
+    quantity_sold: -1,
+  });
+  res.json(items);
+});
+
+//Get the items according to the size
+//Use "$all" operator together with "find ()" method to find matching value in an array
+//If an item only has one of the specified sizes, it won't be included in the result.
+//Note: If we want to return size which mactch either one, we can use $in operator
+//i.e /size?sizes=S should get all items available in Size S
+//i.e /size?sizes=S,XL will return items that are available in both sizes 'S' and 'XL'
+
+app.get("/size", async (req, res) => {
+  const sizes = req.query.sizes;
+  // assuming the user provides sizes as a comma-separated list in the query parameter
+  const sizesArray = sizes.split(",");
+  if (!sizes) {
+    return res
+      .status(400)
+      .json({ error: "Please provide the size you would like" });
+  }
+
+  const items = await MensItemsModel.find({
+    size: { $all: sizesArray },
+  });
+
+  res.json(items);
+});
+
+//Get items by catagories
+app.get("/category/:category", async (req, res) => {
+  const items = await MensItemsModel.find({ category: req.params.category });
+  if (items) {
+    res.json(items);
+  } else {
+    res.status(404).json({ error: "Item Not found" });
+  }
+});
+
+//Get
 
 // Start the server
 app.listen(port, () => {

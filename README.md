@@ -1,12 +1,10 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+A database
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Instead of using the provided database, I tried to generate my own database with chatGPT which is something related to my current work (clothing). It is not as
 
 ## View it live
 
