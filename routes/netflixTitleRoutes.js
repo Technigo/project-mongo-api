@@ -5,12 +5,6 @@ import {NetflixTitleModel, ActorModel, CountryModel} from "../models/NetflixTitl
 // The router method in this code is like setting up a map or a blueprint for handling different kinds of requests in a web application. It helps organize and define how the application should respond when someone visits different URLs. Think of it as creating a list of instructions for the app to follow when it receives specific requests, like "show me all titles" or "register a new user." This makes the code neat and helps the app know what to do when someone interacts with it.
 const router = express.Router();
 
-//---- Documentation of API ----
-// router.get("/", (req, res) => {
-//     const endpoints = listEndpoints(app);
-//     res.json(endpoints)
-//   });
-
 // -------Defining routes for handling GET requests-------
 
 // --- NetflixTitles collection ---
