@@ -7,6 +7,13 @@ const router = express.Router();
 
 // -------Defining routes for handling GET requests-------
 
+// const listEndpoints = require('express-list-endpoints')
+// //---- Documentation of API ----
+// app.get("/", (req, res) => {
+//     const endpoints = listEndpoints(app);
+//     res.json(endpoints)
+//   });
+
 // --- NetflixTitles collection ---
 
 //Retrieving all Netflix titles
