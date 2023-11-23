@@ -25,9 +25,19 @@ import bookRoutes from "./routes/bookRoutes";
 // }
 
 // Connect to the database through Mongoose for local development
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Get the MongoDB connection URL from environment variable
-mongoose.connect(mongoUrl); // Connect to the MongoDB database
+
+const username = process.env.MONGO_USER;
+const rawPassword = process.env.MONGO_PASS; // This is your raw, unencoded password
+
+// Encode the password
+const encodedPassword = encodeURIComponent(rawPassword);
+
+// Construct the connection string
+const connectionString = `mongodb+srv://${username}:${encodedPassword}@hang-cluster.ilbxyac.mongodb.net/project-mongo?retryWrites=true&w=majority`;
+// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Get the MongoDB connection URL from environment variable
+mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}); // Connect to the MongoDB database
 mongoose.Promise = Promise; // Set Mongoose to use ES6 Promises
+
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. PORT is not stored in .env file, rather something copied from Express server. Example command to overwrite PORT env variable value:
