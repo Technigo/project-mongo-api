@@ -14,7 +14,7 @@ exports.getAllFilms = async (req, res) => {
     const films = await features.query;
 
     res.status(200).json({
-      status: 200,
+      status: "success",
       results: films.length,
       data: { films },
     });
@@ -48,7 +48,7 @@ exports.getMovies = async (req, res) => {
     ]);
 
     res.status(200).json({
-      status: 200,
+      status: "success",
       results: movies.length,
       data: { movies },
     });
