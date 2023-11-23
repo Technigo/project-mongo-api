@@ -73,12 +73,44 @@ const seedDatabase = async () => {
   }));
 };
 
-seedDatabase();
+const updateMovies = async () => {
+  try {
+    // Retrieve all casts from the Cast collection
+    const casts = await Cast.find();
+
+    // Loop through each entry in netflixData and update the corresponding movie document
+    for (const entry of netflixData) {
+      // Update the movie document in the MongoDB collection
+      await Movie.updateOne(
+        { title: entry.title },
+        {
+          $set: {
+            cast: entry.cast.split(', ').map((actorName) => {
+              // Find the cast member by name and get their _id
+              const castMember = casts.find((cast) => cast.name === actorName);
+              return castMember ? castMember._id : null;
+            }),
+          },
+        }
+      );
+    }
+
+    console.log('Movies updated successfully!');
+  } catch (error) {
+    console.error('Error updating movies:', error);
+  }
+};
+
+// Call the function to update movies
+updateMovies();
 
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send(listEndpoints(app));
-  
+});
+
+app.get("/home", (req, res) => {
+  res.send(netflixData);
 });
 
 app.get("/movies", async (req, res) => {
@@ -93,11 +125,25 @@ app.get('/movies/cast', async (req, res) => {
 });
 
 app.get('/movies/cast/:id', async (req, res) => {
-  const cast = await Cast.findById(req.params.id);
-  if (cast) {
-    res.json(cast);
-  } else {
-    res.status(404).json({ error: 'Cast not found' });
+  try {
+    console.log('Requested Cast ID:', req.params.id);
+
+    const cast = await Cast.findById(req.params.id);
+    if (!cast) {
+      console.log('Cast not found');
+      return res.status(404).json({ error: 'Cast not found' });
+    }
+
+    // Use populate to retrieve movies information for the given cast
+    const movies = await Movie.find({ cast: cast._id }).populate('cast');
+
+    console.log('Found Cast:', cast);
+    console.log('Movies:', movies);
+
+    res.json({ cast, movies });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
