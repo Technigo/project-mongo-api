@@ -2,25 +2,34 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
+// The keys in schema must match ALL the keys in the json data file, otherwise it won't work!
 export const bookSchema = new Schema({
     bookID: Number,
     title: {
         type: String,
-        minLength: 4
     },
     authors: {
         type: String,
         minLength: 4
     },
     average_rating: Number,
-    language_code: String,
     isbn: {
         type: Number,
         minLength: 9
     },
+    isbn13: {
+        type: Number,
+        minLength: 13
+    },
+    language_code: String,
     num_pages: {
         type: Number,
-        min: 3
+    },
+    ratings_count: {
+        type: Number
+    },
+    text_reviews_count: {
+        type: Number
     }
 }) 
 

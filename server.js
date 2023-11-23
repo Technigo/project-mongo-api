@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+
+mongoose.set("strictQuery", true);
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -8,18 +11,18 @@ import booksData from "./data/books.json";
 import { BookModel } from "./models/Book";
 import bookRoutes from "./routes/bookRoutes";
 
-// Seeding the database
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await BookModel.deleteMany({})
+// Seeding the database - comment out this code block once the database has been seeded
+// if (process.env.RESET_DB) {
+//   const seedDatabase = async () => {
+//     await BookModel.deleteMany({})
 
-    booksData.forEach((bookData) => {
-      new BookModel(bookData).save();
-    });
-  }
+//     booksData.forEach((bookData) => {
+//       new BookModel(bookData).save();
+//     });
+//   }
 
-  seedDatabase();
-}
+//   seedDatabase();
+// }
 
 // Connect to the database through Mongoose for local development
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Get the MongoDB connection URL from environment variable
