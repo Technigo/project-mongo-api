@@ -4,6 +4,9 @@ const filmsController = require("../controllers/filmsControllers");
 
 const router = express.Router();
 
-router.route("/api/v1/films").get(filmsController.getAllFilms);
+router.route("/latest-filmes").get(filmsController.aliasLatestMovies, filmsController.getAllFilms);
+router.route("/movies").get(filmsController.getMovies);
+
+router.route("/").get(filmsController.getAllFilms);
 
 module.exports = router;

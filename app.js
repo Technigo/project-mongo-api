@@ -8,7 +8,7 @@ app.use(express.json());
 
 const filmsRouter = require("./routes/filmsRoutes");
 
-app.use("/", filmsRouter);
+app.use("/api/v1/", filmsRouter);
 
 app.all("*", (req, res, next) => {
   res.status(404).json({ status: "fail", message: "Something went wrong 💥 " });
