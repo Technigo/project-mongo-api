@@ -7,8 +7,6 @@ mongoose.set("strictQuery", true);
 import dotenv from "dotenv";
 dotenv.config();
 
-// import booksData from "./data/books.json";
-// import { BookModel } from "./models/Book";
 import bookRoutes from "./routes/bookRoutes";
 
 // Seeding the database - comment out this code block once the database has been seeded
@@ -34,7 +32,6 @@ const encodedPassword = encodeURIComponent(rawPassword);
 
 // Construct the connection string
 const connectionString = `mongodb+srv://${username}:${encodedPassword}@hang-cluster.ilbxyac.mongodb.net/project-mongo?retryWrites=true&w=majority`;
-// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Get the MongoDB connection URL from environment variable
 mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}); // Connect to the MongoDB database
 mongoose.Promise = Promise; // Set Mongoose to use ES6 Promises
 
