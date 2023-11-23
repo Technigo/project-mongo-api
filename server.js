@@ -26,7 +26,7 @@ import bookRoutes from "./routes/bookRoutes";
 
 // Connect to the database through Mongoose for local development
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Get the MongoDB connection URL from environment variable
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }); // Connect to the MongoDB database
+mongoose.connect(mongoUrl); // Connect to the MongoDB database
 mongoose.Promise = Promise; // Set Mongoose to use ES6 Promises
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
