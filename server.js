@@ -37,7 +37,7 @@ const Show = mongoose.model('Show', {
   type: String
 });
 
- // Seeding function
+ /* Seeding function
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     console.log("Running seeding script...");
@@ -51,7 +51,7 @@ if (process.env.RESET_DB) {
   };
 
   seedDatabase();
-}
+}*/
 
 
 
