@@ -7,43 +7,43 @@ export const bookSchema = new Schema({
   book: {
     bookID: {
       type: Number,
-      required: true,
+      //required: true,
     },
     title: {
       type: String,
-      required: true,
+      //required: true,
     },
     authors: {
       type: String,
-      required: true,
+      //required: true,
     },
     average_rating: {
       type: Number,
-      required: true,
+      //required: true,
     },
     isbn: {
       type: Number,
-      required: true,
+      //required: true,
     },
     isbn13: {
       type: Number,
-      required: true,
+      //required: true,
     },
     language_code: {
       type: String,
-      required: true,
+      //required: true,
     },
     num_pages: {
       type: Number,
-      required: true,
+      //required: true,
     },
     ratings_count: {
       type: Number,
-      required: true,
+      //required: true,
     },
     text_reviews_count: {
       type: Number,
-      required: true,
+      //required: true,
     },
   },
 });
