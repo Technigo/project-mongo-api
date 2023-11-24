@@ -18,8 +18,7 @@ const router = express.Router();
 const listEndpoints = require("express-list-endpoints");
 // Added this line because of the warning "DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7"
 mongoose.set("strictQuery", false);
-const mongoUrl =
-  "mongodb+srv://jjanicecheng:8qytRGt7TaFQao9b@jforjanice.kdzt34w.mongodb.net/?retryWrites=true&w=majority"; // process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
