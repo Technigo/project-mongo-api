@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+we should build an Api with mongoose that had atleats 3 endpoints.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I tried to make a few endpoint for instance one that could sort the shows by year and show them in an order were the newest were displayed at the top but actually i could not get that to work even when i tried diffrent sulotions for it , i then read somewere that it easier to filter and sort in frondend so i draped that endpoint idea and insteda focused on getting the deploy to work.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+I got the deploy to work like 10 min before demos🥳 view it here https://sandras-project-mongo-api.onrender.com
