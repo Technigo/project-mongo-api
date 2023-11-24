@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 import dotenv from "dotenv"
 dotenv.config()
 
-import { songModel } from "./models/song"
+const songModel = require("./models/song")
 const songRoutes = require("./routes/songRoutes")
 
 import data from "../data/top-music.json"
@@ -23,31 +23,19 @@ app.use(cors())
 app.use(express.json()) //Parses incoming JSON-files
 app.use(express.urlencoded({ extended: false })) //Parse arrays and strings
 
-// const listEndpoints = require("express-list-endpoints")
-
 //Check if the database is available/connected (readyState = 1)
-// app.use((req, res, next)=>{
-//   if(mongoose.connection.readyState !== 1){
-//     res.status(503).json({error: "service unavailable"})
-//   } else {
-//     next()
-//   }
-// })
-
-// const ASong = mongoose.model("ASong", {
-//   trackName: String,
-//   artistName: String,
-//   genre: String,
-//   length: Number,
-//   bpm: Number,
-//   energy: Number,
-//   danceability: Number,
-//   popularity: Number
-// })
+app.use((req, res, next)=>{
+  if(mongoose.connection.readyState !== 1){
+    res.status(503).json({error: "service unavailable"})
+  } else {
+    next()
+  }
+})
 
 const seedDataBase = async () => {
   await songModel.deleteMany({})
   data.forEach(song => {
+    console.log(song)
     new songModel(song).save()
   })
 }
