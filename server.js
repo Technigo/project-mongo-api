@@ -25,14 +25,14 @@ const Song = mongoose.model('Song', {
 });
 
 // if (process.env.RESET_DB) {
-const seedDatabase = async () => {
-  await Song.deleteMany({});
+// const seedDatabase = async () => {
+//   await Song.deleteMany({});
 
-  topMusicData.forEach((topMusicData) => {
-    new Song(topMusicData).save();
-  });
-};
-seedDatabase();
+//   topMusicData.forEach((topMusicData) => {
+//     new Song(topMusicData).save();
+//   });
+// };
+// seedDatabase();
 // }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
