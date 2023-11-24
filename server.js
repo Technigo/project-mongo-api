@@ -74,7 +74,6 @@ app.get("/date/:dateinscribed", async (req, res) => {
 //End point for all sites in a country
 app.get("/country/:country", async (req, res) => {
   const siteCountry = req.params.country;
-
   const regex = new RegExp("^" + siteCountry + "$", "i"); // Case-insensitive regex to make sure if user types lowercase it will still match with the database
   Site.find({ country: { $regex: regex } }).then((country) => {
     if (country) {
@@ -85,10 +84,12 @@ app.get("/country/:country", async (req, res) => {
   });
 });
 
-//End point for name of site (one result)
+//End point for name of site (one result) eg. (must include spaces, havent added any handling for this)
 app.get("/name/:name", async (req, res) => {
-  const siteName = req.params.name.toLowerCase().replaceAll(" ", "");
-  Site.find({ name: siteName }).then((name) => {
+  // const siteName = req.params.name.toLowerCase().replaceAll(" ", "");
+  const siteName = req.params.name;
+  const regex2 = new RegExp("^" + siteName + "$", "i");
+  Site.find({ name: { $regex: regex2 } }).then((name) => {
     if (name) {
       res.json(name);
     } else {
@@ -96,10 +97,6 @@ app.get("/name/:name", async (req, res) => {
     }
   });
 });
-
-// const str = "You are a BUTT HEAD";
-// const allSpacesRemoved = str.toLowerCase().replaceAll(" ", "");
-// console.log(allSpacesRemoved); // ABC
 
 // Start the server
 app.listen(port, () => {
