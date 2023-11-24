@@ -47,10 +47,10 @@ app.use(express.urlencoded({ extended: false})) //Cool method according to Diego
 //Getting hold of the get/post-methods (routes) through the bookRoutes
 app.use(bookRoutes)
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+// // Start defining your routes here
+// app.get("/", (req, res) => {
+//   res.send("Hello Technigo!");
+// });
 
 // Start the server
 app.listen(port, () => {

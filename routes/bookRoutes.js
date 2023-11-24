@@ -49,6 +49,21 @@ router.get("/books/:id", async (req, res) => {
   }
 })
 
+// A route to return a selection of books based on author
+router.get("/author/:author", async (req, res) => {
+  const author = req.params.author
+
+  try {
+    const books = await BookModel.find({ authors: author})
+    res.json(books)
+  } catch (error) {
+    res.json({error: error.message})
+  }
+})
+
+
+//-------- BONUS: POST ROUTE -----------
+
 //A route for handling post request (adding a book, with only a title)
 router.post("/add", async (req, res) => {
   const title = req.body.title;
