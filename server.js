@@ -1,3 +1,7 @@
+// First, require and configure dotenv to load the environment variables
+require('dotenv').config();
+
+
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -9,10 +13,11 @@ import netflixData from "./data/netflix-titles.json";
 // import goldenGlobesData from "./data/golden-globes.json"; 
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/defaultdb";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("Error connecting to MongoDB: ", err));
+.catch((err) => console.error("Error connecting to MongoDB: ", err));
+
 
 
 // Mongoose model for Show
@@ -32,7 +37,7 @@ const Show = mongoose.model('Show', {
   type: String
 });
 
-// Seeding function
+ // Seeding function
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     console.log("Running seeding script...");
@@ -41,11 +46,12 @@ if (process.env.RESET_DB) {
     netflixData.forEach((showData) => {
       new Show(showData).save();
     });
+
+    console.log("Seeding completed.");
   };
 
   seedDatabase();
 }
-
 
 
 
@@ -73,6 +79,8 @@ app.get("/api/shows", async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+// Use for test /api/shows
+
 
 // Endpoint to get a single show by ID
 app.get("/api/shows/:id", async (req, res) => {
@@ -87,21 +95,57 @@ app.get("/api/shows/:id", async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+// Use for test /api/shows/81193313
 
 // Endpoint to get shows by release year
 app.get("/api/shows/year/:year", async (req, res) => {
   try {
-    const shows = await Show.find({ release_year: req.params.year });
+    const year = parseInt(req.params.year); // Convert year to a number
+    const shows = await Show.find({ release_year: year });
     if (shows.length > 0) {
       res.json(shows);
     } else {
       res.status(404).json({ error: "No shows found for this year" });
     }
   } catch (error) {
+    console.error("Error:", error); // Log the error for debugging
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+// Use for test /api/shows/year/2015
 
+// Endpoint to search shows by title
+app.get("/api/shows/title/:title", async (req, res) => {
+  try {
+    const titleSearch = new RegExp(req.params.title, 'i'); // 'i' for case-insensitive
+    const shows = await Show.find({ title: { $regex: titleSearch } });
+    if (shows.length > 0) {
+      res.json(shows);
+    } else {
+      res.status(404).json({ error: "No shows found with this title" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+// Use for test /api/shows/title/Hot%20Rod
+
+// Endpoint to get shows by rating
+app.get("/api/shows/rating/:rating", async (req, res) => {
+  try {
+    const rating = req.params.rating;
+    const shows = await Show.find({ rating: rating });
+    if (shows.length > 0) {
+      res.json(shows);
+    } else {
+      res.status(404).json({ error: "No shows found with the specified rating" });
+    }
+  } catch (error) {
+    console.error("Error in /api/shows/rating:", error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+// Use to test /api/shows/rating/TV-14
 
 // Start the server
 app.listen(port, () => {
