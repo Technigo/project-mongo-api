@@ -21,17 +21,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Book.deleteMany({});
+const seedDatabase = async () => {
+  await Book.deleteMany({});
 
-    booksData.forEach((bookData) => {
-      new Book(bookData).save();
-    });
-  };
+  booksData.forEach((bookData) => {
+    new Book(bookData).save();
+  });
+};
 
-  seedDatabase();
-}
+seedDatabase();
 
 app.get("/books", async (req, res) => {
   try {
