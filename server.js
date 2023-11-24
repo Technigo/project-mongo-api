@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import booksData from "./data/books.json";
 import siteData from "./data/sites.json";
 import listEndpoints from "express-list-endpoints";
+//const dotenv = require("dotenv");
+//dotenv.config({ path: "./config.env" });
 
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://127.0.0.1:27017/MongoProject";
@@ -50,6 +52,12 @@ app.get("/", (req, res) => {
   res.send(listEndpoints(app));
 });
 
+//----- End point for all sites-----//
+app.get("/sites", async (req, res) => {
+  const sites = await Site.find();
+  res.json(sites);
+});
+
 //----- End point for all sites from date inscribed-----//
 
 app.get("/date/:dateinscribed", async (req, res) => {
@@ -63,22 +71,35 @@ app.get("/date/:dateinscribed", async (req, res) => {
   });
 });
 
-// app.get("/sites", async (req, res) => {
-//   const sites = await Site.find();
-//   res.json(sites);
-// });
+//End point for all sites in a country
+app.get("/country/:country", async (req, res) => {
+  const siteCountry = req.params.country;
 
-//----- End point for dateinscribed------//
+  const regex = new RegExp("^" + siteCountry + "$", "i"); // Case-insensitive regex to make sure if user types lowercase it will still match with the database
+  Site.find({ country: { $regex: regex } }).then((country) => {
+    if (country) {
+      res.json(country);
+    } else {
+      res.status(404).json({ error: `Country not found` });
+    }
+  });
+});
 
-// app.get("/sites/:dateinscribed", async (req, res) => {
-//   const siteDate = req.params.dateinscribed;
-//   let byDate = Site.findbyId((item) => item.dateinscribed === siteDate);
-//   if (byDate) {
-//     res.json(byDate);
-//   } else {
-//     res.status(404).send("No date found");
-//   }
-// });
+//End point for name of site (one result)
+app.get("/name/:name", async (req, res) => {
+  const siteName = req.params.name.toLowerCase().replaceAll(" ", "");
+  Site.find({ name: siteName }).then((name) => {
+    if (name) {
+      res.json(name);
+    } else {
+      res.status(404).json({ error: `Name not found` });
+    }
+  });
+});
+
+// const str = "You are a BUTT HEAD";
+// const allSpacesRemoved = str.toLowerCase().replaceAll(" ", "");
+// console.log(allSpacesRemoved); // ABC
 
 // Start the server
 app.listen(port, () => {
