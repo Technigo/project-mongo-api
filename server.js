@@ -1,26 +1,41 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import whlSites from "./data/whlSites.json";
+import booksData from "./data/books.json";
+import siteData from "./data/sites.json";
+import listEndpoints from "express-list-endpoints";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/whlSites";
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://127.0.0.1:27017/MongoProject";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const Site = mongoose.model("Site", {
-  //Properties defined here match the keys from the whlSites.json file
+mongoose.connection.on("connected", () => {
+  console.log("Connected to MongoDB");
 });
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await whlSites.deleteMany({});
+const Site = mongoose.model("Site", {
+  name: String,
+  description: String,
+  dateinscribed: Number,
+  dateend: Number,
+  areah: Number,
+  category: String,
+  country: String,
+  region: String,
+});
 
-    data.forEach((siteData) => {
-      new Site(siteData).save();
-    });
-  };
-  seedDatabase();
-}
+//I imported my database through Compass
+
+// if (process.env.RESET_DB) {
+//   const seedDatabase = async () => {
+//     await Book.deleteMany({});
+//     booksData.forEach(async (bookData) => {
+//       await new Book(bookData).save();
+//     });
+//   };
+//   seedDatabase();
+// }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 const port = process.env.PORT || 8080;
@@ -32,13 +47,38 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send(listEndpoints(app));
 });
 
-app.get("/names", async (req, res) => {
-  const names = await Site.find();
-  res.json(names);
+//----- End point for all sites from date inscribed-----//
+
+app.get("/date/:dateinscribed", async (req, res) => {
+  const siteDate = req.params.dateinscribed;
+  Site.find({ dateinscribed: siteDate }).then((date) => {
+    if (date) {
+      res.json(date);
+    } else {
+      res.status(404).json({ error: `Date not found` });
+    }
+  });
 });
+
+// app.get("/sites", async (req, res) => {
+//   const sites = await Site.find();
+//   res.json(sites);
+// });
+
+//----- End point for dateinscribed------//
+
+// app.get("/sites/:dateinscribed", async (req, res) => {
+//   const siteDate = req.params.dateinscribed;
+//   let byDate = Site.findbyId((item) => item.dateinscribed === siteDate);
+//   if (byDate) {
+//     res.json(byDate);
+//   } else {
+//     res.status(404).send("No date found");
+//   }
+// });
 
 // Start the server
 app.listen(port, () => {
