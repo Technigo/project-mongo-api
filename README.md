@@ -2,7 +2,7 @@
 
 My first week learning about MongoDB. I created my own API and database with MongoDB, stored and retrieved data and produced several RESTful APIs using Mongoose methods instead of plain JavaScript to deal with the filtering etc.
 
-My endpoints include: 
+<ins>My endpoints include:</ins> 
     "path": "/",
     "path": "/sites",
     "path": "/date/:dateinscribed",
