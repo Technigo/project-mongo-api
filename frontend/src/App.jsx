@@ -6,10 +6,12 @@ function App() {
   const [songs, setSongs] = useState(null)
   const [danceable, setDanceable] = useState(null)
 
+  const baseUrl = "https://mongo-api-frida.onrender.com/"
+
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const response = await fetch('http://localhost:8080/songs')
+        const response = await fetch(`${baseUrl}songs`)
         if (!response.ok) {
           throw new Error('Error fetching data')
         }
@@ -23,7 +25,7 @@ function App() {
 
     const fetchDance = async () => {
       try {
-        const response = await fetch('http://localhost:8080/danceable')
+        const response = await fetch(`${baseUrl}danceable`)
         if (!response.ok) {
           throw new Error('Error fetching data')
         }
