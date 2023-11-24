@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { songModel } = require('../models/song')
+const { Song } = require('../models/Song')
 const listEndpoints = require('express-list-endpoints')
 
 // Main route
@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 
 //Route to all songs
 router.get("/songs", (req, res) => {
-  songModel.find()
+  Song.find()
   .then(songs => {
     if (songs.length > 0) {
       res.json(songs)
@@ -26,7 +26,7 @@ router.get("/songs", (req, res) => {
 // Route to one song
 router.get("/songs/:songId", async (req, res) => {
   try {
-    const song = await songModel.findById(req.params.songId)
+    const song = await Song.findById(req.params.songId)
     
     if (song) {
       res.json(song)
@@ -43,7 +43,7 @@ router.get("/artists/:artist", async (req, res) => {
   const paramArtistName = req.params.artist
 
   //Regex to make it not case-sensitive (option: i) while searching for any of the artists of a song
-  const artistSongs = await songModel.find({ artistName: { $regex : paramArtistName, $options: "i" } });
+  const artistSongs = await Song.find({ artistName: { $regex : paramArtistName, $options: "i" } });
 
   if (artistSongs === 0) {
     res.status(404).json("We're sorry, this artist hasn't made any songs in our API")
@@ -55,7 +55,7 @@ router.get("/artists/:artist", async (req, res) => {
 //Route to a specific genre
 router.get("/genres/:specificGenre", async (req, res) => {
   try {
-    const song = await songModel.find({genre: { $regex : req.params.specificGenre, $options: "i" } })
+    const song = await Song.find({genre: { $regex : req.params.specificGenre, $options: "i" } })
 
     if (song.length > 0) {
       res.json(song)
@@ -69,7 +69,7 @@ router.get("/genres/:specificGenre", async (req, res) => {
 
 //Route to songs with danceability over 70
 router.get("/danceable", (req, res) => {
-  ASong.find({ danceability: {$gte: 70} })
+  Song.find({ danceability: {$gte: 70} })
     .then(songs => {
       if (songs.length > 0) {
         res.json(songs)
