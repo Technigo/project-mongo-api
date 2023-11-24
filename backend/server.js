@@ -92,6 +92,11 @@ app.get("/songs/:songId", async (req, res) => {
   }
 })
 
+//Route to all artists
+app.get("/artists", (req, res) => {
+
+})
+
 //Route to a specific artist
 app.get("/artists/:artist", async (req, res) => {
   const paramArtistName = req.params.artist
@@ -134,6 +139,16 @@ app.get("/danceable", (req, res) => {
     .catch(err => {
       res.status(500).json({error: `Internal server error: $(err)`})
     })
+})
+
+//Route to songs with a bpm over 100, danceability over 50 and energy over 50 using the aggregation functionality
+app.get("/songs-of-joy", async (req, res) => {
+  let songsOfJoy = await ASong.aggregate([
+    { '$match' : {"bpm" : {$gte : 100}, "danceability" : {$gte : 50}, "energy" : {$gte : 50}} },
+    { '$sort': { "popularity" : -1 } },
+    { '$project' : { "trackName" : 1, "artistName" : 1, "genre" : 1, "popularity" : 1 } },
+  ])
+  res.send(songsOfJoy)
 })
 
 // Start the server
