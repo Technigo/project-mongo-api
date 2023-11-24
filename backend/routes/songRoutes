@@ -1,0 +1,42 @@
+// Main route
+app.get("/", (req, res) => {
+  res.send(listEndpoints(app));
+})
+
+//Route to all songs
+app.get("/songs", (req, res) => {
+  ASong.find().then(song => res.json(song))
+});
+
+// Route to one song
+app.get("/songs/:songId", async (req, res) => {
+  try {
+    const song = await ASong.findById(req.params.songId)
+    if (song) res.json(song)
+    else res.status(404).json({error: "song not found"})
+  } catch (error) {
+    res.status(400).json({error: "invalid song id"})
+  }
+})
+
+//Route to a specific genre
+app.get("/genres/:specificGenre", async (req, res) => {
+  try {
+    const song = await ASong.find({genre: req.params.specificGenre})
+    if (song) res.json(song)
+    else res.status(404).json({error: "There are no songs of that genre"})
+  } catch (error) {
+    res.status(400).json({error: "invalid genre"})
+  }
+})
+
+//Route to songs with danceability over 70
+app.get("/danceable", (req, res) => {
+  ASong.find({ danceability: {$gte: 70} })
+    .then(songs => {
+      if (songs.length > 0) {
+        res.json(songs)
+      } else res.status(404).json({error: "There are no dancable songs"})
+    }).catch(err => {
+      res.status(500).json({error: `Internal server error: $(err)`})})
+})

@@ -3,7 +3,7 @@ import cors from "cors"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 
-import data from "./data/top-music.json"
+import data from "../data/top-music.json"
 
 dotenv.config()
 
@@ -22,13 +22,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false })) //Parse URL-encoded data
 
 //Check if the database is available/connected (readyState = 1)
-// app.use((req, res, next)=>{
-//   if(mongoose.connection.readyState !== 1){
-//     res.status(503).json({error: "service unavailable"})
-//   } else {
-//     next()
-//   }
-// })
+app.use((req, res, next)=>{
+  if(mongoose.connection.readyState !== 1){
+    res.status(503).json({error: "service unavailable"})
+  } else {
+    next()
+  }
+})
 
 const ASong = mongoose.model("ASong", {
   trackName: String,
@@ -41,14 +41,14 @@ const ASong = mongoose.model("ASong", {
   popularity: Number
 })
 
-// if (RESET_DB) {
-  const seedDataBase = async () => {
-    ASong.deleteMany()
-    data.forEach(song => {
-      new ASong(song).save()
-    })
-  }
-  seedDataBase()
+// if (process.env.RESET_DB) {
+//   const seedDataBase = async () => {
+//     await ASong.deleteMany({})
+//     data.forEach(song => {
+//       new ASong(song).save()
+//     })
+//   }
+//   seedDataBase()
 // }
 
 // Main route
