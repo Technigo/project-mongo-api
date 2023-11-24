@@ -3,7 +3,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv" // Import dotenv for environment variables
-//import MetallicaSongs from "./data/MetallicaSongs.json"
+import MetallicaSongs from "./data/MetallicaSongs.json"
+import { MetallicaSongModel } from "./models/MetallicaSongModel";
 import songRoutes from "./routes/songRoutes" // Import routes for handling song-related endpoints
 //const songRoutes = require("./routes/songRoutes");
 
