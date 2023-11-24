@@ -19,12 +19,14 @@ const listEndpoints = require("express-list-endpoints")
 // Add middlewares
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false })) //Parse URL-encoded data
+
 //Check if the database is available/connected (readyState = 1)
 app.use((req, res, next)=>{
-  if(mongoose.connection.readyState === 1){
-    next()
-  } else {
+  if(mongoose.connection.readyState !== 1){
     res.status(503).json({error: "service unavailable"})
+  } else {
+    next()
   }
 })
 
