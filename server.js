@@ -35,14 +35,14 @@ app.use(express.urlencoded({ extended: false})) //Cool method according to Diego
 // if (process.env.RESET_DB) {
   // console.log("Resetting database!")
 
-//   const seedDatabase = async () => {
-//     await BookModel.deleteMany({})
-//     booksData.forEach((book) => {
-//       new BookModel(book).save()
-//     })
-//   }
-//   seedDatabase()
-// // }
+   const seedDatabase = async () => {
+     await BookModel.deleteMany({})
+     booksData.forEach((book) => {
+       new BookModel(book).save()
+     })
+   }
+   seedDatabase()
+ // }
 
 //Getting hold of the get/post-methods (routes) through the bookRoutes
 app.use(bookRoutes)
