@@ -41,7 +41,7 @@ const ASong = mongoose.model("ASong", {
   popularity: Number
 })
 
-if (process.env.RESET_DB) {
+
   const seedDataBase = async () => {
     ASong.deleteMany()
     data.forEach(song => {
@@ -49,7 +49,6 @@ if (process.env.RESET_DB) {
     })
   }
   seedDataBase()
-}
 
 // Main route
 app.get("/", (req, res) => {
