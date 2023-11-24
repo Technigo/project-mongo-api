@@ -78,6 +78,13 @@ if (process.env.RESET_DATABASE == 'true'){
 // Using the routes to handle API requests
 app.use(netflixTitleRoutes);
 
+const listEndpoints = require('express-list-endpoints')
+//---- Documentation of API ----
+app.get("/", (req, res) => {
+    const endpoints = listEndpoints(app);
+    res.json(endpoints)
+  });
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
