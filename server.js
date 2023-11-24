@@ -66,27 +66,27 @@ app.get("/", (req, res) => {
   //res.send("Hello Technigo");
 });
 
-app.get("/authors", async (req, res) => {
-  const authors = await BookDataModel.find();
-  res.json(authors);
-});
+// app.get("/authors", async (req, res) => {
+//   const authors = await BookDataModel.find();
+//   res.json(authors);
+// });
 
-app.get("/authors/:id", async (req, res) => {
-  const author = await BookDataModel.findById(req.params.id);
-  res.json(author);
-});
+// app.get("/authors/:id", async (req, res) => {
+//   const author = await BookDataModel.findById(req.params.id);
+//   res.json(author);
+// });
 
-app.get("/authors/:id/books", async (req, res) => {
-  const author = await BookDataModel.findById(req.params.id);
-  if (author) {
-    const books = await BookDataModel.find({
-      author: mongoose.Types.ObjectId(author.id),
-    });
-    res.json(books);
-  } else {
-    res.status(404).json({ error: "Author not found" });
-  }
-});
+// app.get("/authors/:id/books", async (req, res) => {
+//   const author = await BookDataModel.findById(req.params.id);
+//   if (author) {
+//     const books = await BookDataModel.find({
+//       author: mongoose.Types.ObjectId(author.id),
+//     });
+//     res.json(books);
+//   } else {
+//     res.status(404).json({ error: "Author not found" });
+//   }
+// });
 
 // I get null on author in this route instead if it's being connected with authors rout. Why?
 
@@ -111,6 +111,26 @@ app.get("/books/:bookID", async (req, res) => {
     } else {
       res.status(404).json({ error: "Book not found" });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/sortedRating", async (req, res) => {
+  try {
+    const allBooks = await BookDataModel.find();
+
+    if (!allBooks || allBooks.length === 0) {
+      return res.status(404).json({ error: "No books found" });
+    }
+
+    // Sort books by average_rating in descending order
+    const sortedRating = allBooks.sort(
+      (a, b) => b.average_rating - a.average_rating
+    );
+
+    res.json({ sortedRating });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
