@@ -10,6 +10,8 @@ I added the .env to practise how to hide sensitive information. As I had some st
 
 Atlas was used to deploy the database and Render to deploy the project.
 
+With more time I would've added a separate file for routes and more error handling. I prioritized learning more about backend via material and start the final project instead.
+
 ## API explained
 
 GET /books

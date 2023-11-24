@@ -29,30 +29,17 @@ const Books = mongoose.model("Book", {
 })
 
 // Defining an asynchronous function with purpose to clear existing data from the Books collection and then populate it with new data from the booksData array
-// const seedDatabase = async () => {
-//   // Remove all existing documents in the Books collection
-//   await Books.deleteMany({})
-//   // Iterate over each item in the booksData array
-//   booksData.forEach((bookItem) => {
-//     // Creating a new Books document using data from bookItem
-//     new Books(bookItem).save()
-//   })
-// }
-// seedDatabase()
-
 const seedDatabase = async () => {
-  try {
-    await Books.deleteMany({});
-    booksData.forEach((bookItem) => {
-      new Books(bookItem).save();
-    });
-    console.log('Database seeded successfully.');
-  } catch (error) {
-    console.error('Error seeding database:', error);
-  }
-};
+  // Remove all existing documents in the Books collection
+  await Books.deleteMany({})
+  // Iterate over each item in the booksData array
+  booksData.forEach((bookItem) => {
+    // Creating a new Books document using data from bookItem
+    new Books(bookItem).save()
+  })
+}
+seedDatabase()
 
-seedDatabase();
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
