@@ -43,7 +43,7 @@ const ASong = mongoose.model("ASong", {
 
 if (process.env.RESET_DB) {
   const seedDataBase = async () => {
-    await ASong.deleteMany()
+    ASong.deleteMany()
     data.forEach(song => {
       new ASong(song).save()
     })
