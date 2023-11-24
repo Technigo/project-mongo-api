@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import listEndpoints from 'express-list-endpoints';
+import dotenv from "dotenv"; // Added import for dotenv
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -11,8 +12,11 @@ import listEndpoints from 'express-list-endpoints';
 import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
+// Load environment variables from .env file
+dotenv.config();
+
 // Mongoose connection
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 mongoose.set('strictQuery', true); // Handle Mongoose deprecation warning
