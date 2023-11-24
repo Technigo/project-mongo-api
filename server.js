@@ -8,31 +8,18 @@ import { BookModel } from "./models/BookModel";
 import bookRoutes from "./routes/bookRoutes";
 //import router from "./routes/bookRoutes";
 
-//if (process.env.RESET_DB === true) {
-const seedDatabase = async () => {
-  try {
-    await BookModel.deleteMany({});
-    await BookModel.insertMany(booksData);
-    console.log("Database reset and seeded successfully");
-  } catch (error) {
-    console.log("Error seeding database:", error);
-  }
-};
-seedDatabase();
-// } else {
-//   console.log("Database is not reset");
-// }
+// Commenting out the seedDatabase function because it is not needed anymore
 
-// if (process.env.RESET_DB) {
-//   const seedDatabase = async () => {
+// const seedDatabase = async () => {
+//   try {
 //     await BookModel.deleteMany({});
-
-//     booksData.forEach((bookItem) => {
-//       new BookModel(bookItem).save();
-//     });
-//   };
-//   seedDatabase();
-// }
+//     await BookModel.insertMany(booksData);
+//     console.log("Database reset and seeded successfully");
+//   } catch (error) {
+//     console.log("Error seeding database:", error);
+//   }
+// };
+// seedDatabase();
 
 const mongoUrl = process.env.MONGO_URL;
 mongoose
