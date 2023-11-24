@@ -12,7 +12,7 @@ import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
 // Mongoose connection
-const mongoUrl = process.env.MONGO_URL || "mongodb+srv://elimberkat:computer2018@cluster0.txs9zbq.mongodb.net/project-mongo?retryWrites=true&w=majority";
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://elimberkat:computer2018@cluster0.txs9zbq.mongodb.net/";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 mongoose.set('strictQuery', true); // Handle Mongoose deprecation warning
