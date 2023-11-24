@@ -15,7 +15,7 @@ import booksData from "./data/books.json";
 // import topMusicData from "./data/top-music.json";
 
 //Connection to the database through Mongoose (for local development)
-const mongoUrl = process.env.MONGO_URL //Get the MongoDB connection URL from env variable
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo" //Get the MongoDB connection URL from env variable
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
