@@ -66,30 +66,7 @@ app.get("/", (req, res) => {
   //res.send("Hello Technigo");
 });
 
-// app.get("/authors", async (req, res) => {
-//   const authors = await BookDataModel.find();
-//   res.json(authors);
-// });
-
-// app.get("/authors/:id", async (req, res) => {
-//   const author = await BookDataModel.findById(req.params.id);
-//   res.json(author);
-// });
-
-// app.get("/authors/:id/books", async (req, res) => {
-//   const author = await BookDataModel.findById(req.params.id);
-//   if (author) {
-//     const books = await BookDataModel.find({
-//       author: mongoose.Types.ObjectId(author.id),
-//     });
-//     res.json(books);
-//   } else {
-//     res.status(404).json({ error: "Author not found" });
-//   }
-// });
-
-// I get null on author in this route instead if it's being connected with authors rout. Why?
-
+//Route for all books
 app.get("/books", async (req, res) => {
   try {
     const booksData = await BookDataModel.find();
@@ -100,6 +77,7 @@ app.get("/books", async (req, res) => {
   }
 });
 
+//Route for showing a specific id on book
 app.get("/books/:bookID", async (req, res) => {
   const { bookID } = req.params;
 
@@ -117,6 +95,7 @@ app.get("/books/:bookID", async (req, res) => {
   }
 });
 
+//Route for sorting books with highest rating first
 app.get("/sortedRating", async (req, res) => {
   try {
     const allBooks = await BookDataModel.find();
