@@ -1,13 +1,26 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+A backend project using mongosDB & mongooes
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Instead of using the provided database, I tried to generate my own database with chatGPT which is something related to my current work (clothing).
+I created a few end points base on what I think an e-commerce website would do.
+
+- All items
+- Use query to filter items by size
+- Filter promotion items
+- Best selling items (sort by the quantity was sold)
+- Add item
+- Delete item
+
+Some of the endpoints I did need to look up of how to do it with mongooes operator, it was a good learning progress.
+The biggest problem that I encounter was deploying the data base and connect everything together.
+I think it will go smoother when we have more practice in the future.
+The testing part, instead of testing on the browser, I tried to utilize tools such as postman and compass more.
+I also have problem breaking down the server.js file. As you can see I created the file for the routes, but it didn't work as I expected so I put it back to the server file and will fix it in the future.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Here is the link:
+https://project-mongo-smfh.onrender.com/
