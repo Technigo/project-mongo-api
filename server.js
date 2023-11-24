@@ -15,7 +15,7 @@ import netflixData from "./data/netflix-titles.json";
 const mongoUrl = process.env.MONGO_URL || "mongodb+srv://elimberkat:computer2018@cluster0.txs9zbq.mongodb.net/project-mongo?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-mongoose.set('strictQuery', false); // Handle Mongoose deprecation warning
+mongoose.set('strictQuery', true); // Handle Mongoose deprecation warning
 
 // MongoDB Models
 const Cast = mongoose.model('Cast', {
