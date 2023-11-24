@@ -12,7 +12,8 @@ router.get("/", async (req, res) => {
   res.json(endpoints);
 });
 
-//Route for GETing all the books
+//-----ROUTE 1-------
+//Route for geting all the books
 router.get("/books", async (req, res) => {
   //Use the BookModel to find all books in the database
   // Mongoose Method: TaskModel.find()
@@ -24,6 +25,8 @@ router.get("/books", async (req, res) => {
     res.json({ error: error.message });
   }
 });
+
+//------ ROUTE 2----------
 
 //A route to return a single result (one book based on id)
 router.get("/books/:id", async (req, res) => {
@@ -49,17 +52,28 @@ router.get("/books/:id", async (req, res) => {
   }
 })
 
+//-------ROUTE 3--------
+
 // A route to return a selection of books based on author
 router.get("/author/:author", async (req, res) => {
-  const author = req.params.author
+  const author = new RegExp(req.params.author, "i") //With RegExp (regular expression) a case-insensitive partial match on the authors field is performed. ("partial - if searching for j.k rowling, also books where she is a co writer are provided")
 
   try {
     const books = await BookModel.find({ authors: author})
+
+    if(books.length === 0) {
+      return res.status(404).json({error: "There are no books written by the specified author"})
+    }
+
     res.json(books)
   } catch (error) {
     res.json({error: error.message})
   }
 })
+
+
+//----- ROUTE 4 ------
+// Create a woute to dind books with page count above 500
 
 
 //-------- BONUS: POST ROUTE -----------
