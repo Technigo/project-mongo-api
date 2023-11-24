@@ -29,7 +29,7 @@ app.use(cors());// Enable CORS (Cross-Origin Resource Sharing)
 app.use(express.json());// Parse incoming JSON data
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded data
 
-//-------Creating the database from scratch--------------
+//-------Populating the database for the 3 collections from scratch--------------
 
 const feedDatabase = async () =>{
 
@@ -39,24 +39,44 @@ const feedDatabase = async () =>{
 
   netflixData.forEach((title)=>{
     new CountryModel({name: title.country}).save();
-    const castList= title.cast.split(",")
-    castList.forEach((actor)=>{new ActorModel({name:actor.trim()}).save()})
+    const castList= title.cast.split(",");
+    castList.forEach((actor)=>{
+      new ActorModel({name:actor.trim()}).save()}
+      )
     new NetflixTitleModel(title).save();
   })
 }
+
+/*   netflixData.forEach((title)=>{
+    const countryObject = new CountryModel({name: title.country}).save();
+    const castList= title.cast.split(",");
+    const castObject = [];
+    castList.forEach((actor)=>{
+      castObject.push(new ActorModel({name:actor.trim()}).save())}
+      )
+    new NetflixTitleModel(
+      {
+        show_id: title.show_id,
+        title: title.title,
+        country: title.country,
+        director : title.director,
+        date_added: title.date_added,
+        release_year : title.release_year,
+        rating: title.rating,
+        duration: title.duration,
+        listed_in: title.listed_in,
+        description: title.description,
+        type : title.type,
+        cast : title.cast
+      }
+      ).save();
+  }) */
 
 if (process.env.RESET_DATABASE == 'true'){
   feedDatabase();
 }
 // Using the routes to handle API requests
 app.use(netflixTitleRoutes);
-
-const listEndpoints = require('express-list-endpoints')
-//---- Documentation of API ----
-app.get("/", (req, res) => {
-    const endpoints = listEndpoints(app);
-    res.json(endpoints)
-  });
 
 // Start the server
 app.listen(port, () => {
