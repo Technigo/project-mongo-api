@@ -93,7 +93,7 @@ seedDatabase();
 updateMovies();
 
 // Express app
-const port = process.env.PORT || 27017;
+const port = process.env.PORT || 10000;
 const app = express();
 
 app.use(cors());
