@@ -18,6 +18,7 @@
     "express-async-handler": "^1.2.0",
     "express-list-endpoints": "^6.0.0",
     "mongoose": "^6.12.0",
+    "node": "^21.2.0",
     "nodemon": "^3.0.1"
   }
 }

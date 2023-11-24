@@ -14,4 +14,4 @@ export const MensitemSchema = new Schema({
   isPromotion: Boolean,
 });
 
-export const MensItemsModel = mongoose.model("mensitems", MensitemSchema);
+export const MensItemsModel = mongoose.model("Mensitems", MensitemSchema);
