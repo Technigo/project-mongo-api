@@ -93,8 +93,24 @@ app.get("/songs/:songId", async (req, res) => {
 })
 
 //Route to all artists
-app.get("/artists", (req, res) => {
-
+app.get("/artists", async (req, res) => {
+  let allArtists = await ASong.aggregate(
+    [
+      {
+        '$group': {
+          '_id': null, 
+          'artistName': {
+            '$addToSet': '$artistName'
+          }
+        }
+      }, {
+        '$project': {
+          '_id': 0
+        }
+      }
+    ]
+  )
+  res.json(allArtists)
 })
 
 //Route to a specific artist

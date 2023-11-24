@@ -1,8 +1,5 @@
-# React + Vite
+# Frontend of a music API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a basic structure of a clientside which calls two endpoints of an API and displays these as cards with the songtitle and artist name.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Currently not deployed but works on the localhost

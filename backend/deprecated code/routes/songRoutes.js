@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { Song } = require('../models/Song')
+const { Song } = require('../deprecated code/models/Song')
 const listEndpoints = require('express-list-endpoints')
 
 // Main route

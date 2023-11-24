@@ -7,7 +7,7 @@ dotenv.config()
 const Song = require("./models/Song")
 const songRoutes = require("./routes/songRoutes")
 
-import data from "../data/top-music.json"
+import data from "../../data/top-music.json"
 
 //Setting up the database
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
