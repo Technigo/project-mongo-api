@@ -11,6 +11,13 @@ router.get("/get", async (req, res) => {
     .catch((err) => res.json(err));
 });
 
+router.get("/get/:id", async (req, res) => {
+  const id = req.params.id;
+  await TitleModel.findByIdAndUpdate({ _id: id })
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
 router.post("/add", async (req, res) => {
   const show_id = req.body.show_id;
   const title = req.body.title;
@@ -44,16 +51,23 @@ router.post("/add", async (req, res) => {
 });
 
 router.put("/update/:id", async (req, res) => {
-  const { id } = req.params;
+  const id = req.params.id;
+
+  const updateData = req.body;
+
   console.log(id);
 
-  await TitleModel.findByIdAndUpdate({ _id: id })
+  await TitleModel.findByIdAndUpdate(
+    { _id: id },
+    { $set: updateData },
+    { new: true }
+  )
     .then((result) => res.json(result))
     .catch((err) => res.json(err));
 });
 
 router.delete("/delete/:id", async (req, res) => {
-  const { id } = req.params;
+  const id = req.params.id;
   console.log(id);
 
   await TitleModel.findByIdAndDelete({ _id: id })
