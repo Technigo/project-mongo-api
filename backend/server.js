@@ -54,14 +54,27 @@ if (process.env.RESET_DB) {
 
 // Main route
 app.get("/", (req, res) => {
-  res.send(listEndpoints(app));
+  res.send(listEndpoints(app))
 })
 
 //Route to all songs
 app.get("/songs", async (req, res) => {
-  const allSongs = await ASong.find()
+  let { page = 1, limit = 10 } = req.query
 
-  res.json(allSongs)
+  const limitRecords = parseInt(limit)
+  const skip = (page - 1) * limit
+
+  try {
+    // Find all songs and filter the song-array by adding the Limit Record and Skip
+    const songs = await ASong.find().limit(limitRecords).skip(skip)
+    if (songs.length > 0) {
+      res.json({ songs, page: page, limit:limitRecords })
+    } else {
+      res.status(404).json({error: "The database is empty, no songs found"})
+    }    
+  } catch (error) {
+    res.status(500).json({error: "Something went wrong while loading the songs from the database"})
+  } 
 })
 
 // Route to one song
@@ -83,6 +96,7 @@ app.get("/songs/:songId", async (req, res) => {
 app.get("/artists/:artist", async (req, res) => {
   const paramArtistName = req.params.artist
 
+  //Regex to make it not case-sensitive (option: i) while searching for any of the artists of a song
   const artistSongs = await ASong.find({ artistName: { $regex : new RegExp(paramArtistName, "i") } });
 
   if (artistSongs === 0) {
@@ -95,7 +109,7 @@ app.get("/artists/:artist", async (req, res) => {
 //Route to a specific genre
 app.get("/genres/:specificGenre", async (req, res) => {
   try {
-    const song = await ASong.find({genre: req.params.specificGenre})
+    const song = await ASong.find({genre: { $regex : req.params.specificGenre, $options: "i" } })
 
     if (song) {
       res.json(song)
