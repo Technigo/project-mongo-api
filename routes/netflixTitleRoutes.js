@@ -32,11 +32,10 @@ router.get("/titles", async (req,res)=>{
       if(result.length>0){
         res.json(result)
       }else{
-        res.json(`I dont have any matching title with ${title}`)
+        res.status(404).json(`No matching title with ${title} was found.`)
       }
-    }
-    )
-    .catch((error)=>res.status(404).json(`I dont have any matching title with ${title}`));
+    })
+    .catch((error)=>res.status(500).json(`No matching title with ${title} found due to ${error}`));
     }else{
       //Retrieving all Netflix titles
         await NetflixTitleModel.find()
