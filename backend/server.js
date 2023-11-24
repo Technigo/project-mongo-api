@@ -5,7 +5,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 import { songModel } from "./models/song"
-import { songRoutes } from "./routes/songRoutes"
+const songRoutes = require("./routes/songRoutes")
 
 import data from "../data/top-music.json"
 
