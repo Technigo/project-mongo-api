@@ -16,7 +16,10 @@ import { Mensitems, MensItemsModel } from "./backend/models/MensItem";
 dotenv.config(); // Load environment variables from the .env file
 const router = express.Router();
 const listEndpoints = require("express-list-endpoints");
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+// Added this line because of the warning "DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7"
+mongoose.set("strictQuery", false);
+const mongoUrl =
+  "mongodb+srv://jjanicecheng:8qytRGt7TaFQao9b@jforjanice.kdzt34w.mongodb.net/?retryWrites=true&w=majority"; // process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -103,6 +106,7 @@ app.get("/size/", async (req, res) => {
 });
 
 //Get items by catagories
+//i.e /category/coats_and_jackets should get all items available in Size S
 app.get("/category/:category", async (req, res) => {
   const items = await MensItemsModel.find({ category: req.params.category });
   if (items) {
