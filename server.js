@@ -11,20 +11,13 @@ import listEndpoints from 'express-list-endpoints';
 import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+// Mongoose connection
+const mongoUrl = process.env.MONGO_URL || "mongodb+srv://elimberkat:computer2018@cluster0.txs9zbq.mongodb.net/project-mongo?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
+mongoose.set('strictQuery', false); // Handle Mongoose deprecation warning
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
-
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
-
+// MongoDB Models
 const Cast = mongoose.model('Cast', {
   name: String,
 });
@@ -37,18 +30,17 @@ const Movie = mongoose.model('Movie', {
   }],
 });
 
+// Seed Database Function
 const seedDatabase = async () => {
   await Cast.deleteMany();
   await Movie.deleteMany();
 
-  const castMap = new Map(); // To track existing cast to avoid duplicates
+  const castMap = new Map();
 
-  // Populate Cast collection
   netflixData.forEach(item => {
     const castList = item.cast.split(', ');
 
     castList.forEach(async name => {
-      // Deduplicate cast names
       if (!castMap.has(name)) {
         const cast = new Cast({ name });
         await cast.save();
@@ -57,7 +49,6 @@ const seedDatabase = async () => {
     });
   });
 
-  // Populate Movie collection
   const movies = [];
   netflixData.forEach(item => {
     const movie = new Movie({
@@ -67,26 +58,22 @@ const seedDatabase = async () => {
     movies.push(movie);
   });
 
-  // Save all movies to avoid CastError
   await Promise.all(movies.map(async movie => {
     await movie.save();
   }));
 };
 
+// Update Movies Function
 const updateMovies = async () => {
   try {
-    // Retrieve all casts from the Cast collection
     const casts = await Cast.find();
 
-    // Loop through each entry in netflixData and update the corresponding movie document
     for (const entry of netflixData) {
-      // Update the movie document in the MongoDB collection
       await Movie.updateOne(
         { title: entry.title },
         {
           $set: {
             cast: entry.cast.split(', ').map((actorName) => {
-              // Find the cast member by name and get their _id
               const castMember = casts.find((cast) => cast.name === actorName);
               return castMember ? castMember._id : null;
             }),
@@ -101,10 +88,18 @@ const updateMovies = async () => {
   }
 };
 
-// Call the function to update movies
+// Run Seed and Update Functions
+seedDatabase();
 updateMovies();
 
-// Start defining your routes here
+// Express app
+const port = process.env.PORT || 8080;
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// Routes
 app.get("/", (req, res) => {
   res.send(listEndpoints(app));
 });
@@ -114,7 +109,6 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/movies", async (req, res) => {
-  // Retrieve movies with populated cast information
   const movies = await Movie.find().populate('cast');
   res.json(movies);
 });
@@ -134,7 +128,6 @@ app.get('/movies/cast/:id', async (req, res) => {
       return res.status(404).json({ error: 'Cast not found' });
     }
 
-    // Use populate to retrieve movies information for the given cast
     const movies = await Movie.find({ cast: cast._id }).populate('cast');
 
     console.log('Found Cast:', cast);
@@ -159,4 +152,10 @@ app.get('/movies/:id', async (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  // Optionally, log the error to a monitoring service
 });
