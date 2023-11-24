@@ -57,7 +57,7 @@ if (process.env.RESET_DB) {
 }
 
 //Calling the function that contains all routes & endpoints
-app.use(songRoutes)
+app.use("/", songRoutes)
 
 // Start the server
 app.listen(port, () => {
