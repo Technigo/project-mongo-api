@@ -21,9 +21,9 @@ exports.getAllFilms = async (req, res) => {
   } catch (err) {
     console.error(err);
 
-    res.status(err.statusCode).json({
-      status: err.status,
-      message: err.message,
+    res.status(404).json({
+      status: "fail",
+      message: "No available data 💥",
     });
   }
 };
@@ -55,9 +55,9 @@ exports.getMovies = async (req, res) => {
   } catch (err) {
     console.error(err);
 
-    res.status(err.statusCode).json({
-      status: err.status,
-      message: err.message,
+    res.status(404).json({
+      status: "fail",
+      message: "No matched films 👀",
     });
   }
 };
@@ -82,9 +82,9 @@ exports.getFilm = async (req, res) => {
   } catch (err) {
     console.error(err);
 
-    res.status(err.statusCode).json({
-      status: err.status,
-      message: err.message,
+    res.status(404).json({
+      status: "fail",
+      message: "No matched film 👀",
     });
   }
 };
