@@ -27,7 +27,7 @@ app.use(express.json()); // Parse incoming JSON data
 app.use(express.urlencoded({ extended: false })) // Parse URL-encoded data
 
 // Conditional database seeding based on environment variable, commented out since data is in MongoDB Compass
-if (process.env.RESET_DB) {
+//if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     try {
       console.log('Seeding database...');
@@ -40,9 +40,9 @@ await MetallicaSongModel.insertMany(MetallicaSongs);
   }
 
   seedDatabase()
-  } else {
-    console.log('RESET_DB is not true. Database will not be reset.');
-  }
+  // } else {
+  //   console.log('RESET_DB is not true. Database will not be reset.');
+  // }
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
