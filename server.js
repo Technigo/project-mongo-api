@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 import topMusicData from './data/top-music.json';
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
@@ -24,16 +26,16 @@ const Song = mongoose.model('Song', {
   popularity: Number,
 });
 
-// if (process.env.RESET_DB) {
-// const seedDatabase = async () => {
-//   await Song.deleteMany({});
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Song.deleteMany({});
 
-//   topMusicData.forEach((topMusicData) => {
-//     new Song(topMusicData).save();
-//   });
-// };
-// seedDatabase();
-// }
+    topMusicData.forEach((topMusicData) => {
+      new Song(topMusicData).save();
+    });
+  };
+  seedDatabase();
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
