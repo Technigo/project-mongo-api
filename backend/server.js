@@ -6,7 +6,7 @@ dotenv.config()
 
 import data from "../data/top-music.json"
 
-
+//Setting up the database
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
@@ -17,9 +17,9 @@ const app = express()
 const listEndpoints = require("express-list-endpoints")
 
 // Add middlewares
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false })) //Parse URL-encoded data
+app.use(cors())
+app.use(express.json()) //Parse incoming JSON-files
+app.use(express.urlencoded({ extended: false })) //Parse arrays and strings
 
 //Check if the database is available/connected (readyState = 1)
 app.use((req, res, next)=>{
@@ -41,15 +41,16 @@ const ASong = mongoose.model("ASong", {
   popularity: Number
 })
 
-// if (process.env.RESET_DB) {
-//   const seedDataBase = async () => {
-//     await ASong.deleteMany({})
-//     data.forEach(song => {
-//       new ASong(song).save()
-//     })
-//   }
-//   seedDataBase()
-// }
+const seedDataBase = async () => {
+  await ASong.deleteMany({})
+  data.forEach(song => {
+    new ASong(song).save()
+  })
+}
+
+if (process.env.RESET_DB) {
+  seedDataBase()
+}
 
 // Main route
 app.get("/", (req, res) => {
@@ -57,41 +58,68 @@ app.get("/", (req, res) => {
 })
 
 //Route to all songs
-app.get("/songs", (req, res) => {
-  ASong.find().then(song => res.json(song))
-});
+app.get("/songs", async (req, res) => {
+  const allSongs = await ASong.find()
+
+  res.json(allSongs)
+})
 
 // Route to one song
 app.get("/songs/:songId", async (req, res) => {
   try {
-    const song = await ASong.findById(req.params.songId)
-    if (song) res.json(song)
-    else res.status(404).json({error: "song not found"})
+    const singleSong = await ASong.findById(req.params.songId)
+
+    if (singleSong) {
+      res.json(singleSong)
+    } else {
+      res.status(404).json({error: "We can't fin a song with that ID"})
+    }
   } catch (error) {
-    res.status(400).json({error: "invalid song id"})
+    res.status(400).json({error: "Invalid song ID, please double check"})
   }
+})
+
+//Route to a specific artist
+app.get("/artists/:artist", async (req, res) => {
+  const paramArtistName = req.params.artist
+
+  const artistSongs = await ASong.find({ artistName: { $regex : new RegExp(paramArtistName, "i") } });
+
+  if (artistSongs === 0) {
+    res.status(404).json("We're sorry, this artist hasn't made any songs in our API")
+  }
+
+  res.json(artistSongs)
 })
 
 //Route to a specific genre
 app.get("/genres/:specificGenre", async (req, res) => {
   try {
     const song = await ASong.find({genre: req.params.specificGenre})
-    if (song) res.json(song)
-    else res.status(404).json({error: "There are no songs of that genre"})
+
+    if (song) {
+      res.json(song)
+    } else {
+      res.status(404).json({error: "There are no songs of that genre"})
+    }
   } catch (error) {
-    res.status(400).json({error: "invalid genre"})
+    res.status(400).json({error: "This genre isn't stored in our API"})
   }
 })
 
-//Route to songs with danceability over 70
+//Route to songs with danceability greater than or equal to 70
 app.get("/danceable", (req, res) => {
   ASong.find({ danceability: {$gte: 70} })
     .then(songs => {
       if (songs.length > 0) {
         res.json(songs)
-      } else res.status(404).json({error: "There are no dancable songs"})
-    }).catch(err => {
-      res.status(500).json({error: `Internal server error: $(err)`})})
+      } else {
+        res.status(404).json({error: "There are no dancable songs"})
+      }
+    })
+    .catch(err => {
+      res.status(500).json({error: `Internal server error: $(err)`})
+    })
 })
 
 // Start the server

@@ -3,10 +3,10 @@ import cors from "cors"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 dotenv.config()
+
 import { songModel } from "./models/song"
 import { songRoutes } from "./routes/songRoutes"
 
-//Import the data
 import data from "../data/top-music.json"
 
 //Setting up the database
@@ -14,7 +14,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-// The port the app will run on.
+// The port the app will run on
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -26,13 +26,13 @@ app.use(express.urlencoded({ extended: false })) //Parse arrays and strings
 const listEndpoints = require("express-list-endpoints")
 
 //Check if the database is available/connected (readyState = 1)
-app.use((req, res, next)=>{
-  if(mongoose.connection.readyState !== 1){
-    res.status(503).json({error: "service unavailable"})
-  } else {
-    next()
-  }
-})
+// app.use((req, res, next)=>{
+//   if(mongoose.connection.readyState !== 1){
+//     res.status(503).json({error: "service unavailable"})
+//   } else {
+//     next()
+//   }
+// })
 
 // const ASong = mongoose.model("ASong", {
 //   trackName: String,
@@ -45,13 +45,14 @@ app.use((req, res, next)=>{
 //   popularity: Number
 // })
 
+const seedDataBase = async () => {
+  await ASong.deleteMany({})
+  data.forEach(song => {
+    new ASong(song).save()
+  })
+}
+
 if (process.env.RESET_DB) {
-  const seedDataBase = async () => {
-    await ASong.deleteMany({})
-    data.forEach(song => {
-      new ASong(song).save()
-    })
-  }
   seedDataBase()
 }
 
