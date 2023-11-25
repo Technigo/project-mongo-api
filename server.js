@@ -4,7 +4,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();// Load environment variables from the .env file
 import netflixTitleRoutes from "./routes/netflixTitleRoutes";
-import { NetflixTitleModel, ActorModel, CountryModel } from "./models/NetflixTitle";
+import { NetflixTitleModel} from "./models/NetflixTitle";
+import { ActorModel } from "./models/Actor";
+import { CountryModel } from "./models/Country";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -14,7 +16,7 @@ import { NetflixTitleModel, ActorModel, CountryModel } from "./models/NetflixTit
 import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL // Get the MongoDB connection URL from environment variables
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/netflixTitles' // Get the MongoDB connection URL from environment variables
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });// Connect to the MongoDB database
 mongoose.Promise = Promise;
 
