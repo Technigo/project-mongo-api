@@ -26,16 +26,27 @@ const Song = mongoose.model('Song', {
   popularity: Number,
 });
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Song.deleteMany({});
+const seedDataBase = async () => {
+  await Song.deleteMany({});
+  topMusicData.forEach((song) => {
+    new Song(song).save();
+  });
+};
 
-    topMusicData.forEach((topMusicData) => {
-      new Song(topMusicData).save();
-    });
-  };
-  seedDatabase();
+if (process.env.RESET_DB) {
+  seedDataBase();
 }
+
+// if (process.env.RESET_DB) {
+//   const seedDatabase = async () => {
+//     await Song.deleteMany({});
+
+//     topMusicData.forEach((topMusicData) => {
+//       new Song(topMusicData).save();
+//     });
+//   };
+//   seedDatabase();
+// }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
