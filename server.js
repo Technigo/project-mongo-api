@@ -4,22 +4,25 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import bookRoutes from './routes/bookRoutes';
+import { Book } from './models/bookModel';
+import booksData from './data/books.json';
 
 
 // Import dotenv for handling environment variables
 import dotenv from 'dotenv';
 dotenv.config()
 
-// Import booksData from a local JSON file
-import booksData from "./data/books.json";
-
 // Set up MongoDB connection using the provided URL from environment variables
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo"; // change to books?
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 // Set up the default port for the server, either from environment variable or 3000
 const port = process.env.PORT || 3000;
+
+// Set the strictQuery option to false to address the deprecation warning
+mongoose.set('strictQuery', false);
 
 // Create an Express application
 const app = express();
@@ -41,9 +44,28 @@ app.use((req, res, next) => {
   }
 })
 
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    try {
+      await Book.deleteMany(); // Clear existing data
+  
+      await Promise.all(booksData.map(bookData => new Book(bookData).save()));
+  
+      console.log('Database seeded successfully.');
+    } catch (error) {
+      console.error('Error seeding database:', error);
+    }
+  };
+  
+  seedDatabase();
+  
+}
+
+// Use the bookRoutes
+app.use('/books', bookRoutes);
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
   res.json(listEndpoints(app));
 });
 
