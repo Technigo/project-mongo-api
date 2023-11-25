@@ -1,13 +1,11 @@
 import cors from "cors";
 import express from "express";
 
-// const dotenv = require("dotenv");
-// dotenv.config({ path: "./config.env" });
-
 const listEndpoints = require("express-list-endpoints");
 
-const app = express();
+const filmsRouter = require("./routes/filmsRoutes");
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
@@ -25,8 +23,6 @@ app.use(express.json());
 //   seedDatabase();
 // }
 
-const filmsRouter = require("./routes/filmsRoutes");
-
 app.use("/api/v1/", filmsRouter);
 
 app.use("/", (req, res) => {
@@ -34,7 +30,7 @@ app.use("/", (req, res) => {
 });
 
 app.all("*", (req, res, next) => {
-  res.status(500).json({ status: "fail", message: "Something went very wrong 💥 " });
+  res.status(501).json({ status: "fail", message: "Not Implemented Endpoint 💥 " });
   next();
 });
 
