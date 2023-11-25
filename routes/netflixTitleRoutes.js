@@ -1,5 +1,7 @@
 import express from "express";
-import {NetflixTitleModel, ActorModel, CountryModel} from "../models/NetflixTitle";
+import {NetflixTitleModel} from "../models/NetflixTitle";
+import { ActorModel } from "../models/Actor";
+import { CountryModel } from "../models/Country";
 
 // Creating an instance of the Express router
 // The router method in this code is like setting up a map or a blueprint for handling different kinds of requests in a web application. It helps organize and define how the application should respond when someone visits different URLs. Think of it as creating a list of instructions for the app to follow when it receives specific requests, like "show me all titles" or "register a new user." This makes the code neat and helps the app know what to do when someone interacts with it.
@@ -14,7 +16,9 @@ const router = express.Router();
 //     res.json(endpoints)
 //   });
 
-// --- NetflixTitles collection ---
+// --- *NetflixTitles collection* ---
+
+//--------- Defining routes for handling GET requests ---------
 
 // Retrieving all Netflix titles or one title by searched title string
 // https://www.mongodb.com/docs/manual/reference/operator/query/regex/#examples
@@ -56,24 +60,8 @@ router.get("/titles/:id", async (req, res)=>{
 router.get("/titles/show/:showid", async (req, res)=>{
     await NetflixTitleModel.find({show_id:req.params.showid}).exec()
     .then((result)=>res.json(result))
-    .catch((error)=>res.status(404).json(`This id ${req.params.showid} was not found `));  
+    .catch((error)=>res.status(404).json(`This id ${req.params.showid} was not found due to ${error}.`));  
   })
-
-//--- Actors Collection ---
-// Retrieving all Netflix listed actors
-router.get("/actors", async(req,res)=>{
-    await ActorModel.find()
-    .then((result)=>res.json(result))
-    .catch((error)=>res.status(500).json(`Retrieval of actors collection failed due to ${error}`));
-})
-
-//--- Countries Collection ---
-// Retrieving all Netflix listed countries
-router.get("/countries", async(req,res)=>{
-    await CountryModel.find()
-    .then((result)=>res.json(result))
-    .catch((error)=>res.status(500).json(`Retrieval of countries collection failed due to ${error}`));
-})
 
 //--------- Define a route for handling POST requests to add a new title ---------
 router.post("/titles", async (req, res) => {
@@ -88,14 +76,16 @@ router.post("/titles", async (req, res) => {
   });
 
   //------- Define a route for handling PUT requests to update a specific title by ID ---------
-router.put("/update/:id", async (req, res) => {
+router.put("/titles/:id", async (req, res) => {
     // Extract the title ID from the request parameters
     const { id } = req.params;
+    const updatedBody = req.body;
     console.log(id); // Log the ID to the console
+    console.log(updatedBody); 
     // Use NetflixTitleModel to find and update a title by its ID, marking it as done
     // Mongoose Method: NetflixTitleModel.findByIdAndUpdate({ show_id: id })
     // Description: This route handles HTTP PUT requests and is responsible for updating a specific title by its ID. It extracts the title ID from the request parameters, and then it uses the findByIdAndUpdate() method, which is a Mongoose method, to find and update a title by its ID. The updated title is then responded to the client in JSON format.
-    await NetflixTitleModel.findByIdAndUpdate({ id: show_id })
+    await NetflixTitleModel.findByIdAndUpdate(id,updatedBody)
       .then((result) => res.json(result)) // Respond with the updated title in JSON format
       .catch((error) => res.status(404).json({ message: `Updating ${id} failed with error: ${error}` })); // Handle any errors that occur during the operation
   });
@@ -120,6 +110,22 @@ router.delete("/titles/:id", async (req, res) => {
       })
       .catch((error) => res.status(500).json(error)); // Handle any errors that occur during the operation
   });
+
+  //--- *Actors Collection* ---
+// Retrieving all Netflix listed actors
+router.get("/actors", async(req,res)=>{
+  await ActorModel.find()
+  .then((result)=>res.json(result))
+  .catch((error)=>res.status(500).json(`Retrieval of actors collection failed due to ${error}`));
+})
+
+//--- *Countries Collection* ---
+// Retrieving all Netflix listed countries
+router.get("/countries", async(req,res)=>{
+  await CountryModel.find()
+  .then((result)=>res.json(result))
+  .catch((error)=>res.status(500).json(`Retrieval of countries collection failed due to ${error}`));
+})
   
 // Export the router for use in the main application
 export default router;
