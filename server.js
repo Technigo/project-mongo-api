@@ -29,27 +29,27 @@ const NetflixShow = mongoose.model("NetflixShow", {
   type: String,
 });
 
-// const seedDatabase = async () => {
-//   try {
-//     // Remove all existing documents in the Netflix shows collection.
-//     await NetflixShow.deleteMany({});
+const seedDatabase = async () => {
+  try {
+    // Remove all existing documents in the Netflix shows collection.
+    await NetflixShow.deleteMany({});
 
-//     // Use map to create an array of promises, one for each document to be saved.
-//     const savePromises = netflixData.map(async (NetflixShowItem) => {
-//       // Creating a new NetflixShows document using data from netflixShowItem and returning the promise.
-//       return new NetflixShow(NetflixShowItem).save();
-//     });
+    // Use map to create an array of promises, one for each document to be saved.
+    const savePromises = netflixData.map(async (NetflixShowItem) => {
+      // Creating a new NetflixShows document using data from netflixShowItem and returning the promise.
+      return new NetflixShow(NetflixShowItem).save();
+    });
 
-//     // Wait for all the promises to resolve before moving on.
-//     await Promise.all(savePromises);
+    // Wait for all the promises to resolve before moving on.
+    await Promise.all(savePromises);
 
-//     console.log("Database seeded successfully.");
-//   } catch (error) {
-//     console.error("Error seeding database:", error);
-//   }
-// };
+    console.log("Database seeded successfully.");
+  } catch (error) {
+    console.error("Error seeding database:", error);
+  }
+};
 
-// seedDatabase();
+seedDatabase();
 
 // Defines the port the app will run on. Defaults to 8080.
 const port = process.env.PORT || 8080;
@@ -101,11 +101,9 @@ app.get("/netflix-show/:show_id", async (req, res) => {
     }
   } catch (error) {
     // If there is an error, send an error response
-    res
-      .status(500)
-      .json({
-        error: "Internal Server Error. Replace :show_id with a single show id.",
-      });
+    res.status(500).json({
+      error: "Internal Server Error. Replace :show_id with a single show id.",
+    });
   }
 });
 
