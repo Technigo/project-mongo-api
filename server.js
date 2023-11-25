@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import "dotenv/config";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -10,8 +11,18 @@ import booksData from "./data/books.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/books";
+const connectToMongo = () => {
+  mongoose
+    .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("Connected successfully"))
+    .catch((err) => {
+      console.error("Connection error:", err);
+      setTimeout(connectToMongo, 5000);
+    });
+};
+
+connectToMongo();
 mongoose.Promise = Promise;
 
 //Creates a mongoose model named "Books"
@@ -29,17 +40,13 @@ const Books = mongoose.model("Books", {
 });
 
 // Defining an asynchronous function to clear all existing data from the Books collection and then renew it with new data from the booksData
-const seedDatabase = async () => {
-  await Books.deleteMany({});
-  booksData.forEach((bookItem) => {
-    new Books(bookItem).save();
-  });
-};
-seedDatabase();
-
-const Author = mongoose.model("Author", {
-  name: String,
-});
+// const seedDatabase = async () => {
+//   await Books.deleteMany({});
+//   booksData.forEach((bookItem) => {
+//     new Books(bookItem).save();
+//   });
+// };
+// seedDatabase();
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -58,37 +65,56 @@ app.get("/", (req, res) => {
 });
 
 // Route to get all books
-app.get("/books", async (req, res) => {
+app.get("/books", (req, res) => {
   try {
-    const allBooks = await Books.find();
-    res.json(allBooks);
+    res.json(booksData);
   } catch (error) {
-    // If an error occurs, an error response will show up
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-app.get("/authors", async (req, res) => {
-  const authors = await Author.find();
-  res.json(authors);
+// Route to get all authors
+app.get("/authors", (req, res) => {
+  try {
+    res.json(authors);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Define a route to get authors by last name
+app.get("/authors/:lastName", (req, res) => {
+  const requestedLastName = req.params.lastName;
+  // Find all authors with the requested last name
+  const matchingAuthors = authors.filter(
+    (a) => a.lastName === requestedLastName
+  );
+
+  if (matchingAuthors.length > 0) {
+    res.json(matchingAuthors);
+  } else {
+    res
+      .status(404)
+      .json({ error: "Authors not found with the specified last name" });
+  }
 });
 
 // Route to get a single book by ID
-app.get("/books/:bookID", async (req, res) => {
+app.get("/books/:bookID", (req, res) => {
   try {
     const { bookID } = req.params;
 
-    // Fetch the book from the database based on the bookID
-    const specificBook = await Books.findOne({ bookID: parseInt(bookID) });
+    // Find the book in booksData based on the bookID
+    const specificBook = booksData.find(
+      (book) => book.bookID === parseInt(bookID)
+    );
 
     if (specificBook) {
       res.json(specificBook);
     } else {
-      // If the book with the specified ID cant be found, send a 404 response
       res.status(404).json({ error: "Book not found, try another number" });
     }
   } catch (error) {
-    // If an error occurs, an error response will show up
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
