@@ -4,7 +4,6 @@ const { Schema } = mongoose;
 
 export const bookSchema = new Schema({
   // Adding a schema to the database
-  //book:
 
   bookID: {
     type: Number,
@@ -16,35 +15,35 @@ export const bookSchema = new Schema({
   },
   authors: {
     type: String,
-    required: true,
+    //required: true,
   },
   average_rating: {
     type: Number,
-    required: true,
+    //required: true,
   },
   isbn: {
-    type: Number,
-    required: true,
+    type: String,
+    minLength: 9,
   },
   isbn13: {
-    type: Number,
-    required: true,
+    type: String,
+    minLength: 13,
   },
   language_code: {
     type: String,
-    required: true,
+    //required: true,
   },
   num_pages: {
     type: Number,
-    required: true,
+    //required: true,
   },
   ratings_count: {
     type: Number,
-    required: true,
+    //required: true,
   },
   text_reviews_count: {
     type: Number,
-    required: true,
+    //required: true,
   },
 });
 
