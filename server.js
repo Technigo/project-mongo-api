@@ -1,6 +1,22 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import { endpoints } from 'express-list-endpoints';
+import booksData from "./data/books.json";
+
+// Mongoose models
+const Book = mongoose.model('Book', {
+  title: String,
+  author: String,
+  genre: String,
+  publishDate: Date,
+});
+
+const Author = mongoose.model('Author', {
+  name: String,
+  nationality: String,
+  birthDate: Date,
+});
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -13,6 +29,18 @@ import mongoose from "mongoose";
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
+
+// Insert booksData into MongoDB on startup
+const insertBooksData = async () => {
+  try {
+    await Book.insertMany(booksData);
+    console.log('Books data inserted into MongoDB');
+  } catch (error) {
+    console.error('Error inserting books data:', error);
+  }
+};
+
+insertBooksData(); // Call the function to insert data
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -27,6 +55,37 @@ app.use(express.json());
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
+});
+
+// Documentation route
+app.get("/", (req, res) => {
+  const routes = endpoints(app);
+  res.json(routes);
+});
+
+// Get all books
+app.get('/books', async (req, res) => {
+  try {
+    const books = await Book.find();
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Get a single book by ID
+app.get('/books/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const book = await Book.findById(id);
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).json({ error: 'Book not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 // Start the server
