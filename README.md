@@ -1,13 +1,18 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+In this project we have created our own RESTful API and then used Mongoose methods when, for example, filtering the data.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I found this project harder to set up than the one last week. The deployment was also trickier but within my team we helped eachother out a lot. To write the code I have looked at the provided material, discussed with team mates and chatGPT.
+
+In this project I have used a dataset from Kaggle: https://www.kaggle.com/datasets/jonbown/metallica-songs?select=metallica_songs.csv
+
+Please note that there can be several albums with similar names because in the dataset remastered and live albums are also included.
+In "/songs/:id" you can in the URL change ":id" to one of the MongoDB generated id:s that you find in every song on the "/songs" list.
+In "/song-name/:title" you can replace ":title" with a song title that you find in the "/songs" list. It should include a partial match, for example if you type in "/song-name/ride" it should show songs from the album Ride the lightning.
+In "/albums/:album" you can show songs from certain albums, and you can also choose to see what songs in that album have a popularity score equal to or higher than, for example 55, by typing in "/albums/ridethelightning?popularity=55"
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Please visit: https://mongoapi-fkkq.onrender.com
