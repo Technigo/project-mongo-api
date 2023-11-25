@@ -1,13 +1,15 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project is my first project with database, creating API with database.
+I tried my best to handle routing and errors better than my first backend project, so I divided into some folders. ( models, routes, controllers, utils) I also tried to divide my code as much as possible, so that in the future, when I work with bigger backend setup, I know how!!
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I was really confused with working MongoDB and database as I am really new to backend and never worked with database. So to complete this project, I took some extra courses and read documantation.
+
+The probelm and what I am still not comfortable working with is database. How to connect them, what is SQL and noSQL, (relational database/non-relational database), what I should be carefull when I work with database, and which database to choose. ( firebase/vercel/supabase/mongoDB...)
+I have so many things that I need to figfure it out, yet I found it very interesting to work with servers and data.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Link to API:https://project-mongo-oxse.onrender.com/
