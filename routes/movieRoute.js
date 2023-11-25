@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { MovieModel } = require('../models/MovieModel');
 const listEndpoints = require("express-list-endpoints");
+const asyncHandler = require('express-async-handler')
 // import netflixData from "../data/netflix-titles.json"; // Dataset
 
 // ------------ SEEDING DATABSE ------------ //
@@ -18,11 +19,17 @@ const listEndpoints = require("express-list-endpoints");
 // seedDatabase()
 // }
 
-// ------------ ROUTES ------------ //
-router.get("/", (req, res) => {
-    res.send(listEndpoints(router)); // Displays all available endpoints in json
-});
+// ------------ ERROR HANDLING ROUTE ------------ //
+router.get("/", asyncHandler(async (req, res) => {
+    try {
+        const endpoints = listEndpoints(router);
+        res.json(endpoints);
+    } catch (error) {
+        res.status(500).json({ error: "Something went wrong" });
+    }
+}));
 
+// ------------ OTHER ROUTES ------------ //
 // Gets all the movies from the dataset
 router.get("/movies", (req, res) => {
     MovieModel.find()
