@@ -2,6 +2,7 @@ const Film = require("../models/filmsModel");
 const APIFeatures = require("../utils/apiFeatures");
 
 exports.aliasLatestMovies = (req, res, next) => {
+  //latest movie api giving queries before fetching
   req.query.limit = "10";
   req.query.sort = "release_year";
   next();
@@ -9,9 +10,14 @@ exports.aliasLatestMovies = (req, res, next) => {
 
 exports.getAllFilms = async (req, res) => {
   try {
-    const features = new APIFeatures(Film.find(), req.query).paginate().sort().filter();
-
+    const features = new APIFeatures(Film.find(), req.query).paginate().sort().filter(); //sort/filter/paginate with query
     const films = await features.query;
+
+    if (!films)
+      return res.status(404).json({
+        status: "fail",
+        message: "Could not find films",
+      });
 
     res.status(200).json({
       status: "success",
@@ -20,10 +26,9 @@ exports.getAllFilms = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-
-    res.status(404).json({
+    res.status(400).json({
       status: "fail",
-      message: "No available data 💥",
+      message: "Something went wrong 💥",
     });
   }
 };
@@ -47,6 +52,12 @@ exports.getMovies = async (req, res) => {
       },
     ]);
 
+    if (!movies)
+      return res.status(404).json({
+        status: "fail",
+        message: "No movies available",
+      });
+
     res.status(200).json({
       status: "success",
       results: movies.length,
@@ -55,9 +66,9 @@ exports.getMovies = async (req, res) => {
   } catch (err) {
     console.error(err);
 
-    res.status(404).json({
+    res.status(400).json({
       status: "fail",
-      message: "No matched films 👀",
+      message: "Something went wrong 👀",
     });
   }
 };
@@ -75,6 +86,12 @@ exports.getFilm = async (req, res) => {
       },
     ]);
 
+    if (!film)
+      return res.status(404).json({
+        status: "fail",
+        message: "No film with that ID",
+      });
+
     res.status(200).json({
       status: "success",
       data: film,
@@ -82,9 +99,9 @@ exports.getFilm = async (req, res) => {
   } catch (err) {
     console.error(err);
 
-    res.status(404).json({
+    res.status(400).json({
       status: "fail",
-      message: "No matched film 👀",
+      message: "Something went wrong 👀",
     });
   }
 };
