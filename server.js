@@ -2,14 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import "dotenv/config";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
 import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/books";
 const connectToMongo = () => {
@@ -39,15 +32,6 @@ const Books = mongoose.model("Books", {
   text_review_count: Number,
 });
 
-// Defining an asynchronous function to clear all existing data from the Books collection and then renew it with new data from the booksData
-// const seedDatabase = async () => {
-//   await Books.deleteMany({});
-//   booksData.forEach((bookItem) => {
-//     new Books(bookItem).save();
-//   });
-// };
-// seedDatabase();
-
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
@@ -73,9 +57,20 @@ app.get("/books", (req, res) => {
   }
 });
 
+// Define the Author schema
+const authorSchema = new mongoose.Schema({
+  firstName: String,
+  lastName: String,
+});
+
+// Create the Author model
+const Author = mongoose.model("Author", authorSchema);
+
 // Route to get all authors
-app.get("/authors", (req, res) => {
+app.get("/authors", async (req, res) => {
   try {
+    // Fetch all authors from the database
+    const authors = await Author.find();
     res.json(authors);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
