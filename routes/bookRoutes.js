@@ -4,26 +4,32 @@ import Book from "../models/book.js";
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+    res.json({Homepage})
+
+
+}
+);
+
 router.get("/get", async (req, res) => {
     console.log("get all books");
-    
-const Books = await Book.find()
-    // .then ((result) => console.log(result))
-    // .catch((error) => res.json(error));
-    console.log(Books)
+
+    await Book.find()
+    .then((result) => res.json(result))
+    .catch((error) => res.json(error));
+}
+);
 
 
-})
 
 
-
-  
 // router.post("/add", async (req, res) => {
 //     const newBook = new Book(req.body);
 //     await newBook
 //     .save()
 //     .then((result) => res.json(result))
 //     .catch((error) => res.json(error));
+//     console.log(newBook)
 // }
 // );
 

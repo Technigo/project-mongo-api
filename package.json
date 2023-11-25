@@ -1,4 +1,5 @@
 {
+  "schema": "https://json.schemastore.org/package",
   "name": "project-mongo-api",
   "version": "1.0.0",
   "description": "Starter project to get up and running with express quickly",
@@ -18,4 +19,5 @@
     "mongoose": "^6.12.0",
     "nodemon": "^3.0.1"
   }
+
 }
