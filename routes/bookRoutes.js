@@ -73,7 +73,29 @@ router.get("/author/:author", async (req, res) => {
 
 
 //----- ROUTE 4 ------
-// Create a woute to dind books with page count above 500
+// Aroute to find books with a specified maximum page count
+
+router.get("/books/pagecount/below/:pageCount", async (req, res) => {
+  const specifiedPageCount = parseInt(req.params.pageCount)
+
+    //Error message if user provides a non-numeric page count
+    if (isNaN(specifiedPageCount)) {
+      return res.status(400).json({ error: "Invalid page count. Please provide a second numeric value."})
+    }
+    
+    try {
+      //Find books with a page count less than the specified number
+      const books = await BookModel.find( { num_pages: {$lt: specifiedPageCount }})
+
+      if(books.length === 0 ) {
+        return res.status(404).json({ error: "No book with a page count less than the specified value found"})
+      }
+      res.json(books)
+    } catch (error) {
+      res.status(500).json({ error: error.message})
+    }
+    
+})
 
 
 //-------- BONUS: POST ROUTE -----------
