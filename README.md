@@ -1,12 +1,22 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project involves creating a RESTful API using Node.js, Express, and MongoDB with Mongoose models to handle data storage and retrieval.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+This assignment focuses on building a robust API that interacts with a MongoDB database using Mongoose models. It involves seeding the database with provided or self-generated data and implementing various endpoints to fetch and manipulate this data.
+
+### Technologies used
+Node.js
+Express.js
+MongoDB
+Mongoose
+
+### Routes
+#### Endpoint 1: "/"
+- Provides API documentation using Express List Endpoints.
+- Returns details about available endpoints and their functionalities.
+
 
 ## View it live
 
