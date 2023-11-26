@@ -50,7 +50,7 @@ app.use(express.json());
 // Endpoint to serve API documentation
 app.get('/', (req, res) => {
   try {
-    // Read the content of the API documentation file
+    // Read the content of the API documentation file (api-docs.md)
     const docsContent = fs.readFileSync('api-docs.md', 'utf-8');
 
     // Convert Markdown to HTML using markdown-it
@@ -84,11 +84,13 @@ app.get('/titles/:id', async (req, res) => {
     // Find a title by show_id in MongoDB
     const title = await NetflixTitle.findOne({ show_id: +id });
 
+    // If no document is found in the database, it throws an error indicating that no title was found.
     if (!title) {
       throw new Error('No title was found, please try again!');
     }
-
+   // If a title is found, it responds with a JSON representation of the title.
     res.json(title);
+    // Error handling. 
   } catch (error) {
     if (error instanceof Error) {
       res.status(404).send(error.message);
