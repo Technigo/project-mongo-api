@@ -19,7 +19,7 @@ const bookSchema = new Schema({
     },
 );
 
-const Book = mongoose.model("Book", bookSchema);
+const Book = mongoose.model("niceBooks", bookSchema);
 
 export default Book;
 

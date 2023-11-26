@@ -5,8 +5,11 @@ import dotenv from "dotenv";
 dotenv.config();
 import router from "./routes/bookRoutes.js";
 
+
+
 // Connects to the database
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/" 
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"; // || "mongodb://localhost/Books"
+//process.env.MONGO_URL ||
 mongoose.set('strictQuery', false);
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }).then(less => console.log("connected")).catch(err => console.log(err));
 

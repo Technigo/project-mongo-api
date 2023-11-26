@@ -1,13 +1,11 @@
 import express from "express";
-
 import Book from "../models/book.js";
 
-const router = express.Router();
+
+const router = express.Router(); // router is a mini version of app
 
 router.get("/", (req, res) => {
-    res.json({Homepage})
-
-
+    res.json("Welcome to the book API");
 }
 );
 
@@ -15,10 +13,42 @@ router.get("/get", async (req, res) => {
     console.log("get all books");
 
     await Book.find()
+
     .then((result) => res.json(result))
     .catch((error) => res.json(error));
 }
 );
+
+router.get("/get/:id", async (req, res) => {
+    const bookID = req.params.id;
+    console.log("get book by id");
+
+    await Book.findOne({ bookID: bookID })
+    .then((result) => res.json(result))
+    .catch((error) => res.json(error));
+})
+
+
+
+
+// router.put('/books/:id', async (req, res) => {
+//     const { id } = req.params;
+//     const { title } = req.body;
+
+//     try {
+//         const book = await Book.findById(id);
+//         if (!book) {
+//             return res.status(404).send('Book not found');
+//         }
+
+//         book.title = title;
+//         await book.save();
+
+//         res.send(book);
+//     } catch (error) {
+//         res.status(500).send(error);
+//     }
+// });
 
 
 
