@@ -40,7 +40,15 @@ router.get("/authors/:authors", async (req, res) => {
 // Route to get a specific book by its ID
 router.get("/books/byBookID/:bookID", async (req, res) => {
   try {
-    const result = await BookModel.findOne({ bookID: req.params.bookID });
+    // Convert the request parameter to a Number
+    const bookID = Number(req.params.bookID);
+
+    // Check if the conversion is successful
+    if (isNaN(bookID)) {
+      return res.status(400).json({ error: "Invalid bookID format" });
+    }
+
+    const result = await BookModel.findOne({ bookID: bookID });
 
     if (!result) {
       return res.status(404).json({ error: "Book not found" });
