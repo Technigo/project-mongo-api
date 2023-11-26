@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+A backend project to fetch data, working with MongoDB.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I had a lot of problem understanding everything, it still kinda complex and hard. I used ChatGPT to explain all the steps I did and got help from a group friend.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://mongo-api-evelyn.onrender.com/
