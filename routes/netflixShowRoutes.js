@@ -16,39 +16,53 @@ router.get("/", (req, res) => {
 // Show all data.
 router.get("/netflix-shows", async (req, res) => {
   try {
-    // Asynchronously retrieve all Netflix shows from the database.
     const result = await NetflixShowModel.find();
-    // If the retrieval is successful, handle the result.
     res.json(result);
-
-    // If an error occurs during the retrieval, handle the error.
   } catch (error) {
-    res.json(error);
+    console.error(error.stack); // Log the error for debugging if needed
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 // Define the route to find a show by show_id.
 router.get("/netflix-show/:show_id", async (req, res) => {
-  // Extract show_id from the request parameters.
   const { show_id } = req.params;
 
   try {
-    // Find a Netflix show by show_id in the database.
     const netflixShowID = await NetflixShowModel.findOne({
       show_id: Number(show_id),
     });
 
-    // If a show is found, return it as JSON. If not, return a 404 error.
     if (netflixShowID) {
       res.json(netflixShowID);
     } else {
       res.status(404).json({ error: "Netflix show not found, try another id" });
     }
   } catch (error) {
-    // Handle any errors that occur during the database query.
-    res.status(500).json({
-      error: "Internal Server Error. Replace :show_id with a Netflix show id.",
+    console.error(error.stack);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Define the route to find shows by type.
+router.get("/netflix-shows/type/:type", async (req, res) => {
+  const type = req.params.type.toLowerCase();
+
+  try {
+    const showType = await NetflixShowModel.find({
+      type: { $regex: type, $options: "i" },
     });
+
+    if (showType.length > 0) {
+      res.json(showType);
+    } else {
+      res
+        .status(404)
+        .json({ error: "Show type not found, try movie or tv%20show." });
+    }
+  } catch (error) {
+    console.error(error.stack);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
