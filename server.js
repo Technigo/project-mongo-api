@@ -6,20 +6,19 @@ dotenv.config();
 import booksData from "./data/books.json";
 import { BookModel } from "./models/BookModel";
 import bookRoutes from "./routes/bookRoutes";
-//import router from "./routes/bookRoutes";
 
 // Commenting out the seedDatabase function because it is not needed anymore
 
-// const seedDatabase = async () => {
-//   try {
-//     await BookModel.deleteMany({});
-//     await BookModel.insertMany(booksData);
-//     console.log("Database reset and seeded successfully");
-//   } catch (error) {
-//     console.log("Error seeding database:", error);
-//   }
-// };
-// seedDatabase();
+const seedDatabase = async () => {
+  try {
+    await BookModel.deleteMany({});
+    await BookModel.insertMany(booksData);
+    console.log("Database reset and seeded successfully");
+  } catch (error) {
+    console.log("Error seeding database:", error);
+  }
+};
+seedDatabase();
 
 const mongoUrl = process.env.MONGO_URL;
 mongoose

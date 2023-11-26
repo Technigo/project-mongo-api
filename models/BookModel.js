@@ -7,7 +7,7 @@ export const bookSchema = new Schema({
 
   bookID: {
     type: Number,
-    //required: true,
+    required: true,
   },
   title: {
     type: String,
@@ -15,35 +15,35 @@ export const bookSchema = new Schema({
   },
   authors: {
     type: String,
-    //required: true,
+    required: true,
   },
   average_rating: {
     type: Number,
-    //required: true,
+    required: true,
   },
   isbn: {
     type: String,
-    minLength: 9,
+    required: true,
   },
   isbn13: {
     type: String,
-    minLength: 13,
+    required: true,
   },
   language_code: {
     type: String,
-    //required: true,
+    required: true,
   },
   num_pages: {
     type: Number,
-    //required: true,
+    required: true,
   },
   ratings_count: {
     type: Number,
-    //required: true,
+    required: true,
   },
   text_reviews_count: {
     type: Number,
-    //required: true,
+    required: true,
   },
 });
 

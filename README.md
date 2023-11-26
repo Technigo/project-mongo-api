@@ -2,14 +2,31 @@
 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 
-Replace this readme with your own information about your project.
+This week's project is a continuation of the previous one, emphasizing the adoption of Mongoose methods over plain JavaScript. This shift enhances the API's capabilities in various tasks, particularly in filtering.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The construction of a resilient RESTful API further elevates functionality through the integration of a database, ensuring seamless data storage and retrieval.
 
-## The problem
+## Approach and Technologies Used
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Folder Structure:
+The project adopts a modular organization with distinct directories for models, routes, and the primary server file.
+
+- models/:
+  This directory houses Mongoose models specifically designed for handling data related to books.
+
+- routes/:
+  The routes folder encompasses endpoints for various book-related functionalities, including the general list of books, sorted books by author, bookID, and language code.
+
+Database Connection:
+The project establishes a connection with a MongoDB database hosted on MongoDB Atlas. The secure connection string is stored in the .env file to maintain confidentiality.
+
+Express.js:
+Express.js is the framework of choice for building the API. It facilitates efficient handling of routing and managing HTTP requests.
+
+Mongoose:
+Mongoose serves as the Object Data Modeling (ODM) library in the project, enabling seamless interaction with the MongoDB database. It provides a structured approach to modeling and handling data associated with books.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+The API is deployed and can be accessed at:
+https://project-mongo-2ea3.onrender.com/
