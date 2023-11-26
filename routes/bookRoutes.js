@@ -5,7 +5,17 @@ const router = express.Router(); // router is a mini version of app
 
 // all routes in router.js
 router.get("/", (req, res) => {
-    res.json("Welcome to the book API");
+    
+    const routes = [
+        { method: 'GET', path: '/books' },
+        { method: 'POST', path: '/books' },
+        { method: 'GET', path: '/books/:id' },
+        { method: 'PUT', path: '/books/:id' },
+        { method: 'DELETE', path: '/books/:id' },
+        // Add more routes here
+    ];
+
+    res.json(routes);
 }
 );
 
