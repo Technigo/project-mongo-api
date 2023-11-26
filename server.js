@@ -10,10 +10,11 @@ console.log(process.env);
 
  mongoose.set("strictQuery", false);
  
-const mongoUrl = //process.env.MONGO_URL || "mongodb://localhost/project-mongo";//
-process.env.MONGO_URL || "mongodb://127.0.0.1:27017/MongoProject";
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/MongoProject";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
+
+
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
