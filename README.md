@@ -30,12 +30,29 @@ I tested each endpoint using tools like Postman to simulate HTTP requests.
 
 ### Tools and Technologies Used:
 
-Node.js and Express: Used for server-side development and handling HTTP requests.
-MongoDB and Mongoose: Chosen as the database solution and ODM (Object Data Modeling) library, respectively.
-express-list-endpoints: Used to generate API documentation.
-Postman: Testing and validating API endpoints.
-MongoDB Atlas: Cloud-based MongoDB hosting, providing a scalable and managed database solution.
-Render: Deployment platform for hosting the Node.js application.
+#### Node.js and Express
+
+Used for server-side development and handling HTTP requests.
+
+#### MongoDB and Mongoose
+
+Chosen as the database solution and ODM (Object Data Modeling) library, respectively.
+
+#### express-list-endpoints
+
+Used to generate API documentation.
+
+#### Postman
+
+Testing and validating API endpoints.
+
+#### MongoDB Atlas
+
+Cloud-based MongoDB hosting, providing a scalable and managed database solution.
+
+#### Render
+
+Deployment platform for hosting the Node.js application.
 
 ## View it live
 
