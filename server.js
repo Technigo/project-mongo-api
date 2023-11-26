@@ -19,7 +19,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 // Set up the default port for the server, either from environment variable or 3000
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // Set the strictQuery option to false to address the deprecation warning
 mongoose.set('strictQuery', false);
