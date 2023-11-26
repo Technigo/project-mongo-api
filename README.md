@@ -7,12 +7,12 @@ This weeks project will be using Mongoose methods instead of plain JavaScript to
 
 There have been many hurdles (and is still quite unclear) in the understanding of
 
-- MongoDB Compass (local version) and MongoDB Atlas (deployed version) of the database.
-- how to create a pathway to connect either the deployed backend ( Render) or local backend (VScode) to either MongoDB Compass or MongoDB Atlas,
+- MongoDB Compass (local version) and MongoDB Atlas (cloud version) of the database.
+- how to create a pathway to connect either the cloud backend (Render) or local backend (VScode) to either MongoDB Compass or MongoDB Atlas,
 - when can the seeding/populating of database be necessary again once it is done (tempering of my database by outsiders?)
-- and how Postman can access both databases through the local and deployed backend
+- and how Postman can access both databases through the local and deployed backend whom are themselves connected to either MongoDB Compass(local) or MongoDB Atlas (cloud), and thus making them being updated differently.
 
 ## View it live
 
-Every project should be deployed somewhere, but this week's links will only be communicated to concerned parties only for obvious security reasons.
+Every project should be deployed somewhere, but this week's links will only be communicated to concerned parties only, for obvious security reasons.
 Feel free to contact me if more information is needed.
