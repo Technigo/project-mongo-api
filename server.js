@@ -1,98 +1,71 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import { endpoints } from 'express-list-endpoints';
-import netflixData from "./data/netflix-titles.json";
-import dotenv from "dotenv";
-dotenv.config();
 
-// Mongoose model for movies
-const Movie = mongoose.model('Movie', {
-  show_id: Number,
-  title: String,
-  director: String,
-  cast: String,
-  country: String,
-  date_added: String,
-  release_year: Number,
-  rating: String,
-  duration: String,
-  listed_in: String,
-  description: String,
-  type: String,
-});
+import express from 'express';// Import the Express web framework
+import cors from 'cors'; // Import Cross-Origin Resource Sharing middleware
+import mongoose from 'mongoose'; // Import Mongoose for MongoDB integration
+import netflixData from './data/netflix-titles.json'; // Import Netflix data from a local JSON file
+import dotenv from 'dotenv'; // Import dotenv for managing environment variables
+dotenv.config() // Load environment variables from a .env file
 
-// MongoDB connection
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+// Import Mongoose model and routes
+import Movie from './movieModel'; // Import the Mongoose model for movies
+import movieRoutes from './movieRoutes'; // Import custom routes for movies
 
-// Insert netflixData into MongoDB on startup
-const insertNetflixData = async () => {
-  try {
-    // Insert the Netflix data into the Movie collection
-    await Movie.insertMany(netflixData);
-    console.log('Netflix data inserted into MongoDB');
-  } catch (error) {
-    console.error('Error inserting Netflix data:', error);
-  }
-};
+// MongoDB connection setup
+const mongoUrl = process.env.MONGO_URI || 'mongodb://localhost/movie';  // Define MongoDB connection URI
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });// Connect to the MongoDB database
+mongoose.Promise = Promise; // Use the global Promise library with Mongoose
 
-insertNetflixData(); // Call the function to insert data
+// Set up Express application
+const port = process.env.PORT || 8080; // Define the port for the Express server
+const app = express(); // Create an instance of the Express application
 
-// Express app setup
-const port = process.env.PORT || 8080;
-const app = express();
 
-// Middleware setup
-app.use(cors());
-app.use(express.json());
+const listEndpoints = require("express-list-endpoints")
 
-// Basic route
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+// Use CORS and JSON parsing middleware
+app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(express.json()); // Parse incoming requests with JSON payloads
 
-// Documentation route
-app.get("/docs", (req, res) => {
-  // Generate API documentation using express-list-endpoints
-  const routes = endpoints(app);
-  res.json(routes);
-});
+// Database seeding (resetting) based on the RESET_DB environment variable
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    try {
+      await Movie.deleteMany(); // Clear existing data in the Movie collection
 
-// Get all movies route
-app.get('/movies', async (req, res) => {
-  try {
-    // Fetch all movies from the Movie collection
-    const movies = await Movie.find();
-    res.json(movies);
-  } catch (error) {
-    // Handle server error
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+      // Save each movie from the Netflix data into the Movie collection
+      await Promise.all(netflixData.map(movieData => new Movie(movieData).save()));
 
-// Get a single movie by ID route
-app.get('/movies/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    // Find a movie by its show_id in the Movie collection
-    const movie = await Movie.findOne({ show_id: id });
-    if (movie) {
-      res.json(movie);
-    } else {
-      // Respond with 404 if movie is not found
-      res.status(404).json({ error: 'Movie not found' });
+      console.log('Database seeded successfully.');
+    } catch (error) {
+      console.error('Error seeding database:', error);
     }
-  } catch (error) {
-    // Handle server error
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+  };
+
+  seedDatabase(); // Call the function to seed/reset the database
+
+}
+
+
+// Use the movieRoutes in your app under the root path ('/')
+app.use('/', movieRoutes);
+
+
+
+// Define a route to get a list of all endpoints in the application
+app.get("/", (req, res) => {
+  res.json(listEndpoints(app)); // Respond with a JSON array of endpoints
 });
 
-// Start the server
+// Start the Express server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
 
 
+
+// följ Technigo atlas deploy fram till step 4 - skriftliga - kolla även på videon - render: MongoURI - Render:
+
+//Render = advanced settings
+// env. config
+// MONGO_URI=
+// PORT=8080
