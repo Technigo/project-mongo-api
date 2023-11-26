@@ -29,18 +29,17 @@ const Site = mongoose.model("Site", {
   region: String,
 });
 
-//I imported my database through Compass and didn't use this code
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Book.deleteMany({});
+//I added by database throguh compass but here is the code to seed it
+// if (process.env.RESET_DB) {
+//   const seedDatabase = async () => {
+//     await Book.deleteMany({});
 
-    booksData.forEach((bookData) => {
-      new Book(bookData).save();
-    });
-  };
-
-  seedDatabase();
-}
+//     booksData.forEach((bookData) => {
+//       new Book(bookData).save();
+//     });
+//   };
+//   seedDatabase();
+// }
 
 //-------Defines the port the app will run on-----//
 const port = process.env.PORT || 8080;
