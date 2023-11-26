@@ -62,6 +62,7 @@ app.listen(port, () => {
 });
 
 
+// I will leave this comments so I remember for future projects:
 
 // följ Technigo atlas deploy fram till step 4 - skriftliga - kolla även på videon - render: MongoURI - Render:
 
