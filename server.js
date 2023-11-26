@@ -49,6 +49,8 @@ const feedDatabase = async () =>{
   })
 }
 
+
+//failed attempt to populate my Actor and Country collections for more exploration purposes
 /*   netflixData.forEach((title)=>{
     const countryObject = new CountryModel({name: title.country}).save();
     const castList= title.cast.split(",");
@@ -79,13 +81,6 @@ if (process.env.RESET_DATABASE == 'true'){
 }
 // Using the routes to handle API requests
 app.use(netflixTitleRoutes);
-
-// const listEndpoints = require('express-list-endpoints')
-// //---- Documentation of API ----
-// app.get("/", (req, res) => {
-//     const endpoints = listEndpoints(app);
-//     res.json(endpoints)
-//   });
 
 // Start the server
 app.listen(port, () => {
