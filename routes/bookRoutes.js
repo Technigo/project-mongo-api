@@ -8,16 +8,41 @@ router.get("/", (req, res) => {
     
     const routes = [
         { method: 'GET', path: '/books' },
-        { method: 'POST', path: '/books' },
-        { method: 'GET', path: '/books/:id' },
-        { method: 'PUT', path: '/books/:id' },
-        { method: 'DELETE', path: '/books/:id' },
+        { method: 'GET', path: '/get/:id' },
+        { method: 'GET', path: '/get/sort' },
+        { method: 'POST', path: '/add' },
+        { method: 'PUT', path: '/update/:id' },
         // Add more routes here
     ];
-
     res.json(routes);
+    then((result) => res.json(result))
+    .catch((error) => res.json(error));
 }
 );
+
+router.get("/books", async (req, res) => {
+    console.log("get all books");
+
+    await Book.find()
+
+    .then((result) => res.json(result))
+    .catch((error) => res.json(error));
+}
+);
+
+router.get("books/:id", async (req, res) => {
+
+    const bookID = req.params.id;
+    console.log("get book by id");
+
+    await Book.findOne({ bookID: bookID })
+    .then((result) => res.json(result))
+    .catch((error) => res.json(error));
+}
+)
+
+
+
 
 router.get("/get", async (req, res) => {
     console.log("get all books");
@@ -72,6 +97,7 @@ router.post("/add", async (req, res) => {
     console.log(newBook)
 }
 );
+
 
 
 export default router;
