@@ -5,18 +5,26 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 import dotenv from 'dotenv';
+
+//import seeddatabase
 import seedDatabase from './db/seedDatabase.js';
+
+//import errrorhandler 
 import errorHandler from './middleware/errorHandler.js';
+
+//import routes
 import birdRoutes from './routes/birdRoutes.js';
 import familyRoutes from './routes/familyRoutes.js';
 import habitatRoutes from './routes/habitatRoutes.js';
 import dietRoutes from './routes/dietRoutes.js';
+import lifeSpanRoutes from './routes/lifeSpanRoutes.js'
 
 dotenv.config();
 mongoose.set('strictQuery', false);
 
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/birds';
 
+//connect to mongoose 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
@@ -39,14 +47,15 @@ if (process.env.RESET_DATABASE) {
   seedDatabase();
 }
 
-// Use middleware
+//Use error middleware
 app.use(errorHandler);
 
-// Set up routes
-app.use('/birds', birdRoutes);
-app.use('/families', familyRoutes);
-app.use('/habitat', habitatRoutes);
-app.use('/diet', dietRoutes);
+//routes
+app.use('/birds', birdRoutes); //gets all the birds
+app.use('/families', familyRoutes); //gets all the birdfamilies
+app.use('/habitat', habitatRoutes); //gets bird based on habitat
+app.use('/diet', dietRoutes); //gets bird based on diets
+app.use('/lifespan', lifeSpanRoutes); //gets bird based on lifespan
 
 // New endpoint to list all endpoints
 app.get('/', (req, res) => {
