@@ -29,6 +29,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Define the seedDatabase function
+const seedDatabase = async () => {
+  try {
+    await bookRouter.deleteMany({});
+    booksData.forEach((bookData) => {
+      new Book(bookData).save();
+    });
+    console.log('Database seeded successfully');
+  } catch (error) {
+    console.error('Error seeding database:', error);
+  }
+};
+
 // Use book routes
 app.use("/", bookRouter);
 
