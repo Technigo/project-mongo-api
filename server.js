@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import nomineeRoutes from "./routes/nomineeRoutes.js";
 import { NomineeModel } from "./models/Nominee.js";
 
-dotenv.config();
+dotenv.config(); 
 
 import goldenGlobesData from "./data/golden-globes.json";
 
@@ -22,6 +22,7 @@ mongoose
     });
 // Setting Mongoose Promise Library
 mongoose.Promise = Promise;
+
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
