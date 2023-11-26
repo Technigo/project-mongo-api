@@ -17,5 +17,8 @@
     "express-list-endpoints": "^6.0.0",
     "mongoose": "^8.0.1",
     "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
