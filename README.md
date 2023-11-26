@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The assignment was to build a database with monogoDB, make some endpoints and deploy the site.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I've had difficulties with this assignment. First I wasn't able to connect my code in vs code to Compass, and had a lot of difficulties with figuring out how to. I got help from my team mates and we figured it out. The coding went pretty okay, but the deployment of the site was really hard and I wasn't able to finish it. So this week I don't have a deployed site, yet.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Sorry, no deployed site this week!
