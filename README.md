@@ -1,13 +1,43 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project provides a RESTful API for managing a book database. It includes functionalities to retrieve a collection of books, fetch details of a single book by ID, filter books based on the author and page count.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+### Selecting a Dataset:
+
+I chose the "Books" dataset to build the API around. This involved creating a Mongoose model (BookModel) to represent the structure of the data.
+
+### Setting Up the Environment:
+
+I configured the development environment by initializing a Node.js project, setting up Express for handling HTTP requests, and connecting to MongoDB using Mongoose.
+
+### Data Seeding:
+
+I implemented a data seeding script to populate the MongoDB database with initial book data.
+
+### Route Planning:
+
+I planned the routes for the API based on the project requirements. This involved creating routes for documentation, retrieving all books, retrieving a single book by ID, filtering books by author and filtering boks by page count.
+
+### Error Handling and Validation:
+
+I implemented error handling to ensure that the API provides informative responses in case of errors.
+
+### Testing:
+
+I tested each endpoint using tools like Postman to simulate HTTP requests.
+
+### Tools and Technologies Used:
+
+Node.js and Express: Used for server-side development and handling HTTP requests.
+MongoDB and Mongoose: Chosen as the database solution and ODM (Object Data Modeling) library, respectively.
+express-list-endpoints: Used to generate API documentation.
+Postman: Testing and validating API endpoints.
+MongoDB Atlas: Cloud-based MongoDB hosting, providing a scalable and managed database solution.
+Render: Deployment platform for hosting the Node.js application.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+View the deployed project here:
+https://book-collection-mongo-api.onrender.com/
