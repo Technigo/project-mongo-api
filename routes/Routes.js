@@ -1,5 +1,5 @@
 import express from "express";
-import { bookModel } from "../models/schema.js";
+import { bookModel } from "../models/schema";
 import listEndpoints from "express-list-endpoints";
 
 // Create an instance of the Express router
@@ -46,3 +46,5 @@ router.get("/books/author", async (req, res) => {
     res.status(400).json({ error: "Error fetching author's books" });
   }
 });
+
+export default router;

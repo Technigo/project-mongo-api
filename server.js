@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { bookModel } from "./models/schema.js";
-import { routes } from "../routes/Routes.js";
+
+import Routes from "./routes/Routes";
 
 dotenv.config();
 
@@ -32,18 +32,18 @@ app.use((req, res, next) => {
   }
 });
 
-app.use("/", routes);
+app.use(Routes);
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await bookModel.deleteMany({});
-    data.forEach((data) => {
-      new bookModel(data).save();
-    });
-  };
+// if (process.env.RESET_DB) {
+//   const seedDatabase = async () => {
+//     await Book.deleteMany({});
+//     data.forEach((data) => {
+//       new Book(data).save();
+//     });
+//   };
 
-  seedDatabase();
-}
+//   seedDatabase();
+// }
 
 // Start the server
 app.listen(port, () => {
