@@ -12,16 +12,6 @@ router.get("/", (req, res) => {
   res.json(endpoints);
 });
 
-// router.get("/get", async (req, res) => {
-//   try {
-//     const result = await BookModel.find();
-//     res.json(result);
-//   } catch (error) {
-//     //console.error("Error fetching books:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
-
 // Route to get all the books from the database
 router.get("/books", async (req, res) => {
   try {

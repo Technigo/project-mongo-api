@@ -30,3 +30,18 @@ Mongoose serves as the Object Data Modeling (ODM) library in the project, enabli
 
 The API is deployed and can be accessed at:
 https://project-mongo-2ea3.onrender.com/
+
+All books:
+https://project-mongo-2ea3.onrender.com/books
+
+Books from a specific author, for instace J.R.R Tolkien:
+https://project-mongo-2ea3.onrender.com/authors/Tolkien
+Try also: Rowling, Smith, Duras and more
+
+Books with a specific bookID:
+https://project-mongo-2ea3.onrender.com/books/byBookID/325
+Try also: 1, 493, 1053 and more
+
+Books with a specified language, for instance spanish (spa):
+https://project-mongo-2ea3.onrender.com/books/language_code/spa
+Try also: english: eng, american: en-US, French: fre and more
