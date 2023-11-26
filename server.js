@@ -2,88 +2,90 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import { endpoints } from 'express-list-endpoints';
-import booksData from "./data/books.json";
+import netflixData from "./data/netflix-titles.json";
+import dotenv from "dotenv";
+dotenv.config();
 
-// Mongoose models
-const Book = mongoose.model('Book', {
+// Mongoose model for movies
+const Movie = mongoose.model('Movie', {
+  show_id: Number,
   title: String,
-  author: String,
-  genre: String,
-  publishDate: Date,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: String,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String,
 });
 
-const Author = mongoose.model('Author', {
-  name: String,
-  nationality: String,
-  birthDate: Date,
-});
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
+// MongoDB connection
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Insert booksData into MongoDB on startup
-const insertBooksData = async () => {
+// Insert netflixData into MongoDB on startup
+const insertNetflixData = async () => {
   try {
-    await Book.insertMany(booksData);
-    console.log('Books data inserted into MongoDB');
+    // Insert the Netflix data into the Movie collection
+    await Movie.insertMany(netflixData);
+    console.log('Netflix data inserted into MongoDB');
   } catch (error) {
-    console.error('Error inserting books data:', error);
+    console.error('Error inserting Netflix data:', error);
   }
 };
 
-insertBooksData(); // Call the function to insert data
+insertNetflixData(); // Call the function to insert data
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
+// Express app setup
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
+// Middleware setup
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// Basic route
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
 // Documentation route
-app.get("/", (req, res) => {
+app.get("/docs", (req, res) => {
+  // Generate API documentation using express-list-endpoints
   const routes = endpoints(app);
   res.json(routes);
 });
 
-// Get all books
-app.get('/books', async (req, res) => {
+// Get all movies route
+app.get('/movies', async (req, res) => {
   try {
-    const books = await Book.find();
-    res.json(books);
+    // Fetch all movies from the Movie collection
+    const movies = await Movie.find();
+    res.json(movies);
   } catch (error) {
+    // Handle server error
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-// Get a single book by ID
-app.get('/books/:id', async (req, res) => {
+// Get a single movie by ID route
+app.get('/movies/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const book = await Book.findById(id);
-    if (book) {
-      res.json(book);
+    // Find a movie by its show_id in the Movie collection
+    const movie = await Movie.findOne({ show_id: id });
+    if (movie) {
+      res.json(movie);
     } else {
-      res.status(404).json({ error: 'Book not found' });
+      // Respond with 404 if movie is not found
+      res.status(404).json({ error: 'Movie not found' });
     }
   } catch (error) {
+    // Handle server error
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -92,3 +94,5 @@ app.get('/books/:id', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+
