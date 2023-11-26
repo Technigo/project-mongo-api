@@ -57,6 +57,12 @@ app.get("/", (req, res) => {
   res.send(listEndpoints(app));
 });
 
+//----- End point for all sites-----//
+app.get("/sites", async (req, res) => {
+  const sites = await Site.find();
+  res.json(sites);
+});
+
 //----- End point for all sites from date inscribed-----//
 app.get("/date/:dateinscribed", async (req, res) => {
   const siteDate = req.params.dateinscribed;
