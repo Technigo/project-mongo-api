@@ -8,24 +8,29 @@ const router = express.Router();
 //DEFINE ROUTES
 // Get all movies
 router.get('/movies', async (req, res) => {
-    try {
-        const movies = await MovieModel.find({});
-        res.json(movies);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
+    await MovieModel.find()
+        .then((result) => res.json(result))
+        .catch((error) => res.json(error));
 });
 
 // Get movie by ID
 router.get('/movies/:id', async (req, res) => {
+    const id = req.params.id
+    if (isNaN(id)) {
+        res.status(404).json({ error: "You must enter the number of the movie ID" })
+        return
+    }
     try {
-        const movie = await MovieModel.findById(req.params.id);
+        //Matching the id from param with a movie with the same movieID
+        const movie = await MovieModel.findOne({ show_id: parseInt(id) })
+
+        //Error message when a movie with required id does not exist
         if (!movie) {
-            return res.status(404).json({ message: 'Movie not found' });
+            return res.status(404).json({ error: "A movie with the required id does not exist. Try again." })
         }
-        res.json(movie);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.json(movie)
+    } catch (error) {
+        res.json({ error: error.message })
     }
 });
 
