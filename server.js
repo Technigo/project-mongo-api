@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import nomineeRoutes from "./routes/nomineeRoutes";
-import { NomineeModel } from "./models/Nominee";
+import nomineeRoutes from "./routes/nomineeRoutes.js";
+import { NomineeModel } from "./models/Nominee.js";
 
 dotenv.config();
 
