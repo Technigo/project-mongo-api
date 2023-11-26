@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-export const netflixSchema = new Schema({
+export const movieSchema = new Schema({
     // Complex Object Config
     show_id: { type: Number, },
     title: { type: String },
@@ -18,6 +18,6 @@ export const netflixSchema = new Schema({
     type: { type: String }
 });
 
-// Create a Mongoose model named 'MovieModel' based on the 'netlfixSchema' for the 'Netflix' collection
-// This model is used to interact with the "Netflix" collection in the MongoDB database. It allows you to perform CRUD operations on documents in that collection and provides methods for data validation based on the schema.
-export const MovieModel = mongoose.model("Movie", netflixSchema);
+// Create a Mongoose model named 'MovieModel' based on the 'movieSchema' for the 'Movie' collection
+// This model is used to interact with the "Movie" collection in the MongoDB database. It allows you to perform CRUD operations on documents in that collection and provides methods for data validation based on the schema.
+export const MovieModel = mongoose.model("Movie", movieSchema);
