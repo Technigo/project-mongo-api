@@ -1,13 +1,33 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Creating a RESTful API using MongoDB as database management system and Mongoose as the Object Data Modeling (ODM) library. The API uses data from a .json file which I've selected and created endpoints from.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Had challenges when deploying the database to Atlas and then deploying the project via Render. Going through the sites and my code debugging I realized I had a letter too many in the value of the environment variables at Render. I also choosed deploy a "Static Site" instead of the correct "Web Service", once both bugs were solved it worked.
+
+I added the .env to practise how to hide sensitive information. As I had some struggles with the deploy and in my debug I added the API:info in the server.js file again to understand how it might be connected. With more time I would hide it again.
+
+Atlas was used to deploy the database and Render to deploy the project.
+
+With more time I would've added a separate file for routes and more error handling. I prioritized learning more about backend via material and start up the final project instead.
+
+## API explained
+
+GET /books
+Description: Lists all books
+
+GET /books/:bookID
+Description: Replace ":bookID" with an id of your choice
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+[https://first-mongo.onrender.com/](https://first-mongo.onrender.com/)
+
+## Connect with Me
+
+[![GitHub](https://img.shields.io/badge/GitHub-black?style=flat-square&logo=github)](https://github.com/IdahCollin)
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/idah-collin)
+
+[My portfolio](https://idah-collin-portfolio.netlify.app/)
