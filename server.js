@@ -1,12 +1,22 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import expressListEndpoints from "express-list-endpoints";
 import bookRouter from "./routes/bookRoutes";
 
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/mongo-api";
 
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:127.0.0.1:27017/mongo-api";
+// Define the seedDatabase function
+const seedDatabase = async () => {
+  try {
+    await Book.deleteMany({});
+    booksData.forEach((bookData) => {
+      new Book(bookData).save();
+    });
+    console.log('Database seeded successfully');
+  } catch (error) {
+    console.error('Error seeding database:', error);
+  }
+};
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 .then (() => {
@@ -29,18 +39,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Define the seedDatabase function
-const seedDatabase = async () => {
-  try {
-    await bookRouter.deleteMany({});
-    booksData.forEach((bookData) => {
-      new Book(bookData).save();
-    });
-    console.log('Database seeded successfully');
-  } catch (error) {
-    console.error('Error seeding database:', error);
-  }
-};
 
 // Use book routes
 app.use("/", bookRouter);
