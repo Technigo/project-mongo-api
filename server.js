@@ -1,32 +1,66 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+// Import necessary modules and set up the Express app
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import listEndpoints from 'express-list-endpoints';
+import dotenv from 'dotenv';
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+//import seeddatabase
+import seedDatabase from './db/seedDatabase.js';
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+//import errrorhandler 
+import errorHandler from './middleware/errorHandler.js';
+
+//import routes
+import birdRoutes from './routes/birdRoutes.js';
+import familyRoutes from './routes/familyRoutes.js';
+import habitatRoutes from './routes/habitatRoutes.js';
+import dietRoutes from './routes/dietRoutes.js';
+import lifeSpanRoutes from './routes/lifeSpanRoutes.js'
+
+dotenv.config();
+mongoose.set('strictQuery', false);
+
+const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/birds';
+
+//connect to mongoose 
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
+
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+// Reset database if needed
+if (process.env.RESET_DATABASE) {
+  console.log('Resetting database!');
+  seedDatabase();
+}
+
+//Use error middleware
+app.use(errorHandler);
+
+//routes
+app.use('/birds', birdRoutes); //gets all the birds
+app.use('/families', familyRoutes); //gets all the birdfamilies
+app.use('/habitat', habitatRoutes); //gets bird based on habitat
+app.use('/diet', dietRoutes); //gets bird based on diets
+app.use('/lifespan', lifeSpanRoutes); //gets bird based on lifespan
+
+// New endpoint to list all endpoints
+app.get('/', (req, res) => {
+  const endpoints = listEndpoints(app);
+  res.json({ endpoints });
 });
 
 // Start the server

@@ -1,13 +1,26 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project is a MongoDB API that serves bird-related information, including bird families and individual bird species. The API is built using Express.js, MongoDB, and Mongoose.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The goal of this project was to create a RESTful API for bird data, allowing users to retrieve information about bird families, individual bird species, and filter birds based on habitat and diet. The project involved setting up a MongoDB database on Atlas, defining Mongoose models for bird families and species, and implementing various endpoints to handle different queries.
+
+Approach and Technologies Used
+Folder Structure:
+
+The project follows a modular structure with separate folders for models, routes, and the main server file.
+models/: Contains Mongoose models for BirdFamily and Bird.
+routes/: Includes separate route files for bird families and individual bird species.
+
+Database Connection:
+The project connects to a MongoDB database hosted on MongoDB Atlas. The connection string is stored in the .env file.
+
+Express.js:
+The API is built using Express.js to handle routing and HTTP requests.
+
+Mongoose:
+Mongoose is used as an ODM (Object Data Modeling) library to interact with the MongoDB database.
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+he API is deployed and can be accessed at: https://bird-test-0s48.onrender.com/
