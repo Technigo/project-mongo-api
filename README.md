@@ -8,4 +8,4 @@ I found this project harder to set up and understand than last weeks project. I 
 
 ## View it live
 
-https://project-mongo-frwbjyq86-amandas-projects-f1739839.vercel.app/
+https://project-mongo-api.vercel.app/
