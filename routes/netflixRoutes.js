@@ -1,6 +1,5 @@
 import express from "express";
-import Data from "../data/netflix-titles.json";
-import NetflixTitle from "../models/netflixTitleModel"
+import NetflixTitle from "../models/netflixTitleModel";
 
 const router = express.Router();
 
