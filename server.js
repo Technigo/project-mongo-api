@@ -28,7 +28,7 @@ const Books = mongoose.model("Book", {
   text_review_count: Number
 })
 
-// Defining an asynchronous function with purpose to clear existing data from the Books collection and then populate it with new data from the booksData array
+// Defining an asynchronous function with purpose to clear existing data from the Books collection and then populate it with new data from the booksData array. This part can be commented out after deploying database.
 const seedDatabase = async () => {
   // Remove all existing documents in the Books collection
   await Books.deleteMany({})
