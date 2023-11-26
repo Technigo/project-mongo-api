@@ -72,7 +72,7 @@ router.post("/titles", async (req, res) => {
     // Description: This route handles HTTP POST requests and is used to add a new title to the database. It extracts the title data from the request body and then uses the create() method, which is a Mongoose method, to create a new title document with the provided data. The newly created title is then responded to the client in JSON format.
     await NetflixTitleModel.create(netflixTitle )
       .then((result) => res.json(result))
-      .catch((error) => res.status(500).json({ message: `Posting ${netflixTitle} failed` }));
+      .catch((error) => res.status(500).json({ message: `Posting ${netflixTitle} failed due to error: ${error}` }));
   });
 
   //------- Define a route for handling PUT requests to update a specific title by ID ---------
@@ -83,7 +83,7 @@ router.put("/titles/:id", async (req, res) => {
     console.log(id); // Log the ID to the console
     console.log(updatedBody); 
     // Use NetflixTitleModel to find and update a title by its ID, marking it as done
-    // Mongoose Method: NetflixTitleModel.findByIdAndUpdate({ show_id: id })
+    // Mongoose Method: NetflixTitleModel.findByIdAndUpdate(req.params.id, req.body)
     // Description: This route handles HTTP PUT requests and is responsible for updating a specific title by its ID. It extracts the title ID from the request parameters, and then it uses the findByIdAndUpdate() method, which is a Mongoose method, to find and update a title by its ID. The updated title is then responded to the client in JSON format.
     await NetflixTitleModel.findByIdAndUpdate(id,updatedBody)
       .then((result) => res.json(result)) // Respond with the updated title in JSON format
