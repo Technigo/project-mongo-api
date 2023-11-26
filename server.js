@@ -30,15 +30,17 @@ const Site = mongoose.model("Site", {
 });
 
 //I imported my database through Compass and didn't use this code
-// if (process.env.RESET_DB) {
-//   const seedDatabase = async () => {
-//     await Book.deleteMany({});
-//     booksData.forEach(async (bookData) => {
-//       await new Book(bookData).save();
-//     });
-//   };
-//   seedDatabase();
-// }
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Book.deleteMany({});
+
+    booksData.forEach((bookData) => {
+      new Book(bookData).save();
+    });
+  };
+
+  seedDatabase();
+}
 
 //-------Defines the port the app will run on-----//
 const port = process.env.PORT || 8080;
@@ -53,12 +55,6 @@ app.use(express.json());
 //lists all end points
 app.get("/", (req, res) => {
   res.send(listEndpoints(app));
-});
-
-//----- End point for all sites-----//
-app.get("/sites", async (req, res) => {
-  const sites = await Site.find();
-  res.json(sites);
 });
 
 //----- End point for all sites from date inscribed-----//
