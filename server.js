@@ -1,14 +1,11 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import titleRoutes from "./routes/titleRoutes";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import netflixData from "./data/netflix-titles.json";
+import { TitleModel } from "./models/Title";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -19,14 +16,70 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndpoints = require("express-list-endpoints");
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+app.use((req, res, next) => {
+  mongoose.connection.readyState === 1
+    ? next()
+    : res.status(503).json({ error: "Service Unavailable" });
+});
+
+//#REGION ROUTES
+app.use(titleRoutes);
+//#ENDREGION
+
+// const Categories = mongoose.model("Categories", {
+//   name: String,
+// });
+
+//#REGION CATEGORYSEEDER
+// const categorySeeder = async () => {
+//   await Categories.deleteMany();
+//   let listOfCategories = [];
+//   let cleanList = [];
+
+//   await netflixData.map((category) => {
+//     if (
+//       !listOfCategories.includes(
+//         category.listed_in.split(",").map((category) => category.trim())
+//       )
+//     ) {
+//       listOfCategories.push(
+//         category.listed_in.split(",").map((category) => category.trim())
+//       );
+//     }
+//   });
+
+//   for (let box of listOfCategories) {
+//     for (let cate of box) {
+//       if (!cleanList.includes(cate)) {
+//         cleanList.push(cate);
+//       }
+//     }
+//   }
+
+//   cleanList.map((cat) => new Categories({ name: cat }).save());
+// };
+
+//#ENDREGION
+
+const seeder = async () => {
+  await TitleModel.deleteMany({});
+
+  await netflixData.map((title) => new TitleModel(title).save());
+};
+
+//Seed DB
+// seeder();
+
+//404 page
+app.use((req, res) => {
+  res.send(`<div><h1>Oops, this page doesn't exist 👻</h1>`);
 });
 
 // Start the server
