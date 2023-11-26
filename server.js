@@ -14,7 +14,7 @@ import dotenv from 'dotenv';
 dotenv.config()
 
 // Set up MongoDB connection using the provided URL from environment variables
-const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo"; // change to books?
+const mongoUrl = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/books"; // change to books?
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 

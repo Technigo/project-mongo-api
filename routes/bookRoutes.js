@@ -11,7 +11,7 @@ const handleErrors = (res, error) => {
 
 // Helper function for common parameter destructuring
 const destructureParams = (params) => ({
-  bookID: params.bookID,
+  id: params.id,
   author: params.author
 });
 
@@ -26,11 +26,11 @@ router.get('/', async (req, res) => {
 });
 
 // Route to get a book by ID
-router.get('/:bookID', async (req, res) => {
-  const { bookID } = destructureParams(req.params);
+router.get('/:id', async (req, res) => {
+  const { id } = destructureParams(req.params);
 
   try {
-    const book = await Book.findOne({ bookID });
+    const book = await Book.findById(id);
 
     if (book) {
       res.json(book);
@@ -47,7 +47,8 @@ router.get('/author/:author', async (req, res) => {
   const { author } = destructureParams(req.params);
 
   try {
-    const books = await Book.find({ authors: author });
+    //The "i" modifier specifies a case-insenitive match
+    const books = await Book.find({ authors: new RegExp(author, 'i') });
 
     if (books.length > 0) {
       res.json(books);
