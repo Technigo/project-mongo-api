@@ -18,10 +18,10 @@ At this stage I was able to create several end points.
 
 <ins>What tools and techniques you used to solve it</ins>: Our course content as well as advice from code coaches, Stack Overflow and I even used ChatGPT a few times while trying to solve errors. I attempted to separate my code into the recomented file structure (eg. with routes, mode, server) but this caused many errors so I kept it simple this week.
 
-<ins>What technologies did you use?</ins>: MongoDB. Mongoose, Mongo Compass, Mongo Atlas, JS, Routers
+<ins>What technologies did you use?</ins>: MongoDB. Mongoose, Mongo Compass, Mongo Atlas, JavaScript
 
 <ins>If you had more time, what would be next?</ins>: 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-xcra.onrender.com/
