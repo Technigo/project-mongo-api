@@ -20,4 +20,4 @@ export const movieSchema = new Schema({
 
 // Create a Mongoose model named 'MovieModel' based on the 'movieSchema' for the 'Movie' collection
 // This model is used to interact with the "Movie" collection in the MongoDB database. It allows you to perform CRUD operations on documents in that collection and provides methods for data validation based on the schema.
-export const MovieModel = mongoose.model("Movie", movieSchema);
+export const MovieModel = mongoose.model('"Movie"', movieSchema);

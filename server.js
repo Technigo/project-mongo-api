@@ -9,7 +9,7 @@ import movieData from "./data/netflix-titles.json";
 import { MovieModel } from "./models/Movie";
 
 // Connection to the database through Mongoose (for local development)
-const mongoUrl = process.env.MONGO_URL; // Get the MongoDB connection URL from environment variables
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Get the MongoDB connection URL from environment variables
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }); // Connect to the MongoDB database
 mongoose.Promise = Promise; // Set Mongoose to use ES6 Promises
 
@@ -25,11 +25,11 @@ app.use(express.urlencoded({ extended: false })); // Parse URL-encoded data to a
 //Seeding the database 
 const seedDatabase = async () => {
   await MovieModel.deleteMany({})
-  movieData.forEach((book) => {
-    new MovieModel(book).save()
+  movieData.forEach((movie) => {
+    new MovieModel(movie).save()
   })
 }
-seedDatabase()
+seedDatabase();
 
 
 // Use the routes for handling the API REquests!
