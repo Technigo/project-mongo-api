@@ -1,5 +1,5 @@
 import express from "express";
-import { bookModel } from "../models/schema";
+import { BookModel } from "../models/Book.js";
 import listEndpoints from "express-list-endpoints";
 
 // Create an instance of the Express router
@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 
 router.get("/books", async (req, res) => {
   try {
-    const books = await bookModel.find();
+    const books = await BookModel.find();
     res.json(books);
   } catch (err) {
     res.status(400).json({ error: "Error fetching books" });
@@ -21,7 +21,7 @@ router.get("/books", async (req, res) => {
 
 router.get("/books/:id", async (req, res) => {
   try {
-    const book = await bookModel.findById(req.params.id);
+    const book = await BookModel.findById(req.params.id);
     if (book) {
       res.json(book);
     } else {
@@ -40,7 +40,7 @@ router.get("/books/author", async (req, res) => {
   }
 
   try {
-    const booksByAuthor = await bookModel.find({ authors: authorName });
+    const booksByAuthor = await BookModel.find({ authors: authorName });
     res.json(booksByAuthor);
   } catch (err) {
     res.status(400).json({ error: "Error fetching author's books" });

@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-import Routes from "./routes/Routes";
+import routes from "./Routes/Routes.js";
 
 dotenv.config();
 
@@ -14,11 +14,6 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 mongoose.set("strictQuery", false);
-
-const mongoUrl =
-  process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo-api";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -32,7 +27,12 @@ app.use((req, res, next) => {
   }
 });
 
-app.use(Routes);
+app.use(routes);
+
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://localhost/project-mongo-api";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
 
 // if (process.env.RESET_DB) {
 //   const seedDatabase = async () => {

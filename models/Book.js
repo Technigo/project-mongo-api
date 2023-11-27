@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-// // Dynamic import for JSON (asynchronous)
-// let data;
-// import("./data/books.json", { assert: { type: "json" } })
-//   .then((module) => {
-//     data = module.default;
-//   })
-//   .catch((err) => console.error(err));
+// Dynamic import for JSON (asynchronous)
+let data;
+import("./data/books.json", { assert: { type: "json" } })
+  .then((module) => {
+    data = module.default;
+  })
+  .catch((err) => console.error(err));
 
 export const bookSchema = new Schema({
   bookID: { type: Number },
@@ -22,4 +22,4 @@ export const bookSchema = new Schema({
   text_reviews_count: { type: Number },
 });
 
-export const bookModel = mongoose.model("books", bookSchema);
+export const BookModel = mongoose.model("books", bookSchema);
