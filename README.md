@@ -10,6 +10,7 @@ To run this project, you will need to add the following environment variables to
 `MONGO_URL` - Get your Conncection String from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register). 
 
 `RESET_DB` - If you choose to uncomment that part of the seedDatabase-function. 
+
 ## API Reference
 
 #### Get all movies
@@ -50,7 +51,10 @@ To run this project, you will need to add the following environment variables to
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `title`      | `string` | **Required**. A string part of a the movie title you wish to fetch. Replace ":title" with the title you wish to search for. |
+| `title`      | `string` | **Required**. A string part of a the movie title you wish to fetch. Replace ":title" with the title you wish to search for.|
+
+## View it live
+https://netflix-mongo-api.onrender.com
 
 ## 🔗 Links
 [![portfolio](https://img.shields.io/badge/my_portfolio-1DA1F2?style=for-the-badge&logo=ko-fi&logoColor=white)](https://portfolio-laura-lyckholm.netlify.app/)
