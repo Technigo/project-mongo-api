@@ -1,16 +1,21 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
+import dotenv from "dotenv";
+dotenv.config();
+import listEndpoints from "express-list-endpoints";
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
+import booksData from "./data/books.json";
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+mongoose.set("strictQuery", true);
+
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo-api";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -23,10 +28,101 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
+});
+
+// const BookDataModel = mongoose.model("BookData", {
+//   bookID: Number,
+//   title: String,
+//   authors: String,
+//   average_rating: Number,
+//   isbn: Number,
+//   isbn13: Number,
+//   language_code: String,
+//   num_pages: Number,
+//   ratings_count: Number,
+//   text_reviews_count: Number,
+// });
+
+const Schema = mongoose.Schema;
+
+const bookDataSchema = new Schema({
+  bookID: { type: Number },
+  title: { type: String },
+  authors: { type: String },
+  average_rating: { type: Number },
+  isbn: { type: Number },
+  isbn13: { type: Number },
+  language_code: { type: String },
+  num_pages: { type: Number },
+  ratings_count: { type: Number },
+  text_reviews_count: { type: Number },
+});
+
+const BookDataModel = mongoose.model("BookData", bookDataSchema);
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    console.log("Resetting database!");
+
+    await BookDataModel.deleteMany({});
+
+    booksData.forEach(async (book) => {
+      await new BookDataModel(book).save();
+    });
+  };
+  seedDatabase();
+}
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json(listEndpoints(app));
+});
+
+app.get("/books", async (req, res) => {
+  try {
+    const books = await BookDataModel.find();
+    res.json(booksData);
+  } catch (error) {
+    console.error(error);
+    res.status(404).json({ error: "Data not found" });
+  }
+});
+
+app.get("/books/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const specificBook = await BookDataModel.findOne({ bookID: id });
+
+    if (specificBook) {
+      res.json(specificBook);
+    } else {
+      res.status(404).json({ error: "Book not found, try another number" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/books/author/:author", async (req, res) => {
+  const author = req.params.author;
+  try {
+    const booksByAuthor = await BookDataModel.find({ authors: author });
+    if (booksByAuthor.length > 0) {
+      res.json(booksByAuthor);
+    } else {
+      res.status(404).json({ error: "No books found for this author" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error fetching author's books" });
+  }
 });
 
 // Start the server
