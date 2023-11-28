@@ -6,13 +6,8 @@ dotenv.config() // Load environment variables from the .env file
 import { BookModel } from "./models/Book";
 import bookRoutes from "./routes/bookRoutes"
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
 import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+
 
 //Connection to the database through Mongoose (for local development)
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo" //Get the MongoDB connection URL from env variable
