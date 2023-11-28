@@ -25,6 +25,8 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
+mongoose.set("strictQuery", false);
+
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
@@ -37,18 +39,7 @@ app.use((req, res, next) => {
   }
 });
 
-// const BookDataModel = mongoose.model("BookData", {
-//   bookID: Number,
-//   title: String,
-//   authors: String,
-//   average_rating: Number,
-//   isbn: Number,
-//   isbn13: Number,
-//   language_code: String,
-//   num_pages: Number,
-//   ratings_count: Number,
-//   text_reviews_count: Number,
-// });
+
 
 const Schema = mongoose.Schema;
 
@@ -80,7 +71,6 @@ if (process.env.RESET_DB) {
   seedDatabase();
 }
 
-// Start defining your routes here
 app.get("/", (req, res) => {
   res.json(listEndpoints(app));
 });
