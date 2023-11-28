@@ -7,12 +7,11 @@ import listEndpoints from "express-list-endpoints";
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 // import avocadoSalesData from "./data/avocado-sales.json";
-import booksData from "./data/books.json";
+import booksData from "./data/books.json" assert { type: "json" };
 // import goldenGlobesData from "./data/golden-globes.json";
 // import netflixData from "./data/netflix-titles.json";
 // import topMusicData from "./data/top-music.json";
-
-mongoose.set("strictQuery", true);
+mongoose.set("strictQuery", false);
 
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-mongo-api";
@@ -25,8 +24,6 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
-mongoose.set("strictQuery", false);
-
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
@@ -38,8 +35,6 @@ app.use((req, res, next) => {
     res.status(503).json({ error: "Service unavailable" });
   }
 });
-
-
 
 const Schema = mongoose.Schema;
 
