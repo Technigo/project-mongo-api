@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 //-----ROUTE 1-------
-//Route for geting all the books
+//Route for getting all the books
 router.get("/books", async (req, res) => {
   //Use the BookModel to find all books in the database
   // Mongoose Method: TaskModel.find()
