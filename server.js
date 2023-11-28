@@ -95,6 +95,8 @@ app.get("/books", async (req, res) => {
   }
 });
 
+//To find a book by id write: http://localhost:8080/books/2 for example.
+
 app.get("/books/:id", async (req, res) => {
   const id = req.params.id;
   try {
@@ -109,6 +111,8 @@ app.get("/books/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+//To find an author write: http://localhost:8080/books/author/J.K. Rowling for example
 
 app.get("/books/author/:author", async (req, res) => {
   const author = req.params.author;
