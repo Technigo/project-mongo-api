@@ -11,6 +11,7 @@ There have been many hurdles (and is still quite unclear) in the understanding o
 - how to create a pathway to connect either the cloud backend (Render) or local backend (VScode) to either MongoDB Compass or MongoDB Atlas,
 - when can the seeding/populating of database be necessary again once it is done (tempering of my database by outsiders?)
 - and how Postman can access both the local and deployed backend whom are themselves connected to either MongoDB Compass(local) or MongoDB Atlas (cloud), and thus making the latter being updated differently and separately.
+- My attempt in populating the Actor and Country collections failed as I tried to implement [mongoose.Schema.Types.ObjectId] into the schema did not work. I left it there though for further exploration in the future as I did have fun in working with different endpoints.
 
 ## View it live
 
