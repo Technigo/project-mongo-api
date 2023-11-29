@@ -48,16 +48,16 @@ app.use((req, res, next) => {
 });
 
 //This is how i seeded the database
-const seedDatabase = async () => {
-      try {
-          await NomineeModel.deleteMany({});
-          await NomineeModel.insertMany(goldenGlobesData)
-          console.log("Database has been seeded");
-      } catch (error) {
-            console.error("Error resetting the database:", error.message)
-      }
-};
-seedDatabase();
+// const seedDatabase = async () => {
+//       try {
+//           await NomineeModel.deleteMany({});
+//           await NomineeModel.insertMany(goldenGlobesData)
+//           console.log("Database has been seeded");
+//       } catch (error) {
+//             console.error("Error resetting the database:", error.message)
+//       }
+// };
+// seedDatabase();
 
 // Start the server
 app.listen(port, () => {

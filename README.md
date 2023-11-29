@@ -9,4 +9,3 @@ The trickiest part of this project was the deployment. There were many turns in 
 ## View it live
 
 RENDER: https://mongodb-api-project.onrender.com
-ATLAS:
