@@ -47,21 +47,32 @@ app.use((req, res, next) => {
     }
 });
 
-const Nominee = NomineeModel;
+//const Nominee = NomineeModel;
 
 // This is how i seeded the database
+// const seedDatabase = async () => {
+//     try {
+//         await Nominee.deleteMany({});
+//           goldenGlobesData.forEach((nomineeData) => {
+//               new Nominee(nomineeData).save();
+//           });
+//           console.log("Database has been seeded");
+//     } catch (error) {
+//           console.error("Error resetting the database:", error.message)
+//     }
+// };
+// seedDatabase();
+
 const seedDatabase = async () => {
-    try {
-        await Nominee.deleteMany({});
-          goldenGlobesData.forEach((nomineeData) => {
-              new Nominee(nomineeData).save();
-          });
+      try {
+          await NomineeModel.deleteMany({});
+          await NomineeModel.insertMany(goldenGlobesData)
           console.log("Database has been seeded");
-    } catch (error) {
-          console.error("Error resetting the database:", error.message)
-    }
-};
-seedDatabase();
+      } catch (error) {
+            console.error("Error resetting the database:", error.message)
+      }
+  };
+  seedDatabase();
 
 
 // Start the server
