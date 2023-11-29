@@ -1,16 +1,12 @@
 # Project Mongo API
 
-https://github.com/Technigo/project-express-api/pull/452
-LINK TO CODE REVIEW!
-
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project is the first time i used MongoDB! The data is modelled with Mongoose, and seeded to a database, I used MongoDB Compass to check out the database, and MongoDB Atlas to deploy it. There is "secret" information stored in a .env file. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The trickiest part of this project was the deployment. There were many turns in this that I had to work through. I learned a little more about handling errors and using them to trouble shoot my code. In frontend, I always use console log to know exactly whats happening and what data is comming through to what function etc, but this was a little harder. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+RENDER: https://mongodb-api-project.onrender.com
+ATLAS:
