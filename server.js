@@ -10,7 +10,7 @@ dotenv.config();
 import goldenGlobesData from "./data/golden-globes.json";
 
 // Setting mongoUrl to be MONGO_URL if it exists, otherwise fall back on local host
-const mongoUrl = process.env.MONGO_URL 
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/golden-globes"
 // Connecting to MongoDB
 mongoose
     .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, })
