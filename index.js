@@ -1,3 +1,5 @@
+// Pls note - I had to change the file name from "server.js" to "index.js" in order to be able to deploy via Vercel.
+
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
