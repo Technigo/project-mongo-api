@@ -1,7 +1,7 @@
 // First, require and configure dotenv to load the environment variables
 require('dotenv').config();
 
-
+import listEndpoints from 'express-list-endpoints';
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -67,7 +67,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json(listEndpoints(app));
 });
 
 // Endpoint to get all shows
@@ -76,7 +76,8 @@ app.get("/api/shows", async (req, res) => {
     const shows = await Show.find();
     res.json(shows);
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error:", error); // Log the error for debugging
+    res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 // Use for test /api/shows
@@ -92,7 +93,8 @@ app.get("/api/shows/:id", async (req, res) => {
       res.status(404).json({ error: "Show not found" });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error:", error); // Log the error for debugging
+    res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 // Use for test /api/shows/81193313
@@ -125,7 +127,8 @@ app.get("/api/shows/title/:title", async (req, res) => {
       res.status(404).json({ error: "No shows found with this title" });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error:", error); // Log the error for debugging
+  res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 // Use for test /api/shows/title/Hot%20Rod
@@ -141,8 +144,8 @@ app.get("/api/shows/rating/:rating", async (req, res) => {
       res.status(404).json({ error: "No shows found with the specified rating" });
     }
   } catch (error) {
-    console.error("Error in /api/shows/rating:", error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error:", error); // Log the error for debugging
+    res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 // Use to test /api/shows/rating/TV-14
