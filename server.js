@@ -2,46 +2,45 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import bookRouter from "./routes/bookRoutes";
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/mongo-api";
+import { BookModel } from "./models/book";
+import bookData from "./data/books.json";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Define the seedDatabase function
-const seedDatabase = async () => {
-  try {
-    await Book.deleteMany({});
-    booksData.forEach((bookData) => {
-      new Book(bookData).save();
-    });
-    console.log('Database seeded successfully');
-  } catch (error) {
-    console.error('Error seeding database:', error);
+  if (process.env.RESET_DB) {
+    const seedDatabase = async () => {
+      await BookModel.deleteMany({})
+      bookData.forEach((book) => {
+        new BookModel(book).save();
+      });
+  
+    }
+  
+   
+  
+    seedDatabase();
+  
   }
-};
+
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:127.0.0.1:27017/books";
+
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-.then (() => {
-  console.log('MongoDB connected');
-  if (process.env.RESET_DB) {
-    seedDatabase();
-  }
-})
-.catch(err => {
-  console.error('MongoDB connection error:', err);
-});
 
-mongoose.Promise = Promise;
+
+mongoose.Promise = global.Promise; 
 
 const app = express();
-
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
 // Use book routes
 app.use("/", bookRouter);
+
 
 // Catch-all route for unknown endpoints
 app.use('*', (req, res) => {
@@ -57,6 +56,8 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+
 
 
 

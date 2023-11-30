@@ -1,17 +1,20 @@
 import mongoose from "mongoose";
 
-const Book = mongoose.model('Book', {
-    bookID: Number, 
-    title: String, 
-    authors: String, 
-    average_rating: Number, 
-    isbn: Number, 
-    isbn13: Number, 
-    language_code: String, 
-    num_pages: Number, 
-    ratings_count: Number, 
-    ratings_count: Number, 
-    text_reviews_count: Number,
-  });
+const { Schema } = mongoose;
 
-  export default Book;
+const bookSchema = new Schema({
+  bookID: { type: Number, }, 
+  title: { type: String },
+  authors: { type: String },
+  average_rating: { type: Number }, 
+  isbn: { type: Number },
+  isbn13: { type: Number },
+  language_code: { type: String }, 
+  num_pages: { type: Number },
+  ratings_count: { type: Number },
+  text_reviews_count: {  type: Number }
+});
+
+const BookModel = mongoose.model("Book", bookSchema);
+
+export { BookModel };
