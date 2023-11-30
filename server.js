@@ -8,6 +8,15 @@ import listEndpoints from "express-list-endpoints";
 import movieData from "./data/netflix-titles.json";
 import { MovieModel } from "./models/Movie";
 
+//Seeding the database 
+const seedDatabase = async () => {
+  await MovieModel.deleteMany({})
+  movieData.forEach((movie) => {
+    new MovieModel(movie).save()
+  })
+}
+seedDatabase();
+
 // Connection to the database through Mongoose (for local development)
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // Get the MongoDB connection URL from environment variables
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }); // Connect to the MongoDB database
@@ -21,16 +30,6 @@ const app = express();
 app.use(cors()); // Enable CORS (Cross-Origin Resource Sharing)
 app.use(express.json()); // Parse incoming JSON data
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded data to a json
-
-//Seeding the database 
-const seedDatabase = async () => {
-  await MovieModel.deleteMany({})
-  movieData.forEach((movie) => {
-    new MovieModel(movie).save()
-  })
-}
-seedDatabase();
-
 
 // Use the routes for handling the API REquests!
 //Route to list all the endpoints
