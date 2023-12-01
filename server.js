@@ -8,20 +8,26 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // Define the seedDatabase function
-  if (process.env.RESET_DB) {
-    const seedDatabase = async () => {
-      await BookModel.deleteMany({})
-      bookData.forEach((book) => {
-        new BookModel(book).save();
-      });
+  // if (process.env.RESET_DB) {
+  //  const seedDatabase = async () => {
+  //   await BookModel.deleteMany({})
+  //    bookData.forEach((book) => {
+  //       new BookModel(book).save();
+  //     });
   
-    }
+  //   }}
   
    
-  
-    seedDatabase();
-  
-  }
+    
+
+  const seedDatabase = async () => {
+    await BookModel.deleteMany({})
+    bookData.forEach((book) => {
+    new BookModel(book).save();
+  });
+    
+}
+seedDatabase();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:127.0.0.1:27017/books";
 

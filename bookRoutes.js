@@ -25,7 +25,10 @@ const router = express.Router();
   //Endpoint to get a specific book by ID
   router.get('/books/:id', async (req, res) => {
     try {
-      const book = await BookModel.findById(req.params.id);
+      let idTest = await BookModel.findBy(req.params.bookID);
+      console.log(idTest)
+      const {id} = req.params
+      const book = await BookModel.findById(id);
       if (!book) {
         res.status(404).json({ error: 'Book not found' });
       } else {
