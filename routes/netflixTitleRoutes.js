@@ -1,8 +1,6 @@
 import express from "express";
 import listEndpoints from "express-list-endpoints";
 import {NetflixTitleModel} from "../models/NetflixTitle";
-import { ActorModel } from "../models/Actor";
-import { CountryModel } from "../models/Country";
 
 // Creating an instance of the Express router
 // The router method in this code is like setting up a map or a blueprint for handling different kinds of requests in a web application. It helps organize and define how the application should respond when someone visits different URLs. Think of it as creating a list of instructions for the app to follow when it receives specific requests, like "show me all titles" or "register a new user." This makes the code neat and helps the app know what to do when someone interacts with it.
@@ -44,7 +42,7 @@ router.get("/titles", async (req,res)=>{
       //Retrieving all Netflix titles
         await NetflixTitleModel.find()
         .then((result)=>res.json(result))
-        .catch((error)=>res.status(500).json(error));
+        .catch((error)=>res.status(500).json({ message: `Internal error: ${error}` }));
     }    
 });
 
@@ -108,24 +106,8 @@ router.delete("/titles/:id", async (req, res) => {
           res.status(404).json({ message: `Id ${id} not found` }); // Respond with a 404 error if the title is not found
         }
       })
-      .catch((error) => res.status(500).json(error)); // Handle any errors that occur during the operation
-  });
-
-  //--- *Actors Collection* ---
-// Retrieving all Netflix listed actors
-router.get("/actors", async(req,res)=>{
-  await ActorModel.find()
-  .then((result)=>res.json(result))
-  .catch((error)=>res.status(500).json(`Retrieval of actors collection failed due to ${error}`));
-})
-
-//--- *Countries Collection* ---
-// Retrieving all Netflix listed countries
-router.get("/countries", async(req,res)=>{
-  await CountryModel.find()
-  .then((result)=>res.json(result))
-  .catch((error)=>res.status(500).json(`Retrieval of countries collection failed due to ${error}`));
-})
+      .catch((error) => res.status(500).json({ message: `Delete failed due to error: ${error}` })); // Handle any errors that occur during the operation
+  }); 
   
 // Export the router for use in the main application
 export default router;
