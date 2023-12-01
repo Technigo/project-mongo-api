@@ -1,20 +1,24 @@
+//Importing necessary modules and setting up Express app
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-dotenv.config();// Load environment variables from the .env file
+
+//Importing routes
 import netflixTitleRoutes from "./routes/netflixTitleRoutes";
+import actorRoutes from "./routes/actorRoutes"
+import countryRoutes from "./routes/countryRoutes"
+
+//Importing models
 import { NetflixTitleModel} from "./models/NetflixTitle";
 import { ActorModel } from "./models/Actor";
 import { CountryModel } from "./models/Country";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
+//Importing database
 import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+
+dotenv.config();// Load environment variables from the .env file
+mongoose.set('strictQuery', false);//Addressing deprecation warning
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/netflixTitles' // Get the MongoDB connection URL from environment variables
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });// Connect to the MongoDB database
@@ -76,11 +80,16 @@ const feedDatabase = async () =>{
       ).save();
   }) */
 
+ //Reset database if needed 
 if (process.env.RESET_DATABASE == 'true'){
+  console.log("Resetting database.")
   feedDatabase();
 }
-// Using the routes to handle API requests
+
+// Consuming the routes to handle API requests
 app.use(netflixTitleRoutes);
+app.use(actorRoutes);
+app.use(countryRoutes);
 
 // Start the server
 app.listen(port, () => {
