@@ -1,5 +1,3 @@
-// Pls note - I had to change the file name from "server.js" to "index.js" in order to be able to deploy via Vercel.
-
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -49,7 +47,7 @@ app.use(express.json());
 
 // Defining my routes below
 // Root endpoint - Returns all available endpoints
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.json(listEndpoints(app));
 });
 
