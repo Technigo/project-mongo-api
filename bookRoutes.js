@@ -25,10 +25,7 @@ const router = express.Router();
   //Endpoint to get a specific book by ID
   router.get('/books/:id', async (req, res) => {
     try {
-      let idTest = await BookModel.findBy(req.params.bookID);
-      console.log(idTest)
-      const {id} = req.params
-      const book = await BookModel.findById(id);
+      const book = await BookModel.findOne({ bookID: req.params.id });
       if (!book) {
         res.status(404).json({ error: 'Book not found' });
       } else {
@@ -39,7 +36,28 @@ const router = express.Router();
     }
   });
 
-  //Endpoint to create a new book
+
+  //Endpoint to get books by a specific author
+  router.get('/authors/:author', async (req, res) => {
+    try {
+      const { author } = req.params;
+      const booksByAuthor = await BookModel.find({ authors: author });
+      res.json(booksByAuthor);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+  //Endpoint to get books with less than 200 num_pages
+  router.get('/books/less-than-200-pages', async (req, res) => {
+    try {
+      const booksWithLessThan200Pages = await BookModel.find({ num_pages: { $lt: 200 } });
+      res.json(booksWithLessThan200Pages);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
   router.post('/books', async (req, res) => {
     try {
       const newBook = await BookModel.create(req.body);
@@ -49,18 +67,20 @@ const router = express.Router();
     }
   });
 
-  //Endpoint to delete a book by ID
-  router.delete('/books/:id', async (req, res) => {
-    try {
-      const deletedBook = await BookModel.findByIdAndDelete(req.params.id);
-      if(!deletedBook) {
-        res.status(404).json({ error: 'Book Not Found' });
-      } else {
-        res.json({ message: 'Book deleted successfully' });
+    //Endpoint to delete a book by ID
+    router.delete('/books/:id', async (req, res) => {
+      try {
+        const deletedBook = await BookModel.findByIdAndDelete(req.params.id);
+        if(!deletedBook) {
+          res.status(404).json({ error: 'Book Not Found' });
+        } else {
+          res.json({ message: 'Book deleted successfully' });
+        }
+      } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
       }
-    } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+    });
+
+
 
   export default router;
