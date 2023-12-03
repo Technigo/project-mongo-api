@@ -33,15 +33,16 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:127.0.0.1:27017/b
 
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 mongoose.Promise = global.Promise; 
 
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
 // Use book routes

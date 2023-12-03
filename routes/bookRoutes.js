@@ -21,20 +21,6 @@ const router = express.Router();
       res.json(error);
     }
   });
-  
-  //Endpoint to get a specific book by ID
-  router.get('/books/:id', async (req, res) => {
-    try {
-      const book = await BookModel.findById(req.params.id);
-      if (!book) {
-        res.status(404).json({ error: 'Book not found' });
-      } else {
-        res.json(book);
-      }
-    } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
 
   //Endpoint to create a new book
   router.post('/books', async (req, res) => {
@@ -45,6 +31,20 @@ const router = express.Router();
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
+    //Endpoint to get a specific book by ID
+    router.get('/books/:id', async (req, res) => {
+      try {
+        const book = await BookModel.findOne({ bookID: req.params.id });
+        if (!book) {
+          return res.status(404).json({ error: 'Book not found' });
+        } 
+          res.json(book);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    });
 
   //Endpoint to delete a book by ID
   router.delete('/books/:id', async (req, res) => {
