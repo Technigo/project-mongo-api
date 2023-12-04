@@ -15,7 +15,9 @@ function App() {
         if (!response.ok) {
           throw new Error('Error fetching data')
         }
+
         const data = await response.json()
+        // console.log(data)
         setSongs(data)
       } catch (error) {
         console.log('Error fetching data')
@@ -48,7 +50,8 @@ function App() {
         </div>
         <h1>ALL SONGS:</h1>
         <div className="card-container">
-          {songs && songs.map(item => <Songs key={item.id} title={item.trackName} artist={item.artistName} />)}
+          
+          {songs && songs.songs.map(item => <Songs key={item.id} title={item.trackName} artist={item.artistName} />)}
         </div>
       </div>
     </>
