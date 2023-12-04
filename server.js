@@ -51,7 +51,7 @@ const bookDataSchema = new Schema({
   text_reviews_count: { type: Number },
 });
 
-const BookDataModel = mongoose.model("BookData", bookDataSchema);
+const BookDataModel = mongoose.model("bookdatas", bookDataSchema);
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
@@ -72,8 +72,8 @@ app.get("/", (req, res) => {
 
 app.get("/books", async (req, res) => {
   try {
-    const books = await BookDataModel.find();
-    res.json(books);
+    const bookdatas = await BookDataModel.find();
+    res.json(bookdatas);
   } catch (error) {
     console.error(error);
     res.status(404).json({ error: "Data not found" });
