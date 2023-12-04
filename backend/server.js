@@ -59,7 +59,7 @@ app.get("/", (req, res) => {
 
 //Route to all songs
 app.get("/songs", async (req, res) => {
-  let { page = 1, limit = 10 } = req.query
+  let { page = 1, limit = 30 } = req.query
 
   const limitRecords = parseInt(limit)
   const skip = (page - 1) * limit

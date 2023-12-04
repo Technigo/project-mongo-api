@@ -17,7 +17,6 @@ function App() {
         }
 
         const data = await response.json()
-        // console.log(data)
         setSongs(data)
       } catch (error) {
         console.log('Error fetching data')
