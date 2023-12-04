@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 
 const Schema = mongoose.Schema;
 
-const bookDataSchema = new Schema({
+const bookDataSchema = new mongoose.Schema({
   bookID: { type: Number },
   title: { type: String },
   authors: { type: String },
@@ -72,15 +72,15 @@ app.get("/", (req, res) => {
 
 app.get("/books", async (req, res) => {
   try {
-    const bookdatas = await BookDataModel.find();
-    res.json(bookdatas);
+    const books = await BookDataModel.find();
+    res.json(books);
   } catch (error) {
     console.error(error);
     res.status(404).json({ error: "Data not found" });
   }
 });
 
-//To find a book by id write: http://localhost:8081/books/2 for example.
+//To find a book by id write: https://project-mongo-api-6ofy.onrender.com/books/2 for example.
 
 app.get("/books/:id", async (req, res) => {
   const id = req.params.id;
@@ -97,7 +97,7 @@ app.get("/books/:id", async (req, res) => {
   }
 });
 
-//To find an author write: http://localhost:8081/books/author/J.K. Rowling for example
+//To find an author write: https://project-mongo-api-6ofy.onrender.com/books/author/J.K. Rowling for example
 
 app.get("/books/author/:author", async (req, res) => {
   const author = req.params.author;
