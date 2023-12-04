@@ -49,7 +49,6 @@ function App() {
         </div>
         <h1>ALL SONGS:</h1>
         <div className="card-container">
-          
           {songs && songs.songs.map(item => <Songs key={item.id} title={item.trackName} artist={item.artistName} />)}
         </div>
       </div>
