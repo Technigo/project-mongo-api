@@ -1,14 +1,8 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import listEndpoints from "express-list-endpoints";
+import booksData from "./data/books.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -23,6 +17,36 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+
+// Error when database not available
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
+});
+
+/*
+const Person = mongoose.model('Person', {
+  // Properties defined here match the keys from the people.json file
+})
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await People.deleteMany({})
+
+    data.forEach((personData) => {
+      new Person(personData).save()
+    })
+  }
+
+  seedDatabase()
+}
+```
+*/
+
+
 
 // Start defining your routes here
 app.get("/", (req, res) => {
