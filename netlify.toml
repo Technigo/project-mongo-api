@@ -1,0 +1,9 @@
+[build]
+command= "npm run build"
+base = "frontend"
+publish = "dist"
+
+[[redirect]]
+from ="/*"
+to = "/indexhtml"
+status = 200
