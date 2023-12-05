@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
+console.log(`Database URL: ${process.env.MONGO_URL}`);
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
