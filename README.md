@@ -6,7 +6,12 @@ Start by briefly describing the assignment in a sentence or two. Keep it short a
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I struggled with the bookID, mostly because I kept trying different ID numbers, and by chance, most of the numbers I tested were not included in the book data. This led me to think something was wrong with the code, especially since this issue occurred with more than one ID I tested.
+
+I added a few more paths where I selected multiple details to be shown. For example, I included pages/ratings with title to a detailes page, and titles were added to language code. A list consisting solely of 'en', 'en-us', or just numbers without context didn't seem very useful.
+
+However, I still struggle with understanding how to use the backend and integrate it with the frontend.
+
 
 ## View it live
 
