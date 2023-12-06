@@ -1,6 +1,6 @@
 # Project Mongo API
 
-This is a simple API for a list of books. It lets you see all books, one book, add a book, change a book, or delete a book from the list. It's made with Node.js, using Express for the web server part and MongoDB for storing all book data.
+This is a simple API for a list of books.It's made with Node.js, using Express for the web server part and MongoDB for storing all book data.
 
 ## The problem
 
