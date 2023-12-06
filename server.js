@@ -18,7 +18,7 @@ console.log(`Database URL: ${mongoUrl}`);
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Error connecting to MongoDB:', err));
-
+//had so many errors in termianel, mostly "adress already in use" but also trying to deploy it could not connect
 mongoose.Promise = Promise;
 
 
