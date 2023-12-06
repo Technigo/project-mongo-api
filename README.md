@@ -1,8 +1,6 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This is a simple API for a list of books. It lets you see all books, one book, add a book, change a book, or delete a book from the list. It's made with Node.js, using Express for the web server part and MongoDB for storing all book data.
 
 ## The problem
 
@@ -15,4 +13,4 @@ However, I still struggle with understanding how to use the backend and integrat
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://mongo-api-jlce.onrender.com/

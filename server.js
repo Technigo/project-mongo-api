@@ -6,16 +6,21 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables from .env file
 
-const port = process.env.PORT || 1313;
+const port = process.env.PORT || 1316;
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
-console.log(`Database URL: ${process.env.MONGO_URL}`);
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+console.log(`Database URL: ${mongoUrl}`);
+
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Error connecting to MongoDB:', err));
+
 mongoose.Promise = Promise;
+
 
 // Define the schema and model for a Book.
 const bookSchema = new mongoose.Schema({
