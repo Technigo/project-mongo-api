@@ -3,10 +3,12 @@ import cors from "cors";
 import mongoose from "mongoose";
 import booksData from "./data/books.json";
 
+// Database connection setup
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
+// Define a Mongoose model for the Book schema
 const Book = mongoose.model('Book', {
   title: String,
   authors: String,
@@ -24,6 +26,7 @@ const seedDatabase = async () => {
   try {
     // Clear the Book collection before adding new data to prevent duplicates
     await Book.deleteMany({});
+
     // Loop through the booksData array and save each book to the database
     for (const bookData of booksData) {
       await new Book(bookData).save();
@@ -34,25 +37,29 @@ const seedDatabase = async () => {
   }
 };
 
+// Seed the database with books data
 seedDatabase();
 
+// Initialize the Express app
 const port = process.env.PORT || 8080;
 const app = express();
 
+// Middleware setup
 app.use(cors());
 app.use(express.json());
 
-const endpoints = [
-  { path: "/", methods: ["GET"], middlewares: ["anonymous"] },
-  { path: "/books", methods: ["GET"], middlewares: ["anonymous"] },
-  { path: "/books/:id", methods: ["GET"], middlewares: ["anonymous"] },
-  { path: "/books/author/:author", methods: ["GET"], middlewares: ["anonymous"] },
-];
-
+// Define endpoint documentation array with paths, methods, and middlewares
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  const endpoints = [
+    { path: "/", methods: ["GET"], middlewares: ["anonymous"] },
+    { path: "/books", methods: ["GET"], middlewares: ["anonymous"] },
+    { path: "/books/:id", methods: ["GET"], middlewares: ["anonymous"] },
+    { path: "/books/author/:author", methods: ["GET"], middlewares: ["anonymous"] },
+  ];
+  res.json(endpoints);
 });
 
+// Route to get all books
 app.get('/books', async (req, res) => {
   try {
     const books = await Book.find({});
@@ -62,6 +69,7 @@ app.get('/books', async (req, res) => {
   }
 });
 
+// Route to get a single book by ID
 app.get('/books/:id', async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
@@ -74,6 +82,7 @@ app.get('/books/:id', async (req, res) => {
   }
 });
 
+// Route to get books by a specific author
 app.get('/books/author/:author', async (req, res) => {
   try {
     const booksByAuthor = await Book.find({ authors: req.params.author });
@@ -86,10 +95,13 @@ app.get('/books/author/:author', async (req, res) => {
   }
 });
 
+// Endpoint to return API documentation
 app.get("/documentation", (req, res) => {
   res.json(endpoints);
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
