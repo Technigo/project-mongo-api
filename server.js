@@ -42,6 +42,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const endpoints = [
+  { path: "/", methods: ["GET"], middlewares: ["anonymous"] },
+  { path: "/books", methods: ["GET"], middlewares: ["anonymous"] },
+  { path: "/books/:id", methods: ["GET"], middlewares: ["anonymous"] },
+  { path: "/books/author/:author", methods: ["GET"], middlewares: ["anonymous"] },
+];
+
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
@@ -65,6 +72,22 @@ app.get('/books/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
+});
+
+app.get('/books/author/:author', async (req, res) => {
+  try {
+    const booksByAuthor = await Book.find({ authors: req.params.author });
+    if (!booksByAuthor.length) {
+      return res.status(404).json({ message: 'Books by this author not found' });
+    }
+    res.json(booksByAuthor);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.get("/documentation", (req, res) => {
+  res.json(endpoints);
 });
 
 app.listen(port, () => {
