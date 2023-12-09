@@ -25,7 +25,7 @@ const Book = mongoose.model('Book', {
 const seedDatabase = async () => {
   try {
     // Clear the Book collection before adding new data to prevent duplicates
-    await Book.deleteMany({});
+    await Book.deleteMany({}).maxTimeMS(30000);
 
     // Loop through the booksData array and save each book to the database
     for (const bookData of booksData) {
