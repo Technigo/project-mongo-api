@@ -24,9 +24,6 @@ const Book = mongoose.model('Book', {
 // Function to seed the database with books data from booksData JSON
 const seedDatabase = async () => {
   try {
-    // Clear the Book collection before adding new data to prevent duplicates
-    await Book.deleteMany({}).maxTimeMS(30000);
-
     // Loop through the booksData array and save each book to the database
     for (const bookData of booksData) {
       await new Book(bookData).save();
