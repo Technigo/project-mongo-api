@@ -31,7 +31,7 @@ router.get("/titles", async (req, res) => {
 
 router.get("/title/:id", async (req, res) => {
   try {
-    const title = await ModelNetflix.findOne({ titleID: req.params.id });
+    const title = await ModelNetflix.findOne({ show_id: req.params.id });
     if (!title) {
       return res.status(404).json({ error: "Title cannot be found" });
     }
