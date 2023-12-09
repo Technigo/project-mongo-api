@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const NetflixSchema = new Schema({
-  //Defining the task
+  //Defining the schema, piece by piece
   title: {
     type: String,
   },

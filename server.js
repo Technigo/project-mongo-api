@@ -7,16 +7,7 @@ import NetflixData from "./data/netflix-titles.json";
 import { RoutesNetflix } from "./routes/RoutesNetflix";
 import { ModelNetflix } from "./models/Modelnetflix";
 
-// if (process.env.RESET_DB) {
-const seedDatabase = async () => {
-  await ModelNetflix.deleteMany({});
-  NetflixData.forEach((title) => {
-    new ModelNetflix(titleData).save();
-  });
-};
-seedDatabase();
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:2701/Netflix";
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/Netflix";
 
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -24,6 +15,15 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 //Connect to mongoDB database
 mongoose.Promise = global.Promise;
+
+// if (process.env.RESET_DB) {
+const seedDatabase = async () => {
+  await ModelNetflix.deleteMany({});
+  NetflixData.forEach((title) => {
+    new ModelNetflix(title).save();
+  });
+};
+seedDatabase();
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -53,3 +53,5 @@ app.use("/", RoutesNetflix);
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+export { app };

@@ -1,6 +1,7 @@
 import express from "express";
 import listEndpoints from "express-list-endpoints";
 import { ModelNetflix } from "../models/Modelnetflix";
+import { app } from "../server";
 
 const router = express.Router();
 
@@ -41,4 +42,4 @@ router.get("/title/:id", async (req, res) => {
   }
 });
 
-export default router;
+export { router as RoutesNetflix };
