@@ -19,11 +19,19 @@ const Book = mongoose.model('Book', {
   text_reviews_count: Number,
 });
 
+// Function to seed the database with books data from booksData JSON
 const seedDatabase = async () => {
-  await Book.deleteMany({});
-  booksData.forEach(async (bookData) => {
-    await new Book(bookData).save();
-  });
+  try {
+    // Clear the Book collection before adding new data to prevent duplicates
+    await Book.deleteMany({});
+    // Loop through the booksData array and save each book to the database
+    for (const bookData of booksData) {
+      await new Book(bookData).save();
+    }
+    console.log('Database seeded successfully');
+  } catch (error) {
+    console.error('Error seeding database:', error);
+  }
 };
 
 seedDatabase();
