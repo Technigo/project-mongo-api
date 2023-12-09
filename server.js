@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import NetflixData from "./data/netflix-titles.json";
 import { RoutesNetflix } from "./routes/RoutesNetflix";
-import { ModelNetflix } from "./models/Modelnetflix";
+import { ModelNetflix } from "./models/ModelNetflix";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/Netflix";
 
