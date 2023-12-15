@@ -24,6 +24,8 @@ const Book = mongoose.model('Book', {
 // Function to seed the database with books data from booksData JSON
 const seedDatabase = async () => {
   try {
+    // Clear the Book collection before adding new data to prevent duplicates
+    await Book.deleteMany({});
     // Loop through the booksData array and save each book to the database
     for (const bookData of booksData) {
       await new Book(bookData).save();
@@ -34,8 +36,18 @@ const seedDatabase = async () => {
   }
 };
 
-// Seed the database with books data
-seedDatabase();
+// Conditionally seed the database based on an environment variable (e.g., RESET_DB)
+if (process.env.RESET_DB === 'true') {
+  seedDatabase().then(() => {
+    console.log('Database seeding completed');
+    process.exit(0); // Exiting the process after seeding
+  }).catch((err) => {
+    console.error('Error seeding database:', err);
+    process.exit(1); // Exiting the process due to seeding error
+  });
+} else {
+  console.log('RESET_DB not set, skipping database seeding');
+}
 
 // Initialize the Express app
 const port = process.env.PORT || 8080;
@@ -94,6 +106,13 @@ app.get('/books/author/:author', async (req, res) => {
 
 // Endpoint to return API documentation
 app.get("/documentation", (req, res) => {
+  const endpoints = [
+    { path: "/", methods: ["GET"], middlewares: ["anonymous"] },
+    { path: "/books", methods: ["GET"], middlewares: ["anonymous"] },
+    { path: "/books/:id", methods: ["GET"], middlewares: ["anonymous"] },
+    { path: "/books/author/:author", methods: ["GET"], middlewares: ["anonymous"] },
+    { path: "/documentation", methods: ["GET"], middlewares: ["anonymous"] },
+  ];
   res.json(endpoints);
 });
 
@@ -101,4 +120,5 @@ app.get("/documentation", (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
 
