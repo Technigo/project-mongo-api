@@ -1,5 +1,5 @@
 import express from "express";
-import { NetflixTitle } from "../models/netflixTitleModel";
+import NetflixTitle from "../models/netflixTitleModel";
 
 const router = express.Router();
 
