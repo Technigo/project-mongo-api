@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv"
 dotenv.config()
 import router from "./routes/netflixRoutes";
+import NetflixTitle from "./models/netflixTitleModel";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflixtitles";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -22,10 +23,10 @@ app.get("/", (req, res) => {
 });
 
 // Netflix Title Routes
-app.use("/netflix-titles", router);
+app.use( router );
 
 // Seed the Database
-if (process.env.RESET_DB) {
+// if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     try {
       await NetflixTitle.deleteMany({});
@@ -37,7 +38,7 @@ if (process.env.RESET_DB) {
   };
 
   seedDatabase();
-}
+// }
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

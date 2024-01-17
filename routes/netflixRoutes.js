@@ -4,7 +4,7 @@ import { NetflixTitle } from "../models/netflixTitleModel";
 const router = express.Router();
 
 // Get All Netflix Titles
-router.get("/", async (req, res) => {
+router.get("/titles", async (req, res) => {
   try {
     const titles = await NetflixTitle.find();
     res.json(titles);
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get a Single Netflix Title
-router.get("/:id", async (req, res) => {
+router.get("/titles/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const title = await NetflixTitle.findById(id);
