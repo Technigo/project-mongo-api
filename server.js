@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import dotenv from "dotenv"
-dotenv.config()
+import dotenv from "dotenv";
 import router from "./routes/netflixRoutes";
 import NetflixTitle from "./models/netflixTitleModel";
+
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflixtitles";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -23,23 +24,22 @@ app.get("/", (req, res) => {
 });
 
 // Netflix Title Routes
-app.use( router );
+app.use(router);
 
 // Seed the Database
-// if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    try {
-      await NetflixTitle.deleteMany({});
-      const data = require("./data/netflix-titles.json");
-      await NetflixTitle.insertMany(data);
-    } catch (error) {
-      console.error("Error seeding database:", error);
-    }
-  };
+const seedDatabase = async () => {
+  try {
+    await NetflixTitle.deleteMany({});
+    const data = require("./data/netflix-titles.json");
+    await NetflixTitle.insertMany(data);
+  } catch (error) {
+    console.error("Error seeding database:", error);
+  }
+};
 
-  seedDatabase();
-// }
+seedDatabase();
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
