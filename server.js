@@ -5,16 +5,15 @@ import dotenv from "dotenv"
 dotenv.config()
 import router from "./routes/netflixRoutes";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflixtitles";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const port = process.env.PORT || 8080;
 const app = express();
 
-app.use(express.json());
 app.use(cors());
-
+app.use(express.json());
 
 // Documentation Endpoint
 app.get("/", (req, res) => {
