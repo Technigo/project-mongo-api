@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import router from "./routes/netflixRoutes";
-import NetflixTitle from "./models/netflixTitleModel";
+import { NetflixTitle } from "./models/netflixTitleModel";
 
 dotenv.config();
 
