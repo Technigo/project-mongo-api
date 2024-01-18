@@ -29,11 +29,11 @@ app.use(router);
 // Seed the Database
 const seedDatabase = async () => {
   try {
-    await NetflixTitle.deleteMany({});
+    await NetflixTitle.deleteMany({}).timeout(30000); // Increase timeout to 30 seconds;
     const data = require("./data/netflix-titles.json");
     await NetflixTitle.insertMany(data);
   } catch (error) {
-    console.error("Error seeding database:", error);
+    console.error("Error deleting documents:", error);
   }
 };
 
