@@ -1,11 +1,14 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import booksData from "./data/books.json";
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import booksData from './data/books.json';
 
 // Database connection setup
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost: 8080/project-mongo';
+mongoose.connect(mongoUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 mongoose.Promise = Promise;
 
 // Define a Mongoose model for the Book schema
@@ -36,6 +39,14 @@ const seedDatabase = async () => {
   }
 };
 
+// Initialize the Express app
+const port = process.env.PORT || 8080;
+const app = express();
+
+// Middleware setup
+app.use(cors());
+app.use(express.json());
+
 // Conditionally seed the database based on an environment variable (e.g., RESET_DB)
 if (process.env.RESET_DB === 'true') {
   seedDatabase().then(() => {
@@ -48,14 +59,6 @@ if (process.env.RESET_DB === 'true') {
 } else {
   console.log('RESET_DB not set, skipping database seeding');
 }
-
-// Initialize the Express app
-const port = process.env.PORT || 8080;
-const app = express();
-
-// Middleware setup
-app.use(cors());
-app.use(express.json());
 
 // Define endpoint documentation array with paths, methods, and middlewares
 app.get("/", (req, res) => {
