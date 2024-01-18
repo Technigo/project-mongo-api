@@ -1,7 +1,7 @@
 import express from "express";
 import { NetflixTitle } from "../models/netflixTitleModel";
 
-const router = express.Router();
+export const router = express.Router();
 
 // Get All Netflix Titles
 router.get("/titles", async (req, res) => {
@@ -9,6 +9,7 @@ router.get("/titles", async (req, res) => {
     const titles = await NetflixTitle.find();
     res.json(titles);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
