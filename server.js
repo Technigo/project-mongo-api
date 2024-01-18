@@ -10,6 +10,7 @@ dotenv.config();
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflixtitles";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
+mongoose.set('strictQuery', false);
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -29,7 +30,7 @@ app.use(router);
 // Seed the Database
 const seedDatabase = async () => {
   try {
-    await NetflixTitle.deleteMany({}).timeout(30000); // Increase timeout to 30 seconds;
+    await NetflixTitle.deleteMany({}).maxTimeMS(30000);
     const data = require("./data/netflix-titles.json");
     await NetflixTitle.insertMany(data);
   } catch (error) {
