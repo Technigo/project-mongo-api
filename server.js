@@ -28,17 +28,17 @@ app.get("/", (req, res) => {
 app.use(router);
 
 // Seed the Database
-const seedDatabase = async () => {
-  try {
-    await NetflixTitle.deleteMany({}).maxTimeMS(30000);
-    const data = require("./data/netflix-titles.json");
-    await NetflixTitle.insertMany(data);
-  } catch (error) {
-    console.error("Error deleting documents:", error);
-  }
-};
+// const seedDatabase = async () => {
+//   try {
+//     await NetflixTitle.deleteMany({})
+//     const data = require("./data/netflix-titles.json");
+//     await NetflixTitle.insertMany(data);
+//   } catch (error) {
+//     console.error("Error deleting documents:", error);
+//   }
+// };
 
-seedDatabase();
+// seedDatabase();
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
