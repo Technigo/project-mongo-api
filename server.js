@@ -90,7 +90,7 @@ app.get("/", (req, res) => {
   });
 });
 
-/*// Endpoint to fetch all books, with optional query parameters for filtering by author or language.
+// Endpoint to fetch all books, with optional query parameters for filtering by author or language.
 app.get("/books", async (req, res) => {
   const { author, language } = req.query;
   let query = {};
@@ -106,16 +106,6 @@ app.get("/books", async (req, res) => {
     res.json(books);
   } catch (error) {
     console.error('Error fetching books:', error); // Log the error to the console
-    res.status(500).json({ error: "Server error occurred while fetching books." });
-  }
-});*/
-
-app.get("/books", async (req, res) => {
-  try {
-    const books = await Book.find(); // Return all books without any query filters
-    res.json(books);
-  } catch (error) {
-    console.error('Error fetching books:', error);
     res.status(500).json({ error: "Server error occurred while fetching books." });
   }
 });
