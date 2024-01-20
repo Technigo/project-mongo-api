@@ -17,17 +17,20 @@ app.use(express.json());
 
 // CONNECT TO DATABASE //
 
-// Set Mongoose to use JavaScript native promises
-mongoose.Promise = Promise;
-
-// Set the MongoDB connection URL
+/*// Set the MongoDB connection URL
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo';
+console.log(`Database URL: ${mongoUrl}`);*/
+
+// Set the MongoDB connection URL from .env
+const mongoUrl = process.env.MONGO_URL;
 console.log(`Database URL: ${mongoUrl}`);
 
 // Connect to MongoDB
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Error connecting to MongoDB:', err));
+// Set Mongoose to use JavaScript native promises
+mongoose.Promise = Promise;
 
 // Error when database not available
 app.use((req, res, next) => {
@@ -87,7 +90,7 @@ app.get("/", (req, res) => {
   });
 });
 
-// Endpoint to fetch all books, with optional query parameters for filtering by author or language.
+/*// Endpoint to fetch all books, with optional query parameters for filtering by author or language.
 app.get("/books", async (req, res) => {
   const { author, language } = req.query;
   let query = {};
@@ -98,19 +101,37 @@ app.get("/books", async (req, res) => {
     query.language_code = language;
   }
 
-  const books = await Book.find(query);
-  res.json(books);
+  try {
+    const books = await Book.find(query);
+    res.json(books);
+  } catch (error) {
+    console.error('Error fetching books:', error); // Log the error to the console
+    res.status(500).json({ error: "Server error occurred while fetching books." });
+  }
+});*/
+
+app.get("/books", async (req, res) => {
+  try {
+    const books = await Book.find(); // Return all books without any query filters
+    res.json(books);
+  } catch (error) {
+    console.error('Error fetching books:', error);
+    res.status(500).json({ error: "Server error occurred while fetching books." });
+  }
 });
+
 
 // Endpoint to fetch a single book by its ID, with validation to ensure the ID is a number.
 app.get("/bookID/:id", async (req, res) => {
   const bookId = req.params.id;
+  console.log(`Requested book ID: ${bookId}`);
   if (!bookId.match(/^[0-9]+$/)) { // Validate that the ID is numeric
     return res.status(400).send({ error: "Invalid book ID format" });
   }
 
   try {
     const book = await Book.findOne({ bookID: bookId });
+    console.log(`Found book:`, book);
     if (book) {
       res.json(book);
     } else {
