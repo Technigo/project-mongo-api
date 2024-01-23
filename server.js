@@ -1,35 +1,44 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import listEndpoints from 'express-list-endpoints';
+import booksRouter from './routes/booksRoutes'; // Import the books routes
+import booksData from './data/books.json'; // Assuming you have a JSON file with books data
+import Book from './models/book'; // The Mongoose model for a Book
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+dotenv.config();
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:127.0.0.1:27017/mongo-api";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+  console.log('MongoDB connected');
+  if (process.env.RESET_DB) {
+    seedDatabase();
+  }
+}).catch(err => {
+  console.error('MongoDB connection error:', err);
+});
+
 const app = express();
-
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+// Use the booksRouter for handling routes under '/books'
+app.use('/books', booksRouter);
+
+app.get('/', (req, res) => {
+  res.json({ endpoints: listEndpoints(app) });
 });
 
-// Start the server
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });
+
+async function seedDatabase() {
+  await Book.deleteMany({});
+  await Book.insertMany(booksData);
+  console.log('Database has been seeded!');
+}
