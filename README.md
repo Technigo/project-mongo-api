@@ -1,6 +1,6 @@
 # Project Mongo API
 
-A backend project to fetch data, working with MongoDB.
+A project for practicing using MongoDB and Mongoose and how to seed data about movies to a database and how to create useful API endpoints.
 
 ## The problem
 
