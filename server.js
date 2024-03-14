@@ -1,35 +1,72 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import express from 'express';// Import the Express web framework
+import cors from 'cors'; // Import Cross-Origin Resource Sharing middleware
+import mongoose from 'mongoose'; // Import Mongoose for MongoDB integration
+import netflixData from './data/netflix-titles.json'; // Import Netflix data from a local JSON file
+import dotenv from 'dotenv'; // Import dotenv for managing environment variables
+dotenv.config() // Load environment variables from a .env file
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
+// Import Mongoose model and routes
+import Movie from './movieModel'; // Import the Mongoose model for movies
+import movieRoutes from './movieRoutes'; // Import custom routes for movies
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
+// MongoDB connection setup
+const mongoUrl = process.env.MONGO_URI || 'mongodb://localhost/movie';  // Define MongoDB connection URI
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });// Connect to the MongoDB database
+mongoose.Promise = Promise; // Use the global Promise library with Mongoose
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+// Set up Express application
+const port = process.env.PORT || 8080; // Define the port for the Express server
+const app = express(); // Create an instance of the Express application
 
-// Start defining your routes here
+
+const listEndpoints = require("express-list-endpoints")
+
+// Use CORS and JSON parsing middleware
+app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(express.json()); // Parse incoming requests with JSON payloads
+
+// Database seeding (resetting) based on the RESET_DB environment variable
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    try {
+      await Movie.deleteMany(); // Clear existing data in the Movie collection
+
+      // Save each movie from the Netflix data into the Movie collection
+      await Promise.all(netflixData.map(movieData => new Movie(movieData).save()));
+
+      console.log('Database seeded successfully.');
+    } catch (error) {
+      console.error('Error seeding database:', error);
+    }
+  };
+
+  seedDatabase(); // Call the function to seed/reset the database
+
+}
+
+
+// Use the movieRoutes in your app under the root path ('/')
+app.use('/', movieRoutes);
+
+
+
+// Define a route to get a list of all endpoints in the application
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json(listEndpoints(app)); // Respond with a JSON array of endpoints
 });
 
-// Start the server
+// Start the Express server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+
+// I will leave this comments so I remember for future projects:
+
+// följ Technigo atlas deploy fram till step 4 - skriftliga - kolla även på videon - render: MongoURI - Render:
+
+//Render = advanced settings
+// env. config
+// MONGO_URI=
+// PORT=8080
