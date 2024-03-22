@@ -4,14 +4,13 @@ import cors from 'cors';
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
-import exercisesData from './data/exercises.json' assert {type: 'json'};
-
+import exercisesData from './data/exercises.json';
 
 // Creating URL to connect with MongoDB
 mongoose.set('strictQuery', false);
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/exerciseAPI';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise; 
+mongoose.Promise = Promise;
 
 // Defined a schema corresponding to the data in the json-file
 const Exercise = mongoose.model('Exercise', {
@@ -37,16 +36,15 @@ if (process.env.RESET_DB) {
     });
   };
 
-  seedDatabase(); 
+  seedDatabase();
 }
 
 // Seting up Express app and middleware
 const port = process.env.PORT || 9000;
 
-
 const app = express();
 app.use(cors());
-app.use(bodyParser.json()) 
+app.use(bodyParser.json());
 
 // Define and list all API endpoints
 app.get('/', (req, res) => {
@@ -55,12 +53,12 @@ app.get('/', (req, res) => {
 
 // Fetch exercises with optional pagination and filtering by level
 app.get('/exercises', async (req, res) => {
-  const { page = 1, limit = 10, level } = req.query; 
+  const { page = 1, limit = 10, level } = req.query;
   const skipIndex = (page - 1) * limit;
   try {
     const query = level ? { level: level } : {}; // Filter by level if provided
     const exercises = await Exercise.find(query).skip(skipIndex).limit(Number(limit)).exec();
-    res.json(exercises); 
+    res.json(exercises);
   } catch (error) {
     res.status(400).json({ error: 'Invalid request', details: error.message }); // Shows error message if the request failed
   }
@@ -73,7 +71,6 @@ app.get('/exercises/:name', async (req, res) => {
     const exercise = await Exercise.findOne({ name: new RegExp(name, 'i') }); // Makes sure the request isn't case sensitive
     if (!exercise) {
       res.status(404).json({ error: 'Exercise not found' }); // Show error if the exercise could not be found
-      return;
     }
     res.json(exercise);
   } catch (error) {
