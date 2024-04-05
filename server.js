@@ -3,7 +3,8 @@ import express from "express";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import dotenv from "dotenv";
-import booksData from "./data/books.json";
+
+const booksData = require("./data/books.json");
 
 dotenv.config();
 
