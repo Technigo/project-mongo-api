@@ -50,9 +50,13 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   const htmlContent = `
-    <p>Hello Technigo! This is the documentation of the API.</p>
-    <p>Here you will find <a href="/books">View All Books</a></p>
-    <p><a href="/books/123">View Book by ID</a></p>
+    <div class="bg-pink-100 h-screen flex justify-center items-center">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold mb-4">Hello Technigo! This is the documentation of the API.</h1>
+        <p>Here you will find <a href="/books" class="text-blue-500">View All Books</a></p>
+        <p><a href="/books/123" class="text-blue-500">View Book by ID</a></p>
+      </div>
+    </div>
   `;
   res.send(htmlContent);
 });
