@@ -32,7 +32,7 @@ const BookModel = mongoose.model("Book", bookSchema);
 
 const seedDatabase = async () => {
   try {
-    await BookModel.deleteMany({});
+    await BookModel.deleteMany({}, { timeout: 20000 }); // Increase timeout to 20 seconds
     await BookModel.insertMany(booksData);
     console.log("Database seeded successfully.");
   } catch (error) {
