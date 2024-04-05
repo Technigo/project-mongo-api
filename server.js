@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
-import booksData from "./data/books.json";
 import express from "express";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
-import { config } from "dotenv";
+import dotenv from "dotenv";
+import booksData from "./data/books.json";
 
-config();
+dotenv.config();
+
 mongoose.set("strictQuery", false);
 
 const mongoUrl =
@@ -26,7 +27,7 @@ const bookSchema = new mongoose.Schema({
   text_reviews_count: Number,
 });
 
-const BookModel = mongoose.model("Book", bookSchema); // Renamed to BookModel
+const BookModel = mongoose.model("Book", bookSchema);
 
 const seedDatabase = async () => {
   try {
@@ -45,8 +46,6 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-
-// Define routes
 
 app.get("/", (req, res) => {
   const htmlContent = `
@@ -83,8 +82,6 @@ app.get("/books/:bookID", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
-// Add more routes as needed
 
 app.get("/", (req, res) => {
   const endpoints = listEndpoints(app);
