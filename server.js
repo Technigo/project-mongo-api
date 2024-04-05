@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import booksData from "./data/books.json";
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import listEndpoints from "express-list-endpoints";
+import { config } from "dotenv";
 
-dotenv.config();
+config();
 mongoose.set("strictQuery", false);
 
 const mongoUrl =
