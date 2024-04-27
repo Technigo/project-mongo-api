@@ -9,7 +9,7 @@ dotenv.config();
 
 mongoose.set("strictQuery", false);
 
-// Setup MongoDB connection
+// Setup MongoDB connectionnnn
 const mongoUrl =
   process.env.MONGO_URI || "mongodb://localhost/project-mongo-books";
 
@@ -52,7 +52,7 @@ const seedDatabase = async () => {
 
 const startServer = () => {
   const app = express();
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 7070;
 
   app.use(cors());
   app.use(express.json());
