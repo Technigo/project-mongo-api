@@ -22,7 +22,10 @@ mongoose
     // Start the server
     startServer();
   })
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1); // Exit process with failure code
+  });
 
 const bookSchema = new mongoose.Schema({
   bookID: Number,
