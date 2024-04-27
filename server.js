@@ -7,12 +7,13 @@ import booksData from "./data/books.json" assert { type: "json" };
 
 dotenv.config();
 
-mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", true);
 
 // Setup MongoDB connectionnn
-const mongoUrl =
-  process.env.MONGO_URI ||
-  "mongodb+srv://eva:eva1@mongo.selepe3.mongodb.net/mongo?retryWrites=true&w=majority&appName=mongo";
+const mongoUrl = (process.env.MONGO_URI || "").trim();
+//const mongoUrl =
+//process.env.MONGO_URI ||
+//"mongodb+srv://eva:eva1@mongo.selepe3.mongodb.net/mongo?retryWrites=true&w=majority&appName=mongo";
 console.log(`Connecting to MongoDB at ${mongoUrl}`); // Log the MongoDB URI being used
 
 mongoose
