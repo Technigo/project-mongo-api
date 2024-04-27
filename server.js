@@ -61,7 +61,7 @@ app.get("/books", async (req, res) => {
   }
 });
 
-app.get("/books/bookID", async (req, res) => {
+app.get("/books/:bookID", async (req, res) => {
   try {
     const { bookID } = req.params;
     const singleBook = await BookModel.findOne({ bookID });
