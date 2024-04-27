@@ -9,7 +9,7 @@ dotenv.config();
 
 mongoose.set("strictQuery", false);
 
-// Setup MongoDB connection
+// Setup MongoDB connectionnn
 const mongoUrl =
   process.env.MONGO_URI || "mongodb://localhost/project-mongo-books";
 console.log(`Connecting to MongoDB at ${mongoUrl}`); // Log the MongoDB URI being used
