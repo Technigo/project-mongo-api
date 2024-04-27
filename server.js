@@ -12,7 +12,7 @@ mongoose.set("strictQuery", false);
 // Setup MongoDB connection
 const mongoUrl =
   process.env.MONGO_URI || "mongodb://localhost/project-mongo-books";
-console.log(`Connecting to MongoDB at ${mongoUrl}`); // Log the MongoDB URI being used
+console.log(`Connecting to MongoDB at ${mongoUrl}`); // Log the MongoDB URI being usedddd
 
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
