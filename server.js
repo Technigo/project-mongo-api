@@ -9,9 +9,10 @@ dotenv.config();
 
 mongoose.set("strictQuery", false);
 
-// Setup MongoDB connectionnnn
+// Setup MongoDB connection
 const mongoUrl =
   process.env.MONGO_URI || "mongodb://localhost/project-mongo-books";
+console.log(`Connecting to MongoDB at ${mongoUrl}`); // Log the MongoDB URI being used
 
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -45,7 +46,7 @@ const BookModel = mongoose.model("Book", bookSchema);
 // Function to seed the database
 const seedDatabase = async () => {
   try {
-    await BookModel.deleteMany(); // Remove unnecessary timeout option
+    await BookModel.deleteMany();
     await BookModel.insertMany(booksData);
     console.log("Database seeded successfully.");
   } catch (error) {
@@ -55,7 +56,7 @@ const seedDatabase = async () => {
 
 const startServer = () => {
   const app = express();
-  const port = process.env.PORT || 7070;
+  const port = process.env.PORT || 7070; // Use the PORT environment variable if available
 
   app.use(cors());
   app.use(express.json());
@@ -90,6 +91,7 @@ const startServer = () => {
     res.json({ endpoints });
   });
 
+  console.log(`Attempting to start server on port ${port}`); // Log before starting the server
   app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
   });
