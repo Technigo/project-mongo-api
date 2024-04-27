@@ -13,7 +13,7 @@ mongoose.set("strictQuery", true);
 const mongoUrl = (process.env.MONGO_URI || "").trim();
 //const mongoUrl =
 //process.env.MONGO_URI ||
-//"mongodb+srv://eva:eva1@mongo.selepe3.mongodb.net/mongo?retryWrites=true&w=majority&appName=mongo";nnjjjjj
+//"mongodb+srv://eva:eva1@mongo.selepe3.mongodb.net/mongo?retryWrites=true&w=majority&appName=mongo";
 console.log(`Connecting to MongoDB at ${mongoUrl}`); // Log the MongoDB URI being used
 
 mongoose
