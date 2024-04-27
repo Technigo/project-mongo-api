@@ -11,10 +11,7 @@ mongoose.set("strictQuery", false);
 
 // Setup MongoDB connection
 const mongoUrl =
-  process.env.MONGO_URI ||
-  "mongodb+srv://eva:eva1@mongo.selepe3.mongodb.net/?retryWrites=true&w=majority&appName=mongo";
-
-//"mongodb://localhost/project-mongo-books";
+  process.env.MONGO_URI || "mongodb://localhost/project-mongo-books";
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connection successful"))
