@@ -22,7 +22,7 @@ const bookSchema = new mongoose.Schema({
   title: String,
   authors: String,
   average_rating: Number,
-  isbn: Number,
+  isbn: { type: Number, unique: true },
   isbn13: Number,
   language_code: String,
   num_pages: Number,
@@ -59,32 +59,30 @@ app.route("/books").get(async (req, res) => {
 
   // Get all books in specific language by query
   const lang = req.query.lang;
-  lang && (books = books.filter(book => book.language_code === lang));
+  lang && (books = await Book.find({ language_code: lang }));
 
   // Get all books above specific rating, by query
   const ratingAbove = req.query.ratingAbove;
   ratingAbove &&
-    (books = books.filter(book => book.average_rating > ratingAbove));
+    (books = await Book.find({ average_rating: { $gte: ratingAbove } }));
 
   // Get all books below specific rating, by query
   const ratingBelow = req.query.ratingBelow;
   ratingBelow &&
-    (books = books.filter(book => book.average_rating < ratingBelow));
+    (books = await Book.find({ average_rating: { $lte: ratingBelow } }));
 
   // Get single book by ISBN, by query
-  const ISBN = req.query.isbn;
-  ISBN && (books = books.find(book => book.isbn === +ISBN));
+  const ISBN = Number(req.query.isbn);
+  ISBN && (books = await Book.find({ isbn: ISBN }));
 
-  // Get single book by ISBN, by query
-  const ISBN13 = req.query.isbn13;
-  ISBN13 && (books = books.filter(book => book.isbn13 === +ISBN13));
+  // Get single book by ISBN13, by query
+  const ISBN13 = Number(req.query.isbn13);
+  ISBN13 && (books = await Book.find({ isbn13: ISBN13 }));
 
   // Pages with 20 books on each, by query
   const page = req.query.page;
   const start = (page - 1) * 10;
-  const end = start + 10;
-  console.log(start, end);
-  page && (books = books.slice(start, end));
+  page && (books = await Book.find().skip(start).limit(10).exec());
 
   // Show books
   books && books.length > 0
@@ -92,39 +90,39 @@ app.route("/books").get(async (req, res) => {
     : res.status(404).send({ error: "Could not find any books" });
 });
 
-// Collection - get books by Author
-app.route("/books/popular").get((req, res) => {
-  res.json(
-    booksData.sort((a, b) => b.average_rating - a.average_rating).slice(0, 10)
-  );
+// Collection - 10 most popular books by average rating
+app.route("/books/popular").get(async (req, res) => {
+  const books = await Book.find().sort({ average_rating: -1 }).limit(10);
+  res.json(books);
 });
 
 // Single result - get book by ID
-app.route("/books/:bookId").get((req, res) => {
+app.route("/books/:bookId").get(async (req, res) => {
   const bookId = req.params.bookId;
-  const book = booksData.find(b => b.bookID === +bookId);
+  const book = await Book.findOne({ bookID: bookId }).exec();
   book
     ? res.json(book)
-    : res.status(404).send({ error: `Book ID ${bookId} not found` });
+    : res.status(404).send({
+        error_message: `Book with ID ${bookId} not found`,
+      });
 });
 
 // Collection - get books by Author
-app.route("/authors/:author").get((req, res) => {
+app.route("/authors/:author").get(async (req, res) => {
   const author = req.params.author;
-  const books = booksData.filter(b => b.authors.includes(author));
+  const books = await Book.find({ authors: { $regex: author } });
   books
     ? res.json(books)
     : res.status(404).send({ error: `No books by ${author} found` });
 });
 
-app.route("/search").get((req, res) => {
-  // Search for anything
+// Search for anything in title
+app.route("/search").get(async (req, res) => {
   const q = req.query.q;
   let result = "";
-  q &&
-    (result = booksData.filter(book => Object.values(book).join().includes(q)));
+  q && (result = await Book.find({ title: { $regex: q } }));
 
-  // Show result
+  // Show search result
   result && result.length > 0
     ? res.json(result)
     : res.status(404).send({ error: "No search results" });
