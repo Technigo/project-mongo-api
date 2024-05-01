@@ -4,10 +4,7 @@ import mongoose from "mongoose";
 import expressListEndpoints from "express-list-endpoints";
 import AvocadoSalesData from "./data/avocado-sales.json";
 
-// const mongoUrl = process.env."MONGO_URL" || "mongodb://127.0.0.1/project-mongo";
-const mongoUrl =
-  "mongodb+srv://dittoya:P8cAvd1jhWHk7KOB@mongoapi.apleftq.mongodb.net/avocadosales?retryWrites=true&w=majority&appName=MongoAPI";
-
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
