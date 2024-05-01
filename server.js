@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import mongoose, { Mongoose, mongo } from "mongoose";
+import mongoose from "mongoose";
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -23,25 +23,46 @@ const mongoURL = process.env.MONGO_URL || "mongodb://localhost/library";
 mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Mongoose model
-const Book = mongoose.model("Book", {
-  // Properties defined here match the keys from the books.json file
+// Mongoos schema
+const bookSchema = new mongoose.Schema({
+  bookID: mongoose.Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
 });
 
-// if (process.env.RESET_DB) {
-const seedDatabase = async () => {
-  await Book.deleteMany({});
+// Mongoose model
+const Book = mongoose.model("Book", bookSchema);
 
-  booksData.forEach(book => {
-    new Book(book).save();
-  });
-};
-seedDatabase();
-// }
+// Seed data
+if (process.env.RESET_DB) {
+  console.log("Resetting the database!");
+  const seedDatabase = async () => {
+    await Book.deleteMany({});
+
+    booksData.forEach(async book => {
+      const newBook = new Book(book);
+      await newBook.save();
+    });
+  };
+  seedDatabase();
+}
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hello Technigo, welcome to the library!");
+});
+
+// Fetch all Books
+app.get("/books", async (req, res) => {
+  const books = await Book.find();
+  res.send(books);
 });
 
 // Start the server
