@@ -1,13 +1,22 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week we're using MongoDB
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I had some issues installing everything and the npm run dev stopped without doing everything. After deleting and cloning the repo again, and also updating a bunch of stuff, it finally started working.
+
+I used the same dataset as last project, and copied all my routes. Then I switched them out from express to mongoose.
+Haven't done anything fancy, just kept it pretty basic. Looked in the mooongose documentation for how to do the queries.
+_I believe there's a lot of stuff to read up on to really get the hang of this, which will take more time than I have within this project._
+
+It was tricky to deploy the project with the database. I think I did it correctly, but I had to add RESET_DB to the start commang in render...
+
+### Next
+
+- If I have time, I will create another model for Authors and cross match them, as Damion did in the code along...
+- Maybe I'll add more to the data set aswell, such as genres, and create some models and routes with that.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+[View Mongo API on render](https://project-mongo-api-d9ql.onrender.com)
