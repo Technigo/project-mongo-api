@@ -14,8 +14,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const mongoURL = process.env.MONGO_URL || "mongodb://localhost/library";
-mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoURL = process.env.MONGO_URL || "mongodb://localhost/mongo-library";
+mongoose.connect(mongoURL);
 mongoose.Promise = Promise;
 
 // Mongoos schemas
@@ -42,8 +42,7 @@ if (process.env.RESET_DB) {
     await Book.deleteMany({});
 
     booksData.forEach(async book => {
-      const newBook = new Book(book);
-      await newBook.save();
+      new Book(book).save();
     });
   };
   seedDatabase();
