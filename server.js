@@ -121,7 +121,10 @@ app.route("/authors/:author").get(async (req, res) => {
 app.route("/search").get(async (req, res) => {
   const q = req.query.q;
   let result = "";
-  q && (result = await Book.find({ title: { $regex: q } }));
+  q &&
+    (result = await Book.find({
+      title: { $regex: q },
+    }));
 
   // Show search result
   result && result.length > 0

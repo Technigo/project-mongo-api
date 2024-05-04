@@ -19,6 +19,23 @@ I tried syncing the updates in the original repo by doing a rebase, but it messe
 - If I have time, I will create another model for Authors and cross match them, as Damion did in the code along...
 - Maybe I'll add more to the data set aswell, such as genres, and create some models and routes with that.
 
+### Available endpoints
+
+- "/", API overview
+- "/books", all books
+- "/books/popular", top 10 books by average rating
+- "/books/:bookId", specific book by ID
+- "authors/:author", books by specific author
+- "search", with query - search for anything in book titles
+
+### Available queries
+
+- "q", search
+- "page", pagination, 10 books per page
+- "lang", all books with specific language code
+- "isbn", specific book by isbn
+- "isbn13", specific book by isbn13
+
 ## View it live
 
 [View Mongo API on render](https://project-mongo-api-d9ql.onrender.com)
