@@ -1,0 +1,250 @@
+[
+	{
+		"id": "1",
+		"name": "Brie",
+		"animal": "Cow",
+		"region": "Île-de-France",
+		"taste": "Creamy, buttery",
+		"wine_pairing": "Champagne: Veuve Clicquot Brut Yellow Label"
+	},
+	{
+		"id": "2",
+		"name": "Camembert",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Creamy, earthy",
+		"wine_pairing": "Chardonnay: Louis Latour Corton-Charlemagne Grand Cru"
+	},
+	{
+		"id": "3",
+		"name": "Roquefort",
+		"animal": "Sheep",
+		"region": "Occitanie",
+		"taste": "Salty, tangy, creamy",
+		"wine_pairing": "Sauternes: Château d'Yquem 2015"
+	},
+	{
+		"id": "4",
+		"name": "Comté",
+		"animal": "Cow",
+		"region": "Franche-Comté",
+		"taste": "Nutty, fruity",
+		"wine_pairing": "Jura wine: Domaine de la Tournelle Les Corvées Sous Curon"
+	},
+	{
+		"id": "5",
+		"name": "Morbier",
+		"animal": "Cow",
+		"region": "Franche-Comté",
+		"taste": "Rich, creamy",
+		"wine_pairing": "Pinot Noir: Domaine de la Romanée-Conti Romanée-Conti Grand Cru"
+	},
+	{
+		"id": "6",
+		"name": "Pont-l'Évêque",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Creamy, nutty",
+		"wine_pairing": "Chardonnay: Domaine Leflaive Puligny-Montrachet Premier Cru Les Pucelles"
+	},
+	{
+		"id": "7",
+		"name": "Époisses",
+		"animal": "Cow",
+		"region": "Burgundy",
+		"taste": "Pungent, creamy",
+		"wine_pairing": "Burgundy wine: Domaine de la Romanée-Conti La Tâche Grand Cru"
+	},
+	{
+		"id": "8",
+		"name": "Crottin de Chavignol",
+		"animal": "Goat",
+		"region": "Centre-Val de Loire",
+		"taste": "Tangy, nutty",
+		"wine_pairing": "Sancerre: Pascal Jolivet Sancerre Les Caillottes"
+	},
+	{
+		"id": "9",
+		"name": "Saint-Nectaire",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Creamy, nutty",
+		"wine_pairing": "Beaujolais: Georges Duboeuf Beaujolais Villages"
+	},
+	{
+		"id": "10",
+		"name": "Fourme d'Ambert",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Rich, tangy",
+		"wine_pairing": "Côtes du Rhône: Château de Beaucastel Châteauneuf-du-Pape"
+	},
+	{
+		"id": "11",
+		"name": "Comté",
+		"animal": "Cow",
+		"region": "Franche-Comté",
+		"taste": "Nutty, fruity",
+		"wine_pairing": "Jura wine: Domaine de la Tournelle Les Corvées Sous Curon"
+	},
+	{
+		"id": "12",
+		"name": "Munster",
+		"animal": "Cow",
+		"region": "Grand Est",
+		"taste": "Strong, creamy",
+		"wine_pairing": "Alsace Riesling: Trimbach Clos Sainte Hune"
+	},
+	{
+		"id": "13",
+		"name": "Tomme de Savoie",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Mild, earthy",
+		"wine_pairing": "Savoie wine: Domaine Jean-Louis Chave Hermitage Blanc"
+	},
+	{
+		"id": "14",
+		"name": "Bleu d'Auvergne",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Creamy, tangy",
+		"wine_pairing": "Bordeaux: Château Lafite Rothschild Pauillac"
+	},
+	{
+		"id": "15",
+		"name": "Reblochon",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Creamy, nutty",
+		"wine_pairing": "Savoie wine: Domaine Jean-Louis Chave Hermitage Blanc"
+	},
+	{
+		"id": "16",
+		"name": "Raclette",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Nutty, creamy",
+		"wine_pairing": "White wine from Savoie: Domaine Jean-Louis Chave Hermitage Blanc"
+	},
+	{
+		"id": "17",
+		"name": "Boursin",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Creamy, herby",
+		"wine_pairing": "Chardonnay: Louis Latour Corton-Charlemagne Grand Cru"
+	},
+	{
+		"id": "18",
+		"name": "Ossau-Iraty",
+		"animal": "Sheep",
+		"region": "Nouvelle-Aquitaine",
+		"taste": "Nutty, fruity",
+		"wine_pairing": "Irouléguy: Domaine Ilarria Harri Gorri"
+	},
+	{
+		"id": "19",
+		"name": "Pélardon",
+		"animal": "Goat",
+		"region": "Occitanie",
+		"taste": "Tangy, earthy",
+		"wine_pairing": "Languedoc-Roussillon: Domaine de la Grange des Pères"
+	},
+	{
+		"id": "20",
+		"name": "Pouligny-Saint-Pierre",
+		"animal": "Goat",
+		"region": "Centre-Val de Loire",
+		"taste": "Nutty, earthy",
+		"wine_pairing": "Sauvignon Blanc: Henri Bourgeois Sancerre La Côte des Monts Damnés"
+	},
+	{
+		"id": "21",
+		"name": "Banon",
+		"animal": "Goat",
+		"region": "Provence-Alpes-Côte d'Azur",
+		"taste": "Creamy, tangy",
+		"wine_pairing": "Côtes du Rhône: Domaine du Vieux Télégraphe Châteauneuf-du-Pape La Crau"
+	},
+	{
+		"id": "22",
+		"name": "Beaufort",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Nutty, fruity",
+		"wine_pairing": "Savoie wine: Domaine Jean-Louis Chave Hermitage Blanc"
+	},
+	{
+		"id": "23",
+		"name": "Bleu de Bresse",
+		"animal": "Cow",
+		"region": "Burgundy",
+		"taste": "Creamy, tangy",
+		"wine_pairing": "Bourgogne Aligoté: Domaine Arnaud Ente Bourgogne Aligoté"
+	},
+	{
+		"id": "24",
+		"name": "Bleu des Causses",
+		"animal": "Cow",
+		"region": "Occitanie",
+		"taste": "Sharp, tangy",
+		"wine_pairing": "Cahors: Clos Triguedina Probus Cahors"
+	},
+	{
+		"id": "25",
+		"name": "Cantal",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Sharp, nutty",
+		"wine_pairing": "Madiran: Château Montus Madiran La Tyre"
+	},
+	{
+		"id": "26",
+		"name": "Livarot",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Strong, earthy",
+		"wine_pairing": "Cider: Eric Bordelet Sydre Argelette"
+	},
+	{
+		"id": "27",
+		"name": "Bleu du Vercors-Sassenage",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Creamy, tangy",
+		"wine_pairing": "White wine from Savoie: Domaine Jean-Louis Chave Hermitage Blanc"
+	},
+	{
+		"id": "28",
+		"name": "Coulommiers",
+		"animal": "Cow",
+		"region": "Île-de-France",
+		"taste": "Mild, creamy",
+		"wine_pairing": "Chardonnay: Louis Latour Corton-Charlemagne Grand Cru"
+	},
+	{
+		"id": "29",
+		"name": "Valençay",
+		"animal": "Goat",
+		"region": "Centre-Val de Loire",
+		"taste": "Nutty, tangy",
+		"wine_pairing": "Sauvignon Blanc: Henri Bourgeois Sancerre La Côte des Monts Damnés"
+	},
+	{
+		"id": "30",
+		"name": "Neufchâtel",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Creamy, slightly tangy",
+		"wine_pairing": "Chardonnay: Louis Latour Corton-Charlemagne Grand Cru"
+	},
+	{
+		"id": "31",
+		"name": "Époisses",
+		"animal": "Cow",
+		"region": "Burgundy",
+		"taste": "Pungent, creamy",
+		"wine_pairing": "Pinot Noir: Domaine de la Romanée-Conti La Tâche Grand Cru"
+	}
+]
