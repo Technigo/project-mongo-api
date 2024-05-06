@@ -1,0 +1,92 @@
+[
+  {
+    "path": "/",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
+    "path": "/books/",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
+    "path": "/books/id/:id",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
+    "path": "/books/authors/:authors",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
+    "path": "/books/average_rating/:average_rating",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
+    "path": "/books/pages_asc/:num_pages",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
+    "path": "/books/pages_desc/:num_pages",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
+    "path": "/books/ratings_count/:ratings_count",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
+    "path": "/books/text_reviews_count/:text_reviews_count",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
+    "path": "/books/language_code/:language_code",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  }
+]
