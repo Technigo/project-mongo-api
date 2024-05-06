@@ -1,14 +1,8 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import goldenGlobesData from "./data/golden-globes.json";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
@@ -28,6 +22,26 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
+
+// copied this code from the express api projcet 
+app.get("/nominations", (req, res) => {
+  res.json(goldenGlobesData);
+});
+
+// copied this code from the express api projcet
+app.get("/nominations/:id", (req, res) => {
+  const id = req.params.id; // if /nominations/1, req.params.id is 1
+  const nomination = goldenGlobesData[parseInt(id)];
+// if we find something with that id, we return it. if not we return a 404.
+  if (nomination) {
+    res.json(nomination);
+  } else {
+    // remmber 404 means "not found". if it start with a 2 evertyhing is ok. if it starts with a 4 or 5 something is wrong. 4 means your request is wrong. 5 means the server is wrong.
+    res.status(404).send(`No nomination with id ${id} found.`);
+  }
+});
+
+
 
 // Start the server
 app.listen(port, () => {
