@@ -8,6 +8,30 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
+// copied from the instructions and change the name from person to nomination
+const Nomination = mongoose.model('Nomination', {
+  // this is the schema that tells the data base what kind of data we are expecting. like year-film, category and so on. 
+  year_film: Number,
+  year_award: Number,
+  ceremony: Number,
+  category: String,
+  nominee: String,
+  film: String,
+  win: Boolean
+});
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Nomination.deleteMany({})
+
+    goldenGlobesData.forEach((nominationData) => {
+      new Nomination(nominationData).save()
+    })
+  }
+
+  seedDatabase()
+}
+
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
