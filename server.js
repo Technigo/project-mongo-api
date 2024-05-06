@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json";
+import expressListEndpoints from "express-list-endpoints";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
@@ -15,7 +16,7 @@ const app = express();
 
 //Seeding with database
 
-const Song = mongoose.model('Song', {
+const Song = mongoose.model("Song", {
   id: Number,
   trackName: String,
   artistName: String,
@@ -29,19 +30,19 @@ const Song = mongoose.model('Song', {
   length: Number,
   acousticness: Number,
   speechiness: Number,
-  popularity: Number
-})
+  popularity: Number,
+});
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Song.deleteMany({})
+    await Song.deleteMany({});
 
     topMusicData.forEach((songData) => {
-      new Song(songData).save()
-    })
-  }
+      new Song(songData).save();
+    });
+  };
 
-  seedDatabase()
+  seedDatabase();
 }
 
 // Add middlewares to enable cors and json body parsing
@@ -50,7 +51,22 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send(expressListEndpoints(app));
+});
+
+app.get("/songs", async (req, res) => {
+  const songs = await Song.find();
+  res.json(songs);
+});
+
+app.get("/songs/:id", async (req, res) => {
+  const songID = req.params.id;
+  const songInfo = await Song.findOne({ id: songID }).exec();
+  if (songInfo !== null) {
+    res.json(songInfo);
+  } else {
+    res.status(404).send("Information not found, please try again");
+  }
 });
 
 // Start the server
