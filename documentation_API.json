@@ -9,6 +9,15 @@
     ]
   },
   {
+    "path": "/books",
+    "methods": [
+      "GET"
+    ],
+    "middlewares": [
+      "anonymous"
+    ]
+  },
+  {
     "path": "/books/",
     "methods": [
       "GET"

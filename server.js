@@ -59,6 +59,54 @@ app.get("/", (req, res) => {
 });
 
 
+//filter with query parameters
+
+app.get("/books", (req, res) => {
+  const { title, authors, average_rating, num_pages, ratings_count, text_reviews_count, language_code } = req.query;  // Destructure the query parameters
+  const query = {};  // Create an empty object to store the query
+  if (title) {
+    query.title = new RegExp(title, "i");
+  }
+  if (authors) {
+    query.authors = new RegExp(authors, "i");
+  }
+  if (average_rating) {
+    query.average_rating = Number(average_rating);
+    query.average_rating = {
+      $gte: average_rating,
+      $lt: average_rating + 1
+    };
+  }
+  if (num_pages) {
+    query.num_pages = Number(num_pages);
+    query.num_pages = {
+      $gte: num_pages,
+      $lt: num_pages + 100
+    };
+
+  }
+  if (ratings_count) {
+    query.ratings_count = Number(ratings_count);
+    query.ratings_count = {
+      $gte: ratings_count,
+      $lt: ratings_count + 100
+    };
+  }
+  if (text_reviews_count) {
+    query.text_reviews_count = Number(text_reviews_count);
+    query.text_reviews_count = {
+      $gte: text_reviews_count,
+      $lt: text_reviews_count + 100
+    };
+  }
+  if (language_code) {
+    query.language_code = language_code;
+  }
+  Book.find(query).then(books => {  // Use the query object in the find query
+    res.json(books);
+  }
+  );
+});
 
 
 
@@ -159,7 +207,7 @@ app.get("/books/ratings_count/:ratings_count", (req, res) => {
       res.status(404).json({ error: "Not found" });
     }
   });
-} );
+});
 
 app.get("/books/text_reviews_count/:text_reviews_count", (req, res) => {
   const text_reviews_count = Number(req.params.text_reviews_count);
@@ -189,7 +237,6 @@ app.get("/books/language_code/:language_code", (req, res) => {
   });
 }
 );
-
 
 //get the list of endpoints
 const endpoints = listEndpoints(app);
