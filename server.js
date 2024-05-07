@@ -81,13 +81,80 @@ app.get('/names/:name', async (req, res) => {
 	}
 })
 
+//
 app.get('/regions', async (req, res) => {
-	const region = await Cheese.find({ region: req.params.region })
+	const regions = await Cheese.find({})
 
-	if (region) {
-		res.json(region)
+	if (regions) {
+		res.json(regions)
 	} else {
 		res.status(404).send('no regions found')
+	}
+})
+
+//router that finds all the cheeses made from cows milk
+app.get('/cows', async (req, res) => {
+	const cowMilk = await Cheese.find({ animal: 'Cow' })
+
+	if (cowMilk) {
+		res.json(cowMilk)
+	} else {
+		res.status(404).send('could not find cheeses made from cows milk')
+	}
+})
+
+//router that finds all the cheeses made from goat milk
+app.get('/goats', async (req, res) => {
+	const goatMilk = await Cheese.find({ animal: 'Goat' })
+
+	if (goatMilk) {
+		res.json(goatMilk)
+	} else {
+		res.status(404).send('could not find cheeses made from goat milk')
+	}
+})
+
+//router that finds all the cheeses made from sheep milk
+app.get('/sheep', async (req, res) => {
+	const sheepMilk = await Cheese.find({ animal: 'Sheep' })
+
+	if (sheepMilk) {
+		res.json(sheepMilk)
+	} else {
+		res.status(404).send('could not find cheeses made from goat milk')
+	}
+})
+
+//router to show the wines
+app.get('/wines', async (req, res) => {
+	const wines = await Cheese.find(
+		{ wine_pairing: { $ne: null } },
+		'wine_pairing'
+	)
+	if (wines && wines.length > 0) {
+		res.json(wines)
+	} else {
+		res.status(404).send('Could not find wines')
+	}
+})
+
+//router that shows cheese based on rating, b-a
+app.get('/bestCheeses', async (req, res) => {
+	const allTimeFaves = await Cheese.find().sort({ cheese_rating: -1 })
+	if (allTimeFaves) {
+		res.json(allTimeFaves)
+	} else {
+		res.status(404).send('could not find and sort by highest rating')
+	}
+})
+
+//router that shows cheese based on rating, b-a
+app.get('/bestWinePairings', async (req, res) => {
+	const cheeseAndWine = await Cheese.find().sort({ wine_pairing_rating: -1 })
+	if (cheeseAndWine) {
+		res.json(cheeseAndWine)
+	} else {
+		res.status(404).send('could not show the best wine and cheese pairing')
 	}
 })
 
