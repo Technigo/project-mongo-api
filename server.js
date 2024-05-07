@@ -54,6 +54,10 @@ app.get('/dogs', async (req, res) => {
   if (req.query.weight_kg) {
     query.weight_kg = req.query.weight_kg
   }
+  if (req.query.color) {
+    query.color = req.query.color
+  }
+
   try {
     const dogs = await Dog.find(query)
     res.json(dogs)
@@ -66,6 +70,36 @@ app.get('/dogs/:id', async (req, res) => {
   const dog = await Dog.findById(req.params.id)
   res.json(dog)
 })
+app.post('/dogs', async (req, res) => {
+  try {
+    const newDog = req.body
+    const createdDog = await Dog.create(newDog)
+    res.status(201).json(createdDog)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Failed to create dog' })
+  }
+})
+app.put('/dogs/:id', async (req, res) => {
+  try {
+    const { age, weight_kg } = req.body
+    const updatedDog = await Dog.findByIdAndUpdate(
+      req.params.id,
+      { age, weight_kg },
+      { new: true } //this returns the updated document
+    )
+
+    if (!updatedDog) {
+      return res.status(404).json({ error: 'Dog not found' })
+    }
+
+    res.json(updatedDog)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Failed to update dog' })
+  }
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
