@@ -8,6 +8,14 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/CheesusChrist'
 mongoose.connect(mongoUrl)
 mongoose.Promise = Promise
 
+//seed the database
+const seedDatabase = () => {
+	cheeses.forEach((cheese) => {
+		new Cheese(cheese).save()
+	})
+}
+seedDatabase()
+
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -27,14 +35,6 @@ const cheeseSchema = new Schema({
 
 //models
 const Cheese = mongoose.model('Cheese', cheeseSchema)
-
-//seed the database
-const seedDatabase = () => {
-	cheeses.forEach((Cheese) => {
-		new Cheese(cheese).save()
-	})
-}
-seedDatabase()
 
 // Start defining your routes here
 app.get('/', (req, res) => {
