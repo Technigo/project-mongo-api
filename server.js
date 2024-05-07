@@ -36,7 +36,10 @@ app.get("/", (req, res) => {
 
 // Display all the cities
 app.get("/cities", async (req, res) => {
-  const cities = await City.find().sort({ city: 1, province: 1 }).limit(20);
+  const { page } = req.query;
+  const cities = await City.find()
+    .sort({ city: 1, province: 1 })
+    .limit(page ? +page * 20 : 20);
   res.json(cities);
 });
 
