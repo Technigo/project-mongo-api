@@ -34,6 +34,12 @@ app.get("/", (req, res) => {
   res.json(endpoints);
 });
 
+// Display all the cities
+app.get("/cities", async (req, res) => {
+  const cities = await City.find().sort({ city: 1, province: 1 }).limit(20);
+  res.json(cities);
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
