@@ -2,9 +2,10 @@ import cors from "cors";
 import express from "express";
 import expressListEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 // Getting env file
-require("dotenv").config();
+dotenv.config();
 
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost/project-mongo-bookdata";
@@ -34,8 +35,7 @@ import booksData from "./data/books.json";
 
 // Seed the database with the books
 // I have set RESET_DB to false since the database is already seeded now
-
-if (process.env.RESET_DB) {
+if (process.env.RESET_DB === true) {
   const seedDatabase = async () => {
     console.log("Reseading database");
     await Book.deleteMany({});
