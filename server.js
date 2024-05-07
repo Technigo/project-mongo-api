@@ -1,35 +1,72 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import express from 'express'
+import dotenv from 'dotenv'
+import cors from 'cors'
+import mongoose from 'mongoose'
+import expressListEndpoints from 'express-list-endpoints'
+import dogsData from './data/dogs.json'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/dogs'
+mongoose.connect(mongoUrl)
+mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
+const Dog = mongoose.model('Dog', {
+  id: Number,
+  name: String,
+  breed: String,
+  age: Number,
+  color: String,
+  weight_kg: Number,
+  likes_toys: Boolean,
+})
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Dog.deleteMany({})
+
+    dogsData.forEach((dog) => {
+      new Dog(dog).save()
+    })
+  }
+
+  seedDatabase()
+}
+const port = process.env.PORT || 8080
+const app = express()
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+app.get('/', (req, res) => {
+  const endpoints = expressListEndpoints(app)
+  res.json(endpoints)
+})
+app.get('/dogs', async (req, res) => {
+  let query = {}
+  if (req.query.breed) {
+    query.breed = req.query.breed
+  }
+  if (req.query.age) {
+    query.age = req.query.age
+  }
+  if (req.query.weight_kg) {
+    query.weight_kg = req.query.weight_kg
+  }
+  try {
+    const dogs = await Dog.find(query)
+    res.json(dogs)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
 
+app.get('/dogs/:id', async (req, res) => {
+  const dog = await Dog.findById(req.params.id)
+  res.json(dog)
+})
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+  console.log(`Server running on http://localhost:${port}`)
+})
