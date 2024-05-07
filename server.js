@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import City from "./models/City";
+import expressListEndpoints from "express-list-endpoints";
 import topCitiesChina from "./data/china-city.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -29,7 +30,8 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  const endpoints = expressListEndpoints(app);
+  res.json(endpoints);
 });
 
 // Start the server
