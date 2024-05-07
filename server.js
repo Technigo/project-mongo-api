@@ -36,11 +36,21 @@ app.get("/", (req, res) => {
 
 // Display all the cities
 app.get("/cities", async (req, res) => {
-  const { page } = req.query;
+  const { page, sort, order } = req.query;
   const cities = await City.find()
-    .sort({ city: 1, province: 1 })
+    .sort(
+      sort
+        ? { sort: order === "descending" ? -1 : 1 }
+        : { city: 1, province: 1 }
+    )
     .limit(page ? +page * 20 : 20);
   res.json(cities);
+});
+
+// Display a city by id
+app.get("/cities/:id", async (req, res) => {
+  const city = await City.findById(req.params.id);
+  res.json(city);
 });
 
 // Start the server
