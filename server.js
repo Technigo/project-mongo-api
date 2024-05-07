@@ -1,35 +1,36 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+// this the import from json file.
 import goldenGlobesData from "./data/golden-globes.json";
-
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
 // copied from the instructions and change the name from person to nomination
-const Nomination = mongoose.model('Nomination', {
-  // this is the schema that tells the data base what kind of data we are expecting. like year-film, category and so on. 
+const Nomination = mongoose.model("Nomination", {
+  // this is the schema that tells the data base what kind of data we are expecting. like year-film, category and so on.
   year_film: Number,
   year_award: Number,
   ceremony: Number,
   category: String,
   nominee: String,
   film: String,
-  win: Boolean
+  win: Boolean,
 });
 
+// this put the data from json into mongo db.
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Nomination.deleteMany({})
+    await Nomination.deleteMany({});
 
     goldenGlobesData.forEach((nominationData) => {
-      new Nomination(nominationData).save()
-    })
-  }
+      new Nomination(nominationData).save();
+    });
+  };
 
-  seedDatabase()
+  seedDatabase();
 }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
@@ -47,16 +48,23 @@ app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
-// copied this code from the express api projcet 
+// copied this code from the express api projcet
+// this is route one, where i get the full data about the nominations.
 app.get("/nominations", (req, res) => {
-  res.json(goldenGlobesData);
+  // this where  i get the data from mongo db and send it as json ...
+  Nomination.find().then((results) => {
+    res.json(results);
+  });
 });
 
 // copied this code from the express api projcet
-app.get("/nominations/:id", (req, res) => {
+// async needs to be there because we are using await. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+// here we are replacing the json file. im now getting the data from mongo db.
+// this is routw two where we get a specifc nomination.
+app.get("/nominations/:id", async (req, res) => {
   const id = req.params.id; // if /nominations/1, req.params.id is 1
-  const nomination = goldenGlobesData[parseInt(id)];
-// if we find something with that id, we return it. if not we return a 404.
+  const nomination = await Nomination.find().skip(Number(id)).limit(1).exec();
+  // if we find something with that id, we return it. if not we return a 404.
   if (nomination) {
     res.json(nomination);
   } else {
@@ -65,7 +73,7 @@ app.get("/nominations/:id", (req, res) => {
   }
 });
 
-
+// app.post("/nominations", (req, res) => { THIS WHERE I STOPPED AND HERE IS WHERE I START AGAIN 
 
 // Start the server
 app.listen(port, () => {
