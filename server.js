@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import cheeses from './data/cheeses.json'
 import expressListEndpoints from 'express-list-endpoints'
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/CheesusChrist'
 mongoose.connect(mongoUrl)
 mongoose.Promise = Promise
 
@@ -28,6 +28,14 @@ const cheeseSchema = new Schema({
 //models
 const Cheese = mongoose.model('Cheese', cheeseSchema)
 
+//seed the database
+const seedDatabase = () => {
+	cheeses.forEach((Cheese) => {
+		new Cheese(cheese).save()
+	})
+}
+seedDatabase()
+
 // Start defining your routes here
 app.get('/', (req, res) => {
 	const endpoints = expressListEndpoints(app)
@@ -36,6 +44,20 @@ app.get('/', (req, res) => {
 
 app.get('/cheeses', (req, res) => {
 	res.json(cheeses)
+})
+
+app.get('/cheeses/:cheeseId', async (req, res) => {
+	try {
+		const cheeseId = await Cheese.findById(req.params.cheeseId).exec()
+
+		if (cheeseId) {
+			res.send(cheeseId)
+		} else {
+			res.status(404).send('this cheese does not exist')
+		}
+	} catch (error) {
+		res.status(500).send('Internal server error')
+	}
 })
 
 // Start the server
