@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 import topMusicData from "./data/top-music.json";
 import expressListEndpoints from "express-list-endpoints";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://localhost/project-mongoEZR";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
@@ -64,6 +65,42 @@ app.get("/songs/:id", async (req, res) => {
   const songInfo = await Song.findOne({ id: songID }).exec();
   if (songInfo !== null) {
     res.json(songInfo);
+  } else {
+    res.status(404).send("Information not found, please try again");
+  }
+});
+
+app.get("/songs/genre/:genre", async (req, res) => {
+  const songGenre = req.params.genre;
+  const songsByGenre = await Song.find({
+    genre: songGenre,
+  }).exec();
+  if (songsByGenre !== null) {
+    res.json(songsByGenre);
+  } else {
+    res.status(404).send("Information not found, please try again");
+  }
+});
+
+app.get("/songs/popularity/:popularityScore", async (req, res) => {
+  const songPopularity = req.params.popularityScore;
+  const songsByPopularity = await Song.find({
+    popularity: { $gte: songPopularity },
+  }).exec();
+  if (songsByPopularity !== null) {
+    res.json(songsByPopularity);
+  } else {
+    res.status(404).send("Information not found, please try again");
+  }
+});
+
+app.get("/songs/artist/:artistName", async (req, res) => {
+  const artistName = req.params.artistName;
+  const songsByArtist = await Song.find({
+    artistName,
+  }).exec();
+  if (songsByArtist !== null) {
+    res.json(songsByArtist);
   } else {
     res.status(404).send("Information not found, please try again");
   }
