@@ -9,12 +9,16 @@ mongoose.connect(mongoUrl)
 mongoose.Promise = Promise
 
 //seed the database
-const seedDatabase = () => {
-	cheeses.forEach((cheese) => {
-		new Cheese(cheese).save()
-	})
+if (process.env.RESET_DATABASE) {
+	const seedDatabase = async () => {
+		console.log('Resetting and seeding')
+		await Cheese.deleteMany()
+		cheeses.forEach((cheese) => {
+			new Cheese(cheese).save()
+		})
+	}
+	//seedDatabase()
 }
-seedDatabase()
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -42,21 +46,37 @@ app.get('/', (req, res) => {
 	res.json(endpoints)
 })
 
-app.get('/cheeses', (req, res) => {
-	res.json(cheeses)
+//route to get all cheeses
+app.get('/cheeses', async (req, res) => {
+	const allTheCheeses = await Cheese.find()
+
+	if (allTheCheeses.length > 0) {
+		res.json(allTheCheeses)
+	} else {
+		res.status(404).send('No cheeses where found')
+	}
 })
 
+//route to get cheese by id
 app.get('/cheeses/:cheeseId', async (req, res) => {
-	try {
-		const cheeseId = await Cheese.findById(req.params.cheeseId).exec()
+	const { cheeseId } = req.params
 
-		if (cheeseId) {
-			res.send(cheeseId)
-		} else {
-			res.status(404).send('this cheese does not exist')
-		}
-	} catch (error) {
-		res.status(500).send('Internal server error')
+	const cheese = await Cheese.findById(cheeseId).exec()
+
+	if (cheese) {
+		res.send(cheese)
+	} else {
+		res.status(404).send('this cheese does not exist')
+	}
+})
+
+app.get('/names/:name', async (req, res) => {
+	const cheeseName = await Cheese.findOne({ name: req.params.name }).exec()
+
+	if (cheeseName) {
+		res.json(cheeseName)
+	} else {
+		res.status(404).send('cannot find cheese by this name')
 	}
 })
 
