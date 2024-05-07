@@ -70,6 +70,7 @@ app.get('/cheeses/:cheeseId', async (req, res) => {
 	}
 })
 
+//route that shows a single cheese by name if you enter it in the URL
 app.get('/names/:name', async (req, res) => {
 	const cheeseName = await Cheese.findOne({ name: req.params.name }).exec()
 
@@ -77,6 +78,16 @@ app.get('/names/:name', async (req, res) => {
 		res.json(cheeseName)
 	} else {
 		res.status(404).send('cannot find cheese by this name')
+	}
+})
+
+app.get('/regions', async (req, res) => {
+	const region = await Cheese.find({ region: req.params.region })
+
+	if (region) {
+		res.json(region)
+	} else {
+		res.status(404).send('no regions found')
 	}
 })
 
