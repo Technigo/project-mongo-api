@@ -1,6 +1,6 @@
 [
 	{
-		"id": "1",
+		"id": 1,
 		"name": "Brie",
 		"animal": "Cow",
 		"region": "Île-de-France",
@@ -10,7 +10,7 @@
 		"wine_pairing_rating": 4.8
 	},
 	{
-		"id": "2",
+		"id": 2,
 		"name": "Camembert",
 		"animal": "Cow",
 		"region": "Normandy",
@@ -20,7 +20,7 @@
 		"wine_pairing_rating": 4.6
 	},
 	{
-		"id": "3",
+		"id": 3,
 		"name": "Roquefort",
 		"animal": "Sheep",
 		"region": "Occitanie",
@@ -30,7 +30,7 @@
 		"wine_pairing_rating": 4.9
 	},
 	{
-		"id": "4",
+		"id": 4,
 		"name": "Comté",
 		"animal": "Cow",
 		"region": "Franche-Comté",
@@ -40,7 +40,7 @@
 		"wine_pairing_rating": 4.7
 	},
 	{
-		"id": "5",
+		"id": 5,
 		"name": "Morbier",
 		"animal": "Cow",
 		"region": "Franche-Comté",
@@ -50,7 +50,7 @@
 		"wine_pairing_rating": 4.2
 	},
 	{
-		"id": "6",
+		"id": 6,
 		"name": "Pont-l'Évêque",
 		"animal": "Cow",
 		"region": "Normandy",
@@ -60,7 +60,7 @@
 		"wine_pairing_rating": 4.6
 	},
 	{
-		"id": "7",
+		"id": 7,
 		"name": "Époisses",
 		"animal": "Cow",
 		"region": "Burgundy",
@@ -70,7 +70,7 @@
 		"wine_pairing_rating": 4.9
 	},
 	{
-		"id": "8",
+		"id": 8,
 		"name": "Crottin de Chavignol",
 		"animal": "Goat",
 		"region": "Centre-Val de Loire",
@@ -80,7 +80,7 @@
 		"wine_pairing_rating": 4.8
 	},
 	{
-		"id": "9",
+		"id": 9,
 		"name": "Saint-Nectaire",
 		"animal": "Cow",
 		"region": "Auvergne-Rhône-Alpes",
@@ -90,7 +90,7 @@
 		"wine_pairing_rating": 4.7
 	},
 	{
-		"id": "10",
+		"id": 10,
 		"name": "Fourme d'Ambert",
 		"animal": "Cow",
 		"region": "Auvergne-Rhône-Alpes",
@@ -100,7 +100,7 @@
 		"wine_pairing_rating": 4.6
 	},
 	{
-		"id": "11",
+		"id": 11,
 		"name": "Comté",
 		"animal": "Cow",
 		"region": "Franche-Comté",
@@ -110,7 +110,7 @@
 		"wine_pairing_rating": 4.7
 	},
 	{
-		"id": "12",
+		"id": 12,
 		"name": "Munster",
 		"animal": "Cow",
 		"region": "Grand Est",
@@ -120,7 +120,7 @@
 		"wine_pairing_rating": 4.8
 	},
 	{
-		"id": "13",
+		"id": 13,
 		"name": "Tomme de Savoie",
 		"animal": "Cow",
 		"region": "Auvergne-Rhône-Alpes",
@@ -130,7 +130,7 @@
 		"wine_pairing_rating": 4.9
 	},
 	{
-		"id": "14",
+		"id": 14,
 		"name": "Bleu d'Auvergne",
 		"animal": "Cow",
 		"region": "Auvergne-Rhône-Alpes",
@@ -140,7 +140,7 @@
 		"wine_pairing_rating": 4.5
 	},
 	{
-		"id": "15",
+		"id": 15,
 		"name": "Reblochon",
 		"animal": "Cow",
 		"region": "Auvergne-Rhône-Alpes",
@@ -150,7 +150,7 @@
 		"wine_pairing_rating": 4.7
 	},
 	{
-		"id": "16",
+		"id": 16,
 		"name": "Raclette",
 		"animal": "Cow",
 		"region": "Auvergne-Rhône-Alpes",
@@ -160,7 +160,7 @@
 		"wine_pairing_rating": 4.8
 	},
 	{
-		"id": "17",
+		"id": 17,
 		"name": "Boursin",
 		"animal": "Cow",
 		"region": "Normandy",
@@ -170,7 +170,7 @@
 		"wine_pairing_rating": 4.6
 	},
 	{
-		"id": "18",
+		"id": 18,
 		"name": "Ossau-Iraty",
 		"animal": "Sheep",
 		"region": "Nouvelle-Aquitaine",
@@ -180,7 +180,7 @@
 		"wine_pairing_rating": 4.7
 	},
 	{
-		"id": "19",
+		"id": 19,
 		"name": "Pélardon",
 		"animal": "Goat",
 		"region": "Occitanie",
@@ -190,7 +190,7 @@
 		"wine_pairing_rating": 4.8
 	},
 	{
-		"id": "20",
+		"id": 20,
 		"name": "Pouligny-Saint-Pierre",
 		"animal": "Goat",
 		"region": "Centre-Val de Loire",
@@ -200,7 +200,7 @@
 		"wine_pairing_rating": 4.6
 	},
 	{
-		"id": "21",
+		"id": 21,
 		"name": "Banon",
 		"animal": "Goat",
 		"region": "Provence-Alpes-Côte d'Azur",
@@ -210,7 +210,7 @@
 		"wine_pairing_rating": 4.7
 	},
 	{
-		"id": "22",
+		"id": 22,
 		"name": "Beaufort",
 		"animal": "Cow",
 		"region": "Auvergne-Rhône-Alpes",
@@ -220,7 +220,7 @@
 		"wine_pairing_rating": 4.7
 	},
 	{
-		"id": "23",
+		"id": 23,
 		"name": "Bleu de Bresse",
 		"animal": "Cow",
 		"region": "Burgundy",
@@ -230,7 +230,7 @@
 		"wine_pairing_rating": 4.8
 	},
 	{
-		"id": "24",
+		"id": 24,
 		"name": "Bleu des Causses",
 		"animal": "Cow",
 		"region": "Occitanie",
@@ -240,7 +240,7 @@
 		"wine_pairing_rating": 4.5
 	},
 	{
-		"id": "25",
+		"id": 25,
 		"name": "Cantal",
 		"animal": "Cow",
 		"region": "Auvergne-Rhône-Alpes",
@@ -250,7 +250,7 @@
 		"wine_pairing_rating": 4.7
 	},
 	{
-		"id": "26",
+		"id": 26,
 		"name": "Livarot",
 		"animal": "Cow",
 		"region": "Normandy",
@@ -260,7 +260,7 @@
 		"wine_pairing_rating": 4.8
 	},
 	{
-		"id": "27",
+		"id": 27,
 		"name": "Bleu du Vercors-Sassenage",
 		"animal": "Cow",
 		"region": "Auvergne-Rhône-Alpes",
@@ -270,7 +270,7 @@
 		"wine_pairing_rating": 4.6
 	},
 	{
-		"id": "28",
+		"id": 28,
 		"name": "Coulommiers",
 		"animal": "Cow",
 		"region": "Île-de-France",
@@ -280,7 +280,7 @@
 		"wine_pairing_rating": 4.7
 	},
 	{
-		"id": "29",
+		"id": 29,
 		"name": "Valençay",
 		"animal": "Goat",
 		"region": "Centre-Val de Loire",
@@ -290,7 +290,7 @@
 		"wine_pairing_rating": 4.8
 	},
 	{
-		"id": "30",
+		"id": 30,
 		"name": "Neufchâtel",
 		"animal": "Cow",
 		"region": "Normandy",
@@ -300,7 +300,7 @@
 		"wine_pairing_rating": 4.6
 	},
 	{
-		"id": "31",
+		"id": 31,
 		"name": "Époisses",
 		"animal": "Cow",
 		"region": "Burgundy",
