@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import booksData from "./data/books.json";
 import listEndpoints from "express-list-endpoints";
 import documentation_API from "./documentation_API.json"
-
 require('dotenv').config();
 const fs = require('fs');
 
@@ -12,7 +11,48 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
-const Book = mongoose.model("Book", {
+
+// Destructure the Schema object from the mongoose module
+const { Schema } = mongoose;
+
+// Define the schema for the Book model
+const BookSchema = new Schema({
+  bookID: Number,
+  title: {
+    type: String,
+    required: true
+  },
+  authors: {
+    type: String,
+    required: true
+  },
+  average_rating: Number,
+  isbn: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  isbn13: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number
+});
+//the model is created from the schema
+const Book = mongoose.model("Book", BookSchema);
+
+
+
+// create index for the title and author field
+Book.createIndexes({ title: "text", authors: "text" });
+/*
+
+// old way to create a model - everything in one place.
+const BookModel = mongoose.model("Book", {
   bookID: Number,
   title: String,
   authors: String,
@@ -25,6 +65,9 @@ const Book = mongoose.model("Book", {
   text_reviews_count: Number
 });
 
+*/
+// keep this code to reset the database if needed set .env file to false until the database need a reset
+//only needed once to reset the database
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
@@ -55,188 +98,214 @@ app.use(express.json());
 
 // get updated documentation
 app.get("/", (req, res) => {
-  res.send(documentation);
+  res.send(documentation_API);
 });
 
 
 //filter with query parameters
 
-app.get("/books", (req, res) => {
-  const { title, authors, average_rating, num_pages, ratings_count, text_reviews_count, language_code } = req.query;  // Destructure the query parameters
-  const query = {};  // Create an empty object to store the query
-  if (title) {
-    query.title = new RegExp(title, "i");
-  }
-  if (authors) {
-    query.authors = new RegExp(authors, "i");
-  }
-  if (average_rating) {
-    query.average_rating = Number(average_rating);
-    query.average_rating = {
-      $gte: average_rating,
-      $lt: average_rating + 1
-    };
-  }
-  if (num_pages) {
-    query.num_pages = Number(num_pages);
-    query.num_pages = {
-      $gte: num_pages,
-      $lt: num_pages + 100
-    };
-
-  }
-  if (ratings_count) {
-    query.ratings_count = Number(ratings_count);
-    query.ratings_count = {
-      $gte: ratings_count,
-      $lt: ratings_count + 100
-    };
-  }
-  if (text_reviews_count) {
-    query.text_reviews_count = Number(text_reviews_count);
-    query.text_reviews_count = {
-      $gte: text_reviews_count,
-      $lt: text_reviews_count + 100
-    };
-  }
-  if (language_code) {
-    query.language_code = language_code;
-  }
-  Book.find(query).then(books => {  // Use the query object in the find query
+app.get("/filterbooks", async (req, res) => {
+  try {
+    const { title, authors, average_rating, num_pages, ratings_count, text_reviews_count, language_code } = req.query;  // Destructure the query parameters
+    const query = {};  // Create an empty object to store the query
+    if (title) {
+      query.title = new RegExp(title, "i");
+    }
+    if (authors) {
+      query.authors = new RegExp(authors, "i");
+    }
+    if (average_rating) {
+      query.average_rating = Number(average_rating);
+      query.average_rating = {
+        $gte: average_rating,
+        $lt: average_rating + 1
+      };
+    }
+    if (num_pages) {
+      query.num_pages = Number(num_pages);
+      query.num_pages = {
+        $gte: num_pages,
+        $lt: num_pages + 100
+      };
+    }
+    if (ratings_count) {
+      query.ratings_count = Number(ratings_count);
+      query.ratings_count = {
+        $gte: ratings_count,
+        $lt: ratings_count + 100
+      };
+    }
+    if (text_reviews_count) {
+      query.text_reviews_count = Number(text_reviews_count);
+      query.text_reviews_count = {
+        $gte: text_reviews_count,
+        $lt: text_reviews_count + 100
+      };
+    }
+    if (language_code) {
+      query.language_code = language_code;
+    }
+    const books = await Book.find(query);  // Use the query object in the find query
     res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
   }
-  );
 });
 
 
 
 
-
-app.get("/books/", (req, res) => {
-  const { title } = req.query;
-  const queryRegex = new RegExp(title, "i");
-  Book.find({ title: queryRegex }).then(books => {
+app.get("/books/", async (req, res) => {
+  try {
+    const { title } = req.query;
+    const queryRegex = new RegExp(title, "i");
+    const books = await Book.find({ title: queryRegex });
     res.json(books);
-  });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-app.get("/books/id/:id", (req, res) => {
-  const id = req.params.id;
-  Book.findOne({ bookID: id }).then(book => {
+
+app.get("/books/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await Book.findById(id).exec();
     if (book) {
       res.json(book);
     } else {
-      res.status(404).json({ error: "Not found" });
+      res.status(404).json({ error: "ID Not found" });
     }
-  });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-app.get("/books/authors/:authors", (req, res) => {
+app.get("/books/authors/:authors", async (req, res) => {
+  try{
   const authors = req.params.authors;
   const queryRegex = new RegExp(authors, "i"); // Create a case-insensitive regex to match authors
-  Book.find({ authors: { $regex: queryRegex } }).then(book => { // Use the regex in the find query
-    if (book) {
+  const book = await Book.find({ authors: { $regex: queryRegex } })
+    if (book.length > 0) {
       res.json(book);
     } else {
-      res.status(404).json({ error: "Not found" });
+      res.status(404).json({ error: "Author not found" });
     }
-  });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-app.get("/books/average_rating/:average_rating", (req, res) => {
+app.get("/books/average_rating/:average_rating", async (req, res) => {
+  try{
   const average_rating = Number(req.params.average_rating);
-  Book.find({
+  const book = await Book.find({
     average_rating: {
       $gte: average_rating,
       $lt: average_rating + 1
-    }
-  }).then(book => {
-    if (book) {
+    }})
+    if (book.length > 0) {
       res.json(book);
     } else {
-      res.status(404).json({ error: "Not found" });
+      res.status(404).json({ error: "No results for this rating" });
     }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
   });
-});
 
 
-app.get("/books/pages_asc/:num_pages", (req, res) => {
+
+app.get("/books/pages_asc/:num_pages", async (req, res) => {
+  try{
   const num_pages = Number(req.params.num_pages);
-  Book.find({
+  const book = await Book.find({
     num_pages: {
       $gte: num_pages,
-      $lt: num_pages + 100
+      $lt: num_pages + 50
     }
-  }).sort({ num_pages: 1 }).then(book => {
-    if (book) {
+  }).sort({ num_pages: 1 })
+    if (book.length > 0) {
       res.json(book);
     } else {
-      res.status(404).json({ error: "Not found" });
+      res.status(404).json({ error: "Book with this amount of pages not found" });
+    }
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
     }
   });
-});
 
-app.get("/books/pages_desc/:num_pages", (req, res) => {
+
+app.get("/books/pages_desc/:num_pages", async (req, res) => {
+  try{
   const num_pages = Number(req.params.num_pages);
-  Book.find({
+  const book = await Book.find({
     num_pages: {
       $gte: num_pages,
-      $lt: num_pages + 100
+      $lt: num_pages + 50
     }
-  }).sort({ num_pages: -1 }).then(book => {
-    if (book) {
+  }).sort({ num_pages: -1 })
+    if (book.length > 0) {
       res.json(book);
     } else {
-      res.status(404).json({ error: "Not found" });
+      res.status(404).json({ error: "Book with this amount of pages not found" });
+    }} catch (error) {
+      res.status(500).json({ error: "Internal server error" });
     }
   });
-});
 
 
-app.get("/books/ratings_count/:ratings_count", (req, res) => {
-  const ratings_count = Number(req.params.ratings_count);
-  Book.find({
+
+app.get("/books/ratings_count/:ratings_count", async (req, res) => {
+  try {
+    const ratings_count = Number(req.params.ratings_count);
+  const book = await Book.find({
     ratings_count: {
       $gte: ratings_count,
-      $lt: ratings_count + 100
-    }
-  }).then(book => {
-    if (book) {
+      $lt: ratings_count + 50
+    }})
+    if (book.length > 0) {
       res.json(book);
     } else {
-      res.status(404).json({ error: "Not found" });
+      res.status(404).json({ error: "Rating count not found" });
+    }} catch (error) {
+      res.status(500).json({ error: "Internal server error" });
     }
   });
-});
 
-app.get("/books/text_reviews_count/:text_reviews_count", (req, res) => {
+
+app.get("/books/text_reviews_count/:text_reviews_count", async (req, res) => {
+  try {
   const text_reviews_count = Number(req.params.text_reviews_count);
-  Book.find({
+  const book = await Book.find({
     text_reviews_count: {
       $gte: text_reviews_count,
-      $lt: text_reviews_count + 100
+      $lt: text_reviews_count + 50
     }
-  }).then(book => {
-    if (book) {
+  })
+    if (book.length > 0) {
       res.json(book);
     } else {
-      res.status(404).json({ error: "Not found" });
+      res.status(404).json({ error: "Text reviews not found" });
+    }}
+    catch (error) {
+      res.status(500).json({ error: "Internal server error" });
     }
   });
-}
-);
 
-app.get("/books/language_code/:language_code", (req, res) => {
+
+app.get("/books/language_code/:language_code", async (req, res) => {
   const language_code = req.params.language_code;
-  Book.find({ language_code: language_code }).then(book => {
-    if (book) {
+  try{
+const book = await Book.find({ language_code: language_code })
+    if (book.length > 0) {
       res.json(book);
     } else {
-      res.status(404).json({ error: "Not found" });
+      res.status(404).json({ error: "Language code not found" });
+    }} catch (error) {
+      res.status(500).json({ error: "Internal server error" });
     }
   });
-}
-);
 
 //get the list of endpoints
 const endpoints = listEndpoints(app);

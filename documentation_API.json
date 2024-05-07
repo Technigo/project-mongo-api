@@ -9,7 +9,7 @@
     ]
   },
   {
-    "path": "/books",
+    "path": "/filterbooks",
     "methods": [
       "GET"
     ],
@@ -27,7 +27,7 @@
     ]
   },
   {
-    "path": "/books/id/:id",
+    "path": "/books/:id",
     "methods": [
       "GET"
     ],
