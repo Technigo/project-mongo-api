@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import expressListEndpoints from 'express-list-endpoints'
-import dogsData from './data/dogs.json'
 
 dotenv.config()
 
@@ -20,17 +19,7 @@ const Dog = mongoose.model('Dog', {
   weight_kg: Number,
   likes_toys: Boolean,
 })
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Dog.deleteMany({})
 
-    dogsData.forEach((dog) => {
-      new Dog(dog).save()
-    })
-  }
-
-  seedDatabase()
-}
 const port = process.env.PORT || 8080
 const app = express()
 
