@@ -57,18 +57,28 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// API Documentation with express list endpoints
 app.get("/", (req, res) => {
+  const endpoints = expressListEndpoints(app);
   res.json(endpoints);
 });
 
+// All other endpoints
 app.get("/books", async (req, res) => {
   const allBooks = await Book.find();
   res.json(allBooks);
 });
 
-// Getting all the endpoints
-const endpoints = expressListEndpoints(app);
+app.get("/books/:bookId", async (req, res) => {
+  const { bookId } = req.params;
+  const book = await Book.findOne({ bookID: bookId }).exec();
+
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).send("Sorry, there is no book with that ID.");
+  }
+});
 
 // Start the server
 app.listen(port, () => {
