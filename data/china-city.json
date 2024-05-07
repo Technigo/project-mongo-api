@@ -1,0 +1,709 @@
+[
+  {
+    "city": "Shanghai",
+    "province": "Shanghai",
+    "population": 24240000,
+    "area_size": 6340,
+    "dialects": ["Shanghainese", "Mandarin"]
+  },
+  {
+    "city": "Beijing",
+    "province": "Beijing",
+    "population": 21540000,
+    "area_size": 16411,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "population": 14044000,
+    "area_size": 7434,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Shenzhen",
+    "province": "Guangdong",
+    "population": 13026000,
+    "area_size": 1996,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "population": 8665000,
+    "area_size": 82403,
+    "dialects": ["Mandarin", "Sichuanese"]
+  },
+  {
+    "city": "Tianjin",
+    "province": "Tianjin",
+    "population": 7829000,
+    "area_size": 11916,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Wuhan",
+    "province": "Hubei",
+    "population": 7256000,
+    "area_size": 8494,
+    "dialects": ["Mandarin", "Wuhan dialect"]
+  },
+  {
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "population": 7156000,
+    "area_size": 12388,
+    "dialects": ["Mandarin", "Sichuanese"]
+  },
+  {
+    "city": "Nanjing",
+    "province": "Jiangsu",
+    "population": 7250000,
+    "area_size": 6582,
+    "dialects": ["Mandarin", "Jianghuai Mandarin"]
+  },
+  {
+    "city": "Hong Kong",
+    "province": "Hong Kong",
+    "population": 7210000,
+    "area_size": 1104,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Hangzhou",
+    "province": "Zhejiang",
+    "population": 7165000,
+    "area_size": 1679,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Xi'an",
+    "province": "Shaanxi",
+    "population": 6817000,
+    "area_size": 10060,
+    "dialects": ["Mandarin", "Xi'an dialect"]
+  },
+  {
+    "city": "Suzhou",
+    "province": "Jiangsu",
+    "population": 6300000,
+    "area_size": 8488,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Harbin",
+    "province": "Heilongjiang",
+    "population": 5714000,
+    "area_size": 5362,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Qingdao",
+    "province": "Shandong",
+    "population": 5482000,
+    "area_size": 10654,
+    "dialects": ["Mandarin", "Jiaoliao Mandarin"]
+  },
+  {
+    "city": "Dalian",
+    "province": "Liaoning",
+    "population": 5297000,
+    "area_size": 1236,
+    "dialects": ["Mandarin", "Dalian dialect"]
+  },
+  {
+    "city": "Shantou",
+    "province": "Guangdong",
+    "population": 5182000,
+    "area_size": 2029,
+    "dialects": ["Teochew", "Mandarin"]
+  },
+  {
+    "city": "Jinan",
+    "province": "Shandong",
+    "population": 5064000,
+    "area_size": 8268,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Zhengzhou",
+    "province": "Henan",
+    "population": 4850000,
+    "area_size": 7445,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Kunming",
+    "province": "Yunnan",
+    "population": 4780000,
+    "area_size": 21204,
+    "dialects": ["Mandarin", "Southwestern Mandarin"]
+  },
+  {
+    "city": "Changsha",
+    "province": "Hunan",
+    "population": 4660000,
+    "area_size": 11819,
+    "dialects": ["Mandarin", "Hunanese"]
+  },
+  {
+    "city": "Ningbo",
+    "province": "Zhejiang",
+    "population": 4580000,
+    "area_size": 9816,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Foshan",
+    "province": "Guangdong",
+    "population": 4470000,
+    "area_size": 3848,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Wuxi",
+    "province": "Jiangsu",
+    "population": 4375000,
+    "area_size": 4787,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Nanning",
+    "province": "Guangxi",
+    "population": 4223000,
+    "area_size": 2292,
+    "dialects": ["Mandarin", "Cantonese"]
+  },
+  {
+    "city": "Changchun",
+    "province": "Jilin",
+    "population": 4206000,
+    "area_size": 20542,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Xiamen",
+    "province": "Fujian",
+    "population": 4110000,
+    "area_size": 1699,
+    "dialects": ["Mandarin", "Min Nan Chinese"]
+  },
+  {
+    "city": "Hefei",
+    "province": "Anhui",
+    "population": 4078000,
+    "area_size": 4558,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Shijiazhuang",
+    "province": "Hebei",
+    "population": 4035000,
+    "area_size": 14898,
+    "dialects": ["Mandarin", "Jin Chinese"]
+  },
+  {
+    "city": "Urumqi",
+    "province": "Xinjiang",
+    "population": 3811000,
+    "area_size": 10564,
+    "dialects": ["Mandarin", "Uyghur"]
+  },
+  {
+    "city": "Guiyang",
+    "province": "Guizhou",
+    "population": 3742000,
+    "area_size": 8030,
+    "dialects": ["Mandarin", "Southwestern Mandarin"]
+  },
+  {
+    "city": "Nanchang",
+    "province": "Jiangxi",
+    "population": 3723000,
+    "area_size": 5826,
+    "dialects": ["Mandarin", "Gan Chinese"]
+  },
+  {
+    "city": "Taiyuan",
+    "province": "Shanxi",
+    "population": 3611000,
+    "area_size": 6989,
+    "dialects": ["Mandarin", "Jin Chinese"]
+  },
+  {
+    "city": "Dongguan",
+    "province": "Guangdong",
+    "population": 3577000,
+    "area_size": 2465,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Xuzhou",
+    "province": "Jiangsu",
+    "population": 3562000,
+    "area_size": 11222,
+    "dialects": ["Mandarin", "Xuzhou dialect"]
+  },
+  {
+    "city": "Hohhot",
+    "province": "Inner Mongolia",
+    "population": 3373000,
+    "area_size": 17431,
+    "dialects": ["Mandarin", "Mongolian"]
+  },
+  {
+    "city": "Changzhou",
+    "province": "Jiangsu",
+    "population": 3388000,
+    "area_size": 4384,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Fuzhou",
+    "province": "Fujian",
+    "population": 3330000,
+    "area_size": 12136,
+    "dialects": ["Mandarin", "Min Dong Chinese"]
+  },
+  {
+    "city": "Luoyang",
+    "province": "Henan",
+    "population": 3278000,
+    "area_size": 15996,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Kunshan",
+    "province": "Jiangsu",
+    "population": 3137000,
+    "area_size": 927.38,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Lanzhou",
+    "province": "Gansu",
+    "population": 3101000,
+    "area_size": 4934,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Weifang",
+    "province": "Shandong",
+    "population": 3090000,
+    "area_size": 15968,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Huai'an",
+    "province": "Jiangsu",
+    "population": 2980000,
+    "area_size": 5895,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Nantong",
+    "province": "Jiangsu",
+    "population": 2972000,
+    "area_size": 10211,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Baotou",
+    "province": "Inner Mongolia",
+    "population": 2955000,
+    "area_size": 27146,
+    "dialects": ["Mandarin", "Mongolian"]
+  },
+  {
+    "city": "Yangzhou",
+    "province": "Jiangsu",
+    "population": 2940000,
+    "area_size": 6636,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Ma'anshan",
+    "province": "Anhui",
+    "population": 2929000,
+    "area_size": 4275,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Shaoxing",
+    "province": "Zhejiang",
+    "population": 2818000,
+    "area_size": 8275,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Yantai",
+    "province": "Shandong",
+    "population": 2795000,
+    "area_size": 13715,
+    "dialects": ["Mandarin", "Jiaoliao Mandarin"]
+  },
+  {
+    "city": "Jiaxing",
+    "province": "Zhejiang",
+    "population": 2744000,
+    "area_size": 3992,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Zhongshan",
+    "province": "Guangdong",
+    "population": 2700000,
+    "area_size": 1783,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Zibo",
+    "province": "Shandong",
+    "population": 2691000,
+    "area_size": 5333,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Huizhou",
+    "province": "Guangdong",
+    "population": 2679000,
+    "area_size": 5043,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Jinhua",
+    "province": "Zhejiang",
+    "population": 2626000,
+    "area_size": 10542,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Huzhou",
+    "province": "Zhejiang",
+    "population": 2618000,
+    "area_size": 5923,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Jiangmen",
+    "province": "Guangdong",
+    "population": 2610000,
+    "area_size": 920,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Anshan",
+    "province": "Liaoning",
+    "population": 2587000,
+    "area_size": 9252,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Wenzhou",
+    "province": "Zhejiang",
+    "population": 2570000,
+    "area_size": 11977,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Xiangtan",
+    "province": "Hunan",
+    "population": 2556000,
+    "area_size": 5284,
+    "dialects": ["Mandarin", "Xiang Chinese"]
+  },
+  {
+    "city": "Nanchong",
+    "province": "Sichuan",
+    "population": 2543000,
+    "area_size": 12658,
+    "dialects": ["Mandarin", "Sichuanese"]
+  },
+  {
+    "city": "Fuyang",
+    "province": "Anhui",
+    "population": 2537000,
+    "area_size": 10421,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Xuzhou",
+    "province": "Jiangsu",
+    "population": 2495000,
+    "area_size": 11222,
+    "dialects": ["Mandarin", "Xuzhou dialect"]
+  },
+  {
+    "city": "Datong",
+    "province": "Shanxi",
+    "population": 2475000,
+    "area_size": 14198,
+    "dialects": ["Mandarin", "Jin Chinese"]
+  },
+  {
+    "city": "Zhaoqing",
+    "province": "Guangdong",
+    "population": 2460000,
+    "area_size": 1588,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Linyi",
+    "province": "Shandong",
+    "population": 2416000,
+    "area_size": 17707,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Jilin",
+    "province": "Jilin",
+    "population": 2413000,
+    "area_size": 27125,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Yangjiang",
+    "province": "Guangdong",
+    "population": 2380000,
+    "area_size": 7834,
+    "dialects": ["Cantonese", "Mandarin"]
+  },
+  {
+    "city": "Huaibei",
+    "province": "Anhui",
+    "population": 2379000,
+    "area_size": 2556,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Zhanjiang",
+    "province": "Guangdong",
+    "population": 2368000,
+    "area_size": 12207,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Huainan",
+    "province": "Anhui",
+    "population": 2364000,
+    "area_size": 2598,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Changzhou",
+    "province": "Jiangsu",
+    "population": 2363000,
+    "area_size": 4384,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Lishui",
+    "province": "Zhejiang",
+    "population": 2357000,
+    "area_size": 17637,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Suqian",
+    "province": "Jiangsu",
+    "population": 2324000,
+    "area_size": 8556,
+    "dialects": ["Mandarin", "Huaiyang Chinese"]
+  },
+  {
+    "city": "Chuzhou",
+    "province": "Anhui",
+    "population": 2309000,
+    "area_size": 13756,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Shenyang",
+    "province": "Liaoning",
+    "population": 2306000,
+    "area_size": 12982,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Loudi",
+    "province": "Hunan",
+    "population": 2302000,
+    "area_size": 8474,
+    "dialects": ["Mandarin", "Xiang Chinese"]
+  },
+  {
+    "city": "Ji'nan",
+    "province": "Shandong",
+    "population": 2293000,
+    "area_size": 8268,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Shangqiu",
+    "province": "Henan",
+    "population": 2276000,
+    "area_size": 10042,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Suining",
+    "province": "Sichuan",
+    "population": 2269000,
+    "area_size": 5372,
+    "dialects": ["Mandarin", "Sichuanese"]
+  },
+  {
+    "city": "Yiyang",
+    "province": "Hunan",
+    "population": 2263000,
+    "area_size": 12509,
+    "dialects": ["Mandarin", "Hunanese"]
+  },
+  {
+    "city": "Zunyi",
+    "province": "Guizhou",
+    "population": 2246000,
+    "area_size": 3047,
+    "dialects": ["Mandarin", "Southwestern Mandarin"]
+  },
+  {
+    "city": "Xinyang",
+    "province": "Henan",
+    "population": 2230000,
+    "area_size": 19394,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Xingtai",
+    "province": "Hebei",
+    "population": 2225000,
+    "area_size": 12533,
+    "dialects": ["Mandarin", "Jin Chinese"]
+  },
+  {
+    "city": "Zhangzhou",
+    "province": "Fujian",
+    "population": 2224000,
+    "area_size": 1234,
+    "dialects": ["Mandarin", "Min Nan Chinese"]
+  },
+  {
+    "city": "Jiangyin",
+    "province": "Jiangsu",
+    "population": 2196000,
+    "area_size": 987,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Zhangjiagang",
+    "province": "Jiangsu",
+    "population": 2171000,
+    "area_size": 1186,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Xiangyang",
+    "province": "Hubei",
+    "population": 2159000,
+    "area_size": 9830,
+    "dialects": ["Mandarin", "Southwestern Mandarin"]
+  },
+  {
+    "city": "Shangrao",
+    "province": "Jiangxi",
+    "population": 2153000,
+    "area_size": 10554,
+    "dialects": ["Mandarin", "Gan Chinese"]
+  },
+  {
+    "city": "Yulin",
+    "province": "Guangxi",
+    "population": 2148000,
+    "area_size": 12457,
+    "dialects": ["Mandarin", "Cantonese"]
+  },
+  {
+    "city": "Jieyang",
+    "province": "Guangdong",
+    "population": 2145000,
+    "area_size": 5244,
+    "dialects": ["Teochew", "Mandarin"]
+  },
+  {
+    "city": "Yichang",
+    "province": "Hubei",
+    "population": 2129000,
+    "area_size": 21202,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Zhuzhou",
+    "province": "Hunan",
+    "population": 2104000,
+    "area_size": 11396,
+    "dialects": ["Mandarin", "Xiang Chinese"]
+  },
+  {
+    "city": "Lianyungang",
+    "province": "Jiangsu",
+    "population": 2099000,
+    "area_size": 7618,
+    "dialects": ["Mandarin", "Huaiyang Chinese"]
+  },
+  {
+    "city": "Xuchang",
+    "province": "Henan",
+    "population": 2094000,
+    "area_size": 4966,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Shuangyashan",
+    "province": "Heilongjiang",
+    "population": 2090000,
+    "area_size": 22618,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Zhenjiang",
+    "province": "Jiangsu",
+    "population": 2089000,
+    "area_size": 3836,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  },
+  {
+    "city": "Jinzhou",
+    "province": "Liaoning",
+    "population": 2076000,
+    "area_size": 10213,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Hegang",
+    "province": "Heilongjiang",
+    "population": 2073000,
+    "area_size": 14617,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Yantai",
+    "province": "Shandong",
+    "population": 2059000,
+    "area_size": 13715,
+    "dialects": ["Mandarin", "Jiaoliao Mandarin"]
+  },
+  {
+    "city": "Zhoushan",
+    "province": "Zhejiang",
+    "population": 2046000,
+    "area_size": 1391,
+    "dialects": ["Mandarin"]
+  },
+  {
+    "city": "Yangzhou",
+    "province": "Jiangsu",
+    "population": 2033000,
+    "area_size": 6636,
+    "dialects": ["Mandarin", "Wu Chinese"]
+  }
+]
