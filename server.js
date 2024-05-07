@@ -29,7 +29,7 @@ const seedDatabase = async () => {
   avocadoSalesData.forEach(async (entry) => {
     await new Avocado(entry).save();
   });
-  console.log("database")
+  console.log("database");
 };
 
 const port = process.env.PORT || 8080;
@@ -39,12 +39,27 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// API route
 app.get("/", (req, res) => {
   res.send("Welcome to the Avocado Sales API!");
 });
 
+app.get("/", async (req, res) => {
+  const avocados = await Avocado.find();
+  res.json(avocados);
+});
+
+app.get("/avocados/:id", async (req, res) => {
+  const avocado = await Avocado.findOne({ id: parceInt(req.params.id) });
+  if (avocado) {
+    res.json(avocado);
+  } else {
+    res.status(404).json({ message: "Not found" });
+  }
+});
+
 // Start the server
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Server running on http://localhost:${port}`);
+  await seedDatabase;
 });
