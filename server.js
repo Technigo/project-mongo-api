@@ -3,6 +3,9 @@ import express from "express";
 import expressListEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
 
+// Getting env file
+require("dotenv").config();
+
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost/project-mongo-bookdata";
 mongoose.connect(mongoUrl);
@@ -30,16 +33,19 @@ const Book = mongoose.model("Book", BookSchema);
 import booksData from "./data/books.json";
 
 // Seed the database with the books
-const seedDatabase = async () => {
-  console.log("Reseading database");
-  await Book.deleteMany({});
+// I have set RESET_DB to false since the database is already seeded now
 
-  booksData.forEach((bookData) => {
-    new Book(bookData).save();
-  });
-};
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    console.log("Reseading database");
+    await Book.deleteMany({});
 
-seedDatabase();
+    booksData.forEach((bookData) => {
+      new Book(bookData).save();
+    });
+  };
+  seedDatabase();
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -56,8 +62,9 @@ app.get("/", (req, res) => {
   res.json(endpoints);
 });
 
-app.get("/books", (req, res) => {
-  res.json(booksData);
+app.get("/books", async (req, res) => {
+  const allBooks = await Book.find();
+  res.json(allBooks);
 });
 
 // Getting all the endpoints
