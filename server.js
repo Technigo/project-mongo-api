@@ -63,10 +63,36 @@ app.get("/", (req, res) => {
 });
 
 // Start defining your routes here
-// Retrieve all Netflix titles
+// Retrieve all Netflix titles & accept query parameters for filtering
 app.get("/netflixTitles", async (req, res) => {
   try {
-    const allNetflixTitles = await NetflixTitle.find();
+    // Extract query parameters for filtering
+    const {
+      title,
+      director,
+      cast,
+      country,
+      release_year,
+      rating,
+      duration,
+      listed_in,
+      type,
+    } = req.query;
+
+    // Construct filter object based on provided query params
+    const filter = {};
+    //Case-insensitive param search
+    if (title) filter.title = { $regex: title, $options: "i" };
+    if (director) filter.director = { $regex: director, $options: "i" };
+    if (cast) filter.cast = { $regex: cast, $options: "i" };
+    if (country) filter.country = { $regex: country, $options: "i" };
+    if (release_year) filter.release_year = release_year;
+    if (rating) filter.rating = { $regex: rating, $options: "i" };
+    if (duration) filter.duration = { $regex: duration, $options: "i" };
+    if (listed_in) filter.listed_in = { $regex: listed_in, $options: "i" };
+    if (type) filter.type = { $regex: type, $options: "i" };
+
+    const allNetflixTitles = await NetflixTitle.find(filter);
 
     if (allNetflixTitles.length > 0) {
       res.json(allNetflixTitles);
