@@ -77,7 +77,13 @@ app.get("/netflixTitles", async (req, res) => {
       duration,
       listed_in,
       type,
+      page,
+      pageSize,
     } = req.query;
+
+    const pageNumber = parseInt(page) || 1;
+    const limit = parseInt(pageSize) || 10;
+    const skip = (pageNumber - 1) * limit;
 
     // Construct filter object based on provided query params
     const filter = {};
@@ -92,10 +98,17 @@ app.get("/netflixTitles", async (req, res) => {
     if (listed_in) filter.listed_in = { $regex: listed_in, $options: "i" };
     if (type) filter.type = { $regex: type, $options: "i" };
 
-    const allNetflixTitles = await NetflixTitle.find(filter);
+    const allNetflixTitles = await NetflixTitle.find(filter)
+      .skip(skip)
+      .limit(limit);
 
     if (allNetflixTitles.length > 0) {
-      res.json(allNetflixTitles);
+      res.json({
+        total: allNetflixTitles.length,
+        page: pageNumber,
+        pagesize: limit,
+        data: allNetflixTitles,
+      });
     } else {
       res.status(404).json({ error: "No Netflix titles found" });
     }
