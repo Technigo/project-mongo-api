@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import netflixData from "./data/netflix-titles.json";
+import expressListEndpoints from "express-list-endpoints";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflix-titles";
 mongoose.connect(mongoUrl);
@@ -44,7 +45,8 @@ app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("Titles from Netflix");
+  const endpoints = expressListEndpoints(app);
+  res.send(endpoints);
 });
 
 //Get all titles
