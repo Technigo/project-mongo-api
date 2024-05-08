@@ -12,7 +12,7 @@ As before, it's up to you to decide what sort of data you'd like to store in you
 - 50 popular Spotify tracks and some data about the music type
 
 If you'd like to build your own data set - feel free! You could write it yourself, or use AI to help you greate some mock data to use. [ChatGPT](https://chat.openai.com/) can help with this, just be specific and give it an example.
-
+⭐⭐⭐⭐⭐
 In order to get all this data into your database, you'll need to write some code to generate the data - see the '**Making seed data**' section further down for tips on how to do this.
 
 Once you have the data stored, you will need to write appropriate RESTful endpoints to return the data and make use of [Mongoose Queries](https://mongoosejs.com/docs/queries.html) to find and return the correct data given the route and any filter params passed.

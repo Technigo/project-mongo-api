@@ -2,7 +2,7 @@
   {
     "bookID": 1,
     "title": "Harry Potter and the Half-Blood Prince (Harry Potter  #6)",
-    "authors": "J.K. Rowling-Mary GrandPré",
+    "authors": "J.K. Rowling",
     "average_rating": 4.56,
     "isbn": 439785960,
     "isbn13": 9780439785969,
@@ -14,7 +14,7 @@
   {
     "bookID": 2,
     "title": "Harry Potter and the Order of the Phoenix (Harry Potter  #5)",
-    "authors": "J.K. Rowling-Mary GrandPré",
+    "authors": "J.K. Rowling",
     "average_rating": 4.49,
     "isbn": 439358078,
     "isbn13": 9780439358071,
@@ -26,7 +26,7 @@
   {
     "bookID": 3,
     "title": "Harry Potter and the Sorcerer's Stone (Harry Potter  #1)",
-    "authors": "J.K. Rowling-Mary GrandPré",
+    "authors": "J.K. Rowling",
     "average_rating": 4.47,
     "isbn": 439554934,
     "isbn13": 9780439554930,
@@ -50,7 +50,7 @@
   {
     "bookID": 8,
     "title": "Harry Potter Boxed Set  Books 1-5 (Harry Potter  #1-5)",
-    "authors": "J.K. Rowling-Mary GrandPré",
+    "authors": "J.K. Rowling",
     "average_rating": 4.78,
     "isbn": 439682584,
     "isbn13": 9780439682589,
