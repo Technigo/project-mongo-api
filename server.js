@@ -35,7 +35,7 @@ import booksData from "./data/books.json";
 
 // Seed the database with the books
 // I have set RESET_DB to false since the database is already seeded now
-if (process.env.RESET_DB === true) {
+if (process.env.RESET_DB === "true") {
   const seedDatabase = async () => {
     console.log("Reseading database");
     await Book.deleteMany({});
