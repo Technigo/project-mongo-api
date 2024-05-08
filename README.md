@@ -1,13 +1,21 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project builds a RESTful API for a Netflix title database using Mongoose for data modeling and persistence. It allows users to retrieve all Netflix titles or a specific title by ID, with optional filtering capabilities based on various title attributes.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Approach:
+1. Data Modeling: Defined a Mongoose schema (netflixTitleSchema) to represent Netflix title data with properties like title, director, cast, country, etc.
+2. Database Persistence: Established a MongoDB connection and used Mongoose to create a model (NetflixTitle) for interacting with the database.
+3. Seed Data: Implemented a function (seedDatabase) to populate the database with Netflix title data from a JSON file (netflixTitlesData.json). This function deletes existing data before seeding and handles missing fields by setting them to "Unknown".
+4. API Endpoints: Developed three API endpoints:
+/: Returns API documentation using expressListEndpoints.
+/netflixTitles: Retrieves all Netflix titles with optional filtering based on query parameters (title, director, cast, etc.) using Mongoose queries.
+/netflixTitles/:netflixId: Retrieves a single Netflix title by its ID using Mongoose's findById method.
+5. Error Handling: Implemented error handling middleware to check database connection status and provide appropriate error messages in case of issues.
+
+The most difficult part was getting the localhost and the atlas db working. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://netflix-titles-api.onrender.com/
