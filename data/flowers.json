@@ -1,0 +1,162 @@
+[
+    {
+        "id": 1,
+        "name": "Rose",
+        "price": 2.5,
+        "color": "Red",
+        "instock": true,
+        "quantity": 50
+    },
+    {
+        "id": 2,
+        "name": "Tulip",
+        "price": 1.75,
+        "color": "Yellow",
+        "instock": false,
+        "quantity": 30
+    },
+    {
+        "id": 3,
+        "name": "Lily",
+        "price": 3.0,
+        "color": "White",
+        "instock": true,
+        "quantity": 20
+    },
+    {
+        "id": 4,
+        "name": "Daisy",
+        "price": 2.0,
+        "color": "Pink",
+        "instock": true,
+        "quantity": 40
+    },
+    {
+        "id": 5,
+        "name": "Sunflower",
+        "price": 2.25,
+        "color": "Yellow",
+        "instock": true,
+        "quantity": 35
+    },
+    {
+        "id": 6,
+        "name": "Orchid",
+        "price": 4.5,
+        "color": "Purple",
+        "instock": false,
+        "quantity": 10
+    },
+    {
+        "id": 7,
+        "name": "Carnation",
+        "price": 1.9,
+        "color": "Pink",
+        "instock": true,
+        "quantity": 25
+    },
+    {
+        "id": 8,
+        "name": "Hydrangea",
+        "price": 3.75,
+        "color": "Blue",
+        "instock": true,
+        "quantity": 15
+    },
+    {
+        "id": 9,
+        "name": "Peony",
+        "price": 5.0,
+        "color": "Pink",
+        "instock": false,
+        "quantity": 5
+    },
+    {
+        "id": 10,
+        "name": "Daffodil",
+        "price": 1.5,
+        "color": "Yellow",
+        "instock": true,
+        "quantity": 60
+    },
+    {
+        "id": 11,
+        "name": "Anemone",
+        "price": 2.75,
+        "color": "Purple",
+        "instock": true,
+        "quantity": 30
+    },
+    {
+        "id": 12,
+        "name": "Chrysanthemum",
+        "price": 2.25,
+        "color": "Orange",
+        "instock": true,
+        "quantity": 45
+    },
+    {
+        "id": 13,
+        "name": "Gerbera",
+        "price": 3.25,
+        "color": "Orange",
+        "instock": false,
+        "quantity": 0
+    },
+    {
+        "id": 14,
+        "name": "Crocus",
+        "price": 2.0,
+        "color": "Purple",
+        "instock": true,
+        "quantity": 20
+    },
+    {
+        "id": 15,
+        "name": "Freesia",
+        "price": 3.5,
+        "color": "White",
+        "instock": true,
+        "quantity": 25
+    },
+    {
+        "id": 16,
+        "name": "Gladiolus",
+        "price": 3.75,
+        "color": "Red",
+        "instock": false,
+        "quantity": 0
+    },
+    {
+        "id": 17,
+        "name": "Iris",
+        "price": 2.75,
+        "color": "Blue",
+        "instock": true,
+        "quantity": 20
+    },
+    {
+        "id": 18,
+        "name": "Magnolia",
+        "price": 4.0,
+        "color": "White",
+        "instock": true,
+        "quantity": 10
+    },
+    {
+        "id": 19,
+        "name": "Poppy",
+        "price": 1.25,
+        "color": "Red",
+        "instock": true,
+        "quantity": 50
+    },
+    {
+        "id": 20,
+        "name": "Zinnia",
+        "price": 1.9,
+        "color": "Orange",
+        "instock": false,
+        "quantity": 0
+    }
+]

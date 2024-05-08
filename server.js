@@ -1,32 +1,53 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import flowers from "./data/flowers.json";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/flowers";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
+const { Schema } = mongoose;
+// Schema - the blueprint
+const flowerSchema = new Schema({
+  name: String,
+  price: Number,
+  color: String,
+  inStock: Boolean,
+  quantity: Number,
+});
+
+// The model
+const Flower = mongoose.model("Flower", flowerSchema);
+
+// Seed the database
+const seedDatabase = async () => {
+  if (process.env.RESET_DATABASE) {
+    console.log("Resetting and seeding");
+    await Flower.deleteMany();
+
+    flowers.forEach((flower) => {
+      new Flower(flower).save();
+    });
+  }
+};
+
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
+// Middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// Route defining
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
+});
+
+// Get all the flowers
+app.get("/flowers", async (req, res) => {
+  res.json(flowers);
 });
 
 // Start the server
