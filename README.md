@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project implements a RESTful API using Express and MongoDB to manage and serve Netflix titles data. It includes endpoints to fetch collections of titles, individual titles, and filter titles by type (movie or TV show).
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The task involved creating a RESTful API that interacts with a MongoDB database to store and serve Netflix titles data. The approach taken was to use Express.js for handling HTTP requests, Mongoose for modeling data and interacting with the MongoDB database, and Cors for enabling cross-origin resource sharing. The project utilized a seed data function to populate the database with Netflix titles data from a JSON file. The implemented endpoints enable fetching all titles, titles of a specific type (movie or TV show), and a single title by its ID.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-f26silw6ya-lz.a.run.app/
