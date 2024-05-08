@@ -1,8 +1,11 @@
 import express from "express";
+import expressListEndpoints from "express-list-endpoints";
+
 import cors from "cors";
 import mongoose from "mongoose";
-import Song from "./models/Song";
+import { Title } from "./models/Title";
 import netflixData from "./data/netflix-titles.json";
+require("dotenv").config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
@@ -18,9 +21,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Seed the database
+  const seedDatabase = async () => {
+    console.log('Resetting and seeding')
+    await Title.deleteMany();
+
+    netflixData.forEach((item) => {
+      new Title(item).save();
+    })
+  
+    console.log("Seeding completed");
+  }
+
+  seedDatabase();
+
+
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send(expressListEndpoints(app));
+  const endpoints = expressListEndpoints(app);
+  res.json(endpoints);
 });
 
 // Start the server

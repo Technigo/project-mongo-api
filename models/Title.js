@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const { Schema, model } = mongoose;
+const { Schema } = mongoose;
 
 export const titleSchema = new Schema({
   show_id: Number,
