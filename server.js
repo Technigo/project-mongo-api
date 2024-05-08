@@ -1,6 +1,5 @@
 import express from "express";
 import expressListEndpoints from "express-list-endpoints";
-
 import cors from "cors";
 import mongoose from "mongoose";
 import { Title } from "./models/Title";
@@ -10,6 +9,21 @@ require("dotenv").config();
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
+
+// Seed the database
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    console.log('Resetting and seeding')
+    await Title.deleteMany()
+
+     netflixData.forEach((item) => {
+     new Title(item).save();
+    })
+    console.log("Seeding completed");
+  }
+  seedDatabase();
+}
+  
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -21,20 +35,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Seed the database
-  const seedDatabase = async () => {
-    console.log('Resetting and seeding')
-    await Title.deleteMany();
-
-    netflixData.forEach((item) => {
-      new Title(item).save();
-    })
-  
-    console.log("Seeding completed");
-  }
-
-  seedDatabase();
-
 
 // Start defining your routes here
 app.get("/", (req, res) => {
@@ -43,13 +43,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/titles", async (req, res) => {
+  const { byTitle, type } = req.query
   const allTitles = await Title.find()
 
   if (allTitles.length > 0) {
     res.json(allTitles)
   } else {
     res.status(404).send("no titles were found")
-  }})
+  }
+
+  if (byTitle) {
+    allTitles.find({ title: byTitle })
+  }
+})
 
 app.get("/titles/:titleId", async (req, res) => {
   const { titleId } = req.params
