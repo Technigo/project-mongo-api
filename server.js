@@ -3,10 +3,11 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import cheeses from './data/cheeses.json'
 import expressListEndpoints from 'express-list-endpoints'
+import dotenv from 'dotenv'
 
-const mongoUrl =
-	process.env.MONGO_URL ||
-	'mongodb+srv://sofiestrahl:hugopugo@cluster0.4nv9ke8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+dotenv.config()
+
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/CheesusChrist'
 mongoose.connect(mongoUrl)
 mongoose.Promise = Promise
 
