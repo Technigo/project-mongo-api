@@ -66,18 +66,27 @@ app.get("/", (req, res) => {
 // All other endpoints
 app.get("/books", async (req, res) => {
   const allBooks = await Book.find();
-  res.json(allBooks);
-});
+  const showTitle = req.query.title;
 
-/* async function findPostsContainingText(text) {
-  try {
-      const regex = new RegExp(text, 'i'); // The 'i' flag makes it case-insensitive
-      const results = await BlogPost.find({ content: { $regex: regex } });
-      return results;
-  } catch (error) {
-      console.error('Error finding posts with text:', error);
+  if (showTitle) {
+    const titleSearch = async (showTitle) => {
+      const resultsTitle = await Book.find({
+        title: { $regex: new RegExp(showTitle, "i") },
+      });
+      return resultsTitle;
+    };
+    const titleResults = await titleSearch(showTitle);
+    if (titleResults.length > 0) {
+      res.json(titleResults);
+    } else {
+      res
+        .status(404)
+        .send("Sorry, we couldn't find any books with that title.");
+    }
+  } else {
+    res.json(allBooks);
   }
-} */
+});
 
 app.get("/books/:bookId", async (req, res) => {
   const { bookId } = req.params;
@@ -92,28 +101,6 @@ app.get("/books/:bookId", async (req, res) => {
 
 app.get("/averagerating/:ratingNum", async (req, res) => {
   const { ratingNum } = req.params;
-
-  // I don't need that part :)
-  /*  const resultRating = await Book.aggregate([
-    {
-      $group: {
-        _id: null,
-        average_rating: { $avg: "$rating" },
-      },
-    },
-    {
-      $project: {
-        _id: 0,
-        roundedAverageRating: {
-          $cond: [
-            { $gte: ["$averageRating", parseFloat(ratingNum)] },
-            { $ceil: "$averageRating" }, // Round up
-            { $floor: "$averageRating" }, // Round down
-          ],
-        },
-      },
-    },
-  ]); */
 
   const matchingBooks = await Book.find({
     average_rating: {
