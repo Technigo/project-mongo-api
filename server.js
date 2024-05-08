@@ -1,8 +1,8 @@
 import cors from "cors";
+import dotenv from "dotenv";
 import express from "express";
 import expressListEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 
 // Getting env file
 dotenv.config();
@@ -77,6 +77,39 @@ app.get("/books/:bookId", async (req, res) => {
     res.json(book);
   } else {
     res.status(404).send("Sorry, there is no book with that ID.");
+  }
+});
+
+app.get("/averagerating/:ratingNum", async (req, res) => {
+  const { ratingNum } = req.params;
+
+  const resultRating = await Book.aggregate([
+    {
+      $group: {
+        _id: null,
+        average_rating: { $avg: "$rating" },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        roundedAverageRating: { $round: ["$average_rating", 0] },
+      },
+    },
+  ]);
+
+  if (resultRating.length > 0) {
+    const matchingBooks = await Book.find({
+      average_rating: {
+        $gte: parseFloat(ratingNum),
+        $lt: parseFloat(ratingNum) + 1,
+      },
+    });
+    res.json(matchingBooks);
+  } else if (resultRating.length === 0) {
+    res
+      .status(404)
+      .send("Sorry, we couldn't find any books with that average rating.");
   }
 });
 
