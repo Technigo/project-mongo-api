@@ -93,20 +93,27 @@ app.get("/averagerating/:ratingNum", async (req, res) => {
     {
       $project: {
         _id: 0,
-        roundedAverageRating: { $round: ["$average_rating", 0] },
+        roundedAverageRating: {
+          $cond: [
+            { $gte: ["$averageRating", parseFloat(ratingNum)] },
+            { $ceil: "$averageRating" }, // Round up
+            { $floor: "$averageRating" }, // Round down
+          ],
+        },
       },
     },
   ]);
 
-  if (resultRating.length > 0) {
-    const matchingBooks = await Book.find({
-      average_rating: {
-        $gte: parseFloat(ratingNum),
-        $lt: parseFloat(ratingNum) + 1,
-      },
-    });
+  const matchingBooks = await Book.find({
+    average_rating: {
+      $gte: parseFloat(ratingNum) - 0.5,
+      $lt: parseFloat(ratingNum) + 0.5,
+    },
+  });
+
+  if (matchingBooks.length > 0) {
     res.json(matchingBooks);
-  } else if (resultRating.length === 0) {
+  } else if (matchingBooks.length === 0) {
     res
       .status(404)
       .send("Sorry, we couldn't find any books with that average rating.");
