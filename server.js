@@ -2,30 +2,18 @@ import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
 import expressListEndpoints from "express-list-endpoints"
+import { Restaurant } from "./models/Restaurant"
+import michelinData from "./data/michelin-data.json"
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/restaurants"
 mongoose.connect(mongoUrl)
 mongoose.Promise = Promise
 
-const Restaurant = mongoose.model("Restaurant", {
-  name: String,
-  location: String,
-  cuisine: String,
-})
-
-Restaurant.deleteMany().then(() => {
-  new Restaurant({
-    name: "Hej",
-    location: "Stockholm",
-    cuisine: "Sweden",
-  }).save()
-  new Restaurant({ name: "Ciao", location: "Milan", cuisine: "Italian" }).save()
-  new Restaurant({
-    name: "Bonjour",
-    location: "Cannes",
-    cuisine: "French",
-  }).save()
-})
+const seedDatabase = async () => {
+  await Restaurant.deleteMany()
+  await Restaurant.insertMany(michelinData)
+}
+seedDatabase()
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -43,20 +31,16 @@ app.get("/", (req, res) => {
   const endpoints = expressListEndpoints(app)
   res.json(endpoints)
 })
-app.get("/restaurants", (req, res) => {
-  Restaurant.find().then((restaurants) => {
-    res.json(restaurants)
-  })
-})
 
-app.get("/:name", (req, res) => {
-  Restaurant.findOne({ name: req.params.name }).then((restaurant) => {
-    if (restaurant) {
-      res.json(restaurant)
-    } else {
-      res.status(404).json({ error: "Not found" })
-    }
-  })
+//Get all restos
+app.get("/restaurants", async (req, res) => {
+  const allRestaurants = await Restaurant.find()
+
+  if (allRestaurants.length > 0) {
+    res.json(allRestaurants)
+  } else {
+    res.status(404).send("No restaurants with this criteria")
+  }
 })
 
 // Start the server

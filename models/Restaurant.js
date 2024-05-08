@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 const { Schema } = mongoose
 // Define schema
-export const restaurantSchema = new Schema({
+const restaurantSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -24,7 +24,6 @@ export const restaurantSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   id: {
     type: Number,
