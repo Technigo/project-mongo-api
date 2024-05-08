@@ -47,13 +47,7 @@ app.get("/", (req, res) => {
 
 // Get all the flowers
 app.get("/flowers", async (req, res) => {
-  try {
-    const allFlowers = await Flower.find();
-    res.json(allFlowers);
-  } catch (error) {
-    console.error("Error fetching flowers:", error);
-    res.status(500).json({ error: "Error fetching flowers" });
-  }
+  res.json(flowers);
 });
 
 // Start the server
