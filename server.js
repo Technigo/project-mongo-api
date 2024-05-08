@@ -4,6 +4,11 @@ import mongoose from "mongoose";
 import City from "./models/City";
 import expressListEndpoints from "express-list-endpoints";
 import topCitiesChina from "./data/china-city.json";
+import {
+  errorHandler,
+  methodController,
+  queryParamContoller,
+} from "./middleware/Middleware";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
@@ -29,8 +34,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Add middleware to limit the request method to GET
+app.use(methodController);
+
 // Start defining your routes here
-app.get("/", (req, res) => {
+app.get("/", queryParamContoller, (req, res) => {
   const endpoints = expressListEndpoints(app);
   res.json(endpoints);
 });
@@ -49,13 +57,13 @@ app.get("/cities", async (req, res) => {
 });
 
 // Display a city by id
-app.get("/cities/:id", async (req, res) => {
+app.get("/cities/:id", queryParamContoller, async (req, res) => {
   const city = await City.findById(req.params.id);
   res.json(city);
 });
 
 //Display provinces
-app.get("/provinces", async (req, res) => {
+app.get("/provinces", queryParamContoller, async (req, res) => {
   const provinces = await City.aggregate([
     {
       $group: {
@@ -89,7 +97,7 @@ app.get("/provinces", async (req, res) => {
 });
 
 // Display a summary of a province
-app.get("/provinces/:name", async (req, res) => {
+app.get("/provinces/:name", queryParamContoller, async (req, res) => {
   const cities = await City.aggregate([
     {
       $match: {
@@ -122,6 +130,16 @@ app.get("/provinces/:name", async (req, res) => {
   ]);
   res.json(cities);
 });
+
+//any other endpoints with GET method that are not acceptable -> 404 error
+app.use((req, res, next) => {
+  const err = new Error(`Cannot find endpoint: ${req.originalUrl}.`);
+  err.statusCode = 404;
+  next(err);
+});
+// Add middleware to handle the global error coming from any of the endpoints
+app.use(errorHandler);
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
