@@ -69,6 +69,16 @@ app.get("/books", async (req, res) => {
   res.json(allBooks);
 });
 
+/* async function findPostsContainingText(text) {
+  try {
+      const regex = new RegExp(text, 'i'); // The 'i' flag makes it case-insensitive
+      const results = await BlogPost.find({ content: { $regex: regex } });
+      return results;
+  } catch (error) {
+      console.error('Error finding posts with text:', error);
+  }
+} */
+
 app.get("/books/:bookId", async (req, res) => {
   const { bookId } = req.params;
   const book = await Book.findOne({ bookID: bookId }).exec();
@@ -83,7 +93,8 @@ app.get("/books/:bookId", async (req, res) => {
 app.get("/averagerating/:ratingNum", async (req, res) => {
   const { ratingNum } = req.params;
 
-  const resultRating = await Book.aggregate([
+  // I don't need that part :)
+  /*  const resultRating = await Book.aggregate([
     {
       $group: {
         _id: null,
@@ -102,7 +113,7 @@ app.get("/averagerating/:ratingNum", async (req, res) => {
         },
       },
     },
-  ]);
+  ]); */
 
   const matchingBooks = await Book.find({
     average_rating: {
