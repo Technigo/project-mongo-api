@@ -32,8 +32,8 @@ const seedDatabase = async () => {
   }
 };
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-const port = process.env.PORT || 8080;
+// Defines the port the app will run on.
+const port = process.env.PORT || 3000;
 const app = express();
 
 // Middlewares to enable cors and json body parsing
@@ -47,7 +47,13 @@ app.get("/", (req, res) => {
 
 // Get all the flowers
 app.get("/flowers", async (req, res) => {
-  res.json(flowers);
+  try {
+    const allFlowers = await Flower.find();
+    res.json(allFlowers);
+  } catch (error) {
+    console.error("Error fetching flowers:", error);
+    res.status(500).json({ error: "Error fetching flowers" });
+  }
 });
 
 // Start the server

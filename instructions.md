@@ -38,6 +38,8 @@ if (process.env.RESET_DB) {
 
 This whole process can be a little tricky and relies on your models having the same keys. Give it a try and if you run into issues, don't hesitate to ask your team, ask in Slack, or post your code on Stack Overflow to get some help!
 
+// "mongodb+srv://corneliadahlin:<EGOL0TOXKsdgfQIq>@cluster0.udefoub.mongodb.net/"
+
 ## Requirements:
 - Your API should have at least 3 routes. Try to push yourself to do more, though!
   - The endpoint "/" should return documentation of your API using e.g. [Express List Endpoints](https://www.npmjs.com/package/express-list-endpoints)
