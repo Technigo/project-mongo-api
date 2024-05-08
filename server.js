@@ -11,25 +11,9 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflixTitles";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
-// NetflixTitle-Schema to show what kind of data we want
-const netflixTitleSchema = new mongoose.Schema({
-  title: String,
-  director: String,
-  cast: String,
-  country: String,
-  date_added: Date,
-  release_year: Number,
-  rating: String,
-  duration: String,
-  listed_in: String,
-  description: String,
-  type: String,
-});
-
-// The Mongoose-model:
-const NetflixTitle = mongoose.model("NetflixTitle", netflixTitleSchema);
 // import the data
 import netflixTitlesData from "./data/netflix-titles.json";
+import NetflixTitle from "./model/NetflixTitle";
 
 // Seed the database
 if (process.env.RESET_DB) {
@@ -37,7 +21,17 @@ if (process.env.RESET_DB) {
     await NetflixTitle.deleteMany({});
 
     netflixTitlesData.forEach((netflixTitle) => {
-      new NetflixTitle(netflixTitle).save();
+      // Check for missing fields and set them to "Unknown"
+      const requiredFields = ["title", "director", "cast", "country"];
+
+      requiredFields.forEach((field) => {
+        if (!netflixTitle[field]) {
+          // Set default if missing
+          netflixTitle[field] = "Unknown";
+        }
+      });
+      const newNetflixTitle = new NetflixTitle(netflixTitle);
+      newNetflixTitle.save();
     });
   };
 
