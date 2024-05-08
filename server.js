@@ -42,6 +42,27 @@ app.get("/", (req, res) => {
   res.json(endpoints);
 });
 
+app.get("/titles", async (req, res) => {
+  const allTitles = await Title.find()
+
+  if (allTitles.length > 0) {
+    res.json(allTitles)
+  } else {
+    res.status(404).send("no titles were found")
+  }})
+
+app.get("/titles/:titleId", async (req, res) => {
+  const { titleId } = req.params
+
+  const byId = await Title.findById(titleId).exec()
+
+  if (byId) {
+    res.json(byId) 
+  } else {
+    res.status(404).send("no title found by id")
+  }
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
