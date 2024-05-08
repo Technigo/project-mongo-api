@@ -37,7 +37,6 @@ import booksData from "./data/books.json";
 // I have set RESET_DB to false since the database is already seeded now
 if (process.env.RESET_DB === "true") {
   const seedDatabase = async () => {
-    console.log("Reseading database");
     await Book.deleteMany({});
 
     booksData.forEach((bookData) => {
@@ -99,7 +98,7 @@ app.get("/books/:bookId", async (req, res) => {
   }
 });
 
-app.get("/averagerating/:ratingNum", async (req, res) => {
+app.get("/averageratings/:ratingNum", async (req, res) => {
   const { ratingNum } = req.params;
 
   const matchingBooks = await Book.find({
