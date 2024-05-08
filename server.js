@@ -9,6 +9,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
+// RESET data when necessary
 if (process.env.RESET_DB) {
   const seedDirectorDatabase = async () => {
     await City.deleteMany();
@@ -53,6 +54,74 @@ app.get("/cities/:id", async (req, res) => {
   res.json(city);
 });
 
+//Display provinces
+app.get("/provinces", async (req, res) => {
+  const provinces = await City.aggregate([
+    {
+      $group: {
+        _id: "$province",
+        cities: {
+          $addToSet: "$city",
+        },
+        cityCount: {
+          $sum: 1,
+        },
+        population: {
+          $sum: "$population",
+        },
+        province_size: {
+          $sum: "$area_size",
+        },
+        avgPopulationDensity: {
+          $avg: {
+            $divide: ["$population", "$area_size"],
+          },
+        },
+      },
+    },
+    {
+      $sort: {
+        population: -1,
+      },
+    },
+  ]);
+  res.json(provinces);
+});
+
+// Display a summary of a province
+app.get("/provinces/:name", async (req, res) => {
+  const cities = await City.aggregate([
+    {
+      $match: {
+        // make param case insensitive
+        province: { $regex: req.params.name, $options: "i" },
+      },
+    },
+    {
+      $group: {
+        _id: "$province",
+        cities: {
+          $addToSet: "$city",
+        },
+        cityCount: {
+          $sum: 1,
+        },
+        population: {
+          $sum: "$population",
+        },
+        province_size: {
+          $sum: "$area_size",
+        },
+        populationDensity: {
+          $avg: {
+            $divide: ["$population", "$area_size"],
+          },
+        },
+      },
+    },
+  ]);
+  res.json(cities);
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
