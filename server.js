@@ -82,7 +82,7 @@ app.get("/restaurants/:query", async (req, res) => {
   //If query is NaN, treat as name search
   try {
     const restaurantByName = await Restaurant.findOne({
-      name: { $regex: new RegExp(query, "i") },
+      name: { $regex: new RegExp("^" + query + "$", "i") }, // Ensure case-insensitive match fron beginning "^" to end "$"
     })
     if (restaurantByName) {
       res.json(restaurantByName)
@@ -90,7 +90,7 @@ app.get("/restaurants/:query", async (req, res) => {
       res
         .status(404)
         .send(
-          "No restaurant with this name. If there is a space in the restaurant's name, replace it with '%20', for example 'maison%lameloise'"
+          "No restaurant with this criteria. For names - if there is a space in the restaurant's name, replace it with '%20', for example 'maison%lameloise'. For IDs - try a number between 1-6700"
         )
     }
   } catch (error) {
@@ -114,10 +114,22 @@ app.get("/cuisines", async (req, res) => {
 app.get("/cuisines/:cuisine", async (req, res) => {
   const { cuisine } = req.params
 
+  // Split the cuisine parameter into an array of individual words
+  const searchWords = cuisine
+    .split(",")
+    .map((word) => word.trim().toLowerCase())
+
   try {
-    //Find cuisines matching user input using mongoDB's regex operator to make the word in database case insensitive
+    // Find restaurants whose cuisine includes search words as WHOLE words
+
     const restaurantsByCuisine = await Restaurant.find({
-      cuisine: { $regex: new RegExp("^" + cuisine, "i") },
+      cuisine: {
+        //Iterate over each word in the searchWords array
+        //  "\\b"is word boundary ensuring that the word is matched as a whole word and not part of a larger word
+        //For example this would not render anything if you search only for 1 letter
+        //Before I added this, "i" would for example return cuisines like "italian" when it should return nothing
+        $all: searchWords.map((word) => new RegExp("\\b" + word + "\\b", "i")),
+      },
     })
 
     if (restaurantsByCuisine.length > 0) {
@@ -126,7 +138,7 @@ app.get("/cuisines/:cuisine", async (req, res) => {
       res
         .status(404)
         .send(
-          "No restaurants found within this cuisine, try searching for a cuisine found in the endpoint /cuisine. Add '%20' instead of spacing, for example 'African,%20Creative'"
+          "No restaurants found in this cuisine, try searching for a cuisine found in the endpoint '/cuisines'. Add '%20' instead of spacing, for example 'African,%20Creative'"
         )
     }
   } catch (error) {
