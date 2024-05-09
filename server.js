@@ -22,7 +22,7 @@ if (process.env.RESET_DB) {
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 3000
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -55,6 +55,38 @@ app.get("/restaurants", async (req, res) => {
     res.status(500).send("Internal Server Error")
   }
 })
+
+//Filter one restaurant based on ID
+app.get("/restaurants/:restaurantId", async (req, res) => {
+  const { restaurantId } = req.params
+
+  if (isNaN(restaurantId)) {
+    return res
+      .status(400)
+      .send(
+        "Invalid restaurant ID. Please search for a number between 1 and 6700"
+      )
+  }
+
+  try {
+    const restaurant = await Restaurant.findOne({ id: restaurantId })
+
+    if (restaurant) {
+      res.json(restaurant)
+    } else {
+      res
+        .status(404)
+        .send(
+          "No restaurant with this ID. There are 6700 restaurants, try a number between 1 and 6700"
+        )
+    }
+  } catch (error) {
+    console.error("Error fetching restaurant by ID", error)
+    res.status(500).send("Internal Server Error")
+  }
+})
+// Filter on id "/restaurants/:id"
+// Filter on name "/"/restaurants/:name"
 
 // All unique cuisines
 app.get("/cuisines", async (req, res) => {
@@ -93,10 +125,7 @@ app.get("/cuisines/:cuisine", async (req, res) => {
 })
 
 // Filter on location
-
-// Filter on name
-
-// Filter on id
+// Filter on awarrd
 
 // Start the server
 app.listen(port, () => {
