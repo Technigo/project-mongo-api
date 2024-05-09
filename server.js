@@ -19,7 +19,6 @@ if (process.env.RESET_DB) {
   const seedDirectorDatabase = async () => {
     await City.deleteMany();
     topCitiesChina.forEach(city => {
-      console.log(city);
       new City(city).save();
     });
   };
@@ -44,91 +43,100 @@ app.get("/", queryParamContoller, (req, res) => {
 });
 
 // Display all the cities
-app.get("/cities", async (req, res) => {
-  const { page, sort, order } = req.query;
-  const cities = await City.find()
-    .sort(
-      sort
-        ? { sort: order === "descending" ? -1 : 1 }
-        : { city: 1, province: 1 }
-    )
-    .limit(page ? +page * 20 : 20);
-  res.json(cities);
+app.get("/cities", async (req, res, next) => {
+  const { page, sort } = req.query;
+  try {
+    if (page && !/^[1-6]$/.test(page)) {
+      throw new Error("Page should be within 1-5.");
+    }
+    const cities = await City.find()
+      .sort(sort ? sort : { population: -1, area_size: -1 })
+      .skip(page ? (+page - 1) * 20 : null)
+      .limit(20);
+    res.json(cities);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Display a city by id
-app.get("/cities/:id", queryParamContoller, async (req, res) => {
-  const city = await City.findById(req.params.id);
-  res.json(city);
+app.get("/cities/:id", queryParamContoller, async (req, res, next) => {
+  try {
+    const city = await City.findById(req.params.id);
+    res.json(city);
+  } catch (error) {
+    next(error);
+  }
 });
 
 //Display provinces
-app.get("/provinces", queryParamContoller, async (req, res) => {
-  const provinces = await City.aggregate([
-    {
-      $group: {
-        _id: "$province",
-        cities: {
-          $addToSet: "$city",
-        },
-        cityCount: {
-          $sum: 1,
-        },
-        population: {
-          $sum: "$population",
-        },
-        province_size: {
-          $sum: "$area_size",
-        },
-        avgPopulationDensity: {
-          $avg: {
-            $divide: ["$population", "$area_size"],
+app.get("/provinces", queryParamContoller, async (req, res, next) => {
+  try {
+    const provinces = await City.aggregate([
+      {
+        $group: {
+          _id: "$province",
+          cityCount: {
+            $sum: 1,
+          },
+          population: {
+            $sum: "$population",
+          },
+          province_size: {
+            $sum: "$area_size",
+          },
+          avgPopulationDensity: {
+            $avg: {
+              $divide: ["$population", "$area_size"],
+            },
           },
         },
       },
-    },
-    {
-      $sort: {
-        population: -1,
+      {
+        $sort: {
+          population: -1,
+        },
       },
-    },
-  ]);
-  res.json(provinces);
+    ]);
+    res.json(provinces);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Display a summary of a province
-app.get("/provinces/:name", queryParamContoller, async (req, res) => {
-  const cities = await City.aggregate([
-    {
-      $match: {
-        // make param case insensitive
-        province: { $regex: req.params.name, $options: "i" },
+app.get("/provinces/:name", queryParamContoller, async (req, res, next) => {
+  try {
+    const province = await City.aggregate([
+      {
+        $match: {
+          // make param case insensitive
+          province: { $regex: req.params.name, $options: "i" },
+        },
       },
-    },
-    {
-      $group: {
-        _id: "$province",
-        cities: {
-          $addToSet: "$city",
-        },
-        cityCount: {
-          $sum: 1,
-        },
-        population: {
-          $sum: "$population",
-        },
-        province_size: {
-          $sum: "$area_size",
-        },
-        populationDensity: {
-          $avg: {
-            $divide: ["$population", "$area_size"],
+      { $unwind: "$dialects" },
+      {
+        $group: {
+          _id: "$province",
+          cities: {
+            $addToSet: {
+              city_id: "$_id",
+              city: "$city",
+            },
           },
+          dialects: { $addToSet: "$dialects" },
         },
       },
-    },
-  ]);
-  res.json(cities);
+    ]);
+    if (province.length === 0) {
+      const err = new Error("Province not found");
+      err.statusCode = 404;
+      throw err;
+    }
+    res.json(province);
+  } catch (error) {
+    next(error);
+  }
 });
 
 //any other endpoints with GET method that are not acceptable -> 404 error
