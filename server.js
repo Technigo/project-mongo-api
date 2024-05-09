@@ -20,7 +20,7 @@ const Dog = mongoose.model('Dog', {
   likes_toys: Boolean,
 })
 
-const port = process.env.PORT || 10000
+const port = process.env.PORT || 8888
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
