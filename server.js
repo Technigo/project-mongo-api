@@ -11,7 +11,7 @@ mongoose.Promise = Promise;
 // Schema
 const { Schema } = mongoose;
 
-const movieSchema = new Schema({
+const netflixTitleSchema = new Schema({
   show_id: Number,
   title: String,
   director: String,
@@ -27,16 +27,15 @@ const movieSchema = new Schema({
 });
 
 // Model
-const Movie = mongoose.model("Movie", movieSchema);
+const NetflixTitle = mongoose.model("NetflixTitle", netflixTitleSchema);
 
 // Seed the database
-
 const seedDatabase = async () => {
   console.log("Resetting and seeding");
-  await Movie.deleteMany();
+  await NetflixTitle.deleteMany();
 
-  netflixData.forEach((movie) => {
-    new Movie(movie).save();
+  netflixData.forEach((item) => {
+    new NetflixTitle(item).save();
   });
 };
 seedDatabase();
@@ -52,7 +51,7 @@ app.use(express.json());
 // Generate endpoint details
 const generateQueryUsage = (endpoint) => {
   const queryUsage = {};
-  if (endpoint.path === "/movies") {
+  if (endpoint.path === "/netflix-titles") {
     queryUsage.page = "Filter by page";
     queryUsage.title = "Filter by title (case-insensitive)";
     queryUsage.country = "Filter by country (case-insensitive)";
@@ -70,8 +69,8 @@ app.get("/", (req, res) => {
   res.json(endpoints);
 });
 
-// Show movies and shows
-app.get("/movies", async (req, res) => {
+// Display netflix titles
+app.get("/netflix-titles", async (req, res) => {
   // Set up limit of number of titles shown on each page
   const page = parseInt(req.query.page) || 1;
   const pageItemsNumber = 20;
@@ -92,25 +91,25 @@ app.get("/movies", async (req, res) => {
   }
 
   // Get the shows and movies and apply pagination
-  const movies = await Movie.find(query)
+  const netflixTitles = await NetflixTitle.find(query)
     .skip(skippedItems)
     .limit(pageItemsNumber)
     .exec();
 
-  if (movies.length > 0) {
-    res.json(movies);
+  if (netflixTitles.length > 0) {
+    res.json(netflixTitles);
   } else {
     res.status(404).send("No movie or show found based on filters");
   }
 });
 
 // Get movie or show based on id
-app.get("/movies/:movieId", async (req, res) => {
-  const { movieId } = req.params;
-  const movie = await Movie.findById(movieId).exec();
+app.get("/netflix-titles/:titleId", async (req, res) => {
+  const { titleId } = req.params;
+  const netflixTitle = await NetflixTitle.findById(titleId).exec();
 
-  if (movie) {
-    res.json(movie);
+  if (netflixTitle) {
+    res.json(netflixTitle);
   } else {
     res.status(404).send("No movie or show found");
   }
