@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 export const titleSchema = new Schema({
   show_id: Number,
+
   title: String,
   director: String,
   cast: String,
