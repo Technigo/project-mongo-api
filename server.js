@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import express from "express";
 import expressListEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
+import Book from "./models/bookSchema";
+/* const Book = require("./models/bookSchema"); */
+/* const books = require("./routes/books"); */
 
 // Getting env file
 dotenv.config();
@@ -11,24 +14,6 @@ const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost/project-mongo-bookdata";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
-
-// Doing the Schema for the book
-const { Schema } = mongoose;
-const BookSchema = new Schema({
-  bookID: Number,
-  title: String,
-  authors: String,
-  average_rating: Number,
-  isbn: Number,
-  isgn13: Number,
-  language_code: String,
-  num_pages: Number,
-  ratings_count: Number,
-  text_reviews_count: Number,
-});
-
-// Doing the Book Model with the Schema
-const Book = mongoose.model("Book", BookSchema);
 
 // Import the Data
 import booksData from "./data/books.json";
@@ -63,6 +48,10 @@ app.get("/", (req, res) => {
 });
 
 // All other endpoints
+/* 
+app.use("/books", books);
+ */
+
 app.get("/books", async (req, res) => {
   const allBooks = await Book.find();
   const showTitle = req.query.title;
