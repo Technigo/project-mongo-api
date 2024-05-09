@@ -1,12 +1,10 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The assignmentt was to use Mongo DB to create a database that allows us to store and retrieve data. That data should then be used to create a RESTful API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I looked at last week's project and this weeks videos and code sessions. I then adapted what I'd learned for this weeks assignment. Feedback from last weeks project proved very useful for documenting endpoints.
 
 ## View it live
 
