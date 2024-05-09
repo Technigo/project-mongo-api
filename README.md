@@ -11,11 +11,16 @@ I found data on Kaggle that I manipulated slightly to fit my needs. I created a 
 - "/restaurants/:name" Filter on name
 - "/restaurants/:id" Filter on id
 - "/cuisines" All cuisines. Displays a list of all available cuisine types
-- "/cuisines/:cuisine" Filter on cuisine
-- "/locations/:location" Filter on location
-- "/awards/:award" Filter on award (3 stars, 2 stars, 1 star, Bib Gourmand)
+- "/cuisines/:cuisine" Filter on cuisine (one or several)
+- "/locations/:location" Filter on location (city or country)
 
-If I had more time, I would improve error handling via middleware. I would also have improved filtering to enable combination of different filters. 
+If I had more time, I would:
+
+- added another filter for awards (1-2-3 stars, bib gourmand)
+- improve error handling via middleware
+- improved filtering to enable combination of different filters
+
+I've tested the endpoints quite thoroughly and as far as I'm concerned they all work as intended.
 
 ## View it live
 
