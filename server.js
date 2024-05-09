@@ -20,7 +20,7 @@ const Dog = mongoose.model('Dog', {
   likes_toys: Boolean,
 })
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 10000
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
@@ -35,17 +35,29 @@ app.get('/', (req, res) => {
 app.get('/dogs', async (req, res) => {
   const { breed, age, weight_kg, color } = req.query
 
-  const query = {}
-  if (breed) query.breed = breed
-  if (age) query.age = age
-  if (weight_kg) query.weight_kg = weight_kg
-  if (color) query.color = color
+  // Check if any query parameters are present
+  if (!breed && !age && !weight_kg && !color) {
+    try {
+      // If no query parameters, fetch all dogs
+      const dogs = await Dog.find({})
+      res.json(dogs)
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' })
+    }
+  } else {
+    // If query parameters are present, perform filtered query
+    const query = {}
+    if (breed) query.breed = breed
+    if (age) query.age = age
+    if (weight_kg) query.weight_kg = weight_kg
+    if (color) query.color = color
 
-  try {
-    const dogs = await Dog.find(query)
-    res.json(dogs)
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' })
+    try {
+      const dogs = await Dog.find(query)
+      res.json(dogs)
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' })
+    }
   }
 })
 
