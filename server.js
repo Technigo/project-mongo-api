@@ -56,35 +56,48 @@ app.get("/restaurants", async (req, res) => {
   }
 })
 
-//Filter one restaurant based on ID
-app.get("/restaurants/:restaurantId", async (req, res) => {
-  const { restaurantId } = req.params
-  
-  if (isNaN(restaurantId)) {
-    return res
-      .status(400)
-      .send(
-        "Invalid restaurant ID. Please search for a number between 1 and 6700"
-      )
+//Filter one restaurant based on ID or name
+app.get("/restaurants/:query", async (req, res) => {
+  const { query } = +req.params
+
+  //Give message if query is a number (indicates ID search)
+  if (!isNaN(query)) {
+    try {
+      const restaurantById = await Restaurant.findOne({ id: query })
+      if (restaurantById) {
+        return res.json(restaurantById)
+      } else {
+        return res
+          .status(404)
+          .send(
+            "Invalid restaurant ID. Please search for a number between 1 and 6700"
+          )
+      }
+    } catch (error) {
+      console.error("Error fetching restaurant by ID", error)
+      return res.status(500).send("Internal Server Error")
+    }
   }
+
+  //If query is NaN, treat as name search
   try {
-    const restaurant = await Restaurant.findOne({ id: restaurantId })
-    if (restaurant) {
-      res.json(restaurant)
+    const restaurantByName = await Restaurant.findOne({
+      name: { $regex: new RegExp(query, "i") },
+    })
+    if (restaurantByName) {
+      res.json(restaurantByName)
     } else {
       res
         .status(404)
         .send(
-          "No restaurant with this ID. There are 6700 restaurants, try a number between 1 and 6700"
+          "No restaurant with this name. If there is a space in the restaurant's name, replace it with '%20', for example 'maison%lameloise'"
         )
     }
   } catch (error) {
-    console.error("Error fetching restaurant by ID", error)
+    console.error("Error fetching restaurant by name", error)
     res.status(500).send("Internal Server Error")
   }
 })
-
-// Filter on name "/restaurants/:name"
 
 // Get all unique cuisines
 app.get("/cuisines", async (req, res) => {
@@ -123,7 +136,7 @@ app.get("/cuisines/:cuisine", async (req, res) => {
 })
 
 // Filter on location
-// Filter on awarrd
+// Filter on award
 
 // Start the server
 app.listen(port, () => {
