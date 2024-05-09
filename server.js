@@ -1,14 +1,12 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+// import expressListEndpoints from "express-list-endpoints";
+import topMusicData from "./data/top-music.json";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+mongoose.connect(mongoUrl);
+mongoose.Promise = Promise;
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -20,13 +18,49 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.promise = ProcessingInstruction;
-
 // Start defining your routes here
+
+// http://localhost:8080/
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Top 50 popular songs on spotify");
+  /*
+  const endpoints = expressListEndpoints(app);
+  res.json(endpoints);
+  */
+});
+
+// Get all songs
+// http://localhost:8080/songs
+app.get("/songs", (req, res) => {
+  res.json(topMusicData);
+});
+
+// Get one song based on id
+// http://localhost:8080/songs/2
+app.get("/songs/:songId", (req, res) => {
+  const { songId } = req.params;
+
+  const song = topMusicData.find((song) => +songId === song.id);
+
+  if (song) {
+    res.json(song);
+  } else {
+    res.send("No song was found");
+  }
+});
+
+// Get artist of a specifik song
+// http://localhost:8080/songs/2/artist
+app.get("/songs/:songId/artist", (req, res) => {
+  const { songId } = req.params;
+
+  const song = topMusicData.find((song) => +songId === song.id);
+
+  if (song) {
+    res.json({ artistName: song.artistName });
+  } else {
+    res.send("No song was found");
+  }
 });
 
 // Start the server
