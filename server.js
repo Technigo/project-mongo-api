@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import expressListEndpoints from 'express-list-endpoints'
-import dogsData from './data/dogs.json'
 
 dotenv.config()
 
@@ -20,17 +19,6 @@ const Dog = mongoose.model('Dog', {
   weight_kg: Number,
   likes_toys: Boolean,
 })
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    await Dog.deleteMany({})
-
-    dogsData.forEach((dog) => {
-      new Dog(dog).save()
-    })
-  }
-
-  seedDatabase()
-}
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -45,19 +33,13 @@ app.get('/', (req, res) => {
   res.json(endpoints)
 })
 app.get('/dogs', async (req, res) => {
-  let query = {}
-  if (req.query.breed) {
-    query.breed = req.query.breed
-  }
-  if (req.query.age) {
-    query.age = req.query.age
-  }
-  if (req.query.weight_kg) {
-    query.weight_kg = req.query.weight_kg
-  }
-  if (req.query.color) {
-    query.color = req.query.color
-  }
+  const { breed, age, weight_kg, color } = req.query
+
+  const query = {}
+  if (breed) query.breed = breed
+  if (age) query.age = age
+  if (weight_kg) query.weight_kg = weight_kg
+  if (color) query.color = color
 
   try {
     const dogs = await Dog.find(query)
