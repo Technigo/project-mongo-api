@@ -115,7 +115,7 @@ app.get("/cuisines/:cuisine", async (req, res) => {
   const { cuisine } = req.params
 
   // Split the cuisine parameter into an array of individual words
-  const searchWords = cuisine
+  const cuisineSearchWords = cuisine
     .split(",")
     .map((word) => word.trim().toLowerCase())
 
@@ -128,7 +128,9 @@ app.get("/cuisines/:cuisine", async (req, res) => {
         //  "\\b"is word boundary ensuring that the word is matched as a whole word and not part of a larger word
         //For example this would not render anything if you search only for 1 letter
         //Before I added this, "i" would for example return cuisines like "italian" when it should return nothing
-        $all: searchWords.map((word) => new RegExp("\\b" + word + "\\b", "i")),
+        $all: cuisineSearchWords.map(
+          (word) => new RegExp("\\b" + word + "\\b", "i")
+        ),
       },
     })
 
@@ -148,7 +150,34 @@ app.get("/cuisines/:cuisine", async (req, res) => {
 })
 
 // Filter on location
-// Filter on award
+app.get("/location/:location", async (req, res) => {
+  const { location } = req.params
+
+  const locationSearchWords = location
+    .split(",")
+    .map((word) => word.trim().toLowerCase())
+
+  try {
+    const restaurantsByLocation = await Restaurant.find({
+      location: {
+        $all: locationSearchWords.map(
+          (word) => new RegExp("\\b" + word + "\\b", "i")
+        ),
+      },
+    })
+
+    if (restaurantsByLocation.length > 0) {
+      res.json(restaurantsByLocation)
+    } else {
+      res
+        .status(404)
+        .send("No restaurants found in this location, try another one!")
+    }
+  } catch (error) {
+    console.error("Error fetching restaurants by location", error)
+    res.status(500).send("Internal Server Error")
+  }
+})
 
 // Start the server
 app.listen(port, () => {
