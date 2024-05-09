@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-const { Schema, model } = mongoose;
+const { Schema } = mongoose;
 
 const movieSchema = new Schema({
   show_id: {
     type: Number,
     required: true,
-    unique: true, // Ensures no duplictae show IDs
+    unique: true, // Ensures no duplictae show IDs.
   },
   title: {
     type: String,
@@ -15,31 +15,23 @@ const movieSchema = new Schema({
   director: {
     type: String,
   },
-  cast: {
-    type: String,
-  },
   country: {
     type: String,
-    required: true,
+    //required: true,
+    default: "Unknown",
   },
   date_added: {
     type: Date, // Store as a JavaScript Date object
-    required: true,
+    // convert to a different date format/ human readable. i coudn´t find an aproach to do so...
   },
   release_year: {
     type: Number,
-    required: true,
-  },
-  rating: {
-    type: String,
+    //required: true,
   },
   duration: {
     type: String,
   },
   listed_in: {
-    type: String,
-  },
-  description: {
     type: String,
   },
   type: {
@@ -48,6 +40,6 @@ const movieSchema = new Schema({
   },
 });
 
-const Movie = model("Movie", movieSchema);
+const Movie = mongoose.model("Movie", movieSchema);
 
 export default Movie;
