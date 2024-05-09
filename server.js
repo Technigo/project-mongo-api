@@ -41,42 +41,21 @@ app.get("/", (req, res) => {
 });
 
 app.get("/titles", async (req, res) => {
-  const { name, type, cast, rating } = req.query;
-  let allTitles = await Title.find();
+  const { name, type, cast, country } = req.query;
+  let query = {};
 
-  // if (allTitles.length > 0) {
-  //   res.json(allTitles)
-  // }
-  // else {
-  //   res.status(404).send("no titles were found")
-  // }
+  if (name) query.title = { $regex: name, $options: "i" };
+  if (type) query.type = { $regex: type, $options: "i" };
+  if (cast) query.cast = { $regex: cast, $options: "i" };
+  if (country) query.country = { $regex: country, $options: "i" };
+  
+  const allTitles = await Title.find(query);
 
-  if (name) {
-    const byFilter = await Title.find({
-      title: { $regex: name, $options: "i" },
-    });
-    res.json(byFilter);
+  if (allTitles.length === 0) {
+    res.status(404).send("no titles were found")
   }
-
-  if (type) {
-    const byFilter = await Title.find({
-      type: { $regex: type, $options: "i" },
-    });
-    res.json(byFilter);
-  }
-
-  if (cast) {
-    const byFilter = await Title.find({
-      cast: { $regex: cast, $options: "i" },
-    });
-    res.json(byFilter);
-  }
-
-  if (rating) {
-    const byFilter = await Title.find({
-      rating: { $regex: rating, $options: "i" },
-    });
-    res.json(byFilter);
+  else {
+    res.json(allTitles)
   }
 });
 
@@ -92,7 +71,7 @@ app.get("/titles/:titleId", async (req, res) => {
   }
 });
 
-app.get("/titles/:year", async (req, res) => {
+app.get("/titles/year/:year", async (req, res) => {
   const year = req.params.year
   
   const byYear = await Title.find({ release_year: year }).exec()
