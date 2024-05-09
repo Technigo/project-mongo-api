@@ -26,12 +26,18 @@ const episodeSchema = new Schema({
 const Episode = mongoose.model("Episode", episodeSchema);
 
 //seed the database
-const seedDatabase = () => {
-  whoData.forEach((episode) => {
-    new Episode(episode).save();
-  });
-};
-seedDatabase();
+if (process.env.RESET_DATABASE) {
+  const seedDatabase = async () => {
+    console.log("resetting and seeding data!");
+    //clear existing data
+    await Episode.deleteMany();
+    //add episodes from json-file
+    whoData.forEach((episode) => {
+      new Episode(episode).save();
+    });
+  };
+  seedDatabase();
+}
 
 //defines the port the app will run on
 const port = process.env.PORT || 8080;
@@ -50,8 +56,98 @@ app.get("/", (req, res) => {
 //1️⃣ endpoint that returns all episodes
 //example: http://localhost:8080/episodes
 app.get("/episodes", async (req, res) => {
-  const episodes = await Episodes.find();
-  res.json(episodes);
+  const allEpisodes = await Episode.find();
+  res.json(allEpisodes);
+});
+
+//2️⃣ endpoint to return a single result defined by MongoDB_id
+//example: http://localhost:8080/episodes/663cfb0ddd4f5638407bc5ae
+app.get("/episodes/:episodeId", async (req, res) => {
+  const { episodeId } = req.params;
+
+  const episode = await Episode.findById(episodeId);
+
+  if (episode) {
+    res.json(episode);
+  } else {
+    res.status(404).json({ message: `Episode with ID ${episodeId} not found` });
+  }
+});
+
+//3️⃣ endpoint to return a single result defined by "air date"
+//example: http://localhost:8080/episodes/airdate/2010-04-03
+app.get("/episodes/airdate/:date", async (req, res) => {
+  const { date } = req.params;
+
+  const episode = await Episode.findOne({ air_date: date });
+
+  if (episode) {
+    res.json(episode);
+  } else {
+    res
+      .status(404)
+      .json({ message: `No episode found with air date: ${date}` });
+  }
+});
+
+//4️⃣ endpoint to return episodes filtered by actor name
+//example: http://localhost:8080/episodes/actor/jodie%20whittaker
+app.get("/episodes/actor/:actorName", async (req, res) => {
+  const { actorName } = req.params;
+  //search for episodes where the actor matches the given name (case-insensitive)
+  const filteredEpisodes = await Episode.find({
+    doctor_actor: { $regex: `^${actorName.trim()}$`, $options: "i" },
+  });
+
+  if (filteredEpisodes.length > 0) {
+    res.json(filteredEpisodes);
+  } else {
+    res
+      .status(404)
+      .json({ message: `No episode found for actor: ${actorName}` });
+  }
+});
+
+//5️⃣ endpoint to get a list of all doctor names
+//example: http://localhost:8080/doctors
+app.get("/doctors", async (req, res) => {
+  //get doctor names using distinct
+  const doctorNames = await Episode.distinct("doctor_actor");
+
+  if (doctorNames.length > 0) {
+    res.json(doctorNames);
+  } else {
+    res.status(404).json({ message: "No doctors found" });
+  }
+});
+
+//6️⃣ endpoint to get a list of all companion names
+//example: http://localhost:8080/companions
+app.get("/companions", async (req, res) => {
+  const companionNames = await Episode.distinct("companion");
+
+  if (companionNames.length > 0) {
+    res.json(companionNames);
+  } else {
+    res.status(404).json({ message: "No companions found" });
+  }
+});
+
+//7️⃣ endpoint to get a list of episodes per year based on air_date
+//example: http://localhost:8080/episodes/year/2010
+app.get("/episodes/year/:year", async (req, res) => {
+  const { year } = req.params;
+
+  // Use a MongoDB query to find episodes where the `air_date` starts with the given year
+  const filteredEpisodes = await Episode.find({
+    air_date: { $regex: `^${year}`, $options: "i" }, // Case-insensitive, beginning of the string
+  });
+
+  if (filteredEpisodes.length > 0) {
+    res.json(filteredEpisodes); // Return the list of episodes for the specified year
+  } else {
+    res.status(404).json({ message: `No episodes found for year ${year}` }); // No matches
+  }
 });
 
 // Start the server
