@@ -9,15 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/node": "^7.16.8",
-    "@babel/preset-env": "^7.16.11",
+    "@babel/core": "^7.24.5",
+    "@babel/node": "^7.23.9",
+    "@babel/preset-env": "^7.24.5",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.17.3",
+    "express": "^4.19.2",
     "express-list-endpoints": "^7.1.0",
     "mongodb": "^6.6.1",
-    "mongoose": "^8.0.0",
-    "nodemon": "^3.0.1"
+    "mongoose": "^8.3.4",
+    "nodemon": "^3.1.0"
   }
 }
