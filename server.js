@@ -106,8 +106,10 @@ app.get("/", (req, res) => {
 
 app.get("/filterbooks", async (req, res) => {
   try {
+    let query = {};  // Create an empty object to store the query
+
     const { title, authors, average_rating, num_pages, ratings_count, text_reviews_count, language_code } = req.query;  // Destructure the query parameters
-    const query = {};  // Create an empty object to store the query
+
     if (title) {
       query.title = new RegExp(title, "i");
     }
@@ -115,36 +117,33 @@ app.get("/filterbooks", async (req, res) => {
       query.authors = new RegExp(authors, "i");
     }
     if (average_rating) {
-      query.average_rating = Number(average_rating);
       query.average_rating = {
-        $gte: average_rating,
-        $lt: average_rating + 1
+        $gte: Number(average_rating),
+        $lt: Number(average_rating) + 1
       };
     }
     if (num_pages) {
-      query.num_pages = Number(num_pages);
       query.num_pages = {
-        $gte: num_pages,
-        $lt: num_pages + 100
+        $gte: Number(num_pages),
+        $lt: Number(num_pages) + 100
       };
     }
     if (ratings_count) {
-      query.ratings_count = Number(ratings_count);
       query.ratings_count = {
-        $gte: ratings_count,
-        $lt: ratings_count + 100
+        $gte: Number(ratings_count),
+        $lt: Number(ratings_count) + 100
       };
     }
     if (text_reviews_count) {
-      query.text_reviews_count = Number(text_reviews_count);
       query.text_reviews_count = {
-        $gte: text_reviews_count,
-        $lt: text_reviews_count + 100
+        $gte: Number(text_reviews_count),
+        $lt: Number(text_reviews_count) + 100
       };
     }
     if (language_code) {
       query.language_code = language_code;
     }
+
     const books = await Book.find(query);  // Use the query object in the find query
     res.json(books);
   } catch (error) {
