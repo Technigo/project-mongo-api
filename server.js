@@ -2,7 +2,7 @@ import express, { query } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import expressListEndpoints from "express-list-endpoints";
-// import netflixData from "./data/netflix-titles.json";
+import netflixData from "./data/netflix-titles.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
@@ -29,20 +29,17 @@ const movieSchema = new Schema({
 // Model
 const Movie = mongoose.model("Movie", movieSchema);
 
-// Seed the database (commented out after seeding), kept in code for later referencing
-/*
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    console.log("Resetting and seeding");
-    await Movie.deleteMany();
+// Seed the database
 
-    netflixData.forEach((movie) => {
-      new Movie(movie).save();
-    });
-  };
-  seedDatabase();
-}
-*/
+const seedDatabase = async () => {
+  console.log("Resetting and seeding");
+  await Movie.deleteMany();
+
+  netflixData.forEach((movie) => {
+    new Movie(movie).save();
+  });
+};
+seedDatabase();
 
 // Defines the port the app will run on.
 const port = process.env.PORT || 8080;
