@@ -8,6 +8,7 @@ dotenv.config();
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
 import avocadoSalesData from "./data/avocado-sales.json";
+import magicItemData from "./data/magic-items.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/avocado";
 mongoose.connect(mongoUrl);
@@ -15,15 +16,37 @@ mongoose.Promise = Promise;
 
 const MagicItem = mongoose.model("MagicItem", {
   name: String,
-  age: Number,
-  isFurry: Boolean,
+  price: Number,
+  instock: Boolean,
+  quantity: Number,
+  color: String,
 });
 
-MagicItem.deleteMany().then(() => {
-  new MagicItem({ name: "Alfons", age: 2, isFurry: true }).save();
-  new MagicItem({ name: "Sture", age: 4, isFurry: true }).save();
-  new MagicItem({ name: "Kiwi", age: 9, isFurry: false }).save();
-});
+if (process.env.RESET_DATABASE) {
+  MagicItem.deleteMany().then(() => {
+    new MagicItem({
+      name: "Lyckomynt",
+      price: 200,
+      instock: true,
+      quantity: 1,
+      color: "Gold",
+    }).save();
+    new MagicItem({
+      name: "Tors hammare",
+      price: 2000,
+      instock: false,
+      quantity: 0,
+      color: "Silver",
+    }).save();
+    new MagicItem({
+      name: "Evigt brinnande ljus",
+      price: 50,
+      instock: true,
+      quantity: 5,
+      color: "Bivaxgul",
+    }).save();
+  });
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -65,47 +88,78 @@ app.get("/items/:id", async (req, res) => {
   }
 });
 
+// Avocado Tree
+app.get("/avocado", (req, res) => {
+  let filterList = [...avocadoSalesData];
+
+  // Query for a specific region
+  const regionSearch = req.query.region;
+  if (regionSearch) {
+    filterList = filterList.filter((item) =>
+      item.region.toLowerCase().includes(regionSearch.toLowerCase())
+    );
+  }
+
+  // Query to filter out all entries at a price point higher than the query.
+  const priceSearch = req.query.lowestprice;
+  if (priceSearch) {
+    filterList = filterList.filter((item) => item.averagePrice >= +priceSearch);
+  }
+
+  if (filterList.length > 0) {
+    res.json(filterList);
+  } else {
+    res.status(404).send("No datapoint found!");
+  }
+});
+
+app.get("/avocado/:avocadoId", (req, res) => {
+  const { avocadoId } = req.params;
+  const item = avocadoSalesData.find((findItem) => +avocadoId === findItem.id);
+
+  if (item) {
+    res.send(item);
+  } else {
+    res.status(404).send("No avocado found with that Id!");
+  }
+});
+
+// MagicItem Tree
+app.get("/magic-item", (req, res) => {
+  let filterList = [...magicItemData];
+
+  // Query for a specific region
+  const colorSearch = req.query.color;
+  if (colorSearch) {
+    filterList = filterList.filter((item) =>
+      item.color.toLowerCase().includes(colorSearch.toLowerCase())
+    );
+  }
+  // Query to filter out all entries at a price point higher than the query.
+  const priceSearch = req.query.lowestprice;
+  if (priceSearch) {
+    filterList = filterList.filter((item) => item.price >= +priceSearch);
+  }
+
+  if (filterList.length > 0) {
+    res.json(filterList);
+  } else {
+    res.status(404).send("No datapoint found!");
+  }
+});
+
+app.get("/magic-item/:itemId", (req, res) => {
+  const { itemId } = req.params;
+  const item = magicItemData.find((findItem) => +itemId === findItem.id);
+
+  if (item) {
+    res.send(item);
+  } else {
+    res.status(404).send("No magical item found with that Id!");
+  }
+});
+
+// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-// // Avocado Tree
-// app.get("/avocado", (req, res) => {
-//   let filterList = [...avocadoSalesData];
-
-//   // Query for a specific region
-//   const regionSearch = req.query.region;
-//   if (regionSearch) {
-//     filterList = filterList.filter((item) =>
-//       item.region.toLowerCase().includes(regionSearch.toLowerCase())
-//     );
-//   }
-
-//   // Query to filter out all entries at a price point higher than the query.
-//   const priceSearch = req.query.lowestprice;
-//   if (priceSearch) {
-//     filterList = filterList.filter((item) => item.averagePrice >= +priceSearch);
-//   }
-
-//   if (filterList.length > 0) {
-//     res.json(filterList);
-//   } else {
-//     res.status(404).send("No datapoint found!");
-//   }
-// });
-
-// app.get("/avocado/:avocadoId", (req, res) => {
-//   const { avocadoId } = req.params;
-//   const item = avocadoSalesData.find((findItem) => +avocadoId === findItem.id);
-
-//   if (item) {
-//     res.send(item);
-//   } else {
-//     res.status(404).send("No avocado found with that Id!");
-//   }
-// });
-
-// // Start the server
-// app.listen(port, () => {
-//   console.log(`Server running on http://localhost:${port}`);
-// });
