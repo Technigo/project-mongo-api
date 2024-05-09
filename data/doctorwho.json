@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1,
+    "episode_title": "The Time of the Doctor",
+    "doctor_actor": "Matt Smith",
+    "companion": "Clara Oswald",
+    "summary": "The Doctor faces the final battle in Trenzalore and must confront the Time Lords to ensure the safety of the universe.",
+    "air_date": "2013-12-25"
+  },
+  {
+    "id": 2,
+    "episode_title": "The Eleventh Hour",
+    "doctor_actor": "Matt Smith",
+    "companion": "Amy Pond",
+    "summary": "The newly regenerated Eleventh Doctor crashes into Amy Pond's garden and must stop an alien threat from destroying Earth.",
+    "air_date": "2010-04-03"
+  },
+  {
+    "id": 3,
+    "episode_title": "The Day of the Doctor",
+    "doctor_actor": "David Tennant, Matt Smith, John Hurt",
+    "companion": "Clara Oswald",
+    "summary": "Multiple incarnations of the Doctor unite to solve the mystery of the Time War and make a choice that will define the future of the universe.",
+    "air_date": "2013-11-23"
+  },
+  {
+    "id": 4,
+    "episode_title": "Blink",
+    "doctor_actor": "David Tennant",
+    "companion": "Martha Jones",
+    "summary": "Sally Sparrow, an ordinary person, discovers the deadly Weeping Angels and must solve a mystery involving the Tenth Doctor and time travel.",
+    "air_date": "2007-06-09"
+  },
+  {
+    "id": 5,
+    "episode_title": "The Girl in the Fireplace",
+    "doctor_actor": "David Tennant",
+    "companion": "Rose Tyler",
+    "summary": "The Doctor encounters Madame de Pompadour in 18th-century France and must protect her from clockwork robots with sinister plans.",
+    "air_date": "2006-05-06"
+  },
+  {
+    "id": 6,
+    "episode_title": "The Christmas Invasion",
+    "doctor_actor": "David Tennant",
+    "companion": "Rose Tyler",
+    "summary": "The newly regenerated Tenth Doctor recovers as the Sycorax attempt to take over Earth. Rose must find a way to wake the Doctor.",
+    "air_date": "2005-12-25"
+  },
+  {
+    "id": 7,
+    "episode_title": "Rose",
+    "doctor_actor": "Christopher Eccleston",
+    "companion": "Rose Tyler",
+    "summary": "Rose Tyler meets the Ninth Doctor, who takes her on a journey through time and space, starting with an Auton invasion.",
+    "air_date": "2005-03-26"
+  },
+  {
+    "id": 8,
+    "episode_title": "The Empty Child",
+    "doctor_actor": "Christopher Eccleston",
+    "companion": "Rose Tyler",
+    "summary": "The Doctor and Rose visit London during the Blitz, encountering a mysterious child asking for his mummy and uncovering a dark secret.",
+    "air_date": "2005-05-21"
+  },
+  {
+    "id": 9,
+    "episode_title": "The Doctor Dances",
+    "doctor_actor": "Christopher Eccleston",
+    "companion": "Rose Tyler",
+    "summary": "Continuing from 'The Empty Child,' the Doctor and Rose must solve the mystery of the gas-mask zombies and save London from disaster.",
+    "air_date": "2005-05-28"
+  },
+  {
+    "id": 10,
+    "episode_title": "Human Nature",
+    "doctor_actor": "David Tennant",
+    "companion": "Martha Jones",
+    "summary": "The Doctor transforms into a human to hide from the Family of Blood, while Martha must protect him from imminent danger.",
+    "air_date": "2007-05-26"
+  },
+  {
+    "id": 11,
+    "episode_title": "The Family of Blood",
+    "doctor_actor": "David Tennant",
+    "companion": "Martha Jones",
+    "summary": "The Doctor, still in human form, must decide whether to return to his Time Lord identity to stop the Family of Blood.",
+    "air_date": "2007-06-02"
+  },
+  {
+    "id": 12,
+    "episode_title": "The End of Time",
+    "doctor_actor": "David Tennant",
+    "companion": "Wilfred Mott",
+    "summary": "The Tenth Doctor faces his final challenge as the Master returns and the Time Lords reappear, leading to a dramatic regeneration.",
+    "air_date": "2009-12-25"
+  },
+  {
+    "id": 13,
+    "episode_title": "The Stolen Earth",
+    "doctor_actor": "David Tennant",
+    "companion": "Donna Noble",
+    "summary": "The Doctor and his companions must save Earth as the Daleks return, threatening the entire universe.",
+    "air_date": "2008-06-28"
+  },
+  {
+    "id": 14,
+    "episode_title": "Journey's End",
+    "doctor_actor": "David Tennant",
+    "companion": "Donna Noble",
+    "summary": "In the continuation from 'The Stolen Earth,' the Doctor confronts Davros and the Daleks in a battle for Earth's survival.",
+    "air_date": "2008-07-05"
+  },
+  {
+    "id": 15,
+    "episode_title": "Vincent and the Doctor",
+    "doctor_actor": "Matt Smith",
+    "companion": "Amy Pond",
+    "summary": "The Doctor and Amy visit Vincent van Gogh and help him face a mysterious creature while exploring his mental health struggles.",
+    "air_date": "2010-06-05"
+  },
+  {
+    "id": 16,
+    "episode_title": "The Wedding of River Song",
+    "doctor_actor": "Matt Smith",
+    "companion": "River Song",
+    "summary": "The Doctor must unravel the mystery of Lake Silencio, where he's destined to die, leading to a pivotal moment with River Song.",
+    "air_date": "2011-10-01"
+  },
+  {
+    "id": 17,
+    "episode_title": "A Good Man Goes to War",
+    "doctor_actor": "Matt Smith",
+    "companion": "Amy Pond",
+    "summary": "The Doctor assembles an army to rescue Amy and her newborn child, leading to a shocking revelation about River Song.",
+    "air_date": "2011-06-04"
+  },
+  {
+    "id": 18,
+    "episode_title": "The Impossible Astronaut",
+    "doctor_actor": "Matt Smith",
+    "companion": "River Song",
+    "summary": "The Doctor, Amy, Rory, and River Song embark on a journey to 1960s America, where they encounter a new enemy: the Silence.",
+    "air_date": "2011-04-23"
+  },
+  {
+    "id": 19,
+    "episode_title": "The Pandorica Opens",
+    "doctor_actor": "Matt Smith",
+    "companion": "Amy Pond",
+    "summary": "The Doctor discovers a legendary prison known as the Pandorica, leading to a confrontation with his greatest enemies.",
+    "air_date": "2010-06-19"
+  },
+  {
+    "id": 20,
+    "episode_title": "The Big Bang",
+    "doctor_actor": "Matt Smith",
+    "companion": "Amy Pond",
+    "summary": "In the continuation from 'The Pandorica Opens,' the Doctor must reset the universe to save reality from collapsing.",
+    "air_date": "2010-06-26"
+  },
+  {
+    "id": 21,
+    "episode_title": "The Impossible Girl",
+    "doctor_actor": "Matt Smith",
+    "companion": "Clara Oswald",
+    "summary": "The Doctor investigates the mystery of Clara Oswald, who keeps appearing throughout history.",
+    "air_date": "2013-03-30"
+  },
+  {
+    "id": 22,
+    "episode_title": "The Name of the Doctor",
+    "doctor_actor": "Matt Smith",
+    "companion": "Clara Oswald",
+    "summary": "The Doctor is called to Trenzalore, where he learns the secret of his name and meets his past incarnations.",
+    "air_date": "2013-05-18"
+  },
+  {
+    "id": 23,
+    "episode_title": "Deep Breath",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "Clara Oswald",
+    "summary": "The newly regenerated Twelfth Doctor arrives in Victorian London and must uncover the mystery of the Half-Face Man.",
+    "air_date": "2014-08-23"
+  },
+  {
+    "id": 24,
+    "episode_title": "Dark Water",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "Clara Oswald",
+    "summary": "The Doctor and Clara discover the secrets of the Nethersphere and confront the Master, who has taken a new form as Missy.",
+    "air_date": "2014-11-01"
+  },
+  {
+    "id": 25,
+    "episode_title": "Death in Heaven",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "Clara Oswald",
+    "summary": "The Doctor battles Missy and the Cybermen as he tries to save Earth from an invasion.",
+    "air_date": "2014-11-08"
+  },
+  {
+    "id": 26,
+    "episode_title": "The Zygon Invasion",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "Clara Oswald",
+    "summary": "The Doctor deals with a rogue Zygon faction that threatens to break the peace between humans and Zygons.",
+    "air_date": "2015-10-31"
+  },
+  {
+    "id": 27,
+    "episode_title": "The Zygon Inversion",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "Clara Oswald",
+    "summary": "The Doctor must resolve the Zygon conflict and prevent a global war.",
+    "air_date": "2015-11-07"
+  },
+  {
+    "id": 28,
+    "episode_title": "Heaven Sent",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "None",
+    "summary": "The Doctor is trapped in a mysterious castle and must unravel its secrets to escape.",
+    "air_date": "2015-11-28"
+  },
+  {
+    "id": 29,
+    "episode_title": "Hell Bent",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "Clara Oswald",
+    "summary": "The Doctor returns to Gallifrey and faces the Time Lords, seeking revenge for what happened to Clara.",
+    "air_date": "2015-12-05"
+  },
+  {
+    "id": 30,
+    "episode_title": "The Pilot",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "Bill Potts",
+    "summary": "The Doctor meets Bill Potts and embarks on a new series of adventures involving a mysterious fluid creature.",
+    "air_date": "2017-04-15"
+  },
+  {
+    "id": 31,
+    "episode_title": "World Enough and Time",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "Bill Potts",
+    "summary": "The Doctor and his companions encounter the Mondasian Cybermen and the Master in a time-shifting spaceship.",
+    "air_date": "2017-06-24"
+  },
+  {
+    "id": 32,
+    "episode_title": "The Doctor Falls",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "Bill Potts",
+    "summary": "The Doctor battles the Cybermen and sacrifices himself to save his companions.",
+    "air_date": "2017-07-01"
+  },
+  {
+    "id": 33,
+    "episode_title": "Twice Upon a Time",
+    "doctor_actor": "Peter Capaldi",
+    "companion": "None",
+    "summary": "The Twelfth Doctor meets the First Doctor and must decide whether to regenerate or not.",
+    "air_date": "2017-12-25"
+  },
+  {
+    "id": 34,
+    "episode_title": "The Woman Who Fell to Earth",
+    "doctor_actor": "Jodie Whittaker",
+    "companion": "Yasmin Khan, Ryan Sinclair, Graham O'Brien",
+    "summary": "The newly regenerated Thirteenth Doctor arrives in Sheffield and teams up with new companions to battle an alien threat.",
+    "air_date": "2018-10-07"
+  },
+  {
+    "id": 35,
+    "episode_title": "Resolution",
+    "doctor_actor": "Jodie Whittaker",
+    "companion": "Yasmin Khan, Ryan Sinclair, Graham O'Brien",
+    "summary": "The Doctor and her companions face a resurrected Dalek as it threatens to conquer Earth.",
+    "air_date": "2019-01-01"
+  },
+  {
+    "id": 36,
+    "episode_title": "Spyfall, Part 1",
+    "doctor_actor": "Jodie Whittaker",
+    "companion": "Yasmin Khan, Ryan Sinclair, Graham O'Brien",
+    "summary": "The Doctor goes undercover as a spy to investigate a global threat, only to find that the Master has returned.",
+    "air_date": "2020-01-01"
+  },
+  {
+    "id": 37,
+    "episode_title": "Spyfall, Part 2",
+    "doctor_actor": "Jodie Whittaker",
+    "companion": "Yasmin Khan, Ryan Sinclair, Graham O'Brien",
+    "summary": "The Doctor and her companions must defeat the Master and a deadly threat from an alternate universe.",
+    "air_date": "2020-01-05"
+  },
+  {
+    "id": 38,
+    "episode_title": "The Timeless Children",
+    "doctor_actor": "Jodie Whittaker",
+    "companion": "Yasmin Khan, Ryan Sinclair, Graham O'Brien",
+    "summary": "The Doctor learns a shocking truth about her past and the true origin of the Time Lords.",
+    "air_date": "2020-03-01"
+  },
+  {
+    "id": 39,
+    "episode_title": "The Flux",
+    "doctor_actor": "Jodie Whittaker",
+    "companion": "Yasmin Khan, Dan Lewis",
+    "summary": "The Doctor and her companions face a universe-ending event as a mysterious force known as the Flux threatens reality.",
+    "air_date": "2021-10-31"
+  },
+  {
+    "id": 40,
+    "episode_title": "The Power of the Doctor",
+    "doctor_actor": "Jodie Whittaker",
+    "companion": "Yasmin Khan, Dan Lewis",
+    "summary": "The Doctor's final adventure leads to a confrontation with the Master and a dramatic regeneration.",
+    "air_date": "2022-10-23"
+  }
+]
