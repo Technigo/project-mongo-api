@@ -59,7 +59,7 @@ app.get("/restaurants", async (req, res) => {
 //Filter one restaurant based on ID
 app.get("/restaurants/:restaurantId", async (req, res) => {
   const { restaurantId } = req.params
-
+  
   if (isNaN(restaurantId)) {
     return res
       .status(400)
@@ -67,10 +67,8 @@ app.get("/restaurants/:restaurantId", async (req, res) => {
         "Invalid restaurant ID. Please search for a number between 1 and 6700"
       )
   }
-
   try {
     const restaurant = await Restaurant.findOne({ id: restaurantId })
-
     if (restaurant) {
       res.json(restaurant)
     } else {
@@ -85,10 +83,10 @@ app.get("/restaurants/:restaurantId", async (req, res) => {
     res.status(500).send("Internal Server Error")
   }
 })
-// Filter on id "/restaurants/:id"
-// Filter on name "/"/restaurants/:name"
 
-// All unique cuisines
+// Filter on name "/restaurants/:name"
+
+// Get all unique cuisines
 app.get("/cuisines", async (req, res) => {
   try {
     const uniqueCuisines = await Restaurant.distinct("cuisine")
