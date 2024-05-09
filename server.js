@@ -2,12 +2,13 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
+
 import expressListEndpoints from 'express-list-endpoints'
 
 dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/dogs'
-mongoose.connect(mongoUrl, { dbName: 'firstMongoProject' })
+mongoose.connect(mongoUrl)
 mongoose.Promise = Promise
 
 const Dog = mongoose.model('Dog', {
@@ -20,7 +21,7 @@ const Dog = mongoose.model('Dog', {
   likes_toys: Boolean,
 })
 
-const port = process.env.PORT || 8888
+const port = process.env.PORT || 8080
 const app = express()
 
 // Add middlewares to enable cors and json body parsing
