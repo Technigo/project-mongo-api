@@ -1,4 +1,5 @@
 import express from "express";
+import expressListEndpoints from "express-list-endpoints";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -23,29 +24,39 @@ const MagicItem = mongoose.model("MagicItem", {
 });
 
 if (process.env.RESET_DATABASE) {
-  MagicItem.deleteMany().then(() => {
-    new MagicItem({
-      name: "Lyckomynt",
-      price: 200,
-      instock: true,
-      quantity: 1,
-      color: "Gold",
-    }).save();
-    new MagicItem({
-      name: "Tors hammare",
-      price: 2000,
-      instock: false,
-      quantity: 0,
-      color: "Silver",
-    }).save();
-    new MagicItem({
-      name: "Evigt brinnande ljus",
-      price: 50,
-      instock: true,
-      quantity: 5,
-      color: "Bivaxgul",
-    }).save();
-  });
+  const seedDatabase = async () => {
+    await MagicItem.deleteMany({});
+
+    magicItemData.forEach((itemData) => {
+      new MagicItem(itemData).save;
+    });
+  };
+
+  seedDatabase();
+
+  // MagicItem.deleteMany().then(() => {
+  //   new MagicItem({
+  //     name: "Lyckomynt",
+  //     price: 200,
+  //     instock: true,
+  //     quantity: 1,
+  //     color: "Gold",
+  //   }).save();
+  //   new MagicItem({
+  //     name: "Tors hammare",
+  //     price: 2000,
+  //     instock: false,
+  //     quantity: 0,
+  //     color: "Silver",
+  //   }).save();
+  //   new MagicItem({
+  //     name: "Evigt brinnande ljus",
+  //     price: 50,
+  //     instock: true,
+  //     quantity: 5,
+  //     color: "Bivaxgul",
+  //   }).save();
+  // });
 }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
@@ -68,11 +79,11 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  // const endpoints = expressListEndpoints(app);
-  // res.json(endpoints);
-  MagicItem.find().then((items) => {
-    res.json(items);
-  });
+  const endpoints = expressListEndpoints(app);
+  res.json(endpoints);
+  // MagicItem.find().then((items) => {
+  //   res.json(items);
+  // });
 });
 
 app.get("/items/:id", async (req, res) => {
@@ -125,7 +136,7 @@ app.get("/avocado/:avocadoId", (req, res) => {
 });
 
 // MagicItem Tree
-app.get("/magic-item", (req, res) => {
+app.get("/magic-items", (req, res) => {
   let filterList = [...magicItemData];
 
   // Query for a specific region
@@ -136,9 +147,9 @@ app.get("/magic-item", (req, res) => {
     );
   }
   // Query to filter out all entries at a price point higher than the query.
-  const priceSearch = req.query.lowestprice;
+  const priceSearch = req.query.price;
   if (priceSearch) {
-    filterList = filterList.filter((item) => item.price >= +priceSearch);
+    filterList = filterList.filter((item) => item.price <= +priceSearch);
   }
 
   if (filterList.length > 0) {
@@ -148,7 +159,7 @@ app.get("/magic-item", (req, res) => {
   }
 });
 
-app.get("/magic-item/:itemId", (req, res) => {
+app.get("/magic-items/:itemId", (req, res) => {
   const { itemId } = req.params;
   const item = magicItemData.find((findItem) => +itemId === findItem.id);
 
