@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
@@ -5,6 +6,9 @@ import listEndpoints from "express-list-endpoints";
 
 import netflixData from "./data/netflix-titles.json";
 import Movie from "./model/Movie.js";
+
+// Load environment variables
+dotenv.config();
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -22,7 +26,6 @@ mongoose.Promise = Promise;
 if (process.env.RESET_DB) {
   const seedDatabased = async () => {
     await Movie.deleteMany({});
-    //({ type: "Movie" }); // Remove all documents of type "Movie"
 
     netflixData.forEach((movieData) => {
       new Movie(movieData).save();
@@ -96,6 +99,7 @@ app.get("/tvshows", async (req, res) => {
 
 // route to get a single result
 //http://localhost:8000/movie?title=Chip and Potato
+//http://localhost:8000/movie?director=Mandla Dube
 app.get("/movie", async (req, res) => {
   const { title, director } = req.query;
 
@@ -103,39 +107,34 @@ app.get("/movie", async (req, res) => {
   if (title) {
     filter.title = title;
   }
-  //http://localhost:8000/movie?director=Mandla Dube
+
   if (director) {
     filter.director = director;
   }
 
-  const movie = await Movie.findOne(filter); //Find a single movie
-  if (!movie) {
-    return res.status(404).send("Movie not found");
+  try {
+    const movie = await Movie.findOne(filter); // Find a single movie
+
+    if (!movie) {
+      return res.status(404).send({
+        error: "Content not avaiable",
+        message: "No matching content found for the given criteria",
+      });
+    }
+
+    res.json(movie);
+  } catch (error) {
+    res.status(500).send("An error occurred while fetching the movie");
   }
-  res.json(movie);
 });
 
-/* // Route with optional query parameters (e.g., year)
-app.get('/search', async (req, res) => {
-  try {
-    const { type, year } = req.query;
-    const filter = {};
-
-    if (type) {
-      filter.type = type;
-    }
-
-    if (year) {
-      filter.release_year = parseInt(year, 10); // Convert string to integer
-    }
-
-    const results = await Movie.find(filter);
-    res.json(results);
-  } catch (error) {
-    console.error("Error performing search:", error);
-    res.status(500).send("Error performing search");
-  }
-}); */
+// Custom 404 handler for undefined routes
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Route not found",
+    message: `The requested route ${req.originalUrl} does not exist.`,
+  });
+});
 
 // Start the server
 app.listen(port, () => {
