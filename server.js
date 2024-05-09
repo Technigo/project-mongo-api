@@ -7,7 +7,7 @@ import expressListEndpoints from 'express-list-endpoints'
 dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/dogs'
-mongoose.connect(mongoUrl)
+mongoose.connect(mongoUrl, { dbName: 'firstMongoProject' })
 mongoose.Promise = Promise
 
 const Dog = mongoose.model('Dog', {
