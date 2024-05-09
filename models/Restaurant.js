@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 const { Schema } = mongoose
+
 // Define schema
 const restaurantSchema = new Schema({
   name: {
@@ -32,5 +33,5 @@ const restaurantSchema = new Schema({
   },
 })
 
-// Create model
+// Create model with mongoose
 export const Restaurant = mongoose.model("Restaurant", restaurantSchema)

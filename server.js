@@ -5,15 +5,19 @@ import expressListEndpoints from "express-list-endpoints"
 import { Restaurant } from "./models/Restaurant"
 import michelinData from "./data/michelin-data.json"
 
+//Set up MongoURL and localhost
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/restaurants"
 mongoose.connect(mongoUrl)
 mongoose.Promise = Promise
 
-const seedDatabase = async () => {
-  await Restaurant.deleteMany()
-  await Restaurant.insertMany(michelinData)
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Restaurant.deleteMany()
+    //insert each document in the array into the collection
+    await Restaurant.insertMany(michelinData)
+  }
+  seedDatabase()
 }
-seedDatabase()
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -33,12 +37,22 @@ app.get("/", (req, res) => {
 
 // All restaurants
 app.get("/restaurants", async (req, res) => {
-  const allRestaurants = await Restaurant.find()
+  //Parse query parameters for pagination
+  const page = parseInt(req.query.page) || 1 //Defaults to page 1 if invalid
+  const limit = 100 //Display 100 restaurants per page
+  const skip = (page - 1) * limit //Calc the number of restos to skip for current page
 
-  if (allRestaurants.length > 0) {
-    res.json(allRestaurants)
-  } else {
-    res.status(404).send("No restaurants with this criteria")
+  try {
+    const allRestaurants = await Restaurant.find().skip(skip).limit(limit)
+
+    if (allRestaurants.length > 0) {
+      res.json(allRestaurants)
+    } else {
+      res.status(404).send("No restaurants with this criteria")
+    }
+  } catch (error) {
+    console.error("Error fetching restaurants", error)
+    res.status(500).send("Internal Server Error")
   }
 })
 
@@ -78,9 +92,11 @@ app.get("/cuisines/:cuisine", async (req, res) => {
   }
 })
 
-// Filter on name
-// Filter on id
 // Filter on location
+
+// Filter on name
+
+// Filter on id
 
 // Start the server
 app.listen(port, () => {
