@@ -58,7 +58,7 @@ app.get("/restaurants", async (req, res) => {
 
 //Filter one restaurant based on ID or name
 app.get("/restaurants/:query", async (req, res) => {
-  const { query } = +req.params
+  const { query } = req.params
 
   //Give message if query is a number (indicates ID search)
   if (!isNaN(query)) {
