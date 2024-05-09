@@ -1,13 +1,13 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project implements an API service using the database hosted on MongoDB Atlas and utilises mongoose package to interact with the database.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+- Installed MongoDB compass, mongoose package and MongoDB to equip the project with the complete setup.
+- Used mongoose/MongoDB methods to sort, filter and limit the results.
+- Managed to use the aggregation pipeline in MongoDB which executes complex data manipulation.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://my-mongo-api.onrender.com
