@@ -31,6 +31,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
+});
+
 // Start defining your routes here
 app.get("/", (req, res) => {
   // const endpoints = expressListEndpoints(app);
@@ -40,14 +48,17 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/:name", (req, res) => {
-  MagicItem.findOne({ name: req.params.name }).then((item) => {
+app.get("/items/:id", async (req, res) => {
+  try {
+    const item = await MagicItem.findById(req.params.id);
     if (item) {
       res.json(item);
     } else {
       res.status(404).json({ error: "Not found" });
     }
-  });
+  } catch (err) {
+    res.status(400).json({ error: "Invalid user ID" });
+  }
 });
 
 app.listen(port, () => {
