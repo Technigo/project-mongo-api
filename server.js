@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // If you're using one of our datasets, uncomment the appropriate import below
 // to get started!
@@ -18,7 +21,8 @@ const MagicItem = mongoose.model("MagicItem", {
 
 MagicItem.deleteMany().then(() => {
   new MagicItem({ name: "Alfons", age: 2, isFurry: true }).save();
-  new MagicItem({ name: "Sture", age: 4, isFurry: false }).save();
+  new MagicItem({ name: "Sture", age: 4, isFurry: true }).save();
+  new MagicItem({ name: "Kiwi", age: 9, isFurry: false }).save();
 });
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
