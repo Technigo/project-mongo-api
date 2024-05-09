@@ -1,12 +1,33 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-// import expressListEndpoints from "express-list-endpoints";
+import expressListEndpoints from "express-list-endpoints";
 import topMusicData from "./data/top-music.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
+
+const { Schema } = mongoose;
+
+// Schema
+const musicSchema = new Schema({
+  trackName: String,
+  artistName: String,
+  genre: String,
+  bpm: Number,
+  energy: Number,
+  danceability: Number,
+  loudness: Number,
+  liveness: Number,
+  valence: Number,
+  length: Number,
+  acousticness: Number,
+  speechiness: Number,
+  populariy: Number,
+});
+
+const MusicModel = mongoose.model("Music", Music);
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -22,11 +43,9 @@ app.use(express.json());
 
 // http://localhost:8080/
 app.get("/", (req, res) => {
-  res.send("Top 50 popular songs on spotify");
-  /*
   const endpoints = expressListEndpoints(app);
+
   res.json(endpoints);
-  */
 });
 
 // Get all songs
