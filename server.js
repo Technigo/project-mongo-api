@@ -3,7 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import expressListEndpoints from 'express-list-endpoints'
-import questionData from './data/Jeopardy.json'
+import questionData from './data/Questions.json'
 import Questions from './model/questionSchema'
 
 dotenv.config()
