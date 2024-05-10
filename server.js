@@ -1,35 +1,88 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import express from 'express'
+import cors from 'cors'
+import mongoose from 'mongoose'
+//import dotenv from 'dotenv'
+import expressListEndpoints from 'express-list-endpoints'
+import questionData from './data/Jeopardy.json'
+import Questions from './model/questionSchema'
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+//dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-mongo'
+mongoose.connect(mongoUrl)
+mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
+const seedDatabase = async () => {
+  await Questions.deleteMany()
+  questionData.forEach((question) => {
+    new Questions(question).save()
+  })
+}
+seedDatabase()
+
+const port = process.env.PORT || 8080
+const app = express()
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+app.route('/').get((req, res) => {
+  const endpoints = expressListEndpoints(app)
+  res.send(endpoints)
+})
+
+app.get('/questions', async (req, res) => {
+  const questions = await Questions.find()
+  if (questions) {
+    res.json(questions)
+  } else {
+    res.status(404).json({ error: 'Could not find any Questions' })
+  }
+})
+app.get('/question/:id', async (req, res) => {
+  const id = await Questions.findOne({ id: req.params.id })
+  if (id) {
+    res.json(id)
+  } else {
+    res
+      .status(404)
+      .json({
+        error:
+          'Could not find a question with this id, the id:s go from 0 - 424',
+      })
+  }
+})
+
+app.get('/category/:category', async (req, res) => {
+  const category = await Questions.find({ category: req.params.category })
+  if (category) {
+    res.json(category)
+  } else {
+    res
+      .status(404)
+      .json({
+        error:
+          'Could not find this category, try endpoints like: /Sport, /Swiss Cheese Fondue, /Japan or /Beyoncé',
+      })
+  }
+})
+
+app.get('/difficulty/:difficulty', async (req, res) => {
+  const difficulty = await Questions.find({ difficulty: req.params.difficulty })
+  if (difficulty) {
+    res.json(difficulty)
+  } else {
+    res
+      .status(404)
+      .json({
+        error:
+          'Could not find any questions of this difficulty level, try /Easy or /Medium or /Hard',
+      })
+  }
+})
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+  console.log(`Server running on http://localhost:${port}`)
+})
