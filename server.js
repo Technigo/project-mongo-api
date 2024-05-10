@@ -13,6 +13,13 @@ mongoose.Promise = Promise
 // Add middlewares to enable cors and json body parsing
 app.use(cors())
 app.use(express.json())
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next()
+  } else {
+    res.status(503).json({ error: "Service unavailable." })
+  }
+})
 
 //Schemas and models
 const { Schema } = mongoose
@@ -50,18 +57,19 @@ app.get("/", (req, res) => {
   res.send(endpoints)
 })
 
-/*app.get("/authors", async (req, res) => {
-  const authors = await Author.find();
-  res.json(authors)
-})
-
-*/
-
 // Get all books
 app.get("/books", async (req, res) => {
   const books = await Book.find()
-
-  if (books.length > 0) {
+  const title = req.query.title
+  let result = ""
+  if (title) {
+    result = await Book.find({ title: { $regex: q, $options: "i" }})
+    if (result.length > 0) {
+      res.json(result)
+    } else {
+      res.status(404).send({ error: "No books found." })
+    }
+  } else if (books.length > 0) {
     res.json(books)
   } else {
     res.status(404).json({ error: "No books found." })
@@ -76,12 +84,15 @@ app.get("/books/popular", async (req, res) => {
 
 // Get one book based on id
 app.get("/books/:id", async (req, res) => {
-  const book = await Book.findById(req.params.id).exec()
-
-  if (book) {
-    res.json(book)
-  } else {
-    res.status(404).json({ error: "No book found." })
+  try {
+    const book = await Book.findById(req.params.id).exec()
+    if (book) {
+      res.json(book)
+    } else {
+      res.status(404).json({ error: "No book found." })
+    }
+  } catch (error) {
+    res.status(400).json({error: "Invalid id."})
   }
 })
 
