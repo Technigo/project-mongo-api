@@ -21,6 +21,9 @@
     "fs": "^0.0.1-security",
     "mongodb": "^6.6.1",
     "mongoose": "^8.3.3",
-    "nodemon": "^3.0.1"
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0"
   }
 }
