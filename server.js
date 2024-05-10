@@ -2,9 +2,12 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import expressListEndpoints from "express-list-endpoints";
+import dotenv from "dotenv";
 
 //import data
 import whoData from "./data/doctorwho.json";
+
+dotenv.config();
 
 //establish connection to MongoDB database using Mongoose
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/doctorwho-data";

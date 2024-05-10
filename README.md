@@ -1,12 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week I have been working on building an API using MongoDB. It contains 7 routes, again using my Doctor Who data from last week, but adding some more data to the dataset. Still needed some fun data to work with. 😉
+I tried to replicate last week's endpoints using MongoDB.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The main problem was actually setting up and connecting all the tools and setting up the database. After that it was pretty straightforward.
 
 ## View it live
 
