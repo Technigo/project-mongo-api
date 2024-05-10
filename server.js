@@ -84,6 +84,7 @@ app.get("/flowers", async (req, res) => {
 });
 
 // Get a single flower by ID or numeric ID
+// Example: https://project-mongo-api-wncr.onrender.com/flowers/6
 app.get("/flowers/:id", async (req, res) => {
   try {
     let flower;
