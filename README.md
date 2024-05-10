@@ -14,7 +14,7 @@ This project was about learning some new backend tools, like mongoose schemas an
 
 ## View it live
 
-https://quiz-api-3a1v.onrender.com/https://quiz-api-3a1v.onrender.com/
+https://quiz-api-3a1v.onrender.com/
 
 Endpoints are:  /questions
                 /questions?page=2
