@@ -4,10 +4,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import expressListEndpoints from "express-list-endpoints";
 import booksData from "./data/books.json";
+import { BookSchema } from "./models/BookSchema";
 
 // Configure dotenv
 dotenv.config();
-
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
 mongoose.connect(mongoUrl);
@@ -23,9 +23,26 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// Middleware to check database status
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable" });
+  }
+});
+
+// API documentation route
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  try {
+    const endpoints = expressListEndpoints(app);
+    res.json(endpoints);
+  } catch (error) {
+    console.error("Error", error);
+    res
+      .status(500)
+      .send("This page is unavaliable at the moment. Please try again later.");
+  }
 });
 
 // Start the server
