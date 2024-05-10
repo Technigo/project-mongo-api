@@ -3,9 +3,8 @@ import dotenv from "dotenv";
 import express from "express";
 import expressListEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
+
 import Book from "./models/bookSchema";
-/* const Book = require("./models/bookSchema"); */
-/* const books = require("./routes/books"); */
 
 // Getting env file
 dotenv.config();
@@ -48,10 +47,6 @@ app.get("/", (req, res) => {
 });
 
 // All other endpoints
-/* 
-app.use("/books", books);
- */
-
 app.get("/books", async (req, res) => {
   const allBooks = await Book.find();
   const showTitle = req.query.title;
