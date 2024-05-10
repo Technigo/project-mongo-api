@@ -5,8 +5,8 @@
   "description": "mongo db project with express to create a book api",
   "scripts": {
     "seed": "SEED_DB=true node seedDatabase.js",
-    "start": "babel-node server.js",
-    "dev": "nodemon server.js --exec babel-node"
+    "start": "pm2 start server.js --interpreter babel-node",
+    "dev": "pm2-dev start server.js --interpreter babel-node"
   },
   "author": "",
   "license": "ISC",
