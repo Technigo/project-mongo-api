@@ -5,13 +5,23 @@ import listEndpoints from "express-list-endpoints"
 import booksRouter from "./routes/books.js"
 import updateBookRouter from "./routes/updateBook.js"
 import bookRouter from "./routes/book.js"
+import dotenv from "dotenv"
+import importBooks from "./server/importBooks.js"
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+dotenv.config()
 
-mongoose
-  .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB connected..."))
-  .catch((err) => console.log(err))
+mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`, {
+  dbName: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  pass: process.env.DB_PASS,
+})
+
+const db = mongoose.connection
+db.on("error", console.error.bind(console, "Anslutningsfel:"))
+db.once("open", () => {
+  console.log("Ansluten till databasen")
+  importBooks()
+})
 
 const port = process.env.PORT || 8080
 const app = express()
