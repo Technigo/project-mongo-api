@@ -47,7 +47,7 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!")
+  res.send(endpoints)
 })
 
 /*app.get("/authors", async (req, res) => {
@@ -55,35 +55,65 @@ app.get("/", (req, res) => {
   res.json(authors)
 })
 
-app.get("/authors/:id", async (req, res) => {
-  const author = await Author.findById(req.params.id);
-  if (author) {
-    res.json(author);
-  } else {
-    res.status(404).json({ error: "Author not found." });
-  }
-});
+*/
 
-app.get("/authors/:id/books", async (req, res) => {
-  const author = await Author.findById(req.params.id);
-  if (author) {
-    const books = await Book.find({
-      author: mongoose.Types.ObjectId.createFromHexString(author.id),
-    });
-    res.json(books);
-  } else {
-    res.status(404).json({ error: "Author not found." });
-  }
-});*/
-
+// Get all books
 app.get("/books", async (req, res) => {
-  //const books = await Book.find().populate("author");
   const books = await Book.find()
-  res.json(books)
+
+  if (books.length > 0) {
+    res.json(books)
+  } else {
+    res.status(404).json({ error: "No books found." })
+  }
 })
+
+// Query to sort by rating
+app.get("/books/popular", async (req, res) => {
+  const popularBooks = await Book.find().sort({ average_rating: -1 })
+  res.json(popularBooks)
+})
+
+// Get one book based on id
+app.get("/books/:id", async (req, res) => {
+  const book = await Book.findById(req.params.id).exec()
+
+  if (book) {
+    res.json(book)
+  } else {
+    res.status(404).json({ error: "No book found." })
+  }
+})
+
+// Get a list of authors
+/*app.get("/authors", async (req, res) => {
+  const books = await Book.find()
+  const authors = books.sort({authors})
+    .map((book) => book.artistName)
+  //const uniqueAuthors = [...new Set(authors)]
+  res.json(authors)
+})*/
+
+// Get all books from an author
+app.get("/authors/:author", async (req, res) => {
+  const authorName = req.params.author
+  const booksFromAuthor = await Book.find({ 
+      authors: { $regex: authorName, $options: "i" } 
+    })
+  if (booksFromAuthor.length > 0) {
+    res.json(booksFromAuthor)
+  } else {
+    res.status(404).json({ error: "No books found by the author." })
+  }
+})
+
+// Query to find a title.toLowerCase().replace(/ /g, "-").replace(".", "")
+
+
+
+const endpoints = expressListEndpoints(app)
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
-
