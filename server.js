@@ -26,18 +26,18 @@ const episodeSchema = new Schema({
 const Episode = mongoose.model("Episode", episodeSchema);
 
 //seed the database
-if (process.env.RESET_DATABASE) {
-  const seedDatabase = async () => {
-    console.log("resetting and seeding data!");
-    //clear existing data
-    await Episode.deleteMany();
-    //add episodes from json-file
-    whoData.forEach((episode) => {
-      new Episode(episode).save();
-    });
-  };
-  seedDatabase();
-}
+// if (process.env.RESET_DATABASE) {
+//   const seedDatabase = async () => {
+//     console.log("resetting and seeding data!");
+//     //clear existing data
+//     await Episode.deleteMany();
+//     //add episodes from json-file
+//     whoData.forEach((episode) => {
+//       new Episode(episode).save();
+//     });
+//   };
+//   seedDatabase();
+// }
 
 //defines the port the app will run on
 const port = process.env.PORT || 8080;
@@ -46,6 +46,15 @@ const app = express();
 //add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+
+//middleware to check if database is available
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "service unavailable" });
+  }
+});
 
 //routes
 app.get("/", (req, res) => {
@@ -64,13 +73,18 @@ app.get("/episodes", async (req, res) => {
 //example: http://localhost:8080/episodes/663cfb0ddd4f5638407bc5ae
 app.get("/episodes/:episodeId", async (req, res) => {
   const { episodeId } = req.params;
+  try {
+    const episode = await Episode.findById(episodeId);
 
-  const episode = await Episode.findById(episodeId);
-
-  if (episode) {
-    res.json(episode);
-  } else {
-    res.status(404).json({ message: `Episode with ID ${episodeId} not found` });
+    if (episode) {
+      res.json(episode);
+    } else {
+      res
+        .status(404)
+        .json({ message: `Episode with ID ${episodeId} not found` });
+    }
+  } catch (err) {
+    res.status(400).json({ error: "Invalid ID" });
   }
 });
 
@@ -94,7 +108,7 @@ app.get("/episodes/airdate/:date", async (req, res) => {
 //example: http://localhost:8080/episodes/actor/jodie%20whittaker
 app.get("/episodes/actor/:actorName", async (req, res) => {
   const { actorName } = req.params;
-  //search for episodes where the actor matches the given name (case-insensitive)
+  //search for episodes where the actor matches the given name (case-insensitive because of $options: "i")
   const filteredEpisodes = await Episode.find({
     doctor_actor: { $regex: `^${actorName.trim()}$`, $options: "i" },
   });
@@ -134,23 +148,22 @@ app.get("/companions", async (req, res) => {
 });
 
 //7️⃣ endpoint to get a list of episodes per year based on air_date
-//example: http://localhost:8080/episodes/year/2010
+//example: http://localhost:8080/episodes/year/2021
 app.get("/episodes/year/:year", async (req, res) => {
   const { year } = req.params;
 
-  // Use a MongoDB query to find episodes where the `air_date` starts with the given year
   const filteredEpisodes = await Episode.find({
-    air_date: { $regex: `^${year}`, $options: "i" }, // Case-insensitive, beginning of the string
+    air_date: { $regex: `^${year}` }, // ^ => match must start at beginning of the string
   });
 
   if (filteredEpisodes.length > 0) {
-    res.json(filteredEpisodes); // Return the list of episodes for the specified year
+    res.json(filteredEpisodes);
   } else {
-    res.status(404).json({ message: `No episodes found for year ${year}` }); // No matches
+    res.status(404).json({ message: `No episodes found for year ${year}` });
   }
 });
 
-// Start the server
+//start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
