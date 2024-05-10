@@ -6,9 +6,10 @@ import expressListEndpoints from "express-list-endpoints";
 import booksData from "./data/books.json";
 
 // Configure dotenv
-require("dotenv").config();
+dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
