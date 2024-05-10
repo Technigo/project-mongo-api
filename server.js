@@ -42,62 +42,98 @@ app.use(express.json());
 
 // API Documentation with express list endpoints
 app.get("/", (req, res) => {
-  const endpoints = expressListEndpoints(app);
-  res.json(endpoints);
+  try {
+    const endpoints = expressListEndpoints(app);
+    res.json(endpoints);
+  } catch (error) {
+    console.error("The following error occured:", error);
+    res
+      .status(500)
+      .send(
+        "Sorry, this page is not available at the moment. Please try again later."
+      );
+  }
 });
 
 // All other endpoints
 app.get("/books", async (req, res) => {
-  const allBooks = await Book.find();
-  const showTitle = req.query.title;
+  try {
+    const allBooks = await Book.find();
+    const showTitle = req.query.title;
 
-  if (showTitle) {
-    const titleSearch = async (showTitle) => {
-      const resultsTitle = await Book.find({
-        title: { $regex: new RegExp(showTitle, "i") },
-      });
-      return resultsTitle;
-    };
-    const titleResults = await titleSearch(showTitle);
-    if (titleResults.length > 0) {
-      res.json(titleResults);
+    if (showTitle) {
+      const titleSearch = async (showTitle) => {
+        const resultsTitle = await Book.find({
+          title: { $regex: new RegExp(showTitle, "i") },
+        });
+        return resultsTitle;
+      };
+      const titleResults = await titleSearch(showTitle);
+      if (titleResults.length > 0) {
+        res.json(titleResults);
+      } else {
+        res
+          .status(404)
+          .send("Sorry, we couldn't find any books with that title.");
+      }
     } else {
-      res
-        .status(404)
-        .send("Sorry, we couldn't find any books with that title.");
+      res.json(allBooks);
     }
-  } else {
-    res.json(allBooks);
+  } catch (error) {
+    console.error("The following error occured:", error);
+    res
+      .status(500)
+      .send(
+        "Sorry, this page is not available at the moment. Please try again later."
+      );
   }
 });
 
 app.get("/books/:bookId", async (req, res) => {
-  const { bookId } = req.params;
-  const book = await Book.findOne({ bookID: bookId }).exec();
+  try {
+    const { bookId } = req.params;
+    const book = await Book.findOne({ bookID: bookId }).exec();
 
-  if (book) {
-    res.json(book);
-  } else {
-    res.status(404).send("Sorry, there is no book with that ID.");
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).send("Sorry, there is no book with that ID.");
+    }
+  } catch (error) {
+    console.error("The following error occured:", error);
+    res
+      .status(500)
+      .send(
+        "Sorry, this page is not available at the moment. Please try again later."
+      );
   }
 });
 
 app.get("/averageratings/:ratingNum", async (req, res) => {
-  const { ratingNum } = req.params;
+  try {
+    const { ratingNum } = req.params;
 
-  const matchingBooks = await Book.find({
-    average_rating: {
-      $gte: parseFloat(ratingNum) - 0.5,
-      $lt: parseFloat(ratingNum) + 0.5,
-    },
-  });
+    const matchingBooks = await Book.find({
+      average_rating: {
+        $gte: parseFloat(ratingNum) - 0.5,
+        $lt: parseFloat(ratingNum) + 0.5,
+      },
+    });
 
-  if (matchingBooks.length > 0) {
-    res.json(matchingBooks);
-  } else if (matchingBooks.length === 0) {
+    if (matchingBooks.length > 0) {
+      res.json(matchingBooks);
+    } else if (matchingBooks.length === 0) {
+      res
+        .status(404)
+        .send("Sorry, we couldn't find any books with that average rating.");
+    }
+  } catch (error) {
+    console.error("The following error occured:", error);
     res
-      .status(404)
-      .send("Sorry, we couldn't find any books with that average rating.");
+      .status(500)
+      .send(
+        "Sorry, this page is not available at the moment. Please try again later."
+      );
   }
 });
 
