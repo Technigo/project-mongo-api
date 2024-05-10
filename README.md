@@ -9,7 +9,7 @@ If i had more time i would look into making a frontend for this project, and dve
 I started out with reading about the requirements for the assignement. Then I started working on it like i did with the previous task, and then looked up how i need to rewrite it to use mongoose methods.
 after a made a lot of endpoints, added some filters, and then added the possibility to add, update and delete entries in my db.
 afterwards i tried to clean up my server file and split it into a file for the model, then a file for all routes, and a file for seeding the database who will run if i choose to run npm run seed.
-
+then i looked into how i could improve my error handling and logging. then i and added winston and morgan to my project as well.
 
 ## View it live
 
