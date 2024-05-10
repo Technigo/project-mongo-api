@@ -5,13 +5,14 @@
   "description": "mongo db project with express to create a book api",
   "scripts": {
     "seed": "SEED_DB=true node seedDatabase.js",
-    "start": "pm2 start server.js --interpreter babel-node",
-    "dev": "pm2-dev start server.js --interpreter babel-node"
+    "start": "pm2 start server.js --interpreter @babel/node",
+    "dev": "pm2-dev start server.js --interpreter @babel/node"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.17.9",
+    "@babel/cli": "^7.24.5",
+    "@babel/core": "^7.24.5",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
     "cors": "^2.8.5",
