@@ -30,15 +30,17 @@ const netflixTitleSchema = new Schema({
 const NetflixTitle = mongoose.model("NetflixTitle", netflixTitleSchema);
 
 // Seed the database
-const seedDatabase = async () => {
-  console.log("Resetting and seeding");
-  await NetflixTitle.deleteMany();
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    console.log("Resetting and seeding");
+    await NetflixTitle.deleteMany();
 
-  netflixData.forEach((item) => {
-    new NetflixTitle(item).save();
-  });
-};
-seedDatabase();
+    netflixData.forEach((item) => {
+      new NetflixTitle(item).save();
+    });
+  };
+  seedDatabase();
+}
 
 // Defines the port the app will run on.
 const port = process.env.PORT || 8080;
