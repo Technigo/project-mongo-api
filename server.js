@@ -1,20 +1,12 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
+import listEndpoints from "express-list-endpoints"
 import booksRouter from "./routes/books.js"
+import updateBookRouter from "./routes/updateBook.js"
+import bookRouter from "./routes/book.js"
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-
-const apiRoutes = [
-  {
-    path: "/",
-    methods: ["GET"],
-  },
-  {
-    path: "/books",
-    methods: ["GET"],
-  },
-]
 
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -28,10 +20,13 @@ app.use(cors())
 app.use(express.json())
 
 app.get("/", (req, res) => {
-  res.json(apiRoutes)
+  const endpoints = listEndpoints(app)
+  res.json(endpoints)
 })
 
 app.use("/books", booksRouter)
+app.use("/update-book", updateBookRouter)
+app.use("/book", bookRouter)
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
