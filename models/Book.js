@@ -8,11 +8,11 @@ const BookSchema = new Schema({
   bookID: Number,
   title: {
     type: String,
-    required: true
+    required: true,
   },
   authors: {
     type: String,
-    required: true
+    required: true,
   },
   average_rating: Number,
   isbn: {
@@ -22,17 +22,29 @@ const BookSchema = new Schema({
   },
   isbn13: {
     type: Number,
-    required: true,             
+    required: true,
     min: 0,
   },
   language_code: String,
   num_pages: Number,
   ratings_count: Number,
-  text_reviews_count: Number
+  text_reviews_count: Number,
 });
 
+// Create a text index on the title and authors fields
+//will allow us to search for books using the $text operator - nb! add before creating the model
+BookSchema.index({ title: "text", authors: "text" });
+
 // Create the Book model using the schema
-const Book = mongoose.model('Book', BookSchema);
+const Book = mongoose.model("Book", BookSchema);
+
+Book.on("index", function (error) {
+  if (error) {
+    console.log(error.message);
+  } else {
+    console.log("Text index created for title and authors fields");
+  }
+});
 
 // Export the Book model
 export default Book;

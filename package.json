@@ -1,9 +1,10 @@
 {
   "name": "book-api",
   "version": "1.0.0",
+  "type": "module",
   "description": "mongo db project with express to create a book api",
   "scripts": {
-    "seed": "node seedDatabase.js",
+    "seed": "SEED_DB=true node seedDatabase.js",
     "start": "babel-node server.js",
     "dev": "nodemon server.js --exec babel-node"
   },

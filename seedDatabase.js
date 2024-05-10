@@ -1,18 +1,19 @@
-const mongoose = require('mongoose');
-const Book = require('./models/Book');
-const booksData = require('./data/booksData');
+import dotenv from 'dotenv';
+import Book from './models/Book.js';
+import { readFile } from 'fs/promises';
 
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+dotenv.config();
 
 const seedDatabase = async () => {
-  await Book.deleteMany({});
-
-  booksData.forEach(bookID => {
-    new Book(bookID).save();
-  });
+  try {
+    const booksData = JSON.parse(await readFile(new URL('./data/books.json', import.meta.url)));
+    await Book.deleteMany({});
+    const bookPromises = booksData.map(book => new Book(book).save());
+    await Promise.all(bookPromises);
+    console.log('Database seeded!');
+  } catch (error) {
+    console.error(`Error seeding database: ${error}`);
+  }
 };
 
-seedDatabase();
+export default seedDatabase;
