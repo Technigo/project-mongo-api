@@ -1,6 +1,7 @@
 import express from "express";
 import Book from "../models/Book.js";
 import listEndpoints from "express-list-endpoints";
+import getPaginationParameters from "../utils/pagination.js";
 const router = express.Router();
 
 //filter with query parameters
@@ -15,9 +16,8 @@ router.get("/filterbooks", async (req, res) => {
       text_reviews_count,
       language_code,
     } = req.query;
-
     const query = {};
-
+    const { skip, limit } = getPaginationParameters(req);
     if (title) {
       //find the title with the query parameter
       query.title = { $regex: new RegExp(title, "i") };
@@ -53,7 +53,7 @@ router.get("/filterbooks", async (req, res) => {
       query.language_code = language_code;
     }
 
-    const books = await Book.find(query).limit(100).exec(); // Limit the number of results to 100
+    const books = await Book.find(query).skip(skip).limit(limit).exec(); // Limit the number of results to 100
     res.json(books);
   } catch (error) {
     // If an error occurred, create a new error with a custom message
@@ -65,9 +65,13 @@ router.get("/filterbooks", async (req, res) => {
 
 router.get("/books/", async (req, res) => {
   try {
+    const { skip, limit } = getPaginationParameters(req);
     const { title } = req.query;
     const queryRegex = { $regex: new RegExp(title, "i") };
-    const books = await Book.find({ title: queryRegex }).sort({ title: 1 });
+    const books = await Book.find({ title: queryRegex })
+      .sort({ title: 1 })
+      .skip(skip)
+      .limit(limit);
     res.json(books);
   } catch (error) {
     // If an error occurred, create a new error with a custom message
@@ -96,9 +100,12 @@ router.get("/books/:id", async (req, res) => {
 
 router.get("/books/authors/:authors", async (req, res) => {
   try {
+    const { skip, limit } = getPaginationParameters(req);
     const authors = req.params.authors;
     const queryRegex = new RegExp(authors, "i"); // Create a case-insensitive regex to match authors
-    const book = await Book.find({ authors: { $regex: queryRegex } });
+    const book = await Book.find({ authors: { $regex: queryRegex } })
+      .skip(skip)
+      .limit(limit);
     if (book.length > 0) {
       res.json(book);
     } else {
@@ -116,13 +123,16 @@ router.get("/books/authors/:authors", async (req, res) => {
 
 router.get("/books/average_rating/:average_rating", async (req, res) => {
   try {
+    const { skip, limit } = getPaginationParameters(req);
     const average_rating = Number(req.params.average_rating);
     const book = await Book.find({
       average_rating: {
         $gte: average_rating,
         $lt: average_rating + 1,
       },
-    });
+    })
+      .skip(skip)
+      .limit(limit);
     if (book.length > 0) {
       res.json(book);
     } else {
@@ -142,13 +152,17 @@ router.get("/books/average_rating/:average_rating", async (req, res) => {
 
 router.get("/books/pages_asc/:num_pages", async (req, res) => {
   try {
+    const { skip, limit } = getPaginationParameters(req);
     const num_pages = Number(req.params.num_pages);
     const book = await Book.find({
       num_pages: {
         $gte: num_pages,
         $lt: num_pages + 50,
       },
-    }).sort({ num_pages: 1 });
+    })
+      .sort({ num_pages: 1 })
+      .skip(skip)
+      .limit(limit);
     if (book.length > 0) {
       res.json(book);
     } else {
@@ -166,13 +180,17 @@ router.get("/books/pages_asc/:num_pages", async (req, res) => {
 
 router.get("/books/pages_desc/:num_pages", async (req, res) => {
   try {
+    const { skip, limit } = getPaginationParameters(req);
     const num_pages = Number(req.params.num_pages);
     const book = await Book.find({
       num_pages: {
         $gte: num_pages,
         $lt: num_pages + 50,
       },
-    }).sort({ num_pages: -1 });
+    })
+      .sort({ num_pages: -1 })
+      .skip(skip)
+      .limit(limit);
     if (book.length > 0) {
       res.json(book);
     } else {
@@ -190,13 +208,16 @@ router.get("/books/pages_desc/:num_pages", async (req, res) => {
 
 router.get("/books/ratings_count/:ratings_count", async (req, res) => {
   try {
+    const { skip, limit } = getPaginationParameters(req);
     const ratings_count = Number(req.params.ratings_count);
     const book = await Book.find({
       ratings_count: {
         $gte: ratings_count,
         $lt: ratings_count + 50,
       },
-    });
+    })
+      .skip(skip)
+      .limit(limit);
     if (book.length > 0) {
       res.json(book);
     } else {
@@ -216,21 +237,22 @@ router.get(
   "/books/text_reviews_count/:text_reviews_count",
   async (req, res) => {
     try {
+      const { skip, limit } = getPaginationParameters(req);
       const text_reviews_count = Number(req.params.text_reviews_count);
       const book = await Book.find({
         text_reviews_count: {
           $gte: text_reviews_count,
           $lt: text_reviews_count + 50,
         },
-      });
+      })
+        .skip(skip)
+        .limit(limit);
       if (book.length > 0) {
         res.json(book);
       } else {
-        res
-          .status(404)
-          .json({
-            error: `Books with ${text_reviews_count} text reviews not found`,
-          });
+        res.status(404).json({
+          error: `Books with ${text_reviews_count} text reviews not found`,
+        });
       }
     } catch (error) {
       // If an error occurred, create a new error with a custom message
@@ -246,7 +268,10 @@ router.get(
 router.get("/books/language_code/:language_code", async (req, res) => {
   const language_code = req.params.language_code;
   try {
-    const book = await Book.find({ language_code: language_code });
+    const { skip, limit } = getPaginationParameters(req);
+    const book = await Book.find({ language_code: language_code })
+      .skip(skip)
+      .limit(limit);
     if (book.length > 0) {
       res.json(book);
     } else {
@@ -373,6 +398,16 @@ router.get("/", (req, res) => {
               name: "language_code",
               description:
                 "Filter by language code. Example: /filterbooks?language_code=eng Can be chained with other parameters Example: /filterbooks?language_code=eng&average_rating=4",
+            },
+            {
+              name: "page",
+              description:
+                "The page number to retrieve. Defaults to 1 if not provided. Example: /?page=2 can be chained with limit. Example: /?page=2&limit=5 Can also be chained with other queries if using /filterbooks/ Example: filterbooks?page=2&limit=5&text_reviews_count=200&language_code=eng&average_rating=4",
+            },
+            {
+              name: "limit",
+              description:
+                "The number of items per page. Defaults to 10 if not provided. Example: /?limit=5  can be chained with page but also other queries if using /filterbooks/ Example: filterbooks?page=2&limit=5&text_reviews_count=200&language_code=eng&average_rating=4",
             },
           ],
         };
