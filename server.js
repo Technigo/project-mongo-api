@@ -55,8 +55,8 @@ app.get("/", (req, res) => {
   res.json(endpoints);
 });
 
-// Get all the flowers
-// To filter by color, for example red: http://localhost:3000/flowers?color=red
+// Get all the flowers (/flowers)
+// To filter by color (/flowers?color=red)
 app.get("/flowers", async (req, res) => {
   try {
     let query = {};
@@ -83,8 +83,7 @@ app.get("/flowers", async (req, res) => {
   }
 });
 
-// Get a single flower by ID or numeric ID
-// Example: https://project-mongo-api-wncr.onrender.com/flowers/6
+// Get a single flower by ID or numeric ID (/flowers/6)
 app.get("/flowers/:id", async (req, res) => {
   try {
     let flower;
