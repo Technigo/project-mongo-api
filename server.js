@@ -34,52 +34,68 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const paginateQuery = (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 20;
+
+  req.pagination = {
+    page, 
+    limit, 
+    skip: (page -1) * limit
+  }
+
+  next()
+}
 // Start defining your routes here
 app.get("/", (req, res) => {
   const endpoints = expressListEndpoints(app);
   res.json(endpoints);
 });
 
-app.get("/titles", async (req, res) => {
+// Route for all titles and filters
+app.get("/titles", paginateQuery, async (req, res) => {
   const { name, type, cast, country } = req.query;
+
   let query = {};
 
   if (name) query.title = { $regex: name, $options: "i" };
   if (type) query.type = { $regex: type, $options: "i" };
   if (cast) query.cast = { $regex: cast, $options: "i" };
   if (country) query.country = { $regex: country, $options: "i" };
-  
-  const allTitles = await Title.find(query);
+ 
+  const allTitles = await Title.find(query).skip(req.pagination.skip).limit(req.pagination.limit).exec()
 
   if (allTitles.length === 0) {
-    res.status(404).send("no titles were found")
+    res.status(404).send("No titles were found")
   }
   else {
     res.json(allTitles)
   }
 });
 
+// Route for one title by ID
 app.get("/titles/:titleId", async (req, res) => {
   const { titleId } = req.params;
 
-  const byId = await Title.findById(titleId).exec();
+  const byId = await Title.findById(titleId).exec()
 
   if (byId) {
     res.json(byId);
   } else {
-    res.status(404).send("no title found by id");
+    res.status(404).send("No title found by that id");
   }
 });
 
-app.get("/titles/year/:year", async (req, res) => {
+// Route for titles by year
+app.get("/titles/year/:year", paginateQuery, async (req, res) => {
   const year = req.params.year
   
-  const byYear = await Title.find({ release_year: year }).exec()
+  const byYear = await Title.find({ release_year: year }).skip(req.pagination.skip).limit(req.pagination.limit).exec()
 
   if (byYear.length > 0) {
     res.json(byYear) 
   } else {
-    res.status(404).send("no title found by that year")
+    res.status(404).send("No title found by that year")
   }
  })
 
