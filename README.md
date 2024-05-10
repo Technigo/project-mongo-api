@@ -1,13 +1,10 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week, I worked on building a simple API using MongoDB. It includes four routes, with one ("/") dedicated to API documentation. The others allow fetching a collection of items, a single item, and filtering items by color. I used Mongoose models for data handling, sticking to RESTful principles throughout.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+For database I used a flowers data similar to the one Jennie used in coding session the last two weeks but I added inStock. Challenges included setting up MongoDB, defining data models with Mongoose, and handling asynchronous operations. Techniques involved in this project was environment variables, middleware for CORS and JSON parsing, error handling, and async/await for database operations. I wanted to add a filter for inStock=true and inStock=false but couldn't make it work so I skipped.
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-wncr.onrender.com/
