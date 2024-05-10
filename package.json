@@ -17,6 +17,7 @@
     "express-list-endpoints": "^7.1.0",
     "mongodb": "^6.6.1",
     "mongoose": "^8.0.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "cors": "^2.8.5"
   }
 }
