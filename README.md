@@ -1,7 +1,7 @@
 # Project Mongo API
 
-This week I have been working on building an API using MongoDB. It contains 7 routes, again using my Doctor Who data from last week, but adding some more data to the dataset. Still needed some fun data to work with. 😉
-I tried to replicate last week's endpoints using MongoDB.
+This week I have been working on building an API using MongoDB. It contains 7 routes, again using my Doctor Who data from last week, but adding some more data to the dataset. I still needed some fun data to work with, and with the new series starting tomorrow, this seemed like the right choice.😉
+I replicated last week's endpoints using MongoDB.
 
 ## The problem
 

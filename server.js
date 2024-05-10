@@ -28,7 +28,7 @@ const episodeSchema = new Schema({
 //define model
 const Episode = mongoose.model("Episode", episodeSchema);
 
-//seed the database
+//seed the database **outcoded because it's been seeded**
 // if (process.env.RESET_DATABASE) {
 //   const seedDatabase = async () => {
 //     console.log("resetting and seeding data!");
