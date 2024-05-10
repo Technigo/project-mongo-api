@@ -3,15 +3,16 @@ import cors from "cors";
 import mongoose from "mongoose";
 import booksData from "./data/books.json";
 import listEndpoints from "express-list-endpoints";
-import documentation_API from "./documentation_API.json"
+import Book from "./models/Book";
+
+//import documentation_API from "./documentation_API.json"
 require('dotenv').config();
-const fs = require('fs');
+//const fs = require('fs');
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
-
-
+/*
 // Destructure the Schema object from the mongoose module
 const { Schema } = mongoose;
 
@@ -44,12 +45,13 @@ const BookSchema = new Schema({
 });
 //the model is created from the schema
 const Book = mongoose.model("Book", BookSchema);
-
-
-
+*/
 // create index for the title and author field
+// text indexe enable full-text search capabilities on the title and authors fields in the Book collection,so we can perform complex search queries on these fields that go beyond simple exact matches. For example, you could use MongoDB's $text query operator to search for books that contain certain words or phrases in their title or authors fields. This can be particularly useful for implementing features like a search bar in your application.
+
 Book.createIndexes({ title: "text", authors: "text" });
 /*
+
 
 // old way to create a model - everything in one place.
 const BookModel = mongoose.model("Book", {
@@ -82,8 +84,6 @@ if (process.env.RESET_DB) {
 }
 
 
-
-
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
@@ -94,27 +94,60 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-
 // get updated documentation
 app.get("/", (req, res) => {
-  res.send(documentation_API);
+  try {
+  const endpoints = listEndpoints(app);
+  const updatedEndpoints = endpoints.map((endpoint) => {
+    if (endpoint.path === "/filterbooks") {
+      return {
+        path: endpoint.path,
+        methods: endpoint.methods,
+        queryParameters: [
+          { name: "title", description: "Filter by title. Example: /filterbooks?title=Neither Here nor There: Travels in Europe. Can be chained with other parameters. Example: /filterbooks?title=Neither Here nor There: Travels in Europe&language_code=eng" },
+          { name: "authors", description: "Filter by authors. Example:/filterbooks?authors=bill Can be chained with other parameters.  Example:/filterbooks?authors=bill&average_rating=3 " },
+          { name: "average_rating", description: "Filter by average rating. Example: /filterbooks?average_rating=3 Can be chained with other parameters Example: /filterbooks?average_rating=3&num_pages=200" },
+          { name: "num_pages", description: "Filter by number of pages. Example: /filterbooks?num_pages=200 Can be chained with other parameters. Example: /filterbooks?num_pages=200&ratings_count=1000&text_reviews_count=200" },
+          { name: "ratings_count", description: "Filter by ratings count. Example: /filterbooks?ratings_count=1000 Can be chained with other parameters  Example: /filterbooks?ratings_count=1000&text_reviews_count=200" },
+          { name: "text_reviews_count", description: "Filter by text reviews count. Example: /filterbooks?text_reviews_count=200 Can be chained with other parameters Example: /filterbooks?text_reviews_count=200&language_code=eng&average_rating=4" },
+          { name: "language_code", description: "Filter by language code. Example: /filterbooks?language_code=eng Can be chained with other parameters Example: /filterbooks?language_code=eng&average_rating=4" },
+        ]
+      };
+    }
+      return {
+        path: endpoint.path,
+        methods: endpoint.methods,
+      };
+    });
+    res.json(updatedEndpoints);
+}
+catch (error) {
+  res.status(500).json({ error: "Internal server error" });
+}
 });
 
 
 //filter with query parameters
-
 app.get("/filterbooks", async (req, res) => {
   try {
-    let query = {};  // Create an empty object to store the query
+    const {
+      title,
+      authors,
+      average_rating,
+      num_pages,
+      ratings_count,
+      text_reviews_count,
+      language_code
+    } = req.query;
 
-    const { title, authors, average_rating, num_pages, ratings_count, text_reviews_count, language_code } = req.query;  // Destructure the query parameters
+    const query = {};
 
     if (title) {
-      query.title = new RegExp(title, "i");
+      //find the title with the query parameter
+      query.title = { $regex: new RegExp(title, 'i') };
     }
     if (authors) {
-      query.authors = new RegExp(authors, "i");
+      query.authors = { $regex: new RegExp(authors, "i") };
     }
     if (average_rating) {
       query.average_rating = {
@@ -144,21 +177,18 @@ app.get("/filterbooks", async (req, res) => {
       query.language_code = language_code;
     }
 
-    const books = await Book.find(query);  // Use the query object in the find query
+    const books = await Book.find(query).limit(100); // Limit the number of results to 100
     res.json(books);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-
-
-
 app.get("/books/", async (req, res) => {
   try {
     const { title } = req.query;
-    const queryRegex = new RegExp(title, "i");
-    const books = await Book.find({ title: queryRegex });
+    const queryRegex = { $regex:  new RegExp(title, "i")};
+    const books = await Book.find({ title: queryRegex }).sort({ title: 1 });
     res.json(books);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
@@ -306,35 +336,51 @@ const book = await Book.find({ language_code: language_code })
     }
   });
 
-//get the list of endpoints
-const endpoints = listEndpoints(app);
+//add new book
+  app.post("/books/add/", async (req, res) => {
+    try {
+      const newBook = await new Book(req.body).save();
+      res.status(201).json(newBook);
+    } catch (error) {
+      res.status(400).json({ error: "Invalid request" });
+    }
+  });
 
-//convert the list of endpoints to a JSON string
-const endpointsJSON = JSON.stringify(endpoints, null, 2);
+  //update book
+  app.put('/books/update/:id', async (req, res) => {
+    try {
+      const book = await Book.findById(req.params.id);
+      if (book) {
+        // Update the fields
+        const fieldsToUpdate = ["title", "authors", "average_rating", "isbn", "isbn13", "language_code", "num_pages", "ratings_count", "text_reviews_count"];
+        fieldsToUpdate.forEach(field => {
+          book[field] = req.body[field] || book[field];
+        });
+        // Save the updated book
+        const updatedBook = await book.save();
 
-//updated endpoint content
-const updatedEndpoints = JSON.stringify(endpoints, null, 2);
-
-// Read the current content of the file
-fs.readFile('documentation_API.json', 'utf8', (err, currentContent) => {
-  if (err) {
-    console.error('Error reading file:', err);
-    return;
-  }
-
-  // Compare the current content with the new content
-  if (currentContent !== updatedEndpoints) {
-    // If the content is different, update the file
-    fs.writeFile('documentation_API.json', updatedEndpoints, (err) => {
-      if (err) {
-        console.error('Error writing file:', err);
+        res.json(updatedBook);
       } else {
-        console.log('Successfully wrote new content to documentation_API.json');
+        res.status(404).json({ error: 'Book not found' });
       }
-    });
-  }
-});
+    } catch (error) {
+      res.status(500).json({ error: `Error updating book: ${error}` });
+    }
+  });
 
+  //delete book
+  app.delete('/books/delete/:id', async (req, res) => {
+    try {
+      const book = await Book.findByIdAndDelete(req.params.id);
+      if (book) {
+        res.json({ message: 'Book deleted' });
+      } else {
+        res.status(404).json({ error: 'Book not found' });
+      }
+    } catch (error) {
+      res.status(500).json({ error: `Error deleting book: ${error}` });
+    }
+  });
 
 
 // Start the server
