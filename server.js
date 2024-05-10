@@ -31,9 +31,21 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.route('/').get((req, res) => {
-  const endpoints = expressListEndpoints(app)
-  res.send(endpoints)
+app.get('/', (req, res) => {
+  const endpoints = expressListEndpoints(app).map(endpoint => {
+    // Add alive query parameter to the '/artists/:name' endpoint
+    if (endpoint.path === '/questions') {
+      endpoint.query = [{
+        parameter: "page",
+        description: "add query endpoint to /questions, to show different pages. 50 questions per page",
+        type: "number",
+        example: "?page=7"
+      }];
+    }
+    return endpoint;
+  });
+
+  res.json(endpoints);
 })
 
 //Endpoint for all the questions
