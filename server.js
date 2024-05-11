@@ -29,13 +29,43 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Endpoint listing
+// Endpoint listing and guidance for using query endpoints
 app.get("/", (req, res) => {
-  const endpoints = expressListEndpoints(app)
+  const endpoints = expressListEndpoints(app).map((endpoint) => {
+    if (endpoint.path === "/restaurants") {
+      endpoint.query = {
+        description:
+          "There are 100 restaurants displayed per page in this endpoint. To see another page, add query endpoint like this '?page=3'.",
+      }
+    }
+
+    if (endpoint.path === "/restaurants/:query") {
+      endpoint.query = {
+        description:
+          "Add query endpoint to search for restaurant name or ID. If name includes more than one word, add space or '%20' between the words. ID should be a number between 1 and 6,700",
+      }
+    }
+
+    if (endpoint.path === "/cuisines/:cuisine") {
+      endpoint.query = {
+        description:
+          "Add query endpoint to search for cuisine type. See endpoint '/cuisines' for examples of different cuisines. If cuisine type includes more than one word, add space or '%20' between the words.",
+      }
+    }
+
+    if (endpoint.path === "/locations/:location") {
+      endpoint.query = {
+        description:
+          "Add query endpoint to search for city or country. If location name includes more than one word, add space or '%20' between the words.",
+      }
+    }
+
+    return endpoint
+  })
   res.json(endpoints)
 })
 
-// All restaurants
+// All restaurants grouped by 100 per page
 app.get("/restaurants", async (req, res) => {
   //Parse query parameters for pagination
   const page = parseInt(req.query.page) || 1 //Defaults to page 1 if invalid
@@ -150,7 +180,7 @@ app.get("/cuisines/:cuisine", async (req, res) => {
 })
 
 // Filter on location
-app.get("/location/:location", async (req, res) => {
+app.get("/locations/:location", async (req, res) => {
   const { location } = req.params
 
   const locationSearchWords = location
