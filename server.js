@@ -191,6 +191,11 @@ app.use((req, res) => {
   });
 });
 
+// Define a health check route
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
