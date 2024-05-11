@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
 import cors from "cors";
+import dotenv from "dotenv";
 import express from "express";
-import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
+import mongoose from "mongoose";
 
 import netflixData from "./data/netflix-titles.json";
 import Movie from "./model/Movie.js";
@@ -49,10 +49,65 @@ app.use(express.json());
 app.get("/", (req, res) => {
   try {
     //throw new Error("Simulated error"); //testing error
+    const endpoints = listEndpoints(app);
+
+    //Adding information for this endpoint
+
+    const netflixUsageInfo = {
+      description: "Get all the content available from Netflix.",
+    };
+
+    //Find the index of the /netflix endpoint
+    const netflixEndpointIndex = endpoints.findIndex(
+      (endpoint) => endpoint.path === "/netflix"
+    );
+    // If the /netflix endpoint is found, assign the usage information
+    if (netflixEndpointIndex !== -1) {
+      endpoints[netflixEndpointIndex].usageInfo = netflixUsageInfo;
+    }
+
+    const moviesUsageInfo = {
+      description: "Get all movies.",
+    };
+
+    const tvShowsUsageInfo = {
+      description: "Get all TV shows.",
+    };
+
+    const singleContentUsageInfo = {
+      description: "Get single content by title and/or director.",
+      queryParameters: {
+        title: "Filter content by title.",
+        director: "Filter content by director.",
+      },
+    };
+
+    // Find the indexes of other endpoints and assign the usage information
+    const moviesIndex = endpoints.findIndex(
+      (endpoint) => endpoint.path === "/movies"
+    );
+    const tvShowsIndex = endpoints.findIndex(
+      (endpoint) => endpoint.path === "/tvshows"
+    );
+    const singleContentIndex = endpoints.findIndex(
+      (endpoint) => endpoint.path === "/movie"
+    );
+
+    if (moviesIndex !== -1) {
+      endpoints[moviesIndex].usageInfo = moviesUsageInfo;
+    }
+
+    if (tvShowsIndex !== -1) {
+      endpoints[tvShowsIndex].usageInfo = tvShowsUsageInfo;
+    }
+
+    if (singleContentIndex !== -1) {
+      endpoints[singleContentIndex].usageInfo = singleContentUsageInfo;
+    }
 
     res.json({
       message: "Welcome to Netflix Mongo API",
-      endpoints: listEndpoints(app),
+      endpoints: endpoints,
     });
   } catch (error) {
     res.status(500).json({

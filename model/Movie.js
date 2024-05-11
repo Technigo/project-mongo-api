@@ -5,8 +5,6 @@ const { Schema } = mongoose;
 const movieSchema = new Schema({
   show_id: {
     type: Number,
-    required: true,
-    unique: true, // Ensures no duplictae show IDs.
   },
   title: {
     type: String,
