@@ -19,7 +19,7 @@ dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 
-//Connect to MongoDB with error handling
+//Connect to MongoDB
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
