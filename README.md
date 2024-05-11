@@ -1,13 +1,15 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This week project was a bit similar to last week, we were given data (or you could create your own if you want to) to create different end points using MongoDB and Mongoose.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I would say that the problem that I face was the setting up of the different tools we need it for this project; they sound a bit alike but they perform different task (now I know that)
+Another problem/situation it took me a while to plan the end points; then I plan if I were the user, What would I like to see?
+I used the technoglogies learned this week, MongoDB and Mogoose.
+
+If I have had more time, I would have create my own data with more entries.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+RENDER https://project-mongo-api-qnhd.onrender.com
