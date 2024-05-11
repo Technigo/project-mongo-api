@@ -1,17 +1,18 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import cheeses from './data/cheeses.json'
+// import cheeses from './data/cheeses.json'
 import expressListEndpoints from 'express-list-endpoints'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/CheesusChrist'
+ console.log('Connected to MongoDB?', mongoUrl)
 mongoose.connect(mongoUrl)
 mongoose.Promise = Promise
 
-// //seed the database
+//seed the database
 // if (process.env.RESET_DATABASE) {
 // 	const seedDatabase = async () => {
 // 		console.log('Resetting and seeding')
@@ -20,7 +21,7 @@ mongoose.Promise = Promise
 // 			new Cheese(cheese).save()
 // 		})
 // 	}
-// 	//seedDatabase()
+	//seedDatabase()
 // }
 
 const port = process.env.PORT || 8080
