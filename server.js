@@ -20,11 +20,7 @@ dotenv.config();
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 
 //Connect to MongoDB
-mongoose.connect(mongoUrl),
-  {
-    bufferCommands: false,
-    bufferTimeoutMS: 10000,
-  };
+mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
 if (process.env.RESET_DB) {
@@ -124,7 +120,7 @@ app.get("/", (req, res) => {
 // Route to get all items
 //http://localhost:8000/netflix
 app.get("/netflix", async (req, res) => {
-  const allMovies = await Movie.find();
+  const allMovies = await Movie.find().maxTimeMS(30000);
 
   if (allMovies.length > 0) {
     res.json(allMovies);
