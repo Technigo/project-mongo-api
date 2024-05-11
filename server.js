@@ -54,32 +54,44 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send(endpoints)
+  const documentation = {
+    Welcome: "Welcome to the Book API!",
+    Endpoints: expressListEndpoints(app).map((endpoint) => {
+      return {
+        path: endpoint.path,
+        methods: endpoint.methods,
+        middlewares: endpoint.middlewares,
+      }
+    }),
+    QueryParameters: {
+      title: "Filter books by name (case-insensitive).",
+      sortByRating: "Sort books by rating (true/false)."
+    }
+  }
+  res.json(documentation)
 })
 
 // Get all books
 app.get("/books", async (req, res) => {
-  const books = await Book.find()
+  let books = await Book.find()
+  //Query to search for title
   const title = req.query.title
-  let result = ""
+  //Query to sort by rating
+  const sortByRating = req.query.sortByRating
+
   if (title) {
-    result = await Book.find({ title: { $regex: q, $options: "i" }})
-    if (result.length > 0) {
-      res.json(result)
-    } else {
-      res.status(404).send({ error: "No books found." })
-    }
-  } else if (books.length > 0) {
+    books = await Book.find({ title: { $regex: title, $options: "i" }})
+  } 
+  
+  if (sortByRating) {
+    books = await Book.find().sort({ average_rating: -1 })
+  }
+
+  if (books.length > 0) {
     res.json(books)
   } else {
     res.status(404).json({ error: "No books found." })
   }
-})
-
-// Query to sort by rating
-app.get("/books/popular", async (req, res) => {
-  const popularBooks = await Book.find().sort({ average_rating: -1 })
-  res.json(popularBooks)
 })
 
 // Get one book based on id
@@ -97,13 +109,10 @@ app.get("/books/:id", async (req, res) => {
 })
 
 // Get a list of authors
-/*app.get("/authors", async (req, res) => {
-  const books = await Book.find()
-  const authors = books.sort({authors})
-    .map((book) => book.artistName)
-  //const uniqueAuthors = [...new Set(authors)]
-  res.json(authors)
-})*/
+app.get("/authors", async (req, res) => {
+  const authors = await Book.find().sort({ authors: 1 })
+  res.json(authors.map((book) => book.authors))
+})
 
 // Get all books from an author
 app.get("/authors/:author", async (req, res) => {
@@ -117,12 +126,6 @@ app.get("/authors/:author", async (req, res) => {
     res.status(404).json({ error: "No books found by the author." })
   }
 })
-
-// Query to find a title.toLowerCase().replace(/ /g, "-").replace(".", "")
-
-
-
-const endpoints = expressListEndpoints(app)
 
 // Start the server
 app.listen(port, () => {
