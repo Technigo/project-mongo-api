@@ -108,14 +108,8 @@ app.get("/books/:id", async (req, res) => {
   }
 })
 
-// Get a list of authors
-app.get("/authors", async (req, res) => {
-  const authors = await Book.find().sort({ authors: 1 })
-  res.json(authors.map((book) => book.authors))
-})
-
 // Get all books from an author
-app.get("/authors/:author", async (req, res) => {
+app.get("/books/author/:author", async (req, res) => {
   const authorName = req.params.author
   const booksFromAuthor = await Book.find({ 
       authors: { $regex: authorName, $options: "i" } 
@@ -125,6 +119,12 @@ app.get("/authors/:author", async (req, res) => {
   } else {
     res.status(404).json({ error: "No books found by the author." })
   }
+})
+
+// Get a list of authors
+app.get("/authors", async (req, res) => {
+  const authors = await Book.find().sort({ authors: 1 })
+  res.json(authors.map((book) => book.authors))
 })
 
 // Start the server

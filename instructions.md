@@ -14,9 +14,9 @@ As before, it's up to you to decide what sort of data you'd like to store in you
 If you'd like to build your own data set - feel free! You could write it yourself, or use AI to help you greate some mock data to use. [ChatGPT](https://chat.openai.com/) can help with this, just be specific and give it an example.
 
 In order to get all this data into your database, you'll need to write some code to generate the data - see the '**Making seed data**' section further down for tips on how to do this.
-⭐⭐⭐⭐⭐
+
 Once you have the data stored, you will need to write appropriate RESTful endpoints to return the data and make use of [Mongoose Queries](https://mongoosejs.com/docs/queries.html) to find and return the correct data given the route and any filter params passed.
-⭐⭐⭐⭐⭐
+
 ## Making seed data 🧞‍♂️
 
 [Seeding a database](https://en.wikipedia.org/wiki/Database_seeding) is a process in which an initial set of data is provided to a database when it is being installed or set up. In the videos for this week, we showed a way to generate a small amount of data, but in this project, some of the JSON files have thousands of rows, so we don't want to have it all in our server file.
@@ -44,7 +44,7 @@ if (process.env.RESET_DB) {
 ```
 
 This whole process can be a little tricky and relies on your models having the same keys. Give it a try and if you run into issues, don't hesitate to ask your team, ask in Slack, or post your code on Stack Overflow to get some help!
-⭐⭐⭐⭐⭐
+
 ## Requirements:
 - Your API should have at least 3 routes. Try to push yourself to do more, though!
   - The endpoint "/" should return documentation of your API using e.g. [Express List Endpoints](https://www.npmjs.com/package/express-list-endpoints)
