@@ -20,7 +20,11 @@ dotenv.config();
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 
 //Connect to MongoDB
-mongoose.connect(mongoUrl);
+mongoose.connect(mongoUrl),
+  {
+    bufferCommands: false,
+    bufferTimeoutMS: 10000,
+  };
 mongoose.Promise = Promise;
 
 if (process.env.RESET_DB) {
