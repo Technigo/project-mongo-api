@@ -4,8 +4,9 @@
   "type": "module",
   "description": "mongo db project with express to create a book api",
   "scripts": {
+    "build": "babel ./**/*.js --out-dir dist --ignore node_modules",
     "seed": "SEED_DB=true node seedDatabase.js",
-    "start": "pm2 start server.js --interpreter @babel/node",
+    "start": "pm2 start dist/server.js",
     "dev": "pm2-dev start server.js --interpreter @babel/node"
   },
   "author": "",
