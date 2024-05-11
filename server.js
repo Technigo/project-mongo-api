@@ -3,9 +3,9 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import cheeses from './data/cheeses.json'
 import expressListEndpoints from 'express-list-endpoints'
-// import dotenv from 'dotenv'
+import dotenv from 'dotenv'
 
-// dotenv.config()
+dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/CheesusChrist'
 mongoose.connect(mongoUrl)
