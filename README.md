@@ -10,6 +10,7 @@ I started out with reading about the requirements for the assignement. Then I st
 after a made a lot of endpoints, added some filters, and then added the possibility to add, update and delete entries in my db.
 afterwards i tried to clean up my server file and split it into a file for the model, then a file for all routes, and a file for seeding the database who will run if i choose to run npm run seed.
 then i looked into how i could improve my error handling and logging. then i and added winston and morgan to my project as well.
+I tried using pm2 to handle shutting down, and restarting the server upon unhandled promise rejections and uncaught exceptions (as its best practice), but that gave me too many new challenges to look into, so after trying to handle those, and then a couple of new ones, i decided to not shut down the server and not use pm2 util I have more time to figure out how to solve these issues with deployment using  pm2.
 
 ## View it live
 

@@ -14,6 +14,26 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
+
+
+// Custom error classes
+class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ValidationError";
+    this.status = 400;
+  }
+}
+
+class NotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "NotFoundError";
+    this.status = 404;
+  }
+}
+
+
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
@@ -75,21 +95,27 @@ const morganStream = {
 app.use(morgan("combined", { stream: morganStream }));
 
 // Error handling middleware
-router.use((err, req, res, next) => {
-  console.error(err.stack); // Log error stack trace
-  res.status(500).send({ error: err.message }); // Send error message to client
+app.use((err, req, res, next) => {
+  if (err instanceof ValidationError) {
+    res.status(err.status).send({ error: err.message });
+  } else if (err instanceof NotFoundError) {
+    res.status(err.status).send({ error: err.message });
+  } else {
+    console.error(err.stack); // Log error stack trace
+    res.status(500).send({ error: err.message }); // Send error message to client
+  }
 });
 
 // Handle uncaught exceptions
 process.on("uncaughtException", (err) => {
   logger.error(err);
-  process.exit(1);
+  //process.exit(1);
 });
 
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (reason, promise) => {
   logger.error("Unhandled Rejection at:", promise, "reason:", reason);
-  process.exit(1);
+  //process.exit(1);
 });
 
 // Start the server
