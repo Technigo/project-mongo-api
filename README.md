@@ -1,13 +1,12 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Mongo API about Netflix movies and TV shows.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The structure was not hard to learn. To have a better understanding, I also find some extra videos online. I didn't use aggregate this time, but want to use it for my final project's backend part. The biggest problem I met was deploying on Render. I got the error 
+const err = new MongooseError(message) It took me a while to find the solution. I have tried many sulutions which I found by google. In the end I found, I didn't sent the correct information on Atlas. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://netflix-mongo-api-wrbp.onrender.com/
