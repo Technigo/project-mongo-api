@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
 import topMusicData from "./data/top-music.json";
 
@@ -10,7 +10,6 @@ mongoose.Promise = Promise;
 
 const port = process.env.PORT || 8080;
 const app = express();
-
 
 const Song = mongoose.model("Song", {
   id: Number,
@@ -29,22 +28,22 @@ const Song = mongoose.model("Song", {
   popularity: Number,
 });
 
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    try {
+      await Song.deleteMany({});
 
-const seedDatabase = async () => {
-  try {
-    await Song.deleteMany({});
+      topMusicData.forEach((songData) => {
+        new Song(songData).save();
+      });
+      console.log("Done");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    topMusicData.forEach((songData) => {
-      new Song(songData).save();
-    });
-    console.log("Done");
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-seedDatabase();
-
+  seedDatabase();
+}
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -62,7 +61,6 @@ app.get("/songs", async (req, res) => {
   const songs = await Song.find();
   res.json(songs);
 });
-
 
 app.get("/songs/:id", async (req, res) => {
   const songID = req.params.id;
