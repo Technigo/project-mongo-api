@@ -73,7 +73,29 @@ app.get("/nominations/:id", async (req, res) => {
   }
 });
 
-// app.post("/nominations", (req, res) => { THIS WHERE I STOPPED AND HERE IS WHERE I START AGAIN 
+app.post("/nominations", (req, res) => {
+  // https://stackoverflow.com/questions/67557955/what-is-the-purpose-of-req-body-in-express-js
+  // here we create the route where we can post new nominations.
+  // https://blog.hubspot.com/website/curl-command
+  // wrote promPT to chat gpt: generate me a curl command that sends a post request to http://localhost:8080/nominations containing a new nomination matching the above schema. it returned this command:
+  // curl -X POST \
+  // -H "Content-Type: application/json" \
+  // -d '{
+  //   "year_film": 2023,
+  //   "year_award": 2024,
+  //   "ceremony": 1,
+  //   "category": "Best Actor",
+  //   "nominee": "John Doe",
+  //   "film": "The Great Movie",
+  //   "win": true
+  // }' \
+  // http://localhost:8080/nominations
+
+  const newNomination = new Nomination(req.body);
+  newNomination.save().then(() => {
+    res.json(newNomination);
+  });
+});
 
 // Start the server
 app.listen(port, () => {
