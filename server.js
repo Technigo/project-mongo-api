@@ -9,6 +9,7 @@ import Book from "./models/BookSchema";
 // Configure dotenv
 dotenv.config();
 
+// Set up mongoUrl and localhost
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/bookshop";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
@@ -67,6 +68,19 @@ app.get("/books", async (req, res) => {
     res.json(allBooks);
   } else {
     res.status(404).send("No books were found");
+  }
+});
+
+// GET book by id
+app.get("/books/:bookId", async (req, res) => {
+  const { bookId } = req.params;
+
+  const book = await Book.findById(bookId).exec();
+
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).send("No book was found");
   }
 });
 
