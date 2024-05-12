@@ -9,11 +9,22 @@ import Book from "./models/BookSchema";
 // Configure dotenv
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/bookshop";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
 // Seed database
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    console.log("Resetting and seeding");
+    await Book.deleteMany();
+
+    booksData.forEach((book) => {
+      new Book(book).save();
+    });
+  };
+  seedDatabase();
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
