@@ -4,14 +4,16 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import expressListEndpoints from "express-list-endpoints";
 import booksData from "./data/books.json";
-import { Book } from "./models/BookSchema";
+import Book from "./models/BookSchema";
 
 // Configure dotenv
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo-api";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
+
+// Seed database
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -32,10 +34,9 @@ app.use((req, res, next) => {
   }
 });
 
-
 // ----- ROUTES -----
 
-// GET API documentation 
+// GET API documentation
 app.get("/", (req, res) => {
   try {
     const endpoints = expressListEndpoints(app);
@@ -50,13 +51,13 @@ app.get("/", (req, res) => {
 
 // GET books
 app.get("/books", async (req, res) => {
-  const allBooks = await Book.find()
+  const allBooks = await Book.find();
   if (allBooks.length > 0) {
-    res.json(allBooks)
+    res.json(allBooks);
   } else {
-    res.status(404).send("No books were found")
+    res.status(404).send("No books were found");
   }
-})
+});
 
 // Start the server
 app.listen(port, () => {
