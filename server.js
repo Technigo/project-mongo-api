@@ -1,19 +1,19 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import listEndpoints from "express-list-endpoints";
 import topMusicData from "./data/top-music.json";
 
-
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
 const port = process.env.PORT || 8080;
 const app = express();
 
 
-const songSchema = new mongoose.Schema({
+const Song = mongoose.model("Song", {
+  id: Number,
   trackName: String,
   artistName: String,
   genre: String,
@@ -29,20 +29,22 @@ const songSchema = new mongoose.Schema({
   popularity: Number,
 });
 
-const Song = mongoose.model("Song", songSchema);
 
 const seedDatabase = async () => {
-  if (process.env.RESET_DB) {
+  try {
     await Song.deleteMany({});
 
-    topMusicData.forEach(async (songData) => {
-      const newSong = new Song(songData);
-      await newSong.save();
+    topMusicData.forEach((songData) => {
+      new Song(songData).save();
     });
+    console.log("Done");
+  } catch (err) {
+    console.error(err);
   }
 };
 
 seedDatabase();
+
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -61,10 +63,12 @@ app.get("/songs", async (req, res) => {
   res.json(songs);
 });
 
+
 app.get("/songs/:id", async (req, res) => {
-  const song = await Song.findById(req.params.id);
-  if (song) {
-    res.json(song);
+  const songID = req.params.id;
+  const songInfo = await Song.findOne({ id: songID }).exec();
+  if (songInfo) {
+    res.json(songInfo);
   } else {
     res.status(404).send("Song not found");
   }
