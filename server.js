@@ -83,12 +83,38 @@ app.get("/sneakers/:sneakerId", async (req, res) => {
 //Endpoint to fetch sneakers by brand
 app.get("/sneakers/brand/:brand", async (req, res) => {
   const { brand } = req.params
-  const sneakersByBrand = await  Sneaker.find({ brand: brand }).exec()
+  const sneakersByBrand = await  Sneaker.find({ brand: { $regex: new RegExp(brand, "i")} }).exec()
   
   if (sneakersByBrand.length > 0) {
     res.json(sneakersByBrand)
   } else {
-    res.status(404).send(`No sneakers were found for this brand: ${brand}, please try another brand.`)
+    res.status(404).send(`No sneakers with brand ${brand} was found, please try another brand.`)
+  }
+  
+})
+
+//Endpoint to fetch sneakers by name
+app.get("/sneakers/name/:name", async (req, res) => {
+  const { name } = req.params
+  const sneakersByName = await  Sneaker.find({ name: { $regex: new RegExp(name, "i")} }).exec()
+  
+  if (sneakersByName.length > 0) {
+    res.json(sneakersByName)
+  } else {
+    res.status(404).send(`No sneakers with name ${name} was found, please try something else.`)
+  }
+  
+})
+
+//Endpoint to fetch sneakers by color
+app.get("/sneakers/color/:color", async (req, res) => {
+  const { color } = req.params
+  const sneakersByColor = await Sneaker.find({ color: { $regex: new RegExp(color, "i")} }).exec()
+  
+  if (sneakersByColor.length > 0) {
+    res.json(sneakersByColor)
+  } else {
+    res.status(404).send(`No sneakers whith color ${color} was found, please try another color.`)
   }
   
 })
