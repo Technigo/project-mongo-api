@@ -2,13 +2,12 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
-import expressListEndpoints from "express-list-endpoints"
+import expressListEndpoints from "express-list-endpoints";
 
 //This will connect us to the Data Base
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-
 
 //Here we create a Book modell
 const Book = mongoose.model("Book", {
@@ -21,7 +20,7 @@ const Book = mongoose.model("Book", {
   language_code: String,
   num_pages: Number,
   ratings_count: Number,
-  text_reviews_count: Number
+  text_reviews_count: Number,
 });
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
@@ -35,12 +34,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Start defining your routes here
-app.get("/", queryParamContoller, (req, res) => {
+app.get("/", (req, res) => {
   const endpoints = expressListEndpoints(app);
   res.json(endpoints);
-  res.send(
-    "<b>This is my first API Database using MongoDB!"
-  );
+  // res.send("<b>This is my first API Database using MongoDB!");
 });
 
 app.get("/books", async (req, res) => {
@@ -65,7 +62,6 @@ app.get("/books/:id", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 /// example: books/search?title=Harry%20Potter&author=J.K.%20Rowling
 /// example: books/search?title=Harry%20Potter
@@ -95,7 +91,9 @@ app.get("/books/language/:language_code", async (req, res) => {
     if (books.length > 0) {
       res.json(books);
     } else {
-      res.status(404).json({ error: "No books found for the specified language code" });
+      res
+        .status(404)
+        .json({ error: "No books found for the specified language code" });
     }
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
@@ -107,12 +105,17 @@ app.get("/books/rating", async (req, res) => {
   const { min_rating = 0, max_rating = 5 } = req.query;
   try {
     const books = await Book.find({
-      average_rating: { $gte: parseFloat(min_rating), $lte: parseFloat(max_rating) }
+      average_rating: {
+        $gte: parseFloat(min_rating),
+        $lte: parseFloat(max_rating),
+      },
     });
     if (books.length > 0) {
       res.json(books);
     } else {
-      res.status(404).json({ error: "No books found within the specified rating range" });
+      res
+        .status(404)
+        .json({ error: "No books found within the specified rating range" });
     }
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
@@ -130,4 +133,3 @@ app.use((req, res, next) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-//mongodb+srv://arnauvidal:<password>@cluster0.uirwjkw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
