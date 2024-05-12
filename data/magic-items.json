@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Fågelfjädersstav",
     "price": 150,
     "instock": true,
@@ -7,6 +8,7 @@
     "color": "Golden"
   },
   {
+    "id": 2,
     "name": "Osynlighetsmantel",
     "price": 300,
     "instock": true,
@@ -14,6 +16,7 @@
     "color": "Black"
   },
   {
+    "id": 3,
     "name": "Drakskalrustning",
     "price": 500,
     "instock": false,
@@ -21,6 +24,7 @@
     "color": "Red"
   },
   {
+    "id": 4,
     "name": "Helande Dryck",
     "price": 50,
     "instock": true,
@@ -28,6 +32,7 @@
     "color": "Blue"
   },
   {
+    "id": 5,
     "name": "Skuggornas Trollbok",
     "price": 200,
     "instock": true,
@@ -35,6 +40,7 @@
     "color": "Purple"
   },
   {
+    "id": 6,
     "name": "Kristallkula",
     "price": 100,
     "instock": true,
@@ -42,6 +48,7 @@
     "color": "Clear"
   },
   {
+    "id": 7,
     "name": "Magisk Matta",
     "price": 400,
     "instock": false,
@@ -49,6 +56,7 @@
     "color": "Green"
   },
   {
+    "id": 8,
     "name": "Frostbitring",
     "price": 250,
     "instock": true,
@@ -56,6 +64,7 @@
     "color": "Silver"
   },
   {
+    "id": 9,
     "name": "Amulett av Skydd",
     "price": 150,
     "instock": true,
@@ -63,6 +72,7 @@
     "color": "Golden"
   },
   {
+    "id": 10,
     "name": "Stav av Eldkulor",
     "price": 350,
     "instock": true,
@@ -70,6 +80,7 @@
     "color": "Red"
   },
   {
+    "id": 11,
     "name": "Flygande Kvast",
     "price": 200,
     "instock": true,
@@ -77,6 +88,7 @@
     "color": "Brown"
   },
   {
+    "id": 12,
     "name": "Förtrollad Elixir",
     "price": 100,
     "instock": true,
@@ -84,6 +96,7 @@
     "color": "Yellow"
   },
   {
+    "id": 13,
     "name": "Glowande Klot",
     "price": 75,
     "instock": true,
@@ -91,6 +104,7 @@
     "color": "Glowing"
   },
   {
+    "id": 14,
     "name": "Magisk Spegel",
     "price": 300,
     "instock": true,
@@ -98,6 +112,7 @@
     "color": "Silver"
   },
   {
+    "id": 15,
     "name": "Lyckobringande Amulett",
     "price": 50,
     "instock": true,
@@ -105,6 +120,7 @@
     "color": "Golden"
   },
   {
+    "id": 16,
     "name": "Omvandlande Gryta",
     "price": 400,
     "instock": false,
@@ -112,6 +128,7 @@
     "color": "Black"
   },
   {
+    "id": 17,
     "name": "Trollkarlens Sten",
     "price": 1000,
     "instock": true,
@@ -119,6 +136,7 @@
     "color": "Blue"
   },
   {
+    "id": 18,
     "name": "Magiskt Stoft",
     "price": 25,
     "instock": true,
@@ -126,6 +144,7 @@
     "color": "Transparent"
   },
   {
+    "id": 19,
     "name": "Förtrollad Båge",
     "price": 200,
     "instock": true,
@@ -133,6 +152,7 @@
     "color": "Brown"
   },
   {
+    "id": 20,
     "name": "Viskande Vind Amulett",
     "price": 150,
     "instock": true,

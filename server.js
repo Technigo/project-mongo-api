@@ -33,30 +33,6 @@ if (process.env.RESET_DATABASE) {
   };
 
   seedDatabase();
-
-  // MagicItem.deleteMany().then(() => {
-  //   new MagicItem({
-  //     name: "Lyckomynt",
-  //     price: 200,
-  //     instock: true,
-  //     quantity: 1,
-  //     color: "Gold",
-  //   }).save();
-  //   new MagicItem({
-  //     name: "Tors hammare",
-  //     price: 2000,
-  //     instock: false,
-  //     quantity: 0,
-  //     color: "Silver",
-  //   }).save();
-  //   new MagicItem({
-  //     name: "Evigt brinnande ljus",
-  //     price: 50,
-  //     instock: true,
-  //     quantity: 5,
-  //     color: "Bivaxgul",
-  //   }).save();
-  // });
 }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
@@ -81,72 +57,20 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   const endpoints = expressListEndpoints(app);
   res.json(endpoints);
-  // MagicItem.find().then((items) => {
-  //   res.json(items);
-  // });
-});
-
-app.get("/items/:id", async (req, res) => {
-  try {
-    const item = await MagicItem.findById(req.params.id);
-    if (item) {
-      res.json(item);
-    } else {
-      res.status(404).json({ error: "Not found" });
-    }
-  } catch (err) {
-    res.status(400).json({ error: "Invalid user ID" });
-  }
-});
-
-// Avocado Tree
-app.get("/avocado", (req, res) => {
-  let filterList = [...avocadoSalesData];
-
-  // Query for a specific region
-  const regionSearch = req.query.region;
-  if (regionSearch) {
-    filterList = filterList.filter((item) =>
-      item.region.toLowerCase().includes(regionSearch.toLowerCase())
-    );
-  }
-
-  // Query to filter out all entries at a price point higher than the query.
-  const priceSearch = req.query.lowestprice;
-  if (priceSearch) {
-    filterList = filterList.filter((item) => item.averagePrice >= +priceSearch);
-  }
-
-  if (filterList.length > 0) {
-    res.json(filterList);
-  } else {
-    res.status(404).send("No datapoint found!");
-  }
-});
-
-app.get("/avocado/:avocadoId", (req, res) => {
-  const { avocadoId } = req.params;
-  const item = avocadoSalesData.find((findItem) => +avocadoId === findItem.id);
-
-  if (item) {
-    res.send(item);
-  } else {
-    res.status(404).send("No avocado found with that Id!");
-  }
 });
 
 // MagicItem Tree
 app.get("/magic-items", (req, res) => {
   let filterList = [...magicItemData];
 
-  // Query for a specific region
+  // Query for a specific color
   const colorSearch = req.query.color;
   if (colorSearch) {
     filterList = filterList.filter((item) =>
       item.color.toLowerCase().includes(colorSearch.toLowerCase())
     );
   }
-  // Query to filter out all entries at a price point higher than the query.
+  // Query to filter out all entries at a price point lower than the query.
   const priceSearch = req.query.price;
   if (priceSearch) {
     filterList = filterList.filter((item) => item.price <= +priceSearch);
@@ -166,6 +90,19 @@ app.get("/magic-items/:itemId", (req, res) => {
   if (item) {
     res.send(item);
   } else {
+    res.status(404).send("No magical item found with that Id!");
+  }
+});
+
+app.get("/magic-items/:id", async (req, res) => {
+  try {
+    const item = await MagicItem.findById(req.params.id);
+    if (item) {
+      res.json(item);
+    } else {
+      res.status(404).json({ error: "Not found" });
+    }
+  } catch (err) {
     res.status(404).send("No magical item found with that Id!");
   }
 });
