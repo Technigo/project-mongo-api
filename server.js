@@ -120,7 +120,7 @@ app.get("/", (req, res) => {
 // Route to get all items
 //http://localhost:8000/netflix
 app.get("/netflix", async (req, res) => {
-  const allMovies = await Movie.find().maxTimeMS(30000);
+  const allMovies = await Movie.find();
 
   if (allMovies.length > 0) {
     res.json(allMovies);
@@ -189,11 +189,6 @@ app.use((req, res) => {
     error: "Route not found",
     message: `The requested route ${req.originalUrl} does not exist.`,
   });
-});
-
-// Define a health check route
-app.get("/health", (req, res) => {
-  res.status(200).send("OK");
 });
 
 // Start the server
