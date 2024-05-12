@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 import expressListEndpoints from "express-list-endpoints";
 import topMusicData from "./data/top-music.json";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl =
+  process.env.MONGO_URL || "mongodb://localhost/top-music-spotify";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
@@ -27,7 +28,18 @@ const musicSchema = new Schema({
   populariy: Number,
 });
 
-const MusicModel = mongoose.model("Music", Music);
+// The Model
+const Music = mongoose.model("Music", musicSchema);
+
+// Seed the database
+const seedDataBase = async () => {
+  await Music.deleteMany();
+
+  topMusicData.forEach((song) => {
+    new Music(song).save();
+  });
+};
+seedDataBase();
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -50,16 +62,22 @@ app.get("/", (req, res) => {
 
 // Get all songs
 // http://localhost:8080/songs
-app.get("/songs", (req, res) => {
-  res.json(topMusicData);
+app.get("/songs", async (req, res) => {
+  const allSongs = await Music.find();
+
+  if (allSongs.length > 0) {
+    res.json(allSongs);
+  } else {
+    res.status(404).send("no songs was found based on the filters");
+  }
 });
 
 // Get one song based on id
 // http://localhost:8080/songs/2
-app.get("/songs/:songId", (req, res) => {
+app.get("/songs/:songId", async (req, res) => {
   const { songId } = req.params;
 
-  const song = topMusicData.find((song) => +songId === song.id);
+  const song = await Music.findById(songId).exec();
 
   if (song) {
     res.json(song);
@@ -70,10 +88,10 @@ app.get("/songs/:songId", (req, res) => {
 
 // Get artist of a specifik song
 // http://localhost:8080/songs/2/artist
-app.get("/songs/:songId/artist", (req, res) => {
+app.get("/songs/:songId/artist", async (req, res) => {
   const { songId } = req.params;
 
-  const song = topMusicData.find((song) => +songId === song.id);
+  const song = await Music.findById(songId).exec();
 
   if (song) {
     res.json({ artistName: song.artistName });
