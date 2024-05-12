@@ -23,16 +23,30 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
-if (process.env.RESET_DB) {
-  const seedDatabased = async () => {
-    await Movie.deleteMany({});
+const batchSize = 200; // Define the batch size
 
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    let totalDeleted = 0;
+
+    // Calculate the total number of documents to delete
+    const totalMovies = await Movie.countDocuments();
+
+    // Loop through batches until all documents are deleted
+    while (totalDeleted < totalMovies) {
+      // Delete documents in batches
+      await Movie.deleteMany({}, { limit: 0 });
+
+      totalDeleted += batchSize;
+    }
+
+    // Insert new documents from netflixData
     netflixData.forEach((movieData) => {
       new Movie(movieData).save();
     });
   };
 
-  seedDatabased();
+  seedDatabase();
 }
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
