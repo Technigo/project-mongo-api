@@ -13,6 +13,7 @@ const { Schema } = mongoose;
 
 // Schema
 const musicSchema = new Schema({
+  id: Number,
   trackName: String,
   artistName: String,
   genre: String,
@@ -76,13 +77,20 @@ app.get("/songs", async (req, res) => {
 // http://localhost:8080/songs/2
 app.get("/songs/:songId", async (req, res) => {
   const { songId } = req.params;
+  console.log("Requested song ID:", songId);
 
-  const song = await Music.findById(songId).exec();
+  try {
+    const song = await Music.findById(songId).exec();
 
-  if (song) {
-    res.json(song);
-  } else {
-    res.send("No song was found");
+    if (song) {
+      res.json(song);
+    } else {
+      console.log("No song was found with ID", songId);
+      res.send("No song was found");
+    }
+  } catch (error) {
+    console.error("Error fetching song", error);
+    res.status(500).send("An error occured while fetching the song");
   }
 });
 
