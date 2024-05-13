@@ -1,13 +1,29 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+Utilize MongoDB and Mongoose to model a dataset of Netflix titles with RESTful API endpoints and Mongoose queries for efficient data retrieval and manipulation. 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+Implement features such as pagination to enhance the functionality of the API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Had to refer to documentation to implement pagination. 
+I would like to continue working on the frontend.
 
 ## View it live
+Backend:
+https://project-mongo-api-z0mw.onrender.com
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+Frontend:
+https://melodic-gnome-35f6b0.netlify.app/
+https://github.com/jyy009/project-mongo-api-frontend
+
+## Endpoints
+"/titles" Fetch all Netflix titles. Query by: name, type, cast, country.
+"/titles/year/:year" Fetch titles by year.
+"/titles/:titleId" Fetch one title by it's id.
+
+## Queries
+"name": Filter titles by title name.
+"type": Filter titles by type of title, either 'tv' or 'movie'.
+"cast": Filter titles by cast.
+"country": Filter titles by country.
