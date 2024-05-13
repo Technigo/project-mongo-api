@@ -6,9 +6,16 @@ Implement features such as pagination to enhance the functionality of the API.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+Had to refer to documentation to implement pagination. 
+I would like to continue working on the frontend.
 
 ## View it live
+Backend:
+https://project-mongo-api-z0mw.onrender.com
+
+Frontend:
+https://melodic-gnome-35f6b0.netlify.app/
+https://github.com/jyy009/project-mongo-api-frontend
 
 ## Endpoints
 "/titles" Fetch all Netflix titles. Query by: name, type, cast, country.
