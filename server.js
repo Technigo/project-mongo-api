@@ -94,6 +94,20 @@ app.get("/books/:bookId", async (req, res) => {
   }
 });
 
+// GET book by ISBN
+app.get("/isbn/:isbn", async (req, res) => {
+  const { isbn } = req.params;
+
+  const query = Book.where({ isbn: isbn });
+  const book = await query.findOne();
+
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).send("No book was found");
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
