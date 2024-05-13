@@ -4,6 +4,8 @@ Endpoints: /sneakers, /sneakers/in-stock, /sneakers/brand, /sneakers/name, /snea
 
 ## The problem
 
+The hardest this week was to deploy the database which took several attempts, and finally it worked when I made a new account.
+
 ## View it live
 
-https://project-mongo-api-ybw1.onrender.com
+https://project-mongo-api-6j5x.onrender.com
