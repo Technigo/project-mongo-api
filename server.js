@@ -34,11 +34,16 @@ const Music = mongoose.model("Music", musicSchema);
 
 // Seed the database
 const seedDataBase = async () => {
-  await Music.deleteMany();
+  try {
+    await Music.deleteMany();
 
-  topMusicData.forEach((song) => {
-    new Music(song).save();
-  });
+    topMusicData.forEach(async (song) => {
+      await new Music(song).save();
+    });
+    console.log("Database seeded successfully.");
+  } catch (error) {
+    console.error("Error seeding database:", error);
+  }
 };
 seedDataBase();
 
