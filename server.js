@@ -3,25 +3,25 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import cheeses from './data/cheeses.json'
 import expressListEndpoints from 'express-list-endpoints'
-import dotenv from 'dotenv'
+// import dotenv from 'dotenv'
 
-dotenv.config()
+// dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/CheesusChrist'
 mongoose.connect(mongoUrl)
 mongoose.Promise = Promise
 
-// //seed the database
-// if (process.env.RESET_DATABASE) {
-// 	const seedDatabase = async () => {
-// 		console.log('Resetting and seeding')
-// 		await Cheese.deleteMany()
-// 		cheeses.forEach((cheese) => {
-// 			new Cheese(cheese).save()
-// 		})
-// 	}
-// 	seedDatabase()
-// }
+//seed the database
+if (process.env.RESET_DATABASE) {
+	const seedDatabase = async () => {
+		console.log('Resetting and seeding')
+		await Cheese.deleteMany()
+		cheeses.forEach((cheese) => {
+			new Cheese(cheese).save()
+		})
+	}
+	seedDatabase()
+}
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -42,6 +42,18 @@ const cheeseSchema = new Schema({
 
 //models
 const Cheese = mongoose.model('Cheese', cheeseSchema)
+
+//seed the database
+if (process.env.RESET_DATABASE) {
+	const seedDatabase = async () => {
+		console.log('Resetting and seeding')
+		await Cheese.deleteMany()
+		cheeses.forEach((cheese) => {
+			new Cheese(cheese).save()
+		})
+	}
+	seedDatabase()
+}
 
 // Start defining your routes here
 app.get('/', (req, res) => {
