@@ -20,9 +20,9 @@ app.use(express.json())
 
 const { Schema } = mongoose
 const cheeseSchema = new Schema({
-	name: String,
-	animal: String,
-	region: String,
+  name: String,
+  animal: String,
+  region: String,
 	taste: String,
 	wine_pairing: String,
 	cheese_rating: Number,
@@ -35,9 +35,9 @@ const Cheese = mongoose.model('Cheese', cheeseSchema)
 //seed the database
 if (process.env.RESET_DATABASE) {
 	const seedDatabase = async () => {
-		console.log('Resetting and seeding')
 		await Cheese.deleteMany()
-		cheeses.forEach((cheese) => {
+		
+    cheeses.forEach((cheese) => {
 			new Cheese(cheese).save()
 		})
 	}
@@ -64,9 +64,7 @@ app.get('/cheeses', async (req, res) => {
 //route to get cheese by id
 app.get('/cheeses/:cheeseId', async (req, res) => {
 	const { cheeseId } = req.params
-
 	const cheese = await Cheese.findById(cheeseId).exec()
-
 	if (cheese) {
 		res.send(cheese)
 	} else {
@@ -77,9 +75,8 @@ app.get('/cheeses/:cheeseId', async (req, res) => {
 //route that shows a single cheese by name if you enter it in the URL
 app.get('/names/:name', async (req, res) => {
 	const cheeseName = await Cheese.findOne({ name: req.params.name }).exec()
-
 	if (cheeseName) {
-		res.json(cheeseName)
+	  res.json(cheeseName)
 	} else {
 		res.status(404).send('cannot find cheese by this name')
 	}
@@ -88,7 +85,6 @@ app.get('/names/:name', async (req, res) => {
 //
 app.get('/regions', async (req, res) => {
 	const regions = await Cheese.find({})
-
 	if (regions) {
 		res.json(regions)
 	} else {
@@ -99,7 +95,6 @@ app.get('/regions', async (req, res) => {
 //router that finds all the cheeses made from cows milk
 app.get('/cows', async (req, res) => {
 	const cowMilk = await Cheese.find({ animal: 'Cow' })
-
 	if (cowMilk) {
 		res.json(cowMilk)
 	} else {
@@ -110,7 +105,6 @@ app.get('/cows', async (req, res) => {
 //router that finds all the cheeses made from goat milk
 app.get('/goats', async (req, res) => {
 	const goatMilk = await Cheese.find({ animal: 'Goat' })
-
 	if (goatMilk) {
 		res.json(goatMilk)
 	} else {
@@ -121,7 +115,6 @@ app.get('/goats', async (req, res) => {
 //router that finds all the cheeses made from sheep milk
 app.get('/sheep', async (req, res) => {
 	const sheepMilk = await Cheese.find({ animal: 'Sheep' })
-
 	if (sheepMilk) {
 		res.json(sheepMilk)
 	} else {
