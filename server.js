@@ -20,7 +20,7 @@ dotenv.config();
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 
 //Connect to MongoDB
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
 const batchSize = 200; // Define the batch size
