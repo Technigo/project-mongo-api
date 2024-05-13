@@ -63,11 +63,21 @@ app.get("/", (req, res) => {
 
 // GET books
 app.get("/books", async (req, res) => {
-  const allBooks = await Book.find();
-  if (allBooks.length > 0) {
-    res.json(allBooks);
-  } else {
+  const { sort, order } = req.query;
+
+  const allBooks = Book.find();
+
+  // Check if there are any books
+  if (allBooks.length === 0) {
     res.status(404).send("No books were found");
+    // Check if we should sort by rating
+  } else if (sort === "rating") {
+    // Determine sort order
+    const sortOrder = order === "ascending" ? 1 : -1;
+    const sortedBooks = allBooks.sort({ average_rating: sortOrder });
+    res.json(await sortedBooks);
+  } else {
+    res.json(await allBooks);
   }
 });
 
