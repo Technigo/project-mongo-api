@@ -97,6 +97,7 @@ if (process.env.RESET_DB) {
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
+const address = process.env.ADDRESS || "localhost";
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
@@ -198,5 +199,5 @@ app.get(`/bookpages/:bookpages`, (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on http://${address}:${port}`);
 });
