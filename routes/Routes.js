@@ -294,7 +294,7 @@ router.post("/books/add/", async (req, res, next) => {
   }
 });
 
-//update book
+//update/overwrite all fields in a book
 router.put("/books/update/:id", async (req, res, next) => {
   try {
     const book = await Book.findById(req.params.id);
@@ -325,6 +325,43 @@ router.put("/books/update/:id", async (req, res, next) => {
     // If an error occurred, create a new error with a custom message
     const err = new Error(`Error updating book: ${error}`);
     // Pass the error to the next middleware
+    next(err);
+  }
+});
+
+//update some of the fields in the book
+router.patch("/books/updatefields/:id", async (req, res, next) => {
+  try {
+    const fieldsToUpdate = [
+      "title",
+      "authors",
+      "average_rating",
+      "isbn",
+      "isbn13",
+      "language_code",
+      "num_pages",
+      "ratings_count",
+      "text_reviews_count",
+    ];
+
+    const update = {};
+    fieldsToUpdate.forEach((field) => {
+      if (req.body[field]) {
+        update[field] = req.body[field];
+      }
+    });
+
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, update, {
+      new: true,
+    });
+
+    if (updatedBook) {
+      res.json(updatedBook);
+    } else {
+      res.status(404).json({ error: "Book not found" });
+    }
+  } catch (error) {
+    const err = new Error(`Error updating book: ${error}`);
     next(err);
   }
 });

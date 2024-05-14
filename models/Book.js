@@ -16,12 +16,12 @@ const BookSchema = new Schema({
   },
   average_rating: Number,
   isbn: {
-    type: Number,
+    type: String,
     required: true,
     min: 0,
   },
   isbn13: {
-    type: Number,
+    type: String,
     required: true,
     min: 0,
   },

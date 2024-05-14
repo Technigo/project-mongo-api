@@ -10,6 +10,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
+const app = express();
+
+// Add middlewares to enable cors and json body parsing
+app.use(cors());
+app.use(express.json());
+
+app.use("/", router);
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
@@ -35,12 +43,6 @@ class NotFoundError extends Error {
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
 const port = process.env.PORT || 7777;
-const app = express();
-app.use("/", router);
-
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
 
 // Define __filename and __dirname
 const __filename = fileURLToPath(import.meta.url);
