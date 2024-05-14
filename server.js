@@ -14,8 +14,6 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
-
-
 // Custom error classes
 class ValidationError extends Error {
   constructor(message) {
@@ -32,7 +30,6 @@ class NotFoundError extends Error {
     this.status = 404;
   }
 }
-
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:

@@ -81,7 +81,7 @@ router.get("/books/", async (req, res, next) => {
   }
 });
 
-router.get("/books/:id", async (req, res,  next) => {
+router.get("/books/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const book = await Book.findById(id).exec();
@@ -98,7 +98,7 @@ router.get("/books/:id", async (req, res,  next) => {
   }
 });
 
-router.get("/books/authors/:authors", async (req, res,  next) => {
+router.get("/books/authors/:authors", async (req, res, next) => {
   try {
     const { skip, limit } = getPaginationParameters(req);
     const authors = req.params.authors;
@@ -113,15 +113,13 @@ router.get("/books/authors/:authors", async (req, res,  next) => {
     }
   } catch (error) {
     // If an error occurred, create a new error with a custom message
-    const err = new Error(
-      `Error fetching books with authors: ${error}`
-    );
+    const err = new Error(`Error fetching books with authors: ${error}`);
     // Pass the error to the next middleware
     next(err);
   }
 });
 
-router.get("/books/average_rating/:average_rating", async (req, res,  next) => {
+router.get("/books/average_rating/:average_rating", async (req, res, next) => {
   try {
     const { skip, limit } = getPaginationParameters(req);
     const average_rating = Number(req.params.average_rating);
@@ -142,15 +140,13 @@ router.get("/books/average_rating/:average_rating", async (req, res,  next) => {
     }
   } catch (error) {
     // If an error occurred, create a new error with a custom message
-    const err = new Error(
-      `Error fetching books with rating: ${error}`
-    );
+    const err = new Error(`Error fetching books with rating: ${error}`);
     // Pass the error to the next middleware
     next(err);
   }
 });
 
-router.get("/books/pages_asc/:num_pages", async (req, res,  next) => {
+router.get("/books/pages_asc/:num_pages", async (req, res, next) => {
   try {
     const { skip, limit } = getPaginationParameters(req);
     const num_pages = Number(req.params.num_pages);
@@ -178,7 +174,7 @@ router.get("/books/pages_asc/:num_pages", async (req, res,  next) => {
   }
 });
 
-router.get("/books/pages_desc/:num_pages", async (req, res,  next) => {
+router.get("/books/pages_desc/:num_pages", async (req, res, next) => {
   try {
     const { skip, limit } = getPaginationParameters(req);
     const num_pages = Number(req.params.num_pages);
@@ -206,7 +202,7 @@ router.get("/books/pages_desc/:num_pages", async (req, res,  next) => {
   }
 });
 
-router.get("/books/ratings_count/:ratings_count", async (req, res,  next) => {
+router.get("/books/ratings_count/:ratings_count", async (req, res, next) => {
   try {
     const { skip, limit } = getPaginationParameters(req);
     const ratings_count = Number(req.params.ratings_count);
@@ -235,7 +231,7 @@ router.get("/books/ratings_count/:ratings_count", async (req, res,  next) => {
 
 router.get(
   "/books/text_reviews_count/:text_reviews_count",
-  async (req, res,  next) => {
+  async (req, res, next) => {
     try {
       const { skip, limit } = getPaginationParameters(req);
       const text_reviews_count = Number(req.params.text_reviews_count);
@@ -256,16 +252,14 @@ router.get(
       }
     } catch (error) {
       // If an error occurred, create a new error with a custom message
-      const err = new Error(
-        `Error fetching books with text reviews: ${error}`
-      );
+      const err = new Error(`Error fetching books with text reviews: ${error}`);
       // Pass the error to the next middleware
       next(err);
     }
   }
 );
 
-router.get("/books/language_code/:language_code", async (req, res,  next) => {
+router.get("/books/language_code/:language_code", async (req, res, next) => {
   const language_code = req.params.language_code;
   try {
     const { skip, limit } = getPaginationParameters(req);
@@ -281,9 +275,7 @@ router.get("/books/language_code/:language_code", async (req, res,  next) => {
     }
   } catch (error) {
     // If an error occurred, create a new error with a custom message
-    const err = new Error(
-      `Error fetching book with language code : ${error}`
-    );
+    const err = new Error(`Error fetching book with language code : ${error}`);
     // Pass the error to the next middleware
     next(err);
   }
@@ -303,7 +295,7 @@ router.post("/books/add/", async (req, res, next) => {
 });
 
 //update book
-router.put("/books/update/:id", async (req, res,  next) => {
+router.put("/books/update/:id", async (req, res, next) => {
   try {
     const book = await Book.findById(req.params.id);
     if (book) {
@@ -338,7 +330,7 @@ router.put("/books/update/:id", async (req, res,  next) => {
 });
 
 //delete book
-router.delete("/books/delete/:id", async (req, res,  next) => {
+router.delete("/books/delete/:id", async (req, res, next) => {
   try {
     const book = await Book.findByIdAndDelete(req.params.id);
     if (book) {
@@ -355,7 +347,7 @@ router.delete("/books/delete/:id", async (req, res,  next) => {
 });
 
 // get updated documentation
-router.get("/", (req, res,  next) => {
+router.get("/", (req, res, next) => {
   try {
     const endpoints = listEndpoints(router);
     const updatedEndpoints = endpoints.map((endpoint) => {

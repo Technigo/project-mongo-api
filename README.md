@@ -10,14 +10,16 @@ I started out with reading about the requirements for the assignement. Then I st
 after a made a lot of endpoints, added some filters, and then added the possibility to add, update and delete entries in my db.
 afterwards i tried to clean up my server file and split it into a file for the model, then a file for all routes, and a file for seeding the database who will run if i choose to run npm run seed.
 then i looked into how i could improve my error handling and logging. then i and added winston and morgan to my project as well.
-I tried using pm2 to handle shutting down, and restarting the server upon unhandled promise rejections and uncaught exceptions (as its best practice), but that gave me too many new challenges to look into, so after trying to handle those, and then a couple of new ones, i decided to not shut down the server and not use pm2 util I have more time to figure out how to solve these issues with deployment using  pm2.
+I tried using pm2 to handle shutting down, and restarting the server upon unhandled promise rejections and uncaught exceptions (as its best practice), but that gave me too many new challenges to look into, so after trying to handle those, and then a couple of new ones, i decided to not shut down the server and not use pm2 util I have more time to figure out how to solve these issues with deployment using pm2.
 
 ## View it live
 
 [View it live](https://project-mongo-api-5ryp.onrender.com/)
 
 ## Code Files
+
 Here are the main code files in the project:
+
 - `server.js`: This file is responsible for running the server with a typical setup for a server-side application using Express.js and mongoose for interacting with MongoDB.
 - `book.js`: This file contains the model and schema definition for the "Book" entity in the API.
 - `routes.js`: This file defines the routes and handlers for the API endpoints.
