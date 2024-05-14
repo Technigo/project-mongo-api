@@ -1,13 +1,10 @@
 # Project Mongo API
-
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project was designed to develop a RESTful API for avocado sales data, utilizing Express.js and MongoDB to manage the database and implement API endpoints effectively.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The main challenge was to create efficient queries to retrieve and manipulate data according to the API's requirements. If I had more time, I would implement additional features like authentication and more complex data aggregation to enhance the API's functionality.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-ude1.onrender.com

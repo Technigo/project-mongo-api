@@ -1,32 +1,93 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import expressListEndpoints from "express-list-endpoints";
+import avocadoSalesData from "./data/avocado-sales.json" with { type: "json" };
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
+// Database connection
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
 const app = express();
+const port = process.env.PORT || 8080;
 
-// Add middlewares to enable cors and json body parsing
+// Avocado sales model
+const AvocadoSales = mongoose.model("AvocadoSales", {
+  id: Number,
+  date: Date,
+  averagePrice: Number,
+  totalVolume: Number,
+  totalBagsSold: Number,
+  smallBagsSold: Number,
+  largeBagsSold: Number,
+  xLargeBagsSold: Number,
+  region: String,
+});
+
+// Seed database if required
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await AvocadoSales.deleteMany();
+    const salesDocuments = avocadoSalesData.map(
+      (salesData) => new AvocadoSales(salesData)
+    );
+    await AvocadoSales.insertMany(salesDocuments);
+    console.log("Database seeded");
+  };
+  seedDatabase();
+}
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// API documentation endpoint
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json(
+    expressListEndpoints(app).map((endpoint) => ({
+      method: endpoint.methods.join(", "),
+      path: endpoint.path,
+      description: "Describe what each endpoint does",
+    }))
+  );
+});
+
+// List all sales
+app.get("/avocado-sales", async (req, res) => {
+  try {
+    const sales = await AvocadoSales.find().select("-_id -__v").sort({ id: 1 });
+    res.json(sales);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to retrieve sales data" });
+  }
+});
+
+// Get sales by region
+app.get("/avocado-sales/region/:regionName", async (req, res) => {
+  const { regionName } = req.params;
+  try {
+    const sales = await AvocadoSales.find({ region: regionName })
+      .select("-_id -__v")
+      .sort({ id: 1 });
+    res.json(sales);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to retrieve sales by region" });
+  }
+});
+
+// Get sales by specific date
+app.get("/avocado-sales/date/:date", async (req, res) => {
+  const { date } = req.params;
+  try {
+    const formattedDate = new Date(date).toISOString();
+    const sales = await AvocadoSales.find({ date: formattedDate })
+      .select("-_id -__v")
+      .sort({ id: 1 });
+    res.json(sales);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to retrieve sales by date" });
+  }
 });
 
 // Start the server
