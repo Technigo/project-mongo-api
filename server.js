@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import expressListEndpoints from "express-list-endpoints";
-import avocadoSalesData from "./data/avocado-sales.json" assert { type: "json" };
+import avocadoSalesData from "./data/avocado-sales.json" with { type: "json" };
 
 // Database connection
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
     expressListEndpoints(app).map((endpoint) => ({
       method: endpoint.methods.join(", "),
       path: endpoint.path,
-      description: "Describe what each endpoint does", // Consider adding more detailed descriptions
+      description: "Describe what each endpoint does",
     }))
   );
 });

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "babel-node server.js",
-    "dev": "nodemon server.js --exec babel-node"
+    "dev": "nodemon -r dotenv/config server.js --exec babel-node"
   },
   "author": "",
   "license": "ISC",
