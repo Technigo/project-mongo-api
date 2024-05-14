@@ -17,35 +17,36 @@ dotenv.config();
 // import goldenGlobesData from "./data/golden-globes.json";
 // import topMusicData from "./data/top-music.json";
 
+//MongoDB connection URL
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 
 //Connect to MongoDB
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
-const batchSize = 200; // Define the batch size
+//Function to seed the database
+const seedDatabase = async () => {
+  console.log("Starting database reset...");
+  try {
+    // Delete existing documents
+    const deleteResult = await Movie.deleteMany({});
+    console.log(`Deleted ${deleteResult.deletedCount} documents`);
 
+    // Insert new documents
+    const insertPromises = netflixData.map((movieData) =>
+      new Movie(movieData).save()
+    );
+    await Promise.all(insertPromises);
+    console.log(`Inserted ${netflixData.length} new documents`);
+
+    console.log("Database reset completed");
+  } catch (error) {
+    console.error("Error resetting the database:", error);
+  }
+};
+
+// Check if RESET_DB is true and seed the database if so
 if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    let totalDeleted = 0;
-
-    // Calculate the total number of documents to delete
-    const totalMovies = await Movie.countDocuments();
-
-    // Loop through batches until all documents are deleted
-    while (totalDeleted < totalMovies) {
-      // Delete documents in batches
-      await Movie.deleteMany({}, { limit: 0 });
-
-      totalDeleted += batchSize;
-    }
-
-    // Insert new documents from netflixData
-    netflixData.forEach((movieData) => {
-      new Movie(movieData).save();
-    });
-  };
-
   seedDatabase();
 }
 
@@ -134,12 +135,18 @@ app.get("/", (req, res) => {
 // Route to get all items
 //http://localhost:8000/netflix
 app.get("/netflix", async (req, res) => {
-  const allMovies = await Movie.find();
+  try {
+    const allMovies = await Movie.find();
 
-  if (allMovies.length > 0) {
-    res.json(allMovies);
-  } else {
-    res.status(400).send("Error fetching Netflix movie list");
+    if (allMovies.length > 0) {
+      res.json(allMovies);
+    } else {
+      res.status(400).send("Error fetching Netflix movie list");
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching the movies" });
   }
 });
 

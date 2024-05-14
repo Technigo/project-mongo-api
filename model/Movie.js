@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const { Schema } = mongoose;
+const { Schema, model } = mongoose;
 
 const movieSchema = new Schema({
   show_id: {
@@ -38,6 +38,6 @@ const movieSchema = new Schema({
   },
 });
 
-const Movie = mongoose.model("Movie", movieSchema);
+const Movie = model("Movie", movieSchema);
 
 export default Movie;
