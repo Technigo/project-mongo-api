@@ -21,7 +21,10 @@ dotenv.config();
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 
 //Connect to MongoDB
-mongoose.connect(mongoUrl);
+mongoose
+  .connect(mongoUrl)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.error("Error connecting to MongoDB:", error));
 mongoose.Promise = Promise;
 
 //Function to seed the database
