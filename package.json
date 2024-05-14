@@ -17,6 +17,7 @@
     "express": "^4.19.2",
     "express-list-endpoints": "^7.1.0",
     "mongoose": "^8.3.4",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "dotenv": "^16.0.0"
   }
 }
