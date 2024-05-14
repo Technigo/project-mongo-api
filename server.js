@@ -42,21 +42,21 @@ app.get("/", (req, res) => {
     if (endpoint.path === "/restaurants/:query") {
       endpoint.query = {
         description:
-          "Add query endpoint to search for restaurant name or ID. If name includes more than one word, add space or '%20' between the words. ID should be a number between 1 and 6,700",
+          "Add query endpoint to search for restaurant name or ID. If name includes more than one word, add a space between the words. ID should be a number between 1 and 6,700",
       }
     }
 
     if (endpoint.path === "/cuisines/:cuisine") {
       endpoint.query = {
         description:
-          "Add query endpoint to search for cuisine type. See endpoint '/cuisines' for examples of different cuisines. If cuisine type includes more than one word, add space or '%20' between the words.",
+          "Add query endpoint to search for cuisine type. See endpoint '/cuisines' for examples of different cuisines. If cuisine type includes more than one word, add space between the words.",
       }
     }
 
     if (endpoint.path === "/locations/:location") {
       endpoint.query = {
         description:
-          "Add query endpoint to search for city or country. If location name includes more than one word, add space or '%20' between the words.",
+          "Add query endpoint to search for city or country. If location name includes more than one word, add space between the words.",
       }
     }
 
@@ -120,7 +120,7 @@ app.get("/restaurants/:query", async (req, res) => {
       res
         .status(404)
         .send(
-          "No restaurant with this criteria. For names - if there is a space in the restaurant's name, replace it with '%20', for example 'maison%lameloise'. For IDs - try a number between 1-6700"
+          "No restaurant with this criteria. For names - if the name has more than two words, add a space between the words. For IDs - try a number between 1-6700"
         )
     }
   } catch (error) {
@@ -170,7 +170,7 @@ app.get("/cuisines/:cuisine", async (req, res) => {
       res
         .status(404)
         .send(
-          "No restaurants found in this cuisine, try searching for a cuisine found in the endpoint '/cuisines'. Add '%20' instead of spacing, for example 'African,%20Creative'"
+          "No restaurants found in this cuisine, try searching for a cuisine found in the endpoint '/cuisines'."
         )
     }
   } catch (error) {
