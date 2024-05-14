@@ -1,4 +1,4 @@
-[
+const booksData = [
   {
     "bookID": 1,
     "title": "Harry Potter and the Half-Blood Prince (Harry Potter  #6)",
@@ -5399,4 +5399,6 @@
     "ratings_count": 2,
     "text_reviews_count": 0
   }
-]
+];
+
+export default booksData;

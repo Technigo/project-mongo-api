@@ -1,20 +1,32 @@
 {
-  "name": "project-mongo-api",
+  "name": "book-api",
   "version": "1.0.0",
-  "description": "Starter project to get up and running with express quickly",
+  "type": "module",
+  "description": "mongo db project with express to create a book api",
   "scripts": {
+    "build": "babel ./**/*.js ./**/.*/*.js ./**/*.cjs ./**/.*/*.cjs --out-dir dist --ignore node_modules",
+    "seed": "SEED_DB=true node seedDatabase.js",
     "start": "babel-node server.js",
     "dev": "nodemon server.js --exec babel-node"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.17.9",
+    "@babel/cli": "^7.24.5",
+    "@babel/core": "^7.24.5",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.17.3",
-    "mongoose": "^8.0.0",
-    "nodemon": "^3.0.1"
+    "express-list-endpoints": "^7.1.0",
+    "fs": "^0.0.1-security",
+    "mongodb": "^6.6.1",
+    "mongoose": "^8.3.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "pm2": "^5.3.1",
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0"
   }
 }
