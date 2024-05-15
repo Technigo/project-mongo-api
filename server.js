@@ -8,30 +8,34 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
-mongoose.connect(mongoUrl)
+mongoose
+  .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.error("Error connecting to MongoDB:", error))
+
 mongoose.Promise = Promise
 
-//Set Schema
+// Set Schema
 const { Schema } = mongoose
 
 const netflixSchema = new Schema({
-  show_id: { type: Number, required: true },
-  title: { type: String, required: true },
+  show_id: Number,
+  title: String,
   director: String,
   cast: String,
-  country: { type: String, required: true },
+  country: String,
   date_added: Date,
-  release_year: { type: Number, required: true },
+  release_year: Number,
   rating: String,
   duration: String,
   listed_in: String,
   description: String,
-  type: { type: String, required: true },
+  type: String,
 })
 
 const NetflixModel = mongoose.model("Netflix", netflixSchema)
 
-//Set Seed
+// Set Seed
 const resetAndSeedDatabase = async () => {
   try {
     await NetflixModel.deleteMany({})
@@ -40,8 +44,6 @@ const resetAndSeedDatabase = async () => {
   } catch (error) {
     console.error("Error resetting and seeding database:", error)
   }
-
-  seedDatabase()
 }
 
 // Reset and seed database if RESET_DATABASE is set
@@ -88,10 +90,13 @@ app.get("/country", async (req, res) => {
 
 // Endpoint to return movie by ID
 app.get("/movies/:id", async (req, res) => {
-  const { show_id } = req.params
+  const { id } = req.params
   try {
-    const movie = await NetflixModel.findById(show_id)
-    if (movie && movie.type === "Movie") {
+    const movie = await NetflixModel.findOne({
+      show_id: Number(id),
+      type: "Movie",
+    })
+    if (movie) {
       res.json(movie)
     } else {
       res.status(404).json({ message: "Movie not found" })
