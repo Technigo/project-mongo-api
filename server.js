@@ -32,20 +32,23 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  const endpoints = expressListEndpoints(app).map(endpoint => {
+  const endpoints = expressListEndpoints(app).map((endpoint) => {
     // Add alive query parameter to the '/artists/:name' endpoint
     if (endpoint.path === '/questions') {
-      endpoint.query = [{
-        parameter: "page",
-        description: "add query endpoint to /questions, to show different pages. 50 questions per page",
-        type: "number",
-        example: "?page=7"
-      }];
+      endpoint.query = [
+        {
+          parameter: 'page',
+          description:
+            'add query endpoint to /questions, to show different pages. 50 questions per page',
+          type: 'number',
+          example: '?page=7',
+        },
+      ]
     }
-    return endpoint;
-  });
+    return endpoint
+  })
 
-  res.json(endpoints);
+  res.json(endpoints)
 })
 
 //Endpoint for all the questions
@@ -74,9 +77,9 @@ app.get('/questions', async (req, res) => {
 
 //Endpoint for specific ID
 app.get('/question/:id', async (req, res) => {
-  const id = await Questions.findOne({ id: req.params.id })
-  if (id.length > 0) {
-    res.json(id)
+  const question = await Questions.findOne({ id: req.params.id })
+  if (question) {
+    res.json(question)
   } else {
     res.status(404).json({
       error: 'Could not find a question with this id, the id:s go from 0 - 500',
