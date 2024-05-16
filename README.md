@@ -1,13 +1,12 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+Create my own database with Mongo DB. 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+This project was built on last week's assignment. So, I started by copying code from the previous project to use as a boilerplate. This one was quite challenging. For ages, I struggled with importing data from JSON to MongoDB. I ended up installing an older version of MongoDB - and it worked. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://mongo-nominations.onrender.com/nominations/123
