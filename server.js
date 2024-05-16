@@ -46,7 +46,6 @@ app.get("/", (req, res) => {
 //Endpoint to fetch all sneakers
 app.get("/sneakers", async (req, res) => {
   const allSneakers = await Sneaker.find()
-  console.log("All sneakers:", allSneakers)
 
   if (allSneakers.length > 0) {
     res.json(allSneakers)
