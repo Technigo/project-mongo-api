@@ -1,0 +1,402 @@
+[
+  {
+    "id": 1,
+    "brand": "Nike",
+    "name": "Nike Air Yeezy 2",
+    "price": 500,
+    "color": "Black/Solar Red",
+    "inStock": true
+  },
+  {
+    "id": 2,
+    "brand": "Adidas",
+    "name": "Adidas Yeezy Boost 350 V2",
+    "price": 220,
+    "color": "Zebra",
+    "inStock": true
+  },
+  {
+    "id": 3,
+    "brand": "Vans",
+    "name": "Vans Old Skool",
+    "price": 60,
+    "color": "Black/White",
+    "inStock": true
+  },
+  {
+    "id": 4,
+    "brand": "Nike",
+    "name": "Nike Air Mag",
+    "price": 10000,
+    "color": "Grey",
+    "inStock": true
+  },
+  {
+    "id": 5,
+    "brand": "Adidas",
+    "name": "Adidas Pharrell NMD Hu",
+    "price": 250,
+    "color": "Yellow",
+    "inStock": true
+  },
+  {
+    "id": 6,
+    "brand": "Vans",
+    "name": "Vans Sk8-Hi",
+    "price": 65,
+    "color": "Black/White",
+    "inStock": true
+  },
+  {
+    "id": 7,
+    "brand": "Nike",
+    "name": "Nike Air Fear of God 1",
+    "price": 350,
+    "color": "Black",
+    "inStock": false
+  },
+  {
+    "id": 8,
+    "brand": "Adidas",
+    "name": "Adidas Yeezy Boost 700",
+    "price": 300,
+    "color": "Wave Runner",
+    "inStock": true
+  },
+  {
+    "id": 9,
+    "brand": "Vans",
+    "name": "Vans Authentic",
+    "price": 50,
+    "color": "Black/White",
+    "inStock": true
+  },
+  {
+    "id": 10,
+    "brand": "Nike",
+    "name": "Nike Air Presto Off-White",
+    "price": 800,
+    "color": "Black/White",
+    "inStock": true
+  },
+  {
+    "id": 11,
+    "brand": "Adidas",
+    "name": "Adidas Yeezy Boost 750",
+    "price": 350,
+    "color": "Light Grey",
+    "inStock": false
+  },
+  {
+    "id": 12,
+    "brand": "Vans",
+    "name": "Vans Era",
+    "price": 55,
+    "color": "Black",
+    "inStock": true
+  },
+  {
+    "id": 13,
+    "brand": "Nike",
+    "name": "Nike Air Foamposite One Paranorman",
+    "price": 3500,
+    "color": "Black/Green",
+    "inStock": true
+  },
+  {
+    "id": 14,
+    "brand": "Adidas",
+    "name": "Adidas Human Race NMD Pharrell x Chanel",
+    "price": 1200,
+    "color": "Black",
+    "inStock": true
+  },
+  {
+    "id": 15,
+    "brand": "Vans",
+    "name": "Vans Slip-On",
+    "price": 50,
+    "color": "Checkerboard",
+    "inStock": true
+  },
+  {
+    "id": 16,
+    "brand": "Nike",
+    "name": "Nike Dunk SB Low 'Paris'",
+    "price": 2500,
+    "color": "Grey/Blue",
+    "inStock": true
+  },
+  {
+    "id": 17,
+    "brand": "Adidas",
+    "name": "Adidas Ultra Boost x Hypebeast",
+    "price": 300,
+    "color": "Black",
+    "inStock": true
+  },
+  {
+    "id": 18,
+    "brand": "Vans",
+    "name": "Vans Classic Slip-On",
+    "price": 55,
+    "color": "Black/White Checkerboard",
+    "inStock": true
+  },
+  {
+    "id": 19,
+    "brand": "Nike",
+    "name": "Nike SB Dunk Low 'What The Dunk'",
+    "price": 3000,
+    "color": "Multi-Color",
+    "inStock": false
+  },
+  {
+    "id": 20,
+    "brand": "Adidas",
+    "name": "Adidas NMD R1 PK 'OG'",
+    "price": 250,
+    "color": "Black/Red-Blue",
+    "inStock": true
+  },
+  {
+    "id": 21,
+    "brand": "Vans",
+    "name": "Vans SK8-Hi MTE",
+    "price": 90,
+    "color": "Black/True White",
+    "inStock": true
+  },
+  {
+    "id": 22,
+    "brand": "Nike",
+    "name": "Nike Air Zoom Kobe 1 'Black Mamba'",
+    "price": 400,
+    "color": "Black/Yellow",
+    "inStock": true
+  },
+  {
+    "id": 23,
+    "brand": "Adidas",
+    "name": "Adidas Yeezy Boost 350 V1 'Turtle Dove'",
+    "price": 2500,
+    "color": "Turtle Dove/Blue Grey-White",
+    "inStock": false
+  },
+  {
+    "id": 24,
+    "brand": "Vans",
+    "name": "Vans SK8-Hi Pro",
+    "price": 70,
+    "color": "Blackout",
+    "inStock": true
+  },
+  {
+    "id": 25,
+    "brand": "Nike",
+    "name": "Nike Air Force 1 Low Travis Scott",
+    "price": 1500,
+    "color": "White/Sail",
+    "inStock": true
+  },
+  {
+    "id": 26,
+    "brand": "Adidas",
+    "name": "Adidas Yeezy Boost 350 V2 'Semi-Frozen Yellow'",
+    "price": 220,
+    "color": "Semi Frozen Yellow/Raw Steel/Red",
+    "inStock": true
+  },
+  {
+    "id": 27,
+    "brand": "Vans",
+    "name": "Vans SK8-Hi Reissue",
+    "price": 65,
+    "color": "Black/True White",
+    "inStock": true
+  },
+  {
+    "id": 28,
+    "brand": "Nike",
+    "name": "Nike Air Yeezy 1 'Zen Grey'",
+    "price": 3000,
+    "color": "Zen Grey/Light Charcoal",
+    "inStock": true
+  },
+  {
+    "id": 29,
+    "brand": "Adidas",
+    "name": "Adidas Yeezy Boost 350 V2 'Beluga'",
+    "price": 220,
+    "color": "Steel Grey/Beluga/Solar Red",
+    "inStock": false
+  },
+  {
+    "id": 30,
+    "brand": "Vans",
+    "name": "Vans SK8-Hi",
+    "price": 65,
+    "color": "Black/White",
+    "inStock": true
+  },
+  {
+    "id": 31,
+    "brand": "Nike",
+    "name": "Nike Air Max 1/97 SW 'Sean Wotherspoon'",
+    "price": 1600,
+    "color": "Light Blue/Fury Yellow",
+    "inStock": false
+  },
+  {
+    "id": 32,
+    "brand": "Adidas",
+    "name": "Adidas Yeezy Boost 350 V2 'Sesame'",
+    "price": 220,
+    "color": "Sesame/Sesame-Sesame",
+    "inStock": true
+  },
+  {
+    "id": 33,
+    "brand": "Vans",
+    "name": "Vans Old Skool 'Pro'",
+    "price": 75,
+    "color": "Black/White",
+    "inStock": true
+  },
+  {
+    "id": 34,
+    "brand": "Nike",
+    "name": "Nike React Element 87 'Anthracite Black'",
+    "price": 400,
+    "color": "Anthracite/Black-White",
+    "inStock": true
+  },
+  {
+    "id": 35,
+    "brand": "Adidas",
+    "name": "Adidas NMD Hu Pharrell x Billionaire Boys Club 'Cotton Candy'",
+    "price": 250,
+    "color": "White/Pink-Blue",
+    "inStock": false
+  },
+  {
+    "id": 36,
+    "brand": "Vans",
+    "name": "Vans SK8-Hi MTE",
+    "price": 90,
+    "color": "Grape Leaf/Nightshade",
+    "inStock": true
+  },
+  {
+    "id": 37,
+    "brand": "Nike",
+    "name": "Nike Air Force 1 Low 'Travis Scott'",
+    "price": 1500,
+    "color": "Sail/Sail-Gum Light Brown",
+    "inStock": true
+  },
+  {
+    "id": 38,
+    "brand": "Adidas",
+    "name": "Adidas Ultra Boost 4.0 'Game of Thrones - Targaryen Dragons'",
+    "price": 180,
+    "color": "Core Black/Core Black-Scarlet",
+    "inStock": true
+  },
+  {
+    "id": 39,
+    "brand": "Vans",
+    "name": "Vans Authentic",
+    "price": 50,
+    "color": "Blue Flower/True White",
+    "inStock": true
+  },
+  {
+    "id": 40,
+    "brand": "Nike",
+    "name": "Nike SB Dunk High 'De La Soul'",
+    "price": 250,
+    "color": "Baroque Brown/Altitude Green",
+    "inStock": false
+  },
+  {
+    "id": 41,
+    "brand": "Adidas",
+    "name": "Adidas Yeezy Boost 350 V2 'Blue Tint'",
+    "price": 220,
+    "color": "Blue Tint/Grey Three/High Resolution Red",
+    "inStock": true
+  },
+  {
+    "id": 42,
+    "brand": "Vans",
+    "name": "Vans SK8-Hi Pro",
+    "price": 70,
+    "color": "Russet Orange/White",
+    "inStock": true
+  },
+  {
+    "id": 43,
+    "brand": "Nike",
+    "name": "Nike Air Max 97 'Silver Bullet'",
+    "price": 160,
+    "color": "Metallic Silver/Varsity Red-Black-White",
+    "inStock": true
+  },
+  {
+    "id": 44,
+    "brand": "Adidas",
+    "name": "Adidas NMD R1 'Japan Triple Black'",
+    "price": 300,
+    "color": "Core Black/Core Black-Core Black",
+    "inStock": true
+  },
+  {
+    "id": 45,
+    "brand": "Vans",
+    "name": "Vans Authentic",
+    "price": 50,
+    "color": "Ceramic/Parisian Night",
+    "inStock": true
+  },
+  {
+    "id": 46,
+    "brand": "Nike",
+    "name": "Nike Air Max 90 'Bacon'",
+    "price": 300,
+    "color": "Sail/Sheen-Straw-Medium Brown",
+    "inStock": false
+  },
+  {
+    "id": 47,
+    "brand": "Adidas",
+    "name": "Adidas Ultra Boost 1.0 'SNS Tee Time'",
+    "price": 1000,
+    "color": "White/Black",
+    "inStock": true
+  },
+  {
+    "id": 48,
+    "brand": "Vans",
+    "name": "Vans Old Skool",
+    "price": 60,
+    "color": "Grape Leaf/True White",
+    "inStock": true
+  },
+  {
+    "id": 49,
+    "brand": "Nike",
+    "name": "Nike SB Dunk Low 'De La Soul'",
+    "price": 250,
+    "color": "Safari/Altitude Green-Baroque Brown",
+    "inStock": true
+  },
+  {
+    "id": 50,
+    "brand": "Adidas",
+    "name": "Adidas NMD R1 PK 'OG'",
+    "price": 250,
+    "color": "Black/Red-Blue",
+    "inStock": true
+  }
+]
