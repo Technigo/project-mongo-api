@@ -1,35 +1,107 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import express from "express"
+import expressListEndpoints from "express-list-endpoints"
+import cors from "cors"
+import mongoose from "mongoose"
+import netflixData from "./data/netflix-titles.json"
+import dotenv from "dotenv"
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+dotenv.config()
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+mongoose
+  .connect(mongoUrl)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.error("Error connecting to MongoDB:", error))
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
+mongoose.Promise = Promise
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+// Set Schema
+const { Schema } = mongoose
 
-// Start defining your routes here
+const netflixSchema = new Schema({
+  show_id: Number,
+  title: String,
+  director: String,
+  cast: String,
+  country: String,
+  date_added: Date,
+  release_year: Number,
+  rating: String,
+  duration: String,
+  listed_in: String,
+  description: String,
+  type: String,
+})
+
+const NetflixModel = mongoose.model("Netflix", netflixSchema)
+
+// Set Seed
+if (process.env.RESET_DATABASE) {
+  const seedDatabase = async () => {
+    await NetflixModel.deleteMany()
+    netflixData.forEach((netflix) => {
+      new NetflixModel(netflix).save()
+    })
+  }
+  seedDatabase()
+}
+
+const port = process.env.PORT || 8080
+const app = express()
+
+app.use(cors())
+app.use(express.json())
+
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+  const endpoints = expressListEndpoints(app)
+  res.json(endpoints)
+})
+
+// Endpoint to return all movies
+app.get("/movies", async (req, res) => {
+  try {
+    const movies = await NetflixModel.find({ type: "Movie" })
+    res.json(movies)
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" })
+  }
+})
+
+// Endpoint to return data by country
+app.get("/country", async (req, res) => {
+  try {
+    const mediaByCountry = await NetflixModel.aggregate([
+      { $group: { _id: "$country", media: { $push: "$$ROOT" } } },
+    ])
+    const formattedData = mediaByCountry.reduce((acc, curr) => {
+      acc[curr._id] = curr.media
+      return acc
+    }, {})
+    res.json(formattedData)
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" })
+  }
+})
+
+// Endpoint to return movie by ID
+app.get("/movies/:id", async (req, res) => {
+  const { id } = req.params
+  try {
+    const movie = await NetflixModel.findOne({
+      show_id: Number(id),
+      type: "Movie",
+    })
+    if (movie) {
+      res.json(movie)
+    } else {
+      res.status(404).json({ message: "Movie not found" })
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" })
+  }
+})
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+  console.log(`Server running on http://localhost:${port}`)
+})
