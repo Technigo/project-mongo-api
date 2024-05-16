@@ -36,19 +36,14 @@ const netflixSchema = new Schema({
 const NetflixModel = mongoose.model("Netflix", netflixSchema)
 
 // Set Seed
-const resetAndSeedDatabase = async () => {
-  try {
-    await NetflixModel.deleteMany({})
-    await NetflixModel.insertMany(netflixData)
-    console.log("Database reset and seeded successfully")
-  } catch (error) {
-    console.error("Error resetting and seeding database:", error)
-  }
-}
-
-// Reset and seed database if RESET_DATABASE is set
 if (process.env.RESET_DATABASE) {
-  resetAndSeedDatabase().save()
+  const seedDatabase = async () => {
+    await Netflix.deleteMany()
+    netflixData.forEach((netflix) => {
+      new Netflix(netflix).save()
+    })
+  }
+  seedDatabase()
 }
 
 const port = process.env.PORT || 8080
