@@ -48,7 +48,7 @@ const resetAndSeedDatabase = async () => {
 
 // Reset and seed database if RESET_DATABASE is set
 if (process.env.RESET_DATABASE) {
-  resetAndSeedDatabase()
+  resetAndSeedDatabase().save()
 }
 
 const port = process.env.PORT || 8080
