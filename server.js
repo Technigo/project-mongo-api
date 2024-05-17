@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 const Books = mongoose.model("Books", {
-  bookID: { type: Number, required: true },
+  //bookID: { type: Number, required: true },
   title: { type: String, required: true },
   authors: { type: String, required: true },
   average_rating: Number,
@@ -79,7 +79,7 @@ app.get("/books", async (req, res) => {
 app.get("/books/:bookId", async (req, res) => {
   const { bookId } = req.params; 
   try {
-    const book = await Books.findOne({ bookID: Number(bookId) }).exec();
+    const book = await Books.findById( bookId ).exec();
     if (book) {
       res.json(book);
     } else {
