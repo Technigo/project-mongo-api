@@ -83,16 +83,11 @@ app.get("/flowers", async (req, res) => {
   }
 });
 
-// Get a single flower by ID or numeric ID (/flowers/6)
+// Get a single flower by ID
+// Example: https://project-mongo-api-wncr.onrender.com/flowers/664743c4d7627780ae07c56c
 app.get("/flowers/:id", async (req, res) => {
   try {
-    let flower;
-    if (!isNaN(req.params.id)) {
-      // If the ID is numeric, convert it to ObjectId
-      flower = await Flower.findOne({ id: parseInt(req.params.id) });
-    } else {
-      flower = await Flower.findById(req.params.id);
-    }
+    const flower = await Flower.findById(req.params.id);
     if (!flower) {
       return res.status(404).json({ error: "Flower not found" });
     }
