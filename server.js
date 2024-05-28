@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import expressListEndpoints from "express-list-endpoints";
-// import topMusicData from "./data/top-music.json";
+import topMusicData from "./data/top-music.json";
 
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost/top-music-spotify";
@@ -32,7 +32,6 @@ const musicSchema = new Schema({
 // The Model
 const Music = mongoose.model("Music", musicSchema);
 
-/*
 // Seed the database
 const seedDataBase = async () => {
   try {
@@ -47,7 +46,6 @@ const seedDataBase = async () => {
   }
 };
 seedDataBase();
-*/
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
