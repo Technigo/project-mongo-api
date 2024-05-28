@@ -8,4 +8,4 @@ I used MongoDB compass for checking the data and Postman. For deployment I used 
 
 ## View it live
 
-https://project-mongo-api-jgcc.onrender.com
+https://project-mongo-api-ulhw.onrender.com/
