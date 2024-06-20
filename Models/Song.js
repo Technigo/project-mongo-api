@@ -5,12 +5,12 @@ import mongoose from "mongoose"
 const { Schema } = mongoose
 
 const musicSchema = new Schema({
-  trackName: { type: String },
+  trackName: { type: String, required: true },
 
-  artistName: { String },
-  genre: { String },
+  artistName: { type: String, required: true },
+  genre: { type: String, required: true },
 
-  bpm: { Number },
+  bpm: { type: Number, required: true },
 
   energy: Number,
   danceability: Number,
@@ -23,6 +23,4 @@ const musicSchema = new Schema({
   popularity: Number,
 })
 // The Model
-const Song = mongoose.model("Song", musicSchema)
-
-export default Song
+export const Song = mongoose.model("Song", musicSchema)
