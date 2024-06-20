@@ -4,6 +4,7 @@ import cors from "cors"
 import expressListEndpoints from "express-list-endpoints"
 import mongoose from "mongoose"
 import { Song } from "./Models/Song"
+import dotenv from "dotenv"
 
 const mongoURL = process.env.MONGO_URL || "mongodb://localhost/top-music"
 mongoose.connect(mongoURL)
@@ -11,6 +12,9 @@ mongoose.Promise = Promise
 
 // import the data
 import topMusicData from "./data/top-music.json"
+
+// Configure dotenv
+dotenv.config()
 
 //Seed the database
 const seedDatabase = async () => {
