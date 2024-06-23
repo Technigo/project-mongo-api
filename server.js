@@ -12,18 +12,23 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflixTitles";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
-if (process.env.RESET_DB === "true") {
+if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     try {
       await NetflixTitle.deleteMany({});
-      await NetflixTitle.insertMany(netflixTitlesData);
-      console.log("Database seeded successfully");
+
+      netflixTitlesData.forEach(async (netflixTitle) => {
+        await NetflixTitle.create(netflixTitle);
+      });
+
+      console.log("Netflix titles database seeded successfully");
     } catch (error) {
-      console.error("Error seeding database:", error);
+      console.error("Error seeding Netflix titles database:", error);
     }
   };
+
   seedDatabase();
-};
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
