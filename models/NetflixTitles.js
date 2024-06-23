@@ -12,7 +12,7 @@ const NetflixTitleSchema = new Schema({
   rating: String,
   duration: String,
   listed_in: String,
-  duration: String,
+  description: String,
   type: String,
 });
 
