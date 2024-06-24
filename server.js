@@ -17,14 +17,16 @@ import topMusicData from "./data/top-music.json"
 dotenv.config()
 
 //Seed the database
-const seedDatabase = async () => {
-  await Song.deleteMany()
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Song.deleteMany({})
 
-  topMusicData.forEach((song) => {
-    new Song(song).save()
-  })
+    topMusicData.forEach((song) => {
+      new Song(song).save()
+    })
+  }
+  seedDatabase()
 }
-seedDatabase()
 
 // Defines the port the app will run on.
 const port = process.env.PORT || 8080
