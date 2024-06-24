@@ -1,0 +1,312 @@
+[
+	{
+		"id": 1,
+		"name": "Brie",
+		"animal": "Cow",
+		"region": "Île-de-France",
+		"taste": "Creamy, buttery",
+		"wine_pairing": "Champagne: Veuve Clicquot Brut Yellow Label",
+		"cheese_rating": 4.5,
+		"wine_pairing_rating": 4.8
+	},
+	{
+		"id": 2,
+		"name": "Camembert",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Creamy, earthy",
+		"wine_pairing": "Chardonnay: Louis Latour Corton-Charlemagne Grand Cru",
+		"cheese_rating": 4.7,
+		"wine_pairing_rating": 4.6
+	},
+	{
+		"id": 3,
+		"name": "Roquefort",
+		"animal": "Sheep",
+		"region": "Occitanie",
+		"taste": "Salty, tangy, creamy",
+		"wine_pairing": "Sauternes: Château d'Yquem 2015",
+		"cheese_rating": 4.9,
+		"wine_pairing_rating": 4.9
+	},
+	{
+		"id": 4,
+		"name": "Comté",
+		"animal": "Cow",
+		"region": "Franche-Comté",
+		"taste": "Nutty, fruity",
+		"wine_pairing": "Jura wine: Domaine de la Tournelle Les Corvées Sous Curon",
+		"cheese_rating": 4.6,
+		"wine_pairing_rating": 4.7
+	},
+	{
+		"id": 5,
+		"name": "Morbier",
+		"animal": "Cow",
+		"region": "Franche-Comté",
+		"taste": "Rich, creamy",
+		"wine_pairing": "Pinot Noir: Domaine de la Romanée-Conti Romanée-Conti Grand Cru",
+		"cheese_rating": 4.4,
+		"wine_pairing_rating": 4.2
+	},
+	{
+		"id": 6,
+		"name": "Pont-l'Évêque",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Creamy, nutty",
+		"wine_pairing": "Chardonnay: Domaine Leflaive Puligny-Montrachet Premier Cru Les Pucelles",
+		"cheese_rating": 4.8,
+		"wine_pairing_rating": 4.6
+	},
+	{
+		"id": 7,
+		"name": "Époisses",
+		"animal": "Cow",
+		"region": "Burgundy",
+		"taste": "Pungent, creamy",
+		"wine_pairing": "Burgundy wine: Domaine de la Romanée-Conti La Tâche Grand Cru",
+		"cheese_rating": 4.9,
+		"wine_pairing_rating": 4.9
+	},
+	{
+		"id": 8,
+		"name": "Crottin de Chavignol",
+		"animal": "Goat",
+		"region": "Centre-Val de Loire",
+		"taste": "Tangy, nutty",
+		"wine_pairing": "Sancerre: Pascal Jolivet Sancerre Les Caillottes",
+		"cheese_rating": 4.7,
+		"wine_pairing_rating": 4.8
+	},
+	{
+		"id": 9,
+		"name": "Saint-Nectaire",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Creamy, nutty",
+		"wine_pairing": "Beaujolais: Georges Duboeuf Beaujolais Villages",
+		"cheese_rating": 4.6,
+		"wine_pairing_rating": 4.7
+	},
+	{
+		"id": 10,
+		"name": "Fourme d'Ambert",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Rich, tangy",
+		"wine_pairing": "Côtes du Rhône: Château de Beaucastel Châteauneuf-du-Pape",
+		"cheese_rating": 4.8,
+		"wine_pairing_rating": 4.6
+	},
+	{
+		"id": 11,
+		"name": "Comté",
+		"animal": "Cow",
+		"region": "Franche-Comté",
+		"taste": "Nutty, fruity",
+		"wine_pairing": "Jura wine: Domaine de la Tournelle Les Corvées Sous Curon",
+		"cheese_rating": 4.6,
+		"wine_pairing_rating": 4.7
+	},
+	{
+		"id": 12,
+		"name": "Munster",
+		"animal": "Cow",
+		"region": "Grand Est",
+		"taste": "Strong, creamy",
+		"wine_pairing": "Alsace Riesling: Trimbach Clos Sainte Hune",
+		"cheese_rating": 4.9,
+		"wine_pairing_rating": 4.8
+	},
+	{
+		"id": 13,
+		"name": "Tomme de Savoie",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Mild, earthy",
+		"wine_pairing": "Savoie wine: Domaine Jean-Louis Chave Hermitage Blanc",
+		"cheese_rating": 4.7,
+		"wine_pairing_rating": 4.9
+	},
+	{
+		"id": 14,
+		"name": "Bleu d'Auvergne",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Creamy, tangy",
+		"wine_pairing": "Bordeaux: Château Lafite Rothschild Pauillac",
+		"cheese_rating": 4.8,
+		"wine_pairing_rating": 4.5
+	},
+	{
+		"id": 15,
+		"name": "Reblochon",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Creamy, nutty",
+		"wine_pairing": "Savoie wine: Domaine Jean-Louis Chave Hermitage Blanc",
+		"cheese_rating": 4.6,
+		"wine_pairing_rating": 4.7
+	},
+	{
+		"id": 16,
+		"name": "Raclette",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Nutty, creamy",
+		"wine_pairing": "White wine from Savoie: Domaine Jean-Louis Chave Hermitage Blanc",
+		"cheese_rating": 4.7,
+		"wine_pairing_rating": 4.8
+	},
+	{
+		"id": 17,
+		"name": "Boursin",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Creamy, herby",
+		"wine_pairing": "Chardonnay: Louis Latour Corton-Charlemagne Grand Cru",
+		"cheese_rating": 4.5,
+		"wine_pairing_rating": 4.6
+	},
+	{
+		"id": 18,
+		"name": "Ossau-Iraty",
+		"animal": "Sheep",
+		"region": "Nouvelle-Aquitaine",
+		"taste": "Nutty, fruity",
+		"wine_pairing": "Irouléguy: Domaine Ilarria Harri Gorri",
+		"cheese_rating": 4.9,
+		"wine_pairing_rating": 4.7
+	},
+	{
+		"id": 19,
+		"name": "Pélardon",
+		"animal": "Goat",
+		"region": "Occitanie",
+		"taste": "Tangy, earthy",
+		"wine_pairing": "Languedoc-Roussillon: Domaine de la Grange des Pères",
+		"cheese_rating": 4.7,
+		"wine_pairing_rating": 4.8
+	},
+	{
+		"id": 20,
+		"name": "Pouligny-Saint-Pierre",
+		"animal": "Goat",
+		"region": "Centre-Val de Loire",
+		"taste": "Nutty, earthy",
+		"wine_pairing": "Sauvignon Blanc: Henri Bourgeois Sancerre La Côte des Monts Damnés",
+		"cheese_rating": 4.8,
+		"wine_pairing_rating": 4.6
+	},
+	{
+		"id": 21,
+		"name": "Banon",
+		"animal": "Goat",
+		"region": "Provence-Alpes-Côte d'Azur",
+		"taste": "Creamy, tangy",
+		"wine_pairing": "Côtes du Rhône: Domaine du Vieux Télégraphe Châteauneuf-du-Pape La Crau",
+		"cheese_rating": 4.6,
+		"wine_pairing_rating": 4.7
+	},
+	{
+		"id": 22,
+		"name": "Beaufort",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Nutty, fruity",
+		"wine_pairing": "Savoie wine: Domaine Jean-Louis Chave Hermitage Blanc",
+		"cheese_rating": 4.5,
+		"wine_pairing_rating": 4.7
+	},
+	{
+		"id": 23,
+		"name": "Bleu de Bresse",
+		"animal": "Cow",
+		"region": "Burgundy",
+		"taste": "Creamy, tangy",
+		"wine_pairing": "Bourgogne Aligoté: Domaine Arnaud Ente Bourgogne Aligoté",
+		"cheese_rating": 4.7,
+		"wine_pairing_rating": 4.8
+	},
+	{
+		"id": 24,
+		"name": "Bleu des Causses",
+		"animal": "Cow",
+		"region": "Occitanie",
+		"taste": "Sharp, tangy",
+		"wine_pairing": "Cahors: Clos Triguedina Probus Cahors",
+		"cheese_rating": 4.8,
+		"wine_pairing_rating": 4.5
+	},
+	{
+		"id": 25,
+		"name": "Cantal",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Sharp, nutty",
+		"wine_pairing": "Madiran: Château Montus Madiran La Tyre",
+		"cheese_rating": 4.6,
+		"wine_pairing_rating": 4.7
+	},
+	{
+		"id": 26,
+		"name": "Livarot",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Strong, earthy",
+		"wine_pairing": "Cider: Eric Bordelet Sydre Argelette",
+		"cheese_rating": 4.7,
+		"wine_pairing_rating": 4.8
+	},
+	{
+		"id": 27,
+		"name": "Bleu du Vercors-Sassenage",
+		"animal": "Cow",
+		"region": "Auvergne-Rhône-Alpes",
+		"taste": "Creamy, tangy",
+		"wine_pairing": "White wine from Savoie: Domaine Jean-Louis Chave Hermitage Blanc",
+		"cheese_rating": 4.8,
+		"wine_pairing_rating": 4.6
+	},
+	{
+		"id": 28,
+		"name": "Coulommiers",
+		"animal": "Cow",
+		"region": "Île-de-France",
+		"taste": "Mild, creamy",
+		"wine_pairing": "Chardonnay: Louis Latour Corton-Charlemagne Grand Cru",
+		"cheese_rating": 4.6,
+		"wine_pairing_rating": 4.7
+	},
+	{
+		"id": 29,
+		"name": "Valençay",
+		"animal": "Goat",
+		"region": "Centre-Val de Loire",
+		"taste": "Nutty, tangy",
+		"wine_pairing": "Sauvignon Blanc: Henri Bourgeois Sancerre La Côte des Monts Damnés",
+		"cheese_rating": 4.7,
+		"wine_pairing_rating": 4.8
+	},
+	{
+		"id": 30,
+		"name": "Neufchâtel",
+		"animal": "Cow",
+		"region": "Normandy",
+		"taste": "Creamy, slightly tangy",
+		"wine_pairing": "Chardonnay: Louis Latour Corton-Charlemagne Grand Cru",
+		"cheese_rating": 4.5,
+		"wine_pairing_rating": 4.6
+	},
+	{
+		"id": 31,
+		"name": "Époisses",
+		"animal": "Cow",
+		"region": "Burgundy",
+		"taste": "Pungent, creamy",
+		"wine_pairing": "Pinot Noir: Domaine de la Romanée-Conti La Tâche Grand Cru",
+		"cheese_rating": 4.9,
+		"wine_pairing_rating": 4.9
+	}
+]

@@ -1,13 +1,14 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This weeks project was to create an API with MongoDB and Mongoose. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+First I wantched the material, then I created a json.file with cheeses. After that i decided on endpoints and created them. I used the official documentation from Mongoose to find info about methods specific for Mongoose. Then I created the endpoints I wanted.
+After that I spent alot of time trying to figure out how to deploy. I got my connection string from MongoDB Atlas, but had a hard time figuring out how to use it and where to use it. ChatGPT couldn't help me either. Finally I got help from a teammate and could deploy.
+
+I have more time, but this week I am focusing on family time and handing in early. If I pick this up later, I will make a frontend for it.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://cheesuschrist-api.onrender.com/
