@@ -56,7 +56,7 @@ app.get("/top-music", async (req, res) => {
 
 //Endpoint to fetch a song by trackname
 app.get("/top-music/trackname", async (req, res) => {
-  const { trackName } = req.query
+  const { trackName } = req.params
   const songByTrackName = await Song.find({
     trackname: { $regex: new RegExp(trackName, "i") },
   }).exec()
@@ -71,7 +71,7 @@ app.get("/top-music/trackname", async (req, res) => {
 //Endpoint to fetch a song genre
 app.get("/top-music/genre", async (req, res) => {
   // const genreSearch = await Song.find({req.query.genre;
-  const { genre } = req.query
+  const { genre } = req.params
   const songByGenre = await Song.find({
     genre: { $regex: new RegExp(genre, "i") },
   }).exec()
