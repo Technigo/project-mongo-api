@@ -1,3 +1,5 @@
+/* This code snippet is defining a Mongoose schema and model for a "Book" entity in a Node.js
+application. Here's a breakdown of what each part is doing: */
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
