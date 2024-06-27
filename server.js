@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
-import { Book } from "./models/BookModel";
+import { Book } from "./models/bookModel";
 import listEndpoints from "express-list-endpoints";
 
 // Defining the port
