@@ -1,135 +1,94 @@
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import mongoose from "mongoose";
-import expressListEndpoints from "express-list-endpoints";
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const Book = require("./models/bookModel"); // Ensure this matches the actual filename
 
-//This will connect us to the Data Base
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = Promise;
-
-//Here we create a Book modell
-const Book = mongoose.model("Book", {
-  bookID: Number,
-  title: String,
-  authors: String,
-  average_rating: Number,
-  isbn: Number,
-  isbn13: Number,
-  language_code: String,
-  num_pages: Number,
-  ratings_count: Number,
-  text_reviews_count: Number,
-});
-
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=8080 npm start
-const port = process.env.PORT || 8080;
 const app = express();
+const port = 3000;
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
+// Middleware
 app.use(bodyParser.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  const endpoints = expressListEndpoints(app);
-  res.json(endpoints);
-  // res.send("<b>This is my first API Database using MongoDB!");
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/bookstore', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
-app.get("/books", async (req, res) => {
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
+// Routes
+app.get('/', (req, res) => {
+  res.send('Welcome to the Bookstore API');
+});
+
+// Create a new book
+app.post('/books', async (req, res) => {
+  const { bookID, title, authors, average_rating, language_code, num_pages } = req.body;
+  const book = new Book({
+    bookID,
+    title,
+    authors,
+    average_rating,
+    language_code,
+    num_pages,
+  });
+  try {
+    const savedBook = await book.save();
+    res.status(201).json(savedBook);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// Get all books
+app.get('/books', async (req, res) => {
   try {
     const books = await Book.find();
     res.json(books);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
-app.get("/books/:id", async (req, res) => {
-  const { id } = req.params;
+// Get a single book by ID
+app.get('/books/:id', async (req, res) => {
   try {
-    const book = await Book.findOne({ bookID: id });
-    if (book) {
-      res.json(book);
-    } else {
-      res.status(404).json({ error: "Book not found" });
-    }
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    const book = await Book.findById(req.params.id);
+    if (!book) return res.status(404).json({ message: 'Book not found' });
+    res.json(book);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
-/// example: books/search?title=Harry%20Potter&author=J.K.%20Rowling
-/// example: books/search?title=Harry%20Potter
-/// example: books/search?author=J.K.%20Rowling
-app.get("/books/search", async (req, res) => {
-  const { title, author } = req.query;
+// Update a book by ID
+app.patch('/books/:id', async (req, res) => {
   try {
-    let query = {};
-    if (title) {
-      query.title = { $regex: title, $options: "i" };
-    }
-    if (author) {
-      query.authors = { $regex: author, $options: "i" };
-    }
-    const books = await Book.find(query);
-    res.json(books);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    if (!book) return res.status(404).json({ message: 'Book not found' });
+    res.json(book);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });
 
-//example: /books/language/eng
-app.get("/books/language/:language_code", async (req, res) => {
-  const { language_code } = req.params;
+// Delete a book by ID
+app.delete('/books/:id', async (req, res) => {
   try {
-    const books = await Book.find({ language_code });
-    if (books.length > 0) {
-      res.json(books);
-    } else {
-      res
-        .status(404)
-        .json({ error: "No books found for the specified language code" });
-    }
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    const book = await Book.findByIdAndDelete(req.params.id);
+    if (!book) return res.status(404).json({ message: 'Book not found' });
+    res.json({ message: 'Book deleted' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
-//example /books/rating?min_rating=3.5&max_rating=4.5
-app.get("/books/rating", async (req, res) => {
-  const { min_rating = 0, max_rating = 5 } = req.query;
-  try {
-    const books = await Book.find({
-      average_rating: {
-        $gte: parseFloat(min_rating),
-        $lte: parseFloat(max_rating),
-      },
-    });
-    if (books.length > 0) {
-      res.json(books);
-    } else {
-      res
-        .status(404)
-        .json({ error: "No books found within the specified rating range" });
-    }
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-//any other endpoints with GET method that are not acceptable -> 404 error
-app.use((req, res, next) => {
-  const err = new Error(`Cannot find endpoint: ${req.originalUrl}.`);
-  err.statusCode = 404;
-  next(err);
-});
-
-// Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}/`);
 });
