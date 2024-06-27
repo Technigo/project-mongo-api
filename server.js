@@ -2,134 +2,134 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
-import { Book } from "./models/bookModel";
-import listEndpoints from "express-list-endpoints";
-import dotenv from "dotenv";
+import expressListEndpoints from "express-list-endpoints";
 
-dotenv.config(); // Load environment variables from .env file
+//This will connect us to the Data Base
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = Promise;
 
+//Here we create a Book modell
+const Book = mongoose.model("Book", {
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
+});
+
+// Defines the port the app will run on. Defaults to 8080, but can be overridden
+// when starting the server. Example command to overwrite PORT env variable value:
+// PORT=8080 npm start
+const port = process.env.PORT || 8080;
 const app = express();
-const port = process.env.PORT || 8000;
 
+// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => {
-  console.log("Connected to MongoDB");
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-  });
-})
-.catch((err) => {
-  console.error("Error connecting to MongoDB:", err.message);
-  process.exit(1); // Exit process with error code
-});
-
-mongoose.Promise = global.Promise;
-
-app.use((req, res, next) => {
-  if (mongoose.connection.readyState === 1) {
-    next();
-  } else {
-    res.status(503).json({ error: "Service unavailable" });
-  }
-});
-
-// Routes
+// Start defining your routes here
 app.get("/", (req, res) => {
-  const endpoints = listEndpoints(app);
-  res.status(200).json(endpoints);
+  const endpoints = expressListEndpoints(app);
+  res.json(endpoints);
+  // res.send("<b>This is my first API Database using MongoDB!");
 });
 
-// POST a new book
-app.post("/books", async (req, res) => {
-  try {
-    const { title, author, publishYear } = req.body;
-    if (!title || !author || !publishYear) {
-      return res.status(400).json({
-        message: "Send all required fields: title, author, publishYear",
-      });
-    }
-
-    const newBook = {
-      title,
-      author,
-      publishYear,
-    };
-
-    const book = await Book.create(newBook);
-    return res.status(201).json(book);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ message: err.message });
-  }
-});
-
-// GET all books
 app.get("/books", async (req, res) => {
   try {
-    const books = await Book.find({});
-    return res.status(200).json({
-      count: books.length,
-      data: books,
-    });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ message: err.message });
+    const books = await Book.find();
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// GET one book by ID
 app.get("/books/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
-    const book = await Book.findById(id);
-    if (!book) {
-      return res.status(404).json({ message: "Book not found" });
+    const book = await Book.findOne({ bookID: id });
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).json({ error: "Book not found" });
     }
-    return res.status(200).json(book);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// PUT update a book by ID
-app.put("/books/:id", async (req, res) => {
+/// example: books/search?title=Harry%20Potter&author=J.K.%20Rowling
+/// example: books/search?title=Harry%20Potter
+/// example: books/search?author=J.K.%20Rowling
+app.get("/books/search", async (req, res) => {
+  const { title, author } = req.query;
   try {
-    const { id } = req.params;
-    const { title, author, publishYear } = req.body;
-    if (!title || !author || !publishYear) {
-      return res.status(400).json({
-        message: "Send all required fields: title, author, publishYear",
-      });
+    let query = {};
+    if (title) {
+      query.title = { $regex: title, $options: "i" };
     }
-    const updatedBook = await Book.findByIdAndUpdate(id, req.body, { new: true });
-    if (!updatedBook) {
-      return res.status(404).json({ message: "Book not found" });
+    if (author) {
+      query.authors = { $regex: author, $options: "i" };
     }
-    return res.status(200).json({ message: "Book updated successfully" });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ message: err.message });
+    const books = await Book.find(query);
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// DELETE a book by ID
-app.delete("/books/:id", async (req, res) => {
+//example: /books/language/eng
+app.get("/books/language/:language_code", async (req, res) => {
+  const { language_code } = req.params;
   try {
-    const { id } = req.params;
-    const deletedBook = await Book.findByIdAndDelete(id);
-    if (!deletedBook) {
-      return res.status(404).json({ message: "Book not found" });
+    const books = await Book.find({ language_code });
+    if (books.length > 0) {
+      res.json(books);
+    } else {
+      res
+        .status(404)
+        .json({ error: "No books found for the specified language code" });
     }
-    return res.status(200).json({ message: "Book deleted successfully" });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
   }
+});
+
+//example /books/rating?min_rating=3.5&max_rating=4.5
+app.get("/books/rating", async (req, res) => {
+  const { min_rating = 0, max_rating = 5 } = req.query;
+  try {
+    const books = await Book.find({
+      average_rating: {
+        $gte: parseFloat(min_rating),
+        $lte: parseFloat(max_rating),
+      },
+    });
+    if (books.length > 0) {
+      res.json(books);
+    } else {
+      res
+        .status(404)
+        .json({ error: "No books found within the specified rating range" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+//any other endpoints with GET method that are not acceptable -> 404 error
+app.use((req, res, next) => {
+  const err = new Error(`Cannot find endpoint: ${req.originalUrl}.`);
+  err.statusCode = 404;
+  next(err);
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
