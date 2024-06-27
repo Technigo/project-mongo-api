@@ -1,0 +1,11 @@
+# Exported from Render on 2024-06-27T13:53:12Z
+services:
+- type: web
+  name: project-mongo-api
+  runtime: node
+  repo: https://github.com/Looziolooz/project-mongo-api
+  plan: free
+  region: frankfurt
+  buildCommand: npm install
+  startCommand: npm start
+version: "1"
