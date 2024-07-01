@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(bodyParser.json());
 
+// Impostazione di strictQuery a false
+mongoose.set('strictQuery', false);
+
 // Middleware per verificare lo stato della connessione a MongoDB
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
@@ -18,8 +21,10 @@ app.use((req, res, next) => {
   }
 });
 
+mongoose.set('strictQuery', true);
 // Connessione a MongoDB
-mongoose.connect("mongodb://localhost:27017/bookdb", {
+
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
