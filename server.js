@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Middleware per verificare lo stato della connessione a MongoDB
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next();
@@ -104,43 +103,17 @@ mongoose.connect(process.env.MONGO_URI, {
     }
   });
 
-  // Route per ottenere un singolo libro dal database utilizzando l'ID
-  app.get("/books/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const book = await Book.findById(id);
-      if (!book) {
-        return res.status(404).json({ message: "Book not found" });
-      }
-      res.status(200).json(book);
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  // Route per aggiornare un libro
-  app.put("/books/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const updatedBook = await Book.findByIdAndUpdate(id, req.body, { new: true });
-      if (!updatedBook) {
-        return res.status(404).json({ message: "Book not found" });
-      }
-      res.status(200).json(updatedBook);
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  // Route per eliminare un libro
+  // Route per eliminare un libro tramite ID
   app.delete("/books/:id", async (req, res) => {
     try {
       const { id } = req.params;
       const deletedBook = await Book.findByIdAndDelete(id);
+
       if (!deletedBook) {
         return res.status(404).json({ message: "Book not found" });
       }
-      res.status(200).json({ message: "Book deleted successfully" });
+
+      res.status(200).json({ message: "Book deleted successfully", data: deletedBook });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
