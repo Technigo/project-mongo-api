@@ -1,9 +1,7 @@
-// models/Book.js
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-// Schema - the blueprint
 const bookSchema = new Schema(
   {
     bookID: { type: Number, required: true },
@@ -15,11 +13,9 @@ const bookSchema = new Schema(
   },
   {
     timestamps: true,
-    // Opzionale: definisci indici per migliorare le performance delle query
-    // Esempio: index: { title: "text", authors: "text" }
+    // Definizione di indici per migliorare le performance delle query
+    index: { title: "text", authors: "text" }
   }
 );
 
-// The model
 export const Book = mongoose.model("Book", bookSchema);
-
