@@ -1,12 +1,15 @@
 import express from "express";
-import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import cors from "cors";
+import mongoose from "mongoose";
 import { Book } from "./models/Book.js";
+import listEndpoints from "express-list-endpoints";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
+app.use(cors());
 app.use(bodyParser.json());
 
 // Middleware per verificare lo stato della connessione a MongoDB
@@ -17,9 +20,6 @@ app.use((req, res, next) => {
     res.status(503).json({ error: "Service unavailable" });
   }
 });
-
-// Impostazione di strictQuery a false (opzionale)
-mongoose.set('strictQuery', false);
 
 // Connessione a MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -99,6 +99,48 @@ mongoose.connect(process.env.MONGO_URI, {
       const { min, max } = req.params;
       const books = await Book.find({ num_pages: { $gte: +min, $lte: +max } });
       res.status(200).json({ count: books.length, data: books });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Route per ottenere un singolo libro dal database utilizzando l'ID
+  app.get("/books/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const book = await Book.findById(id);
+      if (!book) {
+        return res.status(404).json({ message: "Book not found" });
+      }
+      res.status(200).json(book);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Route per aggiornare un libro
+  app.put("/books/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedBook = await Book.findByIdAndUpdate(id, req.body, { new: true });
+      if (!updatedBook) {
+        return res.status(404).json({ message: "Book not found" });
+      }
+      res.status(200).json(updatedBook);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Route per eliminare un libro
+  app.delete("/books/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const deletedBook = await Book.findByIdAndDelete(id);
+      if (!deletedBook) {
+        return res.status(404).json({ message: "Book not found" });
+      }
+      res.status(200).json({ message: "Book deleted successfully" });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
