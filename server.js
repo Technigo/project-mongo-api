@@ -9,9 +9,6 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(bodyParser.json());
 
-// Impostazione di strictQuery a false
-mongoose.set('strictQuery', false);
-
 // Middleware per verificare lo stato della connessione a MongoDB
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
@@ -21,9 +18,10 @@ app.use((req, res, next) => {
   }
 });
 
-mongoose.set('strictQuery', true);
-// Connessione a MongoDB
+// Impostazione di strictQuery a false (opzionale)
+mongoose.set('strictQuery', false);
 
+// Connessione a MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -77,7 +75,7 @@ mongoose.connect(process.env.MONGO_URI, {
   app.get("/books/by-rating/:min/:max", async (req, res) => {
     try {
       const { min, max } = req.params;
-      const books = await Book.find({ average_rating: { $gte: min, $lte: max } });
+      const books = await Book.find({ average_rating: { $gte: +min, $lte: +max } });
       res.status(200).json({ count: books.length, data: books });
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -99,7 +97,7 @@ mongoose.connect(process.env.MONGO_URI, {
   app.get("/books/by-pages/:min/:max", async (req, res) => {
     try {
       const { min, max } = req.params;
-      const books = await Book.find({ num_pages: { $gte: min, $lte: max } });
+      const books = await Book.find({ num_pages: { $gte: +min, $lte: +max } });
       res.status(200).json({ count: books.length, data: books });
     } catch (error) {
       res.status(500).json({ message: error.message });
