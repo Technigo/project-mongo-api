@@ -17,6 +17,7 @@ app.use(cors());
 // Database connection
 mongoose.set('strictQuery', true); // Set strictQuery to true or false as needed
 
+
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -29,6 +30,64 @@ db.once("open", () => {
 });
 
 // Routes
+
+// Endpoint Informativo
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to Books API",
+    endpoints: [
+      {
+        path: "/",
+        methods: ["GET"],
+        middlewares: ["anonymous"],
+        usageInfo: {
+          description: "Welcome message with API endpoints information."
+        }
+      },
+      {
+        path: "/books",
+        methods: ["GET"],
+        middlewares: ["anonymous"],
+        usageInfo: {
+          description: "Get all books."
+        }
+      },
+      {
+        path: "/books/:id",
+        methods: ["GET"],
+        middlewares: ["anonymous"],
+        usageInfo: {
+          description: "Get a single book by ID."
+        }
+      },
+      {
+        path: "/books",
+        methods: ["POST"],
+        middlewares: ["anonymous"],
+        usageInfo: {
+          description: "Add a new book."
+        }
+      },
+      {
+        path: "/books/:id",
+        methods: ["PUT"],
+        middlewares: ["anonymous"],
+        usageInfo: {
+          description: "Update a book by ID."
+        }
+      },
+      {
+        path: "/books/:id",
+        methods: ["DELETE"],
+        middlewares: ["anonymous"],
+        usageInfo: {
+          description: "Delete a book by ID."
+        }
+      }
+    ]
+  });
+});
+
 app.post("/books", async (req, res) => {
   try {
     const books = req.body;

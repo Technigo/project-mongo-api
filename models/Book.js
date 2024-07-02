@@ -1,26 +1,17 @@
-// models/Book.js
 import mongoose from "mongoose";
 
-const { Schema } = mongoose;
+const bookSchema = new mongoose.Schema({
+  bookID: Number,
+  title: String,
+  authors: String,
+  average_rating: Number,
+  isbn: Number,
+  isbn13: Number,
+  language_code: String,
+  num_pages: Number,
+  ratings_count: Number,
+  text_reviews_count: Number,
+});
 
-// Schema - the blueprint
-const bookSchema = new Schema(
-  {
-    bookID: { type: Number, required: true },
-    title: { type: String, required: true },
-    authors: { type: String, required: true },
-    average_rating: { type: Number },
-    isbn: { type: Number },
-    isbn13: { type: Number },
-    language_code: { type: String },
-    num_pages: { type: Number },
-    ratings_count: { type: Number },
-    text_reviews_count: { type: Number }
-  },
-  {
-    timestamps: true,
-  }
-);
-
-// The model
 export const Book = mongoose.model("Book", bookSchema);
+
