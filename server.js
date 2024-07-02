@@ -14,20 +14,29 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
+// Ensure MONGO_URI is defined
+if (!process.env.MONGO_URI) {
+  console.error("Error: MONGO_URI is not defined in the environment variables.");
+  process.exit(1);
+}
+
 // Database connection
-mongoose.set('strictQuery', true); // Set strictQuery to true or false as needed
+mongoose.set("strictQuery", true);
 
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error.message);
+    process.exit(1);
+  }
+};
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Connected to MongoDB");
-});
+connectDB();
 
 // Routes
 
@@ -41,56 +50,59 @@ app.get("/", (req, res) => {
         methods: ["GET"],
         middlewares: ["anonymous"],
         usageInfo: {
-          description: "Welcome message with API endpoints information."
-        }
+          description: "Welcome message with API endpoints information.",
+        },
       },
       {
         path: "/books",
         methods: ["GET"],
         middlewares: ["anonymous"],
         usageInfo: {
-          description: "Get all books."
-        }
+          description: "Get all books.",
+        },
       },
       {
         path: "/books/:id",
         methods: ["GET"],
         middlewares: ["anonymous"],
         usageInfo: {
-          description: "Get a single book by ID."
-        }
+          description: "Get a single book by ID.",
+        },
       },
       {
         path: "/books",
         methods: ["POST"],
         middlewares: ["anonymous"],
         usageInfo: {
-          description: "Add a new book."
-        }
+          description: "Add a new book.",
+        },
       },
       {
         path: "/books/:id",
         methods: ["PUT"],
         middlewares: ["anonymous"],
         usageInfo: {
-          description: "Update a book by ID."
-        }
+          description: "Update a book by ID.",
+        },
       },
       {
         path: "/books/:id",
         methods: ["DELETE"],
         middlewares: ["anonymous"],
         usageInfo: {
-          description: "Delete a book by ID."
-        }
-      }
-    ]
+          description: "Delete a book by ID.",
+        },
+      },
+    ],
   });
 });
 
 app.post("/books", async (req, res) => {
   try {
     const books = req.body;
+    if (!Array.isArray(books) || !books.length) {
+      return res.status(400).json({ message: "Request body must be an array of books" });
+    }
     const insertedBooks = await Book.insertMany(books);
     res.status(201).json(insertedBooks);
   } catch (error) {
@@ -119,7 +131,10 @@ app.get("/books/:id", async (req, res) => {
 
 app.put("/books/:id", async (req, res) => {
   try {
-    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
     if (!updatedBook) return res.status(404).json({ message: "Book not found" });
     res.json(updatedBook);
   } catch (error) {
