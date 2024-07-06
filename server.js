@@ -21,7 +21,7 @@ if (!process.env.MONGO_URI) {
 }
 
 // Database connection
-mongoose.set("strictQuery", true);
+mongoose.set("strictQuery", false);
 
 const connectDB = async () => {
   try {
@@ -112,7 +112,23 @@ app.post("/books", async (req, res) => {
 
 app.get("/books", async (req, res) => {
   try {
-    const books = await Book.find();
+    const { title, authors, average_rating, language_code } = req.query;
+    const filter = {};
+
+    if (title) {
+      filter.title = new RegExp(title, "i"); // Filtra per titolo, ignorando il case
+    }
+    if (authors) {
+      filter.authors = new RegExp(authors, "i"); // Filtra per autori, ignorando il case
+    }
+    if (average_rating) {
+      filter.average_rating = { $gte: parseFloat(average_rating) }; // Filtra per valutazione media maggiore o uguale
+    }
+    if (language_code) {
+      filter.language_code = language_code; // Filtra per codice lingua
+    }
+
+    const books = await Book.find(filter);
     res.json(books);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -135,7 +151,7 @@ app.put("/books/:id", async (req, res) => {
       new: true,
       runValidators: true,
     });
-    if (!updatedBook) return res.status(404).json({ message: "Book not found" });
+    if (!updatedBook) return res.status(404).json({ message: "Book not found" }); 
     res.json(updatedBook);
   } catch (error) {
     res.status(400).json({ message: error.message });
