@@ -29,7 +29,6 @@ const books = [
     ratings_count: 4255821,
     text_reviews_count: 88731,
   },
-  // Aggiungi altri libri come desideri
 ];
 
 const seedDB = async () => {
