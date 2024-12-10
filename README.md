@@ -1,13 +1,13 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project had been about creating routes and seeding a database.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I started with following the codealongs provided by Technigo. Finding inspiration from codealongs and from others' code, I managed to figure out how to create my routes and it wasn't the easiest thing to find a way to filter the data (a json file consisting of hundreds of books) to get only one author represented, for example. I spent a decent amount of time and had to do a lot of research, til' I fianlly found a solution in one of my classmates code, that I could implement in mine. So grateful for that!
+
+If I had time, I would make more routes and dig deeper into how to save sensitive data and prevent it from leaking out, which was one of this weeks topics. 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-4ulq.onrender.com/
