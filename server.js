@@ -1,35 +1,101 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import express from "express"
+import cors from "cors"
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+import expressListEndpoints from "express-list-endpoints"
+import mongoose from "mongoose"
+import { Song } from "./Models/Song"
+import dotenv from "dotenv"
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+const mongoURL = process.env.MONGO_URL || "mongodb://localhost/top-music"
+mongoose.connect(mongoURL)
+mongoose.Promise = Promise
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
+// import the data
+import topMusicData from "./data/top-music.json"
+
+// Configure dotenv
+dotenv.config()
+
+//Seed the database
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Song.deleteMany({})
+
+    topMusicData.forEach((song) => {
+      new Song(song).save()
+    })
+  }
+  seedDatabase()
+}
+
+// Defines the port the app will run on.
+const port = process.env.PORT || 8080
+const app = express()
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
 // Start defining your routes here
+// http://localhost:8080
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+  const endpoints = expressListEndpoints(app)
+  res.json(endpoints)
+})
+// Get all top music songs
+// http://localhost:8080/top-music
+app.get("/top-music", async (req, res) => {
+  const allMusic = await Song.find()
+
+  if (allMusic.length > 0) {
+    res.json(allMusic)
+  } else {
+    res.status(404).send("No music was found :(")
+  }
+})
+
+//Endpoint to fetch a song by trackname
+app.get("/top-music/trackname", async (req, res) => {
+  const { trackName } = req.params
+  const songByTrackName = await Song.find({
+    trackname: { $regex: new RegExp(trackName, "i") },
+  }).exec()
+
+  if (songByTrackName.length > 0) {
+    res.json(songByTrackName)
+  } else {
+    res.status(404).send(`No song was found based on typed trackname`)
+  }
+})
+
+//Endpoint to fetch a song genre
+app.get("/top-music/genre", async (req, res) => {
+  // const genreSearch = await Song.find({req.query.genre;
+  const { genre } = req.params
+  const songByGenre = await Song.find({
+    genre: { $regex: new RegExp(genre, "i") },
+  }).exec()
+
+  if (songByGenre.length > 0) {
+    res.json(songByGenre)
+  } else {
+    res.status(404).send(`No song was found based on typed genre`)
+  }
+})
+
+// Endpoint to fetch song by id
+app.get("/top-music/:songID", async (req, res) => {
+  const { songID } = req.params
+  const song = await Song.findById(songID).exec()
+
+  if (song) {
+    res.json(song)
+  } else {
+    res.status(404).send("No song with that ID was found :(")
+  }
+})
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+  console.log(`Server running on http://localhost:${port}`)
+})
