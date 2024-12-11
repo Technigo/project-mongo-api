@@ -1,18 +1,42 @@
 import express from "express";
+import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+import booksData from "./data/books.json";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/books";
+mongoose.connect(mongoUrl)
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+  .then(() => {
+  console.log('MongoDB successfully connected!')
+  })
+  .catch((error) => {
+  console.error('Error to connect with MongoDB', error)
+  })
+
+const Book = mongoose.model('Book', {
+  title: String
+})
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    try {
+      await Book.deleteMany({});
+
+      const savePromises = booksData.map((bookData) => {
+        const book = new Book(bookData); 
+        return book.save();
+      });
+
+      await Promise.all(savePromises);
+      console.log('Database seeded with books data');
+    } catch (error) {
+      console.error('Error seeding database:', error);
+    }
+  };
+
+  seedDatabase();
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
@@ -28,6 +52,17 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
+
+// Route to get books
+app.get('/books', async (req, res) => {
+try {
+  const books = await Book.find()
+  res.json(books)
+}catch (error) {
+  console.error('Error retrieving books', error);
+    res.status(500).send('Server error');
+}
+})
 
 // Start the server
 app.listen(port, () => {
