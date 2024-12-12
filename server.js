@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import elves from "./data/elves.json";
+import elves from "./data/elves.json"
 import expressListEndpoints from "express-list-endpoints";
 
 /**
@@ -41,13 +41,23 @@ app.use((request, response, next) => {
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await Elf.deleteMany({})
+    await Elf.deleteMany({});
+    
+    const elves = [
+      { elfID: 1, title: "Backend Dasher", name: "Eve", language_code: ["en"], reviews_count: 12 },
+      { elfID: 2, title: "Frontend Prancer", name: "Bob", language_code: ["en", "sv"], reviews_count: 5 },
+      // Lägg till fler nissar om du vill
+    ];
 
-    elves.forEach((elfData) => {
-      new Elf(elfData).save()
-    })
-  }
-  seedDatabase()
+    await Promise.all(
+      elves.map(async (elfData) => {
+        const elf = new Elf(elfData);
+        await elf.save();
+      })
+    );
+    console.log("Database has been seeded!");
+  };
+  seedDatabase();
 }
 
 // Documentation endpoint
