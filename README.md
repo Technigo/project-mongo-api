@@ -11,28 +11,45 @@ Start by briefly describing the assignment in a sentence or two. Keep it short a
     - 
 
 ## Dependency Installation & Startup Development Server
-This project uses npm (Node Package Manager) and Express.js to manage dependencies and run the development server. Follow these steps to get started:  
+This project uses npm (Node Package Manager) and Express.js to manage dependencies and run the development server.  It uses MongoDB as the database and the Mongoose library for database interaction. 
+
+Follow these steps to get started:  
   1. Install Project Dependencies  
   Run the following commands to install necessary packages and set up the development environment:  
     ```bash
     npm install
-    npm run dev
-    npm run build
     ```  
-  2. If Express.js is not already installed, initialize your project and install it:  
+  2. Run in development mode: Use the following command during testing: 
+    ```bash
+    npm run dev
+    ``` 
+  3. When preparing for production, build the project using:
+     ```bash
+    npm run build
+    ``` 
+  4. If Express.js is not already installed, initialize your project and install it:  
     ```bash
     npm init -y
     npm install express
     ```  
-  3. Start your server  
+  5. Start your server   
   Launch the server:
     ```bash
-    node server.js
+    npm start
     ```  
-  4. The package used to generate a list of all available API endpoints automatically (shown on the endpoint /). Install it with:  
+  6. The package used to generate a list of all available API endpoints automatically (shown on the endpoint /). Install it with:  
   ```bash
   npm install express-list-endpoints
   ``` 
+  7. To start your local MongoDB, run:  
+  ```bash
+  mongod
+  ```
+  8. Seed the database. To reset and seed the database with initial data, run:    
+  ```bash
+  RESET_DB=true npm start
+  ```
+
 
 ## The problem
 
