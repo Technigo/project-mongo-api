@@ -77,14 +77,14 @@ app.get("/", (request, response) => {
  * Endpoint for getting all elves.
  * This endpoint returns the complete list of elves from the elves database.
  */
-  app.get("/elves/all", async (request, response) => {
-    try {
-      const elves = await Elf.find(); 
-      response.json(elves);
-    } catch (error) {
-      response.status(500).json({ error: "Failed to fetch elves" });
-    }
-  });
+app.get("/elves/all", async (request, response) => {
+  try {
+    const elves = await Elf.find(); 
+    response.json(elves);
+  } catch (error) {
+    response.status(500).json({ error: "Failed to fetch elves" });
+  }
+});
 
 // Start the server
   app.listen(port, () => {
