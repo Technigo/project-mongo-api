@@ -22,7 +22,7 @@ const Elf = mongoose.model('Elf', {
   "name": String,
   "language_code": [String],
   "reviews_count": Number
-})
+});
 
 const port = process.env.PORT || 1224; //  Hoho! 
 const app = express();
@@ -37,7 +37,7 @@ app.use((request, response, next) => {
   } else {
     response.status(503).json({ error: "Service unavailable" })
   }
-})
+});
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
@@ -70,9 +70,11 @@ app.get("/", (request, response) => {
       "/elves/titles/:title": "Get elves by title",
       "/elves/:id": "Get a specific elf by ID",
       "/test": "Test endpoint",
+    },
     endpoints: endpoints
-    }
   });
+});
+
 /**
  * Endpoint for getting all elves.
  * This endpoint returns the complete list of elves from the elves database.
@@ -87,7 +89,6 @@ app.get("/elves/all", async (request, response) => {
 });
 
 // Start the server
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-  }
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
