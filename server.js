@@ -23,7 +23,7 @@ if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     await Elf.deleteMany({})
 
-    data.forEach((elfData) => {
+    elves.forEach((elfData) => {
       new Elf(elfData).save()
     })
   }
