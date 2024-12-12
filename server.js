@@ -18,7 +18,11 @@ const Song = mongoose.model("Song", {
   length: Number,
   acousticness: Number,
   speechiness: Number,
-  popularity: Number,
+  popularity: {
+    type: Number,
+    min: 0,
+    max: 100,
+  },
 });
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/top-music";
@@ -39,7 +43,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/songs", async (req, res) => {
-  const { popularity, genre } = req.query;
+  const { popularity, genre, bpm } = req.query;
 
   let songs = await Song.find();
 
@@ -62,6 +66,19 @@ app.get("/songs", async (req, res) => {
     songs = songs.filter((song) =>
       searchTerms.every((term) => song.genre.toLowerCase().includes(term))
     );
+  }
+
+  if (bpm) {
+    if (bpm !== "slow" && bpm !== "fast") {
+      res
+        .status(400)
+        .json({ message: "Invalid bpm value. Sort by 'slow' or 'fast'." });
+    }
+    if (bpm === "slow") {
+      songs = await Song.where("bpm").lt(120);
+    } else if (bpm === "fast") {
+      songs = await Song.where("bpm").gte(120);
+    }
   }
 
   if (songs.length === 0) {
