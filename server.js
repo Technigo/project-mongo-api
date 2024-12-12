@@ -39,16 +39,16 @@ app.get("/", (req, res) => {
 app.post("/books", async (req, res) => {
   try {
     // Check if new data has following properties
-    if (!req.body.title || !req.body.author || !req.body.publishYear) {
+    if (!req.body.title || !req.body.authors || !req.body.publishYear) {
       return res.status(400).json({
-        message: "Send all required fields: title, author, publishYear",
+        message: "Send all required fields: title, authors, publishYear",
       });
     }
 
     // Add a new book to the database
     const newBook = {
       title: req.body.title,
-      author: req.body.author,
+      authors: req.body.authors,
       publishYear: req.body.publishYear,
     };
 
@@ -96,9 +96,9 @@ app.get("/books/:id", async (req, res) => {
 // PUT route to update a book by its ID
 app.put("/books/:id", async (req, res) => {
   try {
-    if (!req.body.title || !req.body.author || !req.body.publishYear) {
+    if (!req.body.title || !req.body.authors || !req.body.publishYear) {
       return res.status(400).json({
-        message: "Send all required fields: title, author, publishYear",
+        message: "Send all required fields: title, authors, publishYear",
       });
     }
 
