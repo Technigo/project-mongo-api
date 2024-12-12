@@ -17,6 +17,11 @@ app.use(express.json());
 
 const Elf = mongoose.model('Elf', {
   // Properties defined here match the keys from the elves.json file
+  "elfID": Number,
+  "title": String,
+  "Name": String,
+  "language_code": [String],
+  "reviews_count": Number
 })
 
 if (process.env.RESET_DB) {
