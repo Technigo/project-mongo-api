@@ -41,8 +41,10 @@ app.use((request, response, next) => {
 
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
+    console.log("Starting to seed the database...");
     await Elf.deleteMany({});
-    
+    console.log("Old data cleared!");
+
     const elves = [
       { elfID: 1, title: "Backend Dasher", name: "Eve", language_code: ["en"], reviews_count: 12 },
       { elfID: 2, title: "Frontend Prancer", name: "Bob", language_code: ["en", "sv"], reviews_count: 5 },
@@ -52,8 +54,10 @@ if (process.env.RESET_DB) {
       elves.map(async (elfData) => {
         const elf = new Elf(elfData);
         await elf.save();
+        console.log(`Saved elf: ${JSON.stringify(elf)}`);
       })
     );
+
     console.log("Database has been seeded!");
   };
   seedDatabase();
@@ -87,8 +91,60 @@ app.get("/elves/all", async (request, response) => {
     response.status(500).json({ error: "Failed to fetch elves" });
   }
 });
+/**
+ * Endpoint to get the top 12 elves, the "TwElves"
+ * This endpoint uses .slice() to return the first 12 elves from the elves database.
+ */
+app.get("/elves/top-twelves", (request, response) => {
+  const topElves = elves.slice(0, 12);
 
-// Start the server
+  // Return top 12 elves
+  response.json(topElves);
+});
+
+/**
+ * Endpoint for getting elves based on the provided title. 
+ * This endpoint uses .filter() to return the elves with a matching title
+ */
+app.get("/elves/titles/:title", (request, response) => {
+  const title = request.params.title.toLowerCase();
+  const filteredElves = elves.filter((elf) => elf.title.toLowerCase() === title);
+
+  // Return elves with titles that match
+  response.json(filteredElves);
+});
+
+/**
+ * Endpoint for getting elves based on a unique ID. 
+ * This endpoint uses .find() to search for the elf in the elves database. 
+ * If an elf with the given ID exists, it returns the elf's data with a 200 status.
+ * If no elf is found, it returns with a 404 status and the message: "404 - No elf found with that ID".
+ */
+
+app.get("/elves/:id", (request, response) => {
+  const id = request.params.id;
+
+  const elf = elves.find((record) => record.elfID === +id);
+  if (elf) {
+    response.status(200).json(elf);
+  } else {
+    response.status(404).send("404 - No elf found with that ID");
+  }
+})
+
+/**
+ * Endpoint for testing the server.
+ * This endpoint confirms that the server is running and responds with "Jingle bells, the server tells, it's up and running well!"
+ */
+app.get("/test", (request, response) => {
+  response.send("Jingle bells, the server tells, it's up and running well!");
+  console.log("Jingle bells, the server tells, it's up and running well!");
+});
+
+/**
+ * Start the server.
+ * The server listens on the specified port and logs the URL to the console.
+ */
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
