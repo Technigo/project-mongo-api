@@ -2,14 +2,12 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import elves from "./data/elves.json";
+import expressListEndpoints from "express-list-endpoints";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
 const port = process.env.PORT || 1224;
 const app = express();
 
