@@ -1,33 +1,73 @@
 import express from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import res from "express/lib/response";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
-
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 9000;
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
+
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo-api";
+mongoose.connect(mongoUrl)
+mongoose.Promise = Promise;
+
+
+// const Trip = mongoose.model("Trip", {
+//   tripID: Number,
+//   userID: Number,
+//   title: String,
+//   isSubmitted: Boolean
+// })
+
+// Trip.deleteMany().then(() => { 
+//   new Trip({ tripID: 101, userID:1, title:"Admin Conference", isSubmitted: true}).save()
+//   new Trip({ tripID: 102, userID:2, title:"Web Summit", isSubmitted: true}).save()
+//   new Trip({ tripID: 103, userID:2, title:"Tech Expo", isSubmitted: true}).save()
+//   new Trip({ tripID: 104, userID:2, title:"Business Meeting", isSubmitted: false}).save()
+// })
+
+// app.get("/", (req, res) => {
+//   Trip.find().then(trips => { 
+//     res.json(trips)
+//    }  
+//  )
+// });
+
+
+const Animal = mongoose.model("Animal", {
+  name: String,
+  age: Number,
+  isFurry: Boolean
+})
+
+Animal.deleteMany().then(() => {
+  new Animal({ name: "Alfons", age: 2, isFurry: true }).save()
+  new Animal({ name: "Lucy", age: 3, isFurry: true }).save()
+  new Animal({ name: "Goldy", age: 1, isFurry: false }).save()
+})
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  Animal.find().then(animals => { 
+    res.json(animals)
+   }  
+ )
 });
+
+app.get("/:name", (req, res) => {
+  Animal.findOne({ name: req.params.name }).then(animal => {
+    if (animal) {
+      res.json(animal)
+    } else {
+      res.status(404).json({error: "Not found!"})
+    }
+  })
+}) 
+
 
 // Start the server
 app.listen(port, () => {
