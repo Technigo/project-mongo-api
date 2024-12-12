@@ -15,6 +15,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const Elf = mongoose.model('Elf', {
+  // Properties defined here match the keys from the elves.json file
+})
+
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Elf.deleteMany({})
+
+    data.forEach((elfData) => {
+      new Elf(elfData).save()
+    })
+  }
+  seedDatabase()
+}
+
 // Documentation endpoint
 app.get("/", (request, response) => {
   const endpoints = expressListEndpoints(app);
@@ -28,6 +43,15 @@ app.get("/", (request, response) => {
       "/test": "Test endpoint",
     endpoints: endpoints
     }
+  });
+/**
+ * Endpoint for getting all elves.
+ * This endpoint returns the complete list of elves from the elves.json.
+ */
+  app.get("/elves/all", (request, response) => {
+  
+    // Return all elves
+    response.json(elves);
   });
 });
 
