@@ -32,7 +32,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use((request, response, next) => {
-  if (mongoose.connect.readyState === 1) {
+  if (mongoose.connection.readyState === 1) {
     next()
   } else {
     response.status(503).json({ error: "Service unavailable" })
