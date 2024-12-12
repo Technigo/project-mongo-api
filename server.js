@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import elves from "./data/elves.json"
+//import elves from "./data/elves.json"
 import expressListEndpoints from "express-list-endpoints";
 
 /**
@@ -19,7 +19,7 @@ mongoose.Promise = Promise;
 const Elf = mongoose.model('Elf', {
   "elfID": Number,
   "title": String,
-  "Name": String,
+  "name": String,
   "language_code": [String],
   "reviews_count": Number
 })
@@ -46,7 +46,6 @@ if (process.env.RESET_DB) {
     const elves = [
       { elfID: 1, title: "Backend Dasher", name: "Eve", language_code: ["en"], reviews_count: 12 },
       { elfID: 2, title: "Frontend Prancer", name: "Bob", language_code: ["en", "sv"], reviews_count: 5 },
-      // Lägg till fler nissar om du vill
     ];
 
     await Promise.all(
@@ -76,16 +75,19 @@ app.get("/", (request, response) => {
   });
 /**
  * Endpoint for getting all elves.
- * This endpoint returns the complete list of elves from the elves.json.
+ * This endpoint returns the complete list of elves from the elves database.
  */
-  app.get("/elves/all", (request, response) => {
-  
-    // Return all elves
-    response.json(elves);
+  app.get("/elves/all", async (request, response) => {
+    try {
+      const elves = await Elf.find(); 
+      response.json(elves);
+    } catch (error) {
+      response.status(500).json({ error: "Failed to fetch elves" });
+    }
   });
-});
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  }
 });
