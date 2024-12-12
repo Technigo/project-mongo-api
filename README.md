@@ -49,6 +49,12 @@ Follow these steps to get started:
   ```bash
   RESET_DB=true npm start
   ```
+## .env files 
+
+```bash
+npm install dotenv
+```
+
 
 
 ## The problem

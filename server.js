@@ -4,9 +4,25 @@ import mongoose from "mongoose";
 import elves from "./data/elves.json";
 import expressListEndpoints from "express-list-endpoints";
 
+/**
+ * Connect to the MongoDB database using the URL from environment variables or default to localhost.
+ * Mongoose uses JavaScript's built-in Promise system for handling asynchronous operations.
+ */
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = Promise;
+
+/**
+ * Defined properties 
+ * Properties defined to match the keys from the elves.json file
+ */
+const Elf = mongoose.model('Elf', {
+  "elfID": Number,
+  "title": String,
+  "Name": String,
+  "language_code": [String],
+  "reviews_count": Number
+})
 
 const port = process.env.PORT || 1224; //  Hoho! 
 const app = express();
@@ -15,13 +31,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const Elf = mongoose.model('Elf', {
-  // Properties defined here match the keys from the elves.json file
-  "elfID": Number,
-  "title": String,
-  "Name": String,
-  "language_code": [String],
-  "reviews_count": Number
+app.use((request, response, next) => {
+  if (mongoose.connect.readyState === 1) {
+    next()
+  } else {
+    response.status(503).json({ error: "Service unavailable" })
+  }
 })
 
 if (process.env.RESET_DB) {
