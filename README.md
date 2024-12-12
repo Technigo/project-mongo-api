@@ -4,6 +4,12 @@ Replace this readme with your own information about your project.
 
 Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
 
+## Requirements:  
+  1. The API should have at least 3 routes.  
+    This API has the following routes:  
+    - /: Returns documentation of the API using express-list-endpoints.[Express List Endpoints](https://www.npmjs.com/package/express-list-endpoints). 
+    - 
+
 ## Dependency Installation & Startup Development Server
 This project uses npm (Node Package Manager) and Express.js to manage dependencies and run the development server. Follow these steps to get started:  
   1. Install Project Dependencies  

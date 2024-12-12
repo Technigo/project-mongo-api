@@ -8,16 +8,27 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
-const port = process.env.PORT || 1224;
+const port = process.env.PORT || 1224; //  Hoho! 
 const app = express();
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+// Documentation endpoint
+app.get("/", (request, response) => {
+  const endpoints = expressListEndpoints(app);
+  response.json({
+    message: "Welcome to the Elves API! Here are the available endpoints:",
+    description: {
+      "/elves/all": "Get all elves",
+      "/elves/top-twelves": "Get the top twelves",
+      "/elves/titles/:title": "Get elves by title",
+      "/elves/:id": "Get a specific elf by ID",
+      "/test": "Test endpoint",
+    endpoints: endpoints
+    }
+  });
 });
 
 // Start the server
