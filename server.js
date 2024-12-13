@@ -79,14 +79,16 @@ app.get('/books/author/:author', async (req, res) => {
   }
 });
 
+// Route to get books by title / words of title
 app.get('/books/title/:title', async (req, res) => {
   const { title } = req.params;  // Get the title from the URL parameter
   try {
-    const book = await Book.findOne({ title: title });  // Query the book by title
-    if (!book) {
-      return res.status(404).send('Book not found');  // If no book is found, return 404
-    }
-    res.json(book);  // Send the book as a JSON response
+    const books = await Book.find({ 
+      title: {$regex: title, $options: 'i' }})
+      if (books.length === 0) {
+        return res.status(404).send('No books found for this author');
+      }
+      res.json(books);
   } catch (error) {
     console.error('Error retrieving book', error);
     res.status(500).send('Server error');
