@@ -43,9 +43,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/songs", async (req, res) => {
-  const { popularity, genre, bpm } = req.query;
+  const { popularity, genre, bpm, page = 0 } = req.query;
 
-  let songs = await Song.find();
+  const songsPerPage = 10;
+  const pageNumber = parseInt(page);
+
+  let songs = await Song.find()
+    .skip(pageNumber * songsPerPage)
+    .limit(songsPerPage);
 
   if (popularity) {
     if (popularity !== "most popular" && popularity !== "least popular") {
@@ -67,6 +72,20 @@ app.get("/songs", async (req, res) => {
       searchTerms.every((term) => song.genre.toLowerCase().includes(term))
     );
   }
+
+  // if (test) {
+  //   try {
+  //     songs = await Song.where("bpm")
+  //       .gte(120)
+  //       .lte(140)
+  //       .where("popularity")
+  //       .gte(80)
+  //       .select("trackName artistName");
+  //   } catch (error) {
+  //     res.status(400).json({ message: "No songs found" });
+  //     console.log(error.message);
+  //   }
+  // }
 
   if (bpm) {
     if (bpm !== "slow" && bpm !== "fast") {
