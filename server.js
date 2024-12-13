@@ -3,14 +3,15 @@ import cors from "cors";
 import mongoose from "mongoose";
 import nintendoGames from "./data/nintendoswitch-games.json";
 import dotenv from "dotenv";
+import listEndpoints from "express-list-endpoints";
 
 // To use .env, also checked if my .env file was in .gitignore
 dotenv.config();
 
 // Added this to my .env file: MONGO_URL="mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority"
 // To make it more secure
-const mongoUrl = process.env.MONGO_URL
-// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // If connected to compass an Local host
+const mongoUrl = process.env.MONGO_URL;
+// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"; // If connected to compass and Local host
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
@@ -49,7 +50,21 @@ if (process.env.RESET_DB) {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!")
+  const documentation = {
+    Welcome: "Welcome to the Nintendo Switch Games API!",
+    Endpoints: listEndpoints(app).map((endpoint) => {
+      return {
+        path: endpoint.path,
+        methods: endpoint.methods,
+        middlewares: endpoint.middlewares,
+      }
+    }),
+    QueryParameters: {
+      id: "Filter games by id (case-insensitive).",
+      sortedGames: "Sort games by rating (true/false)."
+    }
+  }
+  res.json(documentation)
 });
 
 // Get all videogames http://localhost:3000/videogames
