@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import topMusicData from "./data/top-music.json";
 
 const Song = mongoose.model("Song", {
   // Properties defined here match the keys from the people.json file
@@ -41,6 +40,41 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
+// Aggregated genre stats
+app.get("/songs/genre-stats", async (req, res) => {
+  try {
+    const genreStats = await Song.aggregate([
+      {
+        $group: {
+          _id: "$genre",
+          numberOfSongs: { $sum: 1 },
+          averagePopularity: { $avg: "$popularity" },
+          averageBPM: { $avg: "$bpm" },
+        },
+      },
+      {
+        $sort: { numberOfSongs: -1 },
+      },
+    ]);
+
+    res.json(genreStats);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.get("/songs/:id", async (req, res) => {
+  const songId = req.params.id;
+  try {
+    const song = await Song.findOne({ id: parseInt(songId) });
+    if (!song) {
+      return res.status(404).json({ message: "Song not found" });
+    }
+    res.json(song);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 app.get("/songs", async (req, res) => {
   const { popularity, genre, bpm, page = 0 } = req.query;
@@ -73,20 +107,6 @@ app.get("/songs", async (req, res) => {
     );
   }
 
-  // if (test) {
-  //   try {
-  //     songs = await Song.where("bpm")
-  //       .gte(120)
-  //       .lte(140)
-  //       .where("popularity")
-  //       .gte(80)
-  //       .select("trackName artistName");
-  //   } catch (error) {
-  //     res.status(400).json({ message: "No songs found" });
-  //     console.log(error.message);
-  //   }
-  // }
-
   if (bpm) {
     if (bpm !== "slow" && bpm !== "fast") {
       res
@@ -105,15 +125,6 @@ app.get("/songs", async (req, res) => {
   }
 
   res.json(songs);
-});
-
-app.get("/songs/:id", (req, res) => {
-  const songId = req.params.id;
-  const song = topMusicData.find((song) => song.id === Number(songId));
-  if (!song) {
-    res.status(404).json({ message: "Song not found" });
-  }
-  res.json(song);
 });
 
 // Start the server
