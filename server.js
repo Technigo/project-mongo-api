@@ -1,35 +1,26 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import { app } from "./app.js";
+import { connectDatabase } from "./config/database.js";
+import { seedDatabase } from "./utils/seedDatabase.js";
+import { configDotenv } from "dotenv";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+// Load environment variables
+configDotenv();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+// Connect to the database and optionally seed it
+(async () => {
+  try {
+    await connectDatabase();
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
+    if (process.env.SEED_DATABASE === "true") {
+      console.log("Seeding database...");
+      await seedDatabase();
+      console.log("Database seeding completed");
+    }
+  } catch (error) {
+    console.error("Error connecting to the database or seeding:", error);
+    process.exit(1);
+  }
+})();
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
-
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+// Export the app
+export default app;
