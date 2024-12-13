@@ -19,6 +19,9 @@ _mongoose["default"].connect(mongoUrl, {
   useUnifiedTopology: true
 });
 _mongoose["default"].Promise = Promise;
+Elf.find().then(function (elves) {
+  console.log("Fetched elves at server start:", elves);
+});
 
 /**
  * Defined properties 
@@ -49,27 +52,15 @@ app.use(function (request, response, next) {
 if (process.env.RESET_DB) {
   var seedDatabase = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var elves;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.next = 2;
+            console.log("Starting to seed the database...");
+            _context2.next = 3;
             return Elf.deleteMany({});
-          case 2:
-            elves = [{
-              elfID: 1,
-              title: "Backend Dasher",
-              name: "Eve",
-              language_code: ["en"],
-              reviews_count: 12
-            }, {
-              elfID: 2,
-              title: "Frontend Prancer",
-              name: "Bob",
-              language_code: ["en", "sv"],
-              reviews_count: 5
-            }];
-            _context2.next = 5;
+          case 3:
+            console.log("Old data deleted!");
+            _context2.next = 6;
             return Promise.all(elves.map(/*#__PURE__*/function () {
               var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(elfData) {
                 var elf;
@@ -80,6 +71,8 @@ if (process.env.RESET_DB) {
                       _context.next = 3;
                       return elf.save();
                     case 3:
+                      console.log("Saved elf: ".concat(JSON.stringify(elf)));
+                    case 4:
                     case "end":
                       return _context.stop();
                   }
@@ -89,9 +82,9 @@ if (process.env.RESET_DB) {
                 return _ref2.apply(this, arguments);
               };
             }()));
-          case 5:
-            console.log("Database has been seeded!");
           case 6:
+            console.log("Database has been seeded!");
+          case 7:
           case "end":
             return _context2.stop();
         }
@@ -126,7 +119,7 @@ app.get("/", function (request, response) {
  */
 app.get("/elves/all", /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(request, response) {
-    var elves;
+    var _elves;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
@@ -134,8 +127,8 @@ app.get("/elves/all", /*#__PURE__*/function () {
           _context3.next = 3;
           return Elf.find();
         case 3:
-          elves = _context3.sent;
-          response.json(elves);
+          _elves = _context3.sent;
+          response.json(_elves);
           _context3.next = 10;
           break;
         case 7:
@@ -154,8 +147,89 @@ app.get("/elves/all", /*#__PURE__*/function () {
     return _ref3.apply(this, arguments);
   };
 }());
+/**
+ * Endpoint to get the top 12 elves, the "TwElves"
+ * This endpoint uses .slice() to return the first 12 elves from the elves database.
+ */
+app.get("/elves/top-twelves", /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(request, response) {
+    var _elves2;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          _context4.next = 3;
+          return Elf.find().limit(12);
+        case 3:
+          _elves2 = _context4.sent;
+          console.log("Top Twelves endpoint works!");
+          response.json(_elves2);
+          _context4.next = 12;
+          break;
+        case 8:
+          _context4.prev = 8;
+          _context4.t0 = _context4["catch"](0);
+          console.error("Error fetching top elves:", _context4.t0);
+          response.status(500).json({
+            error: "Failed to fetch the Top TwElves"
+          });
+        case 12:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4, null, [[0, 8]]);
+  }));
+  return function (_x4, _x5) {
+    return _ref4.apply(this, arguments);
+  };
+}());
 
-// Start the server
+/**
+ * Endpoint for getting elves based on the provided title. 
+ * This endpoint uses .filter() to return the elves with a matching title
+ */
+app.get("/elves/titles/:title", function (request, response) {
+  var title = request.params.title.toLowerCase();
+  var filteredElves = elves.filter(function (elf) {
+    return elf.title.toLowerCase() === title;
+  });
+
+  // Return elves with titles that match
+  response.json(filteredElves);
+});
+
+/**
+ * Endpoint for getting elves based on a unique ID. 
+ * This endpoint uses .find() to search for the elf in the elves database. 
+ * If an elf with the given ID exists, it returns the elf's data with a 200 status.
+ * If no elf is found, it returns with a 404 status and the message: "404 - No elf found with that ID".
+ */
+
+app.get("/elves/:id", function (request, response) {
+  var id = request.params.id;
+  var elf = elves.find(function (record) {
+    return record.elfID === +id;
+  });
+  if (elf) {
+    response.status(200).json(elf);
+  } else {
+    response.status(404).send("404 - No elf found with that ID");
+  }
+});
+
+/**
+ * Endpoint for testing the server.
+ * This endpoint confirms that the server is running and responds with "Jingle bells, the server tells, it's up and running well!"
+ */
+app.get("/test", function (request, response) {
+  response.send("Jingle bells, the server tells, it's up and running well!");
+  console.log("Jingle bells, the server tells, it's up and running well!");
+});
+
+/**
+ * Start the server.
+ * The server listens on the specified port and logs the URL to the console.
+ */
 app.listen(port, function () {
   console.log("Server running on http://localhost:".concat(port));
 });

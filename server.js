@@ -43,12 +43,7 @@ if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     console.log("Starting to seed the database...");
     await Elf.deleteMany({});
-    console.log("Old data cleared!");
-
-    const elves = [
-      { elfID: 1, title: "Backend Dasher", name: "Eve", language_code: ["en"], reviews_count: 12 },
-      { elfID: 2, title: "Frontend Prancer", name: "Bob", language_code: ["en", "sv"], reviews_count: 5 },
-    ];
+    console.log("Old data deleted!");
 
     await Promise.all(
       elves.map(async (elfData) => {
@@ -98,8 +93,10 @@ app.get("/elves/all", async (request, response) => {
 app.get("/elves/top-twelves", async (request, response) => {
   try {
     const elves = await Elf.find().limit(12);
+    console.log("Top Twelves endpoint works!");
     response.json(elves);
   } catch (error) {
+    console.error("Error fetching top elves:", error);
     response.status(500).json({ error: "Failed to fetch the Top TwElves" });
   }
 });
