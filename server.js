@@ -29,6 +29,7 @@ mongoose.connect(mongoUrl);
 console.log("Connected to MongoDB");
 mongoose.Promise = Promise;
 
+const expressListEndpoints = require("express-list-endpoints");
 const port = process.env.PORT || 9000;
 const app = express();
 
@@ -36,10 +37,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send(expressListEndpoints(app));
 });
+
 // Aggregated genre stats
 app.get("/songs/genre-stats", async (req, res) => {
   try {
@@ -75,6 +76,8 @@ app.get("/songs/:id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+// Songs by popularity, genre, bpm, divided by 10 per page
 
 app.get("/songs", async (req, res) => {
   const { popularity, genre, bpm, page = 0 } = req.query;
