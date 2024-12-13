@@ -8,7 +8,9 @@ Start by briefly describing the assignment in a sentence or two. Keep it short a
   1. The API should have at least 3 routes.  
     This API has the following routes:  
     - /: Returns documentation of the API using express-list-endpoints.[Express List Endpoints](https://www.npmjs.com/package/express-list-endpoints). 
-    - 
+  2. Mongoose Query Objects used in this project:  
+    - Model.findOne() 
+    
 
 ## Dependency Installation & Startup Development Server
 This project uses npm (Node Package Manager) and Express.js to manage dependencies and run the development server.  It uses MongoDB as the database and the Mongoose library for database interaction. 
@@ -54,6 +56,10 @@ Follow these steps to get started:
 ```bash
 npm install dotenv
 ```
+
+## Useful resources  
+- [Mongoose Query objects](https://mongoosejs.com/docs/queries.html)
+
 
 ## The problem  
 1. Deploying to Render    

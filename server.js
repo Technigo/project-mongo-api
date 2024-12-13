@@ -95,11 +95,13 @@ app.get("/elves/all", async (request, response) => {
  * Endpoint to get the top 12 elves, the "TwElves"
  * This endpoint uses .slice() to return the first 12 elves from the elves database.
  */
-app.get("/elves/top-twelves", (request, response) => {
-  const topElves = elves.slice(0, 12);
-
-  // Return top 12 elves
-  response.json(topElves);
+app.get("/elves/top-twelves", async (request, response) => {
+  try {
+    const elves = await Eld.find().limit(12);
+    response.json(elves);
+  } catch (error) {
+    response.status(500).json({ error: "Failed to fetch the Top TwElves" });
+  }
 });
 
 /**
