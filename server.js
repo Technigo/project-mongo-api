@@ -97,7 +97,7 @@ app.get("/elves/all", async (request, response) => {
  */
 app.get("/elves/top-twelves", async (request, response) => {
   try {
-    const elves = await Eld.find().limit(12);
+    const elves = await Elf.find().limit(12);
     response.json(elves);
   } catch (error) {
     response.status(500).json({ error: "Failed to fetch the Top TwElves" });
