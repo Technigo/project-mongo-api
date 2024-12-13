@@ -14,13 +14,13 @@
     "express": "^4.21.2",
     "express-list-endpoints": "^7.1.1",
     "express-validator": "^7.2.0",
-    "mongoose": "^8.8.4"
+    "mongoose": "^8.8.4",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/node": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
-    "dotenv": "^16.4.7",
     "nodemon": "^3.1.7"
   }
 }
