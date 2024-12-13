@@ -1,13 +1,19 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+A RESTful API built with Express and MongoDB that provides detailed information about songs. The API offers various endpoints to fetch song data, including filtering by genre, popularity, and BPM (beats per minute).
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+I built this API using Express.js and Mongoose to manage a music database. The main features include:
+
+- Endpoint documentation at the root route
+- Song retrieval with pagination (10 songs per page)
+- Filtering songs by popularity, genre, and tempo
+- Aggregated statistics by genre
+- Individual song lookup by ID
+
+Technologies used: Node.js, Express, MongoDB, Mongoose, and Babel for modern JavaScript support.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://mika-project-mongo-api.onrender.com/
