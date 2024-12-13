@@ -4,6 +4,9 @@ import mongoose from "mongoose";
 import simsData from "./data/sims-npcs.json";
 import listEndpoints from "express-list-endpoints";
 
+// Configure dotenv to use .env file
+dotenv.config();
+
 // Use environment variable for MongoDB connection
 const mongoUrl = process.env.MONGO_URL;
 
