@@ -1,13 +1,21 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+This project is an Express.js application that provides a RESTful API for interacting with a MongoDB database of books. It allows users to retrieve books by various attributes such as author, title, ISBN, and language. The project also features an optional database reset functionality to seed the database with a predefined set of books.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+## Features
+MongoDB integration for storing and querying books data.
 
-## The problem
+CORS enabled for cross-origin requests.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+RESTful API endpoints to interact with the books database:
+Get all books
+Get books by author
+Get books by title
+Get books by ISBN
+Get books by language
+
+Database seeding: Optionally populate the database with sample data from a books.json file.
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://project-mongo-api-7ch7.onrender.com/
