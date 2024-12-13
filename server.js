@@ -8,7 +8,10 @@ dotenv.config()
 
 // Connecting to MongoDB
 // const mongoUrl = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/books'
+
+// Connecting to MongoDB Atlas
 const mongoURI = process.env.MONGODB_URI
+
 
 mongoose.connect(mongoURI)
 
@@ -33,6 +36,7 @@ const Book = mongoose.model('Book', new mongoose.Schema({
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndpoints = require("express-list-endpoints")
 
 if (process.env.RESET_DB)  {
     const seedDatabase = async () => {
@@ -50,7 +54,11 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  const endpoints = listEndpoints(app)
+  res.json({
+    message: "Welcome!",
+    endpoints: endpoints
+  });
 });
 
 // Route to get books
