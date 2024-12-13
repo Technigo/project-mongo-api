@@ -1,75 +1,99 @@
-import express from "express";
-import cors from "cors";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import res from "express/lib/response";
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
+import mongoose from 'mongoose'
 
-const port = process.env.PORT || 9000;
-const app = express();
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/books"
+mongoose.connect(mongoUrl)
+mongoose.Promise = Promise
+
+
+const Author = mongoose.model('Author', {
+  name: String
+})
+
+const Book = mongoose.model('Book', {
+  title: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author'
+  }
+})
+
+if (process.env.RESET_DATABASE) {
+  console.log('Resetting database!')
+
+  const seedDatabase = async () => {
+    await Author.deleteMany()
+    await Book.deleteMany()
+
+    const tolkien = new Author({ name: 'J.R.R Tolkien' })
+    await tolkien.save()
+
+    const rowling = new Author({ name: 'J.K. Rowling' })
+    await rowling.save()
+
+    await new Book({ title: "Harry Potter and the Philosopher's Stone", author: rowling }).save()
+    await new Book({ title: "Harry Potter and the Chamber of Secrets", author: rowling }).save()
+    await new Book({ title: "Harry Potter and the Prisoner of Azkaban", author: rowling }).save()
+    await new Book({ title: "Harry Potter and the Goblet of Fire", author: rowling }).save()
+    await new Book({ title: "Harry Potter and the Order of the Phoenix", author: rowling }).save()
+    await new Book({ title: "Harry Potter and the Half-Blood Prince", author: rowling }).save()
+    await new Book({ title: "Harry Potter and the Deathly Hallows", author: rowling }).save()
+    await new Book({ title: "The Lord of the Rings", author: tolkien }).save()
+    await new Book({ title: "The Hobbit", author: tolkien }).save()
+  }
+  seedDatabase()
+}
+
+// Defines the port the app will run on. Defaults to 8080, but can be 
+// overridden when starting the server. For example:
+//
+//   PORT=9000 npm start
+const port = process.env.PORT || 8070
+const app = express()
 
 // Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(bodyParser.json());
-
-const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/project-mongo-api";
-mongoose.connect(mongoUrl)
-mongoose.Promise = Promise;
-
-
-// const Trip = mongoose.model("Trip", {
-//   tripID: Number,
-//   userID: Number,
-//   title: String,
-//   isSubmitted: Boolean
-// })
-
-// Trip.deleteMany().then(() => { 
-//   new Trip({ tripID: 101, userID:1, title:"Admin Conference", isSubmitted: true}).save()
-//   new Trip({ tripID: 102, userID:2, title:"Web Summit", isSubmitted: true}).save()
-//   new Trip({ tripID: 103, userID:2, title:"Tech Expo", isSubmitted: true}).save()
-//   new Trip({ tripID: 104, userID:2, title:"Business Meeting", isSubmitted: false}).save()
-// })
-
-// app.get("/", (req, res) => {
-//   Trip.find().then(trips => { 
-//     res.json(trips)
-//    }  
-//  )
-// });
-
-
-const Animal = mongoose.model("Animal", {
-  name: String,
-  age: Number,
-  isFurry: Boolean
-})
-
-Animal.deleteMany().then(() => {
-  new Animal({ name: "Alfons", age: 2, isFurry: true }).save()
-  new Animal({ name: "Lucy", age: 3, isFurry: true }).save()
-  new Animal({ name: "Goldy", age: 1, isFurry: false }).save()
-})
+app.use(cors())
+app.use(bodyParser.json())
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  Animal.find().then(animals => { 
-    res.json(animals)
-   }  
- )
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.get("/:name", (req, res) => {
-  Animal.findOne({ name: req.params.name }).then(animal => {
-    if (animal) {
-      res.json(animal)
-    } else {
-      res.status(404).json({error: "Not found!"})
-    }
-  })
-}) 
+app.get('/authors', async (req, res) => {
+  const authors = await Author.find()
+  res.json(authors)
+})
 
+app.get('/authors/:id', async (req, res) => {
+  const author = await Author.findById(req.params.id)
+  if (author) {
+    res.json(author)
+  } else {
+    res.status(404).json({ error: 'Author not found' })
+  }
+})
+
+app.get('/authors/:id/books', async (req, res) => {
+  const author = await Author.findById(req.params.id)
+  if (author) {
+    const books = await Book.find({ 
+      author: mongoose.Types.ObjectId.createFromHexString(author.id) 
+    }) 
+    res.json(books)
+  } else {
+    res.status(404).json({ error: 'Author not found' })
+  }
+})
+
+app.get('/books', async (req, res) => {
+  const books = await Book.find().populate('author')
+  res.json(books)
+})
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+  console.log(`Server running on http://localhost:${port}`)
+})
