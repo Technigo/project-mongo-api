@@ -1,6 +1,2 @@
-## Netlify link
-Add your Netlify link here.
-PS. Don't forget to add it in your readme as well.
-
-## Collaborators
-Add any collaborators here.
+## Render link
+https://mika-project-mongo-api.onrender.com/
