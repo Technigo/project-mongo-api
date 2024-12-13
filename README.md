@@ -45,7 +45,7 @@ Retrieve a list of characters. Supports optional query parameters.
 **Example Request:**
 
 ```bash
-GET /characters?homeWorld=675c299a308f20c14cc641f4&role=Hobbit
+GET /characters?homeWorld=675c3e604c6a6806a5c1cf7c&item=675c3e604c6a6806a5c1cf92
 ```
 
 **Response:**
