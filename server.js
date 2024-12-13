@@ -1,33 +1,54 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import simsData from "./data/sims-npcs.json";
+import listEndpoints from "express-list-endpoints";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+// Use environment variable for MongoDB connection
+const mongoUrl = process.env.MONGO_URL;
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
+// Connect to MongoDB with some basic error handling
+mongoose.connect(mongoUrl)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('Could not connect to MongoDB', err));
+
 mongoose.Promise = Promise;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+// Define the NPC Schema
+const Npc = mongoose.model('Npc', {
+  id: String,
+  name: String,
+  gameVersion: String,
+  category: String,
+  occupation: String,
+  lifeStage: String,
+  appearanceMethod: String,
+  traits: [String],
+  notableFeature: String
 });
+
+// Seed database
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    try {
+      await Npc.deleteMany({});
+      await Promise.all(simsData.npcs.map(npcData => {
+        const npc = new Npc(npcData);
+        return npc.save();
+      }));
+      console.log("Database seeded successfully!");
+    } catch (error) {
+      console.error("Error seeding database:", error);
+    }
+  };
+  seedDatabase();
+}
 
 // Start the server
 app.listen(port, () => {
