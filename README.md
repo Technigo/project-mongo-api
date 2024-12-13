@@ -5,6 +5,7 @@ A REST API for managing a fantasy realm with characters, quests, items, and worl
 ## **See it live:**
 
 - Production: [https://fantasy-world-mongodb-api.vercel.app](https://fantasy-world-mongodb-api.vercel.app)
+  You may need to refresh a couple of times before the server awakens.
 
 ---
 
@@ -39,7 +40,6 @@ Retrieve a list of characters. Supports optional query parameters.
 **Query Parameters:**
 
 - `homeWorld`: Filter characters by their home world ID.
-- `role`: Filter characters by role.
 - `item`: Filter characters by the item they own.
 
 **Example Request:**
