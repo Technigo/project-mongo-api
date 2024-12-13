@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-//import elves from "./data/elves.json"
+import elves from "./data/elves.json"
 import expressListEndpoints from "express-list-endpoints";
 
 /**
@@ -30,6 +30,10 @@ const app = express();
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+
+app.get("/elves/json", (request, response) => {
+  response.json(elves); // Return content from JSON-file
+});
 
 app.use((request, response, next) => {
   if (mongoose.connection.readyState === 1) {

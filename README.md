@@ -10,7 +10,7 @@ Start by briefly describing the assignment in a sentence or two. Keep it short a
     - /: Returns documentation of the API using express-list-endpoints.[Express List Endpoints](https://www.npmjs.com/package/express-list-endpoints). 
   2. Mongoose Query Objects used in this project:  
     - Model.findOne() 
-    
+
 
 ## Dependency Installation & Startup Development Server
 This project uses npm (Node Package Manager) and Express.js to manage dependencies and run the development server.  It uses MongoDB as the database and the Mongoose library for database interaction. 
@@ -51,6 +51,11 @@ Follow these steps to get started:
   ```bash
   RESET_DB=true npm start
   ```
+  9. Delete dist folder to update code  
+  ```bash
+  rm -rf dist
+  ````
+
 ## .env files 
 
 ```bash
