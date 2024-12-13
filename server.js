@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import booksData from "./data/books.json";
+
 dotenv.config();
 
 if (!process.env.MONGO_URL) {
@@ -10,11 +12,6 @@ if (!process.env.MONGO_URL) {
 } else {
   console.log("Mongo URL loaded successfully!");
 }
-
-// import booksData from "./data/books.json";
-import topMusicData from "./data/top-music.json";
-
-
 
 // Connecting to mongo Atlas using the secret data from env. file
 const mongoUrl = process.env.MONGO_URL
@@ -38,6 +35,29 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 console.log(process.env.PORT);
 const app = express();
+
+const Book = mongoose.model("Book", new mongoose.Schema({
+  bookID: Number,
+  title: String,
+  authors: String,
+}));
+
+// Seeding data
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    await Book.deleteMany({});
+
+    booksData.forEach((bookData) => {
+      new Book(bookData).save();
+    });
+
+
+  console.log("Database seeded with book data!");
+
+  };
+
+  seedDatabase()
+}
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
