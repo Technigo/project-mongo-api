@@ -8,7 +8,7 @@ The task was to build an API that provides structured data responses from a data
 
 - Database modeling with Mongoose schemas and models.
 - Seeding the database using a function to load JSON data into MongoDB Atlas.
-- RESTful endpoints for retrieving collections (GET /books) and single items (GET /books/  :id) and for adding new entries (POST /books).
+- RESTful endpoints for retrieving collections (GET /books) and single items (GET /books/ :id) and for adding new entries (POST /books).
 - Deployment on Render and connected it to a MongoDB Atlas database for scalability and accessibility.
 
 ## Tools and Technologies
@@ -17,7 +17,6 @@ The task was to build an API that provides structured data responses from a data
 - Database: MongoDB Atlas, Mongoose
 - Deployment: Render
 - Testing: Postman
-- Code Management: GitHub
 - Additional Libraries: dotenv, cors, body-parser, express-list-endpoints
 
 ## View it live
@@ -25,4 +24,3 @@ The task was to build an API that provides structured data responses from a data
 https://project-mongo-api-pbzi.onrender.com/
 https://project-mongo-api-pbzi.onrender.com/books/
 https://project-mongo-api-pbzi.onrender.com/books/675b270be387aacf002d49f9
-
