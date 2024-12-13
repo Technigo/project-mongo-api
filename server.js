@@ -156,7 +156,7 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books";
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log("Connected to MongoDB");
+    console.log("App is connected to MongoDB");
     if (process.env.RESET_DATABASE) {
       seedDatabase(); // Seed the database if RESET_DATABASE is true
     }
