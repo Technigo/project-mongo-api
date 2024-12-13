@@ -4,7 +4,7 @@ A REST API for managing a fantasy realm with characters, quests, items, and worl
 
 ## **See it live:**
 
-- Production: `[https://fantasy-world-mongodb-api.vercel.app](https://fantasy-world-mongodb-api.vercel.app)`
+- Production: [https://fantasy-world-mongodb-api.vercel.app](https://fantasy-world-mongodb-api.vercel.app)
 
 ---
 
