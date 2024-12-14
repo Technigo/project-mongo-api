@@ -68,9 +68,7 @@ app.get("/", (request, response) => {
   response.json({
     message: "Welcome to the Elves API! Here are the available endpoints:",
     description: {
-      "/elves": "Get all elves",
-      "/elves/top-twelves": "Get the top twelves",
-      "/elves/titles/:title": "Get elves by title",
+      "/elves": "Get all elves or filter using query params, e.g., ?title=backend dasher&top_twelves=true",
       "/elves/:id": "Get a specific elf by ID",
       "/test": "Test endpoint",
     },
