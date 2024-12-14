@@ -2,350 +2,350 @@
     {
         "elfID": 1,
         "title": "Backend Dasher",
-        "Name": "Joyce",
+        "name": "Joyce",
         "language": ["en", "js"],
         "reviews_count": 10
     },
     {
         "elfID": 2,
         "title": "Backend Dasher",
-        "Name": "Anna",
+        "name": "Anna",
         "language": ["en", "js"],
         "reviews_count": 14
     },
     {
         "elfID": 3,
         "title": "Backend Dasher",
-        "Name": "Erika",
+        "name": "Erika",
         "language": ["en", "js"],
         "reviews_count": 18
     },
     {
         "elfID": 4,
         "title": "Backend Dasher",
-        "Name": "Helene",
+        "name": "Helene",
         "language": ["en", "js"],
         "reviews_count": 16
     },
     {
         "elfID": 5,
         "title": "Backend Dasher",
-        "Name": "Fanny",
+        "name": "Fanny",
         "language": ["en", "js"],
         "reviews_count": 20
     },
     {
         "elfID": 6,
         "title": "Backend Dasher",
-        "Name": "Johanna",
+        "name": "Johanna",
         "language": ["en", "js"],
         "reviews_count": 19
     },
     {
         "elfID": 7,
         "title": "Backend Dasher",
-        "Name": "Gitte",
+        "name": "Gitte",
         "language": ["en", "de", "js"],
         "reviews_count": 12
     },
     {
         "elfID": 8,
         "title": "Backend Dasher",
-        "Name": "Gabriella",
+        "name": "Gabriella",
         "language": ["en", "js"],
         "reviews_count": 7
     },
     {
         "elfID": 9,
         "title": "Backend Dasher",
-        "Name": "Kelly",
+        "name": "Kelly",
         "language": ["en", "js"],
         "reviews_count": 13
     },
     {
         "elfID": 10,
         "title": "Backend Dasher",
-        "Name": "Xing",
+        "name": "Xing",
         "language": ["en", "js"],
         "reviews_count": 6
     },
     {
         "elfID": 11,
         "title": "Backend Dasher",
-        "Name": "Zoe",
+        "name": "Zoe",
         "language": ["en", "js"],
         "reviews_count": 10
     },
     {
         "elfID": 12,
         "title": "Backend Dasher",
-        "Name": "Liselotte",
+        "name": "Liselotte",
         "language": ["en", "js"],
         "reviews_count": 5
     },
     {
         "elfID": 13,
         "title": "Toy Designer",
-        "Name": "Buddy",
+        "name": "Buddy",
         "language": "en",
         "reviews_count": 5
     },
     {
         "elfID": 14,
         "title": "Gift Wrapper",
-        "Name": "Olof",
+        "name": "Olof",
         "language": "en",
         "reviews_count": 24
     },
     {
         "elfID": 15,
         "title": "Cookie Tester",
-        "Name": "Karl",
+        "name": "Karl",
         "language": "en",
         "reviews_count": 21
     },
     {
         "elfID": 16,
         "title": "Cookie Tester",
-        "Name": "Elsa",
+        "name": "Elsa",
         "language": ["en", "de"],
         "reviews_count": 21
     },
     {
         "elfID": 17,
         "title": "Gift Wrapper",
-        "Name": "Olivia",
+        "name": "Olivia",
         "language": "en",
         "reviews_count": 10
     },
     {
         "elfID": 18,
         "title": "Sleigh Mechanic",
-        "Name": "Liam",
+        "name": "Liam",
         "language": "en",
         "reviews_count": 20
     },
     {
         "elfID": 19,
         "title": "Toy Designer",
-        "Name": "Sophia",
+        "name": "Sophia",
         "language": ["en", "de"],
         "reviews_count": 9
     },
     {
         "elfID": 20,
         "title": "Gift Wrapper",
-        "Name": "Zustand",
+        "name": "Zustand",
         "language": ["en", "de", "js"],
         "reviews_count": 17
     },
     {
         "elfID": 21,
         "title": "Gift Wrapper",
-        "Name": "Mia",
+        "name": "Mia",
         "language": "en",
         "reviews_count": 29
     },
     {
         "elfID": 22,
         "title": "Cookie Tester",
-        "Name": "Ethn",
+        "name": "Ethn",
         "language": "en",
         "reviews_count": 27
     },
     {
         "elfID": 23,
         "title": "Cookie Tester",
-        "Name": "Emily",
+        "name": "Emily",
         "language": "en",
         "reviews_count": 14
     },
     {
         "elfID": 24,
         "title": "Sleigh Mechanic",
-        "Name": "Logan",
+        "name": "Logan",
         "language": "en",
         "reviews_count": 12
     },
     {
         "elfID": 25,
         "title": "Cookie Tester",
-        "Name": "Ella",
+        "name": "Ella",
         "language": "en",
         "reviews_count": 18
     },
     {
         "elfID": 26,
         "title": "Sleigh Mechanic",
-        "Name": "Lucas",
+        "name": "Lucas",
         "language": "en",
         "reviews_count": 8
     },
     {
         "elfID": 27,
         "title": "Sleigh Mechanic",
-        "Name": "Ava",
+        "name": "Ava",
         "language": "en",
         "reviews_count": 7
     },
     {
         "elfID": 28,
         "title": "Cookie Tester",
-        "Name": "Mason",
+        "name": "Mason",
         "language": "en",
         "reviews_count": 24
     },
     {
         "elfID": 29,
         "title": "Cookie Tester",
-        "Name": "Isabella",
+        "name": "Isabella",
         "language": "en",
         "reviews_count": 26
     },
     {
         "elfID": 30,
         "title": "Toy Designer",
-        "Name": "Jacob",
+        "name": "Jacob",
         "language": "en",
         "reviews_count": 22
     },
     {
         "elfID": 31,
         "title": "Reindeer Trainer",
-        "Name": "Harper",
+        "name": "Harper",
         "language": "en",
         "reviews_count": 6
     },
     {
         "elfID": 32,
         "title": "Sleigh Mechanic",
-        "Name": "Elijah",
+        "name": "Elijah",
         "language": "en",
         "reviews_count": 28
     },
     {
         "elfID": 33,
         "title": "Reindeer Trainer",
-        "Name": "Charlotte",
+        "name": "Charlotte",
         "language": "en",
         "reviews_count": 6
     },
     {
         "elfID": 34,
         "title": "Sleigh Mechanic",
-        "Name": "Alexander",
+        "name": "Alexander",
         "language": "en",
         "reviews_count": 12
     },
     {
         "elfID": 35,
         "title": "Sleigh Mechanic",
-        "Name": "Amelia",
+        "name": "Amelia",
         "language": "en",
         "reviews_count": 18
     },
     {
         "elfID": 36,
         "title": "Gift Wrapper",
-        "Name": "James",
+        "name": "James",
         "language": "en",
         "reviews_count": 22
     },
     {
         "elfID": 37,
         "title": "Toy Designer",
-        "Name": "Abigail",
+        "name": "Abigail",
         "language": "en",
         "reviews_count": 28
     },
     {
         "elfID": 38,
         "title": "Sleigh Mechanic",
-        "Name": "Benjamin",
+        "name": "Benjamin",
         "language": "en",
         "reviews_count": 24
     },
     {
         "elfID": 39,
         "title": "Sleigh Mechanic",
-        "Name": "Sofia",
+        "name": "Sofia",
         "language": "en",
         "reviews_count": 10
     },
     {
         "elfID": 40,
         "title": "Sleigh Mechanic",
-        "Name": "William",
+        "name": "William",
         "language": "en",
         "reviews_count": 18
     },
     {
         "elfID": 41,
         "title": "Reindeer Trainer",
-        "Name": "Emma",
+        "name": "Emma",
         "language": "en",
         "reviews_count": 28
     },
     {
         "elfID": 42,
         "title": "Reindeer Trainer",
-        "Name": "Oliver",
+        "name": "Oliver",
         "language": "en",
         "reviews_count": 19
     },
     {
         "elfID": 43,
         "title": "Gift Wrapper",
-        "Name": "Aria",
+        "name": "Aria",
         "language": "en",
         "reviews_count": 26
     },
     {
         "elfID": 44,
         "title": "Toy Designer",
-        "Name": "Henry",
+        "name": "Henry",
         "language": "en",
         "reviews_count": 22
     },
     {
         "elfID": 45,
         "title": "Toy Designer",
-        "Name": "Scarlett",
+        "name": "Scarlett",
         "language": "en",
         "reviews_count": 25
     },
     {
         "elfID": 46,
         "title": "Gift Wrapper",
-        "Name": "Samuel",
+        "name": "Samuel",
         "language": "en",
         "reviews_count": 10
     },
     {
         "elfID": 47,
         "title": "Reindeer Trainer",
-        "Name": "Hannah",
+        "name": "Hannah",
         "language": "en",
         "reviews_count": 26
     },
     {
         "elfID": 48,
         "title": "Cookie Tester",
-        "Name": "Jack",
+        "name": "Jack",
         "language": "en",
         "reviews_count": 7
     },
     {
         "elfID": 49,
         "title": "Toy Designer",
-        "Name": "Grace",
+        "name": "Grace",
         "language": "en",
         "reviews_count": 5
     },
     {
         "elfID": 50,
         "title": "Toy Designer",
-        "Name": "Levi",
+        "name": "Levi",
         "language": "en",
         "reviews_count": 15
     }
