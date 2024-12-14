@@ -148,6 +148,7 @@ app.get("/elves/all", /*#__PURE__*/function () {
     return _ref3.apply(this, arguments);
   };
 }());
+
 /**
  * Endpoint to get the top 12 elves, the "TwElves"
  * This endpoint uses .slice() to return the first 12 elves from the elves database.
@@ -206,17 +207,44 @@ app.get("/elves/titles/:title", function (request, response) {
  * If no elf is found, it returns with a 404 status and the message: "404 - No elf found with that ID".
  */
 
-app.get("/elves/:id", function (request, response) {
-  var id = request.params.id;
-  var elf = _elves3["default"].find(function (record) {
-    return record.elfID === +id;
-  });
-  if (elf) {
-    response.status(200).json(elf);
-  } else {
-    response.status(404).send("404 - No elf found with that ID");
-  }
-});
+app.get("/elves/:id", /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(request, response) {
+    var id, elf;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          id = request.params.id;
+          _context5.prev = 1;
+          _context5.next = 4;
+          return Elf.findOne({
+            elfID: id
+          });
+        case 4:
+          elf = _context5.sent;
+          if (elf) {
+            response.status(200).json(elf);
+          } else {
+            response.status(404).send("404 - No elf found with that ID");
+          }
+          _context5.next = 12;
+          break;
+        case 8:
+          _context5.prev = 8;
+          _context5.t0 = _context5["catch"](1);
+          console.error("Error fetching elf by ID:", _context5.t0);
+          response.status(500).json({
+            error: "Failed to fetch elf"
+          });
+        case 12:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, null, [[1, 8]]);
+  }));
+  return function (_x6, _x7) {
+    return _ref5.apply(this, arguments);
+  };
+}());
 
 /**
  * Endpoint for testing the server.

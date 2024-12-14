@@ -19,7 +19,7 @@ mongoose.Promise = Promise;
 const Elf = mongoose.model('Elf', {
   "elfID": Number,
   "title": String,
-  "name": String,
+  "Name": String,
   "language_code": [String],
   "reviews_count": Number
 });
