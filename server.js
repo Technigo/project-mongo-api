@@ -20,7 +20,7 @@ const Elf = mongoose.model('Elf', {
   "elfID": Number,
   "title": String,
   "Name": String,
-  "language_code": [String],
+  "language": [String],
   "reviews_count": Number
 });
 
