@@ -10,8 +10,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-app.use("/users", userRoutes);
-app.use("/trips", tripRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/trips", tripRoutes);
 
 // API documentation
 app.get("/", (req, res) => {

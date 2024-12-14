@@ -22,6 +22,7 @@
 ├── .env                    # Environment variables (e.g., MONGO_URL, PORT)
 ├── .gitignore              # Exclude sensitive and unnecessary files
 ├── server.js               # Entry point for the API
+├── app.js
 ├── package.json
 
 
