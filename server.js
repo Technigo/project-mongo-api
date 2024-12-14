@@ -133,7 +133,7 @@ app.get("/elves/:id", async (request, response) => {
     if (elf) {
       response.status(200).json(elf);
     } else {
-      esponse.status(404).send("404 - No elf found with that ID");
+      response.status(404).send("404 - No elf found with that ID");
     }
   } catch (error) {
     console.error("Error fetching elf by ID:", error);
