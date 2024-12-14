@@ -1,0 +1,29 @@
+[
+  {
+    "userID": "1",
+    "firstName": "John",
+    "lastName":"Admin",
+    "email": "admin@example.com",
+    "password": "admin",
+    "role": "admin",
+    "phone": "123-456-7890"
+  },
+  {
+    "userID": "2",
+    "firstName": "Jane",
+    "lastName":"Miles",
+    "email": "jane@example.com",
+    "password": "password123",
+    "role": "co-worker",
+    "phone": "987-654-3210"
+  },
+  {
+    "userID": "3",
+    "firstName": "Mike",
+    "lastName":"Worker",
+    "email": "mike@example.com",
+    "password": "password123",
+    "role": "co-worker",
+    "phone": "654-321-9870"
+  }
+]

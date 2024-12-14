@@ -1,0 +1,118 @@
+[
+  {
+    "tripID": "101",
+    "userID": "1",
+    "title": "Admin Conference",
+    "location": {
+      "city": "London",
+      "country": "UK"
+    },
+    "tripDate": {
+      "startDate": "2024-07-01T09:00:00Z",
+      "endDate": "2024-07-03T18:00:00Z"
+    },
+    "hotelBreakfastDays": 2,
+    "mileageKm": 50,
+    "status": "approved",
+    "creation": {
+      "createdBy": "John Admin",
+      "createdAt": "2024-06-01T10:00:00Z"
+    },
+    "submission": {
+      "submittedAt": "2024-06-10T10:00:00Z",
+      "approvedBy": "Jane Worker",
+      "approvedAt": "2024-06-15T12:00:00Z"
+    },
+    "calculatedData": {
+      "totalDays": 2.5,
+      "totalAmount": 3000
+    }
+  },
+  {
+    "tripID": "102",
+    "userID": "2",
+    "title": "Web Summit",
+    "location": {
+      "city": "Berlin",
+      "country": "Germany"
+    },
+    "tripDate": {
+      "startDate": "2024-05-12T10:30:00Z",
+      "endDate": "2024-05-14T15:00:00Z"
+    },
+    "hotelBreakfastDays": 1,
+    "mileageKm": 20,
+    "status": "approved",
+    "creation": {
+      "createdBy": "Jane Worker",
+      "createdAt": "2024-05-01T09:00:00Z"
+    },
+    "submission": {
+      "submittedAt": "2024-05-05T12:00:00Z",
+      "approvedBy": "John Admin",
+      "approvedAt": "2024-05-15T14:00:00Z"
+    },
+    "calculatedData": {
+      "totalDays": 2,
+      "totalAmount": 2200
+    }
+  },
+  {
+    "tripID": "103",
+    "userID": "2",
+    "title": "Tech Expo",
+    "location": {
+      "city": "Stockholm",
+      "country": "Sweden"
+    },
+    "tripDate": {
+      "startDate": "2024-06-01T08:00:00Z",
+      "endDate": "2024-06-03T16:00:00Z"
+    },
+    "hotelBreakfastDays": 3,
+    "mileageKm": 0,
+    "status": "awaiting approval",
+    "creation": {
+      "createdBy": "Jane Worker",
+      "createdAt": "2024-05-20T10:00:00Z"
+    },
+    "submission": {
+      "submittedAt": "2024-05-25T14:00:00Z",
+      "approvedBy": null,
+      "approvedAt": null
+    },
+    "calculatedData": {
+      "totalDays": null,
+      "totalAmount": null
+    }
+  },
+  {
+    "tripID": "104",
+    "userID": "2",
+    "title": "Business Meeting",
+    "location": {
+      "city": "Oslo",
+      "country": "Norway"
+    },
+    "tripDate": {
+      "startDate": "2024-06-15T10:00:00Z",
+      "endDate": "2024-06-16T18:00:00Z"
+    },
+    "hotelBreakfastDays": 1,
+    "mileageKm": 10,
+    "status": "not submitted",
+    "creation": {
+      "createdBy": "Jane Worker",
+      "createdAt": "2024-06-01T11:00:00Z"
+    },
+    "submission": {
+      "submittedAt": null,
+      "approvedBy": null,
+      "approvedAt": null
+    },
+    "calculatedData": {
+      "totalDays": null,
+      "totalAmount": null
+    }
+  }
+]
