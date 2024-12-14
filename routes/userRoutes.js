@@ -1,19 +1,16 @@
 import express from "express";
-import {
-  getUsers,
-  createUser,
-  updateUser,
-} from "../controllers/userController.js";
+import { getUsers, createUser, updateUser } from "../controllers/userController.js";
+import { validateUser, validate } from "../middleware/validation.js";
 
 const router = express.Router();
 
 // GET all users
 router.get("/", getUsers);
 
-// POST a new user
-router.post("/", createUser);
+// POST a new user with validation
+router.post("/", validateUser, validate, createUser);
 
-// PUT (update) an existing user
-router.put("/:id", updateUser);
+// PUT (update) an existing user with validation
+router.put("/:id", validateUser, validate, updateUser);
 
-export default router;
+export { router as userRoutes };

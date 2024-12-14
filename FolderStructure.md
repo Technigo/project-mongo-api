@@ -19,6 +19,7 @@
 │   ├── seedDatabase.js     # Script to seed JSON data into MongoDB
 ├── config/
 │   ├── database.js         # Database connection setup
+│   ├── dateValidators.js   # put all date-related utilities (validation, calculation)
 ├── .env                    # Environment variables (e.g., MONGO_URL, PORT)
 ├── .gitignore              # Exclude sensitive and unnecessary files
 ├── server.js               # Entry point for the API
