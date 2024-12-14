@@ -39,4 +39,4 @@ const tripSchema = new mongoose.Schema({
   },    
 });
 
-export const Trip = mongoose.model("Trip", userSchema);
+export const Trip = mongoose.model("Trip", tripSchema);

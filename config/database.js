@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 
 export const connectDatabase = async () => {
-  const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/triptracking";
+  const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/triptracking"
+  console.log("MongoDB Connection String:", mongoUrl); // Debug line
+  
   try {
     await mongoose.connect(mongoUrl);
     console.log("Connected to MongoDB!")

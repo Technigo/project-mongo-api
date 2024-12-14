@@ -25,5 +25,14 @@
     "password": "password123",
     "role": "co-worker",
     "phone": "654-321-9870"
-  }
+  },
+  {
+    "userID": "4",
+    "firstName": "Maltida",
+    "lastName":"Jonson",
+    "email": "maltida@example.com",
+    "password": "password123",
+    "role": "co-worker",
+    "phone": "456-123-0789"
+  }  
 ]
