@@ -2,47 +2,56 @@ import { body, validationResult } from "express-validator";
 import { checkOverlappingTrips, validateEndDateAfterStartDate, calculateTotalDays } from "../utils/dateValidators.js";
 
 // Validation rules for creating or updating a user
-export const validaterUser = [
+export const validateUser  = [
   body("firstName")
+    .optional() // Allow missing field for updates
     .trim()
     .notEmpty()
     .withMessage("First name is required."),
   body("lastName")
+    .optional() 
     .trim()
     .notEmpty()
     .withMessage("Last name is required."),
   body("email")
+    .optional() 
     .trim()
     .isEmail()
     .withMessage("Valid email is required."),
   body("password")
+    .optional() 
     .trim()
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters long."),
   body("role")
+    .optional() 
     .trim()
     .isIn(["admin", "co-worker"])
     .withMessage("Role must be either 'admin' or 'co-worker'."),
   body("phone")
+    .optional() 
     .optional()
-    .isMobilePhone()
-    .withMessage("Phone number must be a valid mobile number."),  
+    .matches(/^\d{3}-\d{3}-\d{4}$/) // Allows numbers like 123-456-7890
+    .withMessage("Phone number must follow the format XXX-XXX-XXXX."),  
 ]
 
 // Validation rules for creating or updating a trip
 export const validateTrip = [
   body("title")
+    .optional() // Allow missing field for updates    
     .trim()
     .notEmpty()
     .withMessage("Title is required."),
   
   body("location.city")
+    .optional()
     .trim()
     .notEmpty()
     .withMessage("City is required."),
   
   // Validate startDate
   body("tripDate.startDate")
+    .optional()
     .isISO8601()
     .withMessage("Valid startDate is required.")
     .bail() // Stop further validation if this fails
@@ -60,6 +69,7 @@ export const validateTrip = [
 
   // Validate endDate
   body("tripDate.endDate")
+    .optional()
     .isISO8601()
     .withMessage("Valid endDate is required.")
     .bail()
@@ -73,6 +83,7 @@ export const validateTrip = [
   
   // Validate hotelBreakfastDays
   body("hotelBreakfastDays")
+    .optional()
     .isInt({ min: 0 })
     .withMessage("Hotel breakfast days must be a positive integer.")
     .bail()
@@ -94,6 +105,7 @@ export const validateTrip = [
   
   // Validate status
   body("status")
+    .optional()
     .isIn(["approved", "awaiting approval", "not submitted"])
     .withMessage("Status must be 'approved', 'awaiting approval', or 'not submitted'."),
 ];

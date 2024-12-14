@@ -1,7 +1,5 @@
 [
   {
-    "tripID": "101",
-    "userID": "1",
     "title": "Admin Conference",
     "location": {
       "city": "London",
@@ -29,8 +27,6 @@
     }
   },
   {
-    "tripID": "102",
-    "userID": "2",
     "title": "Web Summit",
     "location": {
       "city": "Berlin",
@@ -58,8 +54,6 @@
     }
   },
   {
-    "tripID": "103",
-    "userID": "2",
     "title": "Tech Expo",
     "location": {
       "city": "Stockholm",
@@ -87,8 +81,6 @@
     }
   },
   {
-    "tripID": "104",
-    "userID": "2",
     "title": "Business Meeting",
     "location": {
       "city": "Oslo",

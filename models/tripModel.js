@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const tripSchema = new mongoose.Schema({
-  tripID: { type: String, required: true, unique: true },
   userID: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference to User
   title: {
     type: String,
