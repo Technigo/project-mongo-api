@@ -8,7 +8,6 @@ mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
 const HarryPotterCharacter = mongoose.model("HarryPotterCharacter", {
-	id: Number,
 	name: String,
 	house: String,
 	role: String,
@@ -40,7 +39,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/harryPotterCharacters", async (req, res) => {
-	const { house, role, yearIntroduced } = req.query; // Extracting query parameters 
+	const { house, role, yearIntroduced } = req.query; // Extracting query params 
 
 	// Creating a dynamic query object to be able to filter on more than one thing at the time
 	const query = {};
@@ -53,7 +52,7 @@ app.get("/harryPotterCharacters", async (req, res) => {
 		const characters = await HarryPotterCharacter.find(query);
 
 		if (characters.length === 0) {
-			res.status(404).json({ message: "No characters found matching the criteria." });
+			res.status(404).json({ message: "Sorry - no characters found" });
 		} else {
 			res.json(characters);
 		}

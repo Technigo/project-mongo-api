@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "name": "Harry Potter",
     "house": "Gryffindor",
     "role": "Student",
@@ -8,7 +7,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 2,
     "name": "Hermione Granger",
     "house": "Gryffindor",
     "role": "Student",
@@ -16,7 +14,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 3,
     "name": "Ron Weasley",
     "house": "Gryffindor",
     "role": "Student",
@@ -24,7 +21,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 4,
     "name": "Albus Dumbledore",
     "house": "Gryffindor",
     "role": "Headmaster",
@@ -32,7 +28,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 5,
     "name": "Severus Snape",
     "house": "Slytherin",
     "role": "Professor",
@@ -40,7 +35,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 6,
     "name": "Draco Malfoy",
     "house": "Slytherin",
     "role": "Student",
@@ -48,7 +42,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 7,
     "name": "Minerva McGonagall",
     "house": "Gryffindor",
     "role": "Professor",
@@ -56,7 +49,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 8,
     "name": "Rubeus Hagrid",
     "house": "Gryffindor",
     "role": "Keeper of Keys",
@@ -64,7 +56,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 9,
     "name": "Lord Voldemort",
     "house": "Slytherin",
     "role": "Antagonist",
@@ -72,7 +63,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 10,
     "name": "Sirius Black",
     "house": "Gryffindor",
     "role": "Order of the Phoenix",
@@ -80,7 +70,6 @@
     "yearIntroduced": 1999
   },
   {
-    "id": 11,
     "name": "Remus Lupin",
     "house": "Gryffindor",
     "role": "Professor",
@@ -88,7 +77,6 @@
     "yearIntroduced": 1999
   },
   {
-    "id": 12,
     "name": "Ginny Weasley",
     "house": "Gryffindor",
     "role": "Student",
@@ -96,7 +84,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 13,
     "name": "Neville Longbottom",
     "house": "Gryffindor",
     "role": "Student",
@@ -104,7 +91,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 14,
     "name": "Luna Lovegood",
     "house": "Ravenclaw",
     "role": "Student",
@@ -112,7 +98,6 @@
     "yearIntroduced": 2003
   },
   {
-    "id": 15,
     "name": "Cho Chang",
     "house": "Ravenclaw",
     "role": "Student",
@@ -120,7 +105,6 @@
     "yearIntroduced": 1999
   },
   {
-    "id": 16,
     "name": "Bellatrix Lestrange",
     "house": "Slytherin",
     "role": "Death Eater",
@@ -128,7 +112,6 @@
     "yearIntroduced": 1999
   },
   {
-    "id": 17,
     "name": "Fred Weasley",
     "house": "Gryffindor",
     "role": "Student",
@@ -136,7 +119,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 18,
     "name": "George Weasley",
     "house": "Gryffindor",
     "role": "Student",
@@ -144,7 +126,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 19,
     "name": "Lucius Malfoy",
     "house": "Slytherin",
     "role": "Death Eater",
@@ -152,7 +133,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 20,
     "name": "Nymphadora Tonks",
     "house": "Hufflepuff",
     "role": "Auror",
@@ -160,7 +140,6 @@
     "yearIntroduced": 1999
   },
   {
-    "id": 21,
     "name": "Cedric Diggory",
     "house": "Hufflepuff",
     "role": "Student",
@@ -168,7 +147,6 @@
     "yearIntroduced": 1999
   },
   {
-    "id": 22,
     "name": "Molly Weasley",
     "house": "Gryffindor",
     "role": "Order of the Phoenix",
@@ -176,7 +154,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 23,
     "name": "Arthur Weasley",
     "house": "Gryffindor",
     "role": "Ministry Worker",
@@ -184,7 +161,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 24,
     "name": "Peter Pettigrew",
     "house": "Gryffindor",
     "role": "Death Eater",
@@ -192,7 +168,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 25,
     "name": "Fleur Delacour",
     "house": "Beauxbatons",
     "role": "Triwizard Champion",
@@ -200,7 +175,6 @@
     "yearIntroduced": 2000
   },
   {
-    "id": 26,
     "name": "Viktor Krum",
     "house": "Durmstrang",
     "role": "Triwizard Champion",
@@ -208,7 +182,6 @@
     "yearIntroduced": 2000
   },
   {
-    "id": 27,
     "name": "Moaning Myrtle",
     "house": "Ravenclaw",
     "role": "Ghost",
@@ -216,7 +189,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 28,
     "name": "Nearly Headless Nick",
     "house": "Gryffindor",
     "role": "Ghost",
@@ -224,7 +196,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 29,
     "name": "Dobby",
     "house": "N/A",
     "role": "House Elf",
@@ -232,7 +203,6 @@
     "yearIntroduced": 1998
   },
   {
-    "id": 30,
     "name": "Kreacher",
     "house": "N/A",
     "role": "House Elf",
@@ -240,7 +210,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 31,
     "name": "Horace Slughorn",
     "house": "Slytherin",
     "role": "Professor",
@@ -248,7 +217,6 @@
     "yearIntroduced": 2006
   },
   {
-    "id": 32,
     "name": "Gilderoy Lockhart",
     "house": "Ravenclaw",
     "role": "Professor",
@@ -256,7 +224,6 @@
     "yearIntroduced": 1992
   },
   {
-    "id": 33,
     "name": "Argus Filch",
     "house": "N/A",
     "role": "Caretaker",
@@ -264,7 +231,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 34,
     "name": "Peeves",
     "house": "N/A",
     "role": "Poltergeist",
@@ -272,7 +238,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 35,
     "name": "Barty Crouch Jr.",
     "house": "Slytherin",
     "role": "Death Eater",
@@ -280,7 +245,6 @@
     "yearIntroduced": 1994
   },
   {
-    "id": 36,
     "name": "Fenrir Greyback",
     "house": "N/A",
     "role": "Werewolf",
@@ -288,7 +252,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 37,
     "name": "Dolores Umbridge",
     "house": "Slytherin",
     "role": "Professor",
@@ -296,7 +259,6 @@
     "yearIntroduced": 1995
   },
   {
-    "id": 38,
     "name": "Mad-Eye Moody",
     "house": "Hufflepuff",
     "role": "Auror",
@@ -304,7 +266,6 @@
     "yearIntroduced": 1995
   },
   {
-    "id": 39,
     "name": "Kingsley Shacklebolt",
     "house": "Hufflepuff",
     "role": "Auror",
@@ -312,7 +273,6 @@
     "yearIntroduced": 1995
   },
   {
-    "id": 40,
     "name": "Rita Skeeter",
     "house": "Ravenclaw",
     "role": "Journalist",
@@ -320,7 +280,6 @@
     "yearIntroduced": 1992
   },
   {
-    "id": 41,
     "name": "The Grey Lady (Helena Ravenclaw)",
     "house": "Ravenclaw",
     "role": "Ghost",
@@ -328,7 +287,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 42,
     "name": "The Bloody Baron",
     "house": "Slytherin",
     "role": "Ghost",
@@ -336,7 +294,6 @@
     "yearIntroduced": 1991
   },
   {
-    "id": 43,
     "name": "Salazar Slytherin",
     "house": "Slytherin",
     "role": "Founder",
@@ -344,7 +301,6 @@
     "yearIntroduced": 1991
   },
   {
-    "id": 44,
     "name": "Godric Gryffindor",
     "house": "Gryffindor",
     "role": "Founder",
@@ -352,7 +308,6 @@
     "yearIntroduced": 1991
   },
   {
-    "id": 45,
     "name": "Helga Hufflepuff",
     "house": "Hufflepuff",
     "role": "Founder",
@@ -360,7 +315,6 @@
     "yearIntroduced": 1991
   },
   {
-    "id": 46,
     "name": "Rowena Ravenclaw",
     "house": "Ravenclaw",
     "role": "Founder",
@@ -368,7 +322,6 @@
     "yearIntroduced": 1991
   },
   {
-    "id": 47,
     "name": "Horace Slughorn",
     "house": "Slytherin",
     "role": "Professor",
@@ -376,7 +329,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 48,
     "name": "Narcissa Malfoy",
     "house": "Slytherin",
     "role": "Mother",
@@ -384,7 +336,6 @@
     "yearIntroduced": 1997
   },
   {
-    "id": 49,
     "name": "Astoria Greengrass",
     "house": "Slytherin",
     "role": "Wife",
@@ -392,7 +343,6 @@
     "yearIntroduced": 2007
   },
   {
-    "id": 50,
     "name": "Bill Weasley",
     "house": "Gryffindor",
     "role": "Order of the Phoenix",
