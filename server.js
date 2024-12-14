@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import simsData from "./data/sims-npcs.json";
 import listEndpoints from "express-list-endpoints";
+import dotenv from 'dotenv';
 
 // Configure dotenv to use .env file
 dotenv.config();
