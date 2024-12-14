@@ -68,7 +68,7 @@ app.get("/", (request, response) => {
   response.json({
     message: "Welcome to the Elves API! Here are the available endpoints:",
     description: {
-      "/elves/all": "Get all elves",
+      "/elves": "Get all elves",
       "/elves/top-twelves": "Get the top twelves",
       "/elves/titles/:title": "Get elves by title",
       "/elves/:id": "Get a specific elf by ID",
@@ -79,43 +79,30 @@ app.get("/", (request, response) => {
 });
 
 /**
- * Endpoint for getting all elves.
- * This endpoint returns the complete list of elves from the elves database.
+ * Endpoint for getting all elves, top TwElves and Title
+ * This endpoint returns the complete list of elves from the elves database. 
+ * It uses query params to either get all elves, filter on title or limit to the top twelve elves, the Top TwElves. 
  */
-app.get("/elves/all", async (request, response) => {
+app.get("/elves", async (request, response) => {
   try {
-    const elves = await Elf.find(); 
+    const { title, top_twelves } = request.query;
+    const query = {};
+
+    // Filter based on query params
+    if (title) {
+      // Case insensitive by using Regular Expression
+      query.title = new RegExp(title, "i");
+    }
+
+    // Limit to get the top 12 elves, the "TwElves", if "top_twelves=true" 
+    const limit = top_twelves === "true" ? 12 : 0;
+    const elves = await Elf.find(query).limit(limit);
+
     response.json(elves);
+
   } catch (error) {
     response.status(500).json({ error: "Failed to fetch elves" });
   }
-});
-
-/**
- * Endpoint to get the top 12 elves, the "TwElves"
- * This endpoint uses .slice() to return the first 12 elves from the elves database.
- */
-app.get("/elves/top-twelves", async (request, response) => {
-  try {
-    const elves = await Elf.find().limit(12);
-    console.log("Top Twelves endpoint works!");
-    response.json(elves);
-  } catch (error) {
-    console.error("Error fetching top elves:", error);
-    response.status(500).json({ error: "Failed to fetch the Top TwElves" });
-  }
-});
-
-/**
- * Endpoint for getting elves based on the provided title. 
- * This endpoint uses .filter() to return the elves with a matching title
- */
-app.get("/elves/titles/:title", (request, response) => {
-  const title = request.params.title.toLowerCase();
-  const filteredElves = elves.filter((elf) => elf.title.toLowerCase() === title);
-
-  // Return elves with titles that match
-  response.json(filteredElves);
 });
 
 /**
