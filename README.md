@@ -1,16 +1,36 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project builds on [Project Express API](https://github.com/joheri1/project-express-api) to create a RESTful API, and using MongoDB as a database. Mongoose is used to store, retrieve, and filter data more efficiently. The API leverages Mongoose methods instead of plain JavaScript for operations like filtering.
 
 ## Requirements:  
   1. The API should have at least 3 routes.  
     This API has the following routes:  
-    - /: Returns documentation of the API using express-list-endpoints.[Express List Endpoints](https://www.npmjs.com/package/express-list-endpoints). 
-  2. Mongoose Query Objects used in this project:  
-    - Model.findOne() 
-
+    - "/": Returns documentation of the API using express-list-endpoints.[Express List Endpoints](https://www.npmjs.com/package/express-list-endpoints).  
+    - "/elves": endpoint to return a collection of results (all elves or filter using query params  e.g., ?title=backend dasher&top_twelves=true").  
+    - "/elves/:id": Endpoint to return a single result (Get a specific elf by ID).  
+    - "/test": Test endpoint. 
+  2. The API should use Mongoose model. 
+   This API uses Mongoose models to model the data and use these models to fetch data from the database.  
+   ```bash
+    const Elf = mongoose.model('Elf', {
+    "elfID": Number,
+    "title": String,
+    "name": String,
+    "language": [String],
+    "reviews_count": Number
+    ``` 
+  3. The API should be RESTful
+    This API's RESTful examples: 
+    - The /elves endpoint acts as a flexible entry point by the use of query parameters. 
+    - Path parameters (/elves/:id) are used only for identifying unique resources.  
+    - API returns appropriate HTTP status codes:  
+        200 → Success (e.g., when data is found).  
+        404 → Not Found (e.g., when an elf with the given ID does not exist).  
+        500 → Internal Server Error (e.g., database issues).  
+    - Uses GET for fetching data.  
+   4. Follow the guidelines on how to write clean code.
+    This API's examples of clean code: 
+    - Variable names are clear and descriptive (e.g. request, response, title).
 
 ## Dependency Installation & Startup Development Server
 This project uses npm (Node Package Manager) and Express.js to manage dependencies and run the development server.  It uses MongoDB as the database and the Mongoose library for database interaction. 
@@ -64,12 +84,27 @@ npm install dotenv
 
 ## Useful resources  
 - [Mongoose Query objects](https://mongoosejs.com/docs/queries.html)
+- [Use Regular Expression for case insensitivity](https://stackoverflow.com/questions/52073031/case-insensitive-key-name-match-mongoose)
 
 
 ## The problem  
-1. Deploying to Render    
+### Deploying to Render  
+When deploying to Render, I encountered some issues:  
+- The first issue was related to the MongoDB user I had created. The deployment failed due to an authentication error.
+Solution: I deleted the user and created a new one.  
 
+- The second issue involved my dist folder not updating with the latest code. Despite rebuilding the project, the files in dist caused issues during deployment.
+Solution: I used the following command to remove the folder everytime I wanted to deploy to Render:  
+
+```bash
+rm -rf dist
+```  
+Then, I rebuilt the project using:
+```bash
+npm run build
+```  
+Then, I manually deployed the latest commit on Render.  
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+[Project Mongo API](https://project-mongo-api-x8p0.onrender.com)
