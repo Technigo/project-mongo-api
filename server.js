@@ -90,6 +90,7 @@ app.get("/elves/all", async (request, response) => {
     response.status(500).json({ error: "Failed to fetch elves" });
   }
 });
+
 /**
  * Endpoint to get the top 12 elves, the "TwElves"
  * This endpoint uses .slice() to return the first 12 elves from the elves database.
@@ -124,16 +125,21 @@ app.get("/elves/titles/:title", (request, response) => {
  * If no elf is found, it returns with a 404 status and the message: "404 - No elf found with that ID".
  */
 
-app.get("/elves/:id", (request, response) => {
+app.get("/elves/:id", async (request, response) => {
   const id = request.params.id;
 
-  const elf = elves.find((record) => record.elfID === +id);
-  if (elf) {
-    response.status(200).json(elf);
-  } else {
-    response.status(404).send("404 - No elf found with that ID");
+  try {
+    const elf = await Elf.findOne({ elfID: id });
+    if (elf) {
+      response.status(200).json(elf);
+    } else {
+      esponse.status(404).send("404 - No elf found with that ID");
+    }
+  } catch (error) {
+    console.error("Error fetching elf by ID:", error);
+    response.status(500).json({ error: "Failed to fetch elf" });
   }
-})
+});
 
 /**
  * Endpoint for testing the server.
