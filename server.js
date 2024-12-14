@@ -8,6 +8,7 @@ mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
 const HarryPotterCharacter = mongoose.model("HarryPotterCharacter", {
+	id: Number,
 	name: String,
 	house: String,
 	role: String,
@@ -57,23 +58,24 @@ app.get("/harryPotterCharacters", async (req, res) => {
 			res.json(characters);
 		}
 	} catch (error) {
-		res.status(500).json({ error: "Server error", details: error.message });
+		res.status(400).json({ error: "Server error" });
 	}
 });
 
 
 app.get("/harryPotterCharacters/:id", async (req, res) => {
-	const id = req.params.id;
+	const { id } = req.params;
 
 	try {
-		const harryPotterCharacter = await HarryPotterCharacter.findOne({ id: +id }); // Using +id to reassure the id is always read as a number 
-		if (harryPotterCharacter) {
-			res.status(200).json(harryPotterCharacter);
+		// Converting the string to ObjectId using "new"
+		const character = await HarryPotterCharacter.findById(new mongoose.Types.ObjectId(id));
+		if (character) {
+			res.status(200).json(character);
 		} else {
-			res.status(404).send("Sorry - no character found with that ID");
+			res.status(404).send("Character not found");
 		}
 	} catch (error) {
-		res.status(500).json({ error: "Server error", details: error.message });
+		res.status(400).json({ error: "Invalid ID format or server error", details: error.message });
 	}
 });
 
@@ -89,7 +91,7 @@ app.get("/harryPotterCharacters/name/:name", async (req, res) => {
 			res.status(404).send("Sorry - no character found with that name");
 		}
 	} catch (error) {
-		res.status(500).json({ error: "Server error", details: error.message });
+		res.status(400).json({ error: "Server error" });
 	}
 });
 
