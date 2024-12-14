@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-//import elves from "./data/elves.json"
+import elves from "./data/elves.json"
 import expressListEndpoints from "express-list-endpoints";
 
 /**
