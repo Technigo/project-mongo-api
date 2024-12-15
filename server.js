@@ -53,27 +53,48 @@ app.get("/", (req, res) => {
   });
 });
 
-// Route to get all music tracks
+// Route to get all music tracks with filters and sorting
 app.get("/tracks", async (req, res) => {
-  try {
-    const tracks = await Music.find(); // Fetch all tracks
-    res.json(tracks); // Return the array of tracks
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch tracks" });
-  }
-});
+  // Destructure query parameters from the request
+  const { artist, genre, bpm, popularity, sort, order = "asc" } = req.query;
 
-// Route to get a single music track by ID
-app.get("/tracks/:id", async (req, res) => {
   try {
-    const track = await Music.findById(req.params.id); // Find track by MongoDB _id
-    if (track) {
-      res.json(track); // Returns track if found
+    // Initialize query object to filter tracks
+    const query = {};
+
+    // Add artist filter to the query if provided
+    if (artist) query.artistName = new RegExp(artist, "i"); // Case-insensitive regex search
+
+    // Add genre filter to the query if provided
+    if (genre) query.genre = new RegExp(genre, "i");
+
+    // Add BMP filter to query if provided
+    if (bpm) query.bpm = Number(bpm);
+
+    // Add popularity filter to query if provided
+    if (popularity) query.popularity = { $gte: Number(popularity) }; // Greater than or equal
+
+    // Initialize sorting object
+    let sortBy = {};
+    if (sort) {
+      const sortOrder = order === "desc" ? -1 : 1; // Set order (-1 for Descending, 1 for ascending)
+      sortBy[sort] = sortOrder; // Dynamically set sort field and order
+    }
+
+    // Query database using query object and sort options
+    const tracks = await Music.find(query).sort(sortBy);
+
+    // Check if results exist
+    if (tracks.length > 0) {
+      // If results exist, send back JSON response
+      res.json(tracks);
     } else {
-      res.status(404).json({ error: "Track not found" }); // Return 404 if track doesn't exist
+      // If no results, send 404 status with error message
+      res.status(404).json({ error: "No tracks found matching the criteria" });
     }
   } catch (error) {
-    res.status(400).json({ error: "Invalid ID format" }); // Handle invalid ID errors
+    // Handle server errors and send 500 status with error message
+    res.status(500).json({ error: "Failed to fetch tracks" });
   }
 });
 
