@@ -102,7 +102,9 @@ app.get("/elves", async (request, response) => {
 
     // Limit to get the top 12 elves, the "TwElves", if "top_twelves=true" 
     const limit = top_twelves === "true" ? 12 : 0;
-    const elves = await Elf.find(query).limit(limit);
+    const elves = await Elf.find(query)
+      .sort({ elfID: 1 }) // Sort elfID in ascending order (1 for ascending, -1 for descending)
+      .limit(limit);
 
     response.json(elves);
 
