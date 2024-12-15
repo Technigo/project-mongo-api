@@ -1,7 +1,9 @@
+import fs from "fs/promises";
 import { User } from "../models/userModel.js";
 import { Trip } from "../models/tripModel.js";
-import users from "../data/users.json";
-import trips from "../data/trips.json";
+
+const users = JSON.parse(await fs.readFile(new URL("../data/users.json", import.meta.url)));
+const trips = JSON.parse(await fs.readFile(new URL("../data/trips.json", import.meta.url)));
 
 export const seedDatabase = async () => {
   try {
@@ -16,21 +18,20 @@ export const seedDatabase = async () => {
 
     // Map user names to ObjectIds
     const userMap = createdUsers.reduce((map, user) => {
-      map[user.firstName + " " + user.lastName] = user._id;
+      map[`${user.firstName} ${user.lastName}`] = user._id; // Key: Full name, Value: ObjectId
       return map;
     }, {});
 
     // Update trips with correct ObjectIds
     const updatedTrips = trips.map((trip) => ({
       ...trip,
-      userID: userMap[trip.userID], // Replace userID with ObjectId
       creation: {
         ...trip.creation,
-        createdBy: userMap[trip.creation.createdBy], // Replace createdBy with ObjectId
+        createdBy: userMap[trip.creation.createdBy], // Replace `createdBy` with ObjectId
       },
       submission: {
         ...trip.submission,
-        approvedBy: userMap[trip.submission.approvedBy] || null, // Replace approvedBy with ObjectId or keep null
+        approvedBy: trip.submission.approvedBy ? userMap[trip.submission.approvedBy] : null, // Replace `approvedBy` with ObjectId or null
       },
     }));
 
