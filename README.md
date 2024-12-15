@@ -1,12 +1,19 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
+Week 18th proyect. Build an API with Mongo DataBase.
+This week's goal was very broad: 
+✓ How to create an API using Mongo DB. 
+✓ How to model data in Mongo using Mongoose
+✓ How to store secret information such as database passwords
+✓ How to return useful error messages from your API endpoints
+✓ How to fetch items from a Mongo database using Mongoose
+✓ How to seed large amounts of data to a database 
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+All of the key objectives have been challenging, especially with large amounts of data like in this case, but I have learned a lot doing it. I decided to keep on Netflix films to see the differences between one API and the other.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The most challenging issues that I had were the seeding of data and the error messages (as clear as possible). I am half way from adding styling but I don not have enough time to render it on time to meet the schedule. I'll do it just for fun. I really love API's and Data Bases! 
 
 ## View it live
 
