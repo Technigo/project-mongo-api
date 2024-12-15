@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import harryPotterCharactersData from "./data/harry-potter-characters.json";
 
+dotenv.config();
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/harrypottercharacters";
 mongoose.connect(mongoUrl);
 

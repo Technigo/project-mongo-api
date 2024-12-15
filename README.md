@@ -1,8 +1,6 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This is an API built using Node.js, Express, and MongoDB, designed to provide information about Harry Potter characters. The API allows users to retrieve details about characters, filter them by various attributes, and query individual characters based on their unique IDs or names.
 
 ## The problem
 
