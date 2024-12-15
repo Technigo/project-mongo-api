@@ -6,20 +6,20 @@ import goldenGlobesData from "./data/golden-globes.json";
 import dotenv from 'dotenv';
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL;
+const mongoUri = process.env.MONGO_URI;
 
-if (!mongoUrl) {
-  console.error("❌ MONGO_URL is not defined in .env. Please add it and restart the server.");
+if (!mongoUri) {
+  console.error("❌ MONGO_URI is not defined in .env. Please add it and restart the server.");
   process.exit(1);
 }
 
-mongoose.connect(mongoUrl)
+mongoose.connect(mongoUri)
   .then(() => {
     console.log("Successfully connected to MongoDB Atlas!");
   })
   .catch((err) => {
     console.error("Error connecting to MongoDB Atlas. Please check:");
-    console.error("Is MONGO_URL correct in your .env?");
+    console.error("Is MONGO_URI correct in your .env?");
     console.error("Do you have access to the cluster?");
     console.error(err);
     process.exit(1);
