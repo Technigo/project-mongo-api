@@ -5,7 +5,6 @@ import harryPotterCharactersData from "./data/harry-potter-characters.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/harrypottercharacters";
 mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
 
 const HarryPotterCharacter = mongoose.model("HarryPotterCharacter", {
 	id: Number,
