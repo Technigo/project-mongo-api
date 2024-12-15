@@ -6,9 +6,11 @@ import harryPotterCharactersData from "./data/harry-potter-characters.json";
 
 dotenv.config();
 
+//using the Atlas URL from .env, or fall back to local MongoDB localhost
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/harrypottercharacters";
 mongoose.connect(mongoUrl);
 
+// Defining a Mongoose model for a Harry Potter character
 const HarryPotterCharacter = mongoose.model("HarryPotterCharacter", {
 	id: Number,
 	name: String,
@@ -21,11 +23,12 @@ const HarryPotterCharacter = mongoose.model("HarryPotterCharacter", {
 const port = process.env.PORT || 9000;
 const app = express();
 
+// If the RESET_DB environment variable is true, the database is seeded with JSON data
 if (process.env.RESET_DB) {
 	const seedDatabase = async () => {
-		await HarryPotterCharacter.deleteMany({});
+		await HarryPotterCharacter.deleteMany({}); // Clears the existing database
 		harryPotterCharactersData.forEach((character) => {
-			const newCharacter = new HarryPotterCharacter(character);
+			const newCharacter = new HarryPotterCharacter(character); // Creating a new character instance
 			newCharacter.save();
 		});
 	};
@@ -37,6 +40,15 @@ if (process.env.RESET_DB) {
 app.use(cors());
 app.use(express.json());
 
+// Middleware to handle 503 errors
+app.use((req, res, next) => {
+	if (mongoose.connection.readyState === 1) {
+		next()
+	} else {
+		res.status(503).json({ error: "Service unavailable" });
+	}
+});
+
 // Start defining your routes here
 app.get("/", (req, res) => {
 	res.send("Welcome to the Harry Potter API!");
@@ -46,11 +58,11 @@ app.get("/harryPotterCharacters", async (req, res) => {
 	const { house, role, yearIntroduced } = req.query; // Extracting query params 
 
 	// Creating a dynamic query object to be able to filter on more than one thing at the time
-	const query = {};
-	if (house) query.house = new RegExp(house, "i"); // "i" stands for case-insensitive matching: eg. makes the regular expression ignore differences between uppercase and lowercase letters when matching strings.
+	const query = {}; //Initially an empty query object before the user has applied filters
+	if (house) query.house = new RegExp(house, "i"); //Depending on the query parameters provided - properties are dynamically added to the query object. 
 	if (role) query.role = new RegExp(role, "i");
 	if (yearIntroduced) query.yearIntroduced = +yearIntroduced;
-
+	// "i" stands for case-insensitive matching: eg. makes the regular expression ignore differences between uppercase and lowercase letters when matching strings.
 	try {
 		// Query MongoDB using the dynamic query object
 		const characters = await HarryPotterCharacter.find(query);
@@ -67,7 +79,7 @@ app.get("/harryPotterCharacters", async (req, res) => {
 
 
 app.get("/harryPotterCharacters/:id", async (req, res) => {
-	const { id } = req.params;
+	const { id } = req.params; // Extracting the id from the URL
 
 	try {
 		// Converting the string to ObjectId using "new"
@@ -82,11 +94,11 @@ app.get("/harryPotterCharacters/:id", async (req, res) => {
 	}
 });
 
-//finding only the name 
+//finding the unique character name 
 app.get("/harryPotterCharacters/name/:name", async (req, res) => {
-	const name = req.params.name;
+	const name = req.params.name; // Extracting the name from the URL
 
-	try {
+	try { // "new RegExp(`^${name}$`, "i")" ensures case-insensitive matching 
 		const harryPotterCharacterName = await HarryPotterCharacter.findOne({ name: new RegExp(`^${name}$`, "i") });
 		if (harryPotterCharacterName) {
 			res.status(200).json(harryPotterCharacterName);
