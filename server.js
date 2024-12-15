@@ -43,7 +43,19 @@ app.get("/", (req, res) => {
     message: "Welcome to Joyce's Top Music API!",
     endpoints: [
       { method: "GET", path: "/", description: "API documentation" },
-      { method: "GET", path: "/tracks", description: "Get all music tracks" },
+      {
+        method: "GET",
+        path: "/tracks",
+        description: "Get all music tracks",
+        queryParameters: {
+          artist: "Filter by artist name",
+          genre: "Filter by genre",
+          bpm: "Filter by BPM (exact match)",
+          popularity: "Filter by minimum popularity",
+          sort: "Field to sort by (bpm, popularity)",
+          order: "Sort order: 'asc' (default) or 'desc'",
+        },
+      },
       {
         method: "GET",
         path: "/tracks/:id",
