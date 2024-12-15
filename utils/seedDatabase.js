@@ -1,9 +1,13 @@
 import fs from "fs/promises";
 import { User } from "../models/userModel.js";
 import { Trip } from "../models/tripModel.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const users = JSON.parse(await fs.readFile(new URL("../data/users.json", import.meta.url)));
 const trips = JSON.parse(await fs.readFile(new URL("../data/trips.json", import.meta.url)));
+
 
 export const seedDatabase = async () => {
   try {
