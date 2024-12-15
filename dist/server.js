@@ -28,7 +28,7 @@ var Elf = _mongoose["default"].model('Elf', {
   "language": [String],
   "reviews_count": Number
 });
-var port = process.env.PORT || 1224; //  Hoho! 
+var port = process.env.PORT; //  Hoho! 
 var app = (0, _express["default"])();
 
 /** 
