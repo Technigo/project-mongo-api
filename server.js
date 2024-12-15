@@ -29,6 +29,7 @@ if (process.env.RESET_DB) {
 	seedDatabase();
 };
 
+
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
