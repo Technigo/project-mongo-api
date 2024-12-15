@@ -1,13 +1,11 @@
 # Project Mongo API
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+This project is a RESTful API built with Node.js, Express, and MongoDB using Mongoose for data modeling. It allows for the creation, retrieval, and filtering of data stored in MongoDB, with routes that serve both individual documents and collections.
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The goal was to build a robust API that interacts with a MongoDB database using Mongoose models. The main challenge was seeding the database and understanding what setup and configurations that was needed to be done for a windows enviroment. I used MongoDB, Express, and Node.js to implement the API, and incorporated seeding functionality triggered by an environment variable (RESET_DATABASE=true) for populating the database.
+
+If I had more time, I would improve query performance with advanced filtering options.
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.

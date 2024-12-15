@@ -16,11 +16,9 @@ if (!process.env.MONGO_URL) {
 }
 
 // Connect to Mongo Atlas using connection string from env. file
-const mongoUrl = process.env.MONGO_URL;
-
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/cats";
 mongoose
   .connect(mongoUrl)
-
   .then(() => {
     console.log("Successfully connected to MongoDB");
   })
@@ -44,7 +42,7 @@ const Cat = mongoose.model("Cat", {
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 9000;
 const app = express();
 
 //Seed database
@@ -53,9 +51,9 @@ if (process.env.RESET_DATABASE) {
 
   const seedDatabase = async () => {
     await Cat.deleteMany({}); //Deletes all documents in the 'Cat' collection
-    cats.forEach((cat) => {
+    cats.forEach(async (cat) => {
       // Iterates over the 'data' array
-      newCat(cat).save(); // Creates a new Cat document for each item in 'data' and saves it
+      await new Cat(cat).save(); // Creates a new Cat document for each item in 'data' and saves it
     });
   };
   seedDatabase();
@@ -80,19 +78,21 @@ app.get("/", (request, response) => {
 app.get("/cats", async (request, response) => {
   const { personality, fur_length, commonality, breed } = request.query;
 
-  // query object based on the parameters
+  // Build the query object based on provided parameters
   const query = {};
-  if (personality) query.personality = personality;
-  if (fur_length) query.fur_length = fur_length;
-  if (commonality) query.commonality = commonality;
-  if (breed) query.breed = breed;
+
+  // If no query parameters are provided, return all cats
+  if (personality) query.personality = { $regex: new RegExp(personality, "i") }; // Case-insensitive search
+  if (fur_length) query.fur_length = { $regex: new RegExp(fur_length, "i") };
+  if (commonality) query.commonality = { $regex: new RegExp(commonality, "i") };
+  if (breed) query.breed = { $regex: new RegExp(breed, "i") };
 
   try {
-    // Query MongoDB using the 'Cat' model based on the query parameters
-    const filteredCats = await Cat.find(query);
+    // Query the MongoDB 'Cat' collection
+    const matchingCats = await Cat.find(query);
 
-    if (filteredCats.length > 0) {
-      response.json(filteredCats); // Return matching cats
+    if (matchingCats.length > 0) {
+      response.json(matchingCats); // Return the matching cats
     } else {
       response.status(404).send("No cats found with the specified criteria");
     }
@@ -103,11 +103,12 @@ app.get("/cats", async (request, response) => {
 });
 
 app.get("/cats/:id", async (request, response) => {
-  const id = request.params.id; // Get the id from the URL parameter
+  const { id } = request.params; // Get the id from the URL parameter
+  console.log("Received ID:", id); // Log the id
 
   try {
-    // Query MongoDB for the cat with the given custom 'id' field
-    const cat = await Cat.findOne({ id }); // Match the custom 'id' field
+    // Query MongoDB for the cat with the given custom 'id' field (cast to Number)
+    const cat = await Cat.findOne({ id: parseInt(id) }); // Convert the id to an integer
 
     if (cat) {
       response.json(cat); // Return the cat object if found
