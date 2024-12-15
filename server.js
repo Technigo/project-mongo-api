@@ -8,7 +8,7 @@ import expressListEndpoints from "express-list-endpoints";
  * Connect to the MongoDB database using the URL from environment variables or default to localhost.
  * Mongoose uses JavaScript's built-in Promise system for handling asynchronous operations.
  */
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
+const mongoUrl = process.env.MONGO_URL;
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
