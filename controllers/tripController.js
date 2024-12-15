@@ -10,6 +10,19 @@ export const getTrips = async (req, res) => {
   }
 };
 
+// GET a specific trip by ID
+export const getTripById = async (req, res) => {
+  try {
+    const trip = await Trip.findById(req.params.id).populate("creation.createdBy").populate("submission.approvedBy");
+    if (!trip) {
+      return res.status(404).json({ message: "Trip not found." });
+    }
+    res.status(200).json(trip);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // POST a new trip
 export const createTrip = async (req, res) => {
   try {

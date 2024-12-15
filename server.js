@@ -1,6 +1,9 @@
 import { connectDatabase } from "./config/database.js";
 import { seedDatabase } from "./utils/seedDatabase.js";
 import { app } from "./app.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const port = process.env.PORT || 8070;
 
@@ -10,7 +13,7 @@ const port = process.env.PORT || 8070;
     await connectDatabase();
 
     // Check if RESET_DATABASE is set to trigger seeding
-    if (process.env.RESET_DATABASE === "true") {
+    if (process.env.RESET_DATABASE && process.env.RESET_DATABASE === "true") {
       console.log("RESET_DATABASE is set. Seeding the database...");
       await seedDatabase();
     } else {
