@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import harryPotterCharactersData from "./data/harry-potter-characters.json";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/harrypottercharacters";
