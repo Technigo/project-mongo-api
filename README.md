@@ -4,7 +4,7 @@ This project is a RESTful API built using MongoDB with Mongoose. The API serves 
 
 ## The problem
 
-I approached the problem by planning the structure of the data and required endpoints and designed a Mongoose schema to map the dataset to the MongoDB database. The endpoints can retrieve a list of all tracks or retrieve details of a single track by its unique ID. The API also supports advanced query options like filtering and sorting. Tracks can be filtered by artist, genre, bpm, and popularity. Tracks can also be sorted by specified fields in ascending or descending order.
+I approached the problem by planning the structure of the data and required endpoints and designed a Mongoose schema to map the dataset to the MongoDB database. The endpoints can retrieve a list of all tracks or retrieve details of a single track by its unique ID. The API also supports filtering and sorting. Tracks can be filtered by artist, genre, bpm, and popularity. Tracks can also be sorted by specified fields in ascending or descending order.
 
 I used Node.js and Express for building the API and MongoDB Atlas as the cloud-hosted database. I used Mongose for modeling and interacting with the database and Render for deployment.
 

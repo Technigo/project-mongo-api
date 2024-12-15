@@ -48,11 +48,11 @@ app.get("/", (req, res) => {
         path: "/tracks",
         description: "Get all music tracks",
         queryParameters: {
-          artist: "Filter by artist name",
+          artistName: "Filter by artist name",
           genre: "Filter by genre",
           bpm: "Filter by BPM (exact match)",
           popularity: "Filter by minimum popularity",
-          sort: "Field to sort by (bpm, popularity)",
+          sort: "Field to sort by (artistName, bpm, popularity)",
           order: "Sort order: 'asc' (default) or 'desc'",
         },
       },
