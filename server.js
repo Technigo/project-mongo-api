@@ -24,7 +24,7 @@ const Elf = mongoose.model('Elf', {
   "reviews_count": Number
 });
 
-const port = process.env.PORT || 1224; //  Hoho! 
+const port = process.env.PORT //  Hoho! 
 const app = express();
 
 /** 
