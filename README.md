@@ -17,4 +17,4 @@ The most challenging issues that I had were the seeding of data and the error me
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://maryyy-ux-project-mongo-api.onrender.com
