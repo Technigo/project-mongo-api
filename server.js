@@ -27,13 +27,15 @@ const Elf = mongoose.model('Elf', {
 const port = process.env.PORT || 1224; //  Hoho! 
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
+/** 
+ * Middlewares to enable cors and json body parsing
+ */
 app.use(cors());
 app.use(express.json());
 
-app.get("/elves/json", (request, response) => {
-  response.json(elves); // Return content from JSON-file
-});
+/**
+ * Middleware to ensure MongoDB is connected before handling requests
+ */
 
 app.use((request, response, next) => {
   if (mongoose.connection.readyState === 1) {
