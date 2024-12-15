@@ -9,7 +9,7 @@ import expressListEndpoints from "express-list-endpoints";
  * Mongoose uses JavaScript's built-in Promise system for handling asynchronous operations.
  */
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
 /**
