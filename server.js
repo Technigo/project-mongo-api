@@ -78,7 +78,7 @@ app.get("/harryPotterCharacters/:id", async (req, res) => {
 	}
 });
 
-
+//finding only the name 
 app.get("/harryPotterCharacters/name/:name", async (req, res) => {
 	const name = req.params.name;
 
