@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import elves from "./data/elves.json"
+//import elves from "./data/elves.json" 
 import expressListEndpoints from "express-list-endpoints";
 
 /**
@@ -43,26 +43,32 @@ app.use((request, response, next) => {
   }
 });
 
-if (process.env.RESET_DB) {
-  const seedDatabase = async () => {
-    console.log("Starting to seed the database...");
-    await Elf.deleteMany({});
-    console.log("Old data deleted!");
+/** 
+ * Seed the database with data from elves.json
+ */
 
-    await Promise.all(
-      elves.map(async (elfData) => {
-        const elf = new Elf(elfData);
-        await elf.save();
-        console.log(`Saved elf: ${JSON.stringify(elf)}`);
-      })
-    );
+// if (process.env.RESET_DB) {
+//   const seedDatabase = async () => {
+//     console.log("Starting to seed the database...");
+//     await Elf.deleteMany({});
+//     console.log("Old data deleted!");
 
-    console.log("Database has been seeded!");
-  };
-  seedDatabase();
-}
+//     await Promise.all(
+//       elves.map(async (elfData) => {
+//         const elf = new Elf(elfData);
+//         await elf.save();
+//         console.log(`Saved elf: ${JSON.stringify(elf)}`);
+//       })
+//     );
 
-// Documentation endpoint
+//     console.log("Database has been seeded!");
+//   };
+//   seedDatabase();
+// }
+
+/** 
+ * Documentation endpoint
+ */
 app.get("/", (request, response) => {
   const endpoints = expressListEndpoints(app);
   response.json({
