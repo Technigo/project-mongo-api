@@ -23,6 +23,7 @@ const app = express();
 /**
  * Defined properties 
  * Properties defined to match the keys from the elves.json file
+ * TODO: Move to a new component. 
  */
 const Elf = mongoose.model('Elf', {
   "elfID": Number,
@@ -59,6 +60,7 @@ app.use((request, response, next) => {
 
 /**
  * Routes / Endpoints
+ * TODO: Move to own component 
  */
 
 /** 
@@ -121,7 +123,7 @@ app.get("/elves/:id", async (request, response) => {
     if (elf) {
       response.status(200).json(elf);
     } else {
-      response.status(404).send("404 - No elf found with that ID");
+      response.status(404).json({ error: "404 - No elf found with that ID" });
     }
   } catch (error) {
     console.error("Error fetching elf by ID:", error);
