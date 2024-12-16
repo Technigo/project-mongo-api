@@ -1,7 +1,10 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import netflixData from "./data/netflix-titles.json" assert { type: "json" };
+import fs from "fs";
+
+const rawData = fs.readFileSync("./data/netflix-titles.json");
+const netflixData = JSON.parse(rawData);
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/netflix_titles";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -14,7 +17,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Define the model
 const NetflixTitle = mongoose.model("NetflixTitle", {
   show_id: Number,
   title: String,
@@ -22,7 +24,7 @@ const NetflixTitle = mongoose.model("NetflixTitle", {
   release_year: Number,
   rating: String,
   description: String,
-});
+}, "netflixtitles"); // Namnet på kollektionen i MongoDB
 
 // Seed the database
 if (process.env.RESET_DB) {
