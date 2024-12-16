@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import fs from "fs";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const rawData = fs.readFileSync("./data/netflix-titles.json");
 const netflixData = JSON.parse(rawData);
@@ -27,10 +30,11 @@ const NetflixTitle = mongoose.model("NetflixTitle", {
   description: String,
 });
 
-// Seed the database
+
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
-    await NetflixTitle.deleteMany(); // Clear existing data
+    console.log("🌱 Seeding the database...");
+    await NetflixTitle.deleteMany();
     await NetflixTitle.insertMany(netflixData.map((item) => ({
       show_id: item.show_id,
       title: item.title,
@@ -39,7 +43,7 @@ if (process.env.RESET_DB) {
       rating: item.rating,
       description: item.description,
     })));
-    console.log("Database seeded!");
+    console.log("✅ Database seeded!");
   };
   seedDatabase();
 }
