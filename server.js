@@ -20,15 +20,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Define the model
-const NetflixTitle = mongoose.model("NetflixTitle", {
-  show_id: Number,
-  title: String,
-  country: String,
-  release_year: Number,
-  rating: String,
-  description: String,
-});
+const NetflixTitle = mongoose.model(
+  "NetflixTitle", // Modellnamn
+  {
+    show_id: Number,
+    title: String,
+    country: String,
+    release_year: Number,
+    rating: String,
+    description: String,
+  },
+  "netflixtitles" // Explicit collection-namn
+);
 
 
 if (process.env.RESET_DB) {
