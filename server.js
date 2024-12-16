@@ -5,12 +5,20 @@ import mongoose from "mongoose";
 import expressListEndpoints from "express-list-endpoints";
 
 /**
- * Connect to the MongoDB database using the URL from environment variables or default to localhost.
+ * Connect to the MongoDB database using the URL from environment variables.
  * Mongoose uses JavaScript's built-in Promise system for handling asynchronous operations.
  */
+
+// Environment variables
 const mongoUrl = process.env.MONGO_URL;
+const port = process.env.PORT || 1224 //  Hoho! 
+
+// Database connection
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
+
+// Return a new instance of an Express application
+const app = express();
 
 /**
  * Defined properties 
@@ -23,9 +31,6 @@ const Elf = mongoose.model('Elf', {
   "language": [String],
   "reviews_count": Number
 });
-
-const port = process.env.PORT //  Hoho! 
-const app = express();
 
 /** 
  * Middlewares to enable cors and json body parsing
@@ -67,6 +72,10 @@ app.use((request, response, next) => {
 //   };
 //   seedDatabase();
 // }
+
+/**
+ * Routes / Endpoints
+ */
 
 /** 
  * Documentation endpoint
