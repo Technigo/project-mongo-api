@@ -105,6 +105,9 @@ npm run build
 ```  
 Then, I manually deployed the latest commit on Render.  
 
+## If I had more time  
+I started working on creating new components for the seeding logic, but it isn't completed yet. If I had more time, I would focus on finishing the seeding component and adding separate files for the Mongoose model and the Routes to make the application more modular and maintainable.
+
 ## View it live
 
 [Project Mongo API](https://project-mongo-api-x8p0.onrender.com)
