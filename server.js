@@ -17,6 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Define the model
 const NetflixTitle = mongoose.model("NetflixTitle", {
   show_id: Number,
   title: String,
@@ -24,7 +25,7 @@ const NetflixTitle = mongoose.model("NetflixTitle", {
   release_year: Number,
   rating: String,
   description: String,
-}, "netflixtitles"); // Namnet på kollektionen i MongoDB
+});
 
 // Seed the database
 if (process.env.RESET_DB) {
