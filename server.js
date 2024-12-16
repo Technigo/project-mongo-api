@@ -82,7 +82,7 @@ app.get("/netflix_titles", async (req, res) => {
       titles = titles.sort((a, b) => b.rating - a.rating); // Sort by rating
     }
 
-    // Sätt header och skicka indenterad JSON
+    // Set header and send indented JSON
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(titles, null, 2));
   } catch (error) {
