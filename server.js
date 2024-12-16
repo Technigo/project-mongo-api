@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import fs from "fs";
-import dotenv from 'dotenv';
-
+import dotenv from "dotenv";
 dotenv.config();
+
 
 const rawData = fs.readFileSync("./data/netflix-titles.json");
 const netflixData = JSON.parse(rawData);
@@ -34,20 +34,27 @@ const NetflixTitle = mongoose.model("NetflixTitle", {
 if (process.env.RESET_DB) {
   const seedDatabase = async () => {
     console.log("🌱 Seeding the database...");
-    await NetflixTitle.deleteMany();
-    await NetflixTitle.insertMany(netflixData.map((item) => ({
-      show_id: item.show_id,
-      title: item.title,
-      country: item.country,
-      release_year: item.release_year,
-      rating: item.rating,
-      description: item.description,
-    })));
+    await NetflixTitle.deleteMany(); // Rensa collectionen innan ny data läggs till
+    await NetflixTitle.insertMany(
+      netflixData.map((item) => ({
+        show_id: item.show_id,
+        title: item.title,
+        director: item.director,
+        cast: item.cast,
+        country: item.country,
+        date_added: item.date_added,
+        release_year: item.release_year,
+        rating: item.rating,
+        duration: item.duration,
+        listed_in: item.listed_in,
+        description: item.description,
+        type: item.type,
+      }))
+    );
     console.log("✅ Database seeded!");
   };
   seedDatabase();
 }
-
 // Routes
 import listEndpoints from "express-list-endpoints";
 
