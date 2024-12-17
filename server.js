@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import listEndpoints from "express-list-endpoints";
 import harryPotterCharactersData from "./data/harry-potter-characters.json";
 
 dotenv.config();
@@ -51,7 +52,10 @@ app.use((req, res, next) => {
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-	res.send("Welcome to the Harry Potter API!");
+	res.json({
+		message: "Welcome to the Harry Potter API!",
+		routes: listEndpoints(app),
+	});
 });
 
 app.get("/harryPotterCharacters", async (req, res) => {
