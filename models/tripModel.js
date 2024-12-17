@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const tripSchema = new mongoose.Schema({
-  userID: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference to User
+  userID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+   }, // Reference to User
   title: {
     type: String,
     required: true,
@@ -21,10 +25,15 @@ const tripSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ["approved", "awaiting approval", "not submitted"]
+    enum: ["approved", "awaiting approval", "not submitted"],
+    default: "not submitted"
   },
   creation: {
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference to User
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    }, // Reference to User
     createdAt: { type: Date, default: Date.now },
   },  
   submission: {

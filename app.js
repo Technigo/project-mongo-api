@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
+
 import { userRoutes } from "./routes/userRoutes.js";
 import { tripRoutes } from "./routes/tripRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
