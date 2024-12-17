@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 	}
 });
 
-// Start defining your routes here
+// Start defining your routes here (added listEndpoints)
 app.get("/", (req, res) => {
 	res.json({
 		message: "Welcome to the Harry Potter API!",
