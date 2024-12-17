@@ -63,10 +63,10 @@ app.get("/harryPotterCharacters", async (req, res) => {
 
 	// Creating a dynamic query object to be able to filter on more than one thing at the time
 	const query = {}; //Initially an empty query object before the user has applied filters
-	if (house) query.house = new RegExp(house, "i"); //Depending on the query parameters provided - properties are dynamically added to the query object. 
+	if (house) query.house = new RegExp(house, "i"); //Depending on the query parameters provided - properties are dynamically added to the query object
 	if (role) query.role = new RegExp(role, "i");
 	if (yearIntroduced) query.yearIntroduced = +yearIntroduced;
-	// "i" stands for case-insensitive matching: eg. makes the regular expression ignore differences between uppercase and lowercase letters when matching strings.
+	// "i" stands for case-insensitive matching: eg. makes the regular expression ignore differences between uppercase and lowercase letters 
 	try {
 		// Query MongoDB using the dynamic query object
 		const characters = await HarryPotterCharacter.find(query);
