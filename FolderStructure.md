@@ -1,7 +1,9 @@
 # project-mongo-api folder structure
-├── data/
+├── data/                  # mock data for backend test
 │   ├── trips.json
 │   ├── users.json
+│   ├── favlocation.json
+│   ├── skatteverket.json
 ├── middleware/
 │   ├── validation.js       # Validation middleware using express-validator
 │   ├── auth.js             # Placeholder for authentication logic (optional)

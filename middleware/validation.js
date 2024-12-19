@@ -96,11 +96,11 @@ export const validateTripCreate = [
     .withMessage("Valid startDate is required.")
     .bail() // Stop further validation if this fails
     .custom(async (startDate, { req }) => {
-      const { userID, tripDate } = req.body;
+      const { tripDate } = req.body;
       const endDate = tripDate?.endDate;
 
       // Check for overlapping trips
-      const overlappingTrip = await checkOverlappingTrips(userID, startDate, endDate);
+      const overlappingTrip = await checkOverlappingTrips( startDate, endDate);
       if (overlappingTrip) {
         throw new Error("The trip overlaps with an existing trip.");
       }
@@ -169,11 +169,11 @@ export const validateTripUpdate = [
     .withMessage("Valid startDate is required.")
     .bail() // Stop further validation if this fails
     .custom(async (startDate, { req }) => {
-      const { userID, tripDate } = req.body;
+      const { tripDate } = req.body;
       const endDate = tripDate?.endDate;
 
       // Check for overlapping trips
-      const overlappingTrip = await checkOverlappingTrips(userID, startDate, endDate);
+      const overlappingTrip = await checkOverlappingTrips( startDate, endDate);
       if (overlappingTrip) {
         throw new Error("The trip overlaps with an existing trip.");
       }
