@@ -1,0 +1,34 @@
+[
+  {
+    "firstName": "John",
+    "lastName":"Admin",
+    "email": "admin@example.com",
+    "password": "admin",
+    "role": "admin",
+    "phone": "123-456-7890"
+  },
+  {
+    "firstName": "Jane",
+    "lastName":"Miles",
+    "email": "jane@example.com",
+    "password": "password123",
+    "role": "co-worker",
+    "phone": "987-654-3210"
+  },
+  {
+    "firstName": "Mike",
+    "lastName":"Worker",
+    "email": "mike@example.com",
+    "password": "password123",
+    "role": "co-worker",
+    "phone": "654-321-9870"
+  },
+  {
+    "firstName": "Maltida",
+    "lastName":"Jonson",
+    "email": "maltida@example.com",
+    "password": "password123",
+    "role": "co-worker",
+    "phone": "456-123-0789"
+  }  
+]

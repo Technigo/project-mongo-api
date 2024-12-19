@@ -1,35 +1,33 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import { connectDatabase } from "./config/database.js";
+import { seedDatabase } from "./utils/seedDatabase.js";
+import { app } from "./app.js";
+import dotenv from "dotenv";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+const port = process.env.PORT || 8070;
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
-const app = express();
+(async () => {
+  try {
+    // Connect to MongoDB
+    await connectDatabase();
 
-// Add middlewares to enable cors and json body parsing
-app.use(cors());
-app.use(express.json());
+    // Check if RESET_DATABASE is set to trigger seeding
+    if (process.env.RESET_DATABASE && process.env.RESET_DATABASE === "true") {
+      console.log("RESET_DATABASE is set. Seeding the database...");
+      await seedDatabase();
+    } else {
+      console.log("RESET_DATABASE is not set. Skipping database seeding.");
+    }
 
-// Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+    // Start server
+    app.listen(port, () => {
+      console.log(`Server running on http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error.message);
+    process.exit(1); // Exit the process on failure
+  }
+})();
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+// Simplify server.js to handle only the server initialization and database connection
