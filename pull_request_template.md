@@ -1,6 +1,5 @@
 ## Netlify link
-Add your Netlify link here.
-PS. Don't forget to add it in your readme as well.
+Render link: https://project-18-mongo-api.onrender.com/ (not working yet..)
 
 ## Collaborators
-Add any collaborators here.
+-
