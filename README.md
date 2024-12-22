@@ -12,11 +12,6 @@ This is an API built using Node.js, Express, and MongoDB, designed to provide in
 
 - Initially, I used the id from the JSON file to filter characters by their unique identifier. However, since MongoDB automatically generates an ObjectId, I decided to remove the custom id field from the JSON file. Instead, I used new mongoose.Types.ObjectId to generate new IDs and implemented filtering based on the default ObjectId. 
 
-## Problem with deployment
-I successfully connected the API to MongoDB Atlas, and the data is now visible there. To secure the connection, the Atlas URL  along with the username and password is stored in a .env file.
-
-- However, when deploying the API on Render, only the root route (/) works, while the other routes fail to display. This suggests that Render cannot establish a connection to the MongoDB Atlas URL provided in the .env file. Despite attempting several solutions, the issue remains unresolved. 
-
 ## View it live
 
 https://project-mongo-api-8bgk.onrender.com/
