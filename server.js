@@ -1,35 +1,102 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import avocadoSalesData from "./data/avocado-sales.json";
+import dotenv from "dotenv";
 
-// If you're using one of our datasets, uncomment the appropriate import below
-// to get started!
-// import avocadoSalesData from "./data/avocado-sales.json";
-// import booksData from "./data/books.json";
-// import goldenGlobesData from "./data/golden-globes.json";
-// import netflixData from "./data/netflix-titles.json";
-// import topMusicData from "./data/top-music.json";
+dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+const MONGO_URL = process.env.MONGODB_URI || "mongodb://127.0.0.1/project-mongo"; // Use MONGO_URL consistently
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
-const port = process.env.PORT || 8080;
+// Connect to MongoDB
+mongoose
+  .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("🚀 MongoDB successfully connected!"))
+  .catch((error) => console.error("Error connecting to MongoDB:", error));
+
+// Define Mongoose model
+const AvocadoSale = mongoose.model(
+  "AvocadoSale",
+  new mongoose.Schema({
+    id: Number,
+    date: String,
+    averagePrice: Number,
+    totalVolume: Number,
+    totalBagsSold: Number,
+    smallBagsSold: Number,
+    largeBagsSold: Number,
+    xLargeBagsSold: Number,
+    region: String,
+  })
+);
+
 const app = express();
+const port = process.env.PORT || 8080;
 
-// Add middlewares to enable cors and json body parsing
+if (process.env.RESET_DB) {
+  const seedDatabase = async () => {
+    console.log("Resetting database...");
+    await AvocadoSale.deleteMany({});
+    const inserted = await AvocadoSale.insertMany(avocadoSalesData);
+    console.log(`✅ Database seeded with ${inserted.length} entries!`);
+  };
+  seedDatabase();
+}
+
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// Root endpoint
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json({
+    message: "Welcome to the Avocado Sales API!",
+    endpoints: [
+      { method: "GET", path: "/avocado-sales", description: "Get all sales or filter data" },
+      { method: "GET", path: "/avocado-sales/:id", description: "Get a single sale by ID" },
+    ],
+  });
 });
 
-// Start the server
+// Endpoint to get all sales or filter data
+app.get("/avocado-sales", async (req, res) => {
+  const { region, date, min, max } = req.query;
+  const query = {};
+
+  if (region) query.region = new RegExp(region, "i");
+  if (date) query.date = date;
+  if (min || max) {
+    query.averagePrice = {};
+    if (min) query.averagePrice.$gte = Number(min);
+    if (max) query.averagePrice.$lte = Number(max);
+  }
+
+  try {
+    const sales = await AvocadoSale.find(query);
+    if (sales.length === 0) {
+      return res.status(404).json({ error: "No sales data found with the provided filters." });
+    }
+    res.json(sales);
+  } catch (error) {
+    console.error("Error retrieving sales data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Endpoint to get a single sale by ID
+app.get("/avocado-sales/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const sale = await AvocadoSale.findOne({ id: Number(id) });
+    if (!sale) {
+      return res.status(404).json({ error: "No sales data found for the given ID." });
+    }
+    res.json(sale);
+  } catch (error) {
+    console.error("Error retrieving sale by ID:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`🚀 Server running on http://localhost:${port}`);
 });
